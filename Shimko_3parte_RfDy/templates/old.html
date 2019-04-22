@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.0.4.min.js">
+    </script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+
+    </script>
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        TeX: {
+            equationNumbers: {  autoNumber: "AMS"  },
+            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
+            }
+        });
+
+    </script>
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <!--bootstrap is library for developing websites-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <title>Shimko bounds of probability</title>
+</head>
+
+<body class="w3-myfont">
+<h2>Previous simulations</h2>
+<p align="right"><a href="/">Back to index&nbsp;</a></p>
+{% if data %}
+{% for result in data %}
+<hr> <!--hr is a line-->
+<div class="container">
+    <form class="navbar-form" method="post" action=/delete/{{result['id']}}>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-3">
+                    <h3>Input</h3>
+                    {% for field in result['form'] %}
+                    <div class="row">
+                        <div class="output">
+                            <label class="col-xs-6 control-label">
+                                <span>  {{ field.label  }}  </span>
+                            </label>
+                            <div class="col-xs-6">
+                                {{ field.data }} <!--size box-->
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-xs-3">
+                    <h4>Results</h4>
+                    {% if result[' plot_implied_volatility'] != None %}
+                    <span> \(a_{0}\): {{result ['a0']}}</span><br/>
+                    <span> \(a_{1}\): {{result ['a1']}}</span><br/>
+                    <span> \(a_{2}\): {{result ['a2']}}</span><br/>
+                    <span> \(R^{2}\): {{result ['r2']}}</span><br/> <br/>
+                    <span> File Name: {{result ['file_name']}}</span>
+                    {{ result['plot_implied_volatility'][0]|safe }}
+                    {{ result['plot_implied_volatility'][1]|safe }}
+                    {{ result['plot_index_distribution'][0]|safe }}
+                    {{ result['plot_index_distribution'][1]|safe }}
+                    {{ result['plot_return_distribution'][0]|safe}}
+                    {{ result['plot_return_distribution'][1]|safe}}
+                    {{ result['plot_index_cdf'][0]|safe}}
+                    {{ result['plot_index_cdf'][1]|safe}}
+                    {{ result['plot_return_cdf'][0]|safe}}
+                    {{ result['plot_return_cdf'][1]|safe}}
+                    {% endif %}
+                </div>
+                <div class="col-xs-3">
+                    <form class="navbar-form navbar-top " method="POST" action="/delete/{{ result.id }}">
+                        <input type="submit" class="btn btn-default" value="Delete"
+                               title="Delete this post from database">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endfor %}
+<hr>
+<center>
+    <form method="POST" action="/delete/-1">
+        <input type="submit" class="btn btn-default" value="Delete all">
+    </form>
+</center>
+{% else %}
+No previous simulations
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "prova London",
+  "description": "Prima prova con heroku",
+  "image": "heroku/python",
+  "repository": "https://github.com/LauradiStefano/provaLondon",
+  "keywords": ["python", "flask"],
+
+  "environments": {
+    "test": {
+      "scripts": {
+        "test-setup": "python controller.py",
+        "test": "python controller.py"
+      }
+    }
+  }
+}
