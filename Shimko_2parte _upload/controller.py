@@ -25,7 +25,6 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     # form = ComputeForm(CombinedMultiDict((request.form, request.files)))
     form = ComputeForm(request.form)
     user = current_user
@@ -99,9 +98,9 @@ def index():
                                         strike_data)
 
         pdf_returns, area_prices, expected_price, sigma2_price, skewness_prices, kurtosis_prices, \
-            skewness_prices_log_n, kurtosis_prices_log_n, area_returns, m1_returns, m2_returns, skewness_log_returns, \
-            kurtosis_log_returns, pdf_bench_norm_returns, returns_t, skewness_normal, kurtosis_normal, mu, \
-            std_deviation_log_ret, sigma2 = \
+        skewness_prices_log_n, kurtosis_prices_log_n, area_returns, m1_returns, m2_returns, skewness_log_returns, \
+        kurtosis_log_returns, pdf_bench_norm_returns, returns_t, skewness_normal, kurtosis_normal, mu, \
+        std_deviation_log_ret, sigma2 = \
             compute_shimko_table(a0, a1, a2, form.price.data, risk_free, div_yield, time, strike_min, strike_max)
 
         plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, form.price.data,
@@ -111,7 +110,6 @@ def index():
                                                                               pdf_bench_norm_returns)
 
         if '0' in form.plot_choice.data:
-
             st, pdf, pdf_bench_log_prices = compute_underlying_distribution(a0, a1, a2, form.price.data, risk_free,
                                                                             div_yield, time, strike_min, strike_max,
                                                                             expected_price, sigma2, mu)
@@ -120,7 +118,6 @@ def index():
                                                                                 form.price.data, strike_min, strike_max)
 
         if '1' in form.plot_choice.data:
-
             cdf_prices, cdf_bench_log_prices, st = compute_underlying_cdf(a0, a1, a2, form.price.data, risk_free,
                                                                           div_yield, time, strike_min, strike_max,
                                                                           expected_price, sigma2, mu)
@@ -128,7 +125,6 @@ def index():
             plot_index_cdf = create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, strike_max)
 
         if '2' in form.plot_choice.data:
-
             returns_t, cdf_returns, cdf_bench_norm_returns = compute_returns_cdf(a0, a1, a2, form.price.data, risk_free,
                                                                                  div_yield, time, strike_min,
                                                                                  strike_max, m1_returns,
@@ -158,41 +154,42 @@ def index():
             object.risk_free = risk_free
             object.time = time
 
-            object.st = json.dumps(st.tolist())
-            object.pdf = json.dumps(pdf)
-            object.pdf_returns = json.dumps(pdf_returns)
-            object.area_prices = area_prices
-            object.expected_price = expected_price
-            object.sigma2_price = sigma2_price
-            object.mu = mu
-            object.std_deviation_log_ret = std_deviation_log_ret
-            object.skewness_prices = skewness_prices
-            object.kurtosis_prices = kurtosis_prices
-            object.skewness_prices_log_n = skewness_prices_log_n
-            object.kurtosis_prices_log_n = kurtosis_prices_log_n
-            object.area_returns = area_returns
-            object.m1_returns = m1_returns
-            object.m2_returns = m2_returns
-            object.skewness_log_returns = skewness_log_returns
-            object.kurtosis_log_returns = kurtosis_log_returns
-            object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
-            object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
-            object.price = form.price.data
-            object.volatility_time = json.dumps(volatility_time.tolist())
-            object.r2 = r2
-            object.returns_t = json.dumps(returns_t.tolist())
-            object.skewness_normal = skewness_normal
-            object.kurtosis_normal = kurtosis_normal
-            object.cdf_prices = json.dumps(cdf_prices)
-            object.cdf_returns = json.dumps(cdf_returns)
-            object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
-            object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
-            object.sigma2 = sigma2
-            object.plot_choice = json.dumps(form.plot_choice.data)
+            if st is not None:
+                object.st = json.dumps(st.tolist())
+                object.pdf = json.dumps(pdf)
+                object.pdf_returns = json.dumps(pdf_returns)
+                object.area_prices = area_prices
+                object.expected_price = expected_price
+                object.sigma2_price = sigma2_price
+                object.mu = mu
+                object.std_deviation_log_ret = std_deviation_log_ret
+                object.skewness_prices = skewness_prices
+                object.kurtosis_prices = kurtosis_prices
+                object.skewness_prices_log_n = skewness_prices_log_n
+                object.kurtosis_prices_log_n = kurtosis_prices_log_n
+                object.area_returns = area_returns
+                object.m1_returns = m1_returns
+                object.m2_returns = m2_returns
+                object.skewness_log_returns = skewness_log_returns
+                object.kurtosis_log_returns = kurtosis_log_returns
+                object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
+                object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
+                object.price = form.price.data
+                object.volatility_time = json.dumps(volatility_time.tolist())
+                object.r2 = r2
+                object.returns_t = json.dumps(returns_t.tolist())
+                object.skewness_normal = skewness_normal
+                object.kurtosis_normal = kurtosis_normal
+                object.cdf_prices = json.dumps(cdf_prices)
+                object.cdf_returns = json.dumps(cdf_returns)
+                object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
+                object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
+                object.sigma2 = sigma2
+                object.plot_choice = json.dumps(form.plot_choice.data)
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
     else:
         if user.is_authenticated:
             if user.Compute.count() > 0:
@@ -255,15 +252,12 @@ def index():
                                                                                       pdf_bench_norm_returns)
 
                 if '0' in plot_choice:
-
                     plot_index_distribution = create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices,
                                                                                         price, strike_min, strike_max)
                 if '1' in plot_choice:
-
                     plot_index_cdf = create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, strike_max)
 
                 if '2' in plot_choice:
-
                     plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
     a0 = round(a0, 8) if a0 is not None else None
@@ -418,7 +412,8 @@ def old():
             plot_return_cdf = None
 
             if '0' in plot_choice:
-                plot_index_distribution = create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, price,
+                plot_index_distribution = create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices,
+                                                                                    price,
                                                                                     strike_min, strike_max)
             if '1' in plot_choice:
                 plot_index_cdf = create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, strike_max)

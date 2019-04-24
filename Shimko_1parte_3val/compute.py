@@ -5,13 +5,14 @@ Created on Fri Mar  8 10:03:36 2019
 @author: Diego
 """
 
-from shimkofun import ImpliedPDFPrices, ImpliedCDFPrices, bs, densF, get_lognormal_fit  # ImpliedPDFLogret,ImpliedCDFLogret
-from shimkofun import ImpliedCDFPrices_FullRange, ImpliedPDFPrices_FullRange, ImpliedCDFReturns_FullRange,\
+from shimkofun import get_lognormal_fit
+from shimkofun import ImpliedCDFPrices_FullRange, ImpliedPDFPrices_FullRange, ImpliedCDFReturns_FullRange, \
     ImpliedPDFReturns_FullRange
 from shimkofun import get_implied_parameters_lognormal
 import numpy as np
-import bokeh.plotting as plt
+import bokeh.plotting as bp
 from bokeh.plotting import ColumnDataSource
+from bokeh.models import HoverTool
 from scipy import integrate
 import math
 from scipy.stats import norm, lognorm
@@ -21,7 +22,6 @@ from bokeh.models.widgets import Slider
 
 
 def find_parameters(strike_min, strike_atm, strike_max, vol_min, vol_atm, vol_max):
-    
     strike = [strike_min, strike_atm, strike_max]
     vol_min = vol_min / 100
     vol_atm = vol_atm / 100
@@ -43,12 +43,11 @@ def find_parameters(strike_min, strike_atm, strike_max, vol_min, vol_atm, vol_ma
 
 
 def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max):
-   
     step_k = 0.5
-    
+
     risk_free = risk_free / 100
     div_yield = div_yield / 100
-    
+
     SD = s0 * math.exp(-div_yield * time)
     B = math.exp(-risk_free * time)
 
@@ -63,14 +62,14 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
        Estimate the PDF &  CDF of the underlying asset Logret at maturity
        """
     pdf_returns = lambda kret: ImpliedPDFReturns_FullRange(a0, a1, a2, SD, B, kret, strike_min, strike_max, x_fit_lgn)
-    
+
     """
         Comupute the moments of prices and logret
         """
     # table moments
 
     up_factor = 20
-    
+
     area_prices = integrate.quad(lambda k: pdf_prices(k), 0, strike_max * up_factor)  # Table Ceq Moment
     m1 = integrate.quad(lambda k: k * pdf_prices(k) / area_prices[0], 0, strike_max * up_factor)
     m2 = integrate.quad(lambda k: (k - m1[0]) ** 2 * pdf_prices(k) / area_prices[0], 0, strike_max * up_factor)
@@ -85,12 +84,12 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     # Fitted Lognormal
     q_shimko = stand_deviation_prices / expected_price
     skewness_prices_log_n = 3 * q_shimko + q_shimko ** 3  # Table Lognormal Moment
-    kurtosis_prices_log_n = 3 + 16 * q_shimko ** 2 + 15 * q_shimko ** 4 + 6 * q_shimko**6+q_shimko**8#Table lognormal Moment
+    kurtosis_prices_log_n = 3 + 16 * q_shimko ** 2 + 15 * q_shimko ** 4 + 6 * q_shimko ** 6 + q_shimko ** 8
 
     implied_parameters_lognormal = get_implied_parameters_lognormal(expected_price / SD, (m2[0] + m1[0] ** 2) / SD ** 2)
     mu = implied_parameters_lognormal[0]
-    sigma2 = implied_parameters_lognormal[1]\
-
+    sigma2 = implied_parameters_lognormal[1] \
+ \
     # exp_sg2=math.exp(sigma2)
     # skewness_prices_log_n=(exp_sg2+2)*(math.sqrt(exp_sg2-1))
     # kurtosis_prices_log_n=math.exp(4*sigma2)+2*math.exp(3*sigma2)+3*exp(2*sigma2)-6
@@ -101,8 +100,8 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     ret_t = np.arange(ret_min * 0.75, ret_max * 1.5, step_ret)
 
     area_ret = integrate.quad(lambda k: pdf_returns(k), ret_min, ret_max)  # Table logReturns moment
-    m1_returns = integrate.quad(lambda k: k * pdf_returns(k) / area_ret[0], ret_min, ret_max)  # Table logReturns moment
-    m2_returns = integrate.quad(lambda k: (k - m1_returns[0]) ** 2 * pdf_returns(k) / area_ret[0], ret_min, ret_max)  # Table LogReturns moment
+    m1_returns = integrate.quad(lambda k: k * pdf_returns(k) / area_ret[0], ret_min, ret_max)
+    m2_returns = integrate.quad(lambda k: (k - m1_returns[0]) ** 2 * pdf_returns(k) / area_ret[0], ret_min, ret_max)
     m3_returns = integrate.quad(lambda k: (k - m1_returns[0]) ** 3 * pdf_returns(k) / area_ret[0], ret_min, ret_max)
     m4_returns = integrate.quad(lambda k: (k - m1_returns[0]) ** 4 * pdf_returns(k) / area_ret[0], ret_min, ret_max)
     stand_deviation_log_ret = m2_returns[0] ** 0.5
@@ -129,10 +128,9 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
 
 def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, strike_atm, strike_max, volatility, a0,
                                    a1, a2):
-    tools = "save, box_zoom, pan, reset"
     strike = [round(st, 2) for st in strike]
     strike = [str(s) for s in strike]
-    implied_volatility = [round(zi, 4) for zi in implied_volatility]
+    implied_volatility = [round(vol, 4) for vol in implied_volatility]
 
     data = ColumnDataSource(data=dict(
         strike=strike,
@@ -142,27 +140,26 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
 
     ))
 
-    # tooltips = [
-    #     ("strike", "@strike"),
-    #     ("implied volatility", "@impliedVolatility")
-    # ]
+    hover_implied_volatility = HoverTool(attachment="above", names=['implied vol'],
+                                         tooltips=[("Strike", "@strike"), ("Implied vol", "@implied_volatility")])
 
     x_range = [strike_min, strike_max + 10]
     y_range = [0, max(implied_volatility) + 0.02]
-    p = plt.figure(x_range=x_range, y_range=y_range, title="Implied volatility profile", plot_height=400,
-                   toolbar_location="left", tools=tools, x_axis_label='Exercise price',
-                   y_axis_label='Volatility x root time')
+    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_implied_volatility], x_range=x_range, y_range=y_range,
+                    title="Implied volatility profile", plot_height=450, toolbar_location="left",
+                    x_axis_label='Exercise price', y_axis_label='Volatility x root time')
 
-    p.line(x='strike', y='implied_volatility', source=data, color="#0095B6",  line_width=4, alpha=0.8)
-    p.square(x=s0, y=0, source=data, legend='Price', color="#050402", size=8)
-    p.circle(x='strike_value', y='volatility', source=data, color="#D21F1B", legend='Implied Volatility', size=6)
+    fig.line(x='strike', y='implied_volatility', source=data, color="#0095B6", line_width=4, alpha=0.8,
+             name='implied vol')
+    fig.square(x=s0, y=0, source=data, legend='Price', color="#050402", size=8)
+    fig.circle(x='strike_value', y='volatility', source=data, color="#D21F1B", legend='Implied Volatility', size=6)
 
-    p.legend.orientation = "horizontal"
-    p.legend.location = "bottom_right"
-    p.toolbar.active_drag = None
+    fig.legend.orientation = "horizontal"
+    fig.legend.location = "bottom_right"
+    fig.toolbar.active_drag = None
 
     callback = CustomJS(args=dict(source=data, a0=a0, a1=a1, a2=a2, strike_min=strike_min, strike_atm=strike_atm,
-                                  strike_max=strike_max, y_range=p.y_range), code="""
+                                  strike_max=strike_max, y_range=fig.y_range), code="""
         var data = source.data;
         var vol_min = vol_min.value;
         var vol_atm = vol_atm.value;
@@ -199,7 +196,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
     callback.args["vol_max"] = vol_max_slider
 
     layout = column(
-        p,
+        fig,
         widgetbox(vol_min_slider, vol_atm_slider, vol_max_slider),
     )
 
@@ -209,10 +206,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
 
 
 def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_returns):
-
-    tools = "save, pan, box_zoom, reset"
     ret_t = [round(st, 2) for st in ret_t]
-    # retT = [str(s) for s in retT]
     pdf_ret = [round(pdfret, 10) for pdfret in pdf_ret]
     pdf_bench_norm_returns = [round(pdf_benchNorm, 10) for pdf_benchNorm in pdf_bench_norm_returns]
 
@@ -221,29 +215,37 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
         pdf_ret=pdf_ret,
         pdf_bench_norm_returns=pdf_bench_norm_returns
     ))
+
     x_range = [min(ret_t) - 0.5, max(ret_t) + 0.5]
     y_range = [0, max(pdf_ret) * 1.10]
-    p = plt.figure(x_range=x_range, y_range=y_range, title="Implied CEQ returns distribution", plot_height=400,
-                   toolbar_location="right", tools=tools, x_axis_label='Log Returns', y_axis_label='Probability')
+    hover_returns = HoverTool(attachment="left", names=['pdf ret'],
+                              tooltips=[("Return", "@ret_t"), ("Pdf", "@pdf_ret")])
 
-    p.line(x='ret_t', y='pdf_ret', source=data, legend="CEQ distribution",  color="#0095B6", alpha=0.9, line_width=4)
-    p.line(x='ret_t', y='pdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
-           line_width=4)
-    # p.square(x=S0, y=0, source=data,  legend="Log Price", color="#050402", size=8)
+    hover_normal = HoverTool(attachment="right", names=['pdf norm'],
+                             tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
 
-    p.legend.location = "top_right"
-    p.toolbar.active_drag = None
-    p.legend.click_policy = "hide"
+    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_returns, hover_normal], x_range=x_range, y_range=y_range,
+                    title="Implied CEQ returns distribution", plot_height=450, toolbar_location="right",
+                    x_axis_label='Log Returns', y_axis_label='Probability Density')
+
+    fig.line(x='ret_t', y='pdf_ret', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
+             name='pdf ret')
+
+    fig.line(x='ret_t', y='pdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
+             line_width=4, name='pdf norm')
+
+    fig.legend.location = "top_right"
+    fig.toolbar.active_drag = None
+    fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
-    script, div = components(p)
+    script, div = components(fig)
 
     return script, div
 
 
 def compute_index_underlying_distribution(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max,
                                           expected_price, sigma2, mu):
-
     step_k = 0.5
     risk_free = risk_free / 100
     div_yield = div_yield / 100
@@ -264,8 +266,6 @@ def compute_index_underlying_distribution(a0, a1, a2, s0, risk_free, div_yield, 
 
 
 def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0, strike_min, strike_max):
-
-    tools = "save, pan, box_zoom, reset"
     st = [round(st, 2) for st in st]
     pdf = [round(pdf, 10) for pdf in pdf]
     pdf_bench_log_prices = [round(pdf_bench, 10) for pdf_bench in pdf_bench_log_prices]
@@ -276,29 +276,37 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
         pdf_bench_log_prices=pdf_bench_log_prices
     ))
 
+    hover_pdf = HoverTool(attachment="left", names=['pdf prices'], tooltips=[("Strike", "@st"), ("Pdf", "@pdf")])
+
+    hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
+                               tooltips=[("Strike", "@st"), ("Bench LogNorm", "@pdf_bench_log_prices")])
+
     x_range = [strike_min * 0.125, strike_max * 2]
     y_range = [0, max(pdf) * 1.10]
-    p = plt.figure(x_range=x_range, y_range=y_range, title="Implied CEQ index distribution", plot_height=400,
-                   toolbar_location="left", tools=tools, x_axis_label='Index Value', y_axis_label='Probability')
-    p.line(x='st', y='pdf', source=data, legend="CEQ distribution",  color="#0095B6", alpha=0.9, line_width=4)
-    p.line(x='st', y='pdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
-           line_width=4)
+    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_pdf, hover_log_norm], x_range=x_range, y_range=y_range,
+                    title="Implied CEQ index distribution", plot_height=400, toolbar_location="left",
+                    x_axis_label='Index Value', y_axis_label='Probability Density')
 
-    p.square(x=s0, y=0, source=data, legend="Price", color="#050402", size=8)
+    fig.line(x='st', y='pdf', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
+             name='pdf prices')
 
-    p.legend.location = "bottom_right"
-    p.toolbar.active_drag = None
-    p.legend.click_policy = "hide"
+    fig.line(x='st', y='pdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
+             line_width=4, name='bench logNorm')
+
+    fig.square(x=s0, y=0, legend="Price Today", color="#050402", size=8)
+
+    fig.legend.location = "top_right"
+    fig.toolbar.active_drag = None
+    fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
-    script, div = components(p)
+    script, div = components(fig)
 
     return script, div
 
 
 def compute_index_underlying_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price,
                                  sigma2, mu):
-
     step_k = 0.5
     risk_free = risk_free / 100
     div_yield = div_yield / 100
@@ -317,46 +325,42 @@ def compute_index_underlying_cdf(a0, a1, a2, s0, risk_free, div_yield, time, str
 
 
 def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, strike_max):
-
-    tools = "save, pan, box_zoom, reset"
     st = [round(s, 2) for s in st]
-    # CdfPrices = [round(cdfpr, 10) for cdfpr in CdfPrices]
-    # Cdf_BenchLog_Prices = [round(cdf_benchLog, 10) for cdf_benchLog in Cdf_BenchLog_Prices]
 
     data = ColumnDataSource(data=dict(
         st=st,
         cdf_prices=cdf_prices,
         cdf_bench_log_prices=cdf_bench_log_prices
     ))
+    hover_cdf = HoverTool(attachment="left", names=['cdf'], tooltips=[("Strike", "@st"), ("Cdf", "@cdf_prices")])
 
-    # tooltips = [("returnsT", "@returnsT"),
-    #             ("PdfRet", "@Pdfret")
-    #             ]
+    hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
+                               tooltips=[("Strike", "@st"), ("Bench LogNorm", "@cdf_bench_log_prices")])
 
     x_range = [strike_min * 0.125, strike_max * 2]
     y_range = [0, 1.1]
-    p = plt.figure(x_range=x_range, y_range=y_range, title="Implied CEQ prices CDF", plot_height=400,
-                   toolbar_location="left", tools=tools, x_axis_label='Index Value',
-                   y_axis_label='Cumulative Probability')
-    
-    p.line(x='st', y='cdf_prices', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
-           line_width=4)
-    p.line(x='st', y='cdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
-           line_width=4)
+    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_log_norm], x_range=x_range, y_range=y_range,
+                    title="Implied CEQ prices CDF", plot_height=400, toolbar_location="left",
+                    x_axis_label='Index Value', y_axis_label='Cumulative Probability')
 
-    p.legend.location = "bottom_right"
-    p.toolbar.active_drag = None
-    p.legend.click_policy = "hide"
+    fig.line(x='st', y='cdf_prices', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
+             name='cdf')
+
+    fig.line(x='st', y='cdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
+             line_width=4, name='bench logNorm')
+
+    fig.legend.location = "bottom_right"
+    fig.toolbar.active_drag = None
+    fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
-    script, div = components(p)
+    script, div = components(fig)
 
     return script, div
 
 
 def compute_returns_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, m1_returns,
                         stand_deviation_log_ret, ret_t):
-
     risk_free = risk_free / 100
     div_yield = div_yield / 100
     SD = s0 * math.exp(-div_yield * time)
@@ -375,39 +379,35 @@ def compute_returns_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, 
 
 
 def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
-
-    tools = "save, pan, box_zoom, reset"
-    # retT = [round(st, 2) for st in retT]
-    # CdfReturns = [round(cdfret, 10) for cdfret in CdfReturns]
-    # Cdf_BenchNorm_Returns = [round(cdf_benchNorm, 10) for cdf_benchNorm in Cdf_BenchNorm_Returns]
-
     data = ColumnDataSource(data=dict(
-        returns_t=ret_t,
+        ret_t=ret_t,
         cdf_returns=cdf_returns,
         cdf_bench_norm_returns=cdf_bench_norm_returns
     ))
 
-    # tooltips = [("returnsT", "@returnsT"),
-    #             ("PdfRet", "@Pdfret"),
-    #             ("Pdf Bench Norm", "@Pdf_BenchNorm_Returns")
-    #             ]
+    hover_cdf = HoverTool(attachment="left", names=['cdf ret'],
+                          tooltips=[("Strike", "@ret_t"), ("Cdf", "@cdf_returns")])
+
+    hover_norm = HoverTool(attachment="right", names=['bench norm'],
+                           tooltips=[("Strike", "@ret_t"), ("Bench Norm", "@cdf_bench_norm_returns")])
 
     x_range = [min(ret_t) * 0.9, max(ret_t) * 1.1]
     y_range = [0, 1.1]
-    p = plt.figure(x_range=x_range, y_range=y_range, title="Implied CEQ returns CDF", plot_height=400,
-                   toolbar_location="right", tools=tools, x_axis_label='Log Returns',
-                   y_axis_label='Cumulative Probability')
-    
-    p.line(x='returns_t', y='cdf_returns', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
-           line_width=4)
-    p.line(x='returns_t', y='cdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B",
-           alpha=0.6, line_width=4)
+    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_norm], x_range=x_range, y_range=y_range,
+                    title="Implied CEQ returns CDF", plot_height=400, toolbar_location="right",
+                    x_axis_label='Log Returns', y_axis_label='Cumulative Probability')
 
-    p.legend.location = "bottom_right"
-    p.toolbar.active_drag = None
-    p.legend.click_policy = "hide"
+    fig.line(x='ret_t', y='cdf_returns', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
+             line_width=4, name='cdf ret')
+
+    fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
+             line_width=4, name='bench norm')
+
+    fig.legend.location = "bottom_right"
+    fig.toolbar.active_drag = None
+    fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
-    script, div = components(p)
+    script, div = components(fig)
 
     return script, div

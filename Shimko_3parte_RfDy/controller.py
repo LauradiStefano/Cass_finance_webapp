@@ -25,7 +25,6 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
     # form = ComputeForm(CombinedMultiDict((request.form, request.files)))
     form = ComputeForm(request.form)
     user = current_user
@@ -159,41 +158,42 @@ def index():
             object.risk_free = form.risk_free.data
             object.time = time
 
-            object.st = json.dumps(st.tolist())
-            object.pdf = json.dumps(pdf)
-            object.pdf_returns = json.dumps(pdf_returns)
-            object.area_prices = area_prices
-            object.expected_price = expected_price
-            object.sigma2_price = sigma2_price
-            object.mu = mu
-            object.std_deviation_log_ret = std_deviation_log_ret
-            object.skewness_prices = skewness_prices
-            object.kurtosis_prices = kurtosis_prices
-            object.skewness_prices_log_n = skewness_prices_log_n
-            object.kurtosis_prices_log_n = kurtosis_prices_log_n
-            object.area_returns = area_returns
-            object.m1_returns = m1_returns
-            object.m2_returns = m2_returns
-            object.skewness_log_returns = skewness_log_returns
-            object.kurtosis_log_returns = kurtosis_log_returns
-            object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
-            object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
-            object.price = form.price.data
-            object.volatility_time = json.dumps(volatility_time.tolist())
-            object.r2 = r2
-            object.returns_t = json.dumps(returns_t.tolist())
-            object.skewness_normal = skewness_normal
-            object.kurtosis_normal = kurtosis_normal
-            object.cdf_prices = json.dumps(cdf_prices)
-            object.cdf_returns = json.dumps(cdf_returns)
-            object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
-            object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
-            object.sigma2 = sigma2
-            object.plot_choice = json.dumps(form.plot_choice.data)
+            if st is not None:
+                object.st = json.dumps(st.tolist())
+                object.pdf = json.dumps(pdf)
+                object.pdf_returns = json.dumps(pdf_returns)
+                object.area_prices = area_prices
+                object.expected_price = expected_price
+                object.sigma2_price = sigma2_price
+                object.mu = mu
+                object.std_deviation_log_ret = std_deviation_log_ret
+                object.skewness_prices = skewness_prices
+                object.kurtosis_prices = kurtosis_prices
+                object.skewness_prices_log_n = skewness_prices_log_n
+                object.kurtosis_prices_log_n = kurtosis_prices_log_n
+                object.area_returns = area_returns
+                object.m1_returns = m1_returns
+                object.m2_returns = m2_returns
+                object.skewness_log_returns = skewness_log_returns
+                object.kurtosis_log_returns = kurtosis_log_returns
+                object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
+                object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
+                object.price = form.price.data
+                object.volatility_time = json.dumps(volatility_time.tolist())
+                object.r2 = r2
+                object.returns_t = json.dumps(returns_t.tolist())
+                object.skewness_normal = skewness_normal
+                object.kurtosis_normal = kurtosis_normal
+                object.cdf_prices = json.dumps(cdf_prices)
+                object.cdf_returns = json.dumps(cdf_returns)
+                object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
+                object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
+                object.sigma2 = sigma2
+                object.plot_choice = json.dumps(form.plot_choice.data)
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
     else:
         if user.is_authenticated:
             if user.Compute.count() > 0:
