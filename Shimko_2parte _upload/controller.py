@@ -140,7 +140,7 @@ def index():
             # json.loads converte da stringa ad array
 
             object.filename = file_name
-            object.strike_data = json.dumps(strike_data)
+            object.strike_data = json.dumps(list(map(int, strike_data)))
             object.put_market = json.dumps(put_market)
             object.call_market = json.dumps(call_market)
             object.a0 = a0

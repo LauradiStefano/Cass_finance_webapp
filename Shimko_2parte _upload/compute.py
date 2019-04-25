@@ -28,7 +28,7 @@ def upload_input(filename=None):
         series = data.loc[i]
         array = np.array(series)
 
-        if array[1] == 0:
+        if array[3] == 0:
             data.drop(data.index[i])
         else:
             x.append(np.array(data.loc[i]))
