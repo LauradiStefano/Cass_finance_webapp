@@ -14,7 +14,7 @@ from bokeh.plotting import ColumnDataSource
 from bokeh.models import HoverTool
 from scipy import integrate
 import math
-from scipy.stats import norm, lognorm
+from scipy.stats import norm, lognorm, ks_2samp
 import os
 import pandas as pd
 import bokeh.plotting as bp
@@ -196,6 +196,37 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     return pdf_ret, area_prices[0], expected_price, sigma2_price, skew_prices, kurt_prices, skew_prices_logn, \
            kurt_prices_logn, area_ret[0], m1_ret[0], m2_ret[0], skew_log_ret, kurt_log_ret, \
            pdf_bench_norm_returns, ret_t, skew_norm, kurt_norm, mu, std_deviation_log_ret, sigma2
+
+
+def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price, sigma2, ret_t, mu, m1_ret,
+                            std_deviation_log_ret):
+    step_k = 0.5
+    #Test per i prices                      
+    st = np.arange(strike_min * 0.75, strike_max * 1.25, step_k)  # output per grafico
+    SD = s0 * math.exp(-div_yield * time)
+    B = math.exp(-risk_free * time)
+    x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
+    cdf_prices = lambda k: ImpliedCDFPrices_FullRange(a0, a1, a2, SD, B, k, strike_min, strike_max, x_fit_lgn)
+    cdf_prices = [float(cdf_prices(x)) for x in st]
+    cdf_bench_log_prices = lambda k: lognorm.cdf(k, sigma2 ** 0.5, mu, expected_price)
+    cdf_bench_log_prices = [float(cdf_bench_log_prices(x)) for x in st]  # vs st
+    kolmogorov_smirnov_prices=ks_2samp(cdf_prices,[i[0] for i in cdf_bench_log_prices])
+    statistic_prices=kolmogorov_smirnov_prices[0]
+    pvalue_prices=kolmogorov_smirnov_prices[1]
+
+    #Test per i returns
+
+    cdf_returns = lambda kret: ImpliedCDFReturns_FullRange(a0, a1, a2, SD, B, kret, strike_min, strike_max, x_fit_lgn)
+
+    cdf_returns = [float(cdf_returns(x)) for x in ret_t]
+    cdf_bench_norm_returns = lambda k: norm.cdf(k, m1_ret, std_deviation_log_ret)
+    cdf_bench_norm_returns = [float(cdf_bench_norm_returns(x)) for x in ret_t]
+    kolmogorov_smirnov_returns = ks_2samp(cdf_returns,[i[0] for i in cdf_bench_norm_returns])
+    statistic_returns = kolmogorov_smirnov_returns[0]
+    pvalue_returns = kolmogorov_smirnov_returns[1]
+
+
+    return statistic_prices, pvalue_prices, statistic_returns, pvalue_returns 
 
 
 def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_min, strike_max, strike_data,
