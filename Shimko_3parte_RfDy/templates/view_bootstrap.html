@@ -14,6 +14,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
@@ -25,6 +26,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -151,23 +153,23 @@
                     </div>
 
                 </div>
-                 <br/>
-                    <div class="row">
-                        <div class="col-xs-2">
-                            {{form.plot_choice.label}}
-                        </div>
-                        <div class="col-xs-5">
-                            {{form.plot_choice}}
-                        </div>
-                        <div class="col-xs-5">
-                            {% if form.plot_choice.errors %}
-                            {% for error in form.plot_choice.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-2">
+                        {{form.plot_choice.label}}
                     </div>
-                    <br/>
+                    <div class="col-xs-5">
+                        {{form.plot_choice}}
+                    </div>
+                    <div class="col-xs-5">
+                        {% if form.plot_choice.errors %}
+                        {% for error in form.plot_choice.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <br/>
                 <div class="row">
                     {{form.button_compute}}
                 </div>
@@ -176,18 +178,44 @@
     </div>
     <br/>
     <div class="row">
-        <h4>Result: </h4>
-        <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
-        {% if plot_implied_volatility != None %}
-        <div>
-            <h5>
-                <span> \(a_{0}\): {{a0}}</span><br/>
-                <span> \(a_{1}\): {{a1}}</span><br/>
-                <span> \(a_{2}\): {{a2}}</span><br/><br/>
-                <span> \(R^{2}\): {{r2}}</span>
-            </h5> <br/>
-             <h5><span> Test K-C: -- </span></h5> <br/>
-            <h6><span> File Name: {{file_name}}</span></h6>
+        <div class="row">
+            <div class="col-6 col-xs-6">
+                <h4>Result: </h4>
+                <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
+                {% if plot_implied_volatility != None %}
+                <h5>
+                    <span> \(a_{0}\): {{a0}}</span><br/>
+                    <span> \(a_{1}\): {{a1}}</span><br/>
+                    <span> \(a_{2}\): {{a2}}</span><br/><br/>
+                    <span> \(R^{2}\): {{r2}}</span>
+                </h5> <br/>
+                <h6><span> File Name: {{file_name}}</span></h6>
+            </div>
+            <div class="col-6 col-xs-6">
+                <h5> Kolmogorov Smirnov Prices</h5>
+                <table>
+                    <thead>
+                    <th></th>
+                    <th> Cdf Prices</th>
+                    <th> Cdf Returns</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td> Statistic Value</td>
+                        <td> {{statistic_prices}}</td>
+                        <td> {{statistic_returns}}</td>
+
+                    </tr>
+                    <tr>
+                        <td> PValue</td>
+                        <td> {{pvalue_prices}}</td>
+                        <td> {{pvalue_returns}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <br/>
         <button class="popup_table_open">View details</button>
@@ -201,28 +229,28 @@
                 {{plot_return_distribution[1]|safe}}
             </div>
         </div>
-            {%if plot_index_distribution != None%}
-            <div class="row">
-                <div class="col-6 col-xs-12">
-                    {{plot_index_distribution[0]|safe}}
-                    {{plot_index_distribution[1]|safe}}
-                </div>
+        {%if plot_index_distribution != None%}
+        <div class="row">
+            <div class="col-6 col-xs-12">
+                {{plot_index_distribution[0]|safe}}
+                {{plot_index_distribution[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+        <div class="row">
+            {%if plot_index_cdf != None%}
+            <div class="col-6 col-xs-6">
+                {{plot_index_cdf[0]|safe}}
+                {{plot_index_cdf[1]|safe}}
             </div>
             {%endif%}
-            <div class="row">
-                {%if plot_index_cdf != None%}
-                <div class="col-6 col-xs-6">
-                    {{plot_index_cdf[0]|safe}}
-                    {{plot_index_cdf[1]|safe}}
-                </div>
-                {%endif%}
-                {%if plot_return_cdf != None%}
-                <div class="col-6 col-xs-6">
-                    {{plot_return_cdf[0]|safe}}
-                    {{plot_return_cdf[1]|safe}}
-                </div>
-                {%endif%}
+            {%if plot_return_cdf != None%}
+            <div class="col-6 col-xs-6">
+                {{plot_return_cdf[0]|safe}}
+                {{plot_return_cdf[1]|safe}}
             </div>
+            {%endif%}
+        </div>
         {% endif %}
 
     </div>

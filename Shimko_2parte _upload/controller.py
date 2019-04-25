@@ -1,6 +1,6 @@
 import os
 from compute import upload_input, volatility_term_structure, compute_shimko_table, compute_underlying_distribution, \
-    compute_underlying_cdf, compute_returns_cdf
+    compute_underlying_cdf, compute_returns_cdf, kolmogorov_smirnov_test
 from compute import create_implied_volatility_plot, create_plot_return_underlying_distribution, \
     create_plot_index_underlying_distribution, create_plot_price_cdf, create_plot_return_cdf
 from flask import render_template, request, redirect, url_for
@@ -76,6 +76,10 @@ def index():
     cdf_bench_log_prices = None
     cdf_bench_norm_returns = None
     sigma2 = None
+    statistic_prices = None
+    statistic_returns = None
+    pvalue_prices = None
+    pvalue_returns = None
     plot_choice = None
 
     plot_implied_volatility = None
@@ -102,6 +106,10 @@ def index():
         kurtosis_log_returns, pdf_bench_norm_returns, returns_t, skewness_normal, kurtosis_normal, mu, \
         std_deviation_log_ret, sigma2 = \
             compute_shimko_table(a0, a1, a2, form.price.data, risk_free, div_yield, time, strike_min, strike_max)
+
+        statistic_prices, pvalue_prices, statistic_returns, pvalue_returns = \
+            kolmogorov_smirnov_test(a0, a1, a2, form.price.data, risk_free, div_yield, time, strike_min, strike_max,
+                                    expected_price, sigma2, returns_t, mu, m1_returns, std_deviation_log_ret)
 
         plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, form.price.data,
                                                                  strike_min, strike_max, strike_data, volatility_time)
@@ -185,6 +193,10 @@ def index():
                 object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
                 object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
                 object.sigma2 = sigma2
+                object.statistic_prices = statistic_prices
+                object.statistic_returns = statistic_returns
+                object.pvalue_prices = pvalue_prices
+                object.pvalue_returns = pvalue_returns
                 object.plot_choice = json.dumps(form.plot_choice.data)
 
                 object.user = user
@@ -242,6 +254,10 @@ def index():
                 cdf_bench_log_prices = json.loads(instance.cdf_bench_log_prices)
                 cdf_bench_norm_returns = json.loads(instance.cdf_bench_norm_returns)
                 sigma2 = instance.sigma2
+                statistic_prices = instance.statistic_prices
+                statistic_returns = instance.statistic_returns
+                pvalue_prices = instance.pvalue_prices
+                pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, price,
@@ -278,6 +294,10 @@ def index():
     kurtosis_log_returns = round(kurtosis_log_returns, 4) if kurtosis_log_returns is not None else None
     skewness_normal = round(skewness_normal, 4) if skewness_normal is not None else None
     kurtosis_normal = round(kurtosis_normal, 4) if kurtosis_normal is not None else None
+    statistic_prices = round(statistic_prices, 4) if statistic_prices is not None else None
+    statistic_returns = round(statistic_returns, 4) if statistic_returns is not None else None
+    pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
+    pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
     return render_template("view_bootstrap.html", form=form, user=user, file_name=file_name, k=strike_data,
                            put_market=put_market, call_market=call_market, a0=a0, a1=a1, a2=a2, strike=strike_plot,
@@ -293,6 +313,8 @@ def index():
                            returns_t=returns_t, skewness_normal=skewness_normal, cdf_prices=cdf_prices,
                            cdf_returns=cdf_returns, cdf_bench_log_prices=cdf_bench_log_prices,
                            cdf_bench_norm_returns=cdf_bench_norm_returns, kurtosis_normal=kurtosis_normal, sg2=sigma2,
+                           statistic_prices=statistic_prices, statistic_returns=statistic_returns,
+                           pvalue_prices=pvalue_prices, pvalue_returns=pvalue_returns,
                            plot_choice=plot_choice, plot_implied_volatility=plot_implied_volatility,
                            plot_index_distribution=plot_index_distribution,
                            plot_return_distribution=plot_return_distribution, plot_index_cdf=plot_index_cdf,
@@ -399,6 +421,10 @@ def old():
             cdf_bench_log_prices = json.loads(instance.cdf_bench_log_prices)
             cdf_bench_norm_returns = json.loads(instance.cdf_bench_norm_returns)
             sg2 = instance.sigma2
+            statistic_prices = instance.statistic_prices
+            statistic_returns = instance.statistic_returns
+            pvalue_prices = instance.pvalue_prices
+            pvalue_returns = instance.pvalue_returns
             plot_choice = json.loads(instance.plot_choice)
 
             plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, price, strike_min,
@@ -439,6 +465,8 @@ def old():
                          'skewness_log_returns': skewness_log_returns, 'kurtosis_log_returns': kurtosis_log_returns,
                          'pdf_bench_log_prices': pdf_bench_log_prices, 'pdf_bench_norm_returns': pdf_bench_norm_returns,
                          'price': price, 'volatility_time': volatility_time, 'r2': r2, 'returns_t': returns_t,
+                         'statistic_prices': statistic_prices, 'statistic_returns': statistic_returns,
+                         'pvalue_prices': pvalue_prices, 'pvalue_returns': pvalue_returns,
                          'skewness_normal': skewness_normal, 'kurtosis_normal': kurtosis_normal,
                          'cdf_prices': cdf_prices, 'cdf_returns': cdf_returns,
                          'cdf_bench_log_prices': cdf_bench_log_prices, 'cdf_bench_norm_returns': cdf_bench_norm_returns,

@@ -198,10 +198,15 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
            pdf_bench_norm_returns, ret_t, skew_norm, kurt_norm, mu, std_deviation_log_ret, sigma2
 
 
-def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price, sigma2, ret_t, mu, m1_ret,
-                            std_deviation_log_ret):
+def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price, sigma2,
+                            ret_t, mu, m1_ret, std_deviation_log_ret):
+    risk_free = risk_free / 100
+    div_yield = div_yield / 100
+    SD = s0 * math.exp(-div_yield * time)
+    B = math.exp(-risk_free * time)
     step_k = 0.5
-    #Test per i prices                      
+
+    # Test per i prices
     st = np.arange(strike_min * 0.75, strike_max * 1.25, step_k)  # output per grafico
     SD = s0 * math.exp(-div_yield * time)
     B = math.exp(-risk_free * time)
@@ -210,23 +215,22 @@ def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_m
     cdf_prices = [float(cdf_prices(x)) for x in st]
     cdf_bench_log_prices = lambda k: lognorm.cdf(k, sigma2 ** 0.5, mu, expected_price)
     cdf_bench_log_prices = [float(cdf_bench_log_prices(x)) for x in st]  # vs st
-    kolmogorov_smirnov_prices=ks_2samp(cdf_prices,[i[0] for i in cdf_bench_log_prices])
-    statistic_prices=kolmogorov_smirnov_prices[0]
-    pvalue_prices=kolmogorov_smirnov_prices[1]
+    kolmogorov_smirnov_prices = ks_2samp(cdf_prices, cdf_bench_log_prices)
+    statistic_prices = kolmogorov_smirnov_prices[0]
+    pvalue_prices = kolmogorov_smirnov_prices[1]
 
-    #Test per i returns
+    # Test per i returns
 
     cdf_returns = lambda kret: ImpliedCDFReturns_FullRange(a0, a1, a2, SD, B, kret, strike_min, strike_max, x_fit_lgn)
 
     cdf_returns = [float(cdf_returns(x)) for x in ret_t]
     cdf_bench_norm_returns = lambda k: norm.cdf(k, m1_ret, std_deviation_log_ret)
     cdf_bench_norm_returns = [float(cdf_bench_norm_returns(x)) for x in ret_t]
-    kolmogorov_smirnov_returns = ks_2samp(cdf_returns,[i[0] for i in cdf_bench_norm_returns])
+    kolmogorov_smirnov_returns = ks_2samp(cdf_returns, cdf_bench_norm_returns)
     statistic_returns = kolmogorov_smirnov_returns[0]
     pvalue_returns = kolmogorov_smirnov_returns[1]
 
-
-    return statistic_prices, pvalue_prices, statistic_returns, pvalue_returns 
+    return statistic_prices, pvalue_prices, statistic_returns, pvalue_returns
 
 
 def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_min, strike_max, strike_data,
@@ -464,7 +468,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
                                                                                ("Bench Norm",
                                                                                 "@cdf_bench_norm_returns")])
 
-    x_range = [min(ret_t) , max(ret_t)]
+    x_range = [min(ret_t), max(ret_t)]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_norm], x_range=x_range, y_range=y_range,
                     title="Implied CEQ returns CDF", plot_height=450, toolbar_location="right",

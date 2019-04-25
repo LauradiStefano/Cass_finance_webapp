@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from app import app
 
-
 db = SQLAlchemy(app)
 
 
@@ -22,15 +21,15 @@ class User(db.Model):
         self.pw_hash = generate_password_hash(pw)
 
     def is_authenticated(self):
-        #Return True if the user is authenticated
+        # Return True if the user is authenticated
         return True
 
     def is_active(self):
-        #True, as all users are active."""
+        # True, as all users are active."""
         return True
 
     def is_anonymous(self):
-        #False, as anonymous users aren't supported.
+        # False, as anonymous users aren't supported.
         return False
 
     def get_id(self):
@@ -85,8 +84,11 @@ class Compute(db.Model):
     mu = db.Column(db.Float())
     stand_deviation_log_ret = db.Column(db.Float())
     sigma2 = db.Column(db.Float())
-    ret_min = db.Column(db.Float())
-    ret_max = db.Column(db.Float())
+    statistic_prices = db.Column(db.Float())
+    statistic_returns = db.Column(db.Float())
+    pvalue_prices = db.Column(db.Float())
+    pvalue_returns = db.Column(db.Float())
+
     plot_choice = db.Column(db.String())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

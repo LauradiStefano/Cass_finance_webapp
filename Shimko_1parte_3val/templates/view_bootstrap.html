@@ -11,6 +11,10 @@
     <script type="text/javascript">
         Bokeh.set_log_level("info");
 
+
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
@@ -22,6 +26,10 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
+
+
 
     </script>
     <script type="text/javascript"
@@ -146,16 +154,16 @@
                             {{form.price}}
                         </div>
                         <div class="col-xs-3">
-                             {% if form.price.errors %}
-                                {% for error in form.price.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+                            {% if form.price.errors %}
+                            {% for error in form.price.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                     <br/>
 
-                     <div class="row">
+                    <div class="row">
                         <div class="col-xs-3">
                             {{form.risk_free.label}}
                         </div>
@@ -163,16 +171,16 @@
                             {{form.risk_free}}
                         </div>
                         <div class="col-xs-3">
-                             {% if form.risk_free.errors %}
-                                {% for error in form.risk_free.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+                            {% if form.risk_free.errors %}
+                            {% for error in form.risk_free.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
                     <br/>
 
-                     <div class="row">
+                    <div class="row">
                         <div class="col-xs-3">
                             {{form.div_yield.label}}
                         </div>
@@ -180,16 +188,16 @@
                             {{form.div_yield}}
                         </div>
                         <div class="col-xs-3">
-                             {% if form.div_yield.errors %}
-                                {% for error in form.div_yield.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+                            {% if form.div_yield.errors %}
+                            {% for error in form.div_yield.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
-                     <br/>
+                    <br/>
 
-                     <div class="row">
+                    <div class="row">
                         <div class="col-xs-3">
                             {{form.time.label}}
                         </div>
@@ -197,13 +205,14 @@
                             {{form.time}}
                         </div>
                         <div class="col-xs-3">
-                             {% if form.time.errors %}
-                                {% for error in form.time.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+                            {% if form.time.errors %}
+                            {% for error in form.time.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
                         </div>
-                    </div><br/>
+                    </div>
+                    <br/>
                     <div class="row">
                         <div class="col-xs-2">
                             {{form.plot_choice.label}}
@@ -218,7 +227,8 @@
                             {% endfor %}
                             {% endif %}
                         </div>
-                    </div><br/>
+                    </div>
+                    <br/>
                     <div class="row">
                         {{form.button_compute}}
                     </div>
@@ -228,16 +238,43 @@
     </div>
     <br/>
     <div class="row">
-        <h4>Result: </h4>
-        <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
-        {% if plot_implied_volatility != None %}
-        <div>
-            <h5>
-                <span> \(a_{0}\): {{a0}}</span><br/>
-                <span> \(a_{1}\): {{a1}}</span><br/>
-                <span> \(a_{2}\): {{a2}}</span><br/>
-            </h5> <br/>
-            <h5><span>Test K-C: -- </span></h5>
+        <div class="row">
+            <div class="col-6 col-xs-6">
+                <h4>Result: </h4>
+                <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
+                {% if plot_implied_volatility != None %}
+                <h5>
+                    <span> \(a_{0}\): {{a0}}</span><br/>
+                    <span> \(a_{1}\): {{a1}}</span><br/>
+                    <span> \(a_{2}\): {{a2}}</span><br/>
+                </h5>
+            </div>
+
+            <div class="col-6 col-xs-6">
+                <h5> Kolmogorov Smirnov Test</h5>
+                <table>
+                    <thead>
+                    <th></th>
+                    <th> Cdf Prices</th>
+                    <th> Cdf Returns</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td> Statistic Value</td>
+                        <td> {{statistic_prices}}</td>
+                        <td> {{statistic_returns}}</td>
+
+                    </tr>
+                    <tr>
+                        <td> PValue</td>
+                        <td> {{pvalue_prices}}</td>
+                        <td> {{pvalue_returns}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <br/>
         <button class="popup_table_open">View details</button>
@@ -246,39 +283,39 @@
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
-             <div class="col-6 col-xs-6">
+            <div class="col-6 col-xs-6">
                 {{plot_return_distribution[0]|safe}}
                 {{plot_return_distribution[1]|safe}}
             </div>
         </div>
         {%if plot_index_distribution != None%}
-            <div class="row">
-                <div class="col-6 col-xs-12">
-                    {{plot_index_distribution[0]|safe}}
-                    {{plot_index_distribution[1]|safe}}
-                </div>
+        <div class="row">
+            <div class="col-6 col-xs-12">
+                {{plot_index_distribution[0]|safe}}
+                {{plot_index_distribution[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+        <div class="row">
+            {%if plot_index_cdf != None%}
+            <div class="col-6 col-xs-6">
+                {{plot_index_cdf[0]|safe}}
+                {{plot_index_cdf[1]|safe}}
             </div>
             {%endif%}
-            <div class="row">
-                {%if plot_index_cdf != None%}
-                <div class="col-6 col-xs-6">
-                    {{plot_index_cdf[0]|safe}}
-                    {{plot_index_cdf[1]|safe}}
-                </div>
-                {%endif%}
-                {%if plot_return_cdf != None%}
-                <div class="col-6 col-xs-6">
-                    {{plot_return_cdf[0]|safe}}
-                    {{plot_return_cdf[1]|safe}}
-                </div>
-                {%endif%}
+            {%if plot_return_cdf != None%}
+            <div class="col-6 col-xs-6">
+                {{plot_return_cdf[0]|safe}}
+                {{plot_return_cdf[1]|safe}}
             </div>
+            {%endif%}
+        </div>
 
         {% endif %}
     </div>
 </div>
 <div id="popup_table" style="display:none">
-    <button onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});" >Export
+    <button onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">Export
     </button>
     <h4> Table of moments </h4>
     <table id="tableExport">
