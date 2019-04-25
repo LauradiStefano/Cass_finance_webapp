@@ -166,7 +166,7 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     ret_min = mu - 9 * sigma2 ** 0.5
     ret_max = mu + 9 * sigma2 ** 0.5
     step_ret = 0.01
-    ret_t = np.arange(ret_min * 0.75, ret_max * 1.5, step_ret)
+    ret_t = np.arange(ret_min * 0.65, ret_max * 0.65, step_ret)
 
     # ret_t = np.log(ST / SD)  # output grafico 3
 
@@ -328,10 +328,10 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
     hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
                                tooltips=[("Strike", "@st"), ("Bench LogNorm", "@pdf_bench_log_prices")])
 
-    x_range = [strike_min * 0.125, strike_max * 2]
+    x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, max(pdf) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_pdf, hover_log_norm], x_range=x_range, y_range=y_range,
-                    title="Implied CEQ index distribution", plot_height=400, toolbar_location="left",
+                    title="Implied CEQ index distribution", plot_height=450, toolbar_location="left",
                     x_axis_label='Index Value', y_axis_label='Probability Density')
 
     fig.line(x='st', y='pdf', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
@@ -360,7 +360,7 @@ def compute_underlying_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_mi
 
     x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
 
-    st = np.arange(strike_min * 0.75, strike_max * 1.5, step_k)
+    st = np.arange(strike_min * 0.8, strike_max * 1.25, step_k)
     cdf_prices = lambda k: ImpliedCDFPrices_FullRange(a0, a1, a2, SD, B, k, strike_min, strike_max, x_fit_lgn)
     cdf_prices = [float(cdf_prices(x)) for x in st]
     cdf_bench_log_prices = lambda k: lognorm.cdf(k, sigma2 ** 0.5, mu, expected_price)
@@ -381,10 +381,10 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
     hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
                                tooltips=[("Strike", "@st"), ("Bench LogNorm", "@cdf_bench_log_prices")])
 
-    x_range = [strike_min * 0.125, strike_max * 2]
+    x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_log_norm], x_range=x_range, y_range=y_range,
-                    title="Implied CEQ prices CDF", plot_height=400, toolbar_location="left",
+                    title="Implied CEQ prices CDF", plot_height=450, toolbar_location="left",
                     x_axis_label='Index Value', y_axis_label='Cumulative Probability')
 
     fig.line(x='st', y='cdf_prices', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
@@ -433,10 +433,10 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
                                                                                ("Bench Norm",
                                                                                 "@cdf_bench_norm_returns")])
 
-    x_range = [min(ret_t) * 0.9, max(ret_t) * 1.1]
+    x_range = [min(ret_t) , max(ret_t)]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_norm], x_range=x_range, y_range=y_range,
-                    title="Implied CEQ returns CDF", plot_height=400, toolbar_location="right",
+                    title="Implied CEQ returns CDF", plot_height=450, toolbar_location="right",
                     x_axis_label='Log Returns', y_axis_label='Cumulative Probability')
 
     fig.line(x='ret_t', y='cdf_returns', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
