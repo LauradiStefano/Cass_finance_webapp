@@ -12,13 +12,11 @@ from shimkofun import get_implied_parameters_lognormal
 import numpy as np
 import bokeh.plotting as bp
 from bokeh.plotting import ColumnDataSource
-from bokeh.models import HoverTool
 from scipy import integrate
 import math
 from scipy.stats import norm, lognorm, ks_2samp
-from bokeh.layouts import column, widgetbox
-from bokeh.models import CustomJS
-from bokeh.models.widgets import Slider
+from bokeh.layouts import column, row
+from bokeh.models import CustomJS, Slider, HoverTool
 
 
 def find_parameters(strike_min, strike_atm, strike_max, vol_min, vol_atm, vol_max):
@@ -232,7 +230,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
 
     layout = column(
         fig,
-        widgetbox(vol_min_slider, vol_atm_slider, vol_max_slider)
+        row(vol_min_slider, vol_atm_slider, vol_max_slider)
     )
 
     from bokeh.embed import components
