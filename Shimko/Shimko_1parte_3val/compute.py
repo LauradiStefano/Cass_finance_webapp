@@ -232,7 +232,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
 
     layout = column(
         fig,
-        widgetbox(vol_min_slider, vol_atm_slider, vol_max_slider),
+        widgetbox(vol_min_slider, vol_atm_slider, vol_max_slider)
     )
 
     from bokeh.embed import components
