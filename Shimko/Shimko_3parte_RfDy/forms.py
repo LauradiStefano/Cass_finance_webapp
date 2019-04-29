@@ -44,7 +44,7 @@ class RegistrationForm(wtf.Form):
         return True
 
 
-class Loginform(wtf.Form):
+class LoginForm(wtf.Form):
     username = wtf.StringField(
         label='Username', validators=[DataRequired()])
     password = wtf.PasswordField(label='Password', validators=[DataRequired()])

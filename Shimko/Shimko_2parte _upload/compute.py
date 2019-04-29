@@ -252,11 +252,17 @@ def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_m
     strike_plot = [str(Strike) for Strike in strike_plot]
     implied_volatility = [round(vol, 4) for vol in implied_volatility]
 
-    data = ColumnDataSource(data=dict(
+    data_implied_vol = ColumnDataSource(data=dict(
         strike_plot=strike_plot,
-        implied_volatility=implied_volatility,
+        implied_volatility=implied_volatility
+    ))
+
+    data_call = ColumnDataSource(data=dict(
         strike_call=strike_call,
-        volatility_t_call=volatility_t_call,
+        volatility_t_call=volatility_t_call
+    ))
+
+    data_put = ColumnDataSource(data=dict(
         strike_put=strike_put,
         volatility_t_put=volatility_t_put
     ))
@@ -277,15 +283,15 @@ def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_m
                     y_range=y_range, title="Implied volatility profile", plot_height=450, toolbar_location="left",
                     x_axis_label='Exercise price', y_axis_label='Volatility x root time')
 
-    fig.line(x='strike_plot', y='implied_volatility', source=data, color="#0095B6", legend='Volatility Structure',
-             line_width=4, alpha=0.8, name='implied vol')
+    fig.line(x='strike_plot', y='implied_volatility', source=data_implied_vol, color="#0095B6",
+             legend='Volatility Structure', line_width=4, alpha=0.8, name='implied vol')
 
     fig.square(x=s0, y=0, legend='Price', color="#050402", size=8)
 
-    fig.circle(x='strike_call', y='volatility_t_call', source=data, color="#D21F1B",
+    fig.circle(x='strike_call', y='volatility_t_call', source=data_call, color="#D21F1B",
                legend='Implied Volatility of Market Call Option Price', size=6, name='call')
 
-    fig.circle(x='strike_put', y='volatility_t_put', source=data, color="#120A8F",
+    fig.circle(x='strike_put', y='volatility_t_put', source=data_put, color="#120A8F",
                legend='Implied Volatility of Market Put Option Price', size=6, name='put')
 
     fig.toolbar.active_drag = None
