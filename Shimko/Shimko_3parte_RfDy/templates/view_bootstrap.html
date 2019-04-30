@@ -15,6 +15,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -26,6 +27,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -192,7 +194,7 @@
                 <h6><span> File Name: {{file_name}}</span></h6>
             </div>
             <div class="col-6 col-xs-6">
-                <h5> Kolmogorov Smirnov Prices</h5>
+                <h5> Kolmogorov Smirnov Test</h5>
                 <table>
                     <thead>
                     <th></th>
@@ -220,18 +222,18 @@
         <br/>
         <button class="popup_table_open">View details</button>
         <div class="row">
-            <div class="col-6 col-xs-6">
+            <div id="plot_implied_volatilily" class="col-6 col-xs-6">
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
-            <div class="col-6 col-xs-6">
+            <div id="plot_return_distribution" class="col-6 col-xs-6">
                 {{plot_return_distribution[0]|safe}}
                 {{plot_return_distribution[1]|safe}}
             </div>
         </div>
         {%if plot_index_distribution != None%}
         <div class="row">
-            <div class="col-6 col-xs-12">
+            <div id="plot_index_distribution" class="col-6 col-xs-12">
                 {{plot_index_distribution[0]|safe}}
                 {{plot_index_distribution[1]|safe}}
             </div>
@@ -239,13 +241,13 @@
         {%endif%}
         <div class="row">
             {%if plot_index_cdf != None%}
-            <div class="col-6 col-xs-6">
+            <div id="plot_index_cdf" class="col-6 col-xs-6">
                 {{plot_index_cdf[0]|safe}}
                 {{plot_index_cdf[1]|safe}}
             </div>
             {%endif%}
             {%if plot_return_cdf != None%}
-            <div class="col-6 col-xs-6">
+            <div id="plot_return_cdf" class="col-6 col-xs-6">
                 {{plot_return_cdf[0]|safe}}
                 {{plot_return_cdf[1]|safe}}
             </div>

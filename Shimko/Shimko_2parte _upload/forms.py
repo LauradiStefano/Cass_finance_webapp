@@ -13,7 +13,6 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-
     file_name = wtf.FileField(label='Import File')
     price = wtf.FloatField(label='Price', validators=[InputRequired()])
     call_put_flag = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put'), ('2', 'Both')],

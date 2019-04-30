@@ -7,6 +7,7 @@
     <script type="text/javascript">
         Bokeh.set_log_level("info");
 
+
     </script>
 
     <script type="text/x-mathjax-config">
@@ -16,6 +17,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
     </script>
     <script type="text/javascript"
@@ -63,6 +65,7 @@
                     <span> \(a_{2}\): {{result ['a2']}}</span><br/>
                     <span> \(R^{2}\): {{result ['r2']}}</span><br/> <br/>
                     <span> File Name: {{result ['file_name']}}</span>
+                    <!--TODO: <div id=plot_--_-- > See view_html-->
                     {{ result['plot_implied_volatility'][0]|safe }}
                     {{ result['plot_implied_volatility'][1]|safe }}
                     {{ result['plot_index_distribution'][0]|safe }}
