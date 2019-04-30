@@ -90,7 +90,7 @@ def index():
             kolmogorov_smirnov_test(a0, a1, a2, form.price.data, risk_free, div_yield, time, strike_min, strike_max,
                                     expected_price, sigma2, returns_t, mu, m1_returns, std_deviation_log_ret)
 
-        plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, form.price.data,
+        plot_implied_volatility = create_implied_volatility_plot(form.call_put_flag.data, strike_plot, implied_volatility, form.price.data,
                                                                  strike_min, strike_max, strike_data, volatility_time)
 
         plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
@@ -164,8 +164,8 @@ def index():
             object.statistic_returns = statistic_returns
             object.pvalue_prices = pvalue_prices
             object.pvalue_returns = pvalue_returns
-
             object.price = form.price.data
+            object.call_put_flag = form.call_put_flag.data
 
             if st is not None:  # user chooses the plot
                 object.st = json.dumps(st.tolist())
@@ -199,6 +199,7 @@ def index():
                 strike_max = instance.strike_max
                 volatility_time = np.array(json.loads(instance.volatility_time))
                 price = instance.price
+                call_put_flag = instance.call_put_flag
                 pdf_returns = json.loads(instance.pdf_returns)
                 area_prices = instance.area_prices
                 expected_price = instance.expected_price
@@ -243,7 +244,7 @@ def index():
                     if '2' in plot_choice:
                         plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
-                plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, price,
+                plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, price,
                                                                          strike_min, strike_max, strike_data,
                                                                          volatility_time)
 
@@ -367,6 +368,7 @@ def old():
             kurtosis_log_returns = instance.kurtosis_log_returns
             pdf_bench_norm_returns = json.loads(instance.pdf_bench_norm_returns)
             price = instance.price
+            call_put_flag = instance.call_put_flag
             volatility_time = np.array(json.loads(instance.volatility_time))
             r2 = instance.r2
             returns_t = np.array(json.loads(instance.returns_t))
@@ -402,7 +404,7 @@ def old():
                 if '2' in plot_choice:
                     plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
-            plot_implied_volatility = create_implied_volatility_plot(strike_plot, implied_volatility, price, strike_min,
+            plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, price, strike_min,
                                                                      strike_max, strike_data, volatility_time)
 
             plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,

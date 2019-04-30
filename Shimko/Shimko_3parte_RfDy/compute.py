@@ -222,25 +222,41 @@ def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_m
     return statistic_prices, pvalue_prices, statistic_returns, pvalue_returns
 
 
-def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_min, strike_max, strike_data,
+def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, s0, strike_min, strike_max, strike_data,
                                    volatility_time):
-    delta_k_s0 = np.array(strike_data) - float(s0)
-    negative = delta_k_s0 < 0
-    positive = delta_k_s0 > 0
+    call_put_flag = int(call_put_flag)
+    strike_call = []
+    strike_put = []
+    volatility_t_call = []
+    volatility_t_put = []
+    
+    if  call_put_flag == 2:
+        delta_k_s0 = np.array(strike_data) - float(s0)
+        negative = delta_k_s0 < 0
+        positive = delta_k_s0 > 0
 
-    strike_call = (strike_data * negative)
-    strike_call = np.array([elem for elem in strike_call if elem != 0])
-    volatility_t_call = volatility_time * negative
-    volatility_t_call = np.array([elem for elem in volatility_t_call if elem != 0])
+        strike_call = (strike_data * negative)
+        strike_call = np.array([elem for elem in strike_call if elem != 0])
+        volatility_t_call = volatility_time * negative
+        volatility_t_call = np.array([elem for elem in volatility_t_call if elem != 0])
 
-    strike_put = strike_data * positive
-    strike_put = np.array([elem for elem in strike_put if elem != 0])
-    volatility_t_put = volatility_time * positive
-    volatility_t_put = np.array([elem for elem in volatility_t_put if elem != 0])
+        strike_put = strike_data * positive
+        strike_put = np.array([elem for elem in strike_put if elem != 0])
+        volatility_t_put = volatility_time * positive
+        volatility_t_put = np.array([elem for elem in volatility_t_put if elem != 0])
 
-    strike_plot = [str(Strike) for Strike in strike_plot]
-    implied_volatility = [round(vol, 4) for vol in implied_volatility]
+        strike_plot = [str(Strike) for Strike in strike_plot]
+        implied_volatility = [round(vol, 4) for vol in implied_volatility]
+    
+    elif  call_put_flag == 1:
+        strike_call = strike_data
+        volatility_t_call = volatility_time
+    
+    else:
+        strike_put = strike_data
+        volatility_t_put = volatility_time
 
+    
     data_implied_vol = ColumnDataSource(data=dict(
         strike_plot=strike_plot,
         implied_volatility=implied_volatility
@@ -256,13 +272,13 @@ def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_m
         volatility_t_put=volatility_t_put
     ))
 
-    hover_volatility = HoverTool(attachment="above", names=['implied vol'],
+    hover_volatility = HoverTool(attachment="left", names=['implied vol'],
                                  tooltips=[("Strike", "@strike_plot"), ("Implied vol", "@implied_volatility")])
 
-    hover_call = HoverTool(attachment="right", names=['call'], tooltips=[("Strike call", "@strike_call"),
+    hover_call = HoverTool(attachment="above", names=['call'], tooltips=[("Strike call", "@strike_call"),
                                                                          ("Vol Call", "@volatility_t_call")])
 
-    hover_put = HoverTool(attachment="left", names=['put'], tooltips=[("Strike put", "@strike_put"),
+    hover_put = HoverTool(attachment="below", names=['put'], tooltips=[("Strike put", "@strike_put"),
                                                                       ("Vol put", "@volatility_t_put")])
 
     x_range = [strike_min, strike_max + 10]
@@ -277,10 +293,12 @@ def create_implied_volatility_plot(strike_plot, implied_volatility, s0, strike_m
 
     fig.square(x=s0, y=0, legend='Price', color="#050402", size=8)
 
-    fig.circle(x='strike_call', y='volatility_t_call', source=data_call, color="#D21F1B",
+    if call_put_flag ==1 or call_put_flag ==2:
+        fig.circle(x='strike_call', y='volatility_t_call', source=data_call, color="#D21F1B",
                legend='Implied Volatility of Market Call Option Price', size=6, name='call')
 
-    fig.circle(x='strike_put', y='volatility_t_put', source=data_put, color="#120A8F",
+    if call_put_flag ==0 or call_put_flag ==2:
+        fig.circle(x='strike_put', y='volatility_t_put', source=data_put, color="#120A8F",
                legend='Implied Volatility of Market Put Option Price', size=6, name='put')
 
     fig.toolbar.active_drag = None
