@@ -36,34 +36,15 @@ def find_vol(target_value, cp, S0, K, T, rf, q):
 # return implied_vol
 
 def bs_price(cp_flag, S0, K, T, rf, sigma, q):
+    cp_flag = int(cp_flag)
     K = np.array(K)
     N = norm.cdf
     d1 = (np.log(S0 / K) + (rf + sigma * sigma / 2.) * T) / (sigma * math.sqrt(T))
     d2 = d1 - sigma * math.sqrt(T)
     if cp_flag == 1:
         price = S0 * math.exp(-q * T) * N(d1) - K * math.exp(-rf * T) * N(d2)
-    elif cp_flag == 0:
+    else:  # cp_flag == 0:
         price = K * math.exp(-rf * T) * N(-d2) - S0 * math.exp(-q * T) * N(-d1)
-    else: #cp_flag == 2:
-        delta_K_S0 = np.array(K) - float(S0)
-        negative = delta_K_S0 < 0
-        positive = delta_K_S0 > 0
-        K_Call = (K * negative)
-        K_Call = np.array([elem for elem in K_Call if elem != 0])
-
-        K_Put = K * positive
-        K_Put = np.array([elem for elem in K_Put if elem != 0])
-
-        d1_Call = (np.log(S0 / K_Call) + (rf + sigma * sigma / 2.) * T) / (sigma * math.sqrt(T))
-        d2_Call = d1_Call - sigma * math.sqrt(T)
-
-        d1_Put = (np.log(S0 / K_Put) + (rf + sigma * sigma / 2.) * T) / (sigma * math.sqrt(T))
-        d2_Put = d1_Put - sigma * math.sqrt(T)
-
-        priceC = S0 * math.exp(-q * T) * N(d1_Call) - K_Call * math.exp(-rf * T) * N(d2_Call)
-        priceP = K_Put * math.exp(-rf * T) * N(-d2_Put) - S0 * math.exp(-q * T) * N(-d1_Put)
-        price = list(list(priceC) + list(priceP))
-        price = np.array(price)
 
     return price
 

@@ -11,7 +11,8 @@ from get_COS_bounds import get_COS_bounds
 
 
 # opzione sullo spot
-def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
+def get_cos_prices(type_choice, L, N, CallPut, S0, K, r, q, Tt, param):
+    CallPut = int(CallPut)
     price = []
     if Tt == 0:
         price = (max(CallPut * (S0 - K), 0))
@@ -19,7 +20,7 @@ def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
     else:
 
         param[0] = 0
-        omega = np.log(CharFunc(param, type, -1j, 1))
+        omega = np.log(CharFunc(param, type_choice, -1j, 1))
         # np.concatenate((np.array([(0)]),np.array([param])),axis=None)
 
         mu = r - q - np.real(omega)
@@ -28,7 +29,9 @@ def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
         paramrn = param
         # np.concatenate((np.array([(mu)]),np.array([param])),axis=None)
 
-        a, b = get_COS_bounds(paramrn, type, Tt, L)
+        a, b = get_COS_bounds(paramrn, type_choice, Tt, L)
+    print('a',a)
+    print('b',b)
 
     if CallPut == 1:  # call
 
@@ -38,7 +41,7 @@ def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
 
         V = -(2 / (b - a)) * (chiFO(a, 0, N, a, b) - psiFO(a, 0, N, a, b))
 
-    CharFn = (CharFunc(paramrn, type, np.arange(0, N, 1) * math.pi / (b - a), Tt))
+    CharFn = (CharFunc(paramrn, type_choice, np.arange(0, N, 1) * math.pi / (b - a), Tt))
     Cfv = np.matrix(CharFn * V)  # corretto
 
     for j in range(0, len(K)):
@@ -79,7 +82,7 @@ def psiFO(c, d, N, a, b):
     return psi
 
 # %opzione sullo spot
-# function [price] = myPlainVanillaPrice(type, L, N, CallPut, S0, K, r, q, Tt, param)
+# function [price] = myPlainVanillaPrice(type_choice, L, N, CallPut, S0, K, r, q, Tt, param)
 #
 #
 #
@@ -93,12 +96,12 @@ def psiFO(c, d, N, a, b):
 #    if T==0
 #        price(NR,:)=max(CallPut*(S0(NR,:)-K),0)
 #    else
-#        omega=log(CharFunc([0 param],type,-1i,1))
+#        omega=log(CharFunc([0 param],type_choice,-1i,1))
 #        mu=r-q-omega
 #        
 #        paramrn=[mu param]
 #
-#        [a, b]=get_COS_bounds(paramrn,type,T,L)
+#        [a, b]=get_COS_bounds(paramrn,type_choice,T,L)
 #    
 #    if CallPut == 1 % call
 #    
@@ -107,7 +110,7 @@ def psiFO(c, d, N, a, b):
 #        V = -(2/(b-a))*(chiFO(a,0,N,a,b)-psiFO(a,0,N,a,b))
 #    end
 #
-#        CharFn = CharFunc(paramrn,type,(0:N-1)*pi/(b-a),T)
+#        CharFn = CharFunc(paramrn,type_choice,(0:N-1)*pi/(b-a),T)
 #
 #        CFV=CharFn.*V
 #        

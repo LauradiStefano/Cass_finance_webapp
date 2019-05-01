@@ -9,6 +9,8 @@ import numpy as np
 
 
 def CharFunc(parameters, type_choice, u, dt):
+    type_choice = int(type_choice)
+    
     if type_choice == 1:
         CharFn = NormCF(parameters, u, dt)
     elif type_choice == 2:

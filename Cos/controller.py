@@ -49,7 +49,7 @@ def index():
                                             form.risk_free.data, form.dividend_yield.data)
 
             plot_return_underlying_distribution = \
-                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, form.price.data)
+                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, form.price.data)
 
@@ -82,7 +82,7 @@ def index():
                 implied_volatility = json.loads(instance.implied_volatilities)
 
                 plot_return_underlying_distribution = create_plot_return_underlying_distribution\
-                    (underlying_prices, pdf_underlying_asset, price)
+                    (underlying_prices, pdf_underlying_asset)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
@@ -153,7 +153,7 @@ def old():
             strike = json.loads(instance.strikes)
             implied_volatility = json.loads(instance.implied_volatilities)
 
-            plot_return_underlying_distribution = (underlying_prices, pdf_underlying_asset, price)
+            plot_return_underlying_distribution = (underlying_prices, pdf_underlying_asset)
 
             plot_implied_volatilities = create_implied_volatility_plot(strike, implied_volatility, price)
 

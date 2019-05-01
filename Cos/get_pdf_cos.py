@@ -10,8 +10,8 @@ import math
 from get_CharFunc import CharFunc
 
 
-def get_pdf_cos(type, x, a, b, parameters, T, N):
-    CharFn = CharFunc(parameters, type, np.arange(0, N, 1) * math.pi / (b - a), T)
+def get_pdf_cos(type_choice, x, a, b, parameters, T, N):
+    CharFn = CharFunc(parameters, type_choice, np.arange(0, N, 1) * math.pi / (b - a), T)
 
     COSpdf = []
 
@@ -27,7 +27,7 @@ def get_pdf_cos(type, x, a, b, parameters, T, N):
 
     return COSpdf
 
-#    CharFn=CharFunc(param,type,(0:N-1)*pi/(b-a),T);
+#    CharFn=CharFunc(param,type_choice,(0:N-1)*pi/(b-a),T);
 #
 # %truncate the pdf outside the bounds
 # for j=1:length(x)
