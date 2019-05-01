@@ -50,8 +50,8 @@ class Compute(db.Model):
     option_prices = db.Column(db.String())
     strike_min = db.Column(db.Float())
     strike_max = db.Column(db.Float())
-    strikes = db.Column(db.String())
-    implied_volatilities = db.Column(db.String())
+    strike = db.Column(db.String())
+    implied_volatility = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
 

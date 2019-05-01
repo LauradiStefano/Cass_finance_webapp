@@ -12,10 +12,6 @@ from getbs import find_vol
 import matplotlib.pyplot as plt
 import bokeh.plotting as plt
 from bokeh.plotting import ColumnDataSource
-from bokeh.layouts import column, widgetbox
-from bokeh.models import CustomJS
-from bokeh.models.widgets import Slider
-
 
 # #Input
 # u = 1

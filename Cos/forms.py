@@ -1,7 +1,6 @@
 import wtforms as wtf
 import db_models
 import wtforms.fields.html5 as html5
-# from wtforms.fields.html5 import DecimalRangeField
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms import SelectMultipleField
 
@@ -13,27 +12,25 @@ class MultiCheckboxField(SelectMultipleField):
 
 class ComputeForm(wtf.Form):
     type_choice = wtf.SelectField('Distribution',
-                                  choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')],
-                                  validators=[wtf.validators.InputRequired()])
+                                  choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')])
 
     mu = wtf.FloatField(label='Mu', default=0)
-    sigma = wtf.FloatField(label='Sigma', default=0)
-    kappa = wtf.FloatField(label='kappa', default=0)
-    theta = wtf.FloatField(label='Theta', default=0)
-    c = wtf.FloatField(label='C', default=0)
-    g = wtf.FloatField(label='G', default=0)
-    m = wtf.FloatField(label='M', default=0)
-    y = wtf.FloatField(label='Y', default=0)
+    sigma = wtf.FloatField(label='Sigma', default=0.03)
+    kappa = wtf.FloatField(label='kappa', default=0.001)
+    theta = wtf.FloatField(label='Theta', default=0.001)
+    c = wtf.FloatField(label='C', default=0.02)
+    g = wtf.FloatField(label='G', default=0.07)
+    m = wtf.FloatField(label='M', default=7.5)
+    y = wtf.FloatField(label='Y', default=0.01)
 
-    price = wtf.FloatField(label='Price', default=0, validators=[wtf.validators.InputRequired()])
-    strike_min = wtf.FloatField(label='Strike Min', default=0, validators=[wtf.validators.InputRequired()])
-    strike_max = wtf.FloatField(label='Strike Max', default=0, validators=[wtf.validators.InputRequired()])
-    risk_free = wtf.FloatField(label='Risk Free (%)', default=0.1666, validators=[wtf.validators.InputRequired()])
-    dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0.1666,
+    price = wtf.FloatField(label='Price', default=100, validators=[wtf.validators.InputRequired()])
+    strike_min = wtf.FloatField(label='Strike Min', default=70, validators=[wtf.validators.InputRequired()])
+    strike_max = wtf.FloatField(label='Strike Max', default=130, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Risk Free (%)', default=2, validators=[wtf.validators.InputRequired()])
+    dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0,
                                     validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time expiration', default=0.1666, validators=[wtf.validators.InputRequired()])
-    call_put = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put')],
-                              validators=[wtf.validators.InputRequired()])
+    time = wtf.FloatField(label='Time expiration', default=1, validators=[wtf.validators.InputRequired()])
+    call_put = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put')], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')
 

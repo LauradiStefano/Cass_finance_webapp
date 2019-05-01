@@ -1,0 +1,47 @@
+input.form-control
+{
+    width: 100%!important;
+    /* important is property, it defines the first rule to apply  */
+}
+
+.input-group-addon{
+    display:block;
+}
+
+.w3-myfont  {
+    font-family: "Tahoma",sans-serif; /* sans-serif è famiglia di apparteneza del carattere*/
+    font-size: 13px;
+}
+
+table {
+    border-collapse: collapse;  /*unico bordo*/
+    background: white;
+}
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+th {
+    background-color: #aee3f8;
+}
+tr:nth-child(even){
+    background-color:#f1f1ed;   /*colore alternato celle (even=righe pari, odd=righe dispari)*/
+}
+table, th, td {
+    border: 1px solid black;
+}
+
+.popup_content {
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #444;
+  background: white;
+}
+
+.popup_content > table {
+    margin: 10px;
+}
+
+body{
+  margin: 20px;
+}
