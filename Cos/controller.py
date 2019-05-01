@@ -23,7 +23,6 @@ def index():
     user = current_user
     form = ComputeForm(request.form)
 
-    type_choice = None
     parameters = None
     time = None
     pdf_underlying_asset = None
@@ -43,8 +42,7 @@ def index():
 
     if request.method == "POST":
         if form.validate():
-
-            parameters = select_parameters(form.type_choice, form.mu.data, form.sigma.data, form.kappa.data,
+            parameters = select_parameters(form.type_choice.data, form.mu.data, form.sigma.data, form.kappa.data,
                                            form.theta.data, form.c.data, form.g.data, form.m.data, form.y.data)
             pdf_underlying_asset, underlying_prices = \
                 cos_pdf_underlying_asset(form.type_choice.data, parameters, form.time.data)

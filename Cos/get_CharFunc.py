@@ -15,10 +15,8 @@ def CharFunc(parameters, type_choice, u, dt):
         CharFn = VGCF(parameters, u, dt)
     elif type_choice == 3:
         CharFn = NIGCF(parameters, u, dt)
-    elif type_choice == 4:
+    else:  # type_choice == 4
         CharFn = CGMYCF(parameters, u, dt)
-    elif type_choice == 11:
-        CharFn = NormCF(parameters, u, dt)
 
     ret = CharFn
 

@@ -12,6 +12,14 @@
         Bokeh.set_log_level("info");
 
 
+
+
+
+
+
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.0.4.min.css" rel="stylesheet" type="text/css">
@@ -23,6 +31,14 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
+
+
+
+
+
+
 
 
     </script>
@@ -60,243 +76,240 @@
     <div class="row">
         <h4>Input</h4>
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-xs-3">
                 {{form.type_choice.label}}
-            </div>
-            <div class="col-xs-2">
 
                 {{form.type_choice}}
             </div>
         </div>
         <br/>
         <div class="row">
+
             <div class="col-xs-2">
-                {{form.mu.label}}
+                <div class="row">
+                    {{form.mu.label}}
+                    {{form.mu}}
+                    {% if form.mu.errors %}
+                    {% for error in form.mu.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
-            <div class=" col-xs-2">
-                {{form.mu}}
-                {% if form.mu.errors %}
-                {% for error in form.mu.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class=" col-xs-2">
-                {{form.sigma.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.sigma}}
-                {% if form.sigma.errors %}
-                {% for error in form.sigma.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.mu.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.mu}}
-                {% if form.mu.errors %}
-                {% for error in form.mu.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.sigma.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.sigma}}
-                {% if form.sigma.errors %}
-                {% for error in form.sigma.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.kappa.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.kappa}}
-                {% if form.kappa.errors %}
-                {% for error in form.kappa.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.theta.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.theta}}
-                {% if form.theta.errors %}
-                {% for error in form.theta.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.mu.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.mu}}
-                {% if form.mu.errors %}
-                {% for error in form.mu.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.c.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.c}}
-                {% if form.c.errors %}
-                {% for error in form.c.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.g.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.g}}
-                {% if form.g.errors %}
-                {% for error in form.g.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.m.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.m}}
-                {% if form.m.errors %}
-                {% for error in form.m.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.y.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.y}}
-                {% if form.y.errors %}
-                {% for error in form.y.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.price.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.price}}
-                {% if form.price.errors %}
-                {% for error in form.price.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.time.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.time}}
-                {% if form.time.errors %}
-                {% for error in form.time.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.risk_free.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.risk_free}}
-                {% if form.risk_free.errors %}
-                {% for error in form.risk_free.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.dividend_yield.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.dividend_yield}}
-                {% if form.dividend_yield.errors %}
-                {% for error in form.dividend_yield.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.strike_min.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.strike_min}}
-                {% if form.strike_min.errors %}
-                {% for error in form.strike_min.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.strike_max.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.strike_max}}
-                {% if form.strike_max.errors %}
-                {% for error in form.strike_max.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>  <br/>
-        <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.call_put.label}}
-            </div>
-            <div class="col-xs-2">
-                {{form.call_put}}
-                {% if form.call_put.errors %}
-                {% for error in form.call_put.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.button_compute}}
+
+            <div class="col-xs-10">
+                <div id="normal" class="row">
+                    <div class="col-xs-3">
+                        {{form.sigma.label}}
+                        {{form.sigma}}
+                        {% if form.sigma.errors %}
+                        {% for error in form.sigma.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="vg" class="row">
+                    <div class="col-xs-3">
+                        {{form.sigma.label}}
+                        {{form.sigma}}
+                        {% if form.sigma.errors %}
+                        {% for error in form.sigma.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        {{form.kappa.label}}
+                        {{form.kappa}}
+                        {% if form.kappa.errors %}
+                        {% for error in form.kappa.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        {{form.theta.label}}
+                        {{form.theta}}
+                        {% if form.theta.errors %}
+                        {% for error in form.theta.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="cgmy" class="row">
+                    <div class="col-xs-3">
+                        {{form.c.label}}
+                        {{form.c}}
+                        {% if form.c.errors %}
+                        {% for error in form.c.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        {{form.g.label}}
+                        {{form.g}}
+                        {% if form.g.errors %}
+                        {% for error in form.g.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        {{form.m.label}}
+                        {{form.m}}
+                        {% if form.m.errors %}
+                        {% for error in form.m.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        {{form.y.label}}
+                        {{form.y}}
+                        {% if form.y.errors %}
+                        {% for error in form.y.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <br/>
     <div class="row">
-        <h4>Result: </h4>
-        <div class="row">
+        <div class="col-xs-2">
+            {{form.price.label}}
+            {{form.price}}
+            {% if form.price.errors %}
+            {% for error in form.price.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-xs-2">
+            {{form.time.label}}
+            {{form.time}}
+            {% if form.time.errors %}
+            {% for error in form.time.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-2">
+            {{form.risk_free.label}}
+            {{form.risk_free}}
+            {% if form.risk_free.errors %}
+            {% for error in form.risk_free.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-xs-2">
+            {{form.dividend_yield.label}}
+            {{form.dividend_yield}}
+            {% if form.dividend_yield.errors %}
+            {% for error in form.dividend_yield.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-xs-2">
+            {{form.strike_min.label}}
+            {{form.strike_min}}
+            {% if form.strike_min.errors %}
+            {% for error in form.strike_min.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="col-xs-2">
+            {{form.strike_max.label}}
+            {{form.strike_max}}
+            {% if form.strike_max.errors %}
+            {% for error in form.strike_max.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-xs-3">
+            {{form.call_put.label}}
+            {{form.call_put}}
+            {% if form.call_put.errors %}
+            {% for error in form.call_put.errors %}
+            <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-xs-2">
+            {{form.button_compute}}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h4>Result: </h4>
+    <div class="row">
+    </div>
+</div>
 
 </div>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
-<script type="text/javascript">$('#popup_table').popup(); </script>
-<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+<!--<script type="text/javascript">$('#popup_table').popup(); </script>-->
+<!--<script type="text/javascript" src="./static/tableExportExcel.js"></script>-->
+
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var select_distribution = $('#type_choice');
+        var normal = $('#normal');
+        var vg = $('#vg');
+        var cgmy = $('#cgmy');
+
+        normal.show();
+        vg.hide();
+        cgmy.hide();
+
+        select_distribution.on('change', function() {
+            if (select_distribution.val() == '1') {
+                normal.show();
+                vg.hide();
+                cgmy.hide();
+            } else if ((select_distribution.val() == '2') || (select_distribution.val() == '3')) {
+                normal.hide();
+                vg.show();
+                cgmy.hide();
+            } else {
+                normal.hide();
+                vg.hide();
+                cgmy.show();
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+</script>
 </body>
 </html>

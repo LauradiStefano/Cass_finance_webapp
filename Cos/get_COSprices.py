@@ -12,6 +12,7 @@ from get_COS_bounds import get_COS_bounds
 
 # opzione sullo spot
 def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
+    price = []
     if Tt == 0:
         price = (max(CallPut * (S0 - K), 0))
 
@@ -33,14 +34,13 @@ def get_cos_prices(type, L, N, CallPut, S0, K, r, q, Tt, param):
 
         V = ((2 / (b - a)) * (chiFO(0, b, N, a, b) - psiFO(0, b, N, a, b)))
 
-    elif CallPut == -1:  # put
+    else:  # CallPut == 0  # put
 
         V = -(2 / (b - a)) * (chiFO(a, 0, N, a, b) - psiFO(a, 0, N, a, b))
 
     CharFn = (CharFunc(paramrn, type, np.arange(0, N, 1) * math.pi / (b - a), Tt))
     Cfv = np.matrix(CharFn * V)  # corretto
 
-    price = []
     for j in range(0, len(K)):
         k = np.log(S0 / K[j]) - a
         Exp_term = np.matrix(np.exp(1j * math.pi * (k) * np.arange(0, N, 1) / (b - a)))  # corretto

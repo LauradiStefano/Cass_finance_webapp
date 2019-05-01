@@ -12,19 +12,18 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-
     type_choice = wtf.SelectField('Distribution',
                                   choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')],
                                   validators=[wtf.validators.InputRequired()])
 
-    mu = wtf.FloatField(label='Mu', default=0, validators=[wtf.validators.InputRequired()])
-    sigma = wtf.FloatField(label='Sigma', default=0, validators=[wtf.validators.InputRequired()])
-    kappa = wtf.FloatField(label='kappa', default=0, validators=[wtf.validators.InputRequired()])
-    theta = wtf.FloatField(label='Theta', default=0, validators=[wtf.validators.InputRequired()])
-    c = wtf.FloatField(label='C', default=0, validators=[wtf.validators.InputRequired()])
-    g = wtf.FloatField(label='G', default=0, validators=[wtf.validators.InputRequired()])
-    m = wtf.FloatField(label='M', default=0, validators=[wtf.validators.InputRequired()])
-    y = wtf.FloatField(label='Y', default=0, validators=[wtf.validators.InputRequired()])
+    mu = wtf.FloatField(label='Mu', default=0)
+    sigma = wtf.FloatField(label='Sigma', default=0)
+    kappa = wtf.FloatField(label='kappa', default=0)
+    theta = wtf.FloatField(label='Theta', default=0)
+    c = wtf.FloatField(label='C', default=0)
+    g = wtf.FloatField(label='G', default=0)
+    m = wtf.FloatField(label='M', default=0)
+    y = wtf.FloatField(label='Y', default=0)
 
     price = wtf.FloatField(label='Price', default=0, validators=[wtf.validators.InputRequired()])
     strike_min = wtf.FloatField(label='Strike Min', default=0, validators=[wtf.validators.InputRequired()])
