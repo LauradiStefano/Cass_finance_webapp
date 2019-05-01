@@ -18,7 +18,7 @@ def get_cumulants(parameters, type, dt):
         c1, c2, c3, c4 = VG_cum(parameters, dt)
     elif type == 3:
         c1, c2, c3, c4 = NIG_cum(parameters, dt)
-    elif type == 4:
+    else: #type == 4:
         c1, c2, c3, c4 = CGMY_cum(parameters, dt)
 
     return c1, c2, c3, c4

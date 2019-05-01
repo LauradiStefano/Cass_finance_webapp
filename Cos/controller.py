@@ -88,7 +88,7 @@ def index():
 
     return render_template("view_bootstrap.html", form=form, user=user,
                            plot_return_underlying_distribution=plot_return_underlying_distribution,
-                           plot_implied_volatilities=plot_implied_volatility)
+                           plot_implied_volatility=plot_implied_volatility)
 
 
 def populate_form_from_instance(instance):

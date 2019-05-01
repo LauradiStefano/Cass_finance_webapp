@@ -44,7 +44,7 @@ def bs_price(cp_flag, S0, K, T, rf, sigma, q):
         price = S0 * math.exp(-q * T) * N(d1) - K * math.exp(-rf * T) * N(d2)
     elif cp_flag == 0:
         price = K * math.exp(-rf * T) * N(-d2) - S0 * math.exp(-q * T) * N(-d1)
-    elif cp_flag == 2:
+    else: #cp_flag == 2:
         delta_K_S0 = np.array(K) - float(S0)
         negative = delta_K_S0 < 0
         positive = delta_K_S0 > 0
