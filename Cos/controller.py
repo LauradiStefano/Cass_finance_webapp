@@ -1,6 +1,6 @@
 import os
 from compute import cos_pdf_underlying_asset, create_plot_return_underlying_distribution, compute_option_prices, \
-    compute_implied_volatilites, create_implied_volatility_plot, select_parameters
+    compute_implied_volatility, create_implied_volatility_plot, select_parameters
 from flask import render_template, request, redirect, url_for
 from forms import ComputeForm
 import numpy as np
@@ -46,8 +46,8 @@ def index():
                                       form.time.data, parameters)
 
             implied_volatility = \
-                compute_implied_volatilites(option_prices, form.call_put.data, form.price.data, strike, form.time.data,
-                                            form.risk_free.data, form.dividend_yield.data)
+                compute_implied_volatility(option_prices, form.call_put.data, form.price.data, strike, form.time.data,
+                                           form.risk_free.data, form.dividend_yield.data)
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
@@ -141,7 +141,7 @@ def old():
     data = []
     user = current_user
     if user.is_authenticated():
-        instances = user.Compute.order_by('-id').all()
+        instances = user.Compute.order_by(desc('id')).all()
         for instance in instances:
             form = populate_form_from_instance(instance)
 

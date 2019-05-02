@@ -4,34 +4,36 @@ Created on Fri Apr  5 15:14:27 2019
 
 @author: Diego
 """
-import numpy as np
 import math
-from get_CharFunc import CharFunc
+
+import numpy as np
+
 from get_COS_bounds import get_COS_bounds
+from get_CharFunc import CharFunc
 
 
 # opzione sullo spot
-def get_cos_prices(type_choice, L, N, CallPut, S0, K, r, q, Tt, param):
+def get_cos_prices(type_choice, L, N, call_put, s0, K, r, q, Tt, parameters):
     price = []
-    CallPut = int(CallPut)
+    call_put = int(call_put)
     if Tt == 0:
-        price = (max(CallPut * (S0 - K), 0))
+        price = (max(call_put * (s0 - K), 0))
 
     else:
 
-        param[0] = 0
-        omega = np.log(CharFunc(param, type_choice, -1j, 1))
+        parameters[0] = 0
+        omega = np.log(CharFunc(parameters, type_choice, -1j, 1))
         # np.concatenate((np.array([(0)]),np.array([param])),axis=None)
 
         mu = r - q - np.real(omega)
 
-        param[0] = mu
-        paramrn = param
+        parameters[0] = mu
+        paramrn = parameters
         # np.concatenate((np.array([(mu)]),np.array([param])),axis=None)
 
         a, b = get_COS_bounds(paramrn, type_choice, Tt, L)
 
-    if CallPut == 1:  # call
+    if call_put == 1:  # call
 
         V = ((2 / (b - a)) * (chiFO(0, b, N, a, b) - psiFO(0, b, N, a, b)))
 
@@ -43,7 +45,7 @@ def get_cos_prices(type_choice, L, N, CallPut, S0, K, r, q, Tt, param):
     Cfv = np.matrix(CharFn * V)  # corretto
 
     for j in range(0, len(K)):
-        k = np.log(S0 / K[j]) - a
+        k = np.log(s0 / K[j]) - a
         Exp_term = np.matrix(np.exp(1j * math.pi * (k) * np.arange(0, N, 1) / (b - a)))  # corretto
 
         real_term = np.real(np.dot(Exp_term, Cfv.getT()) - 0.5 * Exp_term[0, 0] * Cfv[

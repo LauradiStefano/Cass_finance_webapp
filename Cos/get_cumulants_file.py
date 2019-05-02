@@ -12,7 +12,6 @@ import math
 
 
 def get_cumulants(parameters, type_choice, dt):
-    
     type_choice = int(type_choice)
 
     if type_choice == 1:

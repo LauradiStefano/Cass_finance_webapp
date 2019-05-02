@@ -6,6 +6,7 @@ Created on Fri Mar 22 10:57:35 2019
 """
 
 import math
+
 from get_cumulants_file import get_cumulants
 
 
@@ -17,4 +18,3 @@ def get_COS_bounds(parameters, type_choice, T, L):
     xmax = c1 + L * math.sqrt(c2 + math.sqrt(c4))
 
     return xmin, xmax
-

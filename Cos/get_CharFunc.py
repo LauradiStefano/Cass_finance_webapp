@@ -5,12 +5,13 @@ Created on Fri Mar 22 11:10:58 2019
 @author: Diego
 """
 import math
+
 import numpy as np
 
 
 def CharFunc(parameters, type_choice, u, dt):
     type_choice = int(type_choice)
-    
+
     if type_choice == 1:
         CharFn = NormCF(parameters, u, dt)
     elif type_choice == 2:
