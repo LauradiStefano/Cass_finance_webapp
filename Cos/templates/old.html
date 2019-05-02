@@ -7,6 +7,7 @@
     <script type="text/javascript">
         Bokeh.set_log_level("info");
 
+
     </script>
 
     <script type="text/x-mathjax-config">
@@ -16,6 +17,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
     </script>
     <script type="text/javascript"
@@ -57,32 +59,17 @@
                 </div>
                 <div class="col-xs-3">
                     <h4>Results</h4>
-                    {% if result[' plot_implied_volatility'] != None %}
-                    <span> \(a_{0}\): {{result ['a0']}}</span><br/>
-                    <span> \(a_{1}\): {{result ['a1']}}</span><br/>
-                    <span> \(a_{2}\): {{result ['a2']}}</span><br/>
+                    {% if result['plot_return_underlying_distribution'] != None %}
+
+                    {{ result['plot_return_underlying_distribution'][0]|safe }}
+                    {{ result['plot_return_underlying_distribution'][1]|safe }}
 
                     {{ result['plot_implied_volatility'][0]|safe }}
                     {{ result['plot_implied_volatility'][1]|safe }}
-                    {{ result['plot_return_distribution'][0]|safe}}
-                    {{ result['plot_return_distribution'][1]|safe}}
 
-                    {% if result[' plot_index_distribution'] != None %}
-                    {{ result['plot_index_distribution'][0]|safe }}
-                    {{ result['plot_index_distribution'][1]|safe }}
-                    {% endif %}
-
-                    {% if result[' plot_index_cdf'] != None %}
-                    {{ result['plot_index_cdf'][0]|safe}}
-                    {{ result['plot_index_cdf'][1]|safe}}
-                    {% endif %}
-
-                    {% if result[' plot_return_cdf'] != None %}
-                    {{ result['plot_return_cdf'][0]|safe}}
-                    {{ result['plot_return_cdf'][1]|safe}}
-                    {% endif %}
 
                     {% endif %}
+
                 </div>
                 <div class="col-xs-3">
                     <form class="navbar-form navbar-top " method="POST" action="/delete/{{ result.id }}">

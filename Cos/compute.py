@@ -61,8 +61,7 @@ def cos_pdf_underlying_asset(type_choice, parameters, time):
 
 
 def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset):
-    
-  
+
     data = ColumnDataSource(data=dict(
         underlying_prices=underlying_prices,
         pdf_underlying_asset=pdf_underlying_asset
@@ -71,12 +70,10 @@ def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying
     x_range = [min(underlying_prices), max(underlying_prices)]  # before x_range = [min(ret_t) - 0.5, max(ret_t) + 0.5]
     y_range = [0, max(pdf_underlying_asset) * 1.10]
     p = plt.figure(x_range=x_range, y_range=y_range, title="Pdf underlying asset", plot_height=450,
-                   toolbar_location="right", x_axis_label='Returns', y_axis_label='Probability')
+                   toolbar_location="left", x_axis_label='Returns', y_axis_label='Probability')
 
     p.line(x='underlying_prices', y='pdf_underlying_asset', source=data, legend="Pdf distribution", color="#0095B6",
            alpha=0.9, line_width=4)
-
-    # p.square(x=S0, y=0, source=data,  legend="Log Price", color="#050402", size=8)
 
     p.legend.location = "top_right"
     p.toolbar.active_drag = None
@@ -94,20 +91,16 @@ def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying
 def compute_option_prices(type_choice, call_put, s0, strike_min, strike_max, risk_free, dividend_yield, time,
                           parameters):
     # Compute option prices
-    risk_free = risk_free/100
-    dividend_yield = dividend_yield/100
+    risk_free = risk_free / 100
+    dividend_yield = dividend_yield / 100
     nk = 50
 
     strikes = np.linspace(strike_min, strike_max, nk)
     L = 10
-    N = 500
+    N = 1000
     
     option_prices = get_cos_prices(type_choice, L, N, call_put, s0, strikes, risk_free, dividend_yield, time,
                                    parameters)
-    
-    
-    
-    print('option prices',option_prices)
     return option_prices, strikes
 
 
@@ -116,7 +109,7 @@ def compute_option_prices(type_choice, call_put, s0, strike_min, strike_max, ris
 def compute_implied_volatilites(option_prices, call_put, s0, strikes, time, risk_free, dividend_yield):
 
     risk_free = risk_free / 100
-    dividend_yield = dividend_yield /100
+    dividend_yield = dividend_yield / 100
     
     implied_volatilities = find_vol(option_prices, call_put, s0, strikes, time, risk_free, dividend_yield)
     return implied_volatilities
@@ -129,12 +122,13 @@ def create_implied_volatility_plot(strikes, implied_volatilities, s0):
     ))
 
     x_range = [min(strikes) * 0.9, max(strikes) * 1.1]
-    y_range = [min(implied_volatilities) * 0.9, max(implied_volatilities) * 1.1]
+    y_range = [0, max(implied_volatilities) * 1.75]
     p = plt.figure(x_range=x_range, y_range=y_range, title="Implied volatility profile", plot_height=450,
-                   toolbar_location="left", x_axis_label='Exercise price',
+                   toolbar_location="right", x_axis_label='Exercise price',
                    y_axis_label='Volatility x root time')
 
-    p.line(x='strikes', y='implied_volatilities', source=data, color="#0095B6", line_width=4, alpha=0.8)
+    p.line(x='strikes', y='implied_volatilities', source=data, legend='Implied volatility', color="#0095B6",
+           line_width=4, alpha=0.8)
     p.square(x=s0, y=0, source=data, legend='Price', color="#050402", size=8)
     # p.circle(x='strike_value', y='volatility', source=data, color="#D21F1B", legend='Implied Volatility', size=6)
 

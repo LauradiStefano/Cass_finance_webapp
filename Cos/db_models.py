@@ -52,6 +52,16 @@ class Compute(db.Model):
     strike_max = db.Column(db.Float())
     strike = db.Column(db.String())
     implied_volatility = db.Column(db.String())
+    type_choice = db.Column(db.Integer())
+
+    mu = db.Column(db.Float())
+    sigma = db.Column(db.Float())
+    kappa = db.Column(db.Float())
+    theta = db.Column(db.Float())
+    c = db.Column(db.Float())
+    g = db.Column(db.Float())
+    m = db.Column(db.Float())
+    y = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
 

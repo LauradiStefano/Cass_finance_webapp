@@ -15,7 +15,7 @@ class ComputeForm(wtf.Form):
                                   choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')])
 
     mu = wtf.FloatField(label='Mu', default=0)
-    sigma = wtf.FloatField(label='Sigma', default=0.03)
+    sigma = wtf.FloatField(label='Sigma', default=0.2)
     kappa = wtf.FloatField(label='kappa', default=0.001)
     theta = wtf.FloatField(label='Theta', default=0.001)
     c = wtf.FloatField(label='C', default=0.02)
@@ -47,7 +47,7 @@ class RegistrationForm(wtf.Form):
         label='Confirm Password',
         validators=[wtf.validators.DataRequired()])
     email = html5.EmailField(label='Email')
-    button_registration = wtf.SubmitField(label='Compute')
+    button_registration = wtf.SubmitField(label='Sign Up')
 
     def validate(self):
         if not wtf.Form.validate(self):
@@ -65,7 +65,7 @@ class Loginform(wtf.Form):
         label='Username', validators=[wtf.validators.DataRequired()])
     password = wtf.PasswordField(
         label='Password', validators=[wtf.validators.DataRequired()])
-    button_login = wtf.SubmitField(label='Compute')
+    button_login = wtf.SubmitField(label='Log In')
 
     def validate(self):
         if not wtf.Form.validate(self):

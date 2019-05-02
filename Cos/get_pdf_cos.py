@@ -27,14 +27,4 @@ def get_pdf_cos(type_choice, x, a, b, parameters, T, N):
 
     return COSpdf
 
-#    CharFn=CharFunc(param,type_choice,(0:N-1)*pi/(b-a),T);
-#
-# %truncate the pdf outside the bounds
-# for j=1:length(x)
-#    if x(j)<a || x(j) >b
-#        COS_pdf(j)=0;
-#    else
-#        V = (2/(b-a))*cos((x(j)-a)*(0:N-1)*pi/(b-a));
-#        COS_pdf(j)=real(sum(CharFn.*V.*exp(1i*(0:N-1)*pi*(-a)/(b-a)))-0.5*CharFn(1)*V(1));
-#    end
-# end
+

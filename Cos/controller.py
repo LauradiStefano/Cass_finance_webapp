@@ -3,6 +3,7 @@ from compute import cos_pdf_underlying_asset, create_plot_return_underlying_dist
     compute_implied_volatilites, create_implied_volatility_plot, select_parameters
 from flask import render_template, request, redirect, url_for
 from forms import ComputeForm
+import numpy as np
 from db_models import db, User, Compute
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
@@ -61,10 +62,10 @@ def index():
             # json.loads convert from string to array
 
             object.pdf_underlying_asset = json.dumps(pdf_underlying_asset)
-            object.underlying_prices = json.dumps(underlying_prices)
+            object.underlying_prices = json.dumps(underlying_prices.tolist())
             object.price = form.price.data
-            object.strike = json.dumps(strike)
-            object.implied_volatility = json.dumps(implied_volatility)
+            object.strike = json.dumps(strike.tolist())
+            object.implied_volatility = json.dumps(implied_volatility.tolist())
 
             object.user = user
             db.session.add(object)
@@ -76,13 +77,13 @@ def index():
                 form = populate_form_from_instance(instance)
 
                 pdf_underlying_asset = json.loads(instance.pdf_underlying_asset)
-                underlying_prices = json.loads(instance.underlying_prices)
+                underlying_prices = np.array(json.loads(instance.underlying_prices))
                 price = instance.price
-                strike = json.loads(instance.strikes)
-                implied_volatility = json.loads(instance.implied_volatilities)
+                strike = np.array(json.loads(instance.strike))
+                implied_volatility = np.array(json.loads(instance.implied_volatility))
 
-                plot_return_underlying_distribution = create_plot_return_underlying_distribution\
-                    (underlying_prices, pdf_underlying_asset)
+                plot_return_underlying_distribution = \
+                    create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
@@ -148,18 +149,19 @@ def old():
 
             id = instance.id
             pdf_underlying_asset = json.loads(instance.pdf_underlying_asset)
-            underlying_prices = json.loads(instance.underlying_prices)
+            underlying_prices = np.array(json.loads(instance.underlying_prices))
             price = instance.price
-            strike = json.loads(instance.strikes)
-            implied_volatility = json.loads(instance.implied_volatilities)
+            strike = np.array(json.loads(instance.strike))
+            implied_volatility = np.array(json.loads(instance.implied_volatility))
 
-            plot_return_underlying_distribution = (underlying_prices, pdf_underlying_asset)
+            plot_return_underlying_distribution = \
+                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
 
-            plot_implied_volatilities = create_implied_volatility_plot(strike, implied_volatility, price)
+            plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
             data.append({'form': form, 'id': id,
                          'plot_return_underlying_distribution': plot_return_underlying_distribution,
-                         'plot_implied_volatilities': plot_implied_volatilities})
+                         'plot_implied_volatility': plot_implied_volatility})
 
     return render_template("old.html", data=data)
 

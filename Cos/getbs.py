@@ -16,9 +16,7 @@ def find_vol(target_value, cp, S0, K, T, rf, q):
     # for j in range (int(len(K))):
     for i in range(0, MAX_ITERATIONS):
         price = bs_price(cp, S0, K, T, rf, sigma, q)
-        vega = bs_vega(cp, S0, K, T, rf, sigma, q)
-
-        price = price
+        vega = bs_vega(S0, K, T, rf, sigma)
         diff = target_value - price  # our root
 
         # print (i, sigma, diff)
@@ -49,7 +47,7 @@ def bs_price(cp_flag, S0, K, T, rf, sigma, q):
     return price
 
 
-def bs_vega(cp_flag, S0, K, T, rf, sigma, q):
+def bs_vega(S0, K, T, rf, sigma):
     n = norm.pdf
     K = np.array(K)
     d1 = (np.log(S0 / K) + (rf + sigma * sigma / 2.) * T) / (sigma * math.sqrt(T))

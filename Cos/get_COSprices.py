@@ -12,8 +12,8 @@ from get_COS_bounds import get_COS_bounds
 
 # opzione sullo spot
 def get_cos_prices(type_choice, L, N, CallPut, S0, K, r, q, Tt, param):
-    CallPut = int(CallPut)
     price = []
+    CallPut = int(CallPut)
     if Tt == 0:
         price = (max(CallPut * (S0 - K), 0))
 
@@ -30,8 +30,6 @@ def get_cos_prices(type_choice, L, N, CallPut, S0, K, r, q, Tt, param):
         # np.concatenate((np.array([(mu)]),np.array([param])),axis=None)
 
         a, b = get_COS_bounds(paramrn, type_choice, Tt, L)
-    print('a',a)
-    print('b',b)
 
     if CallPut == 1:  # call
 
@@ -80,67 +78,3 @@ def psiFO(c, d, N, a, b):
         psi.append((math.sin(rangeN_d[i]) - math.sin(rangeN_c[i])) * (b - a) / (rangeN[i] * math.pi))
 
     return psi
-
-# %opzione sullo spot
-# function [price] = myPlainVanillaPrice(type_choice, L, N, CallPut, S0, K, r, q, Tt, param)
-#
-#
-#
-# NR=size(S0,1)%righe
-# NC=size(S0,2)%colonne
-# price=zeros(NR,NC) 
-#
-# for j=1:NR
-#    T=Tt(j,1)
-#    
-#    if T==0
-#        price(NR,:)=max(CallPut*(S0(NR,:)-K),0)
-#    else
-#        omega=log(CharFunc([0 param],type_choice,-1i,1))
-#        mu=r-q-omega
-#        
-#        paramrn=[mu param]
-#
-#        [a, b]=get_COS_bounds(paramrn,type_choice,T,L)
-#    
-#    if CallPut == 1 % call
-#    
-#        V = (2/(b-a))*(chiFO(0,b,N,a,b)-psiFO(0,b,N,a,b))
-#    elseif CallPut == -1 % put
-#        V = -(2/(b-a))*(chiFO(a,0,N,a,b)-psiFO(a,0,N,a,b))
-#    end
-#
-#        CharFn = CharFunc(paramrn,type_choice,(0:N-1)*pi/(b-a),T)
-#
-#        CFV=CharFn.*V
-#        
-#        Exp_term=exp(1i*pi*(log(S0(j,:)'./K)-a).*(0:N-1)/(b-a))
-#        price(j,:) = K*exp(-r*T)*real(Exp_term*CFV.'-0.5*Exp_term(1)*CFV(1))'
-#    end
-# end
-#
-# end
-#
-# % Fourier-cosine series coefficients of the terminal payoff function
-# function ret=chiFO(N,a,b)
-#
-# rangeN=(0:N-1)
-#
-# rangeN_c=rangeN*pi*(c-a)/(b-a)
-# rangeN_d=rangeN*pi*(d-a)/(b-a)
-#
-# chi = (1./(1+(rangeN*pi/(b-a)).^2)).*(cos(rangeN_d)*exp(d)-cos(rangeN_c)*exp(c)+...
-#    (rangeN*pi/(b-a)).*sin(rangeN_d)*exp(d)-(rangeN*pi/(b-a)).*sin(rangeN_c)*exp(c))
-# ret=chi
-# end
-#
-# function ret=psiFO(c,d,N,a,b)
-#
-# rangeN=(1:N-1)
-# rangeN_c=rangeN*pi*(c-a)/(b-a)
-# rangeN_d=rangeN*pi*(d-a)/(b-a)
-#
-# psi(1) = d-c
-# psi(2:N) = (sin(rangeN_d)-sin(rangeN_c))*(b-a)./(rangeN*pi)
-# ret=psi
-# end
