@@ -1,7 +1,6 @@
 import wtforms as wtf
 import db_models
 import wtforms.fields.html5 as html5
-# from wtforms.fields.html5 import DecimalRangeField
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms import SelectMultipleField
 

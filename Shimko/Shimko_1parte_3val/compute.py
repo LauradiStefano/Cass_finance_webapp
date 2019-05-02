@@ -31,7 +31,6 @@ def find_parameters(strike_min, strike_atm, strike_max, vol_min, vol_atm, vol_ma
     a2 = parameters[0]
     a1 = parameters[1]
     a0 = parameters[2]
-    # r2 = parameters[3]
 
     f = lambda strike: a0 + a1 * strike + a2 * strike ** 2
     strike = np.arange(strike_min, strike_max, 0.1)
@@ -230,7 +229,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
 
     layout = column(
         fig,
-        row(vol_min_slider, vol_atm_slider, vol_max_slider)
+        column(vol_min_slider, vol_atm_slider, vol_max_slider)
     )
 
     from bokeh.embed import components

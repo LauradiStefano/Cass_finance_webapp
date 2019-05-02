@@ -234,15 +234,16 @@ def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_m
     return statistic_prices, pvalue_prices, statistic_returns, pvalue_returns
 
 
-def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, s0, strike_min, strike_max, strike_data,
+def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, s0, strike_min, strike_max,
+                                   strike_data,
                                    volatility_time):
     call_put_flag = int(call_put_flag)
     strike_call = []
     strike_put = []
     volatility_t_call = []
     volatility_t_put = []
-    
-    if  call_put_flag == 2:
+
+    if call_put_flag == 2:
         delta_k_s0 = np.array(strike_data) - float(s0)
         negative = delta_k_s0 < 0
         positive = delta_k_s0 > 0
@@ -259,15 +260,15 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
 
         strike_plot = [str(Strike) for Strike in strike_plot]
         implied_volatility = [round(vol, 4) for vol in implied_volatility]
-    
-    elif  call_put_flag == 1:
+
+    elif call_put_flag == 1:
         strike_call = strike_data
         volatility_t_call = volatility_time
-    
+
     else:
         strike_put = strike_data
         volatility_t_put = volatility_time
-    
+
     data_implied_vol = ColumnDataSource(data=dict(
         strike_plot=strike_plot,
         implied_volatility=implied_volatility
@@ -290,13 +291,13 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
                                                                          ("Vol Call", "@volatility_t_call")])
 
     hover_put = HoverTool(attachment="below", names=['put'], tooltips=[("Strike put", "@strike_put"),
-                                                                      ("Vol put", "@volatility_t_put")])
+                                                                       ("Vol put", "@volatility_t_put")])
 
     x_range = [strike_min, strike_max + 10]
     y_range = [0, max(volatility_time) + 0.02]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_volatility, hover_call, hover_put], x_range=x_range,
-                    y_range=y_range, title="Implied volatility profile", plot_height=450, toolbar_location="left",
+                    y_range=y_range, title="Implied volatility profile", plot_height=450, toolar_location="left",
                     x_axis_label='Exercise price', y_axis_label='Volatility x root time')
 
     fig.line(x='strike_plot', y='implied_volatility', source=data_implied_vol, color="#0095B6",
@@ -304,18 +305,17 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
 
     fig.square(x=s0, y=0, legend='Price', color="#050402", size=8)
 
-    if call_put_flag ==1 or call_put_flag ==2:
+    if call_put_flag == 1 or call_put_flag == 2:
         fig.circle(x='strike_call', y='volatility_t_call', source=data_call, color="#D21F1B",
-               legend='Implied Volatility of Market Call Option Price', size=6, name='call')
-    
-    if call_put_flag ==0 or call_put_flag ==2:
+                   legend='Implied Volatility of Market Call Option Price', size=6, name='call')
+
+    if call_put_flag == 0 or call_put_flag == 2:
         fig.circle(x='strike_put', y='volatility_t_put', source=data_put, color="#120A8F",
-               legend='Implied Volatility of Market Put Option Price', size=6, name='put')
+                   legend='Implied Volatility of Market Put Option Price', size=6, name='put')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_left"
     fig.legend.orientation = "vertical"
-    
 
     from bokeh.embed import components
     script, div = components(fig)
