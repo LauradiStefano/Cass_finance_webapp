@@ -4,10 +4,11 @@ Created on Tue Mar 12 22:24:27 2019
 
 @author: Diego
 """
-import numpy as np
 import math
-from scipy.stats import norm, lognorm
-from scipy.optimize import fsolve, root
+
+import numpy as np
+from scipy.optimize import fsolve
+from scipy.stats import norm
 
 
 def find_SD_B(K, C_market, P_market):
@@ -108,8 +109,7 @@ def ImpliedCDFPrices_FullRange(A0, A1, A2, SD, B, k, kmin, kmax, x_fit_lgn):
     sgmin = x_fit_lgn[1]
     mumax = x_fit_lgn[2]
     sgmax = x_fit_lgn[3]
-    #    p=[mumax,sgmax]
-    #    print('test',get_lognormal_match(A0,A1,A2,SD,B,kmin,kmax,p))
+
     if k == 0:
         cdf = 0
         return cdf
@@ -168,13 +168,10 @@ def get_lognormal_match(A0, A1, A2, SD, B, kmin, kmax, p):
     PdfKmax = ImpliedPDFPrices(A0, A1, A2, SD, B, kmax)
     CdfKmax = ImpliedCDFPrices(A0, A1, A2, SD, B, kmax)
     mumax, sgmax = p
-    print('p', p)
     arg = (math.log(kmax) - mumax) / sgmax
     f1 = norm.cdf(arg) - CdfKmax
 
     f2 = norm.pdf(arg) / (kmax * sgmax) - PdfKmax
-    print('pdf', norm.pdf(arg) / (kmax * sgmax), PdfKmax)
-    print('cdf', norm.ppf(arg), CdfKmax)
     return (f1, f2)
 
 
@@ -201,13 +198,6 @@ def get_lognormal_fit(A0, A1, A2, SD, B, kmin, kmax):
     #    my_fun=lambda p :get_lognormal_match(A0,A1,A2,SD,B,kmin,kmin,p)
     #    mumin, sgmin =  fsolve(my_fun, (mumin, sgmin))
     #
-    #
-    #    print('mu',mumin, sgmin)
-    #    print('Pdf',PdfKmin,CdfKmin)
-    #    print(fminmatch(mumin),norm.cdf((math.log(kmin)-mumin)/sgmin))
-    #    print(PdfKmax,CdfKmax)
-    #    print(fmaxmatch(mumax),norm.cdf((math.log(kmax)-mumax)/sgmax))
-    #    print(fmaxmatch(x),norm.cdf((math.log(kmax)-x)/y))
 
     #    return mumin,sgmin,mumax,sgmax
     return mumin, sgmin, mumax, sgmax

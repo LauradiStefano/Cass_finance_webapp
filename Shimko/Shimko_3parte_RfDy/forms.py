@@ -1,10 +1,10 @@
-import db_models
-import wtforms.fields.html5 as html5
 import wtforms as wtf
-from wtforms.validators import InputRequired, DataRequired, Length, EqualTo
-from flask_wtf.file import FileRequired
+import wtforms.fields.html5 as html5
 from wtforms import SelectMultipleField
+from wtforms.validators import InputRequired, DataRequired, Length, EqualTo
 from wtforms.widgets import ListWidget, CheckboxInput
+
+import db_models
 
 
 class MultiCheckboxField(SelectMultipleField):
@@ -22,6 +22,8 @@ class ComputeForm(wtf.Form):
     plot_choice = MultiCheckboxField('Plot', choices=[('0', 'plotPrice'), ('1', 'plotCdfPrice'),
                                                       ('2', 'plotCdfReturns')], validators=[])
     button_compute = wtf.SubmitField(label='Compute')
+    button_view_details = wtf.SubmitField(label='View Details')
+    button_export_table = wtf.SubmitField(label='Export Table')
 
 
 class RegistrationForm(wtf.Form):
@@ -30,7 +32,7 @@ class RegistrationForm(wtf.Form):
                                  validators=[DataRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm = wtf.PasswordField(label='Confirm Password', validators=[DataRequired()])
     email = html5.EmailField(label='Email', validators=[Length(min=6, max=35)])
-    button_registration = wtf.SubmitField(label='Compute')
+    button_registration = wtf.SubmitField(label='Sign Up')
 
     def validate(self):
         if not wtf.Form.validate(self):
@@ -47,7 +49,7 @@ class LoginForm(wtf.Form):
     username = wtf.StringField(
         label='Username', validators=[DataRequired()])
     password = wtf.PasswordField(label='Password', validators=[DataRequired()])
-    button_login = wtf.SubmitField(label='Compute')
+    button_login = wtf.SubmitField(label='Log In')
 
     def validate(self):
         if not wtf.Form.validate(self):

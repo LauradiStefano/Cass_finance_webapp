@@ -7,6 +7,20 @@
     <script type="text/javascript">
         Bokeh.set_log_level("info");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 
     <script type="text/x-mathjax-config">
@@ -16,6 +30,20 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     </script>
     <script type="text/javascript"
@@ -42,53 +70,160 @@
             <div class="row">
                 <div class="col-xs-3">
                     <h3>Input</h3>
-                    {% for field in result['form'] %}
+
                     <div class="row">
                         <div class="output">
-                            <label class="col-xs-6 control-label">
-                                <span>  {{ field.label  }}  </span>
-                            </label>
                             <div class="col-xs-6">
-                                {{ field.data }} <!--size box-->
+                                {{result['form'].strike_min.label}}
+                                {{result['form'].strike_min}}
+                                {{result['form'].strike_atm.label}}
+                                {{result['form'].strike_atm}}
+                                {{result['form'].strike_max.label}}
+                                {{result['form'].strike_max}}
+                                {{result['form'].volatility_min.label}}
+                                {{result['form'].volatility_min}}
+                                {{result['form'].volatility_atm.label}}
+                                {{result['form'].volatility_atm}}
+                                {{result['form'].volatility_max.label}}
+                                {{result['form'].volatility_max}}
+                                {{result['form'].price.label}}
+                                {{result['form'].price}}
+                                {{result['form'].risk_free.label}}
+                                {{result['form'].risk_free}}
+                                {{result['form'].div_yield.label}}
+                                {{result['form'].div_yield}}
+                                {{result['form'].time.label}}
+                                {{result['form'].time}}
+
                             </div>
+
                         </div>
                     </div>
-                    {% endfor %}
+
                 </div>
-                <div class="col-xs-3">
-                    <h4>Results</h4>
-                    {% if result[' plot_implied_volatility'] != None %}
-                    <span> \(a_{0}\): {{result ['a0']}}</span><br/>
-                    <span> \(a_{1}\): {{result ['a1']}}</span><br/>
-                    <span> \(a_{2}\): {{result ['a2']}}</span><br/>
+                <div class="row">
+                    <div class="col-xs-3">
+                        <h4>Results</h4>
+                        {% if result[' plot_return_distribution'] != None %}
+                        <div class="row">
+                            <span> \(a_{0}\): {{result ['a0']}}</span><br/>
+                            <span> \(a_{1}\): {{result ['a1']}}</span><br/>
+                            <span> \(a_{2}\): {{result ['a2']}}</span><br/>
 
-                    <!--TODO: <div id=plot_--_-- > See view_html-->
-                    {{ result['plot_return_distribution'][0]|safe}}
-                    {{ result['plot_return_distribution'][1]|safe}}
 
-                    {% if result[' plot_index_distribution'] != None %}
-                    {{ result['plot_index_distribution'][0]|safe }}
-                    {{ result['plot_index_distribution'][1]|safe }}
-                    {% endif %}
+                            <h4> Table of moments </h4>
+                            <table>
+                                <thead>
+                                <th> Description</th>
+                                <th> Ceq</th>
+                                <th> LogNormal</th>
+                                <th> Ceq Return</th>
+                                <th> Normal</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td> Area</td>
+                                    <td> {{result['area_prices']}}</td>
+                                    <td> 1</td>
+                                    <td> {{result['area_returns']}}</td>
+                                    <td> 1</td>
+                                </tr>
+                                <tr>
+                                    <td> Mean</td>
+                                    <td> {{result['expected_price']}}</td>
+                                    <td> {{result['expected_price']}}</td>
+                                    <td> {{result['m1_returns']}}</td>
+                                    <td> {{result['m1_returns']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Variance</td>
+                                    <td> {{result['sigma2_price']}}</td>
+                                    <td> {{result['sigma2_price']}}</td>
+                                    <td> {{result['m2_returns']}}</td>
+                                    <td> {{result['m2_returns']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Skewness</td>
+                                    <td> {{result['skewness_prices']}}</td>
+                                    <td> {{result['skewness_prices_log_n']}}</td>
+                                    <td> {{result['skewness_log_returns']}}</td>
+                                    <td> {{result['skewness_normal']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Kurtosis</td>
+                                    <td> {{result['kurtosis_prices']}}</td>
+                                    <td> {{result['kurtosis_prices_log_n']}}</td>
+                                    <td> {{result['kurtosis_log_returns']}}</td>
+                                    <td> {{result['kurtosis_normal']}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <h5> Kolmogorov Smirnov Test</h5>
+                            <table>
+                                <thead>
+                                <th></th>
+                                <th> Cdf Prices</th>
+                                <th> Cdf Returns</th>
+                                </thead>
 
-                    {% if result[' plot_index_cdf'] != None %}
-                    {{ result['plot_index_cdf'][0]|safe}}
-                    {{ result['plot_index_cdf'][1]|safe}}
-                    {% endif %}
+                                <tbody>
+                                <tr>
+                                    <td> Statistic Value</td>
+                                    <td> {{result['statistic_prices']}}</td>
+                                    <td> {{result['statistic_returns']}}</td>
 
-                    {% if result[' plot_return_cdf'] != None %}
-                    {{ result['plot_return_cdf'][0]|safe}}
-                    {{ result['plot_return_cdf'][1]|safe}}
-                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <td> PValue</td>
+                                    <td> {{result['pvalue_prices']}}</td>
+                                    <td> {{result['pvalue_returns']}}</td>
 
-                    {% endif %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <div id="plot_return_distribution">
+                            {{ result['plot_return_distribution'][0]|safe}}
+                            {{ result['plot_return_distribution'][1]|safe}}
+                        </div>
+
+                        {% if result[' plot_index_distribution'] != None %}
+                        <div id="plot_index_distribution">
+                            {{ result['plot_index_distribution'][0]|safe }}
+                            {{ result['plot_index_distribution'][1]|safe }}
+                        </div>
+                        {% endif %}
+
+                        {% if result[' plot_index_cdf'] != None %}
+                        <div id="plot_index_cdf">
+                            {{ result['plot_index_cdf'][0]|safe}}
+                            {{ result['plot_index_cdf'][1]|safe}}
+                        </div>
+                        {% endif %}
+
+                        {% if result[' plot_return_cdf'] != None %}
+                        <div id="plot_return_cdf">
+                            {{ result['plot_return_cdf'][0]|safe}}
+                            {{ result['plot_return_cdf'][1]|safe}}
+                        </div>
+                        {% endif %}
+
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col-xs-3">
-                    <form class="navbar-form navbar-top " method="POST" action="/delete/{{ result.id }}">
-                        <input type="submit" class="btn" value="Delete"
-                               title="Delete this post from database">
-                    </form>
-                </div>
+            </div>
+            <div class="col-xs-3">
+                <form class="navbar-form navbar-top " method="POST" action="/delete/{{ result.id }}">
+                    <input type="submit" value="Delete"
+                           title="Delete this post from database">
+                </form>
             </div>
         </div>
     </form>
@@ -97,7 +232,7 @@
 <hr>
 <center>
     <form method="POST" action="/delete/-1">
-        <input type="submit" class="btn" value="Delete all">
+        <input type="submit" value="Delete all">
     </form>
 </center>
 {% else %}

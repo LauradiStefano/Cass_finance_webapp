@@ -4,10 +4,11 @@ Created on Tue Mar 12 22:24:27 2019
 
 @author: Diego
 """
-import numpy as np
 import math
-from scipy.stats import norm, lognorm
-from scipy.optimize import fsolve, root
+
+import numpy as np
+from scipy.optimize import fsolve
+from scipy.stats import norm
 
 
 def find_SD_B(K, C_market, P_market):

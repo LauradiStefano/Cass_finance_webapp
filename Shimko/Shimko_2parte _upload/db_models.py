@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import app
 
 db = SQLAlchemy(app)
@@ -46,12 +47,12 @@ class Compute(db.Model):
     call_put_flag = db.Column(db.Integer())
     plot_choice = db.Column(db.String())
     button_compute = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
 
     file_name = db.Column(db.String())
 
     strike_data = db.Column(db.String())
-    put_market = db.Column(db.String())
-    call_market = db.Column(db.String())
     a0 = db.Column(db.Float())
     a1 = db.Column(db.Float())
     a2 = db.Column(db.Float())

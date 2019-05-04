@@ -1,19 +1,21 @@
+import json
 import os
-from compute import upload_input, volatility_term_structure, compute_shimko_table, compute_underlying_distribution, \
-    compute_underlying_cdf, compute_returns_cdf, kolmogorov_smirnov_test
-from compute import create_implied_volatility_plot, create_plot_return_underlying_distribution, \
-    create_plot_index_underlying_distribution, create_plot_price_cdf, create_plot_return_cdf
+
+import numpy as np
 from flask import render_template, request, redirect, url_for
-from forms import ComputeForm
-from db_models import db, User, Compute
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
-from app import app
-import json
-import numpy as np
-from werkzeug.utils import secure_filename
-from app import allowed_file
 from sqlalchemy import desc
+from werkzeug.utils import secure_filename
+
+from app import allowed_file
+from app import app
+from compute import create_implied_volatility_plot, create_plot_return_underlying_distribution, \
+    create_plot_index_underlying_distribution, create_plot_price_cdf, create_plot_return_cdf
+from compute import upload_input, volatility_term_structure, compute_shimko_table, compute_underlying_distribution, \
+    compute_underlying_cdf, compute_returns_cdf, kolmogorov_smirnov_test
+from db_models import db, User, Compute
+from forms import ComputeForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -90,7 +92,8 @@ def index():
             kolmogorov_smirnov_test(a0, a1, a2, form.price.data, risk_free, div_yield, time, strike_min, strike_max,
                                     expected_price, sigma2, returns_t, mu, m1_returns, std_deviation_log_ret)
 
-        plot_implied_volatility = create_implied_volatility_plot(form.call_put_flag.data, strike_plot, implied_volatility, form.price.data,
+        plot_implied_volatility = create_implied_volatility_plot(form.call_put_flag.data, strike_plot,
+                                                                 implied_volatility, form.price.data,
                                                                  strike_min, strike_max, strike_data, volatility_time)
 
         plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
@@ -126,7 +129,7 @@ def index():
             # json.dumps return a array string
             # json.loads convert from string to array
 
-            object.filename = file_name
+            object.file_name = file_name
             object.strike_data = json.dumps(list(map(int, strike_data)))
             # map(TIPO, VET)is a function to convert in "TIPO" all elements of VET
             # list converts the returned object to list
@@ -165,6 +168,8 @@ def index():
             object.pvalue_prices = pvalue_prices
             object.pvalue_returns = pvalue_returns
             object.price = form.price.data
+            object.risk_free = risk_free
+            object.div_yield = div_yield
             object.call_put_flag = form.call_put_flag.data
 
             if st is not None:  # user chooses the plot
@@ -244,7 +249,8 @@ def index():
                     if '2' in plot_choice:
                         plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
-                plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, price,
+                plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility,
+                                                                         price,
                                                                          strike_min, strike_max, strike_data,
                                                                          volatility_time)
 
@@ -378,6 +384,8 @@ def old():
             statistic_returns = instance.statistic_returns
             pvalue_prices = instance.pvalue_prices
             pvalue_returns = instance.pvalue_returns
+            risk_free = instance.risk_free
+            div_yield = instance.div_yield
 
             plot_choice = json.loads(instance.plot_choice)
 
@@ -404,7 +412,8 @@ def old():
                 if '2' in plot_choice:
                     plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
-            plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, price, strike_min,
+            plot_implied_volatility = create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility,
+                                                                     price, strike_min,
                                                                      strike_max, strike_data, volatility_time)
 
             plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
@@ -413,7 +422,26 @@ def old():
             a0 = round(a0, 8) if a0 is not None else None
             a1 = round(a1, 8) if a1 is not None else None
             a2 = round(a2, 10) if a2 is not None else None
-            r2 = round(r2, 8) if r2 is not None else None
+            area_prices = round(area_prices, 4) if area_prices is not None else None
+            expected_price = round(expected_price, 4) if expected_price is not None else None
+            sigma2_price = round(sigma2_price, 4) if sigma2_price is not None else None
+            skewness_prices = round(skewness_prices, 4) if skewness_prices is not None else None
+            kurtosis_prices = round(kurtosis_prices, 4) if kurtosis_prices is not None else None
+            skewness_prices_log_n = round(skewness_prices_log_n, 4) if skewness_prices_log_n is not None else None
+            kurtosis_prices_log_n = round(kurtosis_prices_log_n, 4) if kurtosis_prices_log_n is not None else None
+            area_returns = round(area_returns, 4) if area_returns is not None else None
+            m1_returns = round(m1_returns, 4) if m1_returns is not None else None
+            m2_returns = round(m2_returns, 4) if m2_returns is not None else None
+            skewness_log_returns = round(skewness_log_returns, 4) if skewness_log_returns is not None else None
+            kurtosis_log_returns = round(kurtosis_log_returns, 4) if kurtosis_log_returns is not None else None
+            skewness_normal = round(skewness_normal, 4) if skewness_normal is not None else None
+            kurtosis_normal = round(kurtosis_normal, 4) if kurtosis_normal is not None else None
+            statistic_prices = round(statistic_prices, 4) if statistic_prices is not None else None
+            statistic_returns = round(statistic_returns, 4) if statistic_returns is not None else None
+            pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
+            pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
+            risk_free = round(risk_free, 4) if risk_free is not None else None
+            div_yield = round(div_yield, 4) if div_yield is not None else None
 
             data.append({'form': form, 'id': id, 'file_name': file_name, 'a0': a0, 'a1': a1, 'a2': a2,
                          'area_prices': area_prices, 'expected_price': expected_price, 'sigma2_price': sigma2_price,
@@ -424,8 +452,8 @@ def old():
                          'r2': r2, 'statistic_prices': statistic_prices, 'statistic_returns': statistic_returns,
                          'pvalue_prices': pvalue_prices, 'pvalue_returns': pvalue_returns,
                          'skewness_normal': skewness_normal, 'kurtosis_normal': kurtosis_normal,
-                         'plot_implied_volatility': plot_implied_volatility,
-                         'plot_index_distribution': plot_index_distribution,
+                         'plot_implied_volatility': plot_implied_volatility, 'risk_free': risk_free,
+                         'plot_index_distribution': plot_index_distribution, 'div_yield': div_yield,
                          'plot_return_distribution': plot_return_distribution, 'plot_index_cdf': plot_index_cdf,
                          'plot_return_cdf': plot_return_cdf})
 

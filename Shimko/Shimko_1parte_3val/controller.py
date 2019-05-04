@@ -1,17 +1,19 @@
+import json
 import os
-from compute import find_parameters, compute_shimko_table, compute_index_underlying_cdf, \
-    compute_index_underlying_distribution, compute_returns_cdf, kolmogorov_smirnov_test
-from compute import create_implied_volatility_plot, create_plot_index_underlying_distribution, \
-    create_plot_return_underlying_distribution, create_plot_price_cdf, create_plot_return_cdf
+
+import numpy as np
 from flask import render_template, request, redirect, url_for
-from forms import ComputeForm
-from db_models import db, User, Compute
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
-from app import app
-import json
-import numpy as np
 from sqlalchemy import desc
+
+from app import app
+from compute import create_implied_volatility_plot, create_plot_index_underlying_distribution, \
+    create_plot_return_underlying_distribution, create_plot_price_cdf, create_plot_return_cdf
+from compute import find_parameters, compute_shimko_table, compute_index_underlying_cdf, \
+    compute_index_underlying_distribution, compute_returns_cdf, kolmogorov_smirnov_test
+from db_models import db, User, Compute
+from forms import ComputeForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -139,7 +141,7 @@ def index():
             object.volatility = json.dumps(volatility)
             object.pdf_returns = json.dumps(pdf_returns)
             object.area_prices = area_prices
-            object.expected_prices = expected_price
+            object.expected_price = expected_price
             object.sigma2_price = sigma2_price
             object.skewness_prices = skewness_prices
             object.kurtosis_prices = kurtosis_prices
@@ -225,10 +227,9 @@ def index():
                     cdf_bench_log_prices = json.loads(instance.cdf_bench_log_prices)
 
                     if '0' in plot_choice:
-                        plot_index_distribution = create_plot_index_underlying_distribution(st, pdf,
-                                                                                            pdf_bench_log_prices,
-                                                                                            price, strike_min,
-                                                                                            strike_max)
+                        plot_index_distribution = \
+                            create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, price, strike_min,
+                                                                      strike_max)
 
                     if '1' in plot_choice:
                         plot_index_cdf = create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min,
@@ -306,8 +307,8 @@ def create_login():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    from forms import Loginform
-    form = Loginform(request.form)
+    from forms import LoginForm
+    form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         login_user(user)
@@ -346,7 +347,7 @@ def old():
             volatility = json.loads(instance.volatility)
             pdf_returns = json.loads(instance.pdf_returns)
             area_prices = instance.area_prices
-            expected_prices = instance.expected_price
+            expected_price = instance.expected_price
             sigma2_price = instance.sigma2_price
             skewness_prices = instance.skewness_prices
             kurtosis_prices = instance.kurtosis_prices
@@ -400,9 +401,27 @@ def old():
             a0 = round(a0, 8) if a0 is not None else None
             a1 = round(a1, 8) if a1 is not None else None
             a2 = round(a2, 10) if a2 is not None else None
+            area_prices = round(area_prices, 4) if area_prices is not None else None
+            expected_price = round(expected_price, 4) if expected_price is not None else None
+            sigma2_price = round(sigma2_price, 4) if sigma2_price is not None else None
+            skewness_prices = round(skewness_prices, 4) if skewness_prices is not None else None
+            kurtosis_prices = round(kurtosis_prices, 4) if kurtosis_prices is not None else None
+            skewness_prices_log_n = round(skewness_prices_log_n, 4) if skewness_prices_log_n is not None else None
+            kurtosis_prices_log_n = round(kurtosis_prices_log_n, 4) if kurtosis_prices_log_n is not None else None
+            area_returns = round(area_returns, 4) if area_returns is not None else None
+            m1_returns = round(m1_returns, 4) if m1_returns is not None else None
+            m2_returns = round(m2_returns, 4) if m2_returns is not None else None
+            skewness_log_returns = round(skewness_log_returns, 4) if skewness_log_returns is not None else None
+            kurtosis_log_returns = round(kurtosis_log_returns, 4) if kurtosis_log_returns is not None else None
+            skewness_normal = round(skewness_normal, 4) if skewness_normal is not None else None
+            kurtosis_normal = round(kurtosis_normal, 4) if kurtosis_normal is not None else None
+            statistic_prices = round(statistic_prices, 4) if statistic_prices is not None else None
+            statistic_returns = round(statistic_returns, 4) if statistic_returns is not None else None
+            pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
+            pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
             data.append({'form': form, 'id': id, 'a0': a0, 'a1': a1, 'a2': a2, 'area_prices': area_prices,
-                         'expected_prices': expected_prices, 'sigma2_price': sigma2_price,
+                         'expected_price': expected_price, 'sigma2_price': sigma2_price,
                          'skewness_prices': skewness_prices, 'kurtosis_prices': kurtosis_prices,
                          'skewness_prices_log_n': skewness_prices_log_n, 'kurtosis_prices_log_n': kurtosis_prices_log_n,
                          'area_returns': area_returns, 'm1_returns': m1_returns, 'm2_returns': m2_returns,

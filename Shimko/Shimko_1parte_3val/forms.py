@@ -1,8 +1,9 @@
 import wtforms as wtf
-import db_models
 import wtforms.fields.html5 as html5
-from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms import SelectMultipleField
+from wtforms.widgets import ListWidget, CheckboxInput
+
+import db_models
 
 
 class MultiCheckboxField(SelectMultipleField):
@@ -11,7 +12,6 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-
     strike_min = wtf.FloatField(label='Min Strike', default=325, validators=[wtf.validators.InputRequired()])
     strike_atm = wtf.FloatField(label='Atm Strike', default=390, validators=[wtf.validators.InputRequired()])
     strike_max = wtf.FloatField(label='Max Strike', default=425, validators=[wtf.validators.InputRequired()])
@@ -23,8 +23,10 @@ class ComputeForm(wtf.Form):
     div_yield = wtf.FloatField(label='Dividend Yield (%)', default=0, validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time expiration', default=0.1666, validators=[wtf.validators.InputRequired()])
     plot_choice = MultiCheckboxField('Plot Choice', choices=[('0', 'plotPrice'), ('1', 'plotCdfPrice'),
-                                     ('2', 'plotCdfReturns')], validators=[])
+                                                             ('2', 'plotCdfReturns')], validators=[])
     button_compute = wtf.SubmitField(label='Compute')
+    button_view_details = wtf.SubmitField(label='View Details')
+    button_export_table = wtf.SubmitField(label='Export Table')
 
 
 class RegistrationForm(wtf.Form):
@@ -39,7 +41,7 @@ class RegistrationForm(wtf.Form):
         label='Confirm Password',
         validators=[wtf.validators.DataRequired()])
     email = html5.EmailField(label='Email')
-    button_registration = wtf.SubmitField(label='Compute')
+    button_registration = wtf.SubmitField(label='Sign Up')
 
     def validate(self):
         if not wtf.Form.validate(self):
@@ -52,12 +54,12 @@ class RegistrationForm(wtf.Form):
         return True
 
 
-class Loginform(wtf.Form):
+class LoginForm(wtf.Form):
     username = wtf.StringField(
         label='Username', validators=[wtf.validators.DataRequired()])
     password = wtf.PasswordField(
         label='Password', validators=[wtf.validators.DataRequired()])
-    button_login = wtf.SubmitField(label='Compute')
+    button_login = wtf.SubmitField(label='Log In')
 
     def validate(self):
         if not wtf.Form.validate(self):

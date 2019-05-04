@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import app
 
 db = SQLAlchemy(app)
@@ -46,6 +47,8 @@ class Compute(db.Model):
     call_put_flag = db.Column(db.Integer())
     plot_choice = db.Column(db.String())
     button_compute = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
 
     file_name = db.Column(db.String())
 
@@ -90,4 +93,5 @@ class Compute(db.Model):
     pvalue_returns = db.Column(db.Float())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('Compute', lazy='dynamic'))
+    user = db.relationship('User',
+                           backref=db.backref('Compute', lazy='dynamic'))

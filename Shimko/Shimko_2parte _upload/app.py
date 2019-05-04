@@ -1,4 +1,5 @@
 import os
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -24,7 +25,3 @@ def allowed_file(filename):
     """Does filename have the right extension?"""
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
-
-
-
-

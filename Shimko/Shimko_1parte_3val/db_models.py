@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+
 from app import app
 
 db = SQLAlchemy(app)
@@ -50,6 +51,8 @@ class Compute(db.Model):
     div_yield = db.Column(db.Float())
     time = db.Column(db.Float())
     button_compute = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
 
     a0 = db.Column(db.Float())
     a1 = db.Column(db.Float())

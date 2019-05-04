@@ -5,18 +5,20 @@ Created on Fri Mar  8 10:03:36 2019
 @author: Diego
 """
 
-from shimkofun import get_lognormal_fit
+import math
+
+import bokeh.plotting as bp
+import numpy as np
+from bokeh.layouts import column
+from bokeh.models import CustomJS, Slider, HoverTool
+from bokeh.plotting import ColumnDataSource
+from scipy import integrate
+from scipy.stats import norm, lognorm, ks_2samp
+
 from shimkofun import ImpliedCDFPrices_FullRange, ImpliedPDFPrices_FullRange, ImpliedCDFReturns_FullRange, \
     ImpliedPDFReturns_FullRange
 from shimkofun import get_implied_parameters_lognormal
-import numpy as np
-import bokeh.plotting as bp
-from bokeh.plotting import ColumnDataSource
-from scipy import integrate
-import math
-from scipy.stats import norm, lognorm, ks_2samp
-from bokeh.layouts import column, row
-from bokeh.models import CustomJS, Slider, HoverTool
+from shimkofun import get_lognormal_fit
 
 
 def find_parameters(strike_min, strike_atm, strike_max, vol_min, vol_atm, vol_max):
@@ -176,18 +178,19 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
                                          tooltips=[("Strike", "@strike"), ("Implied vol", "@implied_volatility")])
 
     x_range = [strike_min, strike_max + 10]
-    y_range = [0, max(implied_volatility) + 0.02]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_implied_volatility], x_range=x_range, y_range=y_range,
+    y_range = [0, max(implied_volatility) + 0.03]
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_implied_volatility], x_range=x_range,
+                    y_range=y_range,
                     title="Implied volatility profile", plot_height=450, toolbar_location="left",
                     x_axis_label='Exercise price', y_axis_label='Volatility x root time')
 
     fig.line(x='strike', y='implied_volatility', source=data, color="#0095B6", line_width=4, alpha=0.8,
              name='implied vol')
-    fig.square(x=s0, y=0, source=data, legend='Price', color="#050402", size=8)
+    fig.square(x=s0, y=0, source=data, legend='Spot Price', color="#050402", size=8)
     fig.circle(x='strike_value', y='volatility', source=data, color="#D21F1B", legend='Implied Volatility', size=6)
 
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "bottom_left"
     fig.toolbar.active_drag = None
 
     callback = CustomJS(args=dict(source=data, a0=a0, a1=a1, a2=a2, strike_min=strike_min, strike_atm=strike_atm,
@@ -256,7 +259,8 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
     hover_normal = HoverTool(attachment="right", names=['pdf norm'],
                              tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
 
-    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_returns, hover_normal], x_range=x_range, y_range=y_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_normal], x_range=x_range,
+                    y_range=y_range,
                     title="Implied CEQ returns distribution", plot_height=450, toolbar_location="right",
                     x_axis_label='Log Returns', y_axis_label='Probability Density')
 
@@ -315,7 +319,8 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
 
     x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, max(pdf) * 1.10]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_pdf, hover_log_norm], x_range=x_range, y_range=y_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_pdf, hover_log_norm], x_range=x_range,
+                    y_range=y_range,
                     title="Implied CEQ index distribution", plot_height=450, toolbar_location="left",
                     x_axis_label='Index Value', y_axis_label='Probability Density')
 
@@ -325,7 +330,7 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
     fig.line(x='st', y='pdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
              line_width=4, name='bench logNorm')
 
-    fig.square(x=s0, y=0, legend="Price Today", color="#050402", size=8)
+    fig.square(x=s0, y=0, legend="Spot Price", color="#050402", size=8)
 
     fig.legend.location = "top_right"
     fig.toolbar.active_drag = None
@@ -371,7 +376,8 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
 
     x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, 1.1]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_log_norm], x_range=x_range, y_range=y_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_cdf, hover_log_norm], x_range=x_range,
+                    y_range=y_range,
                     title="Implied CEQ prices CDF", plot_height=450, toolbar_location="left",
                     x_axis_label='Index Value', y_axis_label='Cumulative Probability')
 
@@ -425,7 +431,8 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
 
     x_range = [min(ret_t), max(ret_t)]
     y_range = [0, 1.1]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset', hover_cdf, hover_norm], x_range=x_range, y_range=y_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_cdf, hover_norm], x_range=x_range,
+                    y_range=y_range,
                     title="Implied CEQ returns CDF", plot_height=450, toolbar_location="right",
                     x_axis_label='Log Returns', y_axis_label='Cumulative Probability')
 
