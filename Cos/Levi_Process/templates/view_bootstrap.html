@@ -26,6 +26,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -37,6 +38,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -109,6 +111,7 @@
                 </div>
 
                 <div class="col-xs-10">
+                    <!--TODO: type_choice, display:none-->
                     <div id="normal" class="row">
                         <div class="col-xs-3">
                             {{form.sigma.label}}
@@ -120,7 +123,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div id="vg" class="row">
+                    <!--TODO: type_choice, display:none-->
+                    <div id="vg" class="row" style="display:none">
                         <div class="col-xs-3">
                             {{form.sigma.label}}
                             {{form.sigma}}
@@ -149,7 +153,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div id="cgmy" class="row">
+                    <!--TODO: type_choice, display:none-->
+                    <div id="cgmy" class="row" {% if form.type_choice.data !=4%} style="display:none" {%endif%}>
                         <div class="col-xs-3">
                             {{form.c.label}}
                             {{form.c}}
@@ -187,6 +192,7 @@
                             {% endif %}
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -276,9 +282,30 @@
     </form>
 
     <div class="row">
-        <h4>Result: </h4>
+        <h4>Results: </h4>
+        {% if plot_return_underlying_distribution != None %}
         <div class="row">
-            {% if plot_return_underlying_distribution != None %}
+            <table>
+                <thead>
+                <td> Distribution</td>
+                <td> Mean</td>
+                <td> Variance</td>
+                <td> Skewness</td>
+                <td> Kurtosis</td>
+                </thead>
+                <tbody>
+                <tr>
+                    <td> --</td>
+                    <td> {{mean}}</td>
+                    <td> {{variance}}</td>
+                    <td> {{skewness}}</td>
+                    <td> {{kurtosis}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+
             <div id="plot_return_underlying_distribution" class="col-6 col-xs-6">
                 {{plot_return_underlying_distribution[0]|safe}}
                 {{plot_return_underlying_distribution[1]|safe}}
@@ -287,8 +314,8 @@
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
-            {%endif%}
         </div>
+        {%endif%}
     </div>
 
 </div>
@@ -306,10 +333,6 @@
         var vg = $('#vg');
         var cgmy = $('#cgmy');
 
-        normal.show();
-        vg.hide();
-        cgmy.hide();
-
         select_distribution.on('change', function() {
             if (select_distribution.val() == '1') {
                 normal.show();
@@ -326,6 +349,7 @@
             }
         });
     });
+
 
 
 </script>

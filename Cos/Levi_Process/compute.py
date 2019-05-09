@@ -57,12 +57,8 @@ def cos_pdf_underlying_asset(type_choice, parameters, time):
     underlying_prices = np.linspace(a, b, N)
     pdf_underlying_asset = get_pdf_cos(type_choice, underlying_prices, a, b, parameters, time, N)
     
-    mean, variance, skewness, kurtosis = compute_moments(type_choice,parameters)
-    print('mean', mean)
-    print('variance',variance)
-    print('skew', skewness)
-    print('kurt',kurtosis)
-    
+    mean, variance, skewness, kurtosis = compute_moments(type_choice, parameters)
+
     return pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis
 
 

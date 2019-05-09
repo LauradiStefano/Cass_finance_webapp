@@ -13,6 +13,7 @@ input.form-control
     font-size: 13px;
 }
 
+/*TODO: color in the first row table and bold title */
 table {
     border-collapse: collapse;  /*unico bordo*/
     background: white;

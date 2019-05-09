@@ -63,6 +63,11 @@ class Compute(db.Model):
     m = db.Column(db.Float())
     y = db.Column(db.Float())
 
+    mean = db.Column(db.Float())
+    variance = db.Column(db.Float())
+    skewness = db.Column(db.Float())
+    kurtosis = db.Column(db.Float())
+
     button_compute = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

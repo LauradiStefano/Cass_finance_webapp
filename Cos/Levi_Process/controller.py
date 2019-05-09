@@ -29,6 +29,10 @@ def index():
     underlying_prices = None
     strike = None
     implied_volatility = None
+    mean = None
+    variance = None
+    skewness = None
+    kurtosis = None
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
@@ -37,7 +41,7 @@ def index():
         if form.validate():
             parameters = select_parameters(form.type_choice.data, form.mu.data, form.sigma.data, form.kappa.data,
                                            form.theta.data, form.c.data, form.g.data, form.m.data, form.y.data)
-            pdf_underlying_asset, underlying_prices = \
+            pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis = \
                 cos_pdf_underlying_asset(form.type_choice.data, parameters, form.time.data)
 
             option_prices, strike = \
@@ -66,6 +70,10 @@ def index():
             object.price = form.price.data
             object.strike = json.dumps(strike.tolist())
             object.implied_volatility = json.dumps(implied_volatility.tolist())
+            object.mean = mean
+            object.variance = variance
+            object.skewness = skewness
+            object.kurtosis = kurtosis
 
             object.user = user
             db.session.add(object)
@@ -81,15 +89,25 @@ def index():
                 price = instance.price
                 strike = np.array(json.loads(instance.strike))
                 implied_volatility = np.array(json.loads(instance.implied_volatility))
+                mean = instance.mean
+                variance = instance.variance
+                skewness = instance.skewness
+                kurtosis = instance.kurtosis
 
                 plot_return_underlying_distribution = \
                     create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
+    mean = round(mean, 4) if mean is not None else None
+    variance = round(variance, 4) if variance is not None else None
+    skewness = round(skewness, 4) if skewness is not None else None
+    kurtosis = round(kurtosis, 4) if kurtosis is not None else None
+
     return render_template("view_bootstrap.html", form=form, user=user,
                            plot_return_underlying_distribution=plot_return_underlying_distribution,
-                           plot_implied_volatility=plot_implied_volatility)
+                           plot_implied_volatility=plot_implied_volatility, mean=mean, variance=variance,
+                           skewness=skewness, kurtosis=kurtosis)
 
 
 def populate_form_from_instance(instance):
@@ -153,15 +171,25 @@ def old():
             price = instance.price
             strike = np.array(json.loads(instance.strike))
             implied_volatility = np.array(json.loads(instance.implied_volatility))
+            mean = instance.mean
+            variance = instance.variance
+            skewness = instance.skewness
+            kurtosis = instance.kurtosis
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
+            mean = round(mean, 4) if mean is not None else None
+            variance = round(variance, 4) if variance is not None else None
+            skewness = round(skewness, 4) if skewness is not None else None
+            kurtosis = round(kurtosis, 4) if kurtosis is not None else None
+
             data.append({'form': form, 'id': id,
                          'plot_return_underlying_distribution': plot_return_underlying_distribution,
-                         'plot_implied_volatility': plot_implied_volatility})
+                         'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,
+                         'skewness': skewness, 'kurtosis': kurtosis})
 
     return render_template("old.html", data=data)
 
