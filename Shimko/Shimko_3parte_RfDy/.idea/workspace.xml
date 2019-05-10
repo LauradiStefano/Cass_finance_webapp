@@ -2,35 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e3cd1a2-69f6-4070-bf78-f0d21fe03ca7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Cos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/view_bootstrap.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/compute.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/db_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_COSprices.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_COSprices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_CharFuncRn.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_CharFuncRn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_moments.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_moments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/view_bootstrap.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/view_bootstrap.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/old.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_bootstrap.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/compute.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8483">
-              <caret line="511" selection-start-line="511" selection-end-line="511" />
+            <state relative-caret-position="269">
+              <caret line="517" selection-start-line="517" selection-end-line="517" />
               <folding>
                 <element signature="e#85#261#0" expanded="true" />
               </folding>
@@ -53,7 +35,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/basic.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -63,25 +45,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/view_bootstrap.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="96" selection-start-line="21" selection-start-column="96" selection-end-line="23" selection-end-column="41" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#3;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/old.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="110" column="55" lean-forward="true" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
+            <state relative-caret-position="1870">
+              <caret line="110" column="55" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
             </state>
           </provider>
         </entry>
@@ -89,7 +56,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7174">
+            <state relative-caret-position="7463">
               <caret line="439" column="93" selection-start-line="439" selection-start-column="93" selection-end-line="439" selection-end-column="93" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -101,7 +68,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="374">
               <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -183,12 +150,12 @@
         <option value="$PROJECT_DIR$/getbs.py" />
         <option value="$PROJECT_DIR$/shimkofun.py" />
         <option value="$PROJECT_DIR$/../../../Flask4scientists/mortgage/compute.py" />
-        <option value="$PROJECT_DIR$/compute.py" />
         <option value="$PROJECT_DIR$/forms.py" />
         <option value="$PROJECT_DIR$/templates/view_bootstrap.html" />
         <option value="$PROJECT_DIR$/db_models.py" />
         <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/templates/old.html" />
+        <option value="$PROJECT_DIR$/compute.py" />
       </list>
     </option>
   </component>
@@ -205,27 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -247,12 +193,33 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="static" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="Shimko_3parte_RfDy" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Shimko_2parte _upload/controller.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Shimko_2parte _upload/compute.py" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
-    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../Shimko_2parte _upload/controller.py" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/../Shimko_2parte _upload/compute.py" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -583,20 +550,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/compute.py">
+    <entry file="file://$PROJECT_DIR$/../Shimko_2parte _upload/templates/old.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8483">
-          <caret line="511" selection-start-line="511" selection-end-line="511" />
-          <folding>
-            <element signature="e#85#261#0" expanded="true" />
-          </folding>
-        </state>
+        <state relative-caret-position="-1479" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/view_bootstrap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="96" selection-start-line="21" selection-start-column="96" selection-end-line="23" selection-end-column="41" />
+        <state relative-caret-position="34">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#form#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -606,9 +568,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/compute.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="517" selection-start-line="517" selection-end-line="517" />
+          <folding>
+            <element signature="e#85#261#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/basic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1870">
+          <caret line="110" column="55" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7174">
+        <state relative-caret-position="7463">
           <caret line="439" column="93" selection-start-line="439" selection-start-column="93" selection-end-line="439" selection-end-column="93" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -618,30 +604,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="374">
           <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="53" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/old.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="110" column="55" lean-forward="true" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Shimko_2parte _upload/templates/old.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1479" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/basic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
         </state>
       </provider>
     </entry>

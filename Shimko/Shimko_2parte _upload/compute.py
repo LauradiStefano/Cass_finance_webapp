@@ -147,13 +147,13 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     m4 = integrate.quad(lambda k: (k - m1[0]) ** 4 * pdf_prices(k) / area_prices[0], 0, strike_max * up_factor)
     expected_price = m1[0]  # Table Ceq Moment
     sigma2_price = m2[0]  # Table Ceq Moment
-    std_deviation_prices = m2[0] ** 0.5
+    std_deviation_price = m2[0] ** 0.5
     skew_prices = m3[0] / (m2[0] ** 0.5) ** 3  # Table Ceq Moment
     kurt_prices = m4[0] / (m2[0] ** 0.5) ** 4  # Table Ceq Moment
 
     # Fitted Lognormal
 
-    q_shimko = std_deviation_prices / expected_price
+    q_shimko = std_deviation_price / expected_price
     skew_prices_logn = 3 * q_shimko + q_shimko ** 3  # Table Lognormal Moment
     kurt_prices_logn = 3 + 16 * q_shimko ** 2 + 15 * q_shimko ** 4 + 6 * q_shimko ** 6 + q_shimko ** 8
     # Table lognormal Moment

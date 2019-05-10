@@ -64,17 +64,19 @@ def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, 
     if cp_flag==1 target_value is going to be C_market prices
     else P_market prices
     """
+
     if call_put_flag == 1:  # call = 1
         target_value = call_market
     elif call_put_flag == 0:
         target_value = put_market  # put = 0
     else:
-        delta_k_s0 = np.array(strike_data) - float(s0)
-        negative = delta_k_s0 < 0
-        positive = delta_k_s0 > 0
+        delta_strike_s0 = np.array(strike_data) - float(s0)
+        negative = delta_strike_s0 < 0
+        positive = delta_strike_s0 > 0
 
         all_call_market = negative * call_market
         all_put_market = positive * put_market
+
         both_call_put = list(all_call_market + all_put_market)
         target_value = both_call_put
 
@@ -125,11 +127,12 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     pdf_returns = lambda kret: ImpliedPDFReturns_FullRange(a0, a1, a2, SD, B, kret, strike_min, strike_max, x_fit_lgn)
     st = np.arange(strike_min * 0.75, strike_max * 1.25, step_k)  # output per grafico
 
-    # ret_t = np.log(st / SD)  # output grafico 3
+    # ret_t = np.log(ST / SD)  # output grafico 3
 
     # Table moments
 
     up_factor = 20
+
     area_prices = integrate.quad(lambda k: pdf_prices(k), 0, strike_max * up_factor)  # Table Ceq Moment
     m1 = integrate.quad(lambda k: k * pdf_prices(k) / area_prices[0], 0, strike_max * up_factor)
     m2 = integrate.quad(lambda k: (k - m1[0]) ** 2 * pdf_prices(k) / area_prices[0], 0, strike_max * up_factor)
@@ -146,6 +149,7 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     q_shimko = std_deviation_price / expected_price
     skew_prices_logn = 3 * q_shimko + q_shimko ** 3  # Table Lognormal Moment
     kurt_prices_logn = 3 + 16 * q_shimko ** 2 + 15 * q_shimko ** 4 + 6 * q_shimko ** 6 + q_shimko ** 8
+    # Table lognormal Moment
 
     implied_parameters_lognormal = get_implied_parameters_lognormal(expected_price / SD, (m2[0] + m1[0] ** 2) / SD ** 2)
     mu = implied_parameters_lognormal[0]
@@ -154,11 +158,14 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
     # exp_sg2=math.exp(sigma2)
     # skew_prices_logn=(exp_sg2+2)*(math.sqrt(exp_sg2-1))
     # kurt_prices_logn=math.exp(4*sigma2)+2*math.exp(3*sigma2)+3*exp(2*sigma2)-6
+
     ret_min = mu - 9 * sigma2 ** 0.5
     ret_max = mu + 9 * sigma2 ** 0.5
     step_ret = 0.01
     ret_t = np.arange(ret_min * 0.65, ret_max * 0.65, step_ret)
-    # ret_t = np.log(st / SD)  # output grafico 3
+
+    # ret_t = np.log(ST / SD)  # output grafico 3
+
     pdf_ret = [float(pdf_returns(x)) for x in ret_t]  # output grafico3
 
     area_ret = integrate.quad(lambda k: pdf_returns(k), ret_min, ret_max)  # Table logReturns moment
@@ -177,8 +184,8 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
 
     m3_ret_norm = integrate.quad(lambda k: (k - m1_ret[0]) ** 3 * pdf_bench_norm_returns(k), ret_min, ret_max)
     m4_ret_norm = integrate.quad(lambda k: (k - m1_ret[0]) ** 4 * pdf_bench_norm_returns(k), ret_min, ret_max)
-    skew_norm = abs(m3_ret_norm[0] / (std_deviation_log_ret) ** 3)  # Table LogReturns Moment
-    kurt_norm = m4_ret_norm[0] / (std_deviation_log_ret) ** 4
+    skew_norm = abs(m3_ret_norm[0] / std_deviation_log_ret ** 3)  # Table LogReturns Moment
+    kurt_norm = m4_ret_norm[0] / std_deviation_log_ret ** 4
 
     pdf_bench_norm_returns = [float(pdf_bench_norm_returns(x)) for x in ret_t]  # aggiungere all'output
 
@@ -229,8 +236,8 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
     strike_put = []
     volatility_t_call = []
     volatility_t_put = []
-    
-    if  call_put_flag == 2:
+
+    if call_put_flag == 2:
         delta_k_s0 = np.array(strike_data) - float(s0)
         negative = delta_k_s0 < 0
         positive = delta_k_s0 > 0
@@ -247,16 +254,15 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
 
         strike_plot = [str(Strike) for Strike in strike_plot]
         implied_volatility = [round(vol, 4) for vol in implied_volatility]
-    
-    elif  call_put_flag == 1:
+
+    elif call_put_flag == 1:
         strike_call = strike_data
         volatility_t_call = volatility_time
-    
-    else:
+
+    else:  # call_put_flag == 0
         strike_put = strike_data
         volatility_t_put = volatility_time
 
-    
     data_implied_vol = ColumnDataSource(data=dict(
         strike_plot=strike_plot,
         implied_volatility=implied_volatility

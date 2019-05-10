@@ -2,35 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e3cd1a2-69f6-4070-bf78-f0d21fe03ca7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Cos/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_1parte_3val/templates/view_bootstrap.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/compute.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/db_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_COSprices.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_COSprices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_CharFuncRn.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_CharFuncRn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/get_moments.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/get_moments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/view_bootstrap.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_bootstrap.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/db_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/db_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/getbs.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/getbs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/shimkofun.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/shimkofun.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/templates/old.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_3parte_RfDy/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_3parte_RfDy/templates/view_bootstrap.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2356">
-              <caret line="131" column="24" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
+            <state relative-caret-position="85">
+              <caret line="135" selection-start-line="135" selection-end-line="136" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -128,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
+            <state relative-caret-position="867">
               <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -240,7 +222,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,6 +243,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -574,15 +556,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Cos/controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1479">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Cos/controller.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/sql/compiler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
@@ -725,7 +699,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db_models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="867">
           <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -735,8 +709,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2356">
-          <caret line="131" column="24" selection-start-line="131" selection-start-column="24" selection-end-line="131" selection-end-column="24" />
+        <state relative-caret-position="85">
+          <caret line="135" selection-start-line="135" selection-end-line="136" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
