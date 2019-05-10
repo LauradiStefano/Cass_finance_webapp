@@ -5,15 +5,16 @@ Created on Tue Apr 16 09:49:53 2019
 @author: Diego
 """
 
-import numpy as np
-from get_moments import compute_moments
-from get_COS_bounds import get_COS_bounds
-from get_pdf_cos import get_pdf_cos
-from get_COSprices import get_cos_prices
-from getbs import find_vol
 import bokeh.plotting as bp
-from bokeh.plotting import ColumnDataSource
+import numpy as np
 from bokeh.models import HoverTool
+from bokeh.plotting import ColumnDataSource
+
+from get_COS_bounds import get_COS_bounds
+from get_COSprices import get_cos_prices
+from get_moments import compute_moments
+from get_pdf_cos import get_pdf_cos
+from getbs import find_vol
 
 
 # #Input
@@ -56,7 +57,7 @@ def cos_pdf_underlying_asset(type_choice, parameters, time):
     a, b = get_COS_bounds(parameters, type_choice, time, L)
     underlying_prices = np.linspace(a, b, N)
     pdf_underlying_asset = get_pdf_cos(type_choice, underlying_prices, a, b, parameters, time, N)
-    
+
     mean, variance, skewness, kurtosis = compute_moments(type_choice, parameters)
 
     return pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis

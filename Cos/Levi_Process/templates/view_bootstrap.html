@@ -27,6 +27,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -38,6 +39,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -111,8 +113,8 @@
                 </div>
 
                 <div class="col-xs-10">
-                    <!--TODO: type_choice, display:none-->
                     <div id="normal" class="row">
+
                         <div class="col-xs-3">
                             {{form.sigma.label}}
                             {{form.sigma}}
@@ -123,8 +125,9 @@
                             {% endif %}
                         </div>
                     </div>
-                    <!--TODO: type_choice, display:none-->
-                    <div id="vg" class="row" style="display:none">
+                    <div id="vg" class="row" {% if type_choice !='2' or type_choice != '3' %}
+                         style="display:none" {%endif%}>
+
                         <div class="col-xs-3">
                             {{form.sigma.label}}
                             {{form.sigma}}
@@ -154,7 +157,8 @@
                         </div>
                     </div>
                     <!--TODO: type_choice, display:none-->
-                    <div id="cgmy" class="row" {% if form.type_choice.data !=4%} style="display:none" {%endif%}>
+                    <div id="cgmy" class="row" {% if type_choice != '4' %} style="display:none" {%endif%}>
+
                         <div class="col-xs-3">
                             {{form.c.label}}
                             {{form.c}}
@@ -286,6 +290,7 @@
         {% if plot_return_underlying_distribution != None %}
         <div class="row">
             <table>
+                <h5>Table of moments</h5>
                 <thead>
                 <td> Distribution</td>
                 <td> Mean</td>
@@ -349,6 +354,7 @@
             }
         });
     });
+
 
 
 

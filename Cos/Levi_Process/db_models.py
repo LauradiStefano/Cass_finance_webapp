@@ -52,7 +52,7 @@ class Compute(db.Model):
     strike_max = db.Column(db.Float())
     strike = db.Column(db.String())
     implied_volatility = db.Column(db.String())
-    type_choice = db.Column(db.Integer())
+    type_choice = db.Column(db.String())
 
     mu = db.Column(db.Float())
     sigma = db.Column(db.Float())
