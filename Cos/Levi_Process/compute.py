@@ -51,8 +51,8 @@ def select_parameters(type_choice, mu, sigma, kappa, theta, c, g, m, y):
 
 
 def cos_pdf_underlying_asset(type_choice, parameters, time):
-    L = 6
-    N = 500
+    L = 10
+    N = 1000
 
     a, b = get_COS_bounds(parameters, type_choice, time, L)
     underlying_prices = np.linspace(a, b, N)

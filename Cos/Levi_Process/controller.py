@@ -33,7 +33,6 @@ def index():
     variance = None
     skewness = None
     kurtosis = None
-    type_choice = None
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
@@ -75,7 +74,6 @@ def index():
             object.variance = variance
             object.skewness = skewness
             object.kurtosis = kurtosis
-            object.type_choice = form.type_choice.data
 
             object.user = user
             db.session.add(object)
@@ -95,7 +93,6 @@ def index():
                 variance = instance.variance
                 skewness = instance.skewness
                 kurtosis = instance.kurtosis
-                type_choice = instance.type_choice
 
                 plot_return_underlying_distribution = \
                     create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
@@ -110,7 +107,7 @@ def index():
     return render_template("view_bootstrap.html", form=form, user=user,
                            plot_return_underlying_distribution=plot_return_underlying_distribution,
                            plot_implied_volatility=plot_implied_volatility, mean=mean, variance=variance,
-                           skewness=skewness, kurtosis=kurtosis, type_choice=type_choice)
+                           skewness=skewness, kurtosis=kurtosis)
 
 
 def populate_form_from_instance(instance):
@@ -178,7 +175,6 @@ def old():
             variance = instance.variance
             skewness = instance.skewness
             kurtosis = instance.kurtosis
-            type_choice = instance.type_choice
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
@@ -193,7 +189,7 @@ def old():
             data.append({'form': form, 'id': id,
                          'plot_return_underlying_distribution': plot_return_underlying_distribution,
                          'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,
-                         'skewness': skewness, 'kurtosis': kurtosis, 'type_choice': type_choice})
+                         'skewness': skewness, 'kurtosis': kurtosis})
 
     return render_template("old.html", data=data)
 
