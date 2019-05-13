@@ -5,6 +5,7 @@ Created on Thu May  9 10:22:01 2019
 @author: Diego
 """
 import math
+import numpy as np
 
 
 def compute_moments(type_choice, parameters):
@@ -40,9 +41,9 @@ def compute_moments(type_choice, parameters):
         kurtosis = 3 * (1 + (kappa ** 2 + 4 * theta ** 2) / (sigma * kappa ** 2 * math.sqrt(kappa ** 2 - theta ** 2)))
 
     else:  # type_choice == 4 CGMY
-        C = parameters[1];
-        G = parameters[2];
-        M = parameters[3];
+        C = parameters[1]
+        G = parameters[2]
+        M = parameters[3]
         Y = parameters[4]
 
         mean = C * (M ** (Y - 1) - G ** (Y - 1)) * math.gamma(1 - Y)
@@ -54,4 +55,4 @@ def compute_moments(type_choice, parameters):
         kurtosis_denominator = (C * (M ** (Y - 2) + G ** (Y - 2)) * math.gamma(2 - Y)) ** 2
         kurtosis = 3 + (kurtosis_numerator / kurtosis_denominator)
 
-    return mean, variance, skewness, kurtosis
+    return mean, variance, np.real(skewness), kurtosis

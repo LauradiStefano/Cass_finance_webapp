@@ -42,7 +42,7 @@ def select_parameters(type_choice, mu, sigma, kappa, theta, c, g, m, y):
         parameters = [mu, sigma]
 
     elif type_choice == 2 or type_choice == 3:
-        parameters = [mu, sigma, kappa, theta]
+        parameters = [mu, sigma, theta, kappa]
 
     else:  # type_choice == 4
         parameters = [mu, c, g, m, y]
