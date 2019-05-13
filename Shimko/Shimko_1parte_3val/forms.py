@@ -22,8 +22,8 @@ class ComputeForm(wtf.Form):
     risk_free = wtf.FloatField(label='Risk Free (%)', default=5.04, validators=[wtf.validators.InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield (%)', default=0, validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time expiration', default=0.1666, validators=[wtf.validators.InputRequired()])
-    plot_choice = MultiCheckboxField('Plot Choice', choices=[('0', 'plotPrice'), ('1', 'plotCdfPrice'),
-                                                             ('2', 'plotCdfReturns')], validators=[])
+    plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf Prices'), ('1', 'Cdf Prices'),
+                                                      ('2', 'Cdf Returns')])
     button_compute = wtf.SubmitField(label='Compute')
     button_view_details = wtf.SubmitField(label='View Details')
     button_export_table = wtf.SubmitField(label='Export Table')
