@@ -42,7 +42,7 @@ def heston_pdf_and_volatility(spot_price, strike_min, strike_max, time, v0, chi,
     strike = np.linspace(strike_min, strike_max, nk)
     option_prices = get_cos_prices(mu, spot_price, strike, risk_free, dividend_yield, time, v0, chi, lam, rho, v_hat,
                                    call_put)
-
+    
     implied_volatility = find_vol(option_prices, call_put, spot_price, strike, time, risk_free, dividend_yield)
 
     return heston_pdf, returns, implied_volatility, strike
@@ -77,6 +77,7 @@ def create_plot_return_underlying_distribution(returns, heston_pdf):
 
 
 def create_implied_volatility_plot(strike, implied_volatility, spot_price):
+    print('vol',implied_volatility)
     data = ColumnDataSource(data=dict(
         strike=strike,
         implied_volatility=implied_volatility
@@ -86,7 +87,7 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
                               tooltips=[("Strike", "@strike"), ("Impl vol", "@implied_volatility")])
 
     x_range = [min(strike) * 0.9, max(strike) * 1.1]
-    y_range = [0, max(implied_volatility) * 1.75]
+    y_range = [0, max(implied_volatility) * 1.25]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_implied], x_range=x_range, y_range=y_range,
                     title="Implied volatility profile", plot_height=450,
                     toolbar_location="right", x_axis_label='Exercise price', y_axis_label='Volatility x root time')
