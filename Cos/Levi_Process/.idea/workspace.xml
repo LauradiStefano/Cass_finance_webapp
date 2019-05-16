@@ -3,20 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="686d72bb-bbfd-4a1e-8ad9-aadd81a4913b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../Heston_Process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Heston_Process/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compute.py" beforeDir="false" afterPath="$PROJECT_DIR$/compute.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_moments.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_moments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/view_bootstrap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/view_bootstrap.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_1parte_3val/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_2parte _upload/templates/old.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/templates/old.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/templates/old.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +15,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compute.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
+            <state relative-caret-position="697">
               <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#85#112#0" expanded="true" />
@@ -41,11 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/old.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1479">
-              <caret line="87" column="45" lean-forward="true" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
-              <folding>
-                <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="257">
+              <caret line="117" column="62" lean-forward="true" selection-start-line="117" selection-start-column="62" selection-end-line="117" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -53,7 +36,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/view_bootstrap.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
+            <state relative-caret-position="2703">
               <caret line="159" selection-start-line="159" selection-end-line="159" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -86,7 +69,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
+            <state relative-caret-position="425">
               <caret line="29" column="18" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="18" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -160,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -172,11 +156,15 @@
               <item name="Levi_Process" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Levi_Process" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Levi_Process" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -213,7 +201,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15476191" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.15476191" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -224,7 +212,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.34042552" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.34042552" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" />
@@ -433,16 +421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/compute.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-          <folding>
-            <element signature="e#85#112#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../Shimko/Shimko_3parte_RfDy/templates/old.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1980">
@@ -450,19 +428,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forms.py">
+    <entry file="file://$PROJECT_DIR$/compute.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="29" column="18" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="18" />
+        <state relative-caret-position="697">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#85#112#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/view_bootstrap.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
+        <state relative-caret-position="2703">
           <caret line="159" selection-start-line="159" selection-end-line="159" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -491,13 +469,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/old.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="45" lean-forward="true" selection-start-line="87" selection-start-column="45" selection-end-line="87" selection-end-column="45" />
-          <folding>
-            <element signature="n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#form#0;n#div#0;n#body#0;n#html#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="257">
+          <caret line="117" column="62" lean-forward="true" selection-start-line="117" selection-start-column="62" selection-end-line="117" selection-end-column="62" />
         </state>
       </provider>
     </entry>
