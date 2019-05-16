@@ -4,9 +4,8 @@ Created on Tue Mar 12 22:27:07 2019
 
 @author: Diego
 """
-import math
-
 import numpy as np
+import math
 from scipy.stats import norm
 
 

@@ -5,21 +5,19 @@ Created on Fri Mar  8 10:03:36 2019
 @author: Diego
 """
 
-import math
-import os
-
-import bokeh.plotting as bp
-import numpy as np
-import pandas as pd
-from bokeh.models import HoverTool
-from bokeh.plotting import ColumnDataSource
-from scipy import integrate
-from scipy.stats import norm, lognorm, ks_2samp
-
-from getbs import find_vol
 from shimkofun import ImpliedCDFPrices_FullRange, ImpliedPDFPrices_FullRange, ImpliedCDFReturns_FullRange, \
-    ImpliedPDFReturns_FullRange, find_SD_B, find_parameters, get_lognormal_fit
+    ImpliedPDFReturns_FullRange, find_parameters, get_lognormal_fit, find_SD_B
+from getbs import find_vol
 from shimkofun import get_implied_parameters_lognormal
+import numpy as np
+import bokeh.plotting as bp
+from bokeh.plotting import ColumnDataSource
+from bokeh.models import HoverTool
+from scipy import integrate
+import math
+from scipy.stats import norm, lognorm, ks_2samp
+import os
+import pandas as pd
 
 
 def upload_input(filename=None):
@@ -50,21 +48,32 @@ def upload_input(filename=None):
     return filename, strike_data, call_market, put_market, time
 
 
-def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, strike_data):
+def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, strike_data, risk_dividend,
+                              risk_free, div_yield):
+
+    risk_dividend = int(risk_dividend)
     call_put_flag = int(call_put_flag)
     strike_min = int(strike_data[0])
     strike_max = int(strike_data[-1])
     step_k = 0.5
-    regression_line = find_SD_B(strike_data, call_market, put_market)
 
-    SD = regression_line[1]
-    B = abs(regression_line[0])
+    if risk_dividend == 1:  # implied
 
-    """
-    From previous value compute dividend yield and risk free
-    """
-    div_yield = -(1 / time) * math.log(SD / s0)
-    risk_free = (1 / time) * math.log(1 / B)
+        regression_line = find_SD_B(strike_data, call_market, put_market)
+
+        SD = regression_line[1]
+        B = abs(regression_line[0])
+
+        """
+        From previous value compute dividend yield and risk free
+        """
+        div_yield = -(1 / time) * math.log(SD / s0)
+        risk_free = (1 / time) * math.log(1 / B)
+
+    else:  # risk_dividend == 0
+
+        risk_free = risk_free / 100
+        div_yield = div_yield / 100
 
     """
     Newton Method find implied volatily through B&S Formula
@@ -237,8 +246,7 @@ def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_m
 
 
 def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatility, s0, strike_min, strike_max,
-                                   strike_data,
-                                   volatility_time):
+                                   strike_data, volatility_time):
     call_put_flag = int(call_put_flag)
     strike_call = []
     strike_put = []
@@ -491,9 +499,8 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     hover_cdf = HoverTool(attachment="left", names=['cdf ret'], tooltips=[("Strike", "@ret_t"),
                                                                           ("Cdf", "@cdf_returns")])
 
-    hover_norm = HoverTool(attachment="right", names=['bench norm'], tooltips=[("Strike", "@ret_t"),
-                                                                               ("Bench Norm",
-                                                                                "@cdf_bench_norm_returns")])
+    hover_norm = HoverTool(attachment="right", names=['bench norm'],
+                           tooltips=[("Strike", "@ret_t"), ("Bench Norm", "@cdf_bench_norm_returns")])
 
     x_range = [min(ret_t), max(ret_t)]
     y_range = [0, 1.1]

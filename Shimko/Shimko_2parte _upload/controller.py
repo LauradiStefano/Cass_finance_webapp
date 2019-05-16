@@ -62,6 +62,8 @@ def index():
     statistic_returns = None
     pvalue_prices = None
     pvalue_returns = None
+    risk_free = None
+    div_yield = None
 
     plot_implied_volatility = None
     plot_index_distribution = None
@@ -80,7 +82,7 @@ def index():
 
         a0, a1, a2, strike_plot, implied_volatility, strike_min, strike_max, div_yield, risk_free, volatility_time, r2 \
             = volatility_term_structure(form.price.data, form.call_put_flag.data, time, call_market, put_market,
-                                        strike_data)
+                                        strike_data, form.risk_dividend.data, form.risk_free.data, form.div_yield.data)
 
         pdf_returns, area_prices, expected_price, sigma2_price, skewness_prices, kurtosis_prices, \
         skewness_prices_log_n, kurtosis_prices_log_n, area_returns, m1_returns, m2_returns, skewness_log_returns, \
@@ -98,6 +100,13 @@ def index():
 
         plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
                                                                               pdf_bench_norm_returns)
+
+        if form.risk_dividend.data == '1':
+            risk_free = risk_free * 100
+            div_yield = div_yield * 100
+
+            risk_free = round(risk_free, 4) if risk_free is not None else None
+            div_yield = round(div_yield, 4) if div_yield is not None else None
 
         if '0' in form.plot_choice.data:
             st, pdf, pdf_bench_log_prices = compute_underlying_distribution(a0, a1, a2, form.price.data, risk_free,
@@ -168,9 +177,13 @@ def index():
             object.pvalue_prices = pvalue_prices
             object.pvalue_returns = pvalue_returns
             object.price = form.price.data
-            object.risk_free = risk_free
-            object.div_yield = div_yield
             object.call_put_flag = form.call_put_flag.data
+
+            if form.risk_dividend.data == '1':
+                object.risk_free = risk_free
+                object.div_yield = div_yield
+
+            object.risk_dividend = form.risk_dividend.data
 
             if st is not None:  # user chooses the plot
                 object.st = json.dumps(st.tolist())
@@ -228,6 +241,16 @@ def index():
                 pvalue_prices = instance.pvalue_prices
                 pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
+                risk_dividend = instance.risk_dividend
+                print('rd', risk_dividend)
+                if risk_dividend == '1':
+
+                    risk_free = instance.risk_free
+                    div_yield = instance.div_yield
+                    risk_free = risk_free / 100
+                    div_yield = div_yield / 100
+                    risk_free = round(risk_free, 4) if risk_free is not None else None
+                    div_yield = round(div_yield, 4) if div_yield is not None else None
 
                 if instance.st is not None:
                     st = np.array(json.loads(instance.st))
@@ -280,6 +303,9 @@ def index():
     pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
     pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
+    print('rf', risk_free)
+
+
     return render_template("view_bootstrap.html", form=form, user=user, file_name=file_name, a0=a0, a1=a1, a2=a2,
                            area_prices=area_prices, expected_price=expected_price, sigma2_price=sigma2_price,
                            skewness_prices=skewness_prices, kurtosis_prices=kurtosis_prices,
@@ -289,7 +315,7 @@ def index():
                            skewness_normal=skewness_normal, kurtosis_normal=kurtosis_normal,
                            statistic_prices=statistic_prices, statistic_returns=statistic_returns,
                            pvalue_prices=pvalue_prices, pvalue_returns=pvalue_returns,
-                           plot_implied_volatility=plot_implied_volatility,
+                           plot_implied_volatility=plot_implied_volatility, div_yield=div_yield, risk_free=risk_free,
                            plot_index_distribution=plot_index_distribution, plot_return_cdf=plot_return_cdf,
                            plot_return_distribution=plot_return_distribution, plot_index_cdf=plot_index_cdf)
 
@@ -384,14 +410,25 @@ def old():
             statistic_returns = instance.statistic_returns
             pvalue_prices = instance.pvalue_prices
             pvalue_returns = instance.pvalue_returns
-            risk_free = instance.risk_free
-            div_yield = instance.div_yield
+            risk_dividend = instance.risk_dividend
 
             plot_choice = json.loads(instance.plot_choice)
 
             plot_index_distribution = None
             plot_index_cdf = None
             plot_return_cdf = None
+            risk_free = None
+            div_yield = None
+
+            if risk_dividend == '1':
+                risk_free = instance.risk_free
+                div_yield = instance.div_yield
+
+                risk_free = risk_free / 100
+                div_yield = div_yield / 100
+
+                risk_free = round(risk_free, 4) if risk_free is not None else None
+                div_yield = round(div_yield, 4) if div_yield is not None else None
 
             if instance.st is not None:
 
@@ -422,6 +459,7 @@ def old():
             a0 = round(a0, 8) if a0 is not None else None
             a1 = round(a1, 8) if a1 is not None else None
             a2 = round(a2, 10) if a2 is not None else None
+            r2 = round(r2, 8) if r2 is not None else None
             area_prices = round(area_prices, 4) if area_prices is not None else None
             expected_price = round(expected_price, 4) if expected_price is not None else None
             sigma2_price = round(sigma2_price, 4) if sigma2_price is not None else None
@@ -440,8 +478,6 @@ def old():
             statistic_returns = round(statistic_returns, 4) if statistic_returns is not None else None
             pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
             pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
-            risk_free = round(risk_free, 4) if risk_free is not None else None
-            div_yield = round(div_yield, 4) if div_yield is not None else None
 
             data.append({'form': form, 'id': id, 'file_name': file_name, 'a0': a0, 'a1': a1, 'a2': a2,
                          'area_prices': area_prices, 'expected_price': expected_price, 'sigma2_price': sigma2_price,

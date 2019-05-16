@@ -172,7 +172,7 @@ def get_lognormal_match(A0, A1, A2, SD, B, kmin, kmax, p):
     f1 = norm.cdf(arg) - CdfKmax
 
     f2 = norm.pdf(arg) / (kmax * sgmax) - PdfKmax
-    return (f1, f2)
+    return f1, f2
 
 
 def get_lognormal_fit(A0, A1, A2, SD, B, kmin, kmax):

@@ -91,6 +91,7 @@ class Compute(db.Model):
     statistic_returns = db.Column(db.Float())
     pvalue_prices = db.Column(db.Float())
     pvalue_returns = db.Column(db.Float())
+    risk_dividend = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',
