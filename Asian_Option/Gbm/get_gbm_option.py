@@ -6,11 +6,60 @@ Created on Tue May  7 00:06:31 2019
 """
 
 import math
-
 import numpy as np
-from get_gbm_fr_ft import fr_fourier_transform
-from get_gbm_ft import gbm_ft
 
+
+def gbm_charfn(u, dt, sigma, r):
+    output = np.exp(dt * (1j * (r - 0.5 * sigma ** 2) * u - 0.5 * sigma ** 2 * u ** 2))
+
+    return output
+
+def gbm_phi(g1, g2, n, N, dt, sigma, r, S0):
+    term = 0
+
+    for k in range(1, n + 1):
+        term = term + np.log(gbm_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, r))  # corretto
+
+    for k in range(n + 1, N + 1):
+        term = term + np.log(gbm_charfn(g2 * (1 - k / (N + 1)), dt, sigma, r))  # corretto
+
+    output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
+
+    return output
+
+def gbm_ft(s, u, delta, N, dt, sigma, r, S0, K):  # corretto
+
+    term = 0
+
+    for j in range(0, N + 1):
+        term = term + gbm_phi(-1j, u - s * 1j * delta, j, N, dt, sigma, r, S0)
+
+    output = np.exp(-r * N * dt) * (term - K * (N + 1) * gbm_phi(0, u - s * 1j * delta, N, N, dt, sigma, r, S0)) / (
+                (N + 1) * (s * 1j * u + delta))
+
+    return output
+
+def fr_fourier_transform(x, a):
+    m = len(x)
+
+    # first fft
+    vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
+    vect_two = np.concatenate((vect_one, np.zeros(m)))
+    first_fft = np.fft.fft(vect_two)  # correto
+
+    # Second fft
+    vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
+    vect_fourth = np.exp(math.pi * 1j * a * np.arange(-m, 0) ** 2)
+    second_fft = np.fft.fft(np.concatenate((vect_third, vect_fourth)))
+
+    # ifyz
+    ifyz = (np.fft.ifft(first_fft * second_fft))
+
+    # f
+
+    f = np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2) * ifyz[0:m]
+
+    return f
 
 def gbm_option(S0, K, T, r, n, sigma):
     dt = T / n
