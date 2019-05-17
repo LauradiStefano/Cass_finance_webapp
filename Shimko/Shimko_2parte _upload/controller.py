@@ -179,9 +179,8 @@ def index():
             object.price = form.price.data
             object.call_put_flag = form.call_put_flag.data
 
-            if form.risk_dividend.data == '1':
-                object.risk_free = risk_free
-                object.div_yield = div_yield
+            object.risk_free = risk_free
+            object.div_yield = div_yield
 
             object.risk_dividend = form.risk_dividend.data
 
@@ -241,14 +240,12 @@ def index():
                 pvalue_prices = instance.pvalue_prices
                 pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
-                risk_dividend = instance.risk_dividend
-           
-                if risk_dividend == '1':
 
-                    risk_free = instance.risk_free
-                    div_yield = instance.div_yield
-                    risk_free = risk_free / 100
-                    div_yield = div_yield / 100
+                risk_dividend = instance.risk_dividend
+                risk_free = instance.risk_free
+                div_yield = instance.div_yield
+
+                if risk_dividend == '1':
                     risk_free = round(risk_free, 4) if risk_free is not None else None
                     div_yield = round(div_yield, 4) if div_yield is not None else None
 
@@ -302,8 +299,6 @@ def index():
     statistic_returns = round(statistic_returns, 4) if statistic_returns is not None else None
     pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
     pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
-
-
 
     return render_template("view_bootstrap.html", form=form, user=user, file_name=file_name, a0=a0, a1=a1, a2=a2,
                            area_prices=area_prices, expected_price=expected_price, sigma2_price=sigma2_price,
@@ -410,22 +405,16 @@ def old():
             pvalue_prices = instance.pvalue_prices
             pvalue_returns = instance.pvalue_returns
             risk_dividend = instance.risk_dividend
+            risk_free = instance.risk_free
+            div_yield = instance.div_yield
 
             plot_choice = json.loads(instance.plot_choice)
 
             plot_index_distribution = None
             plot_index_cdf = None
             plot_return_cdf = None
-            risk_free = None
-            div_yield = None
 
             if risk_dividend == '1':
-                risk_free = instance.risk_free
-                div_yield = instance.div_yield
-
-                risk_free = risk_free / 100
-                div_yield = div_yield / 100
-
                 risk_free = round(risk_free, 4) if risk_free is not None else None
                 div_yield = round(div_yield, 4) if div_yield is not None else None
 

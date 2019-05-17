@@ -44,7 +44,7 @@ class Compute(db.Model):
     strike_max = db.Column(db.Float())
     price = db.Column(db.Float())
     time = db.Column(db.Float())
-    call_put_flag = db.Column(db.Integer())
+    call_put_flag = db.Column(db.String())
     plot_choice = db.Column(db.String())
     button_compute = db.Column(db.Integer())
     button_view_details = db.Column(db.Integer())
@@ -91,7 +91,7 @@ class Compute(db.Model):
     statistic_returns = db.Column(db.Float())
     pvalue_prices = db.Column(db.Float())
     pvalue_returns = db.Column(db.Float())
-    risk_dividend = db.Column(db.Integer())
+    risk_dividend = db.Column(db.String())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',

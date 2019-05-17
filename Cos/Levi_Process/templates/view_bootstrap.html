@@ -93,7 +93,6 @@
             <div class="row">
                 <div class="col-xs-3">
                     {{form.type_choice.label}}
-
                     {{form.type_choice}}
                 </div>
             </div>
@@ -111,7 +110,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <!--{{form.type_choice.data}}-->
+
                 <div class="col-xs-10">
                     <div id="normal" class="row" {% if form.type_choice.data != '1' and form.type_choice != None %}
                          style="display:none" {%endif%} >

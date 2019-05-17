@@ -1,13 +1,6 @@
-import wtforms as wtf
 import db_models
+import wtforms as wtf
 import wtforms.fields.html5 as html5
-from wtforms.widgets import ListWidget, CheckboxInput
-from wtforms import SelectMultipleField
-
-
-class MultiCheckboxField(SelectMultipleField):
-    widget = ListWidget(prefix_label=False)
-    option_widget = CheckboxInput()
 
 
 class ComputeForm(wtf.Form):
