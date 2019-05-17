@@ -9,7 +9,8 @@ from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 
 from get_gbm_option import gbm_option
-
+from get_vg_option import get_vg_option
+from get_heston_option import get_heston_option
 
 # s0 = 100
 # N = 50
@@ -27,11 +28,26 @@ from get_gbm_option import gbm_option
 # sigma = 0.3
 # T = 1
 
-def compute_values(s0, strike, time, risk_free, N, sigma):
+def compute_values(type_choice, s0, strike, time, risk_free, N, sigma, theta, kappa, v0, alpha, beta, eta, rho):
     N = int(N)
+    type_choice = int(type_choice)
     risk_free = risk_free / 100
-    ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N, sigma)
-    ptrue_strike = ptrue_strike[0]
+
+    if type_choice = 0:
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N, sigma)
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice = 1:
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = vg_option(s0, strike, time, risk_free, N, sigma, theta, kappa)
+        ptrue_strike = ptrue_strike[0]
+
+    else:
+
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = heston_option(s0, strike, v0, time, risk_free, N, alpha, beta, eta, rho)
+        ptrue_strike = ptrue_strike[0]
+
+    
+
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
 
