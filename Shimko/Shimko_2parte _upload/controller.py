@@ -242,7 +242,7 @@ def index():
                 pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
                 risk_dividend = instance.risk_dividend
-                print('rd', risk_dividend)
+           
                 if risk_dividend == '1':
 
                     risk_free = instance.risk_free
@@ -303,7 +303,6 @@ def index():
     pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
     pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
-    print('rf', risk_free)
 
 
     return render_template("view_bootstrap.html", form=form, user=user, file_name=file_name, a0=a0, a1=a1, a2=a2,

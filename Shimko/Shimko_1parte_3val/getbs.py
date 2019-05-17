@@ -8,29 +8,41 @@ import math
 
 import numpy as np
 from scipy.stats import norm
+import scipy.optimize
 
 
-def find_vol(target_value, cp, S0, K, T, rf, q):
-    MAX_ITERATIONS = 1000
-    PRECISION = 1.0e-5
-    sigma = 0.5
-    # for j in range (int(len(K))):
-    for i in range(0, MAX_ITERATIONS):
-        price = bs_price(cp, S0, K, T, rf, sigma, q)
-        vega = bs_vega(cp, S0, K, T, rf, sigma, q)
+def  find_vol(target_value, cp, s0, K, T, risk_free, div_yield):
+    
+    implied_vol = []
+    for j in range(0,len(K)):
+        
+        function = lambda vol : target_value[j]-bs_price(cp, s0, K[j], T, risk_free, vol, div_yield)
+        implied_vol.append(scipy.optimize.brentq(function, a=-2.0, b=2.0, xtol=1e-8))
 
-        price = price
-        diff = target_value - price  # our root
+    return implied_vol 
 
-        # print (i, sigma, diff)
 
-        if all(abs(diff) < PRECISION):
-            return sigma
+# def find_vol(target_value, cp, S0, K, T, rf, q):
+#     MAX_ITERATIONS = 1000
+#     PRECISION = 1.0e-5
+#     sigma = 0.5
+#     # for j in range (int(len(K))):
+#     for i in range(0, MAX_ITERATIONS):
+#         price = bs_price(cp, S0, K, T, rf, sigma, q)
+#         vega = bs_vega(cp, S0, K, T, rf, sigma, q)
 
-        volt = sigma + diff / vega  # f(x) / f'(x)
+#         price = price
+#         diff = target_value - price  # our root
 
-    # value wasn't found, return best guess so far
-    return volt
+#         # print (i, sigma, diff)
+
+#         if all(abs(diff) < PRECISION):
+#             return sigma
+
+#         volt = sigma + diff / vega  # f(x) / f'(x)
+
+#     # value wasn't found, return best guess so far
+#     return volt
 
 
 # implied_vol.append(sigma)

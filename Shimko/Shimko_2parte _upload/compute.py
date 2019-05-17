@@ -97,7 +97,7 @@ def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, 
         target_value = both_call_put
 
     volatility = find_vol(target_value, call_put_flag, s0, strike_data, time, risk_free, div_yield)  # annual volatility
-    volatility_time = np.array(volatility * math.sqrt(time))  # output plot implied
+    volatility_time = np.array(volatility) * math.sqrt(time)  # output plot implied
 
     """
     Given implied volatility and strikes the paper considers the volatility structures
