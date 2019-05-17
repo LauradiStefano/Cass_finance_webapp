@@ -33,6 +33,13 @@
 
 
 
+
+
+
+
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -44,6 +51,13 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
+
+
+
+
+
 
 
 
@@ -93,82 +107,182 @@
 
 <h2>Asian Option</h2>
 
-<h3>to write </h3> <br>
+<h3> ---- </h3> <br>
 <div class="container">
     <form class="navbar-form" method="post" action="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <div class="row">
-            <h5>Input</h5>
+
             <div class="row">
-                <label> Parameters </label> <br/>
-                <div class="col-xs-3">
-                    {{form.sigma.label}}
-                    {{form.sigma}}
-                    {% if form.sigma.errors %}
-                    {% for error in form.sigma.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
+                <label> Input </label> <br/>
+                <div class="row">
+                    <div class="col-xs-3">
+                        {{form.model_choice.label}}
+                        {{form.model_choice}}
+                    </div>
+                </div>
+                <h5>Parameters</h5>
+                <div id="gaussian" class="row">
+
+                    <div class="col-xs-2" {% if form.model_choice.data != '0' and form.model_choice != None %}
+                         style="display:none" {%endif%}>
+                        {{form.sigma_gaussian.label}}
+                        {{form.sigma_gaussian}}
+                        {% if form.sigma_gaussian.errors %}
+                        {% for error in form.sigma_gaussian.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.price.label}}
-                    {{form.price}}
-                    {% if form.price.errors %}
-                    {% for error in form.price.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
+                <div id="vg" class="row" {% if form.model_choice.data != '1' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        {{form.sigma_vg.label}}
+                        {{form.sigma_vg}}
+                        {% if form.sigma_vg.errors %}
+                        {% for error in form.sigma_vg.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.theta.label}}
+                        {{form.theta}}
+                        {% if form.theta.errors %}
+                        {% for error in form.theta.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.kappa.label}}
+                        {{form.kappa}}
+                        {% if form.kappa.errors %}
+                        {% for error in form.kappa.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.risk_free.label}}
-                    {{form.risk_free}}
-                    {% if form.risk_free.errors %}
-                    {% for error in form.risk_free.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
+                <div id="heston" class="row"  {% if form.model_choice.data != '4' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        {{form.volatility_t0.label}}
+                        {{form.volatility_t0}}
+                        {% if form.volatility_t0.errors %}
+                        {% for error in form.volatility_t0.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.alpha.label}}
+                        {{form.alpha}}
+                        {% if form.alpha.errors %}
+                        {% for error in form.alpha.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.beta.label}}
+                        {{form.beta}}
+                        {% if form.beta.errors %}
+                        {% for error in form.beta.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.eta.label}}
+                        {{form.eta}}
+                        {% if form.eta.errors %}
+                        {% for error in form.eta.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.rho.label}}
+                        {{form.rho}}
+                        {% if form.rho.errors %}
+                        {% for error in form.rho.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <br/>
+
+
+                <div class="row">
+
+                    <div class="col-xs-2">
+                        {{form.price.label}}
+                        {{form.price}}
+                        {% if form.price.errors %}
+                        {% for error in form.price.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.risk_free.label}}
+                        {{form.risk_free}}
+                        {% if form.risk_free.errors %}
+                        {% for error in form.risk_free.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <br/>
-            <h5> Contract Parameters</h5>
             <div class="row">
-                <div class="col-xs-3">
-                    {{form.time.label}}
-                    {{form.time}}
-                    {% if form.time.errors %}
-                    {% for error in form.time.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
+                <label> Contract Parameters</label>
 
-                <div class="col-xs-3">
-                    {{form.step.label}}
-                    {{form.step}}
-                    {% if form.step.errors %}
-                    {% for error in form.step.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
+                <div class="row">
+                    <div class="col-xs-2">
+                        {{form.time.label}}
+                        {{form.time}}
+                        {% if form.time.errors %}
+                        {% for error in form.time.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
 
-                <div class="col-xs-3">
-                    {{form.strike.label}}
-                    {{form.strike}}
-                    {% if form.strike.errors %}
-                    {% for error in form.strike.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
+                    <div class="col-xs-2">
+                        {{form.step.label}}
+                        {{form.step}}
+                        {% if form.step.errors %}
+                        {% for error in form.step.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.strike.label}}
+                        {{form.strike}}
+                        {% if form.strike.errors %}
+                        {% for error in form.strike.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <br/>
-            <div class="col-xs-2">
+                <br/>
+
                 {{form.button_compute}}
+
             </div>
+
         </div>
 
     </form>
@@ -185,10 +299,10 @@
             </div>
             <div class="col-6 col-xs-6">
                 <table>
-                   <thead>
-                   <th>--</th>
-                   <th>--</th>
-                   </thead>
+                    <thead>
+                    <th>--</th>
+                    <th>--</th>
+                    </thead>
                     <tbody>
                     <tr>
                         <td>Optimal Strike</td>
@@ -222,5 +336,30 @@
 <!--<script type="text/javascript">$('#popup_table').popup(); </script>-->
 <!--<script type="text/javascript" src="./static/tableExportExcel.js"></script>-->
 
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var select_model = $('#model_choice');
+        var gaussian = $('#gaussian');
+        var vg = $('#vg');
+        var heston = $('#heston');
+
+        select_model.on('change', function() {
+            if (select_model.val() == '0') {
+                gaussian.show();
+                vg.hide();
+                heston.hide();
+            } else if (select_model.val() == '1') {
+                gaussian.hide();
+                vg.show();
+                heston.hide();
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.show();
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

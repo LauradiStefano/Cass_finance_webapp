@@ -6,6 +6,7 @@ Created on Tue May  7 00:06:31 2019
 """
 
 import math
+
 import numpy as np
 
 
@@ -13,6 +14,7 @@ def gbm_charfn(u, dt, sigma, r):
     output = np.exp(dt * (1j * (r - 0.5 * sigma ** 2) * u - 0.5 * sigma ** 2 * u ** 2))
 
     return output
+
 
 def gbm_phi(g1, g2, n, N, dt, sigma, r, S0):
     term = 0
@@ -27,6 +29,7 @@ def gbm_phi(g1, g2, n, N, dt, sigma, r, S0):
 
     return output
 
+
 def gbm_ft(s, u, delta, N, dt, sigma, r, S0, K):  # corretto
 
     term = 0
@@ -35,9 +38,10 @@ def gbm_ft(s, u, delta, N, dt, sigma, r, S0, K):  # corretto
         term = term + gbm_phi(-1j, u - s * 1j * delta, j, N, dt, sigma, r, S0)
 
     output = np.exp(-r * N * dt) * (term - K * (N + 1) * gbm_phi(0, u - s * 1j * delta, N, N, dt, sigma, r, S0)) / (
-                (N + 1) * (s * 1j * u + delta))
+            (N + 1) * (s * 1j * u + delta))
 
     return output
+
 
 def fr_fourier_transform(x, a):
     m = len(x)
@@ -60,6 +64,7 @@ def fr_fourier_transform(x, a):
     f = np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2) * ifyz[0:m]
 
     return f
+
 
 def gbm_option(S0, K, T, r, n, sigma):
     dt = T / n
@@ -102,4 +107,3 @@ def gbm_option(S0, K, T, r, n, sigma):
     Ptrue_K = g1[l == 0]
 
     return Ptrue, K_Exp_lcr, Ptrue_K, lam, g1
-

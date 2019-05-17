@@ -1,16 +1,15 @@
 import json
 import os
 
-import numpy as np
 from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 from sqlalchemy import desc
 
 from app import app
+from compute import create_plot_lower_bound, compute_values
 from db_models import db, User, Compute
 from forms import ComputeForm
-from main_gbm_bounds_asian_option import create_plot_lower_bound, compute_values
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -37,8 +36,10 @@ def index():
     if request.method == "POST":
         if form.validate():
             optimal_lower_bound, optimal_strike, lower_bound_strike, lam, lower_bound = \
-                compute_values(form.price.data, form.strike.data, form.time.data, form.risk_free.data, form.step.data,
-                               form.sigma.data)
+                compute_values(form.model_choice.data, form.price.data, form.strike.data, form.time.data,
+                               form.risk_free.data, form.step.data, form.sigma_gaussian.data, form.sigma_vg.data,
+                               form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha.data,
+                               form.beta.data, form.eta.data, form.rho.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
 
