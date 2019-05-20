@@ -21,7 +21,8 @@ from get_vg_option import vg_option
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
                    alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, alpha_meixner,
-                   beta_meixner, delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft, lmax, lmin, delta, umax):
+                   beta_meixner, delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1,
+                   eta2, Nfft, lmax, lmin, delta, umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)

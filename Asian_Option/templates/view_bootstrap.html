@@ -181,18 +181,18 @@
                     </div>
                     <div class="col-xs-2">
                         $$ \eta $$
-                        {{form.eta}}
-                        {% if form.eta.errors %}
-                        {% for error in form.eta.errors %}
+                        {{form.eta_heston}}
+                        {% if form.eta_heston.errors %}
+                        {% for error in form.eta_heston.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
                         $$ \rho $$
-                        {{form.rho}}
-                        {% if form.rho.errors %}
-                        {% for error in form.rho.errors %}
+                        {{form.rho_heston}}
+                        {% if form.rho_heston.errors %}
+                        {% for error in form.rho_heston.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -335,6 +335,55 @@
                         {{form.sigma_x_mjd}}
                         {% if form.sigma_x_mjd.errors %}
                         {% for error in form.sigma_x_mjd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="dejd" class="row" {% if form.model_choice.data !='7' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        $$ \sigma $$
+                        {{form.sigma_dejd}}
+                        {% if form.sigma_dejd.errors %}
+                        {% for error in form.sigma_dejd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \lambda $$
+                        {{form.lam_dejd}}
+                        {% if form.lam_dejd.errors %}
+                        {% for error in form.lam_dejd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \rho $$
+                        {{form.rho_dejd}}
+                        {% if form.rho_dejd.errors %}
+                        {% for error in form.rho_dejd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \eta_{1} $$
+                        {{form.eta1_dejd}}
+                        {% if form.eta1_dejd.errors %}
+                        {% for error in form.eta1_dejd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \eta_{2} $$
+                        {{form.eta2_dejd}}
+                        {% if form.eta2_dejd.errors %}
+                        {% for error in form.eta2_dejd.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -528,6 +577,7 @@
         var cgmy = $('#cgmy');
         var meixner = $('#meixner');
         var mjd = $('#mjd')
+        var dejd = $('#dejd')
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
@@ -538,6 +588,7 @@
                 cgmy.hide();
                 meixner.hide();
                 mjd.hide();
+                dejd.hide();
             } else if (select_model.val() == '1') {
                 gaussian.hide();
                 vg.show();
@@ -546,6 +597,7 @@
                 cgmy.hide();
                 meixner.hide();
                 mjd.hide();
+                dejd.hide();
             } else if (select_model.val() == '2'){
                 gaussian.hide();
                 vg.hide();
@@ -554,6 +606,7 @@
                 cgmy.hide();
                 meixner.hide();
                 mjd.hide();
+                dejd.hide();
             } else if (select_model.val() == '3') {
                 gaussian.hide();
                 vg.hide();
@@ -562,6 +615,7 @@
                 cgmy.hide();
                 meixner.hide();
                 mjd.hide();
+                dejd.hide();
             } else if (select_model.val() == '4') {
                 gaussian.hide();
                 vg.hide();
@@ -570,6 +624,7 @@
                 cgmy.show();
                 meixner.hide();
                 mjd.hide();
+                dejd.hide();
             } else if (select_model.val() == '5') {
                 gaussian.hide();
                 vg.hide();
@@ -578,7 +633,8 @@
                 cgmy.hide();
                 meixner.show();
                 mjd.hide();
-            } else {
+                dejd.hide();
+            } else if (select_model.val() == '6') {
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
@@ -586,6 +642,16 @@
                 cgmy.hide();
                 meixner.hide();
                 mjd.show();
+                dejd.hide();
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.hide();
+                cgmy.hide();
+                meixner.hide();
+                mjd.hide();
+                dejd.show();
             }
         });
     });
