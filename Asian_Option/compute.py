@@ -73,8 +73,6 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
         ptrue_strike = ptrue_strike[0]
 
-
-
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
 
