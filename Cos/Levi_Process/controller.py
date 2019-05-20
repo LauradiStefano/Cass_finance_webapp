@@ -1,15 +1,17 @@
+import json
 import os
-from compute import cos_pdf_underlying_asset, create_plot_return_underlying_distribution, compute_option_prices, \
-    compute_implied_volatility, create_implied_volatility_plot, select_parameters
-from flask import render_template, request, redirect, url_for
-from forms import ComputeForm
+
 import numpy as np
-from db_models import db, User, Compute
+from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
-from app import app
 from sqlalchemy import desc
-import json
+
+from app import app
+from compute import cos_pdf_underlying_asset, create_plot_return_underlying_distribution, compute_option_prices, \
+    compute_implied_volatility, create_implied_volatility_plot, select_parameters
+from db_models import db, User, Compute
+from forms import ComputeForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -29,10 +31,14 @@ def index():
     underlying_prices = None
     strike = None
     implied_volatility = None
+    option_prices = None
+
     mean = None
     variance = None
     skewness = None
     kurtosis = None
+    norm_pdf = None
+    number_of_strike = 0
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
@@ -41,7 +47,7 @@ def index():
         if form.validate():
             parameters = select_parameters(form.type_choice.data, form.mu.data, form.sigma.data, form.kappa.data,
                                            form.theta.data, form.c.data, form.g.data, form.m.data, form.y.data)
-            pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis = \
+            pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis, norm_pdf = \
                 cos_pdf_underlying_asset(form.type_choice.data, parameters, form.time.data)
 
             option_prices, strike = \
@@ -53,8 +59,10 @@ def index():
                 compute_implied_volatility(option_prices, form.call_put.data, form.price.data, strike, form.time.data,
                                            form.risk_free.data, form.dividend_yield.data)
 
+            number_of_strike = len(strike)
+
             plot_return_underlying_distribution = \
-                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
+                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf)
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, form.price.data)
 
@@ -103,11 +111,14 @@ def index():
     variance = round(variance, 4) if variance is not None else None
     skewness = round(skewness, 4) if skewness is not None else None
     kurtosis = round(kurtosis, 4) if kurtosis is not None else None
+    implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
+    option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
 
     return render_template("view_bootstrap.html", form=form, user=user,
                            plot_return_underlying_distribution=plot_return_underlying_distribution,
                            plot_implied_volatility=plot_implied_volatility, mean=mean, variance=variance,
-                           skewness=skewness, kurtosis=kurtosis)
+                           skewness=skewness, kurtosis=kurtosis, number_of_strike=number_of_strike, strike=strike,
+                           option_prices=option_prices, implied_volatility=implied_volatility)
 
 
 def populate_form_from_instance(instance):

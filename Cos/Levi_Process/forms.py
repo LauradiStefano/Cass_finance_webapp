@@ -26,8 +26,8 @@ class ComputeForm(wtf.Form):
     call_put = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put')], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')
-    # button_export_table = wtf.SubmitField(label='Export Table')
-    # button_table = wtf.SubmitField(label='View Details')
+    button_export_table = wtf.SubmitField(label='Export Table')
+    button_view_details = wtf.SubmitField(label='View Details')
 
 
 class RegistrationForm(wtf.Form):

@@ -9,31 +9,13 @@ import bokeh.plotting as bp
 import numpy as np
 from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
+from scipy.stats import norm
 
 from get_COS_bounds import get_COS_bounds
 from get_COSprices import get_cos_prices
 from get_moments import compute_moments
 from get_pdf_cos import get_pdf_cos
 from getbs import find_vol
-
-
-# #Input
-# u = 1
-# type = 2
-# call_put = 1
-# time = 1
-# s0 = 100
-# strike_min = s0*0.65
-# strike_max = s0*1.35
-# nk=50
-# strikes=np.linspace ( strike_min , strike_max , nk )
-# dividend_yield = 0
-# risk_free = 0.1
-# mu = 0
-# sigma = 0.1213
-# theta=-0.2436 # if zero skew=0
-# kappa=0.1689
-# parameters = [ mu , sigma, theta , kappa  ]
 
 
 def select_parameters(type_choice, mu, sigma, kappa, theta, c, g, m, y):
@@ -59,30 +41,36 @@ def cos_pdf_underlying_asset(type_choice, parameters, time):
     pdf_underlying_asset = get_pdf_cos(type_choice, underlying_prices, a, b, parameters, time, N)
 
     mean, variance, skewness, kurtosis = compute_moments(type_choice, parameters)
+    norm_pdf = norm.pdf(underlying_prices, mean, variance ** 0.5)
 
-    return pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis
+    return pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis, norm_pdf
 
 
 # Plot Pdf underlying distribution
 
 
-def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset):
+def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf):
     data = ColumnDataSource(data=dict(
         underlying_prices=underlying_prices,
-        pdf_underlying_asset=pdf_underlying_asset
+        pdf_underlying_asset=pdf_underlying_asset,
+        norm_pdf=norm_pdf
     ))
 
     hover_returns = HoverTool(attachment="left", names=['pdf ret'],
                               tooltips=[("Returns", "@underlying_prices"), ("Pdf", "@pdf_underlying_asset")])
+    hover_norm_pdf = HoverTool(attachment="right", names=['pdf norm'],
+                               tooltips=[("Returns", "@underlying_prices"), ("Pdf Norm", "@norm_pdf")])
 
     x_range = [min(underlying_prices), max(underlying_prices)]
     y_range = [0, max(pdf_underlying_asset) * 1.10]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns], x_range=x_range, y_range=y_range,
-                    title="Pdf underlying asset", plot_height=450,
-                    toolbar_location="left", x_axis_label='Returns', y_axis_label='Probability')
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_norm_pdf], x_range=x_range,
+                    y_range=y_range, title="Pdf underlying asset", plot_height=450, toolbar_location="left",
+                    x_axis_label='Returns', y_axis_label='Probability')
 
     fig.line(x='underlying_prices', y='pdf_underlying_asset', source=data, legend="Pdf distribution", color="#0095B6",
              alpha=0.9, line_width=4, name='pdf ret')
+    fig.line(x='underlying_prices', y='norm_pdf', source=data, legend="Benchmark Normal", color="#D21F1B",
+             alpha=0.6, line_width=3, name='pdf norm')
 
     fig.legend.location = "top_right"
     fig.toolbar.active_drag = None
@@ -101,9 +89,9 @@ def compute_option_prices(type_choice, call_put, spot_price, strike_min, strike_
     # Compute option prices
     risk_free = risk_free / 100
     dividend_yield = dividend_yield / 100
-    nk = 50
+    nk = 1
 
-    strike = np.linspace(strike_min, strike_max, nk)
+    strike = np.arange(strike_min, strike_max + 1, nk)
     L = 10
     N = 1000
 

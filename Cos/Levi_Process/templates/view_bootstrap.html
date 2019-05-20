@@ -28,6 +28,8 @@
 
 
 
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -39,6 +41,8 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
 
 
 
@@ -112,8 +116,8 @@
                 </div>
 
                 <div class="col-xs-10">
-                    <div id="normal" class="row" {% if form.type_choice.data != '1' and form.type_choice != None %}
-                         style="display:none" {%endif%} >
+                    <div id="normal" class="row" {% if form.type_choice.data !='1' and form.type_choice !=None %}
+                         style="display:none" {%endif%}>
 
                         <div class="col-xs-3">
                             {{form.sigma.label}}
@@ -125,7 +129,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div id="vg" class="row" {% if form.type_choice.data != '2' and form.type_choice.data != '3' %}
+                    <div id="vg" class="row" {% if form.type_choice.data !='2' and form.type_choice.data !='3' %}
                          style="display:none" {%endif%}>
 
                         <div class="col-xs-3">
@@ -157,7 +161,7 @@
                         </div>
                     </div>
 
-                    <div id="cgmy" class="row" {% if form.type_choice.data != '4' %} style="display:none" {%endif%}>
+                    <div id="cgmy" class="row" {% if form.type_choice.data !='4' %} style="display:none" {%endif%}>
 
                         <div class="col-xs-3">
                             {{form.c.label}}
@@ -288,6 +292,11 @@
     <div class="row">
         <h4>Results: </h4>
         {% if plot_return_underlying_distribution != None %}
+
+        <div id="button_view_details" class="popup_table_open">
+            {{form.button_view_details}}
+        </div>
+
         <div class="row">
             <table>
                 <h5>Table of moments</h5>
@@ -322,14 +331,37 @@
         </div>
         {%endif%}
     </div>
+    <div id="popup_table" style="display:none">
+        <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+            {{form.button_export_table}}
+        </div>
+        <h4> Table of volatility and prices</h4>
+        <table id="tableExport">
+            <thead>
+            <th> Strike </th>
+            <th> Prices </th>
+            <th> Implied Volatility</th>
+            </thead>
+            <tbody>
+            {%for i in range(number_of_strike)%}
+            <tr>
+                <td>{{strike[i]}}</td>
+                <td>{{option_prices[i]}}</td>
+                <td>{{implied_volatility[i]}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
 
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>-->
-<!--<script type="text/javascript">$('#popup_table').popup(); </script>-->
-<!--<script type="text/javascript" src="./static/tableExportExcel.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup(); </script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
 
 <script charset="utf-8" type="text/javascript">
     $(function(){
@@ -354,6 +386,8 @@
             }
         });
     });
+
+
 
 
 
