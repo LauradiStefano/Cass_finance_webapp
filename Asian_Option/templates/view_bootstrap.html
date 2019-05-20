@@ -45,6 +45,8 @@
 
 
 
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -257,7 +259,7 @@
                         {% endfor %}
                         {% endif %}
                     </div>
-                     <div class="col-xs-2">
+                    <div class="col-xs-2">
                         {{form.y.label}}
                         {{form.y}}
                         {% if form.y.errors %}
@@ -298,6 +300,47 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div id="mjd" class="row" {% if form.model_choice.data !='6' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        $$ \sigma $$
+                        {{form.sigma_mjd}}
+                        {% if form.sigma_mjd.errors %}
+                        {% for error in form.sigma_mjd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \lambda $$
+                        {{form.lam_mjd}}
+                        {% if form.lam_mjd.errors %}
+                        {% for error in form.lam_mjd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \mu_{x} $$
+                        {{form.mu_x_mjd}}
+                        {% if form.mu_x_mjd.errors %}
+                        {% for error in form.mu_x_mjd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \sigma_{x} $$
+                        {{form.sigma_x_mjd}}
+                        {% if form.sigma_x_mjd.errors %}
+                        {% for error in form.sigma_x_mjd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
                 <br/>
 
                 <div class="row">
@@ -484,6 +527,7 @@
         var nig = $('#nig');
         var cgmy = $('#cgmy');
         var meixner = $('#meixner');
+        var mjd = $('#mjd')
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
@@ -493,6 +537,7 @@
                 nig.hide();
                 cgmy.hide();
                 meixner.hide();
+                mjd.hide();
             } else if (select_model.val() == '1') {
                 gaussian.hide();
                 vg.show();
@@ -500,6 +545,7 @@
                 nig.hide();
                 cgmy.hide();
                 meixner.hide();
+                mjd.hide();
             } else if (select_model.val() == '2'){
                 gaussian.hide();
                 vg.hide();
@@ -507,6 +553,7 @@
                 nig.hide();
                 cgmy.hide();
                 meixner.hide();
+                mjd.hide();
             } else if (select_model.val() == '3') {
                 gaussian.hide();
                 vg.hide();
@@ -514,6 +561,7 @@
                 nig.show();
                 cgmy.hide();
                 meixner.hide();
+                mjd.hide();
             } else if (select_model.val() == '4') {
                 gaussian.hide();
                 vg.hide();
@@ -521,16 +569,28 @@
                 nig.hide();
                 cgmy.show();
                 meixner.hide();
-            } else {
+                mjd.hide();
+            } else if (select_model.val() == '5') {
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
                 nig.hide();
                 cgmy.hide();
                 meixner.show();
+                mjd.hide();
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.hide();
+                cgmy.hide();
+                meixner.hide();
+                mjd.show();
             }
         });
     });
+
+
 
 
 
