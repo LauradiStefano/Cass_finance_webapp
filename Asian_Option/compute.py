@@ -10,20 +10,13 @@ from bokeh.plotting import ColumnDataSource
 
 from get_gbm_option import gbm_option
 from get_heston_option import heston_option
-from get_vg_option import vg_option
 from get_option_nig import nig_option
-
-# s0 = 100
-# N = 50
-# strike = 100
-# risk_free = 0.04
-# sigma = 0.3
-# time = 1
+from get_vg_option import vg_option
 
 
-def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0, alpha, beta,
-                   eta, rho, Nfft, lmax, lmin, delta, umax):
-    # Nfft = 2 ** Nfft
+def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
+                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, Nfft, lmax, lmin, delta, umax):
+    Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
     risk_free = risk_free / 100
@@ -39,18 +32,18 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                                                                           theta, kappa, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 2 : 
- 
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = heston_option(s0, strike, v0, time, risk_free, N, alpha_heston,
-                                                                              beta_heston, eta, rho, Nfft, lmax, lmin, delta,
-                                                                              umax)
-        ptrue_strike = ptrue_strike[0]
-    
-    else:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound  = nig_option(s0, strike, time, risk_free, N, alpha_nig, beta_nig, delta_nig, Nfft, lmax, lmin, delta,
-                                                                              umax) 
+    elif type_choice == 2:
+
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = heston_option(s0, strike, v0, time, risk_free, N,
+                                                                              alpha_heston, beta_heston, eta, rho, Nfft,
+                                                                              lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
+    else:
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = nig_option(s0, strike, time, risk_free, N, alpha_nig,
+                                                                           beta_nig, delta_nig, Nfft, lmax, lmin, delta,
+                                                                           umax)
+        ptrue_strike = ptrue_strike[0]
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 

@@ -5,7 +5,8 @@ import db_models
 
 
 class ComputeForm(wtf.Form):
-    model_choice = wtf.SelectField('Model', choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston')], default='0')
+    model_choice = wtf.SelectField('Model', choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG')],
+                                   default='0')
 
     sigma_gaussian = wtf.FloatField(label='Sigma', default=0.17801)
 
@@ -14,12 +15,16 @@ class ComputeForm(wtf.Form):
     kappa = wtf.FloatField(label='Kappa', default=0.736703)
 
     volatility_t0 = wtf.FloatField(label='V0', default=0.0102)
-    alpha = wtf.FloatField(label='Alpha', default=6.21)
-    beta = wtf.FloatField(label='Beta', default=0.019)
+    alpha_heston = wtf.FloatField(label='Alpha', default=6.21)
+    beta_heston = wtf.FloatField(label='Beta', default=0.019)
     eta = wtf.FloatField(label='Eta', default=0.61)
     rho = wtf.FloatField(label='Rho', default=-0.79)
 
-    grid = wtf.FloatField(label='Grid Point (2^)', default=12)
+    alpha_nig = wtf.FloatField(label='Alpha', default=6.1882)
+    beta_nig = wtf.FloatField(label='Beta', default=-3.8941)
+    delta_nig = wtf.FloatField(label='Delta', default=0.1622)
+
+    grid = wtf.FloatField(label='Grid Point (2^)', default=15)
     upper_range = wtf.FloatField(label='Upper Range', default=2)
     lower_range = wtf.FloatField(label='Lower Range', default=-2)
     dump = wtf.FloatField(label='Dump Parameter', default=1.5)

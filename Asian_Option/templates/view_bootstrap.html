@@ -43,6 +43,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -159,18 +160,18 @@
                     </div>
                     <div class="col-xs-2">
                         $$ \alpha $$
-                        {{form.alpha}}
-                        {% if form.alpha.errors %}
-                        {% for error in form.alpha.errors %}
+                        {{form.alpha_heston}}
+                        {% if form.alpha_heston.errors %}
+                        {% for error in form.alpha_heston.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
                         $$ \beta $$
-                        {{form.beta}}
-                        {% if form.beta.errors %}
-                        {% for error in form.beta.errors %}
+                        {{form.beta_heston}}
+                        {% if form.beta_heston.errors %}
+                        {% for error in form.beta_heston.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -195,7 +196,37 @@
                     </div>
                 </div>
                 <br/>
+                <div id="nig" class="row" {% if form.model_choice.data !='3' %} style="display:none" {%endif%}>
 
+                    <div class="col-xs-2">
+                        $$ \alpha $$
+                        {{form.alpha_nig}}
+                        {% if form.alpha_nig.errors %}
+                        {% for error in form.alpha_nig.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \beta $$
+                        {{form.beta_nig}}
+                        {% if form.beta_nig.errors %}
+                        {% for error in form.beta_nig.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \delta $$
+                        {{form.delta_nig}}
+                        {% if form.delta_nig.errors %}
+                        {% for error in form.delta_nig.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <br/>
 
                 <div class="row">
 
@@ -336,8 +367,8 @@
             <div class="col-6 col-xs-6">
                 <table>
                     <thead>
-                    <th>--</th>
-                    <th>--</th>
+                    <th>Lower Bound</th>
+                    <th>Value</th>
                     </thead>
                     <tbody>
                     <tr>
@@ -378,23 +409,33 @@
         var gaussian = $('#gaussian');
         var vg = $('#vg');
         var heston = $('#heston');
+        var nig = $('#nig');
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
                 gaussian.show();
                 vg.hide();
                 heston.hide();
+                nig.hide();
             } else if (select_model.val() == '1') {
                 gaussian.hide();
                 vg.show();
                 heston.hide();
-            } else {
+                nig.hide();
+            } else if (select_model.val() == '2'){
                 gaussian.hide();
                 vg.hide();
                 heston.show();
+                nig.hide();
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.show();
             }
         });
     });
+
 
 
 

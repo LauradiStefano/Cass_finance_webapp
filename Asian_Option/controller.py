@@ -39,8 +39,9 @@ def index():
             optimal_lower_bound, optimal_strike, lower_bound_strike, lam, lower_bound = \
                 compute_values(form.model_choice.data, form.price.data, form.strike.data, form.time.data,
                                form.risk_free.data, form.step.data, form.sigma_gaussian.data, form.sigma_vg.data,
-                               form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha.data,
-                               form.beta.data, form.eta.data, form.rho.data, form.grid.data, form.upper_range.data,
+                               form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha_heston.data,
+                               form.beta_heston.data, form.eta.data, form.rho.data, form.alpha_nig.data,
+                               form.beta_nig.data, form.delta_nig.data, form.grid.data, form.upper_range.data,
                                form.lower_range.data, form.dump.data, form.tolerance.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
@@ -78,7 +79,7 @@ def index():
                 plot_lower_bound = \
                     create_plot_lower_bound(lam, lower_bound, strike, optimal_strike)
 
-    # optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
+    optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
     optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
     lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
 
