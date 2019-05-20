@@ -8,68 +8,64 @@ import bokeh.plotting as bp
 from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 
+from get_MJD_option import mjd_option
 from get_gbm_option import gbm_option
 from get_heston_option import heston_option
 from get_option_CGMY import CGMY_option
 from get_option_meixner import meixner_option
-from get_MJD_option import mjd_option
 from get_option_nig import nig_option
 from get_vg_option import vg_option
 
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
                    alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, alpha_meixner,
-                   beta_meixner, delta_meixner, sigma_mjd, lam_mjd, mews, sigmas , Nfft, lmax, lmin, delta, umax):
+                   beta_meixner, delta_meixner, sigma_mjd, lam_mjd, mu_x_mjd, sigma_x_mjd, Nfft, lmax, lmin, delta,
+                   umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
     risk_free = risk_free / 100
 
-    if type_choice == 0:
+    if type_choice == 0:  # GBM
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N,
                                                                            sigma_gaussian, Nfft, lmax, lmin, delta,
                                                                            umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 1:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = vg_option(s0, strike, time, risk_free, N, sigma_vg,
-                                                                          theta, kappa, Nfft, lmax, lmin, delta, umax)
+    elif type_choice == 1:  # VG
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            vg_option(s0, strike, time, risk_free, N, sigma_vg, theta, kappa, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 2:
-
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = heston_option(s0, strike, v0, time, risk_free, N,
-                                                                              alpha_heston, beta_heston, eta, rho, Nfft,
-                                                                              lmax, lmin, delta, umax)
+    elif type_choice == 2:  # Heston
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            heston_option(s0, strike, v0, time, risk_free, N, alpha_heston, beta_heston, eta, rho, Nfft, lmax, lmin,
+                          delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 3:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = nig_option(s0, strike, time, risk_free, N, alpha_nig,
-                                                                           beta_nig, delta_nig, Nfft, lmax, lmin, delta,
-                                                                           umax)
+    elif type_choice == 3:  # NIG
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            nig_option(s0, strike, time, risk_free, N, alpha_nig, beta_nig, delta_nig, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 4:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y,
-                                                                            Nfft, lmax, lmin, delta,
-                                                                            umax)
+    elif type_choice == 4:  # CGMY
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 5:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = meixner_option(s0, strike, time, risk_free, N,
-                                                                               alpha_meixner, beta_meixner,
-                                                                               delta_meixner, Nfft, lmax, lmin, delta,
-                                                                               umax)
+    elif type_choice == 5:  # Meixner
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            meixner_option(s0, strike, time, risk_free, N, alpha_meixner, beta_meixner, delta_meixner, Nfft, lmax, lmin,
+                           delta, umax)
 
         ptrue_strike = ptrue_strike[0]
-    
+
     else:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mews, sigmas, Nfft, lmax, lmin, delta,
-                                                                               umax)
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mu_x_mjd, sigma_x_mjd, Nfft, lmax, lmin,
+                       delta, umax)
 
         ptrue_strike = ptrue_strike[0]
-
-
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 

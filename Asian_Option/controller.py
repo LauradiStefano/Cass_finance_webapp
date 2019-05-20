@@ -43,6 +43,7 @@ def index():
                                form.beta_heston.data, form.eta.data, form.rho.data, form.alpha_nig.data,
                                form.beta_nig.data, form.delta_nig.data, form.c.data, form.g.data, form.m.data,
                                form.y.data, form.alpha_meixner.data, form.beta_meixner.data, form.delta_meixner.data,
+                               form.sigma_mjd.data, form.lam_mjd.data, form.mu_x_mjd.data, form.sigma_x_mjd.data,
                                form.grid.data, form.upper_range.data, form.lower_range.data, form.dump.data,
                                form.tolerance.data)
 
