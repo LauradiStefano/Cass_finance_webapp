@@ -88,20 +88,20 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def heston_option(S0, K, v0, T, r, n, a, b, eta, rho):
+def heston_option(S0, K, v0, T, r, n, a, b, eta, rho, Nfft, lmax, lmin, delta, umax):
 
     dt = T / n
 
-    Nfft = 2 ** 14
-
-    lmax = 2
-    lmin = -lmax
+    # Nfft = 2 ** 14
+    #
+    # lmax = 2
+    # lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
 
-    delta = 1.5
-    umax = 50
+    # delta = 1.5
+    # umax = 50
     flag = 0
 
     while flag < 1:

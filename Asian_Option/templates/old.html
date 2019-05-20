@@ -23,6 +23,12 @@
 
 
 
+
+
+
+
+
+
     </script>
 
     <script type="text/x-mathjax-config">
@@ -32,6 +38,12 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
+
+
+
+
+
 
 
 
@@ -59,7 +71,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>Cos Method</title>
+    <title>Asian Option</title>
 </head>
 
 <body class="w3-myfont">
@@ -79,32 +91,45 @@
                         <div class="output">
                             <div class="col-xs-6">
 
-                                {{result['form'].mu.label}}
-                                {{result['form'].mu.data}} <br>
+                                <!--TODO: select-->
+
+                                {%if result ['model_choice'] == '0'%}
+                                {{result['form'].sigma_gaussian.label}}
+                                {{result['form'].sigma_gaussian.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '1'%}
+                                {{result['form'].sigma_vg.label}}
+                                {{result['form'].sigma_vg.data}} <br>
+                                {{result['form'].theta.label}}
+                                {{result['form'].theta.data}} <br>
+                                {{result['form'].kappa.label}}
+                                {{result['form'].kappa.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '2'%}
                                 {{result['form'].volatility_t0.label}}
                                 {{result['form'].volatility_t0.data}} <br>
-                                {{result['form'].volatility_hat.label}}
-                                {{result['form'].volatility_hat.data}} <br>
-                                {{result['form'].lam.label}}
-                                {{result['form'].lam.data}} <br>
-                                {{result['form'].chi.label}}
-                                {{result['form'].chi.data}} <br>
+                                {{result['form'].alpha.label}}
+                                {{result['form'].alpha.data}} <br>
+                                {{result['form'].beta.label}}
+                                {{result['form'].beta.data}} <br>
+                                {{result['form'].eta.label}}
+                                {{result['form'].eta.data}} <br>
                                 {{result['form'].rho.label}}
                                 {{result['form'].rho.data}} <br>
-
+                                {%endif%}
 
                                 {{result['form'].price.label}}
-                                {{result['form'].price.data}}
+                                {{result['form'].price.data}} <br>
                                 {{result['form'].risk_free.label}}
-                                {{result['form'].risk_free.data}}
-                                {{result['form'].dividend_yield.label}}
-                                {{result['form'].dividend_yield.data}}
-                                {{result['form'].strike_min.label}}
-                                {{result['form'].strike_min.data}}
-                                {{result['form'].strike_max.label}}
-                                {{result['form'].strike_max.data}}
+                                {{result['form'].risk_free.data}} <br>
                                 {{result['form'].time.label}}
-                                {{result['form'].time.data}}
+                                {{result['form'].time.data}} <br>
+                                {{result['form'].step.label}}
+                                {{result['form'].step.data}} <br>
+                                {{result['form'].strike.label}}
+                                {{result['form'].strike.data}}
 
                             </div>
                         </div>
@@ -112,41 +137,39 @@
                             <div class="col-xs-6">
                                 <br/>
                                 <h4>Results</h4>
-                                <h5> Table of moments</h5>
-                                {% if result['plot_return_underlying_distribution'] != None %}
+                                {% if result['plot_lower_bound'] != None %}
+
+                                <div id="plot_lower_bound" class="col-xs-6">
+                                    {{ result['plot_lower_bound'][0]|safe }}
+                                    {{ result['plot_lower_bound'][1]|safe }}
+                                </div>
+
                                 <table>
                                     <thead>
-                                    <td> Distribution</td>
-                                    <td> Mean</td>
-                                    <td> Variance</td>
-                                    <td> Skewness</td>
-                                    <td> Kurtosis</td>
+                                    <th>--</th>
+                                    <th>--</th>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td> --</td>
-                                        <td> {{result['mean']}}</td>
-                                        <td> {{result['variance']}}</td>
-                                        <td> {{result['skewness']}}</td>
-                                        <td> {{result['kurtosis']}}</td>
+                                        <td>Optimal Strike</td>
+                                        <td>{{result['optimal_strike']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Optimal Lower Bound</td>
+                                        <td>{{result['optimal_lower_bound']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Strike</td>
+                                        <td>{{result['form'].strike.data}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lower Bound Strike</td>
+                                        <td>{{result['lower_bound_strike']}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
 
-                                <div class="col-xs-6">
-
-                                    <div id="plot_return_underlying_distribution">
-                                        {{ result['plot_return_underlying_distribution'][0]|safe }}
-                                        {{ result['plot_return_underlying_distribution'][1]|safe }}
-                                    </div>
-
-                                    <div class="plot_implied_volatility">
-                                        {{ result['plot_implied_volatility'][0]|safe }}
-                                        {{ result['plot_implied_volatility'][1]|safe }}
-                                    </div>
-
-                                    {% endif %}
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-xs-3">

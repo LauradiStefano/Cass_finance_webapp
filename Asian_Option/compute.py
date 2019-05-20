@@ -22,25 +22,28 @@ from get_vg_option import vg_option
 
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0, alpha, beta,
-                   eta, rho):
+                   eta, rho, Nfft, lmax, lmin, delta, umax):
+    # Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
     risk_free = risk_free / 100
 
     if type_choice == 0:
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N,
-                                                                           sigma_gaussian)
+                                                                           sigma_gaussian, Nfft, lmax, lmin, delta,
+                                                                           umax)
         ptrue_strike = ptrue_strike[0]
 
     elif type_choice == 1:
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = vg_option(s0, strike, time, risk_free, N, sigma_vg,
-                                                                          theta, kappa)
+                                                                          theta, kappa, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
     else:
 
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = heston_option(s0, strike, v0, time, risk_free, N, alpha,
-                                                                              beta, eta, rho)
+                                                                              beta, eta, rho, Nfft, lmax, lmin, delta,
+                                                                              umax)
         ptrue_strike = ptrue_strike[0]
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
@@ -64,8 +67,8 @@ def create_plot_lower_bound(lam, lower_bound, strike, strike_exp_lcr):
     fig.line(x='lam', y='lower_bound', source=data, legend="Lower Bound Function", color="#0095B6", alpha=0.9,
              line_width=4, name='lower bound')
 
-    fig.circle(x=strike_exp_lcr, y=0, source=data, legend='Optimal Strike', color="#D21F1B", size=6)
-    fig.circle(x=strike, y=0, source=data, legend='Strike', color="#050402", size=5)
+    fig.square(x=strike_exp_lcr, y=0, source=data, legend='Optimal Strike', color="#D21F1B", size=9)
+    fig.square(x=strike, y=0, source=data, legend='Strike', color="#050402", size=7)
 
     fig.legend.location = "top_right"
     fig.toolbar.active_drag = None

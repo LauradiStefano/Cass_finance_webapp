@@ -39,7 +39,20 @@ class User(db.Model):
 class Compute(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    sigma = db.Column(db.Float())
+    model_choice = db.Column(db.String())
+
+    sigma_gaussian = db.Column(db.Float())
+
+    sigma_vg = db.Column(db.Float())
+    theta = db.Column(db.Float())
+    kappa = db.Column(db.Float())
+
+    volatility_t0 = db.Column(db.Float())
+    alpha = db.Column(db.Float())
+    beta = db.Column(db.Float())
+    eta = db.Column(db.Float())
+    rho = db.Column(db.Float())
+
     price = db.Column(db.Float())
     risk_free = db.Column(db.Float())
     time = db.Column(db.Float())

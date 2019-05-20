@@ -1,6 +1,7 @@
 import json
 import os
 
+import numpy as np
 from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
@@ -39,7 +40,8 @@ def index():
                 compute_values(form.model_choice.data, form.price.data, form.strike.data, form.time.data,
                                form.risk_free.data, form.step.data, form.sigma_gaussian.data, form.sigma_vg.data,
                                form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha.data,
-                               form.beta.data, form.eta.data, form.rho.data)
+                               form.beta.data, form.eta.data, form.rho.data, form.grid.data, form.upper_range.data,
+                               form.lower_range.data, form.dump.data, form.tolerance.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
 
@@ -50,8 +52,8 @@ def index():
             # json.dumps return a array string
             # json.loads convert from string to array
 
-            object.lam = json.dumps(lam)
-            object.lower_bound = json.dumps(lower_bound)
+            object.lam = json.dumps(lam.tolist())
+            object.lower_bound = json.dumps(lower_bound.tolist())
             object.strike = form.strike.data
             object.optimal_strike = optimal_strike
             object.optimal_lower_bound = optimal_lower_bound
@@ -66,8 +68,8 @@ def index():
                 instance = user.Compute.order_by(desc('id')).first()
                 form = populate_form_from_instance(instance)
 
-                lam = json.loads(instance.lam)
-                lower_bound = json.loads(instance.lower_bound)
+                lam = np.array(json.loads(instance.lam))
+                lower_bound = np.array(json.loads(instance.lower_bound))
                 strike = instance.strike
                 optimal_strike = instance.optimal_strike
                 optimal_lower_bound = instance.optimal_lower_bound
@@ -76,7 +78,7 @@ def index():
                 plot_lower_bound = \
                     create_plot_lower_bound(lam, lower_bound, strike, optimal_strike)
 
-    optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
+    # optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
     optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
     lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
 
@@ -141,8 +143,8 @@ def old():
             # page old.html, store the date and the plot (previous simulation)
 
             id = instance.id
-            lam = json.loads(instance.lam)
-            lower_bound = json.loads(instance.lower_bound)
+            lam = np.array(json.loads(instance.lam))
+            lower_bound = np.array(json.loads(instance.lower_bound))
             strike = instance.strike
             optimal_strike = instance.optimal_strike
             optimal_lower_bound = instance.optimal_lower_bound

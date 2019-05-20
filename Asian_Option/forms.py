@@ -4,29 +4,26 @@ import wtforms.fields.html5 as html5
 import db_models
 
 
-# from wtforms.widgets import ListWidget, CheckboxInput
-# from wtforms import SelectMultipleField
-#
-
-# class MultiCheckboxField(SelectMultipleField):
-#     widget = ListWidget(prefix_label=False)
-#     option_widget = CheckboxInput()
-
-
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model', choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston')], default='0')
 
     sigma_gaussian = wtf.FloatField(label='Sigma', default=0.17801)
 
-    sigma_vg = wtf.FloatField(label='Sigma', default=0.18002)
-    theta = wtf.FloatField(label='Theta', default=-0.13)
-    kappa = wtf.FloatField(label='Kappa', default=0.73670)
+    sigma_vg = wtf.FloatField(label='Sigma', default=0.180022)
+    theta = wtf.FloatField(label='Theta', default=-0.136105)
+    kappa = wtf.FloatField(label='Kappa', default=0.736703)
 
     volatility_t0 = wtf.FloatField(label='V0', default=0.0102)
     alpha = wtf.FloatField(label='Alpha', default=6.21)
     beta = wtf.FloatField(label='Beta', default=0.019)
     eta = wtf.FloatField(label='Eta', default=0.61)
-    rho = wtf.FloatField(label='Rho', default=-0.7)
+    rho = wtf.FloatField(label='Rho', default=-0.79)
+
+    grid = wtf.FloatField(label='Grid Point (2^)', default=12)
+    upper_range = wtf.FloatField(label='Upper Range', default=2)
+    lower_range = wtf.FloatField(label='Lower Range', default=-2)
+    dump = wtf.FloatField(label='Dump Parameter', default=1.5)
+    tolerance = wtf.FloatField(label='Tolerance', default=50)
 
     price = wtf.FloatField(label='Spot Price', default=100, validators=[wtf.validators.InputRequired()])
     risk_free = wtf.FloatField(label='Risk Free (%)', default=3.67, validators=[wtf.validators.InputRequired()])

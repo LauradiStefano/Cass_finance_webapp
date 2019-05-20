@@ -40,51 +40,29 @@
 
 
 
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
+    <!--<script type="text/x-mathjax-config">-->
+    <!--MathJax.Hub.Config({-->
+    <!--TeX: {-->
+    <!--equationNumbers: {  autoNumber: "AMS"  },-->
+    <!--extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]-->
+    <!--}-->
+    <!--});-->
 
 
+    <!--</script>-->
+    <!--<script type="text/javascript"-->
+    <!--src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
+    <!--</script>-->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
+            async></script>
 
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -122,12 +100,12 @@
                         {{form.model_choice}}
                     </div>
                 </div>
-                <h5>Parameters</h5>
+
                 <div id="gaussian" class="row">
 
-                    <div class="col-xs-2" {% if form.model_choice.data != '0' and form.model_choice != None %}
+                    <div class="col-xs-2" {% if form.model_choice.data !='0' %}
                          style="display:none" {%endif%}>
-                        {{form.sigma_gaussian.label}}
+                        $$ \sigma $$
                         {{form.sigma_gaussian}}
                         {% if form.sigma_gaussian.errors %}
                         {% for error in form.sigma_gaussian.errors %}
@@ -137,10 +115,10 @@
                     </div>
                 </div>
 
-                <div id="vg" class="row" {% if form.model_choice.data != '1' %} style="display:none" {%endif%}>
+                <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        {{form.sigma_vg.label}}
+                        $$ \sigma $$
                         {{form.sigma_vg}}
                         {% if form.sigma_vg.errors %}
                         {% for error in form.sigma_vg.errors %}
@@ -149,7 +127,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.theta.label}}
+                        $$ \theta $$
                         {{form.theta}}
                         {% if form.theta.errors %}
                         {% for error in form.theta.errors %}
@@ -158,7 +136,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.kappa.label}}
+                        $$ \kappa $$
                         {{form.kappa}}
                         {% if form.kappa.errors %}
                         {% for error in form.kappa.errors %}
@@ -168,7 +146,7 @@
                     </div>
                 </div>
 
-                <div id="heston" class="row"  {% if form.model_choice.data != '4' %} style="display:none" {%endif%}>
+                <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
                         {{form.volatility_t0.label}}
@@ -180,7 +158,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.alpha.label}}
+                        $$ \alpha $$
                         {{form.alpha}}
                         {% if form.alpha.errors %}
                         {% for error in form.alpha.errors %}
@@ -189,7 +167,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.beta.label}}
+                        $$ \beta $$
                         {{form.beta}}
                         {% if form.beta.errors %}
                         {% for error in form.beta.errors %}
@@ -198,7 +176,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.eta.label}}
+                        $$ \eta $$
                         {{form.eta}}
                         {% if form.eta.errors %}
                         {% for error in form.eta.errors %}
@@ -207,7 +185,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.rho.label}}
+                        $$ \rho $$
                         {{form.rho}}
                         {% if form.rho.errors %}
                         {% for error in form.rho.errors %}
@@ -277,6 +255,63 @@
                         {% endif %}
                     </div>
                 </div>
+
+            </div>
+            <br/>
+
+            <div class="row">
+                <label> FFT Implementation Parameters </label>
+
+                <div class="row">
+                    <div class="col-xs-2">
+                        {{form.grid.label}}
+                        {{form.grid}}
+                        {% if form.grid.errors %}
+                        {% for error in form.grid.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.upper_range.label}}
+                        {{form.upper_range}}
+                        {% if form.upper_range.errors %}
+                        {% for error in form.upper_range.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.lower_range.label}}
+                        {{form.lower_range}}
+                        {% if form.lower_range.errors %}
+                        {% for error in form.lower_range.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.dump.label}}
+                        {{form.dump}}
+                        {% if form.dump.errors %}
+                        {% for error in form.dump.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        {{form.tolerance.label}}
+                        {{form.tolerance}}
+                        {% if form.tolerance.errors %}
+                        {% for error in form.tolerance.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
                 <br/>
 
                 {{form.button_compute}}
@@ -285,10 +320,11 @@
 
         </div>
 
+
     </form>
 
     <div class="row">
-        <h4>Results: </h4>
+        <label>Results: </label>
         {% if plot_lower_bound != None %}
 
         <div class="row">
@@ -359,6 +395,9 @@
             }
         });
     });
+
+
+
 
 </script>
 </body>
