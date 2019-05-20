@@ -6,8 +6,8 @@ import db_models
 
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model',
-                                   choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY')],
-                                   default='0')
+                                   choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
+                                            ('5', 'Meixner')], default='0')
 
     sigma_gaussian = wtf.FloatField(label='Sigma', default=0.17801)
 
@@ -29,6 +29,10 @@ class ComputeForm(wtf.Form):
     g = wtf.FloatField(label='G', default=0.0765)
     m = wtf.FloatField(label='M', default=7.5515)
     y = wtf.FloatField(label='Y', default=1.2945)
+
+    alpha_meixner = wtf.FloatField(label='Alpha', default=0.3977)
+    beta_meixner = wtf.FloatField(label='Beta', default=-1.494)
+    delta_meixner = wtf.FloatField(label='Delta', default=0.3462)
 
     grid = wtf.FloatField(label='Grid Point (2^)', default=15)
     upper_range = wtf.FloatField(label='Upper Range', default=2)

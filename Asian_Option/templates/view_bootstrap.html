@@ -267,6 +267,37 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div id="meixner" class="row" {% if form.model_choice.data !='5' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        $$ \alpha $$
+                        {{form.alpha_meixner}}
+                        {% if form.alpha_meixner.errors %}
+                        {% for error in form.alpha_meixner.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \beta $$
+                        {{form.beta_meixner}}
+                        {% if form.beta_meixner.errors %}
+                        {% for error in form.beta_meixner.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ \delta $$
+                        {{form.delta_meixner}}
+                        {% if form.delta_meixner.errors %}
+                        {% for error in form.delta_meixner.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
                 <br/>
 
                 <div class="row">
@@ -451,7 +482,8 @@
         var vg = $('#vg');
         var heston = $('#heston');
         var nig = $('#nig');
-        var cgmy = $('#cgmy')
+        var cgmy = $('#cgmy');
+        var meixner = $('#meixner');
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
@@ -460,30 +492,42 @@
                 heston.hide();
                 nig.hide();
                 cgmy.hide();
+                meixner.hide();
             } else if (select_model.val() == '1') {
                 gaussian.hide();
                 vg.show();
                 heston.hide();
                 nig.hide();
                 cgmy.hide();
+                meixner.hide();
             } else if (select_model.val() == '2'){
                 gaussian.hide();
                 vg.hide();
                 heston.show();
                 nig.hide();
                 cgmy.hide();
+                meixner.hide();
             } else if (select_model.val() == '3') {
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
                 nig.show();
                 cgmy.hide();
-            } else {
+                meixner.hide();
+            } else if (select_model.val() == '4') {
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
                 nig.hide();
                 cgmy.show();
+                meixner.hide();
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.hide();
+                cgmy.hide();
+                meixner.show();
             }
         });
     });

@@ -42,8 +42,9 @@ def index():
                                form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha_heston.data,
                                form.beta_heston.data, form.eta.data, form.rho.data, form.alpha_nig.data,
                                form.beta_nig.data, form.delta_nig.data, form.c.data, form.g.data, form.m.data,
-                               form.y.data, form.grid.data, form.upper_range.data, form.lower_range.data,
-                               form.dump.data, form.tolerance.data)
+                               form.y.data, form.alpha_meixner.data, form.beta_meixner.data, form.delta_meixner.data,
+                               form.grid.data, form.upper_range.data, form.lower_range.data, form.dump.data,
+                               form.tolerance.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
 

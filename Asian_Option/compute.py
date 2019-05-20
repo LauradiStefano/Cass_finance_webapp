@@ -16,10 +16,9 @@ from get_option_nig import nig_option
 from get_vg_option import vg_option
 
 
-
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
-                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, alpha_meixner, beta_meixner, delta_meixner, Nfft, lmax, lmin,
-                   delta, umax):
+                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, alpha_meixner,
+                   beta_meixner, delta_meixner, Nfft, lmax, lmin, delta, umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -49,7 +48,6 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                                                                            umax)
         ptrue_strike = ptrue_strike[0]
 
-
     elif type_choice == 4:
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y,
                                                                             Nfft, lmax, lmin, delta,
@@ -57,12 +55,12 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
         ptrue_strike = ptrue_strike[0]
 
     else:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound  = meixner_option(s0, strike, time, risk_free, N, alpha_meixner, beta_meixner, delta_meixner, Nfft, lmax, lmin, delta,
-                                                                            umax)
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = meixner_option(s0, strike, time, risk_free, N,
+                                                                               alpha_meixner, beta_meixner,
+                                                                               delta_meixner, Nfft, lmax, lmin, delta,
+                                                                               umax)
 
-        
         ptrue_strike = ptrue_strike[0]
-
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
