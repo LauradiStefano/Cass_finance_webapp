@@ -12,10 +12,10 @@ from get_gbm_option import gbm_option
 from get_heston_option import heston_option
 from get_option_nig import nig_option
 from get_vg_option import vg_option
-
+from get_option_CGMY import CGMY_option
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
-                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, Nfft, lmax, lmin, delta, umax):
+                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, Nfft, lmax, lmin, delta, umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -39,11 +39,20 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                                                                               lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
-    else:
+    elif type_choice == 3:
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = nig_option(s0, strike, time, risk_free, N, alpha_nig,
                                                                            beta_nig, delta_nig, Nfft, lmax, lmin, delta,
                                                                            umax)
         ptrue_strike = ptrue_strike[0]
+
+        
+    else :    
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y, Nfft, lmax, lmin, delta,
+                                                                           umax)
+
+        ptrue_strike = ptrue_strike[0]
+
+
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
