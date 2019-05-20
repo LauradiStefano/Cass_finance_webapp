@@ -16,7 +16,7 @@ def heston_psi0(u1, u2, dt, r, a, b, eta, rho):
     w1 = (a - 1j * u2 * rho * eta - w2 - 1j * u1 * eta ** 2) / (a - 1j * u2 * rho * eta + w2 - 1j * u1 * eta ** 2)
 
     output = 1j * u2 * (r - rho * a * b / eta) * dt + (a * b / eta ** 2) * (
-                (a - w2) * dt - 2 * np.log((w1 * np.exp(-w2 * dt) - 1) / (w1 - 1)))
+            (a - w2) * dt - 2 * np.log((w1 * np.exp(-w2 * dt) - 1) / (w1 - 1)))
 
     return output
 
@@ -27,7 +27,7 @@ def heston_psi1(u1, u2, dt, a, eta, rho):
     w1 = (a - 1j * u2 * rho * eta - w2 - 1j * u1 * eta ** 2) / (a - 1j * u2 * rho * eta + w2 - 1j * u1 * eta ** 2)
 
     output = ((a - 1j * u2 * rho * eta - w2) - w1 * np.exp(-w2 * dt) * (a - 1j * u2 * rho * eta + w2)) / (
-                (1 - w1 * np.exp(-w2 * dt)) * eta ** 2)
+            (1 - w1 * np.exp(-w2 * dt)) * eta ** 2)
 
     return output
 
@@ -59,8 +59,8 @@ def heston_ft(u, delta, N, dt, r, a, b, eta, rho, S0, v0, K):
         term = term + heston_phi(-1j, u - 1j * delta, j, N, dt, r, a, b, eta, rho, S0, v0)
 
     output = np.exp(-r * N * dt) * (
-                term - K * (N + 1) * heston_phi(0, u - 1j * delta, N, N, dt, r, a, b, eta, rho, S0, v0)) / (
-                         (N + 1) * (1j * u + delta))
+            term - K * (N + 1) * heston_phi(0, u - 1j * delta, N, N, dt, r, a, b, eta, rho, S0, v0)) / (
+                     (N + 1) * (1j * u + delta))
 
     return output
 
@@ -89,19 +89,10 @@ def fr_fourier_transform(x, a):
 
 
 def heston_option(S0, K, v0, T, r, n, a, b, eta, rho, Nfft, lmax, lmin, delta, umax):
-
     dt = T / n
-
-    # Nfft = 2 ** 14
-    #
-    # lmax = 2
-    # lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
-
-    # delta = 1.5
-    # umax = 50
     flag = 0
 
     while flag < 1:

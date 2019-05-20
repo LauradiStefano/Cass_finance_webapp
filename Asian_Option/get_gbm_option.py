@@ -68,16 +68,9 @@ def fr_fourier_transform(x, a):
 
 def gbm_option(S0, K, T, r, n, sigma, Nfft, lmax, lmin, delta, umax):
     dt = T / n
-
-    # Nfft = 2 ** 12
-    #
-    # lmax = 2
-    # lmin = -lmax
     dl = (lmax - lmin) / Nfft
     l = lmin + np.arange(0, Nfft, 1) * dl
 
-    # delta = 1.5
-    # umax = 50
     flag = 0
 
     while flag < 1:

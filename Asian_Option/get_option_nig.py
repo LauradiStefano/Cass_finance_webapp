@@ -12,7 +12,6 @@ Created on Tue May  7 00:06:31 2019
 @author: Diego
 """
 
-import datetime
 import math
 
 import numpy as np
@@ -80,19 +79,11 @@ def fr_fourier_transform(x, a):
 
 
 def nig_option(S0, K, T, r, n, a, b, d, Nfft, lmax, lmin, delta, umax):
-    startTime = datetime.datetime.now()
-
     dt = T / n
-
-    # Nfft = 2**15
-
-    # lmax = 2; lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
 
-    # delta = 1.5
-    # umax = 50
     flag = 0
 
     while flag < 1:
@@ -105,7 +96,6 @@ def nig_option(S0, K, T, r, n, a, b, d, Nfft, lmax, lmin, delta, umax):
     du = 2 * umax / Nfft
 
     u = (np.arange(0, Nfft, 1) - 0.5 * Nfft) * du
-    wght = (3 + (-1) ** np.arange(0, Nfft - 2, 1))
     insert_one = 1
     build_array = np.append(insert_one, (3 + (-1) ** np.arange(0, Nfft - 2, 1)))
     wght = (np.append(build_array, insert_one)) / 3
