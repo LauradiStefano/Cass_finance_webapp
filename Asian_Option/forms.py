@@ -5,7 +5,7 @@ import db_models
 
 
 class ComputeForm(wtf.Form):
-    model_choice = wtf.SelectField('Model',
+    model_choice = wtf.SelectField('Distribution',
                                    choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
                                             ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD')], default='0')
 
@@ -21,12 +21,12 @@ class ComputeForm(wtf.Form):
     volatility_t0 = wtf.FloatField(label='V0', default=0.0102)
     alpha_heston = wtf.FloatField(label='Alpha', default=6.21)
     beta_heston = wtf.FloatField(label='Beta', default=0.019)
-    eta_heston = wtf.FloatField(label='Eta', default=0.61)
+    gamma_heston = wtf.FloatField(label='Eta', default=0.61)
     rho_heston = wtf.FloatField(label='Rho', default=-0.79)
 
     # NIG distribution
-    alpha_nig = wtf.FloatField(label='Alpha', default=6.1882)
-    beta_nig = wtf.FloatField(label='Beta', default=-3.8941)
+    a_nig = wtf.FloatField(label='A', default=6.1882)
+    b_nig = wtf.FloatField(label='B', default=-3.8941)
     delta_nig = wtf.FloatField(label='Delta', default=0.1622)
 
     # CGMY distribution
@@ -36,8 +36,8 @@ class ComputeForm(wtf.Form):
     y = wtf.FloatField(label='Y', default=1.2945)
 
     # Meixner distribution
-    alpha_meixner = wtf.FloatField(label='Alpha', default=0.3977)
-    beta_meixner = wtf.FloatField(label='Beta', default=-1.494)
+    a_meixner = wtf.FloatField(label='A', default=0.3977)
+    b_meixner = wtf.FloatField(label='B', default=-1.494)
     delta_meixner = wtf.FloatField(label='Delta', default=0.3462)
 
     # MJD distribution

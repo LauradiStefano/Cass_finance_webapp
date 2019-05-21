@@ -51,11 +51,11 @@ class Compute(db.Model):
     volatility_t0 = db.Column(db.Float())
     alpha_heston = db.Column(db.Float())
     beta_heston = db.Column(db.Float())
-    eta_heston = db.Column(db.Float())
+    gamma_heston = db.Column(db.Float())
     rho_heston = db.Column(db.Float())
 
-    alpha_nig = db.Column(db.Float())
-    beta_nig = db.Column(db.Float())
+    a_nig = db.Column(db.Float())
+    b_nig = db.Column(db.Float())
     delta_nig = db.Column(db.Float())
 
     c = db.Column(db.Float())
@@ -63,8 +63,8 @@ class Compute(db.Model):
     m = db.Column(db.Float())
     y = db.Column(db.Float())
 
-    alpha_meixner = db.Column(db.Float())
-    beta_meixner = db.Column(db.Float())
+    a_meixner = db.Column(db.Float())
+    b_meixner = db.Column(db.Float())
     delta_meixner = db.Column(db.Float())
 
     sigma_mjd = db.Column(db.Float())

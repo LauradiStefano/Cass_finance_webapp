@@ -20,9 +20,9 @@ from get_vg_option import vg_option
 
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
-                   alpha_heston, beta_heston, eta, rho, alpha_nig, beta_nig, delta_nig, C, G, M, Y, alpha_meixner,
-                   beta_meixner, delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1,
-                   eta2, Nfft, lmax, lmin, delta, umax):
+                   alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
+                   delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft,
+                   lmax, lmin, delta, umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -41,13 +41,13 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
     elif type_choice == 2:  # Heston
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            heston_option(s0, strike, v0, time, risk_free, N, alpha_heston, beta_heston, eta, rho, Nfft, lmax, lmin,
+            heston_option(s0, strike, v0, time, risk_free, N, alpha_heston, beta_heston, gamma, rho, Nfft, lmax, lmin,
                           delta, umax)
         ptrue_strike = ptrue_strike[0]
 
     elif type_choice == 3:  # NIG
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            nig_option(s0, strike, time, risk_free, N, alpha_nig, beta_nig, delta_nig, Nfft, lmax, lmin, delta, umax)
+            nig_option(s0, strike, time, risk_free, N, a_nig, b_nig, delta_nig, Nfft, lmax, lmin, delta, umax)
         ptrue_strike = ptrue_strike[0]
 
     elif type_choice == 4:  # CGMY
@@ -57,7 +57,7 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
     elif type_choice == 5:  # Meixner
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            meixner_option(s0, strike, time, risk_free, N, alpha_meixner, beta_meixner, delta_meixner, Nfft, lmax, lmin,
+            meixner_option(s0, strike, time, risk_free, N, a_meixner, b_meixner, delta_meixner, Nfft, lmax, lmin,
                            delta, umax)
 
         ptrue_strike = ptrue_strike[0]

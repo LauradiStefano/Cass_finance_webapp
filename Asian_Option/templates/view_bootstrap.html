@@ -47,6 +47,8 @@
 
 
 
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -65,8 +67,9 @@
     <!--src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
     <!--</script>-->
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
-            async></script>
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
 
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -89,7 +92,6 @@
 
 <h2>Asian Option</h2>
 
-
 <h3> General Optimized Lower Bounds for Asian Options </h3> <br>
 <div class="container">
     <form class="navbar-form" method="post" action="">
@@ -100,7 +102,7 @@
             <div class="row">
                 <label> Input </label> <br/>
                 <div class="row">
-                    <div class="col-xs-3">
+                    <div class="col-xs-1">
                         {{form.model_choice.label}}
                         {{form.model_choice}}
                     </div>
@@ -110,7 +112,8 @@
 
                     <div class="col-xs-2" {% if form.model_choice.data !='0' and form.model_choice.data !=None%}
                          style="display:none" {%endif%}>
-                        $$ \sigma $$
+
+                        $$\sigma $$
                         {{form.sigma_gaussian}}
                         {% if form.sigma_gaussian.errors %}
                         {% for error in form.sigma_gaussian.errors %}
@@ -123,7 +126,7 @@
                 <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ \sigma $$
+                        $$\sigma $$
                         {{form.sigma_vg}}
                         {% if form.sigma_vg.errors %}
                         {% for error in form.sigma_vg.errors %}
@@ -132,7 +135,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \theta $$
+                        $$\theta $$
                         {{form.theta}}
                         {% if form.theta.errors %}
                         {% for error in form.theta.errors %}
@@ -141,7 +144,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \kappa $$
+                        $$ v $$
                         {{form.kappa}}
                         {% if form.kappa.errors %}
                         {% for error in form.kappa.errors %}
@@ -154,7 +157,7 @@
                 <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        {{form.volatility_t0.label}}
+                        $$ V_{0} $$
                         {{form.volatility_t0}}
                         {% if form.volatility_t0.errors %}
                         {% for error in form.volatility_t0.errors %}
@@ -163,7 +166,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \alpha $$
+                        $$\alpha $$
                         {{form.alpha_heston}}
                         {% if form.alpha_heston.errors %}
                         {% for error in form.alpha_heston.errors %}
@@ -172,7 +175,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \beta $$
+                        $$\beta $$
                         {{form.beta_heston}}
                         {% if form.beta_heston.errors %}
                         {% for error in form.beta_heston.errors %}
@@ -181,16 +184,16 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \eta $$
-                        {{form.eta_heston}}
-                        {% if form.eta_heston.errors %}
-                        {% for error in form.eta_heston.errors %}
+                        $$\gamma $$
+                        {{form.gamma_heston}}
+                        {% if form.gamma_heston.errors %}
+                        {% for error in form.gamma_heston.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \rho $$
+                        $$\rho $$
                         {{form.rho_heston}}
                         {% if form.rho_heston.errors %}
                         {% for error in form.rho_heston.errors %}
@@ -203,25 +206,25 @@
                 <div id="nig" class="row" {% if form.model_choice.data !='3' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ \alpha $$
-                        {{form.alpha_nig}}
-                        {% if form.alpha_nig.errors %}
-                        {% for error in form.alpha_nig.errors %}
+                        $$ a $$
+                        {{form.a_nig}}
+                        {% if form.a_nig.errors %}
+                        {% for error in form.a_nig.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \beta $$
-                        {{form.beta_nig}}
-                        {% if form.beta_nig.errors %}
-                        {% for error in form.beta_nig.errors %}
+                        $$ b $$
+                        {{form.b_nig}}
+                        {% if form.b_nig.errors %}
+                        {% for error in form.b_nig.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \delta $$
+                        $$\delta $$
                         {{form.delta_nig}}
                         {% if form.delta_nig.errors %}
                         {% for error in form.delta_nig.errors %}
@@ -234,7 +237,7 @@
                 <div id="cgmy" class="row" {% if form.model_choice.data !='4' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        {{form.c.label}}
+                        $$ C $$
                         {{form.c}}
                         {% if form.c.errors %}
                         {% for error in form.c.errors %}
@@ -243,7 +246,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.g.label}}
+                        $$ G $$
                         {{form.g}}
                         {% if form.g.errors %}
                         {% for error in form.g.errors %}
@@ -252,7 +255,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.m.label}}
+                        $$ M $$
                         {{form.m}}
                         {% if form.m.errors %}
                         {% for error in form.m.errors %}
@@ -261,7 +264,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        {{form.y.label}}
+                        $$ Y $$
                         {{form.y}}
                         {% if form.y.errors %}
                         {% for error in form.y.errors %}
@@ -274,25 +277,25 @@
                 <div id="meixner" class="row" {% if form.model_choice.data !='5' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ \alpha $$
-                        {{form.alpha_meixner}}
-                        {% if form.alpha_meixner.errors %}
-                        {% for error in form.alpha_meixner.errors %}
+                        $$ a $$
+                        {{form.a_meixner}}
+                        {% if form.a_meixner.errors %}
+                        {% for error in form.a_meixner.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \beta $$
-                        {{form.beta_meixner}}
-                        {% if form.beta_meixner.errors %}
-                        {% for error in form.beta_meixner.errors %}
+                        $$ b $$
+                        {{form.b_meixner}}
+                        {% if form.b_meixner.errors %}
+                        {% for error in form.b_meixner.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \delta $$
+                        $$\delta $$
                         {{form.delta_meixner}}
                         {% if form.delta_meixner.errors %}
                         {% for error in form.delta_meixner.errors %}
@@ -305,7 +308,7 @@
                 <div id="mjd" class="row" {% if form.model_choice.data !='6' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ \sigma $$
+                        $$\sigma $$
                         {{form.sigma_mjd}}
                         {% if form.sigma_mjd.errors %}
                         {% for error in form.sigma_mjd.errors %}
@@ -314,7 +317,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \lambda $$
+                        $$ l $$
                         {{form.lam_mjd}}
                         {% if form.lam_mjd.errors %}
                         {% for error in form.lam_mjd.errors %}
@@ -323,7 +326,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \mu_{x} $$
+                        $$\mu_{x} $$
                         {{form.mu_x_mjd}}
                         {% if form.mu_x_mjd.errors %}
                         {% for error in form.mu_x_mjd.errors %}
@@ -332,7 +335,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \sigma_{x} $$
+                        $$\sigma_{x} $$
                         {{form.sigma_x_mjd}}
                         {% if form.sigma_x_mjd.errors %}
                         {% for error in form.sigma_x_mjd.errors %}
@@ -345,7 +348,7 @@
                 <div id="dejd" class="row" {% if form.model_choice.data !='7' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ \sigma $$
+                        $$\sigma $$
                         {{form.sigma_dejd}}
                         {% if form.sigma_dejd.errors %}
                         {% for error in form.sigma_dejd.errors %}
@@ -354,7 +357,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \lambda $$
+                        $$\lambda $$
                         {{form.lam_dejd}}
                         {% if form.lam_dejd.errors %}
                         {% for error in form.lam_dejd.errors %}
@@ -363,7 +366,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \rho $$
+                        $$\rho $$
                         {{form.rho_dejd}}
                         {% if form.rho_dejd.errors %}
                         {% for error in form.rho_dejd.errors %}
@@ -372,7 +375,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \eta_{1} $$
+                        $$\eta_{1} $$
                         {{form.eta1_dejd}}
                         {% if form.eta1_dejd.errors %}
                         {% for error in form.eta1_dejd.errors %}
@@ -381,7 +384,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ \eta_{2} $$
+                        $$\eta_{2} $$
                         {{form.eta2_dejd}}
                         {% if form.eta2_dejd.errors %}
                         {% for error in form.eta2_dejd.errors %}
@@ -656,6 +659,8 @@
             }
         });
     });
+
+
 
 
 
