@@ -52,10 +52,12 @@ class Compute(db.Model):
     strike_max = db.Column(db.Float())
     strike = db.Column(db.String())
     implied_volatility = db.Column(db.String())
+    norm_pdf = db.Column(db.String())
     type_choice = db.Column(db.String())
 
     mu = db.Column(db.Float())
-    sigma = db.Column(db.Float())
+    sigma_normal = db.Column(db.Float())
+    sigma_vg = db.Column(db.Float())
     kappa = db.Column(db.Float())
     theta = db.Column(db.Float())
     c = db.Column(db.Float())
@@ -69,6 +71,8 @@ class Compute(db.Model):
     kurtosis = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',

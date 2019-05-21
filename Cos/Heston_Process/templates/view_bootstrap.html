@@ -33,43 +33,14 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
     <!--bootstrap is library for developing websites-->
@@ -255,6 +226,10 @@
         <h4>Results: </h4>
         {% if plot_return_underlying_distribution != None %}
 
+        <div id="button_view_details" class="popup_table_open">
+            {{form.button_view_details}}
+        </div>
+
         <div class="row">
 
             <div id="plot_return_underlying_distribution" class="col-6 col-xs-6">
@@ -269,13 +244,36 @@
         {%endif%}
     </div>
 
+    <div id="popup_table" style="display:none">
+        <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+            {{form.button_export_table}}
+        </div>
+        <h4> Table of volatility and prices</h4>
+        <table id="tableExport">
+            <thead>
+            <th> Strike</th>
+            <th> Prices</th>
+            <th> Implied Volatility</th>
+            </thead>
+            <tbody>
+            {%for i in range(number_of_strike)%}
+            <tr>
+                <td>{{strike[i]}}</td>
+                <td>{{option_prices[i]}}</td>
+                <td>{{implied_volatility[i]}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!--<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>-->
-<!--<script type="text/javascript">$('#popup_table').popup(); </script>-->
-<!--<script type="text/javascript" src="./static/tableExportExcel.js"></script>-->
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup(); </script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
 
 </body>
 </html>

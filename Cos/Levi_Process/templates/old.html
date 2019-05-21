@@ -5,47 +5,12 @@
     <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
     </script>
     <script type="text/javascript">
-        Bokeh.set_log_level("info");
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Bokeh.set_log_level("info")
 
     </script>
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
     <!--bootstrap is library for developing websites-->
@@ -73,52 +38,49 @@
                         <div class="output">
                             <div class="col-xs-6">
 
-                                {{result['form'].mu.label}}
+                                \(\mu\):
                                 {{result['form'].mu.data}}
 
                                 <div id="normal">
-                                    {%if result['form'].type_choice.data == 1 %}
 
-                                    {{result['form'].sigma.label}}
-                                    {{result['form'].sigma.data}}
 
-                                    {%endif%}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_normal.data}}
+
+
                                 </div>
 
                                 <div id="vg">
 
-                                    {% if result['form'].type_choice.data == 2 or result['form'].type_choice.data == 3
-                                    %}
 
-                                    {{result['form'].sigma.label}}
-                                    {{result['form'].sigma.data}}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_vg.data}} <br/>
 
-                                    {{result['form'].kappa.label}}
-                                    {{result['form'].kappa.data}}
+                                    \(\kappa\):
+                                    {{result['form'].kappa.data}} <br/>
 
-                                    {{result['form'].theta.label}}
+                                    \(\theta\):
                                     {{result['form'].theta.data}}
 
-                                    {%endif%}
+
                                 </div>
 
                                 <div id="cgmy">
 
-                                    {% if result['form'].type_choice.data == 4 %}
 
-                                    {{result['form'].c.label}}
-                                    {{result['form'].c.data}}
+                                    \(C\):
+                                    {{result['form'].c.data}} <br/>
 
-                                    {{result['form'].g.label}}
-                                    {{result['form'].g.data}}
+                                    \(G\):
+                                    {{result['form'].g.data}} <br/>
 
-                                    {{result['form'].m.label}}
-                                    {{result['form'].m.data}}
+                                    \(M\):
+                                    {{result['form'].m.data}} <br/>
 
-                                    {{result['form'].y.label}}
+                                    \(Y\):
                                     {{result['form'].y.data}}
 
-                                    {%endif%}
+
                                 </div>
 
                                 {{result['form'].price.label}}
@@ -140,26 +102,30 @@
                             <div class="col-xs-6">
                                 <br/>
                                 <h4>Results</h4>
-                                <h5> Table of moments</h5>
                                 {% if result['plot_return_underlying_distribution'] != None %}
-                                <table>
-                                    <thead>
-                                    <td> Distribution</td>
-                                    <td> Mean</td>
-                                    <td> Variance</td>
-                                    <td> Skewness</td>
-                                    <td> Kurtosis</td>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td> --</td>
-                                        <td> {{result['mean']}}</td>
-                                        <td> {{result['variance']}}</td>
-                                        <td> {{result['skewness']}}</td>
-                                        <td> {{result['kurtosis']}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                <div class="row">
+                                    <table>
+                                        <h5>Table of moments</h5>
+                                        <thead>
+                                        <td> Distribution</td>
+                                        <td> Mean</td>
+                                        <td> Variance</td>
+                                        <td> Skewness</td>
+                                        <td> Kurtosis</td>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                            </td>
+                                            <td> {{result['mean']}}</td>
+                                            <td> {{result['variance']}}</td>
+                                            <td> {{result['skewness']}}</td>
+                                            <td> {{result['kurtosis']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
                                 <div class="col-xs-6">
 

@@ -78,7 +78,8 @@ def index():
             object.underlying_prices = json.dumps(underlying_prices.tolist())
             object.price = form.price.data
             object.strike = json.dumps(strike.tolist())
-            object.implied_volatility = json.dumps(implied_volatility.tolist())
+            object.implied_volatility = json.dumps(implied_volatility)
+            object.norm_pdf = json.dumps(norm_pdf.tolist())
             object.mean = mean
             object.variance = variance
             object.skewness = skewness
@@ -97,14 +98,15 @@ def index():
                 underlying_prices = np.array(json.loads(instance.underlying_prices))
                 price = instance.price
                 strike = np.array(json.loads(instance.strike))
-                implied_volatility = np.array(json.loads(instance.implied_volatility))
+                implied_volatility = json.loads(instance.implied_volatility)
+                norm_pdf = np.array(json.loads(instance.norm_pdf))
                 mean = instance.mean
                 variance = instance.variance
                 skewness = instance.skewness
                 kurtosis = instance.kurtosis
 
                 plot_return_underlying_distribution = \
-                    create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
+                    create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
@@ -182,14 +184,15 @@ def old():
             underlying_prices = np.array(json.loads(instance.underlying_prices))
             price = instance.price
             strike = np.array(json.loads(instance.strike))
-            implied_volatility = np.array(json.loads(instance.implied_volatility))
+            implied_volatility = json.loads(instance.implied_volatility)
+            norm_pdf = np.array(json.loads(instance.norm_pdf))
             mean = instance.mean
             variance = instance.variance
             skewness = instance.skewness
             kurtosis = instance.kurtosis
 
             plot_return_underlying_distribution = \
-                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset)
+                create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf)
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 

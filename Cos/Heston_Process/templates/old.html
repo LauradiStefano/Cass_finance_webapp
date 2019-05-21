@@ -5,53 +5,11 @@
     <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
     </script>
     <script type="text/javascript">
-        Bokeh.set_log_level("info");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Bokeh.set_log_level("info")
     </script>
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+   <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
     <!--bootstrap is library for developing websites-->
@@ -79,17 +37,17 @@
                         <div class="output">
                             <div class="col-xs-6">
 
-                                {{result['form'].mu.label}}
+                                \(\mu\):
                                 {{result['form'].mu.data}} <br>
-                                {{result['form'].volatility_t0.label}}
+                                \(v_{0}\):
                                 {{result['form'].volatility_t0.data}} <br>
-                                {{result['form'].volatility_hat.label}}
+                                \(\hat{v}\):
                                 {{result['form'].volatility_hat.data}} <br>
-                                {{result['form'].lam.label}}
+                                \(\lambda\):
                                 {{result['form'].lam.data}} <br>
-                                {{result['form'].chi.label}}
+                                \(\chi\):
                                 {{result['form'].chi.data}} <br>
-                                {{result['form'].rho.label}}
+                                \(\rho\):
                                 {{result['form'].rho.data}} <br>
 
 
@@ -112,26 +70,8 @@
                             <div class="col-xs-6">
                                 <br/>
                                 <h4>Results</h4>
-                                <h5> Table of moments</h5>
+
                                 {% if result['plot_return_underlying_distribution'] != None %}
-                                <table>
-                                    <thead>
-                                    <td> Distribution</td>
-                                    <td> Mean</td>
-                                    <td> Variance</td>
-                                    <td> Skewness</td>
-                                    <td> Kurtosis</td>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td> --</td>
-                                        <td> {{result['mean']}}</td>
-                                        <td> {{result['variance']}}</td>
-                                        <td> {{result['skewness']}}</td>
-                                        <td> {{result['kurtosis']}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
 
                                 <div class="col-xs-6">
 
@@ -147,6 +87,7 @@
 
                                     {% endif %}
                                 </div>
+
                             </div>
                         </div>
                         <div class="col-xs-3">

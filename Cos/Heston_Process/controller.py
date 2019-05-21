@@ -1,15 +1,17 @@
+import json
 import os
-from compute import heston_pdf_and_volatility, create_plot_return_underlying_distribution,\
-    create_implied_volatility_plot
-from flask import render_template, request, redirect, url_for
-from forms import ComputeForm
+
 import numpy as np
-from db_models import db, User, Compute
+from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
-from app import app
 from sqlalchemy import desc
-import json
+
+from app import app
+from compute import heston_pdf_and_volatility, create_plot_return_underlying_distribution, \
+    create_implied_volatility_plot
+from db_models import db, User, Compute
+from forms import ComputeForm
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -29,17 +31,21 @@ def index():
     heston_pdf = None
     strike = None
     implied_volatility = None
+    option_prices = None
+    number_of_strike = 0
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
 
     if request.method == "POST":
         if form.validate():
-            heston_pdf, returns, implied_volatility, strike = \
+            heston_pdf, returns, implied_volatility, strike, option_prices = \
                 heston_pdf_and_volatility(form.price.data, form.strike_min.data, form.strike_max.data, form.time.data,
                                           form.volatility_t0.data, form.chi.data, form.lam.data, form.rho.data,
                                           form.volatility_hat.data, form.mu.data, form.risk_free.data,
                                           form.dividend_yield.data, form.call_put.data)
+
+            number_of_strike = len(strike)
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(returns, heston_pdf)
@@ -57,7 +63,9 @@ def index():
             object.returns = json.dumps(returns.tolist())
             object.price = form.price.data
             object.strike = json.dumps(strike.tolist())
-            object.implied_volatility = json.dumps(implied_volatility.tolist())
+            object.implied_volatility = json.dumps(implied_volatility)
+            object.option_prices = json.dumps(option_prices)
+            object.number_of_strike = json.dumps(number_of_strike)
 
             object.user = user
             db.session.add(object)
@@ -72,16 +80,23 @@ def index():
                 returns = np.array(json.loads(instance.returns))
                 price = instance.price
                 strike = np.array(json.loads(instance.strike))
-                implied_volatility = np.array(json.loads(instance.implied_volatility))
+                implied_volatility = json.loads(instance.implied_volatility)
+                option_prices = json.loads(instance.option_prices)
+                number_of_strike = json.loads(instance.number_of_strike)
 
                 plot_return_underlying_distribution = \
                     create_plot_return_underlying_distribution(returns, heston_pdf)
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
+    implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
+    option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
+
     return render_template("view_bootstrap.html", form=form, user=user,
                            plot_return_underlying_distribution=plot_return_underlying_distribution,
-                           plot_implied_volatility=plot_implied_volatility)
+                           plot_implied_volatility=plot_implied_volatility, strike=strike,
+                           number_of_strike=number_of_strike, implied_volatility=implied_volatility,
+                           option_prices=option_prices)
 
 
 def populate_form_from_instance(instance):
@@ -144,16 +159,23 @@ def old():
             returns = np.array(json.loads(instance.returns))
             price = instance.price
             strike = np.array(json.loads(instance.strike))
-            implied_volatility = np.array(json.loads(instance.implied_volatility))
+            implied_volatility = json.loads(instance.implied_volatility)
+            option_prices = json.loads(instance.option_prices)
+            number_of_strike = json.loads(instance.number_of_strike)
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(returns, heston_pdf)
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
+            implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
+            option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
+
             data.append({'form': form, 'id': id,
                          'plot_return_underlying_distribution': plot_return_underlying_distribution,
-                         'plot_implied_volatility': plot_implied_volatility })
+                         'plot_implied_volatility': plot_implied_volatility, 'strike': strike,
+                         'implied_volatility': implied_volatility, 'option_prices': option_prices,
+                         'number_of_strike': number_of_strike})
 
     return render_template("old.html", data=data)
 

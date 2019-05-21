@@ -50,6 +50,8 @@ class Compute(db.Model):
     strike_max = db.Column(db.Float())
     strike = db.Column(db.String())
     implied_volatility = db.Column(db.String())
+    option_prices = db.Column(db.String())
+    number_of_strike = db.Column(db.String())
 
     mu = db.Column(db.Float())
     volatility_t0 = db.Column(db.Float())
@@ -59,6 +61,8 @@ class Compute(db.Model):
     rho = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User',
