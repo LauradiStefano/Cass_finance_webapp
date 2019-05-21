@@ -5,69 +5,12 @@
     <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
     </script>
     <script type="text/javascript">
-        Bokeh.set_log_level("info");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Bokeh.set_log_level("info")
 
     </script>
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
     <!--bootstrap is library for developing websites-->
@@ -97,85 +40,77 @@
 
                                 <!--TODO: select-->
 
-                                {%if result ['model_choice'] == '0'%}
-                                {{result['form'].sigma_gaussian.label}}
+
+                                \(\sigma\):
                                 {{result['form'].sigma_gaussian.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '1'%}
-                                {{result['form'].sigma_vg.label}}
+
+                                \(\sigma\):
                                 {{result['form'].sigma_vg.data}} <br>
-                                {{result['form'].theta.label}}
+                                \(\theta\):
                                 {{result['form'].theta.data}} <br>
-                                {{result['form'].kappa.label}}
+                                \(v \):
                                 {{result['form'].kappa.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '2'%}
-                                {{result['form'].volatility_t0.label}}
+                                \(V_{0}\):
                                 {{result['form'].volatility_t0.data}} <br>
-                                {{result['form'].alpha_heston.label}}
+                                \(\alpha\):
                                 {{result['form'].alpha_heston.data}} <br>
-                                {{result['form'].beta_heston.label}}
+                                \(\beta\):
                                 {{result['form'].beta_heston.data}} <br>
-                                {{result['form'].eta_heston.label}}
-                                {{result['form'].eta_heston.data}} <br>
-                                {{result['form'].rho_heston.label}}
+                                \(\gamma\):
+                                {{result['form'].gamma_heston.data}} <br>
+                                \(\rho\):
                                 {{result['form'].rho_heston.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '3'%}
-                                {{result['form'].alpha_nig.label}}
-                                {{result['form'].alpha_nig.data}} <br>
-                                {{result['form'].beta_nig.label}}
-                                {{result['form'].beta_nig.data}} <br>
-                                {{result['form'].delta_nig.label}}
+
+                                \(a\):
+                                {{result['form'].a_nig.data}} <br>
+                                \(b\):
+                                {{result['form'].b_nig.data}} <br>
+                                \(\delta\):
                                 {{result['form'].delta_nig.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '4'%}
-                                {{result['form'].c.label}}
+
+                                \(C\):
                                 {{result['form'].c.data}} <br>
-                                {{result['form'].g.label}}
+                                \(G\):
                                 {{result['form'].g.data}} <br>
-                                {{result['form'].m.label}}
+                                \(M\):
                                 {{result['form'].m.data}} <br>
-                                {{result['form'].y.label}}
+                                \(Y\):
                                 {{result['form'].y.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '5'%}
-                                {{result['form'].alpha_meixner.label}}
-                                {{result['form'].alpha_meixner.data}} <br>
-                                {{result['form'].beta_meixner.label}}
-                                {{result['form'].beta_meixner.data}} <br>
-                                {{result['form'].delta_meixer.label}}
-                                {{result['form'].delta_meixer.data}} <br>
-                                {%endif%}
+                                \(a\):
+                                {{result['form'].a_meixner.data}} <br>
+                                \(b\):
+                                {{result['form'].b_meixner.data}} <br>
+                                \(\delta\):
+                                {{result['form'].delta_meixner.data}} <br>
 
-                                {%if result['form'].model_choice == '6'%}
-                                {{result['form'].sigma_mjd.label}}
+
+                                \(\sigma\):
                                 {{result['form'].sigma_mjd.data}} <br>
-                                {{result['form'].lam_mdj.label}}
-                                {{result['form'].lam_mdj.data}} <br>
-                                {{result['form'].mu_x_mjd.label}}
+                                \(l\):
+                                {{result['form'].lam_mjd.data}} <br>
+                                \(\mu\):
                                 {{result['form'].mu_x_mjd.data}} <br>
-                                {{result['form'].sigma_x_mjd.label}}
+                                \(\sigma\):
                                 {{result['form'].sigma_x_mjd.data}} <br>
-                                {%endif%}
 
-                                {%if result['form'].model_choice == '7'%}
-                                {{result['form'].sigma_dejd.label}}
+
+
+                                \(\sigma\):
                                 {{result['form'].sigma_dejd.data}} <br>
-                                {{result['form'].lam_dejd.label}}
+                                \(\lambda\):
                                 {{result['form'].lam_dejd.data}} <br>
-                                {{result['form'].rho_dejd.label}}
+                                \(\rho\):
                                 {{result['form'].rho_dejd.data}} <br>
-                                {{result['form'].eta1_dejd.label}}
+                                \(\eta_{1}\):
                                 {{result['form'].eta1_dejd.data}} <br>
-                                {{result['form'].eta2_dejd.label}}
+                                \(\eta_{2}\):
                                 {{result['form'].eta2_dejd.data}} <br>
-                                {%endif%}
+
 
                                 {{result['form'].grid.label}}
                                 {{result['form'].grid.data}} <br>
