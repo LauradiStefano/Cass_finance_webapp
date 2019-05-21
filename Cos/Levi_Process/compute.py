@@ -18,13 +18,13 @@ from get_pdf_cos import get_pdf_cos
 from getbs import find_vol
 
 
-def select_parameters(type_choice, mu, sigma, kappa, theta, c, g, m, y):
+def select_parameters(type_choice, mu, sigma_normal, sigma_vg, kappa, theta, c, g, m, y):
     type_choice = int(type_choice)
     if type_choice == 1:
-        parameters = [mu, sigma]
+        parameters = [mu, sigma_normal]
 
     elif type_choice == 2 or type_choice == 3:
-        parameters = [mu, sigma, theta, kappa]
+        parameters = [mu, sigma_vg, theta, kappa]
 
     else:  # type_choice == 4
         parameters = [mu, c, g, m, y]

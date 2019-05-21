@@ -8,7 +8,8 @@ class ComputeForm(wtf.Form):
                                   choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')], default='1')
 
     mu = wtf.FloatField(label='Mu', default=0)
-    sigma = wtf.FloatField(label='Sigma', default=0.12)
+    sigma_normal = wtf.FloatField(label='Sigma', default=0.12)
+    sigma_vg = wtf.FloatField(label='Sigma', default=0.12)
     kappa = wtf.FloatField(label='kappa', default=0.2)
     theta = wtf.FloatField(label='Theta', default=-0.14)
     c = wtf.FloatField(label='C', default=1)

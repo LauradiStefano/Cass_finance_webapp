@@ -30,41 +30,15 @@
 
 
 
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
+            async></script>
 
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -92,118 +66,118 @@
     <form class="navbar-form" method="post" action="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+        <h4>Input</h4>
         <div class="row">
-            <h4>Input</h4>
-            <div class="row">
-                <div class="col-xs-3">
-                    {{form.type_choice.label}}
-                    {{form.type_choice}}
+            <div class="col-xs-3">
+                {{form.type_choice.label}}
+                {{form.type_choice}}
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+
+            <div class="col-xs-2">
+                <div class="row">
+                    $$ \mu $$
+                    {{form.mu}}
+                    {% if form.mu.errors %}
+                    {% for error in form.mu.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
                 </div>
             </div>
-            <br/>
-            <div class="row">
 
-                <div class="col-xs-2">
-                    <div class="row">
-                        {{form.mu.label}}
-                        {{form.mu}}
-                        {% if form.mu.errors %}
-                        {% for error in form.mu.errors %}
+            <div class="col-xs-10">
+                <div id="normal" class="row" {% if form.type_choice.data !='1' and form.type_choice !=None %}
+                     style="display:none" {%endif%}>
+
+                    <div class="col-xs-3">
+                        $$\sigma $$
+                        {{form.sigma_normal}}
+                        {% if form.sigma_normal.errors %}
+                        {% for error in form.sigma_normal.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div id="vg" class="row" {% if form.type_choice.data !='2' and form.type_choice.data !='3' %}
+                     style="display:none" {%endif%}>
+
+                    <div class="col-xs-3">
+                        $$\sigma $$
+                        {{form.sigma_vg}}
+                        {% if form.sigma_vg.errors %}
+                        {% for error in form.sigma_vg.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        $$\kappa $$
+                        {{form.kappa}}
+                        {% if form.kappa.errors %}
+                        {% for error in form.kappa.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        $$\theta $$
+                        {{form.theta}}
+                        {% if form.theta.errors %}
+                        {% for error in form.theta.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                 </div>
 
-                <div class="col-xs-10">
-                    <div id="normal" class="row" {% if form.type_choice.data !='1' and form.type_choice !=None %}
-                         style="display:none" {%endif%}>
+                <div id="cgmy" class="row" {% if form.type_choice.data !='4' %} style="display:none" {%endif%}>
 
-                        <div class="col-xs-3">
-                            {{form.sigma.label}}
-                            {{form.sigma}}
-                            {% if form.sigma.errors %}
-                            {% for error in form.sigma.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
+                    <div class="col-xs-3">
+                        $$ C $$
+                        {{form.c}}
+                        {% if form.c.errors %}
+                        {% for error in form.c.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
-                    <div id="vg" class="row" {% if form.type_choice.data !='2' and form.type_choice.data !='3' %}
-                         style="display:none" {%endif%}>
-
-                        <div class="col-xs-3">
-                            {{form.sigma.label}}
-                            {{form.sigma}}
-                            {% if form.sigma.errors %}
-                            {% for error in form.sigma.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.kappa.label}}
-                            {{form.kappa}}
-                            {% if form.kappa.errors %}
-                            {% for error in form.kappa.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.theta.label}}
-                            {{form.theta}}
-                            {% if form.theta.errors %}
-                            {% for error in form.theta.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
+                    <div class="col-xs-3">
+                        $$ G $$
+                        {{form.g}}
+                        {% if form.g.errors %}
+                        {% for error in form.g.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
-
-                    <div id="cgmy" class="row" {% if form.type_choice.data !='4' %} style="display:none" {%endif%}>
-
-                        <div class="col-xs-3">
-                            {{form.c.label}}
-                            {{form.c}}
-                            {% if form.c.errors %}
-                            {% for error in form.c.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.g.label}}
-                            {{form.g}}
-                            {% if form.g.errors %}
-                            {% for error in form.g.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.m.label}}
-                            {{form.m}}
-                            {% if form.m.errors %}
-                            {% for error in form.m.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.y.label}}
-                            {{form.y}}
-                            {% if form.y.errors %}
-                            {% for error in form.y.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
+                    <div class="col-xs-3">
+                        $$ M $$
+                        {{form.m}}
+                        {% if form.m.errors %}
+                        {% for error in form.m.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
-
+                    <div class="col-xs-3">
+                        $$ Y $$
+                        {{form.y}}
+                        {% if form.y.errors %}
+                        {% for error in form.y.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
+
             </div>
         </div>
+
         <br/>
         <div class="row">
             <div class="col-xs-2">
@@ -338,8 +312,8 @@
         <h4> Table of volatility and prices</h4>
         <table id="tableExport">
             <thead>
-            <th> Strike </th>
-            <th> Prices </th>
+            <th> Strike</th>
+            <th> Prices</th>
             <th> Implied Volatility</th>
             </thead>
             <tbody>
@@ -386,6 +360,9 @@
             }
         });
     });
+
+
+
 
 
 

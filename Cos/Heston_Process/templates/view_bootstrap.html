@@ -32,6 +32,7 @@
 
 
 
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -43,6 +44,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -100,8 +102,8 @@
             <h4>Input</h4>
             <div class="row">
                 <label> Parameters </label> <br/>
-                <div class="col-xs-3">
-                    {{form.mu.label}}
+                <div class="col-xs-2">
+                    $$\mu $$
                     {{form.mu}}
                     {% if form.mu.errors %}
                     {% for error in form.mu.errors %}
@@ -110,8 +112,8 @@
                     {% endif %}
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.volatility_t0.label}}
+                <div class="col-xs-2">
+                    $$ v_{0} $$
                     {{form.volatility_t0}}
                     {% if form.volatility_t0.errors %}
                     {% for error in form.volatility_t0.errors %}
@@ -120,8 +122,8 @@
                     {% endif %}
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.volatility_hat.label}}
+                <div class="col-xs-2">
+                    $$\hat{v} $$
                     {{form.volatility_hat}}
                     {% if form.volatility_hat.errors %}
                     {% for error in form.volatility_hat.errors %}
@@ -132,8 +134,8 @@
             </div>
             <br/>
             <div class="row">
-                <div class="col-xs-3">
-                    {{form.chi.label}}
+                <div class="col-xs-2">
+                    $$\chi $$
                     {{form.chi}}
                     {% if form.chi.errors %}
                     {% for error in form.chi.errors %}
@@ -142,8 +144,8 @@
                     {% endif %}
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.rho.label}}
+                <div class="col-xs-2">
+                    $$\rho $$
                     {{form.rho}}
                     {% if form.rho.errors %}
                     {% for error in form.rho.errors %}
@@ -152,8 +154,8 @@
                     {% endif %}
                 </div>
 
-                <div class="col-xs-3">
-                    {{form.lam.label}}
+                <div class="col-xs-2">
+                    $$\lambda $$
                     {{form.lam}}
                     {% if form.lam.errors %}
                     {% for error in form.lam.errors %}

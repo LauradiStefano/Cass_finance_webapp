@@ -45,8 +45,9 @@ def index():
 
     if request.method == "POST":
         if form.validate():
-            parameters = select_parameters(form.type_choice.data, form.mu.data, form.sigma.data, form.kappa.data,
-                                           form.theta.data, form.c.data, form.g.data, form.m.data, form.y.data)
+            parameters = select_parameters(form.type_choice.data, form.mu.data, form.sigma_normal.data,
+                                           form.sigma_vg.data, form.kappa.data, form.theta.data, form.c.data,
+                                           form.g.data, form.m.data, form.y.data)
             pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis, norm_pdf = \
                 cos_pdf_underlying_asset(form.type_choice.data, parameters, form.time.data)
 
