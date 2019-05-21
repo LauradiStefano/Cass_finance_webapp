@@ -49,16 +49,47 @@ class Compute(db.Model):
     kappa = db.Column(db.Float())
 
     volatility_t0 = db.Column(db.Float())
-    alpha = db.Column(db.Float())
-    beta = db.Column(db.Float())
-    eta = db.Column(db.Float())
-    rho = db.Column(db.Float())
+    alpha_heston = db.Column(db.Float())
+    beta_heston = db.Column(db.Float())
+    eta_heston = db.Column(db.Float())
+    rho_heston = db.Column(db.Float())
+
+    alpha_nig = db.Column(db.Float())
+    beta_nig = db.Column(db.Float())
+    delta_nig = db.Column(db.Float())
+
+    c = db.Column(db.Float())
+    g = db.Column(db.Float())
+    m = db.Column(db.Float())
+    y = db.Column(db.Float())
+
+    alpha_meixner = db.Column(db.Float())
+    beta_meixner = db.Column(db.Float())
+    delta_meixner = db.Column(db.Float())
+
+    sigma_mjd = db.Column(db.Float())
+    lam_mjd = db.Column(db.Float())
+    mu_x_mjd = db.Column(db.Float())
+    sigma_x_mjd = db.Column(db.Float())
+
+    sigma_dejd = db.Column(db.Float())
+    lam_dejd = db.Column(db.Float())
+    rho_dejd = db.Column(db.Float())
+    eta1_dejd = db.Column(db.Float())
+    eta2_dejd = db.Column(db.Float())
+
+    grid = db.Column(db.Float())
+    upper_range = db.Column(db.Float())
+    lower_range = db.Column(db.Float())
+    dump = db.Column(db.Float())
+    tolerance = db.Column(db.Float())
 
     price = db.Column(db.Float())
     risk_free = db.Column(db.Float())
     time = db.Column(db.Float())
     step = db.Column(db.Float())
     strike = db.Column(db.Float())
+
     lam = db.Column(db.String())
     lower_bound = db.Column(db.String())
     optimal_strike = db.Column(db.Float())

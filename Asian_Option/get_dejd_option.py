@@ -14,7 +14,7 @@ def dejd_charfn(u, dt, sigma, lam, p, eta1, eta2, r):
     output = np.exp(dt * (1j * (
                 r - lam * (p * eta1 / (eta1 - 1) + (1 - p) * eta2 / (eta2 + 1) - 1) - sigma ** 2 / 2) * u + lam * (
                                       p * eta1 / (eta1 - 1j * u) + (1 - p) * eta2 / (eta2 + 1j * u) - 1) - (
-                                      u * sigma) ** 2 / 2));
+                                      u * sigma) ** 2 / 2))
 
     return output
 
@@ -94,7 +94,6 @@ def dejd_option(S0, K, T, r, n, sigma, lam, p, eta1, eta2, Nfft, lmax, lmin, del
     du = 2 * umax / Nfft
 
     u = (np.arange(0, Nfft, 1) - 0.5 * Nfft) * du
-    wght = (3 + (-1) ** np.arange(0, Nfft - 2, 1))
     insert_one = 1
     b = np.append(insert_one, (3 + (-1) ** np.arange(0, Nfft - 2, 1)))
     wght = (np.append(b, insert_one)) / 3

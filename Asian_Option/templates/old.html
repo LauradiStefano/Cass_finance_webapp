@@ -30,6 +30,7 @@
 
 
 
+
     </script>
 
     <script type="text/x-mathjax-config">
@@ -39,6 +40,7 @@
             extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
             }
         });
+
 
 
 
@@ -112,15 +114,79 @@
                                 {%if result['form'].model_choice == '2'%}
                                 {{result['form'].volatility_t0.label}}
                                 {{result['form'].volatility_t0.data}} <br>
-                                {{result['form'].alpha.label}}
-                                {{result['form'].alpha.data}} <br>
-                                {{result['form'].beta.label}}
-                                {{result['form'].beta.data}} <br>
-                                {{result['form'].eta.label}}
-                                {{result['form'].eta.data}} <br>
-                                {{result['form'].rho.label}}
-                                {{result['form'].rho.data}} <br>
+                                {{result['form'].alpha_heston.label}}
+                                {{result['form'].alpha_heston.data}} <br>
+                                {{result['form'].beta_heston.label}}
+                                {{result['form'].beta_heston.data}} <br>
+                                {{result['form'].eta_heston.label}}
+                                {{result['form'].eta_heston.data}} <br>
+                                {{result['form'].rho_heston.label}}
+                                {{result['form'].rho_heston.data}} <br>
                                 {%endif%}
+
+                                {%if result['form'].model_choice == '3'%}
+                                {{result['form'].alpha_nig.label}}
+                                {{result['form'].alpha_nig.data}} <br>
+                                {{result['form'].beta_nig.label}}
+                                {{result['form'].beta_nig.data}} <br>
+                                {{result['form'].delta_nig.label}}
+                                {{result['form'].delta_nig.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '4'%}
+                                {{result['form'].c.label}}
+                                {{result['form'].c.data}} <br>
+                                {{result['form'].g.label}}
+                                {{result['form'].g.data}} <br>
+                                {{result['form'].m.label}}
+                                {{result['form'].m.data}} <br>
+                                {{result['form'].y.label}}
+                                {{result['form'].y.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '5'%}
+                                {{result['form'].alpha_meixner.label}}
+                                {{result['form'].alpha_meixner.data}} <br>
+                                {{result['form'].beta_meixner.label}}
+                                {{result['form'].beta_meixner.data}} <br>
+                                {{result['form'].delta_meixer.label}}
+                                {{result['form'].delta_meixer.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '6'%}
+                                {{result['form'].sigma_mjd.label}}
+                                {{result['form'].sigma_mjd.data}} <br>
+                                {{result['form'].lam_mdj.label}}
+                                {{result['form'].lam_mdj.data}} <br>
+                                {{result['form'].mu_x_mjd.label}}
+                                {{result['form'].mu_x_mjd.data}} <br>
+                                {{result['form'].sigma_x_mjd.label}}
+                                {{result['form'].sigma_x_mjd.data}} <br>
+                                {%endif%}
+
+                                {%if result['form'].model_choice == '7'%}
+                                {{result['form'].sigma_dejd.label}}
+                                {{result['form'].sigma_dejd.data}} <br>
+                                {{result['form'].lam_dejd.label}}
+                                {{result['form'].lam_dejd.data}} <br>
+                                {{result['form'].rho_dejd.label}}
+                                {{result['form'].rho_dejd.data}} <br>
+                                {{result['form'].eta1_dejd.label}}
+                                {{result['form'].eta1_dejd.data}} <br>
+                                {{result['form'].eta2_dejd.label}}
+                                {{result['form'].eta2_dejd.data}} <br>
+                                {%endif%}
+
+                                {{result['form'].grid.label}}
+                                {{result['form'].grid.data}} <br>
+                                {{result['form'].upper_range.label}}
+                                {{result['form'].upper_range.data}} <br>
+                                {{result['form'].lower_range.label}}
+                                {{result['form'].lower_range.data}} <br>
+                                {{result['form'].dump.label}}
+                                {{result['form'].dump.data}} <br>
+                                {{result['form'].tolerance.label}}
+                                {{result['form'].tolerance.data}} <br>
 
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}} <br>
@@ -148,8 +214,8 @@
 
                                 <table>
                                     <thead>
-                                    <th>--</th>
-                                    <th>--</th>
+                                    <th>Lower Bound</th>
+                                    <th>Value</th>
                                     </thead>
                                     <tbody>
                                     <tr>
