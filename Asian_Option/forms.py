@@ -7,7 +7,7 @@ import db_models
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Distribution',
                                    choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
-                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD')], default='0')
+                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV')], default='0')
 
     # GBM distribution
     sigma_gaussian = wtf.FloatField(label='Sigma', default=0.17801)
@@ -18,7 +18,7 @@ class ComputeForm(wtf.Form):
     kappa = wtf.FloatField(label='Kappa', default=0.736703)
 
     # Heston distribution
-    volatility_t0 = wtf.FloatField(label='V0', default=0.0102)
+    volatility_t0 = wtf.FloatField(label='V0', default=0.101)
     alpha_heston = wtf.FloatField(label='Alpha', default=6.21)
     beta_heston = wtf.FloatField(label='Beta', default=0.019)
     gamma_heston = wtf.FloatField(label='Eta', default=0.61)
@@ -52,6 +52,11 @@ class ComputeForm(wtf.Form):
     rho_dejd = wtf.FloatField(label='Rho', default=0.20761)
     eta1_dejd = wtf.FloatField(label='Eta 1', default=9.65997)
     eta2_dejd = wtf.FloatField(label='Eta 2', default=3.13868)
+
+    # CEV distribution
+    sigma_cev = wtf.FloatField(label='Sigma', default=0.120381)
+    gamma_cev = wtf.FloatField(label='Lambda', default=0.330966)
+    f = wtf.FloatField(label='F', default=0.330966)
 
     grid = wtf.FloatField(label='Grid Point (2^)', default=15)
     upper_range = wtf.FloatField(label='Upper Range', default=2)

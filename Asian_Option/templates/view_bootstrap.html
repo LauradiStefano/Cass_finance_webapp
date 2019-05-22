@@ -49,6 +49,9 @@
 
 
 
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -126,10 +129,10 @@
                 <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$\sigma $$
-                        {{form.sigma_vg}}
-                        {% if form.sigma_vg.errors %}
-                        {% for error in form.sigma_vg.errors %}
+                        $$ v $$
+                        {{form.kappa}}
+                        {% if form.kappa.errors %}
+                        {% for error in form.kappa.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -144,27 +147,19 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ v $$
-                        {{form.kappa}}
-                        {% if form.kappa.errors %}
-                        {% for error in form.kappa.errors %}
+                        $$\sigma $$
+                        {{form.sigma_vg}}
+                        {% if form.sigma_vg.errors %}
+                        {% for error in form.sigma_vg.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
+
                 </div>
 
                 <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none" {%endif%}>
 
-                    <div class="col-xs-2">
-                        $$ V_{0} $$
-                        {{form.volatility_t0}}
-                        {% if form.volatility_t0.errors %}
-                        {% for error in form.volatility_t0.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
                     <div class="col-xs-2">
                         $$\alpha $$
                         {{form.alpha_heston}}
@@ -197,6 +192,15 @@
                         {{form.rho_heston}}
                         {% if form.rho_heston.errors %}
                         {% for error in form.rho_heston.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$\sqrt {V_{0}} $$
+                        {{form.volatility_t0}}
+                        {% if form.volatility_t0.errors %}
+                        {% for error in form.volatility_t0.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -357,7 +361,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$\lambda $$
+                        $$ l $$
                         {{form.lam_dejd}}
                         {% if form.lam_dejd.errors %}
                         {% for error in form.lam_dejd.errors %}
@@ -388,6 +392,38 @@
                         {{form.eta2_dejd}}
                         {% if form.eta2_dejd.errors %}
                         {% for error in form.eta2_dejd.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="cev" class="row" {% if form.model_choice.data !='8' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        $$ a $$
+                        {{form.sigma_cev}}
+                        {% if form.sigma_cev.errors %}
+                        {% for error in form.sigma_cev.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-2">
+                        $$ b $$
+                        {{form.gamma_cev}}
+                        {% if form.gamma_cev.errors %}
+                        {% for error in form.gamma_cev.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        $$ F $$
+                        {{form.f}}
+                        {% if form.f.errors %}
+                        {% for error in form.f.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -582,6 +618,7 @@
         var meixner = $('#meixner');
         var mjd = $('#mjd')
         var dejd = $('#dejd')
+        var cev = $('#cev')
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
@@ -593,6 +630,8 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '1') {
                 gaussian.hide();
                 vg.show();
@@ -602,6 +641,8 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '2'){
                 gaussian.hide();
                 vg.hide();
@@ -611,6 +652,8 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '3') {
                 gaussian.hide();
                 vg.hide();
@@ -620,6 +663,8 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '4') {
                 gaussian.hide();
                 vg.hide();
@@ -629,6 +674,8 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '5') {
                 gaussian.hide();
                 vg.hide();
@@ -638,6 +685,8 @@
                 meixner.show();
                 mjd.hide();
                 dejd.hide();
+                cev.hide();
+
             } else if (select_model.val() == '6') {
                 gaussian.hide();
                 vg.hide();
@@ -647,7 +696,9 @@
                 meixner.hide();
                 mjd.show();
                 dejd.hide();
-            } else {
+                cev.hide();
+
+            } else if (select_model.val() == '7'){
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
@@ -656,9 +707,24 @@
                 meixner.hide();
                 mjd.hide();
                 dejd.show();
+                cev.hide();
+
+            } else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.hide();
+                cgmy.hide();
+                meixner.hide();
+                mjd.hide();
+                dejd.hide();
+                cev.show();
             }
         });
     });
+
+
+
 
 
 

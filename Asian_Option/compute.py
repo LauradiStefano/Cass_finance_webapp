@@ -8,10 +8,10 @@ import bokeh.plotting as bp
 from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 
-
+from get_MJD_option import mjd_option
+from get_cev_option import cev_option
 from get_dejd_option import dejd_option
 from get_gbm_option import gbm_option
-from get_MJD_option import mjd_option
 from get_heston_option import heston_option
 from get_option_CGMY import CGMY_option
 from get_option_meixner import meixner_option
@@ -21,8 +21,8 @@ from get_vg_option import vg_option
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
                    alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
-                   delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft,
-                   lmax, lmin, delta, umax):
+                   delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, F,
+                   gamma_cev, sigma_cev, Nfft, lmax, lmin, delta, umax):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -61,16 +61,25 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                            delta, umax)
 
         ptrue_strike = ptrue_strike[0]
-    
-    elif type_choice == 5:
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mews, sigmas, Nfft, lmax, lmin, delta,
-                                                                               umax)
+
+    elif type_choice == 6:  # MJD
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mews, sigmas, Nfft, lmax, lmin, delta, umax)
 
         ptrue_strike = ptrue_strike[0]
-    
-    else :
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = dejd_option(s0, strike, time, risk_free, N, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,  Nfft, lmax, lmin, delta,
-                                                                               umax)
+
+    elif type_choice == 7:  # DEJD
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            dejd_option(s0, strike, time, risk_free, N, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft, lmax, lmin,
+                        delta, umax)
+
+        ptrue_strike = ptrue_strike[0]
+
+    else:  # type_choice == 8 CEV
+
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = cev_option(s0, strike, F, time, risk_free, N, gamma_cev,
+                                                                           sigma_cev, Nfft, lmax, lmin,
+                                                                           delta, umax)
 
         ptrue_strike = ptrue_strike[0]
 

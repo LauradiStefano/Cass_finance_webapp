@@ -176,14 +176,14 @@ def CEVFT(u, delta, N, dt, r, sigma, gamma, X0, K):
     return output
 
 
-def CEV_TRUECV(S0, K, F, T, r, n, gamma, sigma):
+def cev_option(S0, K, F, T, r, n, gamma, sigma, Nfft, lmax, lmin, delta, umax):
 
     S0 = S0/F;
     K = K/F;
     
     dt = T/n;
     
-    Nfft = 2**15;
+    # Nfft = 2**15;
     lmax = 3; lmin = -lmax;
     dl = (lmax-lmin)/Nfft;
     lmin = np.fix(lmin/dl)*dl
@@ -191,8 +191,8 @@ def CEV_TRUECV(S0, K, F, T, r, n, gamma, sigma):
     l = lmin + np.arange(0, Nfft,1)*dl
 
     if gamma > 2:
-        delta = -1.5
-        umax = 10
+        # delta = -1.5
+        # umax = 10
         flag = 0
         while flag < 1:
             if abs(CEVFTGammaAboveTwo(umax, delta, n, dt, r, sigma, gamma, S0**(2-gamma), K)) < 1E-5:
@@ -201,8 +201,8 @@ def CEV_TRUECV(S0, K, F, T, r, n, gamma, sigma):
             umax = umax + 10
         
     else:
-        delta = 1.5
-        umax = 10
+        # delta = 1.5
+        # umax = 10
         flag = 0
         while flag < 1:
             if abs(CEVFT(umax, delta, n, dt, r, sigma, gamma, S0**(2-gamma), K)) < 1E-5:
@@ -231,6 +231,7 @@ def CEV_TRUECV(S0, K, F, T, r, n, gamma, sigma):
     lam = K*np.exp(l)
     Ptrue_K = F*g1[(l**(1/(2-gamma)))==0]
     
-    return Ptrue, lcr, Ptrue_K, K_Exp_lcr, lam
+    return  Ptrue, K_Exp_lcr, Ptrue_K, lam, g1
+
 
 
