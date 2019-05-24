@@ -38,10 +38,8 @@
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-
-    <script type="text/javascript" async
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
-    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML'
+            async></script>
 
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -69,11 +67,14 @@
     <form class="navbar-form" method="post" action="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+        <h4>Input</h4>
         <div class="row">
-            <h4>Input</h4>
+
             <div class="row">
                 <label> Parameters </label> <br/>
                 <div class="col-xs-2">
+
                     $$\mu $$
                     {{form.mu}}
                     {% if form.mu.errors %}
@@ -231,6 +232,27 @@
         </div>
 
         <div class="row">
+            <table>
+                <h5>Table of moments</h5>
+                <thead>
+
+                <td> Mean</td>
+                <td> Variance</td>
+                <td> Skewness</td>
+                <td> Kurtosis</td>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td> --</td>
+                    <td> --</td>
+                    <td> --</td>
+                    <td> --</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
 
             <div id="plot_return_underlying_distribution" class="col-6 col-xs-6">
                 {{plot_return_underlying_distribution[0]|safe}}
@@ -243,7 +265,6 @@
         </div>
         {%endif%}
     </div>
-
     <div id="popup_table" style="display:none">
         <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
             {{form.button_export_table}}
