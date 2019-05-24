@@ -11,9 +11,8 @@ import numpy as np
 
 
 def vg_charfn(u, dt, sigma, theta, kappa, r):
-
     output = np.exp(dt * (1j * (r + np.log(1 - theta * kappa - 0.5 * kappa * sigma ** 2) / kappa) * u)) * (
-                1 / (1 - 1j * u * theta * kappa + 0.5 * kappa * (u * sigma) ** 2)) ** (dt / kappa)
+            1 / (1 - 1j * u * theta * kappa + 0.5 * kappa * (u * sigma) ** 2)) ** (dt / kappa)
 
     return output
 
@@ -69,7 +68,7 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def vg_option(S0, K, T, r, n, sigma, theta, kappa, Nfft, lmax, lmin, delta, umax):
+def vg_option(S0, K, T, r, n, sigma, theta, kappa, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
     dl = (lmax - lmin) / Nfft
@@ -77,10 +76,11 @@ def vg_option(S0, K, T, r, n, sigma, theta, kappa, Nfft, lmax, lmin, delta, umax
     l = lmin + np.arange(0, Nfft, 1) * dl
 
     flag = 0
+    umax = 50
 
     while flag < 1:
 
-        if abs(vg_ft(umax, delta, n, dt, sigma, theta, kappa, r, S0 / K, 1)) < 1E-5:
+        if abs(vg_ft(umax, delta, n, dt, sigma, theta, kappa, r, S0 / K, 1)) < tolerance:
             flag = 1
 
         umax = umax + 20

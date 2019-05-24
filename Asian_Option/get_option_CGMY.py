@@ -13,13 +13,13 @@ import numpy as np
 def CGMY_charfn(u, dt, c, G, m, Y, r):
     output = np.exp(dt * (
             1j * (r - c * math.gamma(-Y) * ((m - 1) ** Y - m ** Y + (G + 1) ** Y - G ** Y)) * u + c * math.gamma(-Y) * (
-                (m - 1j * u) ** Y - m ** Y + (G + 1j * u) ** Y - G ** Y)))
+            (m - 1j * u) ** Y - m ** Y + (G + 1j * u) ** Y - G ** Y)))
 
     return output
 
 
 # function output = CGMYCharFn(u, dt, c, G, m, Y, r)
-# output = exp(dt*(1i*(r-c*gamma(-Y)*((m-1)^Y-m^Y+(G+1)^Y-G^Y))*u+c*gamma(-Y)*((m-1i*u).^Y-m^Y+(G+1i*u).^Y-G^Y)));
+# output = exp(dt*(1i*(r-c*gamma(-Y)*((m-1)^Y-m^Y+(G+1)^Y-G^Y))*u+c*gamma(-Y)*((m-1i*u).^Y-m^Y+(G+1i*u).^Y-G^Y)))
 # end
 
 def CGMY_phi(g1, g2, n, N, dt, c, G, m, Y, r, S0):
@@ -72,18 +72,19 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def CGMY_option(S0, K, T, r, n, c, G, m, Y, Nfft, lmax, lmin, delta, umax):
+def CGMY_option(S0, K, T, r, n, c, G, m, Y, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
+    umax = 50
 
     flag = 0
 
     while flag < 1:
 
-        if abs(CGMY_ft(umax, delta, n, dt, c, G, m, Y, r, S0 / K, 1)) < 1E-5:
+        if abs(CGMY_ft(umax, delta, n, dt, c, G, m, Y, r, S0 / K, 1)) < tolerance:
             flag = 1
 
         umax = umax + 20

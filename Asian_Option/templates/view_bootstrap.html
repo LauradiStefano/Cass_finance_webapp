@@ -197,7 +197,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$\sqrt {V_{0}} $$
+                        $$\ V_{0} $$
                         {{form.volatility_t0}}
                         {% if form.volatility_t0.errors %}
                         {% for error in form.volatility_t0.errors %}
@@ -401,29 +401,10 @@
                 <div id="cev" class="row" {% if form.model_choice.data !='8' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$ a $$
-                        {{form.sigma_cev}}
-                        {% if form.sigma_cev.errors %}
-                        {% for error in form.sigma_cev.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-2">
-                        $$ b $$
-                        {{form.gamma_cev}}
-                        {% if form.gamma_cev.errors %}
-                        {% for error in form.gamma_cev.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-
-                    <div class="col-xs-2">
-                        $$ F $$
-                        {{form.f}}
-                        {% if form.f.errors %}
-                        {% for error in form.f.errors %}
+                        $$\beta $$
+                        {{form.beta_cev}}
+                        {% if form.beta_cev.errors %}
+                        {% for error in form.beta_cev.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}

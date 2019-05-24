@@ -45,9 +45,8 @@ def index():
                                form.y.data, form.a_meixner.data, form.b_meixner.data, form.delta_meixner.data,
                                form.sigma_mjd.data, form.lam_mjd.data, form.mu_x_mjd.data, form.sigma_x_mjd.data,
                                form.sigma_dejd.data, form.lam_dejd.data, form.rho_dejd.data, form.eta1_dejd.data,
-                               form.eta2_dejd.data, form.f.data, form.gamma_cev.data, form.sigma_cev.data,
-                               form.grid.data, form.upper_range.data, form.lower_range.data, form.dump.data,
-                               form.tolerance.data)
+                               form.eta2_dejd.data, form.beta_cev.data, form.grid.data, form.upper_range.data,
+                               form.lower_range.data, form.dump.data, form.tolerance.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
 
@@ -84,9 +83,9 @@ def index():
                 plot_lower_bound = \
                     create_plot_lower_bound(lam, lower_bound, strike, optimal_strike)
 
-    optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
-    optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
-    lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
+    # optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
+    # optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
+    # lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
 
     return render_template("view_bootstrap.html", form=form, user=user, optimal_strike=optimal_strike,
                            optimal_lower_bound=optimal_lower_bound, lower_bound_strike=lower_bound_strike,

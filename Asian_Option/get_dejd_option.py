@@ -12,15 +12,15 @@ import numpy as np
 
 def dejd_charfn(u, dt, sigma, lam, p, eta1, eta2, r):
     output = np.exp(dt * (1j * (
-                r - lam * (p * eta1 / (eta1 - 1) + (1 - p) * eta2 / (eta2 + 1) - 1) - sigma ** 2 / 2) * u + lam * (
-                                      p * eta1 / (eta1 - 1j * u) + (1 - p) * eta2 / (eta2 + 1j * u) - 1) - (
-                                      u * sigma) ** 2 / 2))
+            r - lam * (p * eta1 / (eta1 - 1) + (1 - p) * eta2 / (eta2 + 1) - 1) - sigma ** 2 / 2) * u + lam * (
+                                  p * eta1 / (eta1 - 1j * u) + (1 - p) * eta2 / (eta2 + 1j * u) - 1) - (
+                                  u * sigma) ** 2 / 2))
 
     return output
 
 
 # function output = DEJDCharFn(u, dt, sigma, lambda, p, eta1, eta2, r)
-# output = exp(dt*(1i*(r-lambda*(p*eta1/(eta1-1) + (1-p)*eta2/(eta2+1)-1)-sigma^2/2)*u+lambda*(p*eta1./(eta1-1i*u) + (1-p)*eta2./(eta2+1i*u)-1)-(u*sigma).^2/2));
+# output = exp(dt*(1i*(r-lambda*(p*eta1/(eta1-1) + (1-p)*eta2/(eta2+1)-1)-sigma^2/2)*u+lambda*(p*eta1./(eta1-1i*u) + (1-p)*eta2./(eta2+1i*u)-1)-(u*sigma).^2/2))
 # end
 
 def dejd_phi(g1, g2, n, N, dt, sigma, lam, p, eta1, eta2, r, S0):
@@ -45,8 +45,8 @@ def dejd_ft(u, delta, N, dt, sigma, lam, p, eta1, eta2, r, S0, K):  # corretto
         term = term + dejd_phi(-1j, u - 1j * delta, j, N, dt, sigma, lam, p, eta1, eta2, r, S0)
 
     output = np.exp(-r * N * dt) * (
-                term - K * (N + 1) * dejd_phi(0, u - 1j * delta, N, N, dt, sigma, lam, p, eta1, eta2, r, S0)) / (
-                         (N + 1) * (1j * u + delta));
+            term - K * (N + 1) * dejd_phi(0, u - 1j * delta, N, N, dt, sigma, lam, p, eta1, eta2, r, S0)) / (
+                     (N + 1) * (1j * u + delta))
 
     return output
 
@@ -74,19 +74,18 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def dejd_option(S0, K, T, r, n, sigma, lam, p, eta1, eta2, Nfft, lmax, lmin, delta, umax):
-
+def dejd_option(S0, K, T, r, n, sigma, lam, p, eta1, eta2, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
-
+    umax = 50
     flag = 0
 
     while flag < 1:
 
-        if abs(dejd_ft(umax, delta, n, dt, sigma, lam, p, eta1, eta2, r, S0 / K, 1)) < 1E-5:
+        if abs(dejd_ft(umax, delta, n, dt, sigma, lam, p, eta1, eta2, r, S0 / K, 1)) < tolerance:
             flag = 1
 
         umax = umax + 20

@@ -18,7 +18,7 @@ class ComputeForm(wtf.Form):
     kappa = wtf.FloatField(label='Kappa', default=0.736703)
 
     # Heston distribution
-    volatility_t0 = wtf.FloatField(label='V0', default=0.101)
+    volatility_t0 = wtf.FloatField(label='V0', default=0.0102)
     alpha_heston = wtf.FloatField(label='Alpha', default=6.21)
     beta_heston = wtf.FloatField(label='Beta', default=0.019)
     gamma_heston = wtf.FloatField(label='Eta', default=0.61)
@@ -54,15 +54,14 @@ class ComputeForm(wtf.Form):
     eta2_dejd = wtf.FloatField(label='Eta 2', default=3.13868)
 
     # CEV distribution
-    sigma_cev = wtf.FloatField(label='Sigma', default=0.120381)
-    gamma_cev = wtf.FloatField(label='Lambda', default=0.330966)
-    f = wtf.FloatField(label='F', default=0.330966)
+    beta_cev = wtf.FloatField(label='Beta', default=-0.25)
+    # f_cev = wtf.FloatField(label='F', default=0.120381)
 
     grid = wtf.FloatField(label='Grid Point (2^)', default=15)
     upper_range = wtf.FloatField(label='Upper Range', default=2)
     lower_range = wtf.FloatField(label='Lower Range', default=-2)
     dump = wtf.FloatField(label='Dump Parameter', default=1.5)
-    tolerance = wtf.FloatField(label='Tolerance', default=50)
+    tolerance = wtf.FloatField(label='Tolerance', default=0.00001)
 
     price = wtf.FloatField(label='Spot Price', default=100, validators=[wtf.validators.InputRequired()])
     risk_free = wtf.FloatField(label='Risk Free (%)', default=3.67, validators=[wtf.validators.InputRequired()])

@@ -25,7 +25,7 @@ def nig_charfn(u, dt, a, b, d, r):
 
 
 # function output = NIGCharFn(u, dt, a, b, d, r)
-# output = exp(dt*(1i*(r+d*(sqrt(a^2-(b+1)^2)-sqrt(a^2-b^2)))*u-d*(sqrt(a^2-(b+1i*u).^2)-sqrt(a^2-b^2))));
+# output = exp(dt*(1i*(r+d*(sqrt(a^2-(b+1)^2)-sqrt(a^2-b^2)))*u-d*(sqrt(a^2-(b+1i*u).^2)-sqrt(a^2-b^2))))
 # end
 
 def nig_phi(g1, g2, n, N, dt, a, b, d, r, S0):
@@ -50,7 +50,7 @@ def nig_ft(u, delta, N, dt, a, b, d, r, S0, K):  # corretto
         term = term + nig_phi(-1j, u - 1j * delta, j, N, dt, a, b, d, r, S0)
 
     output = np.exp(-r * N * dt) * (term - K * (N + 1) * nig_phi(0, u - 1j * delta, N, N, dt, a, b, d, r, S0)) / (
-            (N + 1) * (1j * u + delta));
+            (N + 1) * (1j * u + delta))
 
     return output
 
@@ -78,17 +78,18 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def nig_option(S0, K, T, r, n, a, b, d, Nfft, lmax, lmin, delta, umax):
+def nig_option(S0, K, T, r, n, a, b, d, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
 
     flag = 0
+    umax = 50
 
     while flag < 1:
 
-        if abs(nig_ft(umax, delta, n, dt, a, b, d, r, S0 / K, 1)) < 1E-5:
+        if abs(nig_ft(umax, delta, n, dt, a, b, d, r, S0 / K, 1)) < tolerance:
             flag = 1
 
         umax = umax + 20

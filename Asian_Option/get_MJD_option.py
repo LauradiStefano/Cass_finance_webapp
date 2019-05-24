@@ -12,13 +12,13 @@ import numpy as np
 
 def mjd_charfn(u, dt, sigma, lam, mews, sigmas, r):
     output = np.exp(dt * (1j * (r - lam * (np.exp(mews + sigmas ** 2 / 2) - 1) - sigma ** 2 / 2) * u + lam * (
-                np.exp(1j * u * mews - (u * sigmas) ** 2 / 2) - 1) - (u * sigma) ** 2 / 2));
+            np.exp(1j * u * mews - (u * sigmas) ** 2 / 2) - 1) - (u * sigma) ** 2 / 2))
 
     return output
 
 
 # function output = MJDCharFn(u, dt, sigma, lambda, mews, sigmas, r)
-# output = exp(dt*(1i*(r-lambda*(exp(mews+sigmas^2/2)-1)-sigma^2/2)*u+lambda*(exp(1i*u*mews-(u*sigmas).^2/2)-1)-(u*sigma).^2/2));
+# output = exp(dt*(1i*(r-lambda*(exp(mews+sigmas^2/2)-1)-sigma^2/2)*u+lambda*(exp(1i*u*mews-(u*sigmas).^2/2)-1)-(u*sigma).^2/2))
 # end
 
 def mjd_phi(g1, g2, n, N, dt, sigma, lam, mews, sigmas, r, S0):
@@ -43,8 +43,8 @@ def mjd_ft(u, delta, N, dt, sigma, lam, mews, sigmas, r, S0, K):  # corretto
         term = term + mjd_phi(-1j, u - 1j * delta, j, N, dt, sigma, lam, mews, sigmas, r, S0)
 
     output = np.exp(-r * N * dt) * (
-                term - K * (N + 1) * mjd_phi(0, u - 1j * delta, N, N, dt, sigma, lam, mews, sigmas, r, S0)) / (
-                         (N + 1) * (1j * u + delta));
+            term - K * (N + 1) * mjd_phi(0, u - 1j * delta, N, N, dt, sigma, lam, mews, sigmas, r, S0)) / (
+                     (N + 1) * (1j * u + delta))
 
     return output
 
@@ -72,15 +72,16 @@ def fr_fourier_transform(x, a):
     return f
 
 
-def mjd_option(S0, K, T, r, n, sigma, lam, mews, sigmas, Nfft, lmax, lmin, delta, umax):
+def mjd_option(S0, K, T, r, n, sigma, lam, mews, sigmas, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
     # Nfft = 2**15
 
-    # lmax = 2; lmin = -lmax
+    # lmax = 2 lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
+    umax = 50
 
     # delta = 1.5
     # umax = 50
@@ -88,7 +89,7 @@ def mjd_option(S0, K, T, r, n, sigma, lam, mews, sigmas, Nfft, lmax, lmin, delta
 
     while flag < 1:
 
-        if abs(mjd_ft(umax, delta, n, dt, sigma, lam, mews, sigmas, r, S0 / K, 1)) < 1E-5:
+        if abs(mjd_ft(umax, delta, n, dt, sigma, lam, mews, sigmas, r, S0 / K, 1)) < tolerance:
             flag = 1
 
         umax = umax + 20
