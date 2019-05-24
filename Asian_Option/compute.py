@@ -23,7 +23,7 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                    alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
                    delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,
                    beta_cev, Nfft, lmax, lmin, delta, tolerance):
-    # Nfft = 2 ** Nfft
+    Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
     risk_free = risk_free / 100
@@ -80,6 +80,8 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = cev_option(s0, strike, time, risk_free, N, beta_cev,
                                                                            Nfft, lmax, lmin, delta, tolerance)
+        ptrue_strike = ptrue_strike[0]
+        strike_exp_lcr = strike_exp_lcr [0]
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
@@ -93,8 +95,8 @@ def create_plot_lower_bound(lam, lower_bound, strike, strike_exp_lcr):
     hover_lower_bound = HoverTool(attachment="left", names=['lower bound'],
                                   tooltips=[("Lambda", "@lam"), ("Lower Bound", "@lower_bound")])
 
-    x_range = [(strike - (strike - strike_exp_lcr)) * 0.75, (strike + (strike - strike_exp_lcr)) * 1.25]
-    # x_range = [0, max(lam)]
+    #x_range = [(strike - (strike - strike_exp_lcr)) * 0.75, (strike + (strike - strike_exp_lcr)) * 1.25]
+    x_range = [0, max(lam)]
     y_range = [0, max(lower_bound) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_lower_bound], x_range=x_range,
                     y_range=y_range, title="Asian Option Lower Bound", plot_height=450,
