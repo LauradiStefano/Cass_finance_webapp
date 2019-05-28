@@ -13,6 +13,7 @@ from get_heston_bounds import compute_heston_bounds
 from get_heston_cos_pdf import get_pdf_cos
 from get_heston_option_prices import get_cos_prices
 from getbs import find_vol
+from get_heston_mom import momHeston
 
 
 # Pdf Heston Model
@@ -29,18 +30,26 @@ def heston_pdf_and_volatility(spot_price, strike_min, strike_max, time, v0, chi,
                                    call_put, N)
 
     implied_volatility = find_vol(option_prices, call_put, spot_price, strike, time, risk_free, dividend_yield)
+    central = 1
+    mean, variance, skewness, kurtosis =  momHeston(kappa, theta, sigma, rho, tau, r, S0, v0, central)
 
-    return heston_pdf, returns, implied_volatility, strike, option_prices
+    norm_pdf = norm.pdf(returns, mean, variance ** 0.5)
+
+    return heston_pdf, returns, implied_volatility, strike, option_prices,  mean, variance, skewness, kurtosis, norm_pdf 
 
 
-def create_plot_return_underlying_distribution(returns, heston_pdf):
+def create_plot_return_underlying_distribution(returns, heston_pdf, norm_pdf):
     data = ColumnDataSource(data=dict(
         returns=returns,
         heston_pdf=heston_pdf
+        norm_pdf=norm_pdf
     ))
 
     hover_returns = HoverTool(attachment="left", names=['pdf ret'],
                               tooltips=[("Returns", "@returns"), ("Pdf", "@heston_pdf")])
+    
+    hover_norm_pdf = HoverTool(attachment="right", names=['pdf norm'],
+                               tooltips=[("Returns", "@underlying_prices"), ("Pdf Norm", "@norm_pdf")])
 
     x_range = [min(returns), max(returns)]
     y_range = [0, max(heston_pdf) * 1.10]
@@ -50,6 +59,9 @@ def create_plot_return_underlying_distribution(returns, heston_pdf):
 
     fig.line(x='returns', y='heston_pdf', source=data, legend="Pdf distribution", color="#0095B6", alpha=0.9,
              line_width=4, name='pdf ret')
+    
+    fig.line(x='underlying_prices', y='norm_pdf', source=data, legend="Benchmark Normal", color="#D21F1B",
+             alpha=0.6, line_width=3, name='pdf norm')
 
     fig.legend.location = "top_right"
     fig.toolbar.active_drag = None
