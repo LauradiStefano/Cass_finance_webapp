@@ -12,7 +12,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 class ComputeForm(wtf.Form):
 
-    mu = wtf.FloatField(label='Mu', default=0)
+    mu = wtf.FloatField(label='Mu', default=4.4579)
     volatility_t0 = wtf.FloatField(label='Vol t0', default=0.0175)
     volatility_hat = wtf.FloatField(label='Vol hat', default=0.0398)
     lam = wtf.FloatField(label='Lamda', default=1.5768)

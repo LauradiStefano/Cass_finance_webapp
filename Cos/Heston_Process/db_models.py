@@ -52,6 +52,11 @@ class Compute(db.Model):
     implied_volatility = db.Column(db.String())
     option_prices = db.Column(db.String())
     number_of_strike = db.Column(db.String())
+    norm_pdf = db.Column(db.String())
+    mean = db.Column(db.Float())
+    variance = db.Column(db.Float())
+    skewness = db.Column(db.Float())
+    kurtosis = db.Column(db.Float())
 
     mu = db.Column(db.Float())
     volatility_t0 = db.Column(db.Float())

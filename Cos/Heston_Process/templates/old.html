@@ -6,9 +6,11 @@
     </script>
     <script type="text/javascript">
         Bokeh.set_log_level("info")
+
+
     </script>
 
-   <script type="text/javascript" async
+    <script type="text/javascript" async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
@@ -86,6 +88,27 @@
                                     </div>
 
                                     {% endif %}
+                                </div>
+                                <div class="row">
+                                    <table>
+                                        <h5>Table of moments</h5>
+                                        <thead>
+
+                                        <td> Mean</td>
+                                        <td> Variance</td>
+                                        <td> Skewness</td>
+                                        <td> Kurtosis</td>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+
+                                            <td>{{result['mean']}}</td>
+                                            <td>{{result['variance']}}</td>
+                                            <td>{{result['skewness']}}</td>
+                                            <td>{{result['kurtosis']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>
