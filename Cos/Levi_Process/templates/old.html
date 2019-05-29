@@ -18,7 +18,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>Cos Method</title>
+   <title>Cos Method - Levy Processes</title>
 </head>
 
 <body class="w3-myfont">
@@ -42,17 +42,11 @@
                                 {{result['form'].mu.data}}
 
                                 <div id="normal">
-
-
                                     \(\sigma\):
                                     {{result['form'].sigma_normal.data}}
-
-
                                 </div>
 
                                 <div id="vg">
-
-
                                     \(\sigma\):
                                     {{result['form'].sigma_vg.data}} <br/>
 
@@ -61,13 +55,9 @@
 
                                     \(\theta\):
                                     {{result['form'].theta.data}}
-
-
                                 </div>
 
                                 <div id="cgmy">
-
-
                                     \(C\):
                                     {{result['form'].c.data}} <br/>
 
@@ -79,15 +69,15 @@
 
                                     \(Y\):
                                     {{result['form'].y.data}}
-
-
                                 </div>
+
+                                <!--\((\%) \) is a Mathjax symbol for % -->
 
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}}
-                                {{result['form'].risk_free.label}}
+                                {{result['form'].risk_free.label}} \((\%) \)
                                 {{result['form'].risk_free.data}}
-                                {{result['form'].dividend_yield.label}}
+                                {{result['form'].dividend_yield.label}} \((\%) \)
                                 {{result['form'].dividend_yield.data}}
                                 {{result['form'].strike_min.label}}
                                 {{result['form'].strike_min.data}}

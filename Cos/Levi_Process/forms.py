@@ -17,13 +17,13 @@ class ComputeForm(wtf.Form):
     m = wtf.FloatField(label='M', default=5)
     y = wtf.FloatField(label='Y', default=0.5)
 
-    price = wtf.FloatField(label='Price', default=100, validators=[wtf.validators.InputRequired()])
+    price = wtf.FloatField(label='Spot Price', default=100, validators=[wtf.validators.InputRequired()])
     strike_min = wtf.FloatField(label='Strike Min', default=70, validators=[wtf.validators.InputRequired()])
     strike_max = wtf.FloatField(label='Strike Max', default=130, validators=[wtf.validators.InputRequired()])
-    risk_free = wtf.FloatField(label='Risk Free (%)', default=2, validators=[wtf.validators.InputRequired()])
-    dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0,
+    risk_free = wtf.FloatField(label='Risk Free', default=2, validators=[wtf.validators.InputRequired()])
+    dividend_yield = wtf.FloatField(label='Dividend Yield', default=0,
                                     validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time expiration', default=1, validators=[wtf.validators.InputRequired()])
+    time = wtf.FloatField(label='Time to expiration', default=1, validators=[wtf.validators.InputRequired()])
     call_put = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put')], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')

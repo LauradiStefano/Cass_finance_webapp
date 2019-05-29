@@ -84,6 +84,8 @@ def index():
             object.variance = variance
             object.skewness = skewness
             object.kurtosis = kurtosis
+            object.option_prices = json.dumps(option_prices)
+            object.number_of_strike = json.dumps(number_of_strike)
 
             object.user = user
             db.session.add(object)
@@ -104,6 +106,8 @@ def index():
                 variance = instance.variance
                 skewness = instance.skewness
                 kurtosis = instance.kurtosis
+                option_prices = json.loads(instance.option_prices)
+                number_of_strike = json.loads(instance.number_of_strike)
 
                 plot_return_underlying_distribution = \
                     create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf)
@@ -190,6 +194,8 @@ def old():
             variance = instance.variance
             skewness = instance.skewness
             kurtosis = instance.kurtosis
+            option_prices = json.loads(instance.option_prices)
+            number_of_strike = json.loads(instance.number_of_strike)
 
             plot_return_underlying_distribution = \
                 create_plot_return_underlying_distribution(underlying_prices, pdf_underlying_asset, norm_pdf)

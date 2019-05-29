@@ -44,7 +44,7 @@ class Compute(db.Model):
     pdf_underlying_asset = db.Column(db.String())
     underlying_prices = db.Column(db.String())
     price = db.Column(db.Float())
-    call_put = db.Column(db.Integer())
+    call_put = db.Column(db.String())
     risk_free = db.Column(db.Float())
     dividend_yield = db.Column(db.Float())
     option_prices = db.Column(db.String())
@@ -54,6 +54,7 @@ class Compute(db.Model):
     implied_volatility = db.Column(db.String())
     norm_pdf = db.Column(db.String())
     type_choice = db.Column(db.String())
+    number_of_strike = db.Column(db.String())
 
     mu = db.Column(db.Float())
     sigma_normal = db.Column(db.Float())

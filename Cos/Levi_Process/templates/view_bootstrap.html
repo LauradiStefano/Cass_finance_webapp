@@ -45,7 +45,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>COS Method</title>
+    <title>Cos Method - Levy Processes</title>
 
 </head>
 
@@ -59,7 +59,7 @@
 <p align="right"><a href="/login">Login</a> / <a href="/reg">Register&nbsp;</a></p>
 {% endif %}
 
-<h2>COS Method</h2>
+<h2>COS Method - Levy Processes</h2>
 
 <h3>A pricing method for European option based on Fourier-Cosine series expansions: </h3> <br>
 <div class="container">
@@ -177,8 +177,8 @@
 
             </div>
         </div>
-
         <br/>
+
         <div class="row">
             <div class="col-xs-2">
                 {{form.price.label}}
@@ -201,9 +201,10 @@
             </div>
         </div>
         <br/>
+        <!--\((\%) \) is a Mathjax symbol for % -->
         <div class="row">
             <div class="col-xs-2">
-                {{form.risk_free.label}}
+                {{form.risk_free.label}} \((\%) \)
                 {{form.risk_free}}
                 {% if form.risk_free.errors %}
                 {% for error in form.risk_free.errors %}
@@ -213,7 +214,7 @@
             </div>
 
             <div class="col-xs-2">
-                {{form.dividend_yield.label}}
+                {{form.dividend_yield.label}} \((\%) \)
                 {{form.dividend_yield}}
                 {% if form.dividend_yield.errors %}
                 {% for error in form.dividend_yield.errors %}
@@ -262,10 +263,10 @@
         </div>
 
     </form>
-
+     {% if plot_return_underlying_distribution != None %}
     <div class="row">
         <h4>Results: </h4>
-        {% if plot_return_underlying_distribution != None %}
+
 
         <div id="button_view_details" class="popup_table_open">
             {{form.button_view_details}}
