@@ -43,7 +43,7 @@ class Compute(db.Model):
     heston_pdf = db.Column(db.String())
     returns = db.Column(db.String())
     price = db.Column(db.Float())
-    call_put = db.Column(db.Integer())
+    call_put = db.Column(db.String())
     risk_free = db.Column(db.Float())
     dividend_yield = db.Column(db.Float())
     strike_min = db.Column(db.Float())

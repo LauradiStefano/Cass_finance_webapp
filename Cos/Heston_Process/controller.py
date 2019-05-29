@@ -72,7 +72,7 @@ def index():
             object.implied_volatility = json.dumps(implied_volatility)
             object.option_prices = json.dumps(option_prices)
             object.number_of_strike = json.dumps(number_of_strike)
-            object.norm_pdf = json.dumps(norm_pdf)
+            object.norm_pdf = json.dumps(norm_pdf.tolist())
             object.mean = mean
             object.variance = variance
             object.skewness = skewness
@@ -94,7 +94,7 @@ def index():
                 implied_volatility = json.loads(instance.implied_volatility)
                 option_prices = json.loads(instance.option_prices)
                 number_of_strike = json.loads(instance.number_of_strike)
-                norm_pdf = json.loads(instance.norm_pdf)
+                norm_pdf = np.array(json.loads(instance.norm_pdf))
                 mean = instance.mean
                 variance = instance.variance
                 skewness = instance.skewness
@@ -183,7 +183,7 @@ def old():
             implied_volatility = json.loads(instance.implied_volatility)
             option_prices = json.loads(instance.option_prices)
             number_of_strike = json.loads(instance.number_of_strike)
-            norm_pdf = json.loads(instance.norm_pdf)
+            norm_pdf = np.array(json.loads(instance.norm_pdf))
             mean = instance.mean
             variance = instance.variance
             skewness = instance.skewness
@@ -194,8 +194,8 @@ def old():
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
-            implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
-            option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
+            # implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
+            # option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
             mean = round(mean, 4) if mean is not None else None
             variance = round(variance, 4) if variance is not None else None
             skewness = round(skewness, 4) if skewness is not None else None

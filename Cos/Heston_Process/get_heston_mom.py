@@ -23,7 +23,8 @@ def momHeston(kappa, theta, sigma, rho, tau, r, S0, v0, central):
     #    S0      = initial stock price
 
     # Log of the stock price.
-    x0 = np.log(S0)
+    k = 100
+    x0 = np.log(S0/k)
 
     # powers of parameters
     x02 = x0 ** 2

@@ -34,6 +34,8 @@
 
 
 
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
@@ -46,7 +48,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>COS Method</title>
+    <title>COS Method - Heston Model</title>
 
 </head>
 
@@ -60,15 +62,16 @@
 <p align="right"><a href="/login">Login</a> / <a href="/reg">Register&nbsp;</a></p>
 {% endif %}
 
-<h2>COS Method</h2>
+<h2>COS Method - Heston Model</h2>
 
 <h3>A pricing method for European option based on Fourier-Cosine series expansions: </h3> <br>
 <div class="container">
+    <h4>Input</h4>
     <form class="navbar-form" method="post" action="">
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-        <h4>Input</h4>
         <div class="row">
 
             <div class="row">
@@ -160,9 +163,11 @@
                 </div>
             </div>
             <br/>
+
+            <!--\((\%) \) is a Mathjax symbol for % -->
             <div class="row">
                 <div class="col-xs-2">
-                    {{form.risk_free.label}}
+                    {{form.risk_free.label}} \((\%) \)
                     {{form.risk_free}}
                     {% if form.risk_free.errors %}
                     {% for error in form.risk_free.errors %}
@@ -172,7 +177,7 @@
                 </div>
 
                 <div class="col-xs-2">
-                    {{form.dividend_yield.label}}
+                    {{form.dividend_yield.label}} \((\%) \)
                     {{form.dividend_yield}}
                     {% if form.dividend_yield.errors %}
                     {% for error in form.dividend_yield.errors %}
@@ -222,10 +227,10 @@
         </div>
 
     </form>
+    {% if plot_return_underlying_distribution != None %}
 
     <div class="row">
         <h4>Results: </h4>
-        {% if plot_return_underlying_distribution != None %}
 
         <div id="button_view_details" class="popup_table_open">
             {{form.button_view_details}}

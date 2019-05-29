@@ -19,7 +19,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>Cos Method</title>
+    <title>Cos Method - Heston Model</title>
 </head>
 
 <body class="w3-myfont">
@@ -55,9 +55,9 @@
 
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}}
-                                {{result['form'].risk_free.label}}
+                                {{result['form'].risk_free.label}} \((\%) \)
                                 {{result['form'].risk_free.data}}
-                                {{result['form'].dividend_yield.label}}
+                                {{result['form'].dividend_yield.label}} \((\%) \)
                                 {{result['form'].dividend_yield.data}}
                                 {{result['form'].strike_min.label}}
                                 {{result['form'].strike_min.data}}
@@ -75,20 +75,6 @@
 
                                 {% if result['plot_return_underlying_distribution'] != None %}
 
-                                <div class="col-xs-6">
-
-                                    <div id="plot_return_underlying_distribution">
-                                        {{ result['plot_return_underlying_distribution'][0]|safe }}
-                                        {{ result['plot_return_underlying_distribution'][1]|safe }}
-                                    </div>
-
-                                    <div class="plot_implied_volatility">
-                                        {{ result['plot_implied_volatility'][0]|safe }}
-                                        {{ result['plot_implied_volatility'][1]|safe }}
-                                    </div>
-
-                                    {% endif %}
-                                </div>
                                 <div class="row">
                                     <table>
                                         <h5>Table of moments</h5>
@@ -109,6 +95,22 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                </div>
+
+
+                                <div class="col-xs-6">
+
+                                    <div id="plot_return_underlying_distribution">
+                                        {{ result['plot_return_underlying_distribution'][0]|safe }}
+                                        {{ result['plot_return_underlying_distribution'][1]|safe }}
+                                    </div>
+
+                                    <div class="plot_implied_volatility">
+                                        {{ result['plot_implied_volatility'][0]|safe }}
+                                        {{ result['plot_implied_volatility'][1]|safe }}
+                                    </div>
+
+                                    {% endif %}
                                 </div>
 
                             </div>
