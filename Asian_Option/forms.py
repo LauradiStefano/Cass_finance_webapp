@@ -55,7 +55,6 @@ class ComputeForm(wtf.Form):
 
     # CEV distribution
     beta_cev = wtf.FloatField(label='Beta', default=-0.25)
-    # f_cev = wtf.FloatField(label='F', default=0.120381)
 
     grid = wtf.FloatField(label='Grid Point (2^)', default=15)
     upper_range = wtf.FloatField(label='Upper Range', default=2)
@@ -64,7 +63,7 @@ class ComputeForm(wtf.Form):
     tolerance = wtf.FloatField(label='Tolerance', default=0.00001)
 
     price = wtf.FloatField(label='Spot Price', default=100, validators=[wtf.validators.InputRequired()])
-    risk_free = wtf.FloatField(label='Risk Free (%)', default=3.67, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Risk Free', default=3.67, validators=[wtf.validators.InputRequired()])
     # dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0,
     #                                 validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to Maturity', default=1, validators=[wtf.validators.InputRequired()])

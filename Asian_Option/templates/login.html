@@ -6,7 +6,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-    <title>Shimko bounds of probability</title>
+    <title>Asian Option</title>
 </head>
 
 <body class="w3-myfont">
@@ -20,13 +20,11 @@
             <div class="input ">
 
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-6">
                         {{ form.username.label }}
-                    </div>
-                    <div class="col-xs-5">
                         {{ form.username }}
                     </div>
-                    <div class="col-xs-5">
+                    <div class="col-xs-6">
                         {% if form.username.errors %}
                         {% for error in form.username.errors %}
                         <div style="color: red;">{{ error }}</div>
@@ -36,13 +34,12 @@
                 </div>
                 <br/>
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-xs-6">
                         {{ form.password.label }}
-                    </div>
-                    <div class="col-xs-5">
+
                         {{ form.password}}
                     </div>
-                    <div class="col-xs-5">
+                    <div class="col-xs-6">
                         {% if form.password.errors %}
                         {% for error in form.username.errors %}
                         <div style="color: red;">{{ error }}</div>

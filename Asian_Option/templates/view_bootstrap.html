@@ -52,23 +52,13 @@
 
 
 
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <!--<script type="text/x-mathjax-config">-->
-    <!--MathJax.Hub.Config({-->
-    <!--TeX: {-->
-    <!--equationNumbers: {  autoNumber: "AMS"  },-->
-    <!--extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]-->
-    <!--}-->
-    <!--});-->
-
-
-    <!--</script>-->
-    <!--<script type="text/javascript"-->
-    <!--src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">-->
-    <!--</script>-->
 
     <script type="text/javascript" async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
@@ -425,8 +415,10 @@
                         {% endif %}
                     </div>
 
+                    <!--\((\%) \) is a Mathjax symbol for % -->
+
                     <div class="col-xs-2">
-                        {{form.risk_free.label}}
+                        {{form.risk_free.label}} \((\%) \)
                         {{form.risk_free}}
                         {% if form.risk_free.errors %}
                         {% for error in form.risk_free.errors %}
@@ -539,9 +531,11 @@
 
     </form>
 
+    {% if plot_lower_bound != None %}
+
     <div class="row">
         <label>Results: </label>
-        {% if plot_lower_bound != None %}
+
 
         <div class="row">
 
@@ -703,6 +697,9 @@
             }
         });
     });
+
+
+
 
 
 
