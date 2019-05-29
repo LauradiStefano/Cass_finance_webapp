@@ -101,10 +101,15 @@ def index():
         plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
                                                                               pdf_bench_norm_returns)
 
-        if form.risk_dividend.data == '1':
+        if form.risk_dividend.data == '1':  # risk free and div yield are implicitly calculated
+            risk_free = risk_free * 100
+            div_yield = div_yield * 100
 
             risk_free = round(risk_free, 4) if risk_free is not None else None
             div_yield = round(div_yield, 4) if div_yield is not None else None
+        else:
+            risk_free = form.risk_free.data
+            div_yield = form.div_yield.data
 
         if '0' in form.plot_choice.data:
             st, pdf, pdf_bench_log_prices = compute_underlying_distribution(a0, a1, a2, form.price.data, risk_free,
@@ -176,11 +181,14 @@ def index():
             object.pvalue_returns = pvalue_returns
             object.price = form.price.data
             object.call_put_flag = form.call_put_flag.data
-
-            object.risk_free = risk_free
-            object.div_yield = div_yield
-
             object.risk_dividend = form.risk_dividend.data
+
+            if form.risk_dividend.data == '1':
+                object.risk_free = risk_free
+                object.div_yield = div_yield
+            else:
+                object.risk_free = form.risk_free.data
+                object.div_yield = form.div_yield.data
 
             if st is not None:  # user chooses the plot
                 object.st = json.dumps(st.tolist())
@@ -238,15 +246,18 @@ def index():
                 pvalue_prices = instance.pvalue_prices
                 pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
-
                 risk_dividend = instance.risk_dividend
-                risk_free = instance.risk_free
-                div_yield = instance.div_yield
 
                 if risk_dividend == '1':
 
+                    risk_free = instance.risk_free
+                    div_yield = instance.div_yield
                     risk_free = round(risk_free, 4) if risk_free is not None else None
                     div_yield = round(div_yield, 4) if div_yield is not None else None
+
+                else:
+                    risk_free = instance.risk_free
+                    div_yield = instance.div_yield
 
                 if instance.st is not None:
                     st = np.array(json.loads(instance.st))
@@ -404,8 +415,6 @@ def old():
             pvalue_prices = instance.pvalue_prices
             pvalue_returns = instance.pvalue_returns
             risk_dividend = instance.risk_dividend
-            risk_free = instance.risk_free
-            div_yield = instance.div_yield
 
             plot_choice = json.loads(instance.plot_choice)
 
@@ -414,8 +423,14 @@ def old():
             plot_return_cdf = None
 
             if risk_dividend == '1':
+
+                risk_free = instance.risk_free
+                div_yield = instance.div_yield
                 risk_free = round(risk_free, 4) if risk_free is not None else None
                 div_yield = round(div_yield, 4) if div_yield is not None else None
+            else:
+                risk_free = form.risk_free.data
+                div_yield = form.div_yield.data
 
             if instance.st is not None:
 

@@ -158,16 +158,18 @@
         <div class="row">
             {% if plot_implied_volatility != None %}
             <div class="col-6 col-xs-6">
-                <h4>Result: </h4>
+                <h4>Results: </h4>
                 <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
                 <h5>
                     <span> \(a_{0}\): {{a0}}</span><br/>
                     <span> \(a_{1}\): {{a1}}</span><br/>
                     <span> \(a_{2}\): {{a2}}</span><br/><br/>
                     <span> \(R^{2}\): {{r2}}</span> <br/><br/>
-                    {%if form.risk_dividend.data == '1' or risk_dividend == '1'%}
-                    <span> Risk Free (%): {{risk_free}}</span> <br/><br/>
-                    <span> Dividend Yield (%): {{div_yield}}</span>
+
+                    <!--\((\%) \) is a Mathjax symbol for % -->
+                    {%if form.risk_dividend.data == '1'%}
+                    <span> Risk Free \((\%)\): {{risk_free}}</span> <br/><br/>
+                    <span> Dividend Yield \((\%)\): {{div_yield}}</span>
                     {%endif%}
                 </h5> <br/>
                 <h6><span> File Name: {{file_name}}</span></h6>

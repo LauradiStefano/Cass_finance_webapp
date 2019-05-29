@@ -5,61 +5,13 @@
     <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
     </script>
     <script type="text/javascript">
-        Bokeh.set_log_level("info");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        Bokeh.set_log_level("info")
 
 
     </script>
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
 
     <!--bootstrap is library for developing websites-->
@@ -86,16 +38,18 @@
                     <div class="row">
                         <div class="output">
 
-                              <!--\((\%) \) is a Mathjax symbol for % -->
+                            <!--\((\%) \) is a Mathjax symbol for % -->
 
                             <div class="col-xs-8">
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}}
 
+                                {% if result['form'].risk_dividend.data == '0' %}
                                 {{result['form'].risk_free.label}} \((\%) \)
                                 {{result['form'].risk_free.data}}
                                 {{result['form'].div_yield.label}} \((\%) \)
                                 {{result['form'].div_yield.data}}
+                                {%endif%}
 
                             </div>
 
@@ -106,6 +60,7 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <h4>Results</h4>
+                        <!--\((\%) \) is a Mathjax symbol for % -->
                         {% if result[' plot_implied_volatility'] != None %}
                         <div class="row">
                             <span> \(a_{0}\): {{result ['a0']}}</span><br/>
@@ -113,14 +68,13 @@
                             <span> \(a_{2}\): {{result ['a2']}}</span><br/>
                             <span> \(R^{2}\): {{result ['r2']}}</span><br/>
 
-                             {% if result['risk_dividend'] == 1 %}
-                            <span> Risk Free: {{result['risk_free']}}</span><br/>
-                            <span> Dividend Yield: {{result['div_yield']}}</span><br/>
+                            {% if result['form'].risk_dividend.data == '1' %}
+                            <span> Risk Free \((\%) \): {{result['risk_free']}}</span><br/>
+                            <span> Dividend Yield \((\%) \): {{result['div_yield']}}</span><br/>
                             {% endif %}
 
 
                             <span> File Name: {{result['file_name']}}</span><br/>
-
 
 
                             <h4> Table of moments </h4>
