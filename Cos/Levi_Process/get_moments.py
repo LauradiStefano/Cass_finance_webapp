@@ -12,13 +12,13 @@ import numpy as np
 def compute_moments(type_choice, parameters):
     type_choice = int(type_choice)
 
-    if type_choice == 1:
+    if type_choice == 0:
         mean = parameters[0]
         variance = parameters[1] ** 2
         skewness = 0
         kurtosis = 3
 
-    elif type_choice == 2:  # VG
+    elif type_choice == 1:  # VG
         sigma = parameters[1]
         theta = parameters[2]
         kappa = parameters[3]
@@ -30,7 +30,7 @@ def compute_moments(type_choice, parameters):
         skewness = skew_nominatore / skew_denominatore
         kurtosis = 3 * (1 + 2 * kappa - kappa * sigma ** 4 * (sigma ** 2 + kappa * theta ** 2) ** (-2))
 
-    elif type_choice == 3:  # NIG
+    elif type_choice == 2:  # NIG
 
         sigma = parameters[1]
         theta = parameters[2]
@@ -41,7 +41,7 @@ def compute_moments(type_choice, parameters):
         skewness = 3 * theta * kappa ** (-1) * sigma ** (-0.5) * (kappa ** 2 - theta ** 2) ** (-1 / 4)
         kurtosis = 3 * (1 + (kappa ** 2 + 4 * theta ** 2) / (sigma * kappa ** 2 * math.sqrt(kappa ** 2 - theta ** 2)))
 
-    else:  # type_choice == 4 CGMY
+    else:  # type_choice == 3 CGMY
         C = parameters[1]
         G = parameters[2]
         M = parameters[3]

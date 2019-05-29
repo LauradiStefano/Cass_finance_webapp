@@ -12,13 +12,13 @@ import numpy as np
 def CharFunc(parameters, type_choice, u, dt):
     type_choice = int(type_choice)
 
-    if type_choice == 1:
+    if type_choice == 0:
         CharFn = NormCF(parameters, u, dt)
-    elif type_choice == 2:
+    elif type_choice == 1:
         CharFn = VGCF(parameters, u, dt)
-    elif type_choice == 3:
+    elif type_choice == 2:
         CharFn = NIGCF(parameters, u, dt)
-    else:  # type_choice == 4
+    else:  # type_choice == 3
         CharFn = CGMYCF(parameters, u, dt)
 
     ret = CharFn

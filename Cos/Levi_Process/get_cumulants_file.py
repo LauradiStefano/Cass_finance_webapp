@@ -14,13 +14,13 @@ import math
 def get_cumulants(parameters, type_choice, dt):
     type_choice = int(type_choice)
 
-    if type_choice == 1:
+    if type_choice == 0:
         c1, c2, c3, c4 = Norm_cum(parameters, dt)
-    elif type_choice == 2:
+    elif type_choice == 1:
         c1, c2, c3, c4 = VG_cum(parameters, dt)
-    elif type_choice == 3:
+    elif type_choice == 2:
         c1, c2, c3, c4 = NIG_cum(parameters, dt)
-    else:  # type_choice == 4:
+    else:  # type_choice == 3:
         c1, c2, c3, c4 = CGMY_cum(parameters, dt)
 
     return c1, c2, c3, c4

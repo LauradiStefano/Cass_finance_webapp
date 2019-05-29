@@ -90,7 +90,7 @@
             </div>
 
             <div class="col-xs-10">
-                <div id="normal" class="row" {% if form.type_choice.data !='1' and form.type_choice !=None %}
+                <div id="normal" class="row" {% if form.type_choice.data !='0' and form.type_choice !=None %}
                      style="display:none" {%endif%}>
 
                     <div class="col-xs-3">
@@ -103,7 +103,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div id="vg" class="row" {% if form.type_choice.data !='2' and form.type_choice.data !='3' %}
+                <div id="vg" class="row" {% if form.type_choice.data !='1' and form.type_choice.data !='2' %}
                      style="display:none" {%endif%}>
 
                     <div class="col-xs-3">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <div id="cgmy" class="row" {% if form.type_choice.data !='4' %} style="display:none" {%endif%}>
+                <div id="cgmy" class="row" {% if form.type_choice.data !='3' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-3">
                         $$ C $$
@@ -346,11 +346,11 @@
         var cgmy = $('#cgmy');
 
         select_distribution.on('change', function() {
-            if (select_distribution.val() == '1') {
+            if (select_distribution.val() == '0') {
                 normal.show();
                 vg.hide();
                 cgmy.hide();
-            } else if ((select_distribution.val() == '2') || (select_distribution.val() == '3')) {
+            } else if ((select_distribution.val() == '1') || (select_distribution.val() == '2')) {
                 normal.hide();
                 vg.show();
                 cgmy.hide();

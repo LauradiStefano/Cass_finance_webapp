@@ -20,13 +20,13 @@ from getbs import find_vol
 
 def select_parameters(type_choice, mu, sigma_normal, sigma_vg, kappa, theta, c, g, m, y):
     type_choice = int(type_choice)
-    if type_choice == 1:
+    if type_choice == 0:
         parameters = [mu, sigma_normal]
 
-    elif type_choice == 2 or type_choice == 3:
+    elif type_choice == 1 or type_choice == 2:
         parameters = [mu, sigma_vg, theta, kappa]
 
-    else:  # type_choice == 4
+    else:  # type_choice == 3
         parameters = [mu, c, g, m, y]
 
     return parameters

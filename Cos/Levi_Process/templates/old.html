@@ -7,6 +7,7 @@
     <script type="text/javascript">
         Bokeh.set_log_level("info")
 
+
     </script>
 
     <script type="text/javascript" async
@@ -18,7 +19,7 @@
 
     <link href="/static/basic.css" rel="stylesheet">
 
-   <title>Cos Method - Levy Processes</title>
+    <title>Cos Method - Levy Processes</title>
 </head>
 
 <body class="w3-myfont">
@@ -42,11 +43,15 @@
                                 {{result['form'].mu.data}}
 
                                 <div id="normal">
+                                    {% if result['form'].type_choice.data == '0' %}
                                     \(\sigma\):
                                     {{result['form'].sigma_normal.data}}
+                                    {%endif%}
                                 </div>
 
                                 <div id="vg">
+                                    {% if result['form'].type_choice.data == '1' or result['form'].type_choice.data ==
+                                    '2' %}
                                     \(\sigma\):
                                     {{result['form'].sigma_vg.data}} <br/>
 
@@ -55,9 +60,11 @@
 
                                     \(\theta\):
                                     {{result['form'].theta.data}}
+                                    {%endif%}
                                 </div>
 
                                 <div id="cgmy">
+                                    {% if result['form'].type_choice.data == '3' %}
                                     \(C\):
                                     {{result['form'].c.data}} <br/>
 
@@ -69,6 +76,7 @@
 
                                     \(Y\):
                                     {{result['form'].y.data}}
+                                    {%endif%}
                                 </div>
 
                                 <!--\((\%) \) is a Mathjax symbol for % -->

@@ -5,7 +5,7 @@ import wtforms.fields.html5 as html5
 
 class ComputeForm(wtf.Form):
     type_choice = wtf.SelectField('Distribution',
-                                  choices=[('1', 'Normal'), ('2', 'VG'), ('3', 'NIG'), ('4', 'CGMY')], default='1')
+                                  choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'NIG'), ('3', 'CGMY')], default='0')
 
     mu = wtf.FloatField(label='Mu', default=0)
     sigma_normal = wtf.FloatField(label='Sigma', default=0.12)
