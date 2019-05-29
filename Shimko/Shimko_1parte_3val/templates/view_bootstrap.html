@@ -18,26 +18,16 @@
 
 
 
+
+
+
     </script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
-
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -116,8 +106,11 @@
                         <br/>
 
                         <div class="row">
+
+                            <!--\((\%) \) is a Mathjax symbol for % -->
+
                             <div class="col-xs-3">
-                                <label>Implied Volatility (%)</label>
+                                <label>Implied Volatility \((\%) \)</label>
                             </div>
                             <div class="col-xs-3">
                                 {{ (form.volatility_min) }}
@@ -151,45 +144,45 @@
                     <div class="row">
                         <div class="col-xs-3">
                             {{form.price.label}}
-                        </div>
-                        <div class="col-xs-3">
                             {{form.price}}
-                        </div>
-                        <div class="col-xs-3">
+
                             {% if form.price.errors %}
                             {% for error in form.price.errors %}
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
                         </div>
+
+                        <div class="col-xs-3">
+                            {{form.time.label}}
+                            {{form.time}}
+
+                            {% if form.time.errors %}
+                            {% for error in form.time.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
                     </div>
                     <br/>
 
                     <div class="row">
                         <div class="col-xs-3">
-                            {{form.risk_free.label}}
-                        </div>
-                        <div class="col-xs-3">
+                            {{form.risk_free.label}}  \((\%) \)
                             {{form.risk_free}}
-                        </div>
-                        <div class="col-xs-3">
+
                             {% if form.risk_free.errors %}
                             {% for error in form.risk_free.errors %}
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
                         </div>
-                    </div>
-                    <br/>
 
-                    <div class="row">
                         <div class="col-xs-3">
-                            {{form.div_yield.label}}
-                        </div>
-                        <div class="col-xs-3">
+                            {{form.div_yield.label}} \((\%) \)
                             {{form.div_yield}}
-                        </div>
-                        <div class="col-xs-3">
+
                             {% if form.div_yield.errors %}
                             {% for error in form.div_yield.errors %}
                             <div style="color: red;">{{ error }}</div>
@@ -198,28 +191,9 @@
                         </div>
                     </div>
                     <br/>
-
                     <div class="row">
-                        <div class="col-xs-3">
-                            {{form.time.label}}
-                        </div>
-                        <div class="col-xs-3">
-                            {{form.time}}
-                        </div>
-                        <div class="col-xs-3">
-                            {% if form.time.errors %}
-                            {% for error in form.time.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-xs-4">
                             {{form.plot_choice.label}}
-                        </div>
-                        <div class="col-xs-5">
                             {{form.plot_choice}}
                         </div>
                         <div class="col-xs-5">
@@ -241,10 +215,11 @@
     <br/>
     <div class="row">
         <div class="row">
+            {% if plot_implied_volatility != None %}
             <div class="col-6 col-xs-6">
-                <h4>Result: </h4>
+                <h4>Results: </h4>
                 <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
-                {% if plot_implied_volatility != None %}
+
                 <h5>
                     <span> \(a_{0}\): {{a0}}</span><br/>
                     <span> \(a_{1}\): {{a1}}</span><br/>

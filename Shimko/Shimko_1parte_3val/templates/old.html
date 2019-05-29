@@ -73,24 +73,25 @@
 
                     <div class="row">
                         <div class="output">
-                            <div class="col-xs-6">
+                             <!--\((\%) \) is a Mathjax symbol for % -->
+                            <div class="col-xs-8">
                                 {{result['form'].strike_min.label}}
                                 {{result['form'].strike_min.data}}
                                 {{result['form'].strike_atm.label}}
                                 {{result['form'].strike_atm.data}}
                                 {{result['form'].strike_max.label}}
                                 {{result['form'].strike_max.data}}
-                                {{result['form'].volatility_min.label}}
+                                {{result['form'].volatility_min.label}} \((\%) \)
                                 {{result['form'].volatility_min.data}}
-                                {{result['form'].volatility_atm.label}}
+                                {{result['form'].volatility_atm.label}} \((\%) \)
                                 {{result['form'].volatility_atm.data}}
-                                {{result['form'].volatility_max.label}}
+                                {{result['form'].volatility_max.label}} \((\%) \)
                                 {{result['form'].volatility_max.data}}
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}}
-                                {{result['form'].risk_free.label}}
+                                {{result['form'].risk_free.label}}  \((\%) \)
                                 {{result['form'].risk_free.data}}
-                                {{result['form'].div_yield.label}}
+                                {{result['form'].div_yield.label}}  \((\%) \)
                                 {{result['form'].div_yield.data}}
                                 {{result['form'].time.label}}
                                 {{result['form'].time.data}}
@@ -194,21 +195,21 @@
                             {{ result['plot_return_distribution'][1]|safe}}
                         </div>
 
-                        {% if result[' plot_index_distribution'] != None %}
+                        {% if result['plot_index_distribution'] != None %}
                         <div id="plot_index_distribution">
                             {{ result['plot_index_distribution'][0]|safe }}
                             {{ result['plot_index_distribution'][1]|safe }}
                         </div>
                         {% endif %}
 
-                        {% if result[' plot_index_cdf'] != None %}
+                        {% if result['plot_index_cdf'] != None %}
                         <div id="plot_index_cdf">
                             {{ result['plot_index_cdf'][0]|safe}}
                             {{ result['plot_index_cdf'][1]|safe}}
                         </div>
                         {% endif %}
 
-                        {% if result[' plot_return_cdf'] != None %}
+                        {% if result['plot_return_cdf'] != None %}
                         <div id="plot_return_cdf">
                             {{ result['plot_return_cdf'][0]|safe}}
                             {{ result['plot_return_cdf'][1]|safe}}
