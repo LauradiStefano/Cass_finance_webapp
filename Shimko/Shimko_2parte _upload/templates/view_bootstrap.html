@@ -25,30 +25,9 @@
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
     <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {  autoNumber: "AMS"  },
-            extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
     </script>
-
-    <script type="text/javascript"
-            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
-
     <!--bootstrap is library for developing websites-->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
@@ -77,16 +56,13 @@
         <form class="navbar-form" method="post" action="" enctype="multipart/form-data">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <div class="form-group">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-                <div class="input">
 
                     <div class="row">
-                        <div class="col-xs-4">
+                        <div class="col-xs-6">
                             {{form.file_name.label}}
                             {{form.file_name}}
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-6">
                             {% if form.file_name.errors %}
                             {% for error in form.file_name.errors %}
                             <div style="color: red;">{{ error }}</div>
@@ -113,8 +89,10 @@
 
                     <br/>
 
+                     <!--\((\%) \) is a Mathjax symbol for % -->
+
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-9">
                             {{form.risk_dividend.label}}
                             {{form.risk_dividend}}
                         </div>
@@ -126,7 +104,7 @@
                     <div id="risk_free" class="row"
                          {% if form.risk_dividend.data !='0' %} style="display:none" {%endif%}>
                         <div class="col-xs-4">
-                            {{form.risk_free.label}}
+                            {{form.risk_free.label}} \((\%) \)
                             {{form.risk_free}}
                             {% if form.risk_free.errors %}
                             {% for error in form.risk_free.errors %}
@@ -135,7 +113,7 @@
                             {% endif %}
                         </div>
                         <div class="col-xs-4">
-                            {{form.div_yield.label}}
+                            {{form.div_yield.label}} \((\%) \)
                             {{form.div_yield}}
                             {% if form.div_yield.errors %}
                             {% for error in form.div_yield.errors %}
@@ -161,20 +139,13 @@
 
                     <br/>
                     <div class="row">
-                        <div class="col-xs-5">
+                        <div class="col-xs-7">
                             {{form.plot_choice.label}}
                             {{form.plot_choice}}
                         </div>
-                        <div class="col-xs-5">
-                            {% if form.plot_choice.errors %}
-                            {% for error in form.plot_choice.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
-                        </div>
                     </div>
                     <br/>
-                </div>
+
                 <br/>
                 <div class="row">
                     {{form.button_compute}}
@@ -185,10 +156,10 @@
     <br/>
     <div class="row">
         <div class="row">
+            {% if plot_implied_volatility != None %}
             <div class="col-6 col-xs-6">
                 <h4>Result: </h4>
                 <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
-                {% if plot_implied_volatility != None %}
                 <h5>
                     <span> \(a_{0}\): {{a0}}</span><br/>
                     <span> \(a_{1}\): {{a1}}</span><br/>
@@ -337,6 +308,7 @@
             }
         });
     });
+
 
 
 

@@ -102,8 +102,6 @@ def index():
                                                                               pdf_bench_norm_returns)
 
         if form.risk_dividend.data == '1':
-            risk_free = risk_free * 100
-            div_yield = div_yield * 100
 
             risk_free = round(risk_free, 4) if risk_free is not None else None
             div_yield = round(div_yield, 4) if div_yield is not None else None
@@ -246,6 +244,7 @@ def index():
                 div_yield = instance.div_yield
 
                 if risk_dividend == '1':
+
                     risk_free = round(risk_free, 4) if risk_free is not None else None
                     div_yield = round(div_yield, 4) if div_yield is not None else None
 
