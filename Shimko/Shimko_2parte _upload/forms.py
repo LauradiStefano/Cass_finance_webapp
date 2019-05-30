@@ -1,6 +1,6 @@
 import wtforms as wtf
 import wtforms.fields.html5 as html5
-from wtforms import SelectMultipleField
+from wtforms import SelectMultipleField, validators
 from wtforms.validators import InputRequired, DataRequired, Length, EqualTo
 from wtforms.widgets import ListWidget, CheckboxInput
 
@@ -14,7 +14,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 class ComputeForm(wtf.Form):
     file_name = wtf.FileField(label='Import File')
-    price = wtf.FloatField(label='Spot Price', validators=[InputRequired()])
+    price = wtf.FloatField(label='Spot Price', validators=[InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Risk Free', default=5.04, validators=[InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield', default=3.14, validators=[InputRequired()])
 
