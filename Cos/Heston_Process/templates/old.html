@@ -64,7 +64,10 @@
                                 {{result['form'].strike_max.label}}
                                 {{result['form'].strike_max.data}}
                                 {{result['form'].time.label}}
-                                {{result['form'].time.data}}
+                                {{result['form'].time.data}} <br/>
+                                {{result['form'].call_put.label}}
+                                {{dict(result['form'].call_put.choices).get(result['form'].call_put.data)}}
+
 
                             </div>
                         </div>

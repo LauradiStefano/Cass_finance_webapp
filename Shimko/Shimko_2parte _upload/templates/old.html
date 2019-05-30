@@ -44,6 +44,9 @@
                                 {{result['form'].price.label}}
                                 {{result['form'].price.data}}
 
+                                {{result['form'].call_put_flag.label}}
+                                {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}} <br/>
+
                                 {% if result['form'].risk_dividend.data == '0' %}
                                 {{result['form'].risk_free.label}} \((\%) \)
                                 {{result['form'].risk_free.data}}

@@ -24,7 +24,7 @@ class ComputeForm(wtf.Form):
     dividend_yield = wtf.FloatField(label='Dividend Yield', default=0,
                                     validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to expiration', default=1, validators=[wtf.validators.InputRequired()])
-    call_put = wtf.RadioField('Call/Put', choices=[('1', 'Call'), ('0', 'Put')], default='1')
+    call_put = wtf.RadioField('Call-Put', choices=[('0', 'Put'), ('1', 'Call')], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
