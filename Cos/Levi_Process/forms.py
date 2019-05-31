@@ -45,16 +45,14 @@ class ComputeForm(wtf.Form):
 
 class RegistrationForm(wtf.Form):
     username = wtf.StringField(
-        label='Username', validators=[wtf.validators.DataRequired()])
+        label='Username', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     password = wtf.PasswordField(
         label='Password', validators=[
             wtf.validators.DataRequired(),
-            wtf.validators.EqualTo(
-                'confirm', message='Passwords must match')])
-    confirm = wtf.PasswordField(
-        label='Confirm Password',
-        validators=[wtf.validators.DataRequired()])
-    email = html5.EmailField(label='Email')
+            wtf.validators.EqualTo('confirm', message='Passwords must match')])
+    confirm = wtf.PasswordField(label='Confirm Password', validators=[wtf.validators.DataRequired()])
+    email = html5.EmailField(label='Email', validators=[wtf.validators.DataRequired(),
+                                                        validators.Email('Please enter your email address')])
     button_registration = wtf.SubmitField(label='Sign Up')
 
     def validate(self):
@@ -68,11 +66,9 @@ class RegistrationForm(wtf.Form):
         return True
 
 
-class Loginform(wtf.Form):
-    username = wtf.StringField(
-        label='Username', validators=[wtf.validators.DataRequired()])
-    password = wtf.PasswordField(
-        label='Password', validators=[wtf.validators.DataRequired()])
+class LoginForm(wtf.Form):
+    username = wtf.StringField(label='Username')
+    password = wtf.PasswordField(label='Password')
     button_login = wtf.SubmitField(label='Log In')
 
     def validate(self):

@@ -3,14 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="7e3cd1a2-69f6-4070-bf78-f0d21fe03ca7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../Asian_Option/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Asian_Option/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Asian_Option/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Asian_Option/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Asian_Option/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Asian_Option/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Asian_Option/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Asian_Option/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Cos/Heston_Process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Heston_Process/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Heston_Process/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Heston_Process/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Heston_Process/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Heston_Process/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Heston_Process/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Heston_Process/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Cos/Levi_Process/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Shimko_2parte _upload/templates/login.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -41,10 +51,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/old.html">
+        <entry file="file://$PROJECT_DIR$/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+            <state relative-caret-position="782">
+              <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -62,18 +72,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
+            <state relative-caret-position="102">
               <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -82,11 +83,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="76" column="47" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="47" />
+            <state relative-caret-position="-85">
+              <caret line="299" selection-start-line="299" selection-end-line="299" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -94,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="33" column="102" selection-start-line="33" selection-start-column="102" selection-end-line="33" selection-end-column="102" />
+            <state relative-caret-position="1105">
+              <caret line="70" column="39" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -109,7 +110,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/compute.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2958">
+            <state relative-caret-position="2737">
               <caret line="174" column="6" selection-start-line="174" selection-start-column="6" selection-end-line="174" selection-end-column="6" />
               <folding>
                 <element signature="e#85#96#0" expanded="true" />
@@ -121,7 +122,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
+            <state relative-caret-position="1071">
               <caret line="66" column="18" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="18" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -203,21 +204,22 @@
         <option value="$PROJECT_DIR$/getbs.py" />
         <option value="$PROJECT_DIR$/shimkofun.py" />
         <option value="$PROJECT_DIR$/db_models.py" />
-        <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/../../Asian_Option/templates/view_bootstrap.html" />
         <option value="$PROJECT_DIR$/compute.py" />
         <option value="$PROJECT_DIR$/templates/view_bootstrap.html" />
         <option value="$PROJECT_DIR$/templates/old.html" />
         <option value="$PROJECT_DIR$/templates/reg.html" />
-        <option value="$PROJECT_DIR$/templates/login.html" />
         <option value="$PROJECT_DIR$/forms.py" />
+        <option value="$PROJECT_DIR$/templates/login.html" />
+        <option value="$PROJECT_DIR$/controller.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
-    <option name="width" value="697" />
-    <option name="height" value="372" />
+    <option name="x" value="522" />
+    <option name="y" value="16" />
+    <option name="width" value="563" />
+    <option name="height" value="565" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -324,9 +326,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15550596" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.26488096" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -527,6 +528,13 @@
         <state relative-caret-position="-1785" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/old.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/view_bootstrap.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1190">
@@ -545,10 +553,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/old.html">
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
+        <state relative-caret-position="782">
+          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -562,16 +570,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="102">
           <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -579,19 +580,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1292">
-          <caret line="76" column="47" selection-start-line="76" selection-start-column="37" selection-end-line="76" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/compute.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2958">
+        <state relative-caret-position="2737">
           <caret line="174" column="6" selection-start-line="174" selection-start-column="6" selection-end-line="174" selection-end-column="6" />
           <folding>
             <element signature="e#85#96#0" expanded="true" />
@@ -601,7 +592,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/db_models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
+        <state relative-caret-position="1071">
           <caret line="66" column="18" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="18" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -611,10 +602,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="33" column="102" selection-start-line="33" selection-start-column="102" selection-end-line="33" selection-end-column="102" />
+        <state relative-caret-position="1105">
+          <caret line="70" column="39" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="299" selection-start-line="299" selection-end-line="299" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

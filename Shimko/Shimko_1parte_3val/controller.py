@@ -2,6 +2,7 @@ import json
 import os
 
 import numpy as np
+
 from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
@@ -301,6 +302,7 @@ def create_login():
         db.session.commit()
 
         login_user(user)
+        # flash('Thanks for registering')
         return redirect(url_for('index'))
     return render_template("reg.html", form=form)
 

@@ -155,8 +155,8 @@ def create_login():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    from forms import Loginform
-    form = Loginform(request.form)
+    from forms import LoginForm
+    form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         login_user(user)
