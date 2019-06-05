@@ -182,13 +182,8 @@ def index():
             object.price = form.price.data
             object.call_put_flag = form.call_put_flag.data
             object.risk_dividend = form.risk_dividend.data
-
-            if form.risk_dividend.data == '1':
-                object.risk_free = risk_free
-                object.div_yield = div_yield
-            else:
-                object.risk_free = form.risk_free.data
-                object.div_yield = form.div_yield.data
+            object.risk_free = risk_free
+            object.div_yield = div_yield
 
             if st is not None:  # user chooses the plot
                 object.st = json.dumps(st.tolist())
@@ -247,17 +242,13 @@ def index():
                 pvalue_returns = instance.pvalue_returns
                 plot_choice = json.loads(instance.plot_choice)
                 risk_dividend = instance.risk_dividend
+                risk_free = instance.risk_free
+                div_yield = instance.div_yield
 
                 if risk_dividend == '1':
 
-                    risk_free = instance.risk_free
-                    div_yield = instance.div_yield
                     risk_free = round(risk_free, 4) if risk_free is not None else None
                     div_yield = round(div_yield, 4) if div_yield is not None else None
-
-                else:
-                    risk_free = instance.risk_free
-                    div_yield = instance.div_yield
 
                 if instance.st is not None:
                     st = np.array(json.loads(instance.st))
@@ -421,16 +412,13 @@ def old():
             plot_index_distribution = None
             plot_index_cdf = None
             plot_return_cdf = None
+            risk_free = instance.risk_free
+            div_yield = instance.div_yield
 
             if risk_dividend == '1':
 
-                risk_free = instance.risk_free
-                div_yield = instance.div_yield
                 risk_free = round(risk_free, 4) if risk_free is not None else None
                 div_yield = round(div_yield, 4) if div_yield is not None else None
-            else:
-                risk_free = form.risk_free.data
-                div_yield = form.div_yield.data
 
             if instance.st is not None:
 
