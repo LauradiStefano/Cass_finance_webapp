@@ -101,8 +101,7 @@
                     <br/>
 
 
-                    <div id="risk_free" class="row"
-                         {% if form.risk_dividend.data !='0' %} style="display:none" {%endif%}>
+                    <div id= "risk_free" class="row" {% if form.risk_dividend.data !='0' %} style="display:none" {%endif%}>
                         <div class="col-xs-4">
                             {{form.risk_free.label}} \((\%) \)
                             {{form.risk_free}}
@@ -302,18 +301,14 @@
         var select_risk_dividend = $('#risk_dividend');
         var risk_free = $('#risk_free');
 
-        select_risk_dividend.on('change', function() {
-            if (select_risk_dividend.val() == '0') {
+        select_risk_dividend.on('click', function() {
+            if ($('[name=risk_dividend]:radio:checked').val() == '0') {
                 risk_free.show();
             } else {
                 risk_free.hide();
             }
         });
     });
-
-
-
-
 
 </script>
 </body>
