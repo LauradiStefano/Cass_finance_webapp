@@ -5,6 +5,14 @@ from wtforms import validators
 import db_models
 
 
+def check_vg_distribution(form, field):
+    """Form validation: failure if T > 30 periods."""
+    kappa = form.kappa.data
+    theta = field.data
+    if kappa < theta:
+        raise validators.ValidationError('Kappa must be greater than Beta')
+
+
 class ComputeForm(wtf.Form):
     type_choice = wtf.SelectField('Distribution',
                                   choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'NIG'), ('3', 'CGMY')], default='0')
@@ -15,8 +23,10 @@ class ComputeForm(wtf.Form):
                                   validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     sigma_vg = wtf.FloatField(label='Sigma', default=0.12,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    kappa = wtf.FloatField(label='kappa', default=0.2, validators=[wtf.validators.InputRequired()])
-    theta = wtf.FloatField(label='Theta', default=-0.14, validators=[wtf.validators.InputRequired()])
+    kappa = wtf.FloatField(label='kappa', default=0.2,
+                           validators=[wtf.validators.InputRequired()])
+    theta = wtf.FloatField(label='Theta', default=-0.14,
+                           validators=[wtf.validators.InputRequired(), check_vg_distribution])
     c = wtf.FloatField(label='C', default=1,
                        validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     g = wtf.FloatField(label='G', default=5,

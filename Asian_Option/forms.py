@@ -7,6 +7,23 @@ from wtforms import validators
 import db_models
 
 
+def check_vg_distribution(form, field):
+    """Form validation: failure if T > 30 periods."""
+    kappa = form.kappa.data
+    theta = field.data
+    if kappa < theta:
+        raise validators.ValidationError('Kappa must be greater than Beta')
+
+
+def check_nig_distribution(form, field):
+    """Form validation: failure if T > 30 periods."""
+    a_nig = form.a_nig.data
+    b_nig = field.data
+
+    if abs(b_nig) < 0 or abs(b_nig) > a_nig:
+        raise validators.ValidationError('Beta must be between 0 and alpha')
+
+
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Distribution',
                                    choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
@@ -19,7 +36,8 @@ class ComputeForm(wtf.Form):
     # VG distribution
     sigma_vg = wtf.FloatField(label='Sigma', default=0.180022,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    theta = wtf.FloatField(label='Theta', default=-0.136105, validators=[wtf.validators.InputRequired()])
+    theta = wtf.FloatField(label='Theta', default=-0.136105,
+                           validators=[wtf.validators.InputRequired(), check_vg_distribution])
     kappa = wtf.FloatField(label='Kappa', default=0.736703, validators=[wtf.validators.InputRequired()])
 
     # Heston distribution
@@ -36,7 +54,8 @@ class ComputeForm(wtf.Form):
 
     # NIG distribution
     a_nig = wtf.FloatField(label='A', default=6.1882, validators=[wtf.validators.InputRequired()])
-    b_nig = wtf.FloatField(label='B', default=-3.8941, validators=[wtf.validators.InputRequired()])
+    b_nig = wtf.FloatField(label='B', default=-3.8941,
+                           validators=[wtf.validators.InputRequired(), check_nig_distribution])
     delta_nig = wtf.FloatField(label='Delta', default=0.1622,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
