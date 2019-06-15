@@ -1,0 +1,470 @@
+<html>
+<!--HEAD -->
+<head>
+
+    <!--PY COMPONENTS -->
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+
+    <!--STYLE-->
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Shimko bounds of probability</title>
+
+</head>
+
+<!--BODY -->
+<body>
+
+
+<!-- NAVBAR -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_theoretical">
+                        Shimko theoretical
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                     <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        ...
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+
+            <span class="navbar-text">
+
+                <!-- LOGIN / REGISTER -->
+                {% if user.is_authenticated %}
+                Logged in as {{user.username}}
+                <a class="mx-3" href="/old">Previous simulations</a>
+                <a class="mx-2" href="/logout">Logout</a>
+
+                {% else %}
+                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                {% endif %}
+
+            </span>
+        </div>
+    </nav>
+</header>
+
+
+<!-- PAGE TITLE -->
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Shimko Bounds of probability</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">This function computes the bounds of
+                probability:</h2>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="">
+
+            <!-- FIRST ROW -->
+            <div class="row">
+
+                <!-- STRIKE -->
+                <div class="col-6">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Strike</legend>
+                        </div>
+
+                        <!-- MIN -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Min</label>
+                                {{ (form.strike_min) }}
+                                {% if form.strike_min.errors %}
+                                {% for error in form.strike_min.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- ATM -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Atm</label>
+                                {{ (form.strike_atm) }}
+                                {% if form.strike_atm.errors %}
+                                {% for error in form.strike_atm.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- MAX -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Max</label>
+                                {{ (form.strike_max) }}
+                                {% if form.strike_max.errors %}
+                                {% for error in form.strike_max.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div> <!-- /col strike -->
+                <!-- IMPLIED VOLATILITY % -->
+                <div class="col-6">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Implied Volatility \((\%) \)</legend>
+                        </div>
+
+                        <!-- MIN -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Min</label>
+                                {{ (form.volatility_min) }}
+                                {% if form.volatility_min.errors %}
+                                {% for error in form.volatility_min.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- ATM -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Atm</label>
+                                {{ (form.volatility_atm) }}
+                                {% if form.volatility_atm.errors %}
+                                {% for error in form.volatility_atm.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- MAX -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                <label>Max</label>
+                                {{ (form.volatility_max) }}
+                                {% if form.volatility_max.errors %}
+                                {% for error in form.volatility_max.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div> <!-- /col implied volatility -->
+
+            </div>
+
+
+            <!-- SECOND ROW -->
+            <div class="row">
+
+                <!-- OTHER FOUR -->
+                <div class="col-md-8 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <!-- SPOT PRICE -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- TIME TO EXPIRATION -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- RISK FREE -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.risk_free.label}} \((\%) \)
+                                {{form.risk_free}}
+
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- DIVIDEND YELD -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.div_yield.label}} \((\%) \)
+                                {{form.div_yield}}
+
+                                {% if form.div_yield.errors %}
+                                {% for error in form.div_yield.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div> <!-- /col other four -->
+                <!-- PLOT -->
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
+                        <!-- PLOT LIST-->
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Plot Selector</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{form.plot_choice}}
+
+                                {% if form.plot_choice.errors %}
+                                {% for error in form.plot_choice.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </div>
+
+
+            <!-- COMPUTE -->
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+
+        </form>
+    </div> <!-- /row justify-content-center -->
+
+    <div class="row p-3 d-flex justify-content-center">
+        <!-- RESULTS -->
+        {% if plot_implied_volatility != None %}
+        <div class="col-md-4 col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Results</legend>
+                </div>
+
+                <!--Smile -->
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h6 font-weight-bold">Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot
+                            k^{2}\)</label></br></br>
+                        <p class="font-weight-light"> \(a_{0}\): {{a0}}</p>
+                        <p class="font-weight-light"> \(a_{1}\): {{a1}}</p>
+                        <p class="font-weight-light"> \(a_{2}\): {{a2}}</p>
+                    </div>
+                </div>
+
+            </fieldset>
+        </div> <!-- /col smile -->
+
+        <div class="col-md-8 col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Kolmogorov Smirnov Test</legend>
+                </div>
+                <table class="table table-striped">
+                    <thead class="thead-light">
+                    <th scope="col"></th>
+                    <th scope="col"> Cdf Prices</th>
+                    <th scope="col"> Cdf Returns</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td> Statistic Value</td>
+                        <td> {{statistic_prices}}</td>
+                        <td> {{statistic_returns}}</td>
+
+                    </tr>
+                    <tr>
+                        <td> PValue</td>
+                        <td> {{pvalue_prices}}</td>
+                        <td> {{pvalue_returns}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex mb-3 justify-content-center">
+            <div id="button_view_details" class="popup_table_open">
+                {{form.button_view_details}}
+            </div>
+        </div>
+    </div>
+
+    <!-- BOKEH PLOTS -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{plot_implied_volatility[0]|safe}}
+                {{plot_implied_volatility[1]|safe}}
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div id="plot_return_distribution"
+                 class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{plot_return_distribution[0]|safe}}
+                {{plot_return_distribution[1]|safe}}
+            </div>
+        </div>
+    </div>
+
+    {%if plot_index_distribution != None%}
+    <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            <div id="plot_index_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{plot_index_distribution[0]|safe}}
+                {{plot_index_distribution[1]|safe}}
+            </div>
+        </div>
+    </div>
+    {%endif%}
+
+    <div class="row d-flex justify-content-center">
+        {%if plot_index_cdf != None%}
+        <div class="col-12">
+            <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{plot_index_cdf[0]|safe}}
+                {{plot_index_cdf[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+        {%if plot_return_cdf != None%}
+        <div class="col-12">
+            <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{plot_return_cdf[0]|safe}}
+                {{plot_return_cdf[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+    </div>
+
+    {% endif %}
+</div> <!-- /container -->
+<!-- POPUP TABLE -->
+<div id="popup_table" style="display:none">
+
+    <div class="row border-bottom mb-2 pb-1">
+        <legend>Table of moments</legend>
+    </div>
+    <table class="table table-striped" id="tableExport">
+        <thead class="thead-light">
+        <th scope="col"> Description</th>
+        <th scope="col"> Ceq</th>
+        <th scope="col"> LogNormal</th>
+        <th scope="col"> Ceq Return</th>
+        <th scope="col"> Normal</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td> Area</td>
+            <td> {{area_prices}}</td>
+            <td> 1</td>
+            <td> {{area_returns}}</td>
+            <td> 1</td>
+        </tr>
+        <tr>
+            <td> Mean</td>
+            <td> {{expected_price}}</td>
+            <td> {{expected_price}}</td>
+            <td> {{m1_returns}}</td>
+            <td> {{m1_returns}}</td>
+        </tr>
+        <tr>
+            <td> Variance</td>
+            <td> {{sigma2_price}}</td>
+            <td> {{sigma2_price}}</td>
+            <td> {{m2_returns}}</td>
+            <td> {{m2_returns}}</td>
+        </tr>
+        <tr>
+            <td> Skewness</td>
+            <td> {{skewness_prices}}</td>
+            <td> {{skewness_prices_log_n}}</td>
+            <td> {{skewness_log_returns}}</td>
+            <td> {{skewness_normal}}</td>
+        </tr>
+        <tr>
+            <td> Kurtosis</td>
+            <td> {{kurtosis_prices}}</td>
+            <td> {{kurtosis_prices_log_n}}</td>
+            <td> {{kurtosis_log_returns}}</td>
+            <td> {{kurtosis_normal}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row d-flex justify-content-center">
+        <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+            {{form.button_export_table}}
+        </div>
+    </div>
+</div>
+
+<!-- BODY SCRIPTS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup();</script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

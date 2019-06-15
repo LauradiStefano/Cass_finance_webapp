@@ -25,14 +25,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/shimko" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Shimko
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_theoretical">
+                        Shimko theoretical
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                     <a class="nav-link" href="#" id="navbarDropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">
                         ...
                     </a>
@@ -40,8 +39,18 @@
             </ul>
             <div class="dropdown-divider"></div>
 
-            <span class="navbar-text px-3">
-                <a href="/reg">Register</a>
+            <span class="navbar-text">
+
+                <!-- LOGIN / REGISTER -->
+                {% if user.is_authenticated %}
+                Logged in as {{user.username}}
+                <a class="mx-3" href="/old">Previous simulations</a>
+                <a class="mx-2" href="/logout">Logout</a>
+
+                {% else %}
+                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                {% endif %}
+
             </span>
         </div>
     </nav>

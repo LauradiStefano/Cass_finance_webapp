@@ -7,6 +7,8 @@ from flask_login import LoginManager, current_user, \
 from app import app
 from db_models import db, User
 
+from shimko_theoretical.controller import controller_shimko_theoretical
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -18,8 +20,14 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    user = current_user
-    return render_template("index.html", user=user)
+    return render_template("index.html", user=current_user)
+
+
+@app.route('/shimko_theoretical', methods=['GET', 'POST'])
+def shimko_theoretical():
+    # ** = {'a':1, 'b':2} --> (a=1, b=2)
+    template_variables = controller_shimko_theoretical(current_user, request)
+    return render_template("shimko_theoretical.html", **template_variables)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
@@ -35,6 +43,7 @@ def create_login():
         db.session.commit()
 
         login_user(user)
+        # TODO: Msg registration
         # flash('Thanks for registering')
         return redirect(url_for('index'))
     return render_template("reg.html", form=form)
