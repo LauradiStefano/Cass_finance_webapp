@@ -1,0 +1,100 @@
+<html>
+<head>
+
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/shimko" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Shimko
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        ...
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+
+            <span class="navbar-text px-3">
+                <a href="/reg">Register</a>
+            </span>
+        </div>
+    </nav>
+</header>
+
+<div id="login" class="container">
+    <div class="row mt-5 d-flex justify-content-center">
+        <form class="" method="post" action="">
+
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn text-center custom-overlay">
+                <div class="row">
+                    <div class="col-12">
+                        {{ form.username.label }}
+                        {{ form.username }}
+
+                        {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ form.password.label }}
+
+                        {{ form.password}}
+
+                        {% if form.password.errors %}
+                        {% for error in form.username.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        {{form.button_login}}
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+<!-- BODY SCRIPTS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup(); </script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+
+</body>
+</html>

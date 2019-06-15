@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+/* GENERAL */
+
+body{
+background-image: linear-gradient(to top, #191e3b, #1d2242, #222749, #262b50, #2b3057);
+    font-family: 'Source Sans Pro', sans-serif;
+    width:100%;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 14px;
+}
+
+
+p {
+    font-size: 16px;
+    color: #191E3B;
+}
+
+label {
+    text-transform:uppercase;
+    font-size: 12px;
+    color: #191E3B;
+    font-weight:400 !important;
+
+}
+
+td, th {
+    font-size: 14px;
+    color: inherit;
+}
+
+hr {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+legend {
+    float: left !important;
+    font-size: 18px;
+    width: auto;
+    padding: 2px 7px 2px 5px;
+    line-height: inherit;
+    color: #191E3B;
+    margin-bottom: 0;
+    font-variant: small-caps;
+    font-weight:600;
+}
+
+input[type=text], input[type=number], input[type=time], input[type=password], input[type=email]{
+    width: 100%;
+    border: 2px solid #ccdae5;
+    padding: 3px;
+    border-radius: 5px;
+
+}
+
+
+input[type=submit] {
+    background-color: #e65c5e;
+    color: white;
+    border-radius: 2px;
+    border: 0px;
+    font-size: 12px;
+    padding: 10px 20px 10px 20px;
+    text-transform: uppercase;
+}
+
+form{
+    width: 80%;
+}
+
+.custom-overlay:hover{
+    background-color: #F5F7FF!important;
+    -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#login{
+    width: 300px;
+}
+
+#plot_choice {
+    margin: 0;
+    padding: 0;;
+    list-style-position: inside;
+    list-style: none;
+}
+#previous{
+    width: 100% !important;
+}
+
+/* BOOSTRAP OVERRIDE */
+
+.container{
+    margin: 0 auto;
+}
+
+.row{
+        margin: 0 auto; !important;
+}
+
+.col, .col-6, .col-md-4, .col-md-8, .col-12, .col-sm {
+    margin: 0 auto; !important;
+    padding: 7px;
+    overflow: hidden;
+
+}
+
+.row .border-bottom {
+    border-bottom: 1.5px solid #e65c5e!important;
+
+}
+
+.lead, .nav-link{
+    color: #839db4 !important;
+    font-size: 16px;
+    
+}
+
+
+/* POPUP */
+
+.popup_content {
+    margin: 10px;
+    padding: 25px;
+    border: none;
+    background: white;
+    border-radius: 5px;
+    align-content: center;
+}
+
+.popup_content > table {
+    margin: 10px;
+    align-content: center;
+}
+
+/* NAV */
+
+.navbar {
+    background-color: ##25274D;
+    font-weight: 700;
+}
+
+
+/* BOKEH */
+
+#plot_implied_volatility, #plot_return_distribution, #plot_index_distribution, #plot_index_cdf, #plot_return_cdf {
+    overflow: hidden;
+}
+
+.MathJax_CHTML {
+    font-size: 12px !important;
+}
+
+.bk{
+    margin: 0 auto;
+    width: 100%;
+}
