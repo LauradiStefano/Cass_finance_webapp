@@ -83,10 +83,12 @@ def ImpliedPDFPrices_FullRange(A0, A1, A2, SD, B, k, kmin, kmax, x_fit_lgn):
 
 
 def ImpliedCDFPrices_FullRange(A0, A1, A2, SD, B, k, kmin, kmax, x_fit_lgn):
+
     mumin = x_fit_lgn[0]
     sgmin = x_fit_lgn[1]
     mumax = x_fit_lgn[2]
     sgmax = x_fit_lgn[3]
+
     if k == 0:
         cdf = 0
         return cdf
@@ -137,7 +139,6 @@ def densF(A0, A1, A2, SD, B, k):
 
 
 def get_lognormal_match(A0, A1, A2, SD, B, kmin, kmax, p):
-
     PdfKmax = ImpliedPDFPrices(A0, A1, A2, SD, B, kmax)
     CdfKmax = ImpliedCDFPrices(A0, A1, A2, SD, B, kmax)
     mumax, sgmax = p

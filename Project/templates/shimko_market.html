@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Shimko bounds of probability</title>
+
+</head>
+
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_theoretical">
+                        Shimko theoretical
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        ...
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+
+            <span class="navbar-text">
+
+                {% if user.is_authenticated %}
+                Logged in as {{user.username}}
+                <a class="mx-3" href="/old">Previous simulations</a>
+                <a class="mx-2" href="/logout">Logout</a>
+
+                {% else %}
+                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                {% endif %}
+
+            </span>
+        </div>
+    </nav>
+</header>
+
+<h2>Shimko Bounds of probability</h2>
+
+<h3>This function computes the bounds of probability: </h3> <br>
+<div class="container">
+    <div class="row">
+        <h4>Input</h4>
+        <form class="navbar-form" method="post" action="" enctype="multipart/form-data">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <div class="form-group">
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{form.file_name.label}}
+                        {{form.file_name}}
+                    </div>
+                    <div class="col-xs-6">
+                        {% if form.file_name.errors %}
+                        {% for error in form.file_name.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-xs-5">
+                        {{form.price.label}}
+                        {{form.price}}
+                    </div>
+                    <div class="col-xs-5">
+                        {% if form.price.errors %}
+                        {% for error in form.price.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <br/>
+
+                <!--\((\%) \) is a Mathjax symbol for % -->
+
+                <div class="row">
+                    <div class="col-xs-9">
+                        {{form.risk_dividend.label}}
+                        {{form.risk_dividend}}
+                    </div>
+                </div>
+
+                <br/>
+
+
+                <div id="risk_free" class="row" {% if form.risk_dividend.data !='0' %} style="display:none" {%endif%}>
+                    <div class="col-xs-4">
+                        {{form.risk_free.label}} \((\%) \)
+                        {{form.risk_free}}
+                        {% if form.risk_free.errors %}
+                        {% for error in form.risk_free.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-4">
+                        {{form.div_yield.label}} \((\%) \)
+                        {{form.div_yield}}
+                        {% if form.div_yield.errors %}
+                        {% for error in form.div_yield.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-5">
+                        {{form.call_put_flag.label}}
+                        {{form.call_put_flag}}
+                    </div>
+                    <div class="col-xs-5">
+                        {% if form.call_put_flag.errors %}
+                        {% for error in form.call_put_flag.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <br/>
+                <div class="row">
+                    <div class="col-xs-7">
+                        {{form.plot_choice.label}}
+                        {{form.plot_choice}}
+                    </div>
+                </div>
+                <br/>
+
+                <br/>
+                <div class="row">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="row">
+            {% if plot_implied_volatility != None %}
+            <div class="col-6 col-xs-6">
+                <h4>Results: </h4>
+                <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
+                <h5>
+                    <span> \(a_{0}\): {{a0}}</span><br/>
+                    <span> \(a_{1}\): {{a1}}</span><br/>
+                    <span> \(a_{2}\): {{a2}}</span><br/><br/>
+                    <span> \(R^{2}\): {{r2}}</span> <br/><br/>
+
+                    <!--\((\%) \) is a Mathjax symbol for % -->
+                    {%if form.risk_dividend.data == '1'%}
+                    <span> Risk Free \((\%)\): {{risk_free}}</span> <br/><br/>
+                    <span> Dividend Yield \((\%)\): {{div_yield}}</span>
+                    {%endif%}
+                </h5> <br/>
+                <h6><span> File Name: {{file_name}}</span></h6>
+            </div>
+            <div class="col-6 col-xs-6">
+                <h5>Kolmogorov Smirnov Test</h5>
+                <table>
+                    <thead>
+                    <th></th>
+                    <th> Cdf Prices</th>
+                    <th> Cdf Returns</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td> Statistic Value</td>
+                        <td> {{statistic_prices}}</td>
+                        <td> {{statistic_returns}}</td>
+
+                    </tr>
+                    <tr>
+                        <td> PValue</td>
+                        <td> {{pvalue_prices}}</td>
+                        <td> {{pvalue_returns}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <div id="button_view_details" class="popup_table_open">
+            {{form.button_view_details}}
+        </div>
+        <div class="row">
+            <div id="plot_implied_volatility" class="col-6 col-xs-6">
+                {{plot_implied_volatility[0]|safe}}
+                {{plot_implied_volatility[1]|safe}}
+            </div>
+            <div id="plot_return_distribution" class="col-6 col-xs-6">
+                {{plot_return_distribution[0]|safe}}
+                {{plot_return_distribution[1]|safe}}
+            </div>
+        </div>
+        {%if plot_index_distribution != None%}
+        <div class="row">
+            <div id="plot_index_distribution" class="col-6 col-xs-12">
+                {{plot_index_distribution[0]|safe}}
+                {{plot_index_distribution[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+        <div class="row">
+            {%if plot_index_cdf != None%}
+            <div id="plot_index_cdf" class="col-6 col-xs-6">
+                {{plot_index_cdf[0]|safe}}
+                {{plot_index_cdf[1]|safe}}
+            </div>
+            {%endif%}
+            {%if plot_return_cdf != None%}
+            <div id="plot_return_cdf" class="col-6 col-xs-6">
+                {{plot_return_cdf[0]|safe}}
+                {{plot_return_cdf[1]|safe}}
+            </div>
+            {%endif%}
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+<div id="popup_table" style="display:none">
+    <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+        {{form.button_export_table}}
+    </div>
+    <h4> Table of moments </h4>
+    <table id="tableExport">
+        <thead>
+        <th> Description</th>
+        <th> Ceq</th>
+        <th> LogNormal</th>
+        <th> Ceq Return</th>
+        <th> Normal</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td> Area</td>
+            <td> {{area_prices}}</td>
+            <td> 1</td>
+            <td> {{area_returns}}</td>
+            <td> 1</td>
+        </tr>
+        <tr>
+            <td> Mean</td>
+            <td> {{expected_price}}</td>
+            <td> {{expected_price}}</td>
+            <td> {{m1_returns}}</td>
+            <td> {{m1_returns}}</td>
+        </tr>
+        <tr>
+            <td> Variance</td>
+            <td> {{sigma2_price}}</td>
+            <td> {{sigma2_price}}</td>
+            <td> {{m2_returns}}</td>
+            <td> {{m2_returns}}</td>
+        </tr>
+        <tr>
+            <td> Skewness</td>
+            <td> {{skewness_prices}}</td>
+            <td> {{skewness_prices_log_n}}</td>
+            <td> {{skewness_log_returns}}</td>
+            <td> {{skewness_normal}}</td>
+        </tr>
+        <tr>
+            <td> Kurtosis</td>
+            <td> {{kurtosis_prices}}</td>
+            <td> {{kurtosis_prices_log_n}}</td>
+            <td> {{kurtosis_log_returns}}</td>
+            <td> {{kurtosis_normal}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup(); </script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var select_risk_dividend = $('#risk_dividend');
+        var risk_free = $('#risk_free');
+
+        select_risk_dividend.on('click', function() {
+            if ($('[name=risk_dividend]:radio:checked').val() == '0') {
+                risk_free.show();
+            } else {
+                risk_free.hide();
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>

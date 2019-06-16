@@ -7,46 +7,18 @@ Created on Tue Mar 12 22:27:07 2019
 import math
 
 import numpy as np
-from scipy.stats import norm
 import scipy.optimize
+from scipy.stats import norm
 
 
-def  find_vol(target_value, cp, s0, K, T, risk_free, div_yield):
-    
+def find_vol(target_value, cp, s0, K, T, risk_free, div_yield):
     implied_vol = []
-    for j in range(0,len(K)):
-        
-        function = lambda vol : target_value[j]-bs_price(cp, s0, K[j], T, risk_free, vol, div_yield)
+    for j in range(0, len(K)):
+        function = lambda vol: target_value[j] - bs_price(cp, s0, K[j], T, risk_free, vol, div_yield)
         implied_vol.append(scipy.optimize.brentq(function, a=-2.0, b=2.0, xtol=1e-8))
 
-    return implied_vol 
+    return implied_vol
 
-
-# def find_vol(target_value, cp, S0, K, T, rf, q):
-#     MAX_ITERATIONS = 1000
-#     PRECISION = 1.0e-5
-#     sigma = 0.5
-#     # for j in range (int(len(K))):
-#     for i in range(0, MAX_ITERATIONS):
-#         price = bs_price(cp, S0, K, T, rf, sigma, q)
-#         vega = bs_vega(cp, S0, K, T, rf, sigma, q)
-
-#         price = price
-#         diff = target_value - price  # our root
-
-#         # print (i, sigma, diff)
-
-#         if all(abs(diff) < PRECISION):
-#             return sigma
-
-#         volt = sigma + diff / vega  # f(x) / f'(x)
-
-#     # value wasn't found, return best guess so far
-#     return volt
-
-
-# implied_vol.append(sigma)
-# return implied_vol
 
 def bs_price(cp_flag, S0, K, T, rf, sigma, q):
     K = np.array(K)
@@ -61,7 +33,7 @@ def bs_price(cp_flag, S0, K, T, rf, sigma, q):
     return price
 
 
-def bs_vega(cp_flag, S0, K, T, rf, sigma, q):
+def bs_vega(S0, K, T, rf, sigma):
     n = norm.pdf
     K = np.array(K)
     d1 = (np.log(S0 / K) + (rf + sigma * sigma / 2.) * T) / (sigma * math.sqrt(T))

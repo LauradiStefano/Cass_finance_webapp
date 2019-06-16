@@ -27,11 +27,16 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/shimko_theoretical">
-                        Shimko theoretical
+                        Shimko Theoretical
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_market">
+                        Shimko Market
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                     <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">
                         ...
                     </a>
@@ -40,17 +45,7 @@
             <div class="dropdown-divider"></div>
 
             <span class="navbar-text">
-
-                <!-- LOGIN / REGISTER -->
-                {% if user.is_authenticated %}
-                Logged in as {{user.username}}
-                <a class="mx-3" href="/old">Previous simulations</a>
-                <a class="mx-2" href="/logout">Logout</a>
-
-                {% else %}
-                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
-                {% endif %}
-
+                <a href="/reg">Register</a>
             </span>
         </div>
     </nav>
@@ -80,7 +75,7 @@
                         {{ form.password}}
 
                         {% if form.password.errors %}
-                        {% for error in form.username.errors %}
+                        {% for error in form.password.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -97,8 +92,6 @@
     </div>
 </div>
 
-
-<!-- BODY SCRIPTS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
