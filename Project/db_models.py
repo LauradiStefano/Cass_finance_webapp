@@ -199,3 +199,40 @@ class levy_process(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_levy_process', lazy='dynamic'))
+
+
+class heston_method(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    time = db.Column(db.Float())
+    heston_pdf = db.Column(db.String())
+    returns = db.Column(db.String())
+    price = db.Column(db.Float())
+    call_put = db.Column(db.String())
+    risk_free = db.Column(db.Float())
+    dividend_yield = db.Column(db.Float())
+    strike_min = db.Column(db.Float())
+    strike_max = db.Column(db.Float())
+    strike = db.Column(db.String())
+    implied_volatility = db.Column(db.String())
+    option_prices = db.Column(db.String())
+    number_of_strike = db.Column(db.String())
+    norm_pdf = db.Column(db.String())
+    mean = db.Column(db.Float())
+    variance = db.Column(db.Float())
+    skewness = db.Column(db.Float())
+    kurtosis = db.Column(db.Float())
+
+    mu = db.Column(db.Float())
+    volatility_t0 = db.Column(db.Float())
+    volatility_hat = db.Column(db.Float())
+    lam = db.Column(db.Float())
+    chi = db.Column(db.Float())
+    rho = db.Column(db.Float())
+
+    button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_heston_method', lazy='dynamic'))

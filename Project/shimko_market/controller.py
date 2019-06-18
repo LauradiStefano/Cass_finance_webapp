@@ -3,7 +3,6 @@ import os
 
 import numpy as np
 from flask import redirect, url_for
-from flask_login import current_user
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -193,7 +192,8 @@ def controller_shimko_market(user, request):
         if user.is_authenticated:  # user authenticated, store the data
 
             if user.compute_shimko_market.count() > 0:
-                instance = user.compute_shimko_market.order_by(desc('id')).first()  # decreasing order db, take the last data saved
+                instance = user.compute_shimko_market.order_by(
+                    desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
                 file_name = instance.file_name

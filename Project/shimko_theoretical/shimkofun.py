@@ -137,7 +137,6 @@ def densF(A0, A1, A2, SD, B, k):
 
 
 def get_lognormal_match(A0, A1, A2, SD, B, kmin, kmax, p):
-
     PdfKmax = ImpliedPDFPrices(A0, A1, A2, SD, B, kmax)
     CdfKmax = ImpliedCDFPrices(A0, A1, A2, SD, B, kmax)
     mumax, sgmax = p

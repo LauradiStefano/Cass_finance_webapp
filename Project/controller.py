@@ -6,6 +6,7 @@ from flask_login import LoginManager, current_user, \
 
 from app import app
 from db_models import db, User
+from heston_method.controller import controller_heston_method
 from levy_process.controller import controller_levy_process
 from shimko_market.controller import controller_shimko_market
 from shimko_theoretical.controller import controller_shimko_theoretical
@@ -43,6 +44,13 @@ def levy_process():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_levy_process(current_user, request)
     return render_template("levy_process.html", **template_variables)
+
+
+@app.route('/heston_method', methods=['GET', 'POST'])
+def heston_method():
+    # ** = {'a':1, 'b':2} --> (a=1, b=2)
+    template_variables = controller_heston_method(current_user, request)
+    return render_template("heston_method.html", **template_variables)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

@@ -50,7 +50,7 @@ def get_cos_prices(type_choice, L, N, call_put, s0, K, r, q, Tt, parameters):
 
         real_term = np.real(np.dot(Exp_term, Cfv.getT()) - 0.5 * Exp_term[0, 0] * Cfv[
             0, 0])  # corretto il secondo termine della sottrazione
-        
+
         price.append(float(K[j] * math.exp(-r * Tt) * real_term))  # transpose CFV
 
     return price

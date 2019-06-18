@@ -83,7 +83,6 @@ def ImpliedPDFPrices_FullRange(A0, A1, A2, SD, B, k, kmin, kmax, x_fit_lgn):
 
 
 def ImpliedCDFPrices_FullRange(A0, A1, A2, SD, B, k, kmin, kmax, x_fit_lgn):
-
     mumin = x_fit_lgn[0]
     sgmin = x_fit_lgn[1]
     mumax = x_fit_lgn[2]

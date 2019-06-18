@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Shimko bounds of probability</title>
+
+</head>
+
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_theoretical">
+                        Shimko theoretical
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_market">
+                        Shimko Market
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/levy_process">
+                        Levy Process
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/heston_method">
+                        Heston Method
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+
+            <span class="navbar-text">
+
+                {% if user.is_authenticated %}
+                Logged in as {{user.username}}
+                <a class="mx-3" href="/old">Previous simulations</a>
+                <a class="mx-2" href="/logout">Logout</a>
+
+                {% else %}
+                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                {% endif %}
+
+            </span>
+        </div>
+    </nav>
+</header>
+<h2>COS Method - Heston Model</h2>
+
+<h3>A pricing method for European option based on Fourier-Cosine series expansions: </h3> <br>
+<div class="container">
+    <h4>Input</h4>
+    <form class="navbar-form" method="post" action="">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <div class="row">
+
+            <div class="row">
+                <label> Parameters </label> <br/>
+                <div class="col-xs-2">
+
+                    $$\mu $$
+                    {{form.mu}}
+                    {% if form.mu.errors %}
+                    {% for error in form.mu.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    $$ v_{0} $$
+                    {{form.volatility_t0}}
+                    {% if form.volatility_t0.errors %}
+                    {% for error in form.volatility_t0.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    $$\hat{v} $$
+                    {{form.volatility_hat}}
+                    {% if form.volatility_hat.errors %}
+                    {% for error in form.volatility_hat.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-2">
+                    $$\chi $$
+                    {{form.chi}}
+                    {% if form.chi.errors %}
+                    {% for error in form.chi.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    $$\rho $$
+                    {{form.rho}}
+                    {% if form.rho.errors %}
+                    {% for error in form.rho.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    $$\lambda $$
+                    {{form.lam}}
+                    {% if form.lam.errors %}
+                    {% for error in form.lam.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+
+            <br/>
+            <div class="row">
+                <div class="col-xs-2">
+                    {{form.price.label}}
+                    {{form.price}}
+                    {% if form.price.errors %}
+                    {% for error in form.price.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    {{form.time.label}}
+                    {{form.time}}
+                    {% if form.time.errors %}
+                    {% for error in form.time.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <br/>
+
+            <!--\((\%) \) is a Mathjax symbol for % -->
+            <div class="row">
+                <div class="col-xs-2">
+                    {{form.risk_free.label}} \((\%) \)
+                    {{form.risk_free}}
+                    {% if form.risk_free.errors %}
+                    {% for error in form.risk_free.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    {{form.dividend_yield.label}} \((\%) \)
+                    {{form.dividend_yield}}
+                    {% if form.dividend_yield.errors %}
+                    {% for error in form.dividend_yield.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-xs-2">
+                    {{form.strike_min.label}}
+                    {{form.strike_min}}
+                    {% if form.strike_min.errors %}
+                    {% for error in form.strike_min.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-2">
+                    {{form.strike_max.label}}
+                    {{form.strike_max}}
+                    {% if form.strike_max.errors %}
+                    {% for error in form.strike_max.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-3">
+                    {{form.call_put.label}}
+                    {{form.call_put}}
+                    {% if form.call_put.errors %}
+                    {% for error in form.call_put.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="col-xs-2">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </div>
+
+    </form>
+    {% if plot_return_underlying_distribution != None %}
+
+    <div class="row">
+        <h4>Results: </h4>
+
+        <div id="button_view_details" class="popup_table_open">
+            {{form.button_view_details}}
+        </div>
+
+        <div class="row">
+            <table>
+                <h5>Table of moments</h5>
+                <thead>
+
+                <td> Mean</td>
+                <td> Variance</td>
+                <td> Skewness</td>
+                <td> Kurtosis</td>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td>{{mean}}</td>
+                    <td>{{variance}}</td>
+                    <td>{{skewness}}</td>
+                    <td>{{kurtosis}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+
+            <div id="plot_return_underlying_distribution" class="col-6 col-xs-6">
+                {{plot_return_underlying_distribution[0]|safe}}
+                {{plot_return_underlying_distribution[1]|safe}}
+            </div>
+            <div id="plot_implied_volatility" class="col-6 col-xs-6">
+                {{plot_implied_volatility[0]|safe}}
+                {{plot_implied_volatility[1]|safe}}
+            </div>
+        </div>
+        {%endif%}
+    </div>
+    <div id="popup_table" style="display:none">
+        <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+            {{form.button_export_table}}
+        </div>
+        <h4> Table of volatility and prices</h4>
+        <table id="tableExport">
+            <thead>
+            <th> Strike</th>
+            <th> Prices</th>
+            <th> Implied Volatility</th>
+            </thead>
+            <tbody>
+            {%for i in range(number_of_strike)%}
+            <tr>
+                <td>{{strike[i]}}</td>
+                <td>{{option_prices[i]}}</td>
+                <td>{{implied_volatility[i]}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+<script type="text/javascript">$('#popup_table').popup(); </script>
+<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -166,7 +166,8 @@ def controller_shimko_theoretical(user, request):
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_shimko_theoretical.count() > 0:
-                instance = user.compute_shimko_theoretical.order_by(desc('id')).first()  # decreasing order db, take the last data saved
+                instance = user.compute_shimko_theoretical.order_by(
+                    desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
                 a0 = instance.a0

@@ -7,10 +7,6 @@ Created on Thu Mar 21 17:43:59 2019
 import math
 
 
-# %cumulants of Levy processes
-# %function [c1, c2, c3, c4]=LProc_cumulants(xxx,type_choice,dt)
-
-
 def get_cumulants(parameters, type_choice, dt):
     type_choice = int(type_choice)
 
