@@ -6,8 +6,9 @@ from flask_login import LoginManager, current_user, \
 
 from app import app
 from db_models import db, User
-from shimko_theoretical.controller import controller_shimko_theoretical
+from levy_process.controller import controller_levy_process
 from shimko_market.controller import controller_shimko_market
+from shimko_theoretical.controller import controller_shimko_theoretical
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -35,6 +36,13 @@ def shimko_market():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_shimko_market(current_user, request)
     return render_template("shimko_market.html", **template_variables)
+
+
+@app.route('/levy_process', methods=['GET', 'POST'])
+def levy_process():
+    # ** = {'a':1, 'b':2} --> (a=1, b=2)
+    template_variables = controller_levy_process(current_user, request)
+    return render_template("levy_process.html", **template_variables)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
