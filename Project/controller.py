@@ -5,6 +5,7 @@ from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
 from app import app
+from asian_option.controller import controller_asian_option
 from db_models import db, User
 from heston_method.controller import controller_heston_method
 from levy_process.controller import controller_levy_process
@@ -51,6 +52,13 @@ def heston_method():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_heston_method(current_user, request)
     return render_template("heston_method.html", **template_variables)
+
+
+@app.route('/asian_option', methods=['GET', 'POST'])
+def asian_option():
+    # ** = {'a':1, 'b':2} --> (a=1, b=2)
+    template_variables = controller_asian_option(current_user, request)
+    return render_template("asian_option.html", **template_variables)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

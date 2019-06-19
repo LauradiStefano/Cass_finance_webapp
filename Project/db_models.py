@@ -236,3 +236,79 @@ class heston_method(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_heston_method', lazy='dynamic'))
+
+
+class asian_option(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    model_choice = db.Column(db.String())
+
+    # GBM distribution
+    sigma_gaussian = db.Column(db.Float())
+
+    # VG distribution
+    sigma_vg = db.Column(db.Float())
+    theta = db.Column(db.Float())
+    kappa = db.Column(db.Float())
+
+    # Heston distribution
+    volatility_t0 = db.Column(db.Float())
+    alpha_heston = db.Column(db.Float())
+    beta_heston = db.Column(db.Float())
+    gamma_heston = db.Column(db.Float())
+    rho_heston = db.Column(db.Float())
+
+    # NIG distribution
+    a_nig = db.Column(db.Float())
+    b_nig = db.Column(db.Float())
+    delta_nig = db.Column(db.Float())
+
+    # CGMY distribution
+    c = db.Column(db.Float())
+    g = db.Column(db.Float())
+    m = db.Column(db.Float())
+    y = db.Column(db.Float())
+
+    # Meixner distribution
+    a_meixner = db.Column(db.Float())
+    b_meixner = db.Column(db.Float())
+    delta_meixner = db.Column(db.Float())
+
+    # MJD distribution
+    sigma_mjd = db.Column(db.Float())
+    lam_mjd = db.Column(db.Float())
+    mu_x_mjd = db.Column(db.Float())
+    sigma_x_mjd = db.Column(db.Float())
+
+    # DEJD distribution
+    sigma_dejd = db.Column(db.Float())
+    lam_dejd = db.Column(db.Float())
+    rho_dejd = db.Column(db.Float())
+    eta1_dejd = db.Column(db.Float())
+    eta2_dejd = db.Column(db.Float())
+
+    # CEV distribution
+    beta_cev = db.Column(db.Float())
+
+    grid = db.Column(db.Float())
+    upper_range = db.Column(db.Float())
+    lower_range = db.Column(db.Float())
+    dump = db.Column(db.Float())
+    tolerance = db.Column(db.Float())
+
+    price = db.Column(db.Float())
+    risk_free = db.Column(db.Float())
+    time = db.Column(db.Float())
+    step = db.Column(db.Float())
+    strike = db.Column(db.Float())
+
+    lam = db.Column(db.String())
+    lower_bound = db.Column(db.String())
+    optimal_strike = db.Column(db.Float())
+    optimal_lower_bound = db.Column(db.Float())
+    lower_bound_strike = db.Column(db.Float())
+
+    button_compute = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_asian_option', lazy='dynamic'))
