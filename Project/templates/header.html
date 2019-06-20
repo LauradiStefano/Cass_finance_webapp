@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
+
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Shimko bounds of probability</title>
+
+</head>
+
+
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_theoretical">
+                        Shimko theoretical
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shimko_market">
+                        Shimko Market
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/levy_process">
+                        Levy Process
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/heston_method">
+                        Heston Method
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/asian_option">
+                        Asian Option
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        ...
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown-divider"></div>
+
+            <span class="navbar-text">
+                {% if user is defined%}
+                    {% if user.is_authenticated %}
+                    Logged in as {{user.username}}
+                    <a class="mx-3" href="/old">Previous simulations</a>
+                    <a class="mx-2" href="/logout">Logout</a>
+                    {% else %}
+                    <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                    {% endif %}
+                {% else %}
+                    {% if login is defined %}
+                    <a class="mx-2" href="/reg">Register</a>
+                    {% else %}
+                    <a class="mx-2" href="/login">Login</a>
+                    {% endif %}
+                {% endif %}
+
+            </span>
+        </div>
+    </nav>
+</header>

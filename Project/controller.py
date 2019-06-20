@@ -77,7 +77,7 @@ def create_login():
         # TODO: Msg registration
         # flash('Thanks for registering')
         return redirect(url_for('index'))
-    return render_template("reg.html", form=form)
+    return render_template("reg.html", form=form, register=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def login():
         user = form.get_user()
         login_user(user)
         return redirect(url_for('index'))
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, login=True)
 
 
 @app.route('/logout')
