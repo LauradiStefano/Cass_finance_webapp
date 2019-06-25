@@ -312,7 +312,7 @@ def populate_form_from_instance(instance):
     return form
 
 
-def old(user):
+def controller_old_shimko_market(user):
     data = []
     if user.is_authenticated():
         instances = user.compute_shimko_market.order_by(desc('id')).all()
@@ -433,7 +433,7 @@ def old(user):
                          'plot_return_distribution': plot_return_distribution, 'plot_index_cdf': plot_index_cdf,
                          'plot_return_cdf': plot_return_cdf})
 
-    return data
+    return {'data': data}
 
 
 def delete_post(user, id):

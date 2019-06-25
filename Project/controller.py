@@ -5,12 +5,12 @@ from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
 from app import app
-from asian_option.controller import controller_asian_option
+from asian_option.controller import controller_asian_option, controller_old_asian_option
 from db_models import db, User
-from heston_method.controller import controller_heston_method
-from levy_process.controller import controller_levy_process
-from shimko_market.controller import controller_shimko_market
-from shimko_theoretical.controller import controller_shimko_theoretical
+from heston_method.controller import controller_heston_method, controller_old_heston_method
+from levy_process.controller import controller_levy_process, controller_old_levy_process
+from shimko_market.controller import controller_shimko_market, controller_old_shimko_market
+from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -23,7 +23,7 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html", user=current_user)
+    return render_template("index.html", user=current_user, index=True)
 
 
 @app.route('/shimko_theoretical', methods=['GET', 'POST'])
@@ -59,6 +59,41 @@ def asian_option():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_asian_option(current_user, request)
     return render_template("asian_option.html", **template_variables)
+
+
+@app.route('/shimko_theoretical/old')
+@login_required
+def old_shimko_theoretical():
+    template_variables = controller_old_shimko_theoretical(current_user)
+    return render_template("old_shimko_theoretical.html", **template_variables)
+
+
+@app.route('/shimko_market/old')
+@login_required
+def old_shimko_market():
+    template_variables = controller_old_shimko_market(current_user)
+    return render_template("old_shimko_market.html", **template_variables)
+
+
+@app.route('/levy_process/old')
+@login_required
+def old_levy_process():
+    template_variables = controller_old_levy_process(current_user)
+    return render_template("old_levy_process.html", **template_variables)
+
+
+@app.route('/heston_method/old')
+@login_required
+def old_heston_method():
+    template_variables = controller_old_heston_method(current_user)
+    return render_template("old_heston_method.html", **template_variables)
+
+
+@app.route('/asian_option/old')
+@login_required
+def old_asian_option():
+    template_variables = controller_old_asian_option(current_user)
+    return render_template("old_asian_option.html", **template_variables)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

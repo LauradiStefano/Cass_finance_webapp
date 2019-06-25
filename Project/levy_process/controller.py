@@ -122,7 +122,7 @@ def populate_form_from_instance(instance):
     return form
 
 
-def old(user):
+def controller_old_levy_process(user):
     data = []
     if user.is_authenticated():
         instances = user.compute_levy_process.order_by(desc('id')).all()
@@ -160,7 +160,7 @@ def old(user):
                          'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,
                          'skewness': skewness, 'kurtosis': kurtosis})
 
-    return data
+    return {'data': data}
 
 
 def delete_post(user, id):

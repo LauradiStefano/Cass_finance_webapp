@@ -87,7 +87,7 @@ def populate_form_from_instance(instance):
     return form
 
 
-def old(user):
+def controller_old_asian_option(user):
     data = []
 
     if user.is_authenticated():
@@ -116,7 +116,7 @@ def old(user):
                          'optimal_lower_bound': optimal_lower_bound, 'strike': strike,
                          'lower_bound_strike': lower_bound_strike, 'plot_lower_bound': plot_lower_bound})
 
-    return data
+    return {'data': data}
 
 
 def delete_post(id):

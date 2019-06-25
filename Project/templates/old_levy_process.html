@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
+    </script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info")
+
+
+    </script>
+
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <!--bootstrap is library for developing websites-->
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/static/basic.css" rel="stylesheet">
+
+    <title>Cos Method - Levy Processes</title>
+</head>
+
+<body class="w3-myfont">
+<h2>Previous simulations</h2>
+<p align="right"><a href="/">Back to index&nbsp;</a></p>
+{% if data %}
+{% for result in data %}
+<hr> <!--hr is a line-->
+<div class="container">
+    <form class="navbar-form" method="post" action=/delete/{{result['id']}}>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-3">
+                    <h3>Input</h3>
+
+                    <div class="row">
+                        <div class="output">
+                            <div class="col-xs-6">
+
+                                {{result['form'].type_choice.label}}
+                                {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}} <br/>
+
+                                \(\mu\):
+                                {{result['form'].mu.data}}
+
+                                <div id="normal">
+                                    {% if result['form'].type_choice.data == '0' %}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_normal.data}}
+                                    {%endif%}
+                                </div>
+
+                                <div id="vg">
+                                    {% if result['form'].type_choice.data == '1' or result['form'].type_choice.data ==
+                                    '2' %}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_vg.data}} <br/>
+
+                                    \(\kappa\):
+                                    {{result['form'].kappa.data}} <br/>
+
+                                    \(\theta\):
+                                    {{result['form'].theta.data}}
+                                    {%endif%}
+                                </div>
+
+                                <div id="cgmy">
+                                    {% if result['form'].type_choice.data == '3' %}
+                                    \(C\):
+                                    {{result['form'].c.data}} <br/>
+
+                                    \(G\):
+                                    {{result['form'].g.data}} <br/>
+
+                                    \(M\):
+                                    {{result['form'].m.data}} <br/>
+
+                                    \(Y\):
+                                    {{result['form'].y.data}}
+                                    {%endif%}
+                                </div>
+
+                                <!--\((\%) \) is a Mathjax symbol for % -->
+
+                                {{result['form'].price.label}}
+                                {{result['form'].price.data}}
+                                {{result['form'].risk_free.label}} \((\%) \)
+                                {{result['form'].risk_free.data}}
+                                {{result['form'].dividend_yield.label}} \((\%) \)
+                                {{result['form'].dividend_yield.data}}
+                                {{result['form'].strike_min.label}}
+                                {{result['form'].strike_min.data}}
+                                {{result['form'].strike_max.label}}
+                                {{result['form'].strike_max.data}}
+                                {{result['form'].time.label}}
+                                {{result['form'].time.data}} <br/>
+
+                                {{result['form'].call_put.label}}
+                                {{dict(result['form'].call_put.choices).get(result['form'].call_put.data)}}
+
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="col-xs-6">
+                                <br/>
+                                <h4>Results</h4>
+                                {% if result['plot_return_underlying_distribution'] != None %}
+                                <div class="row">
+                                    <table>
+                                        <h5>Table of moments</h5>
+                                        <thead>
+                                        <td> Distribution</td>
+                                        <td> Mean</td>
+                                        <td> Variance</td>
+                                        <td> Skewness</td>
+                                        <td> Kurtosis</td>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                            </td>
+                                            <td> {{result['mean']}}</td>
+                                            <td> {{result['variance']}}</td>
+                                            <td> {{result['skewness']}}</td>
+                                            <td> {{result['kurtosis']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-xs-6">
+
+                                    <div id="plot_return_underlying_distribution">
+                                        {{ result['plot_return_underlying_distribution'][0]|safe }}
+                                        {{ result['plot_return_underlying_distribution'][1]|safe }}
+                                    </div>
+
+                                    <div class="plot_implied_volatility">
+                                        {{ result['plot_implied_volatility'][0]|safe }}
+                                        {{ result['plot_implied_volatility'][1]|safe }}
+                                    </div>
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <form class="navbar-form navbar-top " method="POST" action="/delete/{{ result.id }}">
+                                <input type="submit" value="Delete"
+                                       title="Delete this post from database">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endfor %}
+<hr>
+<center>
+    <div class="row">
+        <form method="POST" action="/delete/-1">
+            <input type="submit" value="Delete all">
+        </form>
+    </div>
+</center>
+{% else %}
+No previous simulations
+{% endif %}
+</body>
+</html>
