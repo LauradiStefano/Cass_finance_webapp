@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
-    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js">
-    </script>
-    <script type="text/javascript">
-        Bokeh.set_log_level("info")
+{% include 'header.html' %}
 
-
-
-
-
-
-
-
-
-
-
-    </script>
-
-    <script type="text/javascript" async
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
-    </script>
-
-    <!--bootstrap is library for developing websites-->
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="/static/basic.css" rel="stylesheet">
-
-    <title>Asian Option</title>
-</head>
-
-<body class="w3-myfont">
-<h2>Previous simulations</h2>
-<p align="right"><a href="/">Back to index&nbsp;</a></p>
 {% if data %}
 {% for result in data %}
 <hr> <!--hr is a line-->
@@ -234,5 +200,8 @@
 {% else %}
 No previous simulations
 {% endif %}
+
+{% include 'footer.html' %}
+
 </body>
 </html>

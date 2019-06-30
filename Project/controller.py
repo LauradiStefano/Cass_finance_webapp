@@ -65,35 +65,36 @@ def asian_option():
 @login_required
 def old_shimko_theoretical():
     template_variables = controller_old_shimko_theoretical(current_user)
-    return render_template("old_shimko_theoretical.html", **template_variables)
+    return render_template("old_shimko_theoretical.html", **template_variables, back_url=url_for('shimko_theoretical'),
+                           old=True)
 
 
 @app.route('/shimko_market/old')
 @login_required
 def old_shimko_market():
     template_variables = controller_old_shimko_market(current_user)
-    return render_template("old_shimko_market.html", **template_variables)
+    return render_template("old_shimko_market.html", **template_variables, back_url=url_for('shimko_market'), old=True)
 
 
 @app.route('/levy_process/old')
 @login_required
 def old_levy_process():
     template_variables = controller_old_levy_process(current_user)
-    return render_template("old_levy_process.html", **template_variables)
+    return render_template("old_levy_process.html", **template_variables, back_url=url_for('levy_process'), old=True)
 
 
 @app.route('/heston_method/old')
 @login_required
 def old_heston_method():
     template_variables = controller_old_heston_method(current_user)
-    return render_template("old_heston_method.html", **template_variables)
+    return render_template("old_heston_method.html", **template_variables, back_url=url_for('heston_method'), old=True)
 
 
 @app.route('/asian_option/old')
 @login_required
 def old_asian_option():
     template_variables = controller_old_asian_option(current_user)
-    return render_template("old_asian_option.html", **template_variables)
+    return render_template("old_asian_option.html", **template_variables, back_url=url_for('asian_option'), old=True)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

@@ -88,6 +88,8 @@
                     <a class="mx-2" href="/reg">Register</a>
                     {% elif register is defined %}
                     <a class="mx-2" href="/login">Login</a>
+                    {% elif old is defined %}
+                    <a class="mx-2" href={{back_url}}> Back to the Model </a>
                     {% endif %}
                 {% endif %}
 
