@@ -1,5 +1,9 @@
 {% include 'header.html' %}
 
+{% if just_registered == '1'  %}
+<div class="alert alert-success"> Thank you for your registration </div>
+{% endif %}
+
 {% include 'footer.html' %}
 
 </body>

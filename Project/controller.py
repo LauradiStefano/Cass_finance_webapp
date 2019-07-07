@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
@@ -23,7 +23,8 @@ def load_user(user_id):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html", user=current_user, index=True)
+    just_registered = request.args.get('just_registered')
+    return render_template("index.html", user=current_user, index=True, just_registered=just_registered)
 
 
 @app.route('/shimko_theoretical', methods=['GET', 'POST'])
@@ -110,9 +111,9 @@ def create_login():
         db.session.commit()
 
         login_user(user)
-        # TODO: Msg registration
-        # flash('Thanks for registering')
-        return redirect(url_for('index'))
+
+        # return render_template('index.html', just_registered=True)
+        return redirect(url_for('index', just_registered=1))
     return render_template("reg.html", form=form, register=True)
 
 
