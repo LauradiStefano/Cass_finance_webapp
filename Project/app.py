@@ -6,6 +6,11 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 UPLOAD_DIR = 'uploads/'
+
+# Allowed file types for file upload
+
+ALLOWED_EXTENSIONS = set(['xlsx'])
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_DIR
 app.secret_key = 'MySecretKey'
 
@@ -15,10 +20,6 @@ app.secret_key = os.urandom(24)
 
 if not os.path.isdir(UPLOAD_DIR):
     os.mkdir(UPLOAD_DIR)
-
-# Allowed file types for file upload
-
-ALLOWED_EXTENSIONS = set(['xlsx'])
 
 
 def allowed_file(filename):

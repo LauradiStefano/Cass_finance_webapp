@@ -2,7 +2,7 @@ import json
 import os
 
 import numpy as np
-from flask import redirect, url_for
+from flask import redirect, url_for, flash
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -63,6 +63,7 @@ def controller_shimko_market(user, request):
     if request.method == "POST" and request.files and form.validate():
 
         file = request.files[form.file_name.name]
+
         if file and allowed_file(file.filename):
             file_name = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))

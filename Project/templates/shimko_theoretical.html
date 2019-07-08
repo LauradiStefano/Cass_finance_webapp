@@ -180,10 +180,10 @@
                         </div>
                     </fieldset>
                 </div> <!-- /col other four -->
-                <!-- PLOT -->
+
                 <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
-                        <!-- PLOT LIST-->
+
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Plot Selector</legend>
                         </div>
@@ -276,16 +276,15 @@
         </div>
     </div>
 
-    <!-- BOKEH PLOTS -->
     <div class="row d-flex justify-content-center">
-        <div class="col-12">
+        <div class="col-12 plot">
             <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 plot">
             <div id="plot_return_distribution"
                  class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_distribution[0]|safe}}
@@ -296,7 +295,7 @@
 
     {%if plot_index_distribution != None%}
     <div class="row d-flex justify-content-center">
-        <div class="col-12">
+        <div class="col-12 plot">
             <div id="plot_index_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_distribution[0]|safe}}
                 {{plot_index_distribution[1]|safe}}
@@ -307,7 +306,7 @@
 
     <div class="row d-flex justify-content-center">
         {%if plot_index_cdf != None%}
-        <div class="col-12">
+        <div class="col-12 plot">
             <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_cdf[0]|safe}}
                 {{plot_index_cdf[1]|safe}}
@@ -315,7 +314,7 @@
         </div>
         {%endif%}
         {%if plot_return_cdf != None%}
-        <div class="col-12">
+        <div class="col-12 plot">
             <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_cdf[0]|safe}}
                 {{plot_return_cdf[1]|safe}}

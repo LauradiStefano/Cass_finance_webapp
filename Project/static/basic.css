@@ -82,7 +82,7 @@ form{
   transition: all 0.3s ease-in-out;
 }
 
-#login{
+#user_form{
     width: 300px;
 }
 
@@ -151,7 +151,7 @@ form{
 
 /* BOKEH */
 
-#plot_implied_volatility, #plot_return_distribution, #plot_index_distribution, #plot_index_cdf, #plot_return_cdf {
+.plot {
     overflow: hidden;
 }
 

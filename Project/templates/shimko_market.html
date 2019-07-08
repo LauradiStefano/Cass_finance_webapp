@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <h4>Input</h4>
-        <form class="navbar-form" method="post" action="" enctype="multipart/form-data">
+        <form class="navbar-form" method="POST" action="" enctype="multipart/form-data">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <div class="form-group">
 
@@ -156,7 +156,7 @@
         <div id="button_view_details" class="popup_table_open">
             {{form.button_view_details}}
         </div>
-        <div class="row">
+        <div class="row plot">
             <div id="plot_implied_volatility" class="col-6 col-xs-6">
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
@@ -167,14 +167,14 @@
             </div>
         </div>
         {%if plot_index_distribution != None%}
-        <div class="row">
+        <div class="row plot">
             <div id="plot_index_distribution" class="col-6 col-xs-12">
                 {{plot_index_distribution[0]|safe}}
                 {{plot_index_distribution[1]|safe}}
             </div>
         </div>
         {%endif%}
-        <div class="row">
+        <div class="row plot">
             {%if plot_index_cdf != None%}
             <div id="plot_index_cdf" class="col-6 col-xs-6">
                 {{plot_index_cdf[0]|safe}}

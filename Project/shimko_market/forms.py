@@ -1,4 +1,5 @@
 import wtforms as wtf
+from flask_wtf.file import FileRequired
 from wtforms import SelectMultipleField, validators
 from wtforms.validators import InputRequired
 from wtforms.widgets import ListWidget, CheckboxInput
