@@ -331,7 +331,7 @@
     <div class="row border-bottom mb-2 pb-1">
         <legend>Table of moments</legend>
     </div>
-    <table class="table table-striped" id="tableExport">
+    <table class="table table-striped" id="table_export">
         <thead class="thead-light">
         <th scope="col"> Description</th>
         <th scope="col"> Ceq</th>
@@ -378,9 +378,9 @@
         </tbody>
     </table>
     <div class="row d-flex justify-content-center">
-        <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
+
             {{form.button_export_table}}
-        </div>
+
     </div>
 </div>
 

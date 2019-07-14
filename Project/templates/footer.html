@@ -6,7 +6,34 @@
 
 <script type="text/javascript">$('#popup_table').popup(); </script>
 
-<script type="text/javascript" src="./static/tableExportExcel.js"></script>
+<script src="https://unpkg.com/xlsx@0.14.3/dist/xlsx.full.min.js"></script>
+
+<script src="/static/file_saver.min.js"></script>
+
+<script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.js"></script>
+
+<script>
+
+var exportTable = document.getElementById('table_export');
+
+var instance = new TableExport(exportTable, {
+    formats: ['xls'],
+    exportButtons: false,
+    filename: "computed_data",
+    trimWhitespace: true,
+    sheetname: "data"
+});
+
+var exportData = instance.getExportData()['table_export']['xls'];
+
+var buttonExportTable = document.getElementById('button_export_table');
+
+buttonExportTable.addEventListener('click', function (e) {
+    //                   // data          // mime              // name              // extension
+    instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+});
+
+</script>
 
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">

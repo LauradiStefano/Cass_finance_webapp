@@ -193,11 +193,10 @@
     </div>
 </div>
 <div id="popup_table" style="display:none">
-    <div onClick="$('#tableExport').tableExport({type:'excel',escape:'false'});">
-        {{form.button_export_table}}
-    </div>
+
+    {{form.button_export_table}}
     <h4> Table of moments </h4>
-    <table id="tableExport">
+    <table id="table_export">
         <thead>
         <th> Description</th>
         <th> Ceq</th>
@@ -260,6 +259,7 @@
             }
         });
     });
+
 
 </script>
 </body>
