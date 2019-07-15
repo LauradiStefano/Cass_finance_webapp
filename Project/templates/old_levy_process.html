@@ -26,16 +26,28 @@
                             </div>
 
                             <div id="vg">
-                                {% if result['form'].type_choice.data == '1' or result['form'].type_choice.data ==
-                                '2' %}
+                                {% if result['form'].type_choice.data == '1' %}
                                 \(\sigma\):
                                 {{result['form'].sigma_vg.data}} <br/>
 
                                 \(\kappa\):
-                                {{result['form'].kappa.data}} <br/>
+                                {{result['form'].kappa_vg.data}} <br/>
 
                                 \(\theta\):
-                                {{result['form'].theta.data}}
+                                {{result['form'].theta_vg.data}}
+                                {%endif%}
+                            </div>
+
+                            <div id="nig">
+                                {% if result['form'].type_choice.data == '2' %}
+                                \(\sigma\):
+                                {{result['form'].sigma_nig.data}} <br/>
+
+                                \(\kappa\):
+                                {{result['form'].kappa_nig.data}} <br/>
+
+                                \(\theta\):
+                                {{result['form'].theta_nig.data}}
                                 {%endif%}
                             </div>
 

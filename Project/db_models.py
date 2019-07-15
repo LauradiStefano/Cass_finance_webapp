@@ -179,10 +179,21 @@ class levy_process(db.Model):
     number_of_strike = db.Column(db.String())
 
     mu = db.Column(db.Float())
+
+    # Gaussian distribution
     sigma_normal = db.Column(db.Float())
+
+    # VG distribution
     sigma_vg = db.Column(db.Float())
-    kappa = db.Column(db.Float())
-    theta = db.Column(db.Float())
+    kappa_vg = db.Column(db.Float())
+    theta_vg = db.Column(db.Float())
+
+    # NIG distribution
+    sigma_nig = db.Column(db.Float())
+    kappa_nig = db.Column(db.Float())
+    theta_nig = db.Column(db.Float())
+
+    # CGMY distribution
     c = db.Column(db.Float())
     g = db.Column(db.Float())
     m = db.Column(db.Float())

@@ -44,7 +44,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div id="vg" class="row" {% if form.type_choice.data !='1' and form.type_choice.data !='2' %}
+                <div id="vg" class="row" {% if form.type_choice.data !='1' %}
                      style="display:none" {%endif%}>
 
                     <div class="col-xs-3">
@@ -58,18 +58,50 @@
                     </div>
                     <div class="col-xs-3">
                         $$\kappa $$
-                        {{form.kappa}}
-                        {% if form.kappa.errors %}
-                        {% for error in form.kappa.errors %}
+                        {{form.kappa_vg}}
+                        {% if form.kappa_vg.errors %}
+                        {% for error in form.kappa_vg.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-3">
                         $$\theta $$
-                        {{form.theta}}
-                        {% if form.theta.errors %}
-                        {% for error in form.theta.errors %}
+                        {{form.theta_vg}}
+                        {% if form.theta_vg.errors %}
+                        {% for error in form.theta_vg.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div id="nig" class="row" {% if form.type_choice.data !='2' %}
+                     style="display:none" {%endif%}>
+
+                    <div class="col-xs-3">
+                        $$\sigma $$
+                        {{form.sigma_nig}}
+                        {% if form.sigma_nig.errors %}
+                        {% for error in form.sigma_nig.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        $$\kappa $$
+                        {{form.kappa_nig}}
+                        {% if form.kappa_nig.errors %}
+                        {% for error in form.kappa_nig.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="col-xs-3">
+                        $$\theta $$
+                        {{form.theta_nig}}
+                        {% if form.theta_nig.errors %}
+                        {% for error in form.theta_nig.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -249,7 +281,7 @@
     </div>
     <div id="popup_table" style="display:none">
 
-            {{form.button_export_table}}
+        {{form.button_export_table}}
 
         <h4> Table of volatility and prices</h4>
         <table id="table_export">
@@ -279,24 +311,34 @@
         var select_distribution = $('#type_choice');
         var normal = $('#normal');
         var vg = $('#vg');
+        var nig = $('#nig');
         var cgmy = $('#cgmy');
 
         select_distribution.on('change', function() {
             if (select_distribution.val() == '0') {
                 normal.show();
                 vg.hide();
+                nig.hide();
                 cgmy.hide();
-            } else if ((select_distribution.val() == '1') || (select_distribution.val() == '2')) {
+            } else if (select_distribution.val() == '1') {
                 normal.hide();
                 vg.show();
+                nig.hide();
+                cgmy.hide();
+            } else if (select_distribution.val() == '2') {
+                normal.hide();
+                vg.hide();
+                nig.show();
                 cgmy.hide();
             } else {
                 normal.hide();
                 vg.hide();
+                nig.hide();
                 cgmy.show();
             }
         });
     });
+
 
 
 

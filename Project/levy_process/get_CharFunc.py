@@ -30,7 +30,6 @@ def NormCF(parameters, u, dt):
     mu = parameters[0]
     sigma = parameters[1]
     output = np.exp(dt * (1j * u * mu - 0.5 * sigma ** 2 * u ** 2))
-    # matlab code output = exp(dt*(1i*u.*mu-0.5*sigma^2*u.^2))
 
     return output
 
@@ -42,7 +41,6 @@ def VGCF(parameters, u, dt):
     kappa = parameters[3]
     output = np.exp(1j * u * mu * dt) * (1 - 1j * u * theta * kappa + 0.5 * u ** 2 * sigma ** 2 * kappa) ** (
             -dt / kappa)
-    # matlab code output = exp(1i*u.*mu*dt).*(1-1i*u.*theta*kappa+0.5*u.^2*sigma^2*kappa).^(-dt/kappa)
 
     return output
 
@@ -54,7 +52,6 @@ def NIGCF(parameters, u, dt):
     kappa = parameters[3]
     output = np.exp(
         1j * u * mu * dt + dt / kappa * (1 - np.sqrt(1 + u ** 2 * sigma ** 2 * kappa - 2 * 1j * u * theta * kappa)))
-    # matlab code output = exp(1i*u.*mu*dt+dt/kappa*(1-sqrt(1+u.^2*sigma^2*kappa-2*1i*u.*theta*kappa)))
 
     return output
 
@@ -67,6 +64,5 @@ def CGMYCF(parameters, u, dt):
     Y = parameters[4]
     output = np.exp(
         1j * u * mu * dt + C * math.gamma(-Y) * dt * ((M - 1j * u) ** Y - M ** Y + (G + 1j * u) ** Y - G ** Y))
-    # matlab code output = exp(1i*u.*mu*dt+C*gamma(-Y)*dt*((M-1i*u).^Y-M^Y+(G+1i*u).^Y-G^Y))
 
     return output

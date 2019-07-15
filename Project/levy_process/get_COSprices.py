@@ -12,7 +12,7 @@ from levy_process.get_COS_bounds import get_COS_bounds
 from levy_process.get_CharFunc import CharFunc
 
 
-# opzione sullo spot
+# spot option
 def get_cos_prices(type_choice, L, N, call_put, s0, K, r, q, Tt, parameters):
     price = []
     call_put = int(call_put)

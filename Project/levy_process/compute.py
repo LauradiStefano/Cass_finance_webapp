@@ -18,13 +18,17 @@ from levy_process.get_pdf_cos import get_pdf_cos
 from levy_process.getbs import find_vol
 
 
-def select_parameters(type_choice, mu, sigma_normal, sigma_vg, kappa, theta, c, g, m, y):
+def select_parameters(type_choice, mu, sigma_normal, sigma_vg, kappa_vg, theta_vg, sigma_nig, kappa_nig, theta_nig, c,
+                      g, m, y):
     type_choice = int(type_choice)
     if type_choice == 0:
         parameters = [mu, sigma_normal]
 
-    elif type_choice == 1 or type_choice == 2:
-        parameters = [mu, sigma_vg, theta, kappa]
+    elif type_choice == 1:
+        parameters = [mu, sigma_vg, theta_vg, kappa_vg]
+
+    elif type_choice == 2:
+        parameters = [mu, sigma_nig, theta_nig, kappa_nig]
 
     else:  # type_choice == 3
         parameters = [mu, c, g, m, y]
@@ -100,7 +104,7 @@ def compute_option_prices(type_choice, call_put, spot_price, strike_min, strike_
     return option_prices, strike
 
 
-# Compute Implied Volatilities
+# Compute Implied Volatility
 
 def compute_implied_volatility(option_prices, call_put, spot_price, strike, time, risk_free, dividend_yield):
     risk_free = risk_free / 100
