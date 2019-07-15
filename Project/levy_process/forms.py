@@ -30,11 +30,11 @@ class ComputeForm(wtf.Form):
                               validators=[wtf.validators.InputRequired(), check_vg_distribution])
 
     # NIG distribution
-    sigma_nig = wtf.FloatField(label='Sigma', default=0.2375,
+    sigma_nig = wtf.FloatField(label='Sigma', default=0.1622,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     kappa_nig = wtf.FloatField(label='Kappa', default=0.2,
                                validators=[wtf.validators.InputRequired()])
-    theta_nig = wtf.FloatField(label='Theta', default=-0.14,
+    theta_nig = wtf.FloatField(label='Theta', default=-0.12882,
                                validators=[wtf.validators.InputRequired()])
 
     # CGMY distribution
@@ -56,7 +56,7 @@ class ComputeForm(wtf.Form):
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Risk Free', default=2, validators=[wtf.validators.InputRequired()])
     dividend_yield = wtf.FloatField(label='Dividend Yield', default=0, validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time to expiration', default=1,
+    time = wtf.FloatField(label='Time to expiration', default=0.2,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     call_put = wtf.RadioField('Call-Put', choices=[('0', 'Put'), ('1', 'Call')], default='1')
 
