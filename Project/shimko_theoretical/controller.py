@@ -386,17 +386,17 @@ def controller_old_shimko_theoretical(user):
     return {'data': data}
 
 
-def delete_post(user, id):
+def delete_shimko_theoretical_simulation(user, id):
     id = int(id)
     if user.is_authenticated():
         if id == -1:
             user.compute_shimko_theoretical.delete()
         else:
             try:
-                instance = user.theoretical.filter_by(id=id).first()
+                instance = user.compute_shimko_theoretical.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
-    return redirect(url_for('old'))
+    return redirect(url_for('old_shimko_theoretical'))

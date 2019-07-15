@@ -158,17 +158,17 @@ def controller_old_heston_method(user):
     return {'data': data}
 
 
-def delete_post(user, id):
+def delete_heston_method_simulation(user, id):
     id = int(id)
     if user.is_authenticated():
         if id == -1:
-            user.Compute.delete()
+            user.compute_heston_method.delete()
         else:
             try:
-                instance = user.Compute.filter_by(id=id).first()
+                instance = user.compute_heston_method.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
-    return redirect(url_for('old'))
+    return redirect(url_for('old_heston_method'))

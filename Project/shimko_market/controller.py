@@ -437,7 +437,7 @@ def controller_old_shimko_market(user):
     return {'data': data}
 
 
-def delete_post(user, id):
+def delete_shimko_market_simulation(user, id):
     id = int(id)
     if user.is_authenticated():
         if id == -1:
@@ -450,4 +450,4 @@ def delete_post(user, id):
                 pass
 
         db.session.commit()
-    return redirect(url_for('old'))
+    return redirect(url_for('old_shimko_market'))

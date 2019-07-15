@@ -1,16 +1,19 @@
 import os
 
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
 from app import app
-from asian_option.controller import controller_asian_option, controller_old_asian_option
+from asian_option.controller import controller_asian_option, controller_old_asian_option, delete_asian_option_simulation
 from db_models import db, User
-from heston_method.controller import controller_heston_method, controller_old_heston_method
-from levy_process.controller import controller_levy_process, controller_old_levy_process
-from shimko_market.controller import controller_shimko_market, controller_old_shimko_market
-from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical
+from heston_method.controller import controller_heston_method, controller_old_heston_method, \
+    delete_heston_method_simulation
+from levy_process.controller import controller_levy_process, controller_old_levy_process, delete_levy_process_simulation
+from shimko_market.controller import controller_shimko_market, controller_old_shimko_market, \
+    delete_shimko_market_simulation
+from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical, \
+    delete_shimko_theoretical_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -98,6 +101,36 @@ def old_asian_option():
     return render_template("old_asian_option.html", **template_variables, back_url=url_for('asian_option'), old=True)
 
 
+@app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_shimko_theretical(id):
+    return delete_shimko_theoretical_simulation(current_user, id)
+
+
+@app.route('/shimko_market/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_shimko_market(id):
+    return delete_shimko_market_simulation(current_user, id)
+
+
+@app.route('/levy_process/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_levy_process(id):
+    return delete_levy_process_simulation(current_user, id)
+
+
+@app.route('/heston_method/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_heston_method(id):
+    return delete_heston_method_simulation(current_user, id)
+
+
+@app.route('/asian_option/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_asian_option(id):
+    return delete_asian_option_simulation(current_user, id)
+
+
 @app.route('/reg', methods=['GET', 'POST'])
 def create_login():
     from forms import RegistrationForm
@@ -112,7 +145,6 @@ def create_login():
 
         login_user(user)
 
-        # return render_template('index.html', just_registered=True)
         return redirect(url_for('index', just_registered=1))
     return render_template("reg.html", form=form, register=True)
 

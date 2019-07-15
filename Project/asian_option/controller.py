@@ -119,18 +119,17 @@ def controller_old_asian_option(user):
     return {'data': data}
 
 
-def delete_post(id):
+def delete_asian_option_simulation(user, id):
     id = int(id)
-    user = current_user
     if user.is_authenticated():
         if id == -1:
-            user.Compute.delete()
+            user.compute_asian_option.delete()
         else:
             try:
-                instance = user.Compute.filter_by(id=id).first()
+                instance = user.compute_asian_option.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
-    return redirect(url_for('old'))
+    return redirect(url_for('old_asian_option'))

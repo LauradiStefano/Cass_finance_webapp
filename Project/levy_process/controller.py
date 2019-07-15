@@ -163,17 +163,17 @@ def controller_old_levy_process(user):
     return {'data': data}
 
 
-def delete_post(user, id):
+def delete_levy_process_simulation(user, id):
     id = int(id)
     if user.is_authenticated():
         if id == -1:
-            user.Compute.delete()
+            user.compute_levy_process.delete()
         else:
             try:
-                instance = user.Compute.filter_by(id=id).first()
+                instance = user.compute_levy_process.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
-    return redirect(url_for('old'))
+    return redirect(url_for('old_levy_process'))
