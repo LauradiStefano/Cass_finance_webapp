@@ -259,8 +259,8 @@ class asian_option(db.Model):
 
     # VG distribution
     sigma_vg = db.Column(db.Float())
-    theta = db.Column(db.Float())
-    kappa = db.Column(db.Float())
+    theta_vg = db.Column(db.Float())
+    kappa_vg = db.Column(db.Float())
 
     # Heston distribution
     volatility_t0 = db.Column(db.Float())

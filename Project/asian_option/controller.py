@@ -2,7 +2,6 @@ import json
 
 import numpy as np
 from flask import redirect, url_for
-from flask_login import current_user
 from sqlalchemy import desc
 
 from asian_option.compute import create_plot_lower_bound, compute_values
@@ -27,7 +26,7 @@ def controller_asian_option(user, request):
             optimal_lower_bound, optimal_strike, lower_bound_strike, lam, lower_bound = \
                 compute_values(form.model_choice.data, form.price.data, form.strike.data, form.time.data,
                                form.risk_free.data, form.step.data, form.sigma_gaussian.data, form.sigma_vg.data,
-                               form.theta.data, form.kappa.data, form.volatility_t0.data, form.alpha_heston.data,
+                               form.theta_vg.data, form.kappa_vg.data, form.volatility_t0.data, form.alpha_heston.data,
                                form.beta_heston.data, form.gamma_heston.data, form.rho_heston.data, form.a_nig.data,
                                form.b_nig.data, form.delta_nig.data, form.c.data, form.g.data, form.m.data,
                                form.y.data, form.a_meixner.data, form.b_meixner.data, form.delta_meixner.data,

@@ -1,15 +1,12 @@
 import math
 
 import wtforms as wtf
-import wtforms.fields.html5 as html5
 from wtforms import validators
-
-import db_models
 
 
 def check_vg_distribution(form, field):
     """Form validation: failure if T > 30 periods."""
-    kappa = form.kappa.data
+    kappa = form.kappa_vg.data
     theta = field.data
     if kappa < theta:
         raise validators.ValidationError('Kappa must be greater than Beta')
@@ -36,9 +33,9 @@ class ComputeForm(wtf.Form):
     # VG distribution
     sigma_vg = wtf.FloatField(label='Sigma', default=0.180022,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    theta = wtf.FloatField(label='Theta', default=-0.136105,
-                           validators=[wtf.validators.InputRequired(), check_vg_distribution])
-    kappa = wtf.FloatField(label='Kappa', default=0.736703, validators=[wtf.validators.InputRequired()])
+    theta_vg = wtf.FloatField(label='Theta', default=-0.136105,
+                              validators=[wtf.validators.InputRequired(), check_vg_distribution])
+    kappa_vg = wtf.FloatField(label='Kappa', default=0.736703, validators=[wtf.validators.InputRequired()])
 
     # Heston distribution
     volatility_t0 = wtf.FloatField(label='V0', default=0.0102,
@@ -97,6 +94,7 @@ class ComputeForm(wtf.Form):
     beta_cev = wtf.FloatField(label='Beta', default=-0.25,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
 
+    # Implementation Parameter
     grid = wtf.FloatField(label='Grid Point (2^)', default=15,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(2, 20)])
     upper_range = wtf.FloatField(label='Upper Range', default=2, validators=[wtf.validators.InputRequired()])
@@ -104,6 +102,7 @@ class ComputeForm(wtf.Form):
     dump = wtf.FloatField(label='Dump Parameter', default=1.5, validators=[wtf.validators.InputRequired()])
     tolerance = wtf.FloatField(label='Tolerance', default=0.00001, validators=[wtf.validators.InputRequired()])
 
+    # Contract Parameters
     price = wtf.FloatField(label='Spot Price', default=100,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Risk Free', default=3.67, validators=[wtf.validators.InputRequired()])
@@ -119,5 +118,3 @@ class ComputeForm(wtf.Form):
     button_compute = wtf.SubmitField(label='Compute')
     # button_export_table = wtf.SubmitField(label='Export Table')
     # button_table = wtf.SubmitField(label='View Details')
-
-

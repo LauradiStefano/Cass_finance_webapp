@@ -37,18 +37,18 @@
 
                     <div class="col-xs-2">
                         $$ v $$
-                        {{form.kappa}}
-                        {% if form.kappa.errors %}
-                        {% for error in form.kappa.errors %}
+                        {{form.kappa_vg}}
+                        {% if form.kappa_vg.errors %}
+                        {% for error in form.kappa_vg.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
                         $$\theta $$
-                        {{form.theta}}
-                        {% if form.theta.errors %}
-                        {% for error in form.theta.errors %}
+                        {{form.theta_vg}}
+                        {% if form.theta_vg.errors %}
+                        {% for error in form.theta_vg.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}

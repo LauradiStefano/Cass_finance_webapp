@@ -19,7 +19,7 @@ from asian_option.get_option_nig import nig_option
 from asian_option.get_vg_option import vg_option
 
 
-def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta, kappa, v0,
+def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta_vg, kappa_vg, v0,
                    alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
                    delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,
                    beta_cev, Nfft, lmax, lmin, delta, tolerance):
@@ -36,7 +36,7 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
     elif type_choice == 1:  # VG
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            vg_option(s0, strike, time, risk_free, N, sigma_vg, theta, kappa, Nfft, lmax, lmin, delta, tolerance)
+            vg_option(s0, strike, time, risk_free, N, sigma_vg, theta_vg, kappa_vg, Nfft, lmax, lmin, delta, tolerance)
         ptrue_strike = ptrue_strike[0]
 
     elif type_choice == 2:  # Heston
