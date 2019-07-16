@@ -1,278 +1,341 @@
 {% include 'header.html' %}
 
-<h2>COS Method - Levy Processes</h2>
-
-<h3>A pricing method for European option based on Fourier-Cosine series expansions: </h3> <br>
 <div class="container">
-    <form class="navbar-form" method="post" action="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-        <h4>Input</h4>
-        <div class="row">
-            <div class="col-xs-3">
-                {{form.type_choice.label}}
-                {{form.type_choice}}
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-
-            <div class="col-xs-2">
-                <div class="row">
-                    $$ \mu $$
-                    {{form.mu}}
-                    {% if form.mu.errors %}
-                    {% for error in form.mu.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                    {% endfor %}
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="col-xs-10">
-                <div id="normal" class="row" {% if form.type_choice.data !='0' and form.type_choice !=None %}
-                     style="display:none" {%endif%}>
-
-                    <div class="col-xs-3">
-                        $$\sigma $$
-                        {{form.sigma_normal}}
-                        {% if form.sigma_normal.errors %}
-                        {% for error in form.sigma_normal.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-                <div id="vg" class="row" {% if form.type_choice.data !='1' %}
-                     style="display:none" {%endif%}>
-
-                    <div class="col-xs-3">
-                        $$\sigma $$
-                        {{form.sigma_vg}}
-                        {% if form.sigma_vg.errors %}
-                        {% for error in form.sigma_vg.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$\kappa $$
-                        {{form.kappa_vg}}
-                        {% if form.kappa_vg.errors %}
-                        {% for error in form.kappa_vg.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$\theta $$
-                        {{form.theta_vg}}
-                        {% if form.theta_vg.errors %}
-                        {% for error in form.theta_vg.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div id="nig" class="row" {% if form.type_choice.data !='2' %}
-                     style="display:none" {%endif%}>
-
-                    <div class="col-xs-3">
-                        $$\sigma $$
-                        {{form.sigma_nig}}
-                        {% if form.sigma_nig.errors %}
-                        {% for error in form.sigma_nig.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$\kappa $$
-                        {{form.kappa_nig}}
-                        {% if form.kappa_nig.errors %}
-                        {% for error in form.kappa_nig.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$\theta $$
-                        {{form.theta_nig}}
-                        {% if form.theta_nig.errors %}
-                        {% for error in form.theta_nig.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div id="cgmy" class="row" {% if form.type_choice.data !='3' %} style="display:none" {%endif%}>
-
-                    <div class="col-xs-3">
-                        $$ C $$
-                        {{form.c}}
-                        {% if form.c.errors %}
-                        {% for error in form.c.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$ G $$
-                        {{form.g}}
-                        {% if form.g.errors %}
-                        {% for error in form.g.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$ M $$
-                        {{form.m}}
-                        {% if form.m.errors %}
-                        {% for error in form.m.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-3">
-                        $$ Y $$
-                        {{form.y}}
-                        {% if form.y.errors %}
-                        {% for error in form.y.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <br/>
-
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.price.label}}
-                {{form.price}}
-                {% if form.price.errors %}
-                {% for error in form.price.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-
-            <div class="col-xs-2">
-                {{form.time.label}}
-                {{form.time}}
-                {% if form.time.errors %}
-                {% for error in form.time.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <br/>
-        <!--\((\%) \) is a Mathjax symbol for % -->
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.risk_free.label}} \((\%) \)
-                {{form.risk_free}}
-                {% if form.risk_free.errors %}
-                {% for error in form.risk_free.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-
-            <div class="col-xs-2">
-                {{form.dividend_yield.label}} \((\%) \)
-                {{form.dividend_yield}}
-                {% if form.dividend_yield.errors %}
-                {% for error in form.dividend_yield.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-2">
-                {{form.strike_min.label}}
-                {{form.strike_min}}
-                {% if form.strike_min.errors %}
-                {% for error in form.strike_min.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-
-            <div class="col-xs-2">
-                {{form.strike_max.label}}
-                {{form.strike_max}}
-                {% if form.strike_max.errors %}
-                {% for error in form.strike_max.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-        </div>
-        <br/>
-        <br/>
-        <div class="row">
-            <div class="col-xs-3">
-                {{form.call_put.label}}
-                {{form.call_put}}
-                {% if form.call_put.errors %}
-                {% for error in form.call_put.errors %}
-                <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                {{form.button_compute}}
-            </div>
-        </div>
-
-    </form>
-    {% if plot_return_underlying_distribution != None %}
     <div class="row">
-        <h4>Results: </h4>
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">COS Method - Levy Processes</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">A pricing method for European option based on
+                Fourier-Cosine series expansions:</h2>
+        </div>
+    </div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="">
+
+            <!-- FIRST ROW -->
+            <div class="row">
+
+                <!-- INPUT -->
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Input</legend>
+                        </div>
+
+                        <!-- TYPE CHOICE -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.type_choice.label}}
+                                {{form.type_choice}}
+                            </div>
+                        </div>
+
+                        <!-- MU -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                $$ \mu $$
+                                {{form.mu}}
+                                {% if form.mu.errors %}
+                                {% for error in form.mu.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
 
 
-        <div id="button_view_details" class="popup_table_open">
-            {{form.button_view_details}}
+                        <!-- SIGMA -->
+                        <div class="row" id="normal" {% if form.type_choice.data !='0' and form.type_choice !=None %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                $$\sigma $$
+                                {{form.sigma_normal}}
+                                {% if form.sigma_normal.errors %}
+                                {% for error in form.sigma_normal.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- SIGMA KAPPA THETA -->
+                        <div class="row" id="vg" {% if form.type_choice.data !='1' %}
+                             style="display:none" {%endif%}>
+                            <div class="col-12 mb-1">
+                                $$\sigma $$
+                                {{form.sigma_vg}}
+                                {% if form.sigma_vg.errors %}
+                                {% for error in form.sigma_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-12 mb-1">
+                                $$\kappa $$
+                                {{form.kappa_vg}}
+                                {% if form.kappa_vg.errors %}
+                                {% for error in form.kappa_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-12 mb-1">
+                                $$\theta $$
+                                {{form.theta_vg}}
+                                {% if form.theta_vg.errors %}
+                                {% for error in form.theta_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row" id="nig" {% if form.type_choice.data !='2' %}
+                             style="display:none" {%endif%}>
+
+                            <div class="col-xs-3">
+                                $$\sigma $$
+                                {{form.sigma_nig}}
+                                {% if form.sigma_nig.errors %}
+                                {% for error in form.sigma_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-3">
+                                $$\kappa $$
+                                {{form.kappa_nig}}
+                                {% if form.kappa_nig.errors %}
+                                {% for error in form.kappa_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-xs-3">
+                                $$\theta $$
+                                {{form.theta_nig}}
+                                {% if form.theta_nig.errors %}
+                                {% for error in form.theta_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- CGMY -->
+                        <div class="row fadeInDown" id="cgmy" {% if form.type_choice.data !='3' %} style="display:none"
+                             {%endif%}>
+                            <div class="col-12 mb-1">
+                                $$ C $$
+                                {{form.c}}
+                                {% if form.c.errors %}
+                                {% for error in form.c.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 mb-1">
+                                $$ G $$
+                                {{form.g}}
+                                {% if form.g.errors %}
+                                {% for error in form.g.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 mb-1">
+                                $$ M $$
+                                {{form.m}}
+                                {% if form.m.errors %}
+                                {% for error in form.m.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+
+                            <div class="col-12 mb-1">
+                                $$ Y $$
+                                {{form.y}}
+                                {% if form.y.errors %}
+                                {% for error in form.y.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+
+                <!-- OTHER FOUR -->
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
+                        <!-- SPOT PRICE -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- TIME TO EXPIRATION -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- RISK FREE -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.risk_free.label}} \((\%) \)
+                                {{form.risk_free}}
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- DIVIDEND YELD -->
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.dividend_yield.label}} \((\%) \)
+                                {{form.dividend_yield}}
+                                {% if form.dividend_yield.errors %}
+                                {% for error in form.dividend_yield.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div> <!-- /col other four -->
+
+
+                <!-- PLOT -->
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                        <!-- STRIKE & PLOT LIST-->
+
+                        <div class="row">
+                            <div class="col">
+                                {{form.strike_min.label}}
+                                {{form.strike_min}}
+                                {% if form.strike_min.errors %}
+                                {% for error in form.strike_min.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{form.strike_max.label}}
+                                {{form.strike_max}}
+                                {% if form.strike_max.errors %}
+                                {% for error in form.strike_max.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                {{form.call_put.label}}
+                                {{form.call_put}}
+                                {% if form.call_put.errors %}
+                                {% for error in form.call_put.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- COMPUTE -->
+                <div class="row mt-3">
+                    <div class="col d-flex justify-content-center">
+                        {{form.button_compute}}
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div> <!-- /row justify-content-center -->
+
+    <div class="row p-3 d-flex justify-content-center">
+        {% if plot_return_underlying_distribution != None %}
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+
+
+                <table class="table table-striped">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Table of moments</legend>
+                    </div>
+                    <thead class="thead-light">
+                    <th scope="col"> Distribution
+                    </td>
+                    <th scope="col"> Mean
+                    </td>
+                    <th scope="col"> Variance
+                    </td>
+                    <th scope="col"> Skewness
+                    </td>
+                    <th scope="col"> Kurtosis
+                    </td>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td> {{dict(form.type_choice.choices).get(form.type_choice.data)}}</td>
+                        <td> {{mean}}</td>
+                        <td> {{variance}}</td>
+                        <td> {{skewness}}</td>
+                        <td> {{kurtosis}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
         </div>
 
-        <div class="row">
-            <table>
-                <h5>Table of moments</h5>
-                <thead>
-                <td> Distribution</td>
-                <td> Mean</td>
-                <td> Variance</td>
-                <td> Skewness</td>
-                <td> Kurtosis</td>
-                </thead>
-                <tbody>
-                <tr>
-                    <td> {{dict(form.type_choice.choices).get(form.type_choice.data)}}</td>
-                    <td> {{mean}}</td>
-                    <td> {{variance}}</td>
-                    <td> {{skewness}}</td>
-                    <td> {{kurtosis}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="row plot">
 
-            <div id="plot_return_underlying_distribution" class="col-6 col-xs-6">
+        <div class="col-12 d-flex mb-3 justify-content-center">
+            <div id="button_view_details" class="popup_table_open">
+                {{form.button_view_details}}
+            </div>
+        </div>
+
+        <div class="col-12 plot">
+            <div id="plot_return_underlying_distribution"
+                 class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_underlying_distribution[0]|safe}}
                 {{plot_return_underlying_distribution[1]|safe}}
             </div>
-            <div id="plot_implied_volatility" class="col-6 col-xs-6">
+        </div>
+        <div class="col-12 plot">
+
+            <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
@@ -283,12 +346,15 @@
 
         {{form.button_export_table}}
 
-        <h4> Table of volatility and prices</h4>
-        <table id="table_export">
-            <thead>
-            <th> Strike</th>
-            <th> Prices</th>
-            <th> Implied Volatility</th>
+        <div class="row border-bottom mb-2 pb-1">
+            <legend>Table of volatility and prices</legend>
+        </div>
+
+        <table class="table table-striped" id="table_export">
+            <thead class="thead-light">
+            <th scope="col"> Strike</th>
+            <th scope="col"> Prices</th>
+            <th scope="col"> Implied Volatility</th>
             </thead>
             <tbody>
             {%for i in range(number_of_strike)%}
@@ -338,6 +404,8 @@
             }
         });
     });
+
+
 
 
 

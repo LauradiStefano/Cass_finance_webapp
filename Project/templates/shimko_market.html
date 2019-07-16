@@ -1,138 +1,198 @@
 {% include 'header.html' %}
 
-<h2>Shimko Bounds of probability</h2>
-
-<h3>This function computes the bounds of probability: </h3> <br>
 <div class="container">
     <div class="row">
-        <h4>Input</h4>
-        <form class="navbar-form" method="POST" action="" enctype="multipart/form-data">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <div class="form-group">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Shimko Bounds of probability</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">This function computes the bounds of
+                probability:</h2>
+        </div>
+    </div>
+</div>
 
-                <div class="row">
-                    <div class="col-xs-6">
-                        {{form.file_name.label}}
-                        {{form.file_name}}
-                    </div>
-                    <div class="col-xs-6">
-                        {% if form.file_name.errors %}
-                        {% for error in form.file_name.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
+<!-- CONTAINER -->
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="" enctype="multipart/form-data">
+
+            <!-- FIRST ROW -->
+            <div class="row">
+
+                <!-- STRIKE -->
+                <div class="col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Input</legend>
+                        </div>
+
+                        <!-- FILE NAME -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_name.label}}
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- PRICE -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- RISK -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.risk_dividend.label}}
+                                {{form.risk_dividend}}
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
 
-                <br/>
+                <!-- EXTRA -->
+                <div id="risk_free" class="col-12" {% if form.risk_dividend.data !='0' %} style="display:none"
+                     {%endif%}>
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
 
-                <div class="row">
-                    <div class="col-xs-5">
-                        {{form.price.label}}
-                        {{form.price}}
-                    </div>
-                    <div class="col-xs-5">
-                        {% if form.price.errors %}
-                        {% for error in form.price.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
+                        <!-- MIN -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.risk_free.label}} \((\%) \)
+                                {{form.risk_free}}
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- ATM -->
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.div_yield.label}} \((\%) \)
+                                {{form.div_yield}}
+                                {% if form.div_yield.errors %}
+                                {% for error in form.div_yield.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
                 </div>
 
-                <br/>
+            </div>
 
-                <!--\((\%) \) is a Mathjax symbol for % -->
 
-                <div class="row">
-                    <div class="col-xs-9">
-                        {{form.risk_dividend.label}}
-                        {{form.risk_dividend}}
-                    </div>
+            <!-- SECOND ROW -->
+            <div class="row">
+
+                <!-- OTHER FOUR -->
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <!-- RISK FREE -->
+                        <div class="row border-bottom mb-2 pb-1">
+                            {{form.call_put_flag.label}}
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                {{form.call_put_flag}}
+                                {% if form.call_put_flag.errors %}
+                                {% for error in form.call_put_flag.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div> <!-- /col other four -->
+
+                <!-- PLOT -->
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                        <!-- PLOT LIST-->
+                        <div class="row border-bottom mb-2 pb-1">
+                            {{form.plot_choice.label}}
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{form.plot_choice}}
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
 
-                <br/>
+            </div>
 
 
-                <div id="risk_free" class="row" {% if form.risk_dividend.data !='0' %} style="display:none" {%endif%}>
-                    <div class="col-xs-4">
-                        {{form.risk_free.label}} \((\%) \)
-                        {{form.risk_free}}
-                        {% if form.risk_free.errors %}
-                        {% for error in form.risk_free.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <div class="col-xs-4">
-                        {{form.div_yield.label}} \((\%) \)
-                        {{form.div_yield}}
-                        {% if form.div_yield.errors %}
-                        {% for error in form.div_yield.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-                <br/>
-                <div class="row">
-                    <div class="col-xs-5">
-                        {{form.call_put_flag.label}}
-                        {{form.call_put_flag}}
-                    </div>
-                    <div class="col-xs-5">
-                        {% if form.call_put_flag.errors %}
-                        {% for error in form.call_put_flag.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-
-                <br/>
-                <div class="row">
-                    <div class="col-xs-7">
-                        {{form.plot_choice.label}}
-                        {{form.plot_choice}}
-                    </div>
-                </div>
-                <br/>
-
-                <br/>
-                <div class="row">
+            <!-- COMPUTE -->
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
                     {{form.button_compute}}
                 </div>
             </div>
-        </form>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="row">
-            {% if plot_implied_volatility != None %}
-            <div class="col-6 col-xs-6">
-                <h4>Results: </h4>
-                <h5>Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)</h5>
-                <h5>
-                    <span> \(a_{0}\): {{a0}}</span><br/>
-                    <span> \(a_{1}\): {{a1}}</span><br/>
-                    <span> \(a_{2}\): {{a2}}</span><br/><br/>
-                    <span> \(R^{2}\): {{r2}}</span> <br/><br/>
 
-                    <!--\((\%) \) is a Mathjax symbol for % -->
-                    {%if form.risk_dividend.data == '1'%}
-                    <span> Risk Free \((\%)\): {{risk_free}}</span> <br/><br/>
-                    <span> Dividend Yield \((\%)\): {{div_yield}}</span>
-                    {%endif%}
-                </h5> <br/>
-                <h6><span> File Name: {{file_name}}</span></h6>
-            </div>
-            <div class="col-6 col-xs-6">
-                <h5>Kolmogorov Smirnov Test</h5>
-                <table>
-                    <thead>
-                    <th></th>
-                    <th> Cdf Prices</th>
-                    <th> Cdf Returns</th>
+        </form>
+    </div> <!-- /row justify-content-center -->
+
+    <div class="row p-3 d-flex justify-content-center">
+        <!-- RESULTS -->
+        {% if plot_implied_volatility != None %}
+        <div class="col-md-4 col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Results</legend>
+                </div>
+
+                <!--Smile -->
+                <div class="row">
+                    <div class="col-12">
+                        <p class="h6 font-weight-bold">Fitted Volatility Smile \(a_{0}+a_{1}\cdot k+a_{2}\cdot
+                            k^{2}\)</p>
+                        <hr>
+                        <p class="font-weight-light"> \(a_{0}\): {{a0}}</p>
+                        <p class="font-weight-light"> \(a_{1}\): {{a1}}</p>
+                        <p class="font-weight-light"> \(a_{2}\): {{a2}}</p>
+                        <p class="font-weight-light"> \(R^{2}\): {{r2}}</p>
+
+                        {%if form.risk_dividend.data == '1'%}
+                        <span> Risk Free \((\%)\): {{risk_free}}</span> <br/><br/>
+                        <span> Dividend Yield \((\%)\): {{div_yield}}</span>
+                        {%endif%}
+                        <hr>
+                        <h6><span> File Name: {{file_name}}</span></h6>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+
+
+        <div class="col-md-8 col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Kolmogorov Smirnov Test</legend>
+                </div>
+                <table class="table table-striped">
+                    <thead class="thead-light">
+                    <th scope="col"></th>
+                    <th scope="col"> Cdf Prices</th>
+                    <th scope="col"> Cdf Returns</th>
                     </thead>
 
                     <tbody>
@@ -150,59 +210,81 @@
                     </tr>
                     </tbody>
                 </table>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col d-flex mb-3 justify-content-center">
+            <div id="button_view_details" class="popup_table_open">
+                {{form.button_view_details}}
             </div>
         </div>
-        <br/>
-        <div id="button_view_details" class="popup_table_open">
-            {{form.button_view_details}}
-        </div>
-        <div class="row plot">
-            <div id="plot_implied_volatility" class="col-6 col-xs-6">
+    </div>
+
+    <!-- BOKEH PLOTS -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 plot">
+            <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_implied_volatility[0]|safe}}
                 {{plot_implied_volatility[1]|safe}}
             </div>
-            <div id="plot_return_distribution" class="col-6 col-xs-6">
+        </div>
+
+        <div class="col-12 plot">
+            <div id="plot_return_distribution"
+                 class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_distribution[0]|safe}}
                 {{plot_return_distribution[1]|safe}}
             </div>
         </div>
-        {%if plot_index_distribution != None%}
-        <div class="row plot">
-            <div id="plot_index_distribution" class="col-6 col-xs-12">
+    </div>
+
+    {%if plot_index_distribution != None%}
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 plot">
+            <div id="plot_index_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_distribution[0]|safe}}
                 {{plot_index_distribution[1]|safe}}
             </div>
         </div>
-        {%endif%}
-        <div class="row plot">
-            {%if plot_index_cdf != None%}
-            <div id="plot_index_cdf" class="col-6 col-xs-6">
+    </div>
+    {%endif%}
+
+    <div class="row d-flex justify-content-center">
+        {%if plot_index_cdf != None%}
+        <div class="col-12 plot">
+            <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_cdf[0]|safe}}
                 {{plot_index_cdf[1]|safe}}
             </div>
-            {%endif%}
-            {%if plot_return_cdf != None%}
-            <div id="plot_return_cdf" class="col-6 col-xs-6">
+        </div>
+        {%endif%}
+        {%if plot_return_cdf != None%}
+        <div class="col-12 plot">
+            <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_cdf[0]|safe}}
                 {{plot_return_cdf[1]|safe}}
             </div>
-            {%endif%}
         </div>
-        {% endif %}
-
+        {%endif%}
     </div>
-</div>
+
+    {% endif %}
+</div> <!-- /container -->
+
 <div id="popup_table" style="display:none">
 
-    {{form.button_export_table}}
-    <h4> Table of moments </h4>
-    <table id="table_export">
-        <thead>
-        <th> Description</th>
-        <th> Ceq</th>
-        <th> LogNormal</th>
-        <th> Ceq Return</th>
-        <th> Normal</th>
+    <div class="row border-bottom mb-2 pb-1">
+        <legend>Table of moments</legend>
+    </div>
+    <table class="table table-striped" id="table_export">
+        <thead class="thead-light">
+        <th scope="col"> Description</th>
+        <th scope="col"> Ceq</th>
+        <th scope="col"> LogNormal</th>
+        <th scope="col"> Ceq Return</th>
+        <th scope="col"> Normal</th>
         </thead>
         <tbody>
         <tr>
@@ -259,7 +341,6 @@
             }
         });
     });
-
 
 </script>
 </body>

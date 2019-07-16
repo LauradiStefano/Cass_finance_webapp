@@ -1,8 +1,82 @@
 {% include 'header.html' %}
 
 {% if just_registered == '1'  %}
-<div class="alert alert-success"> Thank you for your registration </div>
+<div class="alert alert-success"> Thank you for your registration</div>
 {% endif %}
+
+<!-- CONTAINER -->
+<div class="container" id="home">
+    <div class="row d-flex justify-content-center">
+
+        <!-- SHIMKO -->
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Shimko</legend>
+                </div>
+
+                <!-- MIN -->
+                <div class="row">
+                    <div class="col mb-1">
+                        <label>Theoretical</label>
+                    </div>
+                </div>
+
+                <!-- ATM -->
+                <div class="row">
+                    <div class="col mb-1">
+                        <label>Market</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div> <!-- /col shimko -->
+
+        <!-- COS_METHOD -->
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>COS_Method</legend>
+                </div>
+
+                <!-- LEVY -->
+                <div class="row">
+                    <div class="col mb-1">
+                        <label>Levy Process</label>
+
+                    </div>
+                </div>
+
+                <!-- HESTON -->
+                <div class="row">
+                    <div class="col mb-1">
+                        <label>Heston Method</label>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div> <!-- /col cos -->
+
+        <!-- ASIAN OPTION -->
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Asian Option</legend>
+                </div>
+
+                <!-- MIN -->
+                <div class="row">
+                    <div class="col mb-1">
+                        <label>Asian Option</label>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div> <!-- /col asian -->
+
+    </div>
+</div> <!-- /container -->
+
 
 {% include 'footer.html' %}
 
