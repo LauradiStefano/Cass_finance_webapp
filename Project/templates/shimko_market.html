@@ -67,6 +67,11 @@
                      {%endif%}>
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
 
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Risk Free & Dividend Yield</legend>
+                        </div>
+
+
                         <!-- MIN -->
                         <div class="row">
                             <div class="col mb-1">
@@ -107,8 +112,9 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
                         <!-- RISK FREE -->
                         <div class="row border-bottom mb-2 pb-1">
-                            {{form.call_put_flag.label}}
+                            <legend>Call - Put</legend>
                         </div>
+
                         <div class="row">
                             <div class="col mb-2">
                                 {{form.call_put_flag}}
@@ -127,7 +133,7 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
                         <!-- PLOT LIST-->
                         <div class="row border-bottom mb-2 pb-1">
-                            {{form.plot_choice.label}}
+                            <legend>Plot Selector</legend>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -324,6 +330,11 @@
         </tr>
         </tbody>
     </table>
+    <div class="row d-flex justify-content-center">
+
+        {{form.button_export_table}}
+
+    </div>
 </div>
 
 {% include 'footer.html' %}
@@ -341,6 +352,7 @@
             }
         });
     });
+
 
 </script>
 </body>

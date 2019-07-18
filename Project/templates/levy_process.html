@@ -175,6 +175,11 @@
                 <!-- OTHER FOUR -->
                 <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
                         <!-- SPOT PRICE -->
                         <div class="row">
                             <div class="col mb-2">
@@ -233,7 +238,12 @@
                 <!-- PLOT -->
                 <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
-                        <!-- STRIKE & PLOT LIST-->
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
+                        <!-- STRIKE -->
 
                         <div class="row">
                             <div class="col">
@@ -344,8 +354,6 @@
     </div>
     <div id="popup_table" style="display:none">
 
-        {{form.button_export_table}}
-
         <div class="row border-bottom mb-2 pb-1">
             <legend>Table of volatility and prices</legend>
         </div>
@@ -366,6 +374,10 @@
             {%endfor%}
             </tbody>
         </table>
+
+        <div class="row d-flex justify-content-center">
+            {{form.button_export_table}}
+        </div>
     </div>
 
 
@@ -404,6 +416,7 @@
             }
         });
     });
+
 
 
 

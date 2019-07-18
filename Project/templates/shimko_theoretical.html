@@ -125,6 +125,9 @@
                 <!-- OTHER FOUR -->
                 <div class="col-md-8 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
                         <!-- SPOT PRICE -->
                         <div class="row">
                             <div class="col mb-2">
@@ -190,12 +193,6 @@
                         <div class="row">
                             <div class="col">
                                 {{form.plot_choice}}
-
-                                {% if form.plot_choice.errors %}
-                                {% for error in form.plot_choice.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
                             </div>
                         </div>
                     </fieldset>
@@ -378,10 +375,9 @@
         </tr>
         </tbody>
     </table>
+
     <div class="row d-flex justify-content-center">
-
         {{form.button_export_table}}
-
     </div>
 </div>
 

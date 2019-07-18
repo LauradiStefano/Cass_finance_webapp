@@ -111,6 +111,11 @@
                 <!-- OTHER FOUR -->
                 <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
                         <!-- SPOT PRICE -->
                         <div class="row">
                             <div class="col mb-2">
@@ -238,14 +243,10 @@
                     </div>
                     <thead class="thead-light">
 
-                    <th scope="col"> Mean
-                    </td>
-                    <th scope="col"> Variance
-                    </td>
-                    <th scope="col"> Skewness
-                    </td>
-                    <th scope="col"> Kurtosis
-                    </td>
+                    <th scope="col"> Mean</th>
+                    <th scope="col"> Variance</th>
+                    <th scope="col"> Skewness</th>
+                    <th scope="col"> Kurtosis</th>
                     </thead>
                     <tbody>
                     <tr>
@@ -278,25 +279,30 @@
 
     <div id="popup_table" style="display:none">
 
-        {{form.button_export_table}}
+        <div class="row border-bottom mb-2 pb-1">
+            <legend>Table of volatility and prices </legend>
+        </div>
+        <table class="table table-striped" id="table_export">
+            <thead class="thead-light">
+            <th scope="col"> Strike</th>
+            <th scope="col"> Prices</th>
+            <th scope="col"> Implied Volatility</th>
+            </thead>
+            <tbody>
+            {%for i in range(number_of_strike)%}
+            <tr>
+                <td>{{strike[i]}}</td>
+                <td>{{option_prices[i]}}</td>
+                <td>{{implied_volatility[i]}}</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+
+        <div class="row d-flex justify-content-center">
+             {{form.button_export_table}}
+        </div>
     </div>
-    <h4> Table of volatility and prices</h4>
-    <table class="table table-striped" id="table_export">
-        <thead class="thead-light">
-        <th scope="col"> Strike</th>
-        <th scope="col"> Prices</th>
-        <th scope="col"> Implied Volatility</th>
-        </thead>
-        <tbody>
-        {%for i in range(number_of_strike)%}
-        <tr>
-            <td>{{strike[i]}}</td>
-            <td>{{option_prices[i]}}</td>
-            <td>{{implied_volatility[i]}}</td>
-        </tr>
-        {%endfor%}
-        </tbody>
-    </table>
 </div>
 </div>
 
