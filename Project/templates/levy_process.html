@@ -23,7 +23,7 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Input</legend>
+                            <legend>Distribution Parameters</legend>
                         </div>
 
                         <!-- TYPE CHOICE -->
@@ -96,7 +96,7 @@
                         <div class="row" id="nig" {% if form.type_choice.data !='2' %}
                              style="display:none" {%endif%}>
 
-                            <div class="col-xs-3">
+                            <div class="col-12 mb-1">
                                 $$\sigma $$
                                 {{form.sigma_nig}}
                                 {% if form.sigma_nig.errors %}
@@ -105,7 +105,7 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 mb-1">
                                 $$\kappa $$
                                 {{form.kappa_nig}}
                                 {% if form.kappa_nig.errors %}
@@ -114,7 +114,7 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="col-xs-3">
+                            <div class="col-12 mb-1">
                                 $$\theta $$
                                 {{form.theta_nig}}
                                 {% if form.theta_nig.errors %}
@@ -291,6 +291,7 @@
                 </div>
 
             </div>
+
         </form>
     </div> <!-- /row justify-content-center -->
 
