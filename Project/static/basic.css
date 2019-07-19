@@ -49,6 +49,10 @@ table {
     width:100%;
 }
 
+tr:nth-child(even){
+    background-color:#F5F5F5;   /*colore alternato celle (even=righe pari, odd=righe dispari)*/
+}
+
 label {
     text-transform: uppercase;
     font-size: 12px;
@@ -227,5 +231,6 @@ form{
 
 .bk{
       display: table;
-margin: 0 auto;
+      margin: 0 auto;
 }
+
