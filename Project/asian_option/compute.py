@@ -11,19 +11,19 @@ from bokeh.plotting import ColumnDataSource
 from asian_option.get_MJD_option import mjd_option
 from asian_option.get_cev_option import cev_option
 from asian_option.get_dejd_option import dejd_option
+from asian_option.get_exp_gaussian_option import exp_gaussian_option
 from asian_option.get_gbm_option import gbm_option
 from asian_option.get_heston_option import heston_option
 from asian_option.get_option_CGMY import CGMY_option
 from asian_option.get_option_meixner import meixner_option
 from asian_option.get_option_nig import nig_option
 from asian_option.get_vg_option import vg_option
-from asian_option.get_exp_gaussian_option import exp_gaussian_option
 
 
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta_vg, kappa_vg, v0,
                    alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
                    delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,
-                   beta_cev,epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta, tolerance):
+                   beta_cev, epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta, tolerance):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -77,21 +77,21 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
         ptrue_strike = ptrue_strike[0]
 
-    elif type_choice == 8: #CEV
+    elif type_choice == 8:  # CEV
 
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = cev_option(s0, strike, time, risk_free, N, beta_cev,
                                                                            Nfft, lmax, lmin, delta, tolerance)
         ptrue_strike = ptrue_strike[0]
         strike_exp_lcr = strike_exp_lcr[0]
 
-    else: #type choice == 9 Ou exp gaussian model
-        
+    else:  # type choice == 9 Ou exp gaussian model
+
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-               exp_gaussian_option(s0, strike, time, risk_free, N, epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta, tolerance)
+            exp_gaussian_option(s0, strike, time, risk_free, N, epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta,
+                                tolerance)
 
-        #ptrue_strike = ptrue_strike[0]
+        # ptrue_strike = ptrue_strike[0]
 
-        
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
 
