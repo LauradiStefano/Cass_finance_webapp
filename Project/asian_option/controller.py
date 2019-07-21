@@ -32,7 +32,8 @@ def controller_asian_option(user, request):
                                form.y.data, form.a_meixner.data, form.b_meixner.data, form.delta_meixner.data,
                                form.sigma_mjd.data, form.lam_mjd.data, form.mu_x_mjd.data, form.sigma_x_mjd.data,
                                form.sigma_dejd.data, form.lam_dejd.data, form.rho_dejd.data, form.eta1_dejd.data,
-                               form.eta2_dejd.data, form.beta_cev.data, form.grid.data, form.upper_range.data,
+                               form.eta2_dejd.data, form.beta_cev.data, form.epsilon_exp.data, form.k1_exp.data,
+                               form.sigma_exp.data, form.grid.data, form.upper_range.data,
                                form.lower_range.data, form.dump.data, form.tolerance.data)
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)

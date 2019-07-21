@@ -301,6 +301,11 @@ class asian_option(db.Model):
     # CEV distribution
     beta_cev = db.Column(db.Float())
 
+    # Exponential Gaussian distribution
+    epsilon_exp = db.Column(db.Float())
+    k1_exp = db.Column(db.Float())
+    sigma_cev = db.Column(db.Float())
+
     grid = db.Column(db.Float())
     upper_range = db.Column(db.Float())
     lower_range = db.Column(db.Float())

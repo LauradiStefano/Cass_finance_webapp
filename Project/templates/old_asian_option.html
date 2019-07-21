@@ -111,6 +111,16 @@
                                 {{result['form'].beta_cev.data}}
                                 {%endif%}
                             </div>
+                             <div id="exp_gau">
+                                {% if result['form'].model_choice.data == '9' %}
+                                \(\epsilon\):
+                                {{result['form'].epsilon_exp.data}}
+                                 \(k_{1}\):
+                                {{result['form'].k1_exp.data}}
+                                 \(\sigma\):
+                                {{result['form'].sigma_exp.data}}
+                                {%endif%}
+                            </div>
 
                             {{result['form'].grid.label}}
                             {{result['form'].grid.data}} <br>

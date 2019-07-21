@@ -24,7 +24,8 @@ def check_nig_distribution(form, field):
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Distribution',
                                    choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
-                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV')], default='0')
+                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV'), ('9', 'Dist')],
+                                   default='0')
 
     # GBM distribution
     sigma_gaussian = wtf.FloatField(label='Sigma', default=0.17801,
@@ -93,6 +94,15 @@ class ComputeForm(wtf.Form):
     # CEV distribution
     beta_cev = wtf.FloatField(label='Beta', default=-0.25,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
+
+    # Exponential Gaussian distribution
+
+    epsilon_exp = wtf.FloatField(label='Epsilon', default=-0.25,
+                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
+    k1_exp = wtf.FloatField(label='k1', default=-0.25,
+                            validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
+    sigma_exp = wtf.FloatField(label='Sigma', default=-0.25,
+                               validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
 
     # Implementation Parameter
     grid = wtf.FloatField(label='Grid Point (2^)', default=15,

@@ -318,6 +318,39 @@
                     </div>
                 </div>
 
+                 <div id="exp_gaus" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        $$\epsilon $$
+                        {{form.epsilon_exp}}
+                        {% if form.epsilon_exp.errors %}
+                        {% for error in form.epsilon_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                     <div class="col-xs-2">
+                        $$ k_{0} $$
+                        {{form.k1_exp}}
+                        {% if form.k1_exp.errors %}
+                        {% for error in form.k1_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                      <div class="col-xs-2">
+                        $$\sigma $$
+                        {{form.sigma_exp}}
+                        {% if form.sigma_exp.errors %}
+                        {% for error in form.sigma_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
                 <br/>
 
                 <div class="row">
@@ -507,6 +540,7 @@
         var mjd = $('#mjd')
         var dejd = $('#dejd')
         var cev = $('#cev')
+        var exp_gaus = $('#exp_gaus')
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
@@ -519,6 +553,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '1') {
                 gaussian.hide();
@@ -530,6 +565,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '2'){
                 gaussian.hide();
@@ -541,6 +577,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '3') {
                 gaussian.hide();
@@ -552,6 +589,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '4') {
                 gaussian.hide();
@@ -563,6 +601,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '5') {
                 gaussian.hide();
@@ -574,6 +613,7 @@
                 mjd.hide();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '6') {
                 gaussian.hide();
@@ -585,6 +625,7 @@
                 mjd.show();
                 dejd.hide();
                 cev.hide();
+                exp_gaus.hide();
 
             } else if (select_model.val() == '7'){
                 gaussian.hide();
@@ -596,8 +637,9 @@
                 mjd.hide();
                 dejd.show();
                 cev.hide();
+                exp_gaus.hide();
 
-            } else {
+            } else if (select_model.val() == '8') {
                 gaussian.hide();
                 vg.hide();
                 heston.hide();
@@ -607,6 +649,20 @@
                 mjd.hide();
                 dejd.hide();
                 cev.show();
+                exp_gaus.hide();
+            }
+
+             else {
+                gaussian.hide();
+                vg.hide();
+                heston.hide();
+                nig.hide();
+                cgmy.hide();
+                meixner.hide();
+                mjd.hide();
+                dejd.hide();
+                cev.hide();
+                exp_gaus.show();
             }
         });
     });
