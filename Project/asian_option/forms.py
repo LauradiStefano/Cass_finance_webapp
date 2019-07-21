@@ -97,11 +97,11 @@ class ComputeForm(wtf.Form):
 
     # Exponential Gaussian distribution
 
-    epsilon_exp = wtf.FloatField(label='Epsilon', default=-0.25,
+    epsilon_exp = wtf.FloatField(label='Epsilon', default=4.282364642,
                                  validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
-    k1_exp = wtf.FloatField(label='k1', default=-0.25,
+    k1_exp = wtf.FloatField(label='k1', default=5.4462283548,
                             validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
-    sigma_exp = wtf.FloatField(label='Sigma', default=-0.25,
+    sigma_exp = wtf.FloatField(label='Sigma', default=0.361786273,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
 
     # Implementation Parameter
