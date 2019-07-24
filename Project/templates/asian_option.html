@@ -318,7 +318,7 @@
                     </div>
                 </div>
 
-                 <div id="exp_gaus" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
                         $$\epsilon $$
@@ -329,8 +329,7 @@
                         {% endfor %}
                         {% endif %}
                     </div>
-
-                     <div class="col-xs-2">
+                    <div class="col-xs-2">
                         $$ k_{1} $$
                         {{form.k1_exp}}
                         {% if form.k1_exp.errors %}
@@ -339,8 +338,7 @@
                         {% endfor %}
                         {% endif %}
                     </div>
-
-                      <div class="col-xs-2">
+                    <div class="col-xs-2">
                         $$\sigma $$
                         {{form.sigma_exp}}
                         {% if form.sigma_exp.errors %}
@@ -351,11 +349,12 @@
                     </div>
                 </div>
 
+
                 <br/>
 
-                <div class="row">
+                <div id="general" class="row"{% if form.model_choice.data =='9' %} style="display:none" {%endif%} >
 
-                    <div class="col-xs-2">
+                    <div id="price" class="col-xs-2">
                         {{form.price.label}}
                         {{form.price}}
                         {% if form.price.errors %}
@@ -377,12 +376,37 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div id="exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+
+                    <div class="col-xs-2">
+                        {{form.price_exp.label}}
+                        {{form.price_exp}}
+                        {% if form.price_exp.errors %}
+                        {% for error in form.price_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <!--\((\%) \) is a Mathjax symbol for % -->
+
+                    <div class="col-xs-2">
+                        {{form.risk_free_exp.label}} \((\%) \)
+                        {{form.risk_free_exp}}
+                        {% if form.risk_free_exp.errors %}
+                        {% for error in form.risk_free_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             <br/>
             <div class="row">
                 <label> Contract Parameters</label>
 
-                <div class="row">
+                <div id="parameters_general" class="row" {% if form.model_choice.data =='9' %} style="display:none" {%endif%} >
                     <div class="col-xs-2">
                         {{form.time.label}}
                         {{form.time}}
@@ -414,6 +438,38 @@
                     </div>
                 </div>
 
+                <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                    <div class="col-xs-2">
+                        {{form.time_exp.label}}
+                        {{form.time_exp}}
+                        {% if form.time_exp.errors %}
+                        {% for error in form.time_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.step_exp.label}}
+                        {{form.step_exp}}
+                        {% if form.step_exp.errors %}
+                        {% for error in form.step_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-xs-2">
+                        {{form.strike_exp.label}}
+                        {{form.strike_exp}}
+                        {% if form.strike_exp.errors %}
+                        {% for error in form.strike_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
             </div>
             <br/>
 
@@ -431,7 +487,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-xs-2">
+                    <div id="upper_gen" class="col-xs-2"{% if form.model_choice.data =='9' %} style="display:none" {%endif%} >
                         {{form.upper_range.label}}
                         {{form.upper_range}}
                         {% if form.upper_range.errors %}
@@ -441,11 +497,31 @@
                         {% endif %}
                     </div>
 
-                    <div class="col-xs-2">
+                    <div id="lower_gen" class="col-xs-2" {% if form.model_choice.data =='9' %} style="display:none" {%endif%}>
                         {{form.lower_range.label}}
                         {{form.lower_range}}
                         {% if form.lower_range.errors %}
                         {% for error in form.lower_range.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div id="upper_exp" class="col-xs-2" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                        {{form.upper_range_exp.label}}
+                        {{form.upper_range_exp}}
+                        {% if form.upper_range_exp.errors %}
+                        {% for error in form.upper_range_exp.errors %}
+                        <div style="color: red;">{{ error }}</div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <div id="lower_exp" class="col-xs-2" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                        {{form.lower_range_exp.label}}
+                        {{form.lower_range_exp}}
+                        {% if form.lower_range_exp.errors %}
+                        {% for error in form.lower_range_exp.errors %}
                         <div style="color: red;">{{ error }}</div>
                         {% endfor %}
                         {% endif %}
@@ -540,133 +616,121 @@
         var mjd = $('#mjd')
         var dejd = $('#dejd')
         var cev = $('#cev')
-        var exp_gaus = $('#exp_gaus')
+        var exponential = $('#exponential')
+
+        var general = $('#general')
+        var exp = $('#exp')
+        var parGen = $('#parameters_general')
+        var parExp = $('#parameters_exp')
+        var upper_gen = $('#upper_gen')
+        var lower_gen = $('#lower_gen')
+        var upper_exp = $('#upper_exp')
+        var lower_exp = $('#lower_exp')
+
+        function reset(){
+        gaussian.hide();
+        vg.hide();
+        heston.hide();
+        nig.hide();
+        cgmy.hide();
+        meixner.hide();
+        mjd.hide();
+        dejd.hide();
+        cev.hide();
+        exponential.hide();
+        general.hide();
+        exp.hide();
+        parGen.hide();
+        parExp.hide();
+        upper_gen.hide();
+        lower_gen.hide();
+        upper_exp.hide();
+        lower_exp.hide();
+        }
 
         select_model.on('change', function() {
             if (select_model.val() == '0') {
+                reset();
                 gaussian.show();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '1') {
-                gaussian.hide();
+                reset();
                 vg.show();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '2'){
-                gaussian.hide();
-                vg.hide();
+                reset();
                 heston.show();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '3') {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
+                reset();
                 nig.show();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '4') {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
+                reset();
                 cgmy.show();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '5') {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
+                reset();
                 meixner.show();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '6') {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
+                reset();
                 mjd.show();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
             } else if (select_model.val() == '7'){
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
+                reset();
                 dejd.show();
-                cev.hide();
-                exp_gaus.hide();
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
-            } else if (select_model.val() == '8') {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
+            } else if (select_model.val() == '8'){
+                reset();
                 cev.show();
-                exp_gaus.hide();
-            }
+                general.show();
+                parGen.show();
+                upper_gen.show();
+                lower_gen.show();
 
-             else {
-                gaussian.hide();
-                vg.hide();
-                heston.hide();
-                nig.hide();
-                cgmy.hide();
-                meixner.hide();
-                mjd.hide();
-                dejd.hide();
-                cev.hide();
-                exp_gaus.show();
+            } else {
+                reset();
+                exponential.show();
+                exp.show();
+                parExp.show();
+                upper_exp.show();
+                lower_exp.show();
             }
         });
     });
-
 
 </script>
 </body>

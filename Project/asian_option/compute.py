@@ -23,7 +23,8 @@ from asian_option.get_vg_option import vg_option
 def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta_vg, kappa_vg, v0,
                    alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
                    delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,
-                   beta_cev, epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta, tolerance):
+                   beta_cev, epsilon_exp, k1_exp, sigma_exp, price_exp, strike_exp, risk_free_exp, time_exp, N_exp,
+                   lmax_exp, lmin_exp, Nfft, lmax, lmin, delta, tolerance):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
@@ -87,7 +88,8 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
     else:  # type choice == 9 Ou exp gaussian model
 
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            exp_gaussian_option(s0, strike, time, risk_free, N, epsilon_exp, k1_exp, sigma_exp, Nfft, lmax, lmin, delta,
+            exp_gaussian_option(price_exp, strike_exp, time_exp, risk_free_exp, N_exp, epsilon_exp, k1_exp, sigma_exp,
+                                Nfft, lmax_exp, lmin_exp, delta,
                                 tolerance)
 
         # ptrue_strike = ptrue_strike[0]
