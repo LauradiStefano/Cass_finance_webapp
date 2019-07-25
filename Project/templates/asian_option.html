@@ -10,7 +10,7 @@
         <div class="row">
 
             <div class="row">
-                <label> Input </label> <br/>
+                <label> Model Parameters </label> <br/>
                 <div class="row">
                     <div class="col-xs-1">
                         {{form.model_choice.label}}
@@ -321,7 +321,7 @@
                 <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
 
                     <div class="col-xs-2">
-                        $$\epsilon $$
+                        $$\varepsilon $$
                         {{form.epsilon_exp}}
                         {% if form.epsilon_exp.errors %}
                         {% for error in form.epsilon_exp.errors %}
@@ -330,7 +330,7 @@
                         {% endif %}
                     </div>
                     <div class="col-xs-2">
-                        $$ k_{1} $$
+                        $$ \kappa_{1} $$
                         {{form.k1_exp}}
                         {% if form.k1_exp.errors %}
                         {% for error in form.k1_exp.errors %}
@@ -581,7 +581,7 @@
                         <td>{{optimal_strike}}</td>
                     </tr>
                     <tr>
-                        <td>Optimal Lower Bound</td>
+                        <td>Optimal Shadow Lower Bound</td>
                         <td>{{optimal_lower_bound}}</td>
                     </tr>
                     <tr>

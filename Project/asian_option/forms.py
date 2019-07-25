@@ -24,7 +24,7 @@ def check_nig_distribution(form, field):
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Distribution',
                                    choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
-                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV'), ('9', 'EGM')],
+                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV'), ('9', 'OUM')],
                                    default='0')
 
     # GBM distribution
@@ -108,27 +108,27 @@ class ComputeForm(wtf.Form):
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     strike_exp = wtf.FloatField(label='Strike', default=49.323468,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free_exp = wtf.FloatField(label='Risk Free', default=0.01,
+    risk_free_exp = wtf.FloatField(label='Interest Rate', default=0.01,
                                    validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     time_exp = wtf.FloatField(label='Time to Maturity', default=0.083333,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     step_exp = wtf.FloatField(label='Monitoring Frequency', default=22,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    upper_range_exp = wtf.FloatField(label='Upper Range', default=6, validators=[wtf.validators.InputRequired()])
-    lower_range_exp = wtf.FloatField(label='Lower Range', default=3, validators=[wtf.validators.InputRequired()])
+    upper_range_exp = wtf.FloatField(label='Upper Bound Range', default=6, validators=[wtf.validators.InputRequired()])
+    lower_range_exp = wtf.FloatField(label='Lower Bound Range', default=3, validators=[wtf.validators.InputRequired()])
 
     # Implementation Parameter
     grid = wtf.FloatField(label='Grid Point (2^)', default=15,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(2, 20)])
-    upper_range = wtf.FloatField(label='Upper Range', default=2, validators=[wtf.validators.InputRequired()])
-    lower_range = wtf.FloatField(label='Lower Range', default=-2, validators=[wtf.validators.InputRequired()])
+    upper_range = wtf.FloatField(label='Upper Bound Range', default=2, validators=[wtf.validators.InputRequired()])
+    lower_range = wtf.FloatField(label='Lower Bound Range', default=-2, validators=[wtf.validators.InputRequired()])
     dump = wtf.FloatField(label='Dump Parameter', default=1.5, validators=[wtf.validators.InputRequired()])
     tolerance = wtf.FloatField(label='Tolerance', default=0.00001, validators=[wtf.validators.InputRequired()])
 
     # Contract Parameters
     price = wtf.FloatField(label='Spot Price', default=100,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Risk Free', default=3.67, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate', default=3.67, validators=[wtf.validators.InputRequired()])
     # dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0,
     #                                 validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to Maturity', default=1,

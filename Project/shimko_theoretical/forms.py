@@ -25,7 +25,7 @@ class ComputeForm(wtf.Form):
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     price = wtf.FloatField(label='Spot Price', default=387,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Risk Free', default=5.04, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate', default=5.04, validators=[wtf.validators.InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield', default=0, validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to expiration', default=0.1666,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])

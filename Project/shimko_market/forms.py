@@ -1,5 +1,4 @@
 import wtforms as wtf
-from flask_wtf.file import FileRequired
 from wtforms import SelectMultipleField, validators
 from wtforms.validators import InputRequired
 from wtforms.widgets import ListWidget, CheckboxInput
@@ -13,10 +12,11 @@ class MultiCheckboxField(SelectMultipleField):
 class ComputeForm(wtf.Form):
     file_name = wtf.FileField(label='Import File')
     price = wtf.FloatField(label='Spot Price', validators=[InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Risk Free', default=5.04, validators=[InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate', default=5.04, validators=[InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield', default=3.14, validators=[InputRequired()])
 
-    risk_dividend = wtf.RadioField('Risk Free & Dividend Yield', choices=[('0', 'True'), ('1', 'False')], default='1')
+    risk_dividend = wtf.RadioField('Interest Rate & Dividend Yield', choices=[('0', 'True'), ('1', 'False')],
+                                   default='1')
     call_put_flag = wtf.RadioField('Call-Put', choices=[('0', 'Put'), ('1', 'Call'), ('2', 'Both')],
                                    validators=[InputRequired()], default='2')
     plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf Prices'), ('1', 'Cdf Prices'),
