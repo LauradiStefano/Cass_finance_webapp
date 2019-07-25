@@ -204,6 +204,7 @@ form{
     background: white;
     border-radius: 5px;
     align-content: center;
+    max-width:700px !important;
 }
 
 .popup_content > table {
