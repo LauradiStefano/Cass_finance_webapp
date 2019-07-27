@@ -304,7 +304,14 @@ class asian_option(db.Model):
     # Exponential Gaussian distribution
     epsilon_exp = db.Column(db.Float())
     k1_exp = db.Column(db.Float())
-    sigma_cev = db.Column(db.Float())
+    sigma_exp = db.Column(db.Float())
+    price_exp = db.Column(db.Float())
+    strike_exp = db.Column(db.Float())
+    risk_free_exp = db.Column(db.Float())
+    time_exp = db.Column(db.Float())
+    step_exp = db.Column(db.Float())
+    upper_range_exp = db.Column(db.Float())
+    lower_range_exp = db.Column(db.Float())
 
     grid = db.Column(db.Float())
     upper_range = db.Column(db.Float())
