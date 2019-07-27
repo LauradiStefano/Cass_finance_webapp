@@ -5,115 +5,135 @@
 <hr> <!--hr is a line-->
 <div class="container">
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-xs-3">
-                <h3>Input</h3>
+    <div class="row">
+        <div class="col-md-3 col-12">
+            <div class="row">
+                <div class="col-12 output">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Input</legend>
+                        </div>
+                        <div class="row">
 
-                <div class="row">
-                    <div class="output">
+                            <!--\((\%) \) is a Mathjax symbol for % -->
 
-                        <!--\((\%) \) is a Mathjax symbol for % -->
+                            <div class="col d-flex flex-column">
+                                {{result['form'].price.label}}
+                                {{result['form'].price.data}}
 
-                        <div class="col-xs-8">
-                            {{result['form'].price.label}}
-                            {{result['form'].price.data}}
+                                {{result['form'].call_put_flag.label}}
+                                {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}}
 
-                            {{result['form'].call_put_flag.label}}
-                            {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}}
-                            <br/>
+                                {% if result['form'].risk_dividend.data == '0' %}
+                                {{result['form'].risk_free.label}} \((\%) \)
+                                {{result['form'].risk_free.data}}
+                                {{result['form'].div_yield.label}} \((\%) \)
+                                {{result['form'].div_yield.data}}
+                                {%endif%}
 
-                            {% if result['form'].risk_dividend.data == '0' %}
-                            {{result['form'].risk_free.label}} \((\%) \)
-                            {{result['form'].risk_free.data}}
-                            {{result['form'].div_yield.label}} \((\%) \)
-                            {{result['form'].div_yield.data}}
-                            {%endif%}
-
+                            </div>
                         </div>
 
-                    </div>
+                    </fieldset>
                 </div>
 
+                <div class="col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Results</legend>
+                        </div>
+                        <!--\((\%) \) is a Mathjax symbol for % -->
+                        {% if result[' plot_implied_volatility'] != None %}
+                        <div class="row d-flex flex-column">
+                            <span class="mb-1"> \(a_{0}\): {{result ['a0']}}</span>
+                            <span class="mb-1"> \(a_{1}\): {{result ['a1']}}</span>
+                            <span class="mb-1"> \(a_{2}\): {{result ['a2']}}</span>
+                            <span class="mb-1"> \(R^{2}\): {{result ['r2']}}</span>
+                            <br>
+
+                            {% if result['form'].risk_dividend.data == '1' %}
+                            <span class="mb-1 font-weight-bold"> Risk Free \((\%) \): {{result['risk_free']}}</span>
+                            <span class="mb-1 font-weight-bold"> Dividend Yield \((\%) \): {{result['div_yield']}}</span>
+                            {% endif %}
+
+
+                            <span class="mb-1"> File Name: {{result['file_name']}}</span>
+                        </div>
+                    </fieldset>
+                </div>
             </div>
+        </div>
+
+        <div class="col-md-9 col-12">
             <div class="row">
-                <div class="col-xs-3">
-                    <h4>Results</h4>
-                    <!--\((\%) \) is a Mathjax symbol for % -->
-                    {% if result[' plot_implied_volatility'] != None %}
-                    <div class="row">
-                        <span> \(a_{0}\): {{result ['a0']}}</span><br/>
-                        <span> \(a_{1}\): {{result ['a1']}}</span><br/>
-                        <span> \(a_{2}\): {{result ['a2']}}</span><br/>
-                        <span> \(R^{2}\): {{result ['r2']}}</span><br/>
-
-                        {% if result['form'].risk_dividend.data == '1' %}
-                        <span> Risk Free \((\%) \): {{result['risk_free']}}</span><br/>
-                        <span> Dividend Yield \((\%) \): {{result['div_yield']}}</span><br/>
-                        {% endif %}
-
-
-                        <span> File Name: {{result['file_name']}}</span><br/>
-
-
-                        <h4> Table of moments </h4>
-                        <table>
-                            <thead>
-                            <th> Description</th>
-                            <th> Ceq</th>
-                            <th> LogNormal</th>
-                            <th> Ceq Return</th>
-                            <th> Normal</th>
+                <div class="col">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend> Table of moments </legend>
+                        </div>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <th scope="col"> Description</th>
+                            <th scope="col"> Ceq</th>
+                            <th scope="col"> LogNormal</th>
+                            <th scope="col"> Ceq Return</th>
+                            <th scope="col"> Normal</th>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td> Area</td>
-                                <td> {{result['area_prices']}}</td>
-                                <td> 1</td>
-                                <td> {{result['area_returns']}}</td>
-                                <td> 1</td>
-                            </tr>
-                            <tr>
-                                <td> Mean</td>
-                                <td> {{result['expected_price']}}</td>
-                                <td> {{result['expected_price']}}</td>
-                                <td> {{result['m1_returns']}}</td>
-                                <td> {{result['m1_returns']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Variance</td>
-                                <td> {{result['sigma2_price']}}</td>
-                                <td> {{result['sigma2_price']}}</td>
-                                <td> {{result['m2_returns']}}</td>
-                                <td> {{result['m2_returns']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Skewness</td>
-                                <td> {{result['skewness_prices']}}</td>
-                                <td> {{result['skewness_prices_log_n']}}</td>
-                                <td> {{result['skewness_log_returns']}}</td>
-                                <td> {{result['skewness_normal']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Kurtosis</td>
-                                <td> {{result['kurtosis_prices']}}</td>
-                                <td> {{result['kurtosis_prices_log_n']}}</td>
-                                <td> {{result['kurtosis_log_returns']}}</td>
-                                <td> {{result['kurtosis_normal']}}</td>
-                            </tr>
+                                <tr>
+                                    <td> Area</td>
+                                    <td> {{result['area_prices']}}</td>
+                                    <td> 1</td>
+                                    <td> {{result['area_returns']}}</td>
+                                    <td> 1</td>
+                                </tr>
+                                <tr>
+                                    <td> Mean</td>
+                                    <td> {{result['expected_price']}}</td>
+                                    <td> {{result['expected_price']}}</td>
+                                    <td> {{result['m1_returns']}}</td>
+                                    <td> {{result['m1_returns']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Variance</td>
+                                    <td> {{result['sigma2_price']}}</td>
+                                    <td> {{result['sigma2_price']}}</td>
+                                    <td> {{result['m2_returns']}}</td>
+                                    <td> {{result['m2_returns']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Skewness</td>
+                                    <td> {{result['skewness_prices']}}</td>
+                                    <td> {{result['skewness_prices_log_n']}}</td>
+                                    <td> {{result['skewness_log_returns']}}</td>
+                                    <td> {{result['skewness_normal']}}</td>
+                                </tr>
+                                <tr>
+                                    <td> Kurtosis</td>
+                                    <td> {{result['kurtosis_prices']}}</td>
+                                    <td> {{result['kurtosis_prices_log_n']}}</td>
+                                    <td> {{result['kurtosis_log_returns']}}</td>
+                                    <td> {{result['kurtosis_normal']}}</td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="row">
-                        <h5> Kolmogorov Smirnov Test</h5>
-                        <table>
-                            <thead>
-                            <th></th>
-                            <th> Cdf Prices</th>
-                            <th> Cdf Returns</th>
-                            </thead>
+                    </fieldset>
+                </div>
+            </div>
 
-                            <tbody>
+            <div class="col">
+                <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend> Kolmogorov Smirnov Test </legend>
+                    </div>
+                    <table class="table">
+                        <thead class="thead-light">
+                        <th scope="col"></th>
+                        <th scope="col"> Cdf Prices</th>
+                        <th scope="col"> Cdf Returns</th>
+                        </thead>
+
+                        <tbody>
                             <tr>
                                 <td> Statistic Value</td>
                                 <td> {{result['statistic_prices']}}</td>
@@ -126,56 +146,59 @@
                                 <td> {{result['pvalue_returns']}}</td>
 
                             </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-                <div class="col-xs-6 plot">
-                    <div id="plot_implied_volatility">
-                        {{ result['plot_implied_volatility'][0]|safe}}
-                        {{ result['plot_implied_volatility'][1]|safe}}
-                    </div>
-
-                    <div id="plot_return_distribution">
-                        {{ result['plot_return_distribution'][0]|safe}}
-                        {{ result['plot_return_distribution'][1]|safe}}
-                    </div>
-
-                    {% if result[' plot_index_distribution'] != None %}
-                    <div id="plot_index_distribution">
-                        {{ result['plot_index_distribution'][0]|safe }}
-                        {{ result['plot_index_distribution'][1]|safe }}
-                    </div>
-                    {% endif %}
-
-                    {% if result[' plot_index_cdf'] != None %}
-                    <div id="plot_index_cdf">
-                        {{ result['plot_index_cdf'][0]|safe}}
-                        {{ result['plot_index_cdf'][1]|safe}}
-                    </div>
-                    {% endif %}
-
-                    {% if result[' plot_return_cdf'] != None %}
-                    <div id="plot_return_cdf">
-                        {{ result['plot_return_cdf'][0]|safe}}
-                        {{ result['plot_return_cdf'][1]|safe}}
-                    </div>
-                    {% endif %}
-
-                    {% endif %}
-                </div>
+                        </tbody>
+                    </table>
+                </fieldset>
             </div>
         </div>
-        <div class="col-xs-3">
-            <form class="navbar-form navbar-top " method="POST" action="/shimko_market/old/delete/{{ result.id }}">
+
+        <div class="col-12 plot">
+            <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{ result['plot_implied_volatility'][0]|safe}}
+                {{ result['plot_implied_volatility'][1]|safe}}
+            </div>
+
+            <div id="plot_return_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{ result['plot_return_distribution'][0]|safe}}
+                {{ result['plot_return_distribution'][1]|safe}}
+            </div>
+
+            {% if result[' plot_index_distribution'] != None %}
+            <div id="plot_index_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{ result['plot_index_distribution'][0]|safe }}
+                {{ result['plot_index_distribution'][1]|safe }}
+            </div>
+            {% endif %}
+
+            {% if result[' plot_index_cdf'] != None %}
+            <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{ result['plot_index_cdf'][0]|safe}}
+                {{ result['plot_index_cdf'][1]|safe}}
+            </div>
+            {% endif %}
+
+            {% if result[' plot_return_cdf'] != None %}
+            <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+                {{ result['plot_return_cdf'][0]|safe}}
+                {{ result['plot_return_cdf'][1]|safe}}
+            </div>
+            {% endif %}
+
+            {% endif %}
+        </div>
+
+        <div class="col-12">
+            <form style="text-align:center;" method="POST" action="/shimko_market/old/delete/{{ result.id }}">
                 <input type="submit" value="Delete"
                        title="Delete this post from database">
             </form>
         </div>
+
     </div>
+
+
 </div>
+
 {% endfor %}
 <hr>
 <center>

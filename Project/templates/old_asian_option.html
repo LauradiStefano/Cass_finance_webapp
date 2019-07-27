@@ -6,15 +6,17 @@
 <div class="container">
     <div class="form-group">
         <div class="row">
-            <div class="col-xs-3">
-                <h3>Input</h3>
+            <div class="col-12">
+                <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
-                <div class="row">
-                    <div class="output">
-                        <div class="col-xs-8">
+                    <div class="row">
+                        <div class="col-3 output">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
 
                             {{result['form'].model_choice.label}}
-                            {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}} <br/>
+                            {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}} <br />
 
 
                             <div id="gaussian">
@@ -111,13 +113,13 @@
                                 {{result['form'].beta_cev.data}}
                                 {%endif%}
                             </div>
-                             <div id="exp_gau">
+                            <div id="exp_gau">
                                 {% if result['form'].model_choice.data == '9' %}
                                 \(\epsilon\):
                                 {{result['form'].epsilon_exp.data}}
-                                 \(k_{1}\):
+                                \(k_{1}\):
                                 {{result['form'].k1_exp.data}}
-                                 \(\sigma\):
+                                \(\sigma\):
                                 {{result['form'].sigma_exp.data}}
                                 {%endif%}
                             </div>
@@ -145,54 +147,54 @@
                             {{result['form'].strike.data}}
 
                         </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="col-xs-4">
-                            <br/>
-                            <h4>Results</h4>
-                            {% if result['plot_lower_bound'] != None %}
 
-                            <div id="plot_lower_bound" class="col-xs-6 plot">
-                                {{ result['plot_lower_bound'][0]|safe }}
-                                {{ result['plot_lower_bound'][1]|safe }}
-                            </div>
+                        <div class="col-9">
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Results</legend>
+                                </div>
+                                {% if result['plot_lower_bound'] != None %}
 
-                            <table>
-                                <thead>
-                                <th>Lower Bound</th>
-                                <th>Value</th>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>Optimal Strike</td>
-                                    <td>{{result['optimal_strike']}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Optimal Lower Bound</td>
-                                    <td>{{result['optimal_lower_bound']}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Strike</td>
-                                    <td>{{result['form'].strike.data}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Lower Bound Strike</td>
-                                    <td>{{result['lower_bound_strike']}}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                <div id="plot_lower_bound" class="col-xs-6 plot">
+                                    {{ result['plot_lower_bound'][0]|safe }}
+                                    {{ result['plot_lower_bound'][1]|safe }}
+                                </div>
 
-                            {% endif %}
+                                <table class="table">
+                                    <thead class="thead-light">
+                                    <th scope="col">Lower Bound</th>
+                                    <th scope="col">Value</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Optimal Strike</td>
+                                            <td>{{result['optimal_strike']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Optimal Lower Bound</td>
+                                            <td>{{result['optimal_lower_bound']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Strike</td>
+                                            <td>{{result['form'].strike.data}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lower Bound Strike</td>
+                                            <td>{{result['lower_bound_strike']}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <form class="navbar-form navbar-top " method="POST"
+                                  action="/asian_option/old/delete/{{ result.id }}">
+                                <input type="submit" value="Delete"
+                                       title="Delete this post from database">
+                            </form>
                         </div>
                     </div>
-                    <div class="col-xs-3">
-                        <form class="navbar-form navbar-top " method="POST"
-                              action="/asian_option/old/delete/{{ result.id }}">
-                            <input type="submit" value="Delete"
-                                   title="Delete this post from database">
-                        </form>
-                    </div>
-                </div>
+                    </fieldset>
             </div>
         </div>
     </div>

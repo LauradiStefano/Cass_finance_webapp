@@ -28,7 +28,7 @@
 
                         <!-- MU -->
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col">
                                 $$\mu $$
                                 {{form.mu}}
                                 {% if form.mu.errors %}
@@ -41,7 +41,7 @@
 
                         <!-- V -->
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col">
                                 $$ v_{0} $$
                                 {{form.volatility_t0}}
                                 {% if form.volatility_t0.errors %}
@@ -54,7 +54,7 @@
 
                         <!-- HAT -->
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col">
                                 $$\hat{v} $$
                                 {{form.volatility_hat}}
                                 {% if form.volatility_hat.errors %}
@@ -67,7 +67,7 @@
 
                         <!-- CHI -->
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col">
                                 $$\chi $$
                                 {{form.chi}}
                                 {% if form.chi.errors %}
@@ -80,7 +80,7 @@
 
                         <!-- RHO -->
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col">
                                 $$\rho $$
                                 {{form.rho}}
                                 {% if form.rho.errors %}
@@ -92,8 +92,8 @@
                         </div>
 
                         <!-- LAMBDA -->
-                        <div class="row mb-1">
-                            <div class="col mb-1">
+                        <div class="row">
+                            <div class="col">
                                 $$\lambda $$
                                 {{form.lam}}
                                 {% if form.lam.errors %}
@@ -195,7 +195,7 @@
                         </div>
 
                         <!-- SOME PLOT -->
-                        <div class="row pb-3 mt-2">
+                        <div class="row mb-1 mt-1">
                             <div class="col mb-2">
                                 {{form.call_put.label}}
                                 {{form.call_put}}
