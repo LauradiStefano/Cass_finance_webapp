@@ -1,14 +1,21 @@
 {% include 'header.html' %}
 
-<h2>Asian Option</h2>
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Asian Option</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> General Optimized Lower Bounds for Asian
+                Oprions</h2>
+        </div>
+    </div>
+</div>
 
-<h3> General Optimized Lower Bounds for Asian Options </h3> <br>
 <div class="container">
     <form class="" method="post" action="">
 
         <div class="row d-flex justify-content-center">
 
-<div class="col-md-3 col-12">
+            <div class="col-md-3 col-12">
                 <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
                     <div class="row border-bottom mb-2 pb-1">
@@ -47,7 +54,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\theta $$
                             {{form.theta_vg}}
                             {% if form.theta_vg.errors %}
@@ -55,7 +62,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\sigma $$
                             {{form.sigma_vg}}
                             {% if form.sigma_vg.errors %}
@@ -77,7 +84,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\beta $$
                             {{form.beta_heston}}
                             {% if form.beta_heston.errors %}
@@ -85,7 +92,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\gamma $$
                             {{form.gamma_heston}}
                             {% if form.gamma_heston.errors %}
@@ -93,7 +100,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\rho $$
                             {{form.rho_heston}}
                             {% if form.rho_heston.errors %}
@@ -101,7 +108,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\ V_{0} $$
                             {{form.volatility_t0}}
                             {% if form.volatility_t0.errors %}
@@ -122,7 +129,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                       
+
                             $$ b $$
                             {{form.b_nig}}
                             {% if form.b_nig.errors %}
@@ -130,7 +137,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\delta $$
                             {{form.delta_nig}}
                             {% if form.delta_nig.errors %}
@@ -151,7 +158,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                       
+
                             $$ G $$
                             {{form.g}}
                             {% if form.g.errors %}
@@ -159,7 +166,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$ M $$
                             {{form.m}}
                             {% if form.m.errors %}
@@ -167,7 +174,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$ Y $$
                             {{form.y}}
                             {% if form.y.errors %}
@@ -188,7 +195,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                       
+
                             $$ b $$
                             {{form.b_meixner}}
                             {% if form.b_meixner.errors %}
@@ -196,7 +203,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\delta $$
                             {{form.delta_meixner}}
                             {% if form.delta_meixner.errors %}
@@ -217,7 +224,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$ l $$
                             {{form.lam_mjd}}
                             {% if form.lam_mjd.errors %}
@@ -225,7 +232,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\mu_{x} $$
                             {{form.mu_x_mjd}}
                             {% if form.mu_x_mjd.errors %}
@@ -233,7 +240,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\sigma_{x} $$
                             {{form.sigma_x_mjd}}
                             {% if form.sigma_x_mjd.errors %}
@@ -254,7 +261,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$ l $$
                             {{form.lam_dejd}}
                             {% if form.lam_dejd.errors %}
@@ -262,7 +269,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\rho $$
                             {{form.rho_dejd}}
                             {% if form.rho_dejd.errors %}
@@ -270,7 +277,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\eta_{1} $$
                             {{form.eta1_dejd}}
                             {% if form.eta1_dejd.errors %}
@@ -278,7 +285,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\eta_{2} $$
                             {{form.eta2_dejd}}
                             {% if form.eta2_dejd.errors %}
@@ -302,7 +309,8 @@
                         </div>
                     </div>
 
-                    <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                    <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                         {%endif%}>
 
                         <div class="col-12">
                             $$\varepsilon $$
@@ -312,7 +320,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$ \kappa_{1} $$
                             {{form.k1_exp}}
                             {% if form.k1_exp.errors %}
@@ -320,7 +328,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             $$\sigma $$
                             {{form.sigma_exp}}
                             {% if form.sigma_exp.errors %}
@@ -331,7 +339,15 @@
                         </div>
                     </div>
 
-                    <div id="general" class="row" {% if form.model_choice.data =='9' %} style="display:none" {%endif%}>
+                </fieldset>
+            </div>
+
+            <div class="col-md-9 col-12">
+                <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInDown custom-overlay">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Contract Parameters</legend>
+                    </div>
+                    <div id="general" class="row" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
 
                         <div id="price" class="col-12">
                             {{form.price.label}}
@@ -342,9 +358,7 @@
                             {% endfor %}
                             {% endif %}
 
-
-                        <!--\((\%) \) is a Mathjax symbol for % -->
-
+                            <!--\((\%) \) is a Mathjax symbol for % -->
 
                             {{form.risk_free.label}} \((\%) \)
                             {{form.risk_free}}
@@ -366,7 +380,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                       
+
                             {{form.risk_free_exp.label}} \((\%) \)
                             {{form.risk_free_exp}}
                             {% if form.risk_free_exp.errors %}
@@ -376,16 +390,9 @@
                             {% endif %}
                         </div>
                     </div>
-                    </fieldset>
-            </div>            
-  
-              <div class="col-md-9 col-12">
-                <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInDown custom-overlay">
-                <div class="row border-bottom mb-2 pb-1">
-                        <legend>Contract Parameter</legend>
-                    </div>
 
-                    <div id="parameters_general" class="row" {% if form.model_choice.data =='9' %} style="display:none" {%endif%}>
+                    <div id="parameters_general" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                         {%endif%}>
                         <div class="col-12">
                             {{form.time.label}}
                             {{form.time}}
@@ -394,7 +401,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             {{form.step.label}}
                             {{form.step}}
                             {% if form.step.errors %}
@@ -402,7 +409,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             {{form.strike.label}}
                             {{form.strike}}
                             {% if form.strike.errors %}
@@ -413,7 +420,8 @@
                         </div>
                     </div>
 
-                    <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                    <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                         {%endif%}>
                         <div class="col-12">
                             {{form.time_exp.label}}
                             {{form.time_exp}}
@@ -422,7 +430,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             {{form.step_exp.label}}
                             {{form.step_exp}}
                             {% if form.step_exp.errors %}
@@ -430,7 +438,7 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
-                        
+
                             {{form.strike_exp.label}}
                             {{form.strike_exp}}
                             {% if form.strike_exp.errors %}
@@ -440,87 +448,88 @@
                             {% endif %}
                         </div>
                     </div>
-                    </fieldset>
-            
-                  <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInRight custom-overlay">
-                      <div class="row border-bottom mb-2 pb-1">
-                          <legend>FFT Implementation Parameters</legend>
-                      </div>
+                </fieldset>
 
-                      <div class="row">
-                          <div class="col-12">
-                              {{form.grid.label}}
-                              {{form.grid}}
-                              {% if form.grid.errors %}
-                              {% for error in form.grid.errors %}
-                              <div style="color: red;">{{ error }}</div>
-                              {% endfor %}
-                              {% endif %}
+                <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInRight custom-overlay">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>FFT Implementation Parameters</legend>
+                    </div>
 
-                              <div id="upper_gen" {% if form.model_choice.data =='9' %} style="display:none" {%endif%}>
-                                  {{form.upper_range.label}}
-                                  {{form.upper_range}}
-                                  {% if form.upper_range.errors %}
-                                  {% for error in form.upper_range.errors %}
-                                  <div style="color: red;">{{ error }}</div>
-                                  {% endfor %}
-                                  {% endif %}
-                              </div>
+                    <div class="row">
+                        <div class="col-12">
+                            {{form.grid.label}}
+                            {{form.grid}}
+                            {% if form.grid.errors %}
+                            {% for error in form.grid.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
 
-                              <div id="lower_gen" {% if form.model_choice.data =='9' %} style="display:none" {%endif%}>
-                                  {{form.lower_range.label}}
-                                  {{form.lower_range}}
-                                  {% if form.lower_range.errors %}
-                                  {% for error in form.lower_range.errors %}
-                                  <div style="color: red;">{{ error }}</div>
-                                  {% endfor %}
-                                  {% endif %}
-                              </div>
+                            <div id="upper_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+                                {{form.upper_range.label}}
+                                {{form.upper_range}}
+                                {% if form.upper_range.errors %}
+                                {% for error in form.upper_range.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
 
-                              <div id="upper_exp" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
-                                  {{form.upper_range_exp.label}}
-                                  {{form.upper_range_exp}}
-                                  {% if form.upper_range_exp.errors %}
-                                  {% for error in form.upper_range_exp.errors %}
-                                  <div style="color: red;">{{ error }}</div>
-                                  {% endfor %}
-                                  {% endif %}
-                              </div>
+                            <div id="lower_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+                                {{form.lower_range.label}}
+                                {{form.lower_range}}
+                                {% if form.lower_range.errors %}
+                                {% for error in form.lower_range.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
 
-                              <div id="lower_exp" class="col-xs-2" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
-                                  {{form.lower_range_exp.label}}
-                                  {{form.lower_range_exp}}
-                                  {% if form.lower_range_exp.errors %}
-                                  {% for error in form.lower_range_exp.errors %}
-                                  <div style="color: red;">{{ error }}</div>
-                                  {% endfor %}
-                                  {% endif %}
-                              </div>
+                            <div id="upper_exp" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                                {{form.upper_range_exp.label}}
+                                {{form.upper_range_exp}}
+                                {% if form.upper_range_exp.errors %}
+                                {% for error in form.upper_range_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
 
-                              {{form.dump.label}}
-                              {{form.dump}}
-                              {% if form.dump.errors %}
-                              {% for error in form.dump.errors %}
-                              <div style="color: red;">{{ error }}</div>
-                              {% endfor %}
-                              {% endif %}
+                            <div id="lower_exp" class="col-xs-2" {% if form.model_choice.data !='9' %}
+                                 style="display:none" {%endif%}>
+                                {{form.lower_range_exp.label}}
+                                {{form.lower_range_exp}}
+                                {% if form.lower_range_exp.errors %}
+                                {% for error in form.lower_range_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
 
-                              {{form.tolerance.label}}
-                              {{form.tolerance}}
-                              {% if form.tolerance.errors %}
-                              {% for error in form.tolerance.errors %}
-                              <div style="color: red;">{{ error }}</div>
-                              {% endfor %}
-                              {% endif %}
-                          </div>
-                      </div>
+                            {{form.dump.label}}
+                            {{form.dump}}
+                            {% if form.dump.errors %}
+                            {% for error in form.dump.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
 
-                  </fieldset>
+                            {{form.tolerance.label}}
+                            {{form.tolerance}}
+                            {% if form.tolerance.errors %}
+                            {% for error in form.tolerance.errors %}
+                            <div style="color: red;">{{ error }}</div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
 
-                  <div class="col-12 d-flex justify-content-center">
-                      {{form.button_compute}}
-                  </div>
-              </div>
+                </fieldset>
+
+                <div class="col-12 d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
 
         </div>
 
@@ -549,25 +558,25 @@
                     <th scope="col">Value</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Optimal Strike</td>
-                            <td>{{optimal_strike}}</td>
-                        </tr>
-                        <tr>
-                            <td>Optimal Shadow Lower Bound</td>
-                            <td>{{optimal_lower_bound}}</td>
-                        </tr>
-                        <tr>
-                            <td>Strike</td>
-                            <td>{{form.strike.data}}</td>
-                        </tr>
-                        <tr>
-                            <td>Lower Bound Strike</td>
-                            <td>{{lower_bound_strike}}</td>
-                        </tr>
+                    <tr>
+                        <td>Optimal Strike</td>
+                        <td>{{optimal_strike}}</td>
+                    </tr>
+                    <tr>
+                        <td>Optimal Shadow Lower Bound</td>
+                        <td>{{optimal_lower_bound}}</td>
+                    </tr>
+                    <tr>
+                        <td>Strike</td>
+                        <td>{{form.strike.data}}</td>
+                    </tr>
+                    <tr>
+                        <td>Lower Bound Strike</td>
+                        <td>{{lower_bound_strike}}</td>
+                    </tr>
                     </tbody>
                 </table>
-                </fieldset>
+            </fieldset>
         </div>
         {%endif%}
     </div>
@@ -703,7 +712,6 @@
             }
         });
     });
-
 </script>
 </body>
 </html>

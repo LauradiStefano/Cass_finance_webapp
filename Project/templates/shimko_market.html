@@ -68,7 +68,7 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Risk Free & Dividend Yield</legend>
+                            <legend>interest rate & Dividend Yield</legend>
                         </div>
 
 
@@ -110,7 +110,7 @@
                 <!-- OTHER FOUR -->
                 <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-                        <!-- RISK FREE -->
+                        <!-- interest rate -->
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
                         </div>
@@ -177,7 +177,7 @@
                         <p class="font-weight-light"> \(R^{2}\): {{r2}}</p>
 
                         {%if form.risk_dividend.data == '1'%}
-                        <span> Risk Free \((\%)\): {{risk_free}}</span> <br/><br/>
+                        <span> interest rate \((\%)\): {{risk_free}}</span> <br/><br/>
                         <span> Dividend Yield \((\%)\): {{div_yield}}</span>
                         {%endif%}
                         <hr>
@@ -352,6 +352,7 @@
             }
         });
     });
+
 
 
 </script>

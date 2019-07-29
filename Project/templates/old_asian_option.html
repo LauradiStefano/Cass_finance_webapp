@@ -1,5 +1,14 @@
 {% include 'header.html' %}
 
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Previous simulation</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">Asian Option</h2>
+        </div>
+    </div>
+</div>
+
 {% if data %}
 {% for result in data %}
 <hr> <!--hr is a line-->
@@ -16,7 +25,7 @@
                             </div>
 
                             {{result['form'].model_choice.label}}
-                            {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}} <br />
+                            {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}} <br/>
 
 
                             <div id="gaussian">
@@ -149,42 +158,42 @@
                         </div>
 
                         <div class="col-9">
-                                <div class="row border-bottom mb-2 pb-1">
-                                    <legend>Results</legend>
-                                </div>
-                                {% if result['plot_lower_bound'] != None %}
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Results</legend>
+                            </div>
+                            {% if result['plot_lower_bound'] != None %}
 
-                                <div id="plot_lower_bound" class="col-xs-6 plot">
-                                    {{ result['plot_lower_bound'][0]|safe }}
-                                    {{ result['plot_lower_bound'][1]|safe }}
-                                </div>
+                            <div id="plot_lower_bound" class="col-xs-6 plot">
+                                {{ result['plot_lower_bound'][0]|safe }}
+                                {{ result['plot_lower_bound'][1]|safe }}
+                            </div>
 
-                                <table class="table">
-                                    <thead class="thead-light">
-                                    <th scope="col">Lower Bound</th>
-                                    <th scope="col">Value</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Optimal Strike</td>
-                                            <td>{{result['optimal_strike']}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Optimal Lower Bound</td>
-                                            <td>{{result['optimal_lower_bound']}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Strike</td>
-                                            <td>{{result['form'].strike.data}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lower Bound Strike</td>
-                                            <td>{{result['lower_bound_strike']}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table class="table">
+                                <thead class="thead-light">
+                                <th scope="col">Lower Bound</th>
+                                <th scope="col">Value</th>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Optimal Strike</td>
+                                    <td>{{result['optimal_strike']}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Optimal Lower Bound</td>
+                                    <td>{{result['optimal_lower_bound']}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Strike</td>
+                                    <td>{{result['form'].strike.data}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lower Bound Strike</td>
+                                    <td>{{result['lower_bound_strike']}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
 
-                                {% endif %}
+                            {% endif %}
                         </div>
                         <div class="col-12">
                             <form class="navbar-form navbar-top " method="POST"
@@ -194,7 +203,7 @@
                             </form>
                         </div>
                     </div>
-                    </fieldset>
+                </fieldset>
             </div>
         </div>
     </div>
@@ -209,7 +218,7 @@
     </div>
 </center>
 {% else %}
-No previous simulations
+<h3 class="text-center animated fadeInDown">No previous simulations</h3>
 {% endif %}
 
 {% include 'footer.html' %}
