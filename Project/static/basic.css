@@ -152,13 +152,17 @@ form{
     width: 100% !important;
 }
 
-#home{
-    width: 300px !important;
+#home {
+    text-align: center;
+    
+}
+
+.unresponsive{
+    min-width:720px !important;
 }
 
 /* BOOSTRAP OVERRIDE */
-
-.container{
+.container {
     margin: 0 auto;
 }
 
@@ -180,6 +184,10 @@ form{
 
 .navbar-brand{
     color: #C8202E !important;
+}
+
+.navbar-text {
+    font-size: 14px;
 }
 
 .lead{
