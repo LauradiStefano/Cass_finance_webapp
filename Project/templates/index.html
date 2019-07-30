@@ -1,84 +1,91 @@
-{% include 'header.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% if just_registered == '1'  %}
-<div class="alert alert-success"> Thank you for your registration</div>
-{% endif %}
+<head>
 
-<!-- CONTAINER -->
-<div class="container" id="home">
-    <div class="row d-flex justify-content-center">
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css" />
+    <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+    <script type="text/javascript">Bokeh.set_log_level("info");</script>
+    <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+    <link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel="stylesheet" type="text/css">
 
-        <!-- SHIMKO -->
-        <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+    <script src="https://unpkg.com/mathjs/dist/math.min.js"></script>
 
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Shimko</legend>
-                </div>
+    <link rel="stylesheet" href="https://meyerweb.com/eric/tools/css/reset/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css">
+    <link href="/static/basic.css" rel="stylesheet">
 
-                <!-- MIN -->
-                <div class="row">
-                    <div class="col mb-1">
-                        <label>Theoretical</label>
-                    </div>
-                </div>
-
-                <!-- ATM -->
-                <div class="row">
-                    <div class="col mb-1">
-                        <label>Market</label>
-                    </div>
-                </div>
-            </fieldset>
-        </div> <!-- /col shimko -->
-
-        <!-- COS_METHOD -->
-        <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>COS Method</legend>
-                </div>
-
-                <!-- LEVY -->
-                <div class="row">
-                    <div class="col mb-1">
-                        <label>Lévy Process</label>
-
-                    </div>
-                </div>
-
-                <!-- HESTON -->
-                <div class="row">
-                    <div class="col mb-1">
-                        <label>Heston Method</label>
-
-                    </div>
-                </div>
-            </fieldset>
-        </div> <!-- /col cos -->
-
-        <!-- ASIAN OPTION -->
-        <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Asian Option</legend>
-                </div>
-
-                <!-- MIN -->
-                <div class="row">
-                    <div class="col mb-1">
-                        <label>Asian Option</label>
-
-                    </div>
-                </div>
-            </fieldset>
-        </div> <!-- /col asian -->
-
-    </div>
-</div> <!-- /container -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-{% include 'footer.html' %}
+</head>
+
+<body>
+
+    {% if just_registered == '1'  %}
+    <div class="alert alert-success"> Thank you for your registration</div>
+    {% endif %}
+
+    <!-- CONTAINER -->
+    <div class="container" id="home">
+        <div class="row d-flex justify-content-center">
+
+            <div class="col-12 bg-white">
+                <a href="shimko_theoretical"> Shimko Theoretical </a>
+            </div>
+
+            <div class="col-12 bg-white">
+                <a href="shimko_market"> Shimko Market </a>
+            </div>
+
+            <div class="col-12 bg-white">
+                <a href="levy_process"> COS Method - Lévy Processes </a>
+            </div>
+
+            <div class="col-12 bg-white">
+                <a href="heston_process">
+                    COS Method - Heston Model
+                </a>
+            </div>
+
+            <div class="col-12 bg-white">
+                <a href="asian_option"> Asian Option </a>
+            </div>
+
+        </div> <!-- /container -->
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 mt-5">
+    <span class="text-white">
+        {% if user is defined%}
+        {% if user.is_authenticated %}
+        Logged in as {{user.username}}
+        {% if index is not defined %}
+        <a class="mx-3" href="{{request.path}}/old">Previous simulations</a>
+        {% endif %}
+        <a class="mx-2" href="/logout">Logout</a>
+        {% else %}
+        <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+        {% endif %}
+        {% else %}
+        {% if login is defined %}
+        <a class="mx-2" href="/reg">Register</a>
+        {% elif register is defined %}
+        <a class="mx-2" href="/login">Login</a>
+        {% elif old is defined %}
+        <a class="mx-2" href={{back_url}}> Back to the Model </a>
+        {% endif %}
+        {% endif %}
+    </span>
+        </div>
+
+        </div>
+
+
+
+
+        {% include 'footer.html' %}
 
 </body>
 </html>

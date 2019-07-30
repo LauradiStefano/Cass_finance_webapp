@@ -1,5 +1,18 @@
 {% include 'header.html' %}
 
+<<<<<<< HEAD
+
+    <div class="container">
+        <div class="row">
+            <div class="col p-3 m-4">
+                <h1 class="title text-center text-light">Asian Option</h1>
+                <h2 class="lead text-center text-light animated fadeInDown">
+                    General Optimized Lower Bounds for Asian Options
+                </h2>
+                </div>
+            </div>
+        </div>
+=======
 <div class="container">
     <div class="row">
         <div class="col p-3 m-4">
@@ -12,40 +25,38 @@
 
 <div class="container">
     <form class="" method="post" action="">
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
-        <div class="row d-flex justify-content-center">
+    <div class="container">
+        <form class="" method="post" action="">
 
+<<<<<<< HEAD
+            <div class="row d-flex justify-content-center">
+=======
             <div class="col-md-3 col-12">
                 <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend>Model Parameters</legend>
-                    </div>
+                <div class="col-md-3 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
-                    <div class="row">
-                        <div class="col">
-                            {{form.model_choice.label}}
-                            {{form.model_choice}}
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Model Parameters</legend>
                         </div>
-                    </div>
 
-                    <div id="gaussian" class="row">
-
-                        <div class="col-12" {% if form.model_choice.data !='0' and form.model_choice.data !=None %}
-                             style="display:none" {%endif%}>
-
-                            $$\sigma $$
-                            {{form.sigma_gaussian}}
-                            {% if form.sigma_gaussian.errors %}
-                            {% for error in form.sigma_gaussian.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
+                        <div class="row">
+                            <div class="col">
+                                {{form.model_choice.label}}
+                                {{form.model_choice}}
+                            </div>
                         </div>
-                    </div>
 
-                    <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
+                        <div id="gaussian" class="row">
 
+<<<<<<< HEAD
+                            <div class="col-12" {% if form.model_choice.data !='0' and form.model_choice.data !=None %}
+                                 style="display:none" {%endif%}>
+=======
                         <div class="col-12">
                             $$ v $$
                             {{form.kappa_vg}}
@@ -71,11 +82,48 @@
                             {% endfor %}
                             {% endif %}
                         </div>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
-                    </div>
+                                $$\sigma $$
+                                {{form.sigma_gaussian}}
+                                {% if form.sigma_gaussian.errors %}
+                                {% for error in form.sigma_gaussian.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
 
-                    <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none" {%endif%}>
+                        <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
 
+                            <div class="col-12">
+                                $$ v $$
+                                {{form.kappa_vg}}
+                                {% if form.kappa_vg.errors %}
+                                {% for error in form.kappa_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\theta $$
+                                {{form.theta_vg}}
+                                {% if form.theta_vg.errors %}
+                                {% for error in form.theta_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\sigma $$
+                                {{form.sigma_vg}}
+                                {% if form.sigma_vg.errors %}
+                                {% for error in form.sigma_vg.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+
+<<<<<<< HEAD
+=======
                         <div class="col-12">
                             $$\alpha $$
                             {{form.alpha_heston}}
@@ -116,9 +164,54 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
+<<<<<<< HEAD
+                        <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                $$\alpha $$
+                                {{form.alpha_heston}}
+                                {% if form.alpha_heston.errors %}
+                                {% for error in form.alpha_heston.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\beta $$
+                                {{form.beta_heston}}
+                                {% if form.beta_heston.errors %}
+                                {% for error in form.beta_heston.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\gamma $$
+                                {{form.gamma_heston}}
+                                {% if form.gamma_heston.errors %}
+                                {% for error in form.gamma_heston.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\rho $$
+                                {{form.rho_heston}}
+                                {% if form.rho_heston.errors %}
+                                {% for error in form.rho_heston.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\ V_{0} $$
+                                {{form.volatility_t0}}
+                                {% if form.volatility_t0.errors %}
+                                {% for error in form.volatility_t0.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                     <div id="nig" class="row" {% if form.model_choice.data !='3' %} style="display:none" {%endif%}>
 
                         <div class="col-12">
@@ -145,9 +238,38 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
+<<<<<<< HEAD
+                        <div id="nig" class="row" {% if form.model_choice.data !='3' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                $$ a $$
+                                {{form.a_nig}}
+                                {% if form.a_nig.errors %}
+                                {% for error in form.a_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ b $$
+                                {{form.b_nig}}
+                                {% if form.b_nig.errors %}
+                                {% for error in form.b_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\delta $$
+                                {{form.delta_nig}}
+                                {% if form.delta_nig.errors %}
+                                {% for error in form.delta_nig.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                     <div id="cgmy" class="row" {% if form.model_choice.data !='4' %} style="display:none" {%endif%}>
 
                         <div class="col-12">
@@ -182,9 +304,46 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
+<<<<<<< HEAD
+                        <div id="cgmy" class="row" {% if form.model_choice.data !='4' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                $$ C $$
+                                {{form.c}}
+                                {% if form.c.errors %}
+                                {% for error in form.c.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ G $$
+                                {{form.g}}
+                                {% if form.g.errors %}
+                                {% for error in form.g.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ M $$
+                                {{form.m}}
+                                {% if form.m.errors %}
+                                {% for error in form.m.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ Y $$
+                                {{form.y}}
+                                {% if form.y.errors %}
+                                {% for error in form.y.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                     <div id="meixner" class="row" {% if form.model_choice.data !='5' %} style="display:none" {%endif%}>
 
                         <div class="col-12">
@@ -211,11 +370,38 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
-                    <div id="mjd" class="row" {% if form.model_choice.data !='6' %} style="display:none" {%endif%}>
+<<<<<<< HEAD
+                        <div id="meixner" class="row" {% if form.model_choice.data !='5' %} style="display:none" {%endif%}>
 
+                            <div class="col-12">
+                                $$ a $$
+                                {{form.a_meixner}}
+                                {% if form.a_meixner.errors %}
+                                {% for error in form.a_meixner.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ b $$
+                                {{form.b_meixner}}
+                                {% if form.b_meixner.errors %}
+                                {% for error in form.b_meixner.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\delta $$
+                                {{form.delta_meixner}}
+                                {% if form.delta_meixner.errors %}
+                                {% for error in form.delta_meixner.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                         <div class="col-12">
                             $$\sigma $$
                             {{form.sigma_mjd}}
@@ -248,11 +434,46 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
-                    <div id="dejd" class="row" {% if form.model_choice.data !='7' %} style="display:none" {%endif%}>
+<<<<<<< HEAD
+                        <div id="mjd" class="row" {% if form.model_choice.data !='6' %} style="display:none" {%endif%}>
 
+                            <div class="col-12">
+                                $$\sigma $$
+                                {{form.sigma_mjd}}
+                                {% if form.sigma_mjd.errors %}
+                                {% for error in form.sigma_mjd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ l $$
+                                {{form.lam_mjd}}
+                                {% if form.lam_mjd.errors %}
+                                {% for error in form.lam_mjd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\mu_{x} $$
+                                {{form.mu_x_mjd}}
+                                {% if form.mu_x_mjd.errors %}
+                                {% for error in form.mu_x_mjd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\sigma_{x} $$
+                                {{form.sigma_x_mjd}}
+                                {% if form.sigma_x_mjd.errors %}
+                                {% for error in form.sigma_x_mjd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                         <div class="col-12">
                             $$\sigma $$
                             {{form.sigma_dejd}}
@@ -293,20 +514,67 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
-                    <div id="cev" class="row" {% if form.model_choice.data !='8' %} style="display:none" {%endif%}>
+                        <div id="dejd" class="row" {% if form.model_choice.data !='7' %} style="display:none" {%endif%}>
 
-                        <div class="col-12">
-                            $$\beta $$
-                            {{form.beta_cev}}
-                            {% if form.beta_cev.errors %}
-                            {% for error in form.beta_cev.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
+                            <div class="col-12">
+                                $$\sigma $$
+                                {{form.sigma_dejd}}
+                                {% if form.sigma_dejd.errors %}
+                                {% for error in form.sigma_dejd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ l $$
+                                {{form.lam_dejd}}
+                                {% if form.lam_dejd.errors %}
+                                {% for error in form.lam_dejd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\rho $$
+                                {{form.rho_dejd}}
+                                {% if form.rho_dejd.errors %}
+                                {% for error in form.rho_dejd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\eta_{1} $$
+                                {{form.eta1_dejd}}
+                                {% if form.eta1_dejd.errors %}
+                                {% for error in form.eta1_dejd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\eta_{2} $$
+                                {{form.eta2_dejd}}
+                                {% if form.eta2_dejd.errors %}
+                                {% for error in form.eta2_dejd.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
+<<<<<<< HEAD
+
+                        <div id="cev" class="row" {% if form.model_choice.data !='8' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                $$\beta $$
+                                {{form.beta_cev}}
+                                {% if form.beta_cev.errors %}
+                                {% for error in form.beta_cev.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+=======
                     </div>
 
                     <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none"
@@ -336,9 +604,39 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
+<<<<<<< HEAD
+                        <div id="exponential" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                $$\varepsilon $$
+                                {{form.epsilon_exp}}
+                                {% if form.epsilon_exp.errors %}
+                                {% for error in form.epsilon_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$ \kappa_{1} $$
+                                {{form.k1_exp}}
+                                {% if form.k1_exp.errors %}
+                                {% for error in form.k1_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                $$\sigma $$
+                                {{form.sigma_exp}}
+                                {% if form.sigma_exp.errors %}
+                                {% for error in form.sigma_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+=======
                 </fieldset>
             </div>
 
@@ -348,28 +646,130 @@
                         <legend>Contract Parameters</legend>
                     </div>
                     <div id="general" class="row" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
-                        <div id="price" class="col-12">
-                            {{form.price.label}}
-                            {{form.price}}
-                            {% if form.price.errors %}
-                            {% for error in form.price.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
+                        
+                    
+                    </fieldset>
+                </div>
 
-                            <!--\((\%) \) is a Mathjax symbol for % -->
-
-                            {{form.risk_free.label}} \((\%) \)
-                            {{form.risk_free}}
-                            {% if form.risk_free.errors %}
-                            {% for error in form.risk_free.errors %}
-                            <div style="color: red;">{{ error }}</div>
-                            {% endfor %}
-                            {% endif %}
+<<<<<<< HEAD
+                <div class="col-md-9 col-12">
+                    <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInDown custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameter</legend>
                         </div>
-                    </div>
 
+                        <div id="general" class="row" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+
+                            <div id="price" class="col-12">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+
+                                <!--\((\%) \) is a Mathjax symbol for % -->
+                                {{form.risk_free.label}} \((\%) \)
+                                {{form.risk_free}}
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+
+                            <div class="col-12">
+                                {{form.price_exp.label}}
+                                {{form.price_exp}}
+                                {% if form.price_exp.errors %}
+                                {% for error in form.price_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.risk_free_exp.label}} \((\%) \)
+                                {{form.risk_free_exp}}
+                                {% if form.risk_free_exp.errors %}
+                                {% for error in form.risk_free_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+=======
+                            <!--\((\%) \) is a Mathjax symbol for % -->
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
+
+                        <div id="parameters_general" class="row" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+                            <div class="col-12">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.step.label}}
+                                {{form.step}}
+                                {% if form.step.errors %}
+                                {% for error in form.step.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.strike.label}}
+                                {{form.strike}}
+                                {% if form.strike.errors %}
+                                {% for error in form.strike.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+<<<<<<< HEAD
+                        <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                            <div class="col-12">
+                                {{form.time_exp.label}}
+                                {{form.time_exp}}
+                                {% if form.time_exp.errors %}
+                                {% for error in form.time_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.step_exp.label}}
+                                {{form.step_exp}}
+                                {% if form.step_exp.errors %}
+                                {% for error in form.step_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.strike_exp.label}}
+                                {{form.strike_exp}}
+                                {% if form.strike_exp.errors %}
+                                {% for error in form.strike_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInRight custom-overlay">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>FFT Implementation Parameters</legend>
+=======
                     <div id="exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
 
                         <div class="col-12">
@@ -417,9 +817,80 @@
                             <div style="color: red;">{{ error }}</div>
                             {% endfor %}
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                    </div>
 
+<<<<<<< HEAD
+                        <div class="row">
+                            <div class="col-12">
+                                {{form.grid.label}}
+                                {{form.grid}}
+                                {% if form.grid.errors %}
+                                {% for error in form.grid.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                <div id="upper_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+                                    {{form.upper_range.label}}
+                                    {{form.upper_range}}
+                                    {% if form.upper_range.errors %}
+                                    {% for error in form.upper_range.errors %}
+                                    <div style="color: red;">{{ error }}</div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <div id="lower_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
+                                    {{form.lower_range.label}}
+                                    {{form.lower_range}}
+                                    {% if form.lower_range.errors %}
+                                    {% for error in form.lower_range.errors %}
+                                    <div style="color: red;">{{ error }}</div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <div id="upper_exp" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                                    {{form.upper_range_exp.label}}
+                                    {{form.upper_range_exp}}
+                                    {% if form.upper_range_exp.errors %}
+                                    {% for error in form.upper_range_exp.errors %}
+                                    <div style="color: red;">{{ error }}</div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                <div id="lower_exp" class="col-xs-2" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
+                                    {{form.lower_range_exp.label}}
+                                    {{form.lower_range_exp}}
+                                    {% if form.lower_range_exp.errors %}
+                                    {% for error in form.lower_range_exp.errors %}
+                                    <div style="color: red;">{{ error }}</div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+
+                                {{form.dump.label}}
+                                {{form.dump}}
+                                {% if form.dump.errors %}
+                                {% for error in form.dump.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+
+                                {{form.tolerance.label}}
+                                {{form.tolerance}}
+                                {% if form.tolerance.errors %}
+                                {% for error in form.tolerance.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+=======
                     <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none"
                          {%endif%}>
                         <div class="col-12">
@@ -530,24 +1001,66 @@
                     {{form.button_compute}}
                 </div>
             </div>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
-        </div>
 
-
-    </form>
-
-    {% if plot_lower_bound != None %}
-
-    <div class="row d-flex justify-content-center">
-        <div id="plot_lower_bound" class="col-12 plot d-flex justify-content-center">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown custom-overlay">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Results</legend>
                 </div>
+                <div class="col-12 d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
 
-                {{plot_lower_bound[0]|safe}}
-                {{plot_lower_bound[1]|safe}}
 
+        </form>
+
+        <div class="row d-flex justify-content-center">
+            <div class="unresponsive col-12">
+                <fieldset class= "shadow-sm p-3 bg-white rounded animated fadeIn">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Results</legend>
+                    </div>
+
+                    {% if plot_lower_bound != None %}
+
+<<<<<<< HEAD
+
+                    <div id="plot_lower_bound" class="d-flex justify-content-center">
+
+
+                        {{plot_lower_bound[0]|safe}}
+                        {{plot_lower_bound[1]|safe}}
+
+                    </div>
+                    {%endif%}
+
+                    <table class="table">
+                        <thead class="thead-light">
+                        <th scope="col">Lower Bound</th>
+                        <th scope="col">Value</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Optimal Strike</td>
+                                <td>{{optimal_strike}}</td>
+                            </tr>
+                            <tr>
+                                <td>Optimal Shadow Lower Bound</td>
+                                <td>{{optimal_lower_bound}}</td>
+                            </tr>
+                            <tr>
+                                <td>Strike</td>
+                                <td>{{form.strike.data}}</td>
+                            </tr>
+                            <tr>
+                                <td>Lower Bound Strike</td>
+                                <td>{{lower_bound_strike}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+            </div>
+
+=======
             </fieldset>
         </div>
         <div class="col-12">
@@ -577,10 +1090,146 @@
                     </tbody>
                 </table>
             </fieldset>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
         </div>
-        {%endif%}
+
     </div>
 
+<<<<<<< HEAD
+                {% include 'footer.html' %}
+
+                <script charset="utf-8" type="text/javascript">
+                    $(function () {
+                        var select_model = $('#model_choice');
+                        var gaussian = $('#gaussian');
+                        var vg = $('#vg');
+                        var heston = $('#heston');
+                        var nig = $('#nig');
+                        var cgmy = $('#cgmy');
+                        var meixner = $('#meixner');
+                        var mjd = $('#mjd')
+                        var dejd = $('#dejd')
+                        var cev = $('#cev')
+                        var exponential = $('#exponential')
+
+                        var general = $('#general')
+                        var exp = $('#exp')
+                        var parGen = $('#parameters_general')
+                        var parExp = $('#parameters_exp')
+                        var upper_gen = $('#upper_gen')
+                        var lower_gen = $('#lower_gen')
+                        var upper_exp = $('#upper_exp')
+                        var lower_exp = $('#lower_exp')
+
+                        function reset() {
+                            gaussian.hide();
+                            vg.hide();
+                            heston.hide();
+                            nig.hide();
+                            cgmy.hide();
+                            meixner.hide();
+                            mjd.hide();
+                            dejd.hide();
+                            cev.hide();
+                            exponential.hide();
+                            general.hide();
+                            exp.hide();
+                            parGen.hide();
+                            parExp.hide();
+                            upper_gen.hide();
+                            lower_gen.hide();
+                            upper_exp.hide();
+                            lower_exp.hide();
+                        }
+
+                        select_model.on('change', function () {
+                            if (select_model.val() == '0') {
+                                reset();
+                                gaussian.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '1') {
+                                reset();
+                                vg.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '2') {
+                                reset();
+                                heston.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '3') {
+                                reset();
+                                nig.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '4') {
+                                reset();
+                                cgmy.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '5') {
+                                reset();
+                                meixner.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '6') {
+                                reset();
+                                mjd.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '7') {
+                                reset();
+                                dejd.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else if (select_model.val() == '8') {
+                                reset();
+                                cev.show();
+                                general.show();
+                                parGen.show();
+                                upper_gen.show();
+                                lower_gen.show();
+
+                            } else {
+                                reset();
+                                exponential.show();
+                                exp.show();
+                                parExp.show();
+                                upper_exp.show();
+                                lower_exp.show();
+                            }
+                        });
+                    });
+
+                </script>
+                </body>
+                </html>
+=======
 </div>
 
 {% include 'footer.html' %}
@@ -715,3 +1364,4 @@
 </script>
 </body>
 </html>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3

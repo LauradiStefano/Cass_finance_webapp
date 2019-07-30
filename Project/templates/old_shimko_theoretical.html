@@ -249,11 +249,10 @@
 
                 {% endif %}
             </div>
-        </div>
-        <div class="row">
+   
             <div class="col-12 d-flex mb-3 justify-content-center">
 
-                <form class="" method="POST" action="/shimko_theoretical/old/delete/{{ result.id }}">
+                <form style="text-align:center;" class="" method="POST" action="/shimko_theoretical/old/delete/{{ result.id }}">
                     <input type="submit" value="Delete"
                            title="Delete this post from database">
                 </form>
@@ -271,7 +270,15 @@
     </form>
 </center>
 {% else %}
+<<<<<<< HEAD
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+<span class="text-white animated fadeInDown">No previous simulations</span>
+        </div>
+    </div>
+=======
 <h3 class="text-center ">No previous simulations</h3>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 {% endif %}
 
 {% include 'footer.html' %}

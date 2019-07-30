@@ -162,33 +162,37 @@
         </div>
 
         <div class="col-12 plot">
-            <div id="plot_implied_volatility" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_implied_volatility" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
                 {{ result['plot_implied_volatility'][0]|safe}}
                 {{ result['plot_implied_volatility'][1]|safe}}
             </div>
 
+<<<<<<< HEAD
+            <div id="plot_return_distribution" class="shadow-sm mb-3 bg-white rounded d-flex justify-content-center">
+=======
             <div id="plot_return_distribution"
                  class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                 {{ result['plot_return_distribution'][0]|safe}}
                 {{ result['plot_return_distribution'][1]|safe}}
             </div>
 
             {% if result[' plot_index_distribution'] != None %}
-            <div id="plot_index_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_index_distribution" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
                 {{ result['plot_index_distribution'][0]|safe }}
                 {{ result['plot_index_distribution'][1]|safe }}
             </div>
             {% endif %}
 
             {% if result[' plot_index_cdf'] != None %}
-            <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_index_cdf" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
                 {{ result['plot_index_cdf'][0]|safe}}
                 {{ result['plot_index_cdf'][1]|safe}}
             </div>
             {% endif %}
 
             {% if result[' plot_return_cdf'] != None %}
-            <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_return_cdf" class="shadow-sm mb-3 bg-white rounded d-flex justify-content-center">
                 {{ result['plot_return_cdf'][0]|safe}}
                 {{ result['plot_return_cdf'][1]|safe}}
             </div>

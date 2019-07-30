@@ -19,7 +19,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Input</legend>
@@ -105,6 +105,21 @@
             </div>
 
 
+<<<<<<< HEAD
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Table of Moments</legend>
+                        </div>
+                        {% if result['plot_return_underlying_distribution'] != None %}
+                        <div class="row">
+                            <table class="table">
+                                <thead class="thead-light">
+                                <th scope="col"> Mean</th>
+                                <th scope="col"> Variance</th>
+                                <th scope="col"> Skewness</th>
+                                <th scope="col"> Kurtosis</th>
+                                </thead>
+                                <tbody>
+=======
             <div class="col-md-7 col-12">
                 <div class="row">
                     <div class="col-12">
@@ -123,6 +138,7 @@
                                     <th scope="col"> Kurtosis</th>
                                     </thead>
                                     <tbody>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                                     <tr>
 
                                         <td> {{result['mean']}}</td>
@@ -179,8 +195,16 @@
     </div>
 </center>
 {% else %}
+<<<<<<< HEAD
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>{% endif %}
+=======
 <h3 class="text-center animated fadeInDown">No previous simulations</h3>
 {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
 {% include 'footer.html' %}
 

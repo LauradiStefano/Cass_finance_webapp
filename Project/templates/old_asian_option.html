@@ -16,6 +16,163 @@
     <div class="form-group">
         <div class="row">
             <div class="col-12">
+<<<<<<< HEAD
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-lg-3 col-12 output">
+                            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Input</legend>
+                                </div>
+
+                                {{result['form'].model_choice.label}}
+                                {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}} <br />
+
+
+                                <div id="gaussian">
+                                    {% if result['form'].model_choice.data == '0' %}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_gaussian.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="vg">
+                                    {% if result['form'].model_choice.data == '1' %}
+                                    \(v \):
+                                    {{result['form'].kappa_vg.data}} <br>
+                                    \(\theta\):
+                                    {{result['form'].theta_vg.data}} <br>
+                                    \(\sigma\):
+                                    {{result['form'].sigma_vg.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="heston">
+                                    {% if result['form'].model_choice.data == '2' %}
+                                    \(\alpha\):
+                                    {{result['form'].alpha_heston.data}} <br>
+                                    \(\beta\):
+                                    {{result['form'].beta_heston.data}} <br>
+                                    \(\gamma\):
+                                    {{result['form'].gamma_heston.data}} <br>
+                                    \(\rho\):
+                                    {{result['form'].rho_heston.data}} <br>
+                                    \(V_{0}\):
+                                    {{result['form'].volatility_t0.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="nig">
+                                    {% if result['form'].model_choice.data == '3' %}
+                                    \(a\):
+                                    {{result['form'].a_nig.data}} <br>
+                                    \(b\):
+                                    {{result['form'].b_nig.data}} <br>
+                                    \(\delta\):
+                                    {{result['form'].delta_nig.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="cgmy">
+                                    {% if result['form'].model_choice.data == '4' %}
+                                    \(C\):
+                                    {{result['form'].c.data}} <br>
+                                    \(G\):
+                                    {{result['form'].g.data}} <br>
+                                    \(M\):
+                                    {{result['form'].m.data}} <br>
+                                    \(Y\):
+                                    {{result['form'].y.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="meixer">
+                                    {% if result['form'].model_choice.data == '5' %}
+                                    \(a\):
+                                    {{result['form'].a_meixner.data}} <br>
+                                    \(b\):
+                                    {{result['form'].b_meixner.data}} <br>
+                                    \(\delta\):
+                                    {{result['form'].delta_meixner.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="mjd">
+                                    {% if result['form'].model_choice.data == '6' %}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_mjd.data}} <br>
+                                    \(l\):
+                                    {{result['form'].lam_mjd.data}} <br>
+                                    \(\mu_{x}\):
+                                    {{result['form'].mu_x_mjd.data}} <br>
+                                    \(\sigma_{x}\):
+                                    {{result['form'].sigma_x_mjd.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="dejd">
+                                    {% if result['form'].model_choice.data == '7' %}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_dejd.data}} <br>
+                                    \(l\):
+                                    {{result['form'].lam_dejd.data}} <br>
+                                    \(\rho\):
+                                    {{result['form'].rho_dejd.data}} <br>
+                                    \(\eta_{1}\):
+                                    {{result['form'].eta1_dejd.data}} <br>
+                                    \(\eta_{2}\):
+                                    {{result['form'].eta2_dejd.data}} <br>
+                                    {%endif%}
+                                </div>
+                                <div id="cev">
+                                    {% if result['form'].model_choice.data == '8' %}
+                                    \(\beta\):
+                                    {{result['form'].beta_cev.data}}
+                                    {%endif%}
+                                </div>
+                                <div id="exp_gau">
+                                    {% if result['form'].model_choice.data == '9' %}
+                                    \(\epsilon\):
+                                    {{result['form'].epsilon_exp.data}}
+                                    \(k_{1}\):
+                                    {{result['form'].k1_exp.data}}
+                                    \(\sigma\):
+                                    {{result['form'].sigma_exp.data}}
+                                    {%endif%}
+                                </div>
+
+                                {{result['form'].grid.label}}
+                                {{result['form'].grid.data}} <br>
+                                {{result['form'].upper_range.label}}
+                                {{result['form'].upper_range.data}} <br>
+                                {{result['form'].lower_range.label}}
+                                {{result['form'].lower_range.data}} <br>
+                                {{result['form'].dump.label}}
+                                {{result['form'].dump.data}} <br>
+                                {{result['form'].tolerance.label}}
+                                {{result['form'].tolerance.data}} <br>
+
+                                {{result['form'].price.label}}
+                                {{result['form'].price.data}} <br>
+                                {{result['form'].risk_free.label}} \((\%) \)
+                                {{result['form'].risk_free.data}} <br>
+                                {{result['form'].time.label}}
+                                {{result['form'].time.data}} <br>
+                                {{result['form'].step.label}}
+                                {{result['form'].step.data}} <br>
+                                {{result['form'].strike.label}}
+                                {{result['form'].strike.data}}
+
+                            </fieldset>
+                        </div>
+
+                        <div class="uresponsive col-lg-9 col-12">
+                            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Results</legend>
+                                </div>
+                                {% if result['plot_lower_bound'] != None %}
+
+                                <div id="plot_lower_bound" class="">
+                                    {{ result['plot_lower_bound'][0]|safe }}
+                                    {{ result['plot_lower_bound'][1]|safe }}
+                                </div>
+=======
                 <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
                     <div class="row">
@@ -169,6 +326,7 @@
                             <div class="row border-bottom mb-2 pb-1">
                                 <legend>Table...</legend>
                             </div>
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
                             <table class="table">
                                 <thead class="thead-light">
@@ -195,10 +353,15 @@
                                 </tbody>
                             </table>
 
+<<<<<<< HEAD
+                                {% endif %}
+                                </fieldset>
+=======
                             {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
                         </div>
-                        <div class="col-12">
-                            <form class="navbar-form navbar-top " method="POST"
+                        <div class="col-12 d-flex justify-content-center">
+                            <form style="text-align:center; class="" method="POST"
                                   action="/asian_option/old/delete/{{ result.id }}">
                                 <input type="submit" value="Delete"
                                        title="Delete this post from database">
@@ -214,14 +377,22 @@
 <hr>
 <center>
     <div class="row">
-        <form method="POST" action="/asian_option/old/delete/-1">
+        <form style="text-align:center; method="POST" action="/asian_option/old/delete/-1">
             <input type="submit" value="Delete all">
         </form>
     </div>
 </center>
 {% else %}
+<<<<<<< HEAD
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>{% endif %}
+=======
 <h3 class="text-center animated fadeInDown">No previous simulations</h3>
 {% endif %}
+>>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
 {% include 'footer.html' %}
 
