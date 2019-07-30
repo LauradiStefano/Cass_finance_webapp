@@ -11,7 +11,7 @@
 
 {% if data %}
 {% for result in data %}
-<hr> <!--hr is a line-->
+
 <div class="container">
     <div class="form-group">
         <div class="row">
@@ -154,7 +154,6 @@
                             {{result['form'].step.data}} <br>
                             {{result['form'].strike.label}}
                             {{result['form'].strike.data}}
-
                         </div>
 
                         <div class="col-9">
@@ -166,6 +165,9 @@
                             <div id="plot_lower_bound" class="col-xs-6 plot">
                                 {{ result['plot_lower_bound'][0]|safe }}
                                 {{ result['plot_lower_bound'][1]|safe }}
+                            </div>
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Table...</legend>
                             </div>
 
                             <table class="table">
