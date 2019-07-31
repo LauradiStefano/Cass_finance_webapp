@@ -1,16 +1,7 @@
 {% include 'header.html' %}
-<div class="container">
-    <div class="row">
-        <div class="col p-3 m-4">
-            <h1 class="title text-center text-light">Previous simulation</h1>
-            <h2 class="lead text-center text-light animated fadeInDown">COS Method - Lévy Processes</h2>
-        </div>
-    </div>
-</div>
-
 {% if data %}
 {% for result in data %}
-
+<hr> <!--hr is a line-->
 <div class="container">
 
     <div class="row mb-4">
@@ -29,7 +20,7 @@
                                     {{result['form'].type_choice.label}}
                                 </span>
                                 <span class="mb-1">
-                                    {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}} <br/>
+                                    {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}} <br />
                                 </span>
                                 <span class="mb-1">
                                     \(\mu\):
@@ -161,9 +152,12 @@
                             </div>
 
                         </div>
-                    </fieldset>
                 </div>
+                </fieldset>
             </div>
+
+
+
         </div>
 
         <div class="col-md-7 col-12">
@@ -177,6 +171,7 @@
                         {% if result['plot_return_underlying_distribution'] != None %}
                         <div class="row">
                             <table class="table">
+                                <h5>Table of moments</h5>
                                 <thead class="thead-light">
                                 <th scope="col"> Distribution</th>
                                 <th scope="col"> Mean</th>
@@ -185,15 +180,15 @@
                                 <th scope="col"> Kurtosis</th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>
-                                        {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
-                                    </td>
-                                    <td> {{result['mean']}}</td>
-                                    <td> {{result['variance']}}</td>
-                                    <td> {{result['skewness']}}</td>
-                                    <td> {{result['kurtosis']}}</td>
-                                </tr>
+                                    <tr>
+                                        <td>
+                                            {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                        </td>
+                                        <td> {{result['mean']}}</td>
+                                        <td> {{result['variance']}}</td>
+                                        <td> {{result['skewness']}}</td>
+                                        <td> {{result['kurtosis']}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -206,8 +201,7 @@
 
         <div class="col-12 plot">
 
-            <div id="plot_return_underlying_distribution"
-                 class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_return_underlying_distribution" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{ result['plot_return_underlying_distribution'][0]|safe }}
                 {{ result['plot_return_underlying_distribution'][1]|safe }}
             </div>
@@ -242,16 +236,11 @@
     </div>
 </center>
 {% else %}
-<<<<<<< HEAD
 <div class="row d-flex align-content-center">
     <div style="text-align:center;" class="col">
         <span class="text-white animated fadeInDown">No previous simulations</span>
     </div>
 </div>{% endif %}
-=======
-<h3 class="text-center animated fadeInDown">No previous simulations</h3>
-{% endif %}
->>>>>>> 9546e771194945becc494c59d6ce66ddb1974ee3
 
 {% include 'footer.html' %}
 </body>
