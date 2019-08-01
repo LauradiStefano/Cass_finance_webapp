@@ -249,7 +249,8 @@
     {%if plot_index_distribution != None%}
     <div class="row d-flex justify-content-center">
         <div class="unresponsive col-12">
-            <div id="plot_index_distribution" class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_index_distribution"
+                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_distribution[0]|safe}}
                 {{plot_index_distribution[1]|safe}}
             </div>
@@ -260,7 +261,8 @@
     <div class="row d-flex justify-content-center">
         {%if plot_index_cdf != None%}
         <div class="unresponsive col-12">
-            <div id="plot_index_cdf" class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_index_cdf"
+                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_index_cdf[0]|safe}}
                 {{plot_index_cdf[1]|safe}}
             </div>
@@ -268,7 +270,8 @@
         {%endif%}
         {%if plot_return_cdf != None%}
         <div class="unresponsive col-12 plot">
-            <div id="plot_return_cdf" class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
+            <div id="plot_return_cdf"
+                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
                 {{plot_return_cdf[0]|safe}}
                 {{plot_return_cdf[1]|safe}}
             </div>
@@ -352,6 +355,7 @@
             }
         });
     });
+
 
 
 </script>
