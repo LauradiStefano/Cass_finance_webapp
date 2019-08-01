@@ -66,7 +66,7 @@ def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, 
         B = abs(regression_line[0])
 
         """
-        From previous value compute dividend yield and risk free
+        From previous value compute dividend yield and interest rate
         """
         div_yield = -(1 / time) * math.log(SD / s0)
         risk_free = (1 / time) * math.log(1 / B)

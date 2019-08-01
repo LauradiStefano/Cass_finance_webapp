@@ -91,7 +91,7 @@ def controller_shimko_market(user, request):
         plot_return_distribution = create_plot_return_underlying_distribution(returns_t, pdf_returns,
                                                                               pdf_bench_norm_returns)
 
-        if form.risk_dividend.data == '1':  # risk free and div yield are implicitly calculated
+        if form.risk_dividend.data == '1':  # interest rate and div yield are implicitly calculated
             risk_free = risk_free * 100
             div_yield = div_yield * 100
 
