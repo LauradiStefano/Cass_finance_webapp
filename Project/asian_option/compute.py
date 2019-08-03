@@ -110,8 +110,8 @@ def create_plot_lower_bound(lam, lower_bound, strike, strike_exp_lcr):
     x_range = [0, max(lam)]
     y_range = [0, max(lower_bound) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_lower_bound], x_range=x_range,
-                    y_range=y_range, title="Asian Option Lower Bound", plot_height=450,
-                    toolbar_location="left", x_axis_label='Lambda', y_axis_label='Lower Bound')
+                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Lambda',
+                    y_axis_label='Lower Bound')
 
     fig.line(x='lam', y='lower_bound', source=data, legend="Lower Bound Function", color="#0095B6", alpha=0.9,
              line_width=4, name='lower bound')

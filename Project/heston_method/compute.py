@@ -57,8 +57,8 @@ def create_plot_return_underlying_distribution(returns, heston_pdf, norm_pdf):
     x_range = [min(returns), max(returns)]
     y_range = [0, max(heston_pdf) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_norm_pdf], x_range=x_range,
-                    y_range=y_range, title="Pdf underlying asset", plot_height=450, toolbar_location="left",
-                    x_axis_label='Returns', y_axis_label='Probability')
+                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Returns',
+                    y_axis_label='Probability')
 
     fig.line(x='returns', y='heston_pdf', source=data, legend="Pdf distribution", color="#0095B6", alpha=0.9,
              line_width=4, name='pdf ret')
@@ -87,8 +87,8 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
     x_range = [min(strike) * 0.9, max(strike) * 1.1]
     y_range = [0, max(implied_volatility) * 1.25]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_implied], x_range=x_range, y_range=y_range,
-                    title="Implied volatility profile", plot_height=450,
-                    toolbar_location="right", x_axis_label='Exercise price', y_axis_label='Volatility x root time')
+                    plot_height=450, toolbar_location="right", x_axis_label='Exercise price',
+                    y_axis_label='Volatility x root time')
 
     fig.line(x='strike', y='implied_volatility', source=data, legend='Implied volatility', color="#0095B6",
              line_width=4, alpha=0.8, name='implied vol')
