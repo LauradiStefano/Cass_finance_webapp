@@ -40,7 +40,7 @@ h3 {
 h6{
     font-size: 14px;
         color: #1E1E1E;
-    text-transform: uppercase;
+    font-variant: small-caps;
         font-weight: 600;
 
 }
@@ -177,7 +177,7 @@ form{
 
 }
 
-.row .border-bottom {
+.row.border-bottom {
     border-bottom: 1.5px solid #C8202E!important;
 
 }
@@ -247,8 +247,5 @@ form{
     font-size: 14px !important;
 }
 
-.bk{
-      display: table;
-      margin: 0 auto;
-}
+
 

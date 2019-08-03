@@ -228,7 +228,7 @@
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
                 <table class="table">
                     <div class="row border-bottom mb-2 pb-1">
-                        <legend>Table of moments</legend>
+                        <legend>Table of Moments</legend>
                     </div>
                     <thead class="thead-light">
 
@@ -257,27 +257,35 @@
             </div>
         </div>
 
-        <div class="unresponsive col-12 plot">
-            <div id="plot_return_underlying_distribution"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_return_underlying_distribution[0]|safe}}
-                {{plot_return_underlying_distribution[1]|safe}}
-            </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Pdf Underlying Asset</legend>
+                </div>
+                <div id="plot_return_underlying_distribution" class="d-flex justify-content-center">
+                    {{plot_return_underlying_distribution[0]|safe}}
+                    {{plot_return_underlying_distribution[1]|safe}}
+                </div>
+            </fieldset>
         </div>
-        <div class="unresponsive col-12 plot">
-            <div id="plot_implied_volatility"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_implied_volatility[0]|safe}}
-                {{plot_implied_volatility[1]|safe}}
-            </div>
-            {%endif%}
+
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied Volatility Profile</legend>
+                </div>
+                <div id="plot_implied_volatility" class="d-flex justify-content-center">
+                    {{plot_implied_volatility[0]|safe}}
+                    {{plot_implied_volatility[1]|safe}}
+                </div>
+            </fieldset>
         </div>
     </div>
 
     <div id="popup_table" style="display:none">
 
         <div class="row border-bottom mb-2 pb-1">
-            <legend>Table of volatility and prices</legend>
+            <legend>Table of Volatility & Prices</legend>
         </div>
         <table class="table" id="table_export">
             <thead class="thead-light">
@@ -302,6 +310,7 @@
     </div>
 </div>
 </div>
+{% endif%}
 
 {% include 'footer.html' %}
 
