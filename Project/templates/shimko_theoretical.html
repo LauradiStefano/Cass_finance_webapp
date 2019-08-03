@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col p-3 m-4">
             <h1 class="title text-center text-light">Shimko Bounds of probability</h1>
-            <h2 class="lead text-center text-light animated fadeInDown">This function computes the bounds of
-                probability:</h2>
+            <h2 class="lead text-center text-light animated fadeInDown">This function computes the theoretical bounds of
+                probability</h2>
         </div>
     </div>
 </div>
@@ -200,7 +200,6 @@
 
             </div>
 
-
             <!-- COMPUTE -->
             <div class="row mt-3">
                 <div class="col d-flex justify-content-center">
@@ -211,7 +210,7 @@
         </form>
     </div> <!-- /row justify-content-center -->
 
-    <div class="row p-3 d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
         <!-- RESULTS -->
         {% if plot_implied_volatility != None %}
         <div class="col-md-4 col-12">
@@ -223,17 +222,27 @@
                 <!--Smile -->
                 <div class="row">
                     <div class="col-12">
-                        <h6>Fitted Volatility Smile<br>\(a_{0}+a_{1}\cdot k+a_{2}\cdot
-                            k^{2}\)</h6>
+                        <h6>Fitted Volatility Smile </h6>
+                        \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)
                         <hr>
                         <p class="font-weight-light"> \(a_{0}\): {{a0}}</p>
                         <p class="font-weight-light"> \(a_{1}\): {{a1}}</p>
                         <p class="font-weight-light"> \(a_{2}\): {{a2}}</p>
                     </div>
+
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col d-flex mb-3 justify-content-center">
+                        <div id="button_view_details" class="popup_table_open">
+                            {{form.button_view_details}}
+                        </div>
+                    </div>
                 </div>
 
             </fieldset>
         </div> <!-- /col smile -->
+
 
         <div class="col-md-8 col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
@@ -266,64 +275,80 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col d-flex mb-3 justify-content-center">
-            <div id="button_view_details" class="popup_table_open">
-                {{form.button_view_details}}
-            </div>
-        </div>
-    </div>
-
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12 plot">
-            <div id="plot_implied_volatility"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_implied_volatility[0]|safe}}
-                {{plot_implied_volatility[1]|safe}}
-            </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied Volatility Profile</legend>
+                </div>
+                <div id="plot_implied_volatility" class="d-flex justify-content-center">
+                    {{plot_implied_volatility[0]|safe}}
+                    {{plot_implied_volatility[1]|safe}}
+                </div>
+            </fieldset>
         </div>
 
-        <div class="unresponsive col-12 plot">
-            <div id="plot_return_distribution"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_return_distribution[0]|safe}}
-                {{plot_return_distribution[1]|safe}}
-            </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns Distribution</legend>
+                </div>
+                <div id="plot_return_distribution" class="d-flex justify-content-center">
+                    {{plot_return_distribution[0]|safe}}
+                    {{plot_return_distribution[1]|safe}}
+                </div>
+            </fieldset>
         </div>
     </div>
 
     {%if plot_index_distribution != None%}
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12 plot">
-            <div id="plot_index_distribution"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_index_distribution[0]|safe}}
-                {{plot_index_distribution[1]|safe}}
-            </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ index distribution</legend>
+                </div>
+                <div id="plot_index_distribution" class="d-flex justify-content-center">
+                    {{plot_index_distribution[0]|safe}}
+                    {{plot_index_distribution[1]|safe}}
+                </div>
+            </fieldset>
         </div>
     </div>
     {%endif%}
 
+    {%if plot_index_cdf != None%}
     <div class="row d-flex justify-content-center">
-        {%if plot_index_cdf != None%}
-        <div class="unresponsive col-12 plot">
-            <div id="plot_index_cdf"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_index_cdf[0]|safe}}
-                {{plot_index_cdf[1]|safe}}
-            </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Prices CDF</legend>
+                </div>
+                <div id="plot_index_cdf" class="d-flex justify-content-center">
+                    {{plot_index_cdf[0]|safe}}
+                    {{plot_index_cdf[1]|safe}}
+                </div>
+            </fieldset>
         </div>
-        {%endif%}
-        {%if plot_return_cdf != None%}
-        <div class="unresponsive col-12 plot">
-            <div id="plot_return_cdf"
-                 class="unresponsive shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                {{plot_return_cdf[0]|safe}}
-                {{plot_return_cdf[1]|safe}}
-            </div>
-        </div>
-        {%endif%}
     </div>
+    {%endif%}
+
+    {%if plot_return_cdf != None%}
+    <div class="row d-flex justify-content-center">
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns CDF</legend>
+                </div>
+                <div id="plot_return_cdf" class="d-flex justify-content-center">
+                    {{plot_return_cdf[0]|safe}}
+                    {{plot_return_cdf[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+    {%endif%}
 
     {% endif %}
 </div> <!-- /container -->
