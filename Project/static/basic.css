@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap');
 
-/* GENERAL */
-
 html{
     height: 100%;
 }
@@ -52,11 +50,12 @@ p {
 table {
     table-layout: fixed;
     width: 100%;
+    text-align: center;
 }
 
 label {
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 11px;
     color: #1E1E1E;
     font-weight: normal;
 }
@@ -112,7 +111,6 @@ input[type=text]:focus, input[type=number]:focus, input[type=time]:focus, input[
     border-color: #d0e3e5;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #d0e3e5;
   outline: 0 none;
-
 }
 
 input[type=submit] {
@@ -158,7 +156,6 @@ form{
     min-width:720px !important;
 }
 
-/* BOOSTRAP OVERRIDE */
 .container {
     margin: 0 auto;
 }
@@ -171,12 +168,10 @@ form{
     margin: 0 auto !important;
     padding: 7px;
     overflow: hidden;
-
 }
 
 .row.border-bottom {
     border-bottom: 1.5px solid #C8202E!important;
-
 }
 
 .navbar-brand{
@@ -190,7 +185,6 @@ form{
 .lead{
     color: #D1CFCB !important;
     font-size: 16px;
-
 }
 
 .nav-link{
@@ -210,8 +204,6 @@ form{
     padding-right: 1rem;
 }
 
-/* POPUP */
-
 .popup_content {
     margin: 10px;
     padding: 25px;
@@ -223,11 +215,9 @@ form{
 }
 
 .popup_content > table {
-    margin: 10px;
+    margin: auto;
     align-content: center;
 }
-
-/* NAV */
 
 .navbar {
     background-color: rgba(255, 255, 255, 0);
@@ -235,8 +225,7 @@ form{
 }
 
 .mjx-char {
-    font-size: 16px !important;
-
+    font-size: 15px !important;
 }
 
 .mjx-chtml {
