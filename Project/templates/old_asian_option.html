@@ -244,31 +244,23 @@
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
                             <div class="row border-bottom mb-2 pb-1">
-                                <legend>Table of Asian Option Results</legend>
+                                <legend>Table of Asian Option Lower Bound</legend>
                             </div>
                             {% if result['plot_lower_bound'] != None %}
                             <div class="row">
                                 <div class="col-12">
                                     <table class="table table-striped">
                                         <thead>
-                                        <th scope="col">Lower Bound</th>
-                                        <th scope="col">Value</th>
+                                        <th scope="col">Optimal Strike</th>
+                                        <th scope="col">Optimal Shadow LB</th>
+                                        <th scope="col">Strike</th>
+                                        <th scope="col">LB Strike</th>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <th>Optimal Strike</th>
                                             <td>{{result['optimal_strike']}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Optimal Shadow Lower Bound</th>
                                             <td>{{result['optimal_lower_bound']}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Strike</th>
                                             <td>{{result['form'].strike.data}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Lower Bound Strike</th>
                                             <td>{{result['lower_bound_strike']}}</td>
                                         </tr>
                                         </tbody>
