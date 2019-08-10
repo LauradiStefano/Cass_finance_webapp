@@ -1,82 +1,68 @@
 {% include 'header.html' %}
-
 {% if data %}
 {% for result in data %}
+
 <div class="container">
     <div class="row d-flex justify-content-center">
 
-        <div class="row mb-4">
+        <div class="row">
             <div class="col-md-3 col-12">
-
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-
                             <div class="row border-bottom mb-2 pb-1">
                                 <legend>Input</legend>
                             </div>
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
-
-                                            <span class="mb-1">
-                                                {{result['form'].strike_min.label}}
-                                                {{result['form'].strike_min.data}}
-                                            </span>
                                     <span class="mb-1">
-
-                                                {{result['form'].strike_atm.label}}
-                                                {{result['form'].strike_atm.data}}
-                                            </span>
+                                        {{result['form'].strike_min.label}}:
+                                        {{result['form'].strike_min.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].strike_atm.label}}:
+                                        {{result['form'].strike_atm.data}}
+                                    </span>
 
                                     <span class="mb-1">
-
-                                                {{result['form'].strike_max.label}}
-                                                {{result['form'].strike_max.data}}
-                                            </span>
-
-                                    <span class="mb-1">
-
-                                                {{result['form'].volatility_min.label}} \((\%) \)
-                                                {{result['form'].volatility_min.data}}
-                                            </span>
+                                        {{result['form'].strike_max.label}}:
+                                        {{result['form'].strike_max.data}}
+                                    </span>
 
                                     <span class="mb-1">
-
-                                                {{result['form'].volatility_atm.label}} \((\%) \)
-                                                {{result['form'].volatility_atm.data}}
-                                            </span>
-
-                                    <span class="mb-1">
-
-                                                {{result['form'].volatility_max.label}} \((\%) \)
-                                                {{result['form'].volatility_max.data}}
-                                            </span>
+                                        {{result['form'].volatility_min.label}} \((\%) \):
+                                        {{result['form'].volatility_min.data}}
+                                    </span>
 
                                     <span class="mb-1">
-
-                                                {{result['form'].price.label}}
-                                                {{result['form'].price.data}}
-                                            </span>
-
-                                    <span class="mb-1">
-
-                                                {{result['form'].risk_free.label}}  \((\%) \)
-                                                {{result['form'].risk_free.data}}
-                                            </span>
+                                        {{result['form'].volatility_atm.label}} \((\%) \):
+                                        {{result['form'].volatility_atm.data}}
+                                    </span>
 
                                     <span class="mb-1">
-
-                                                {{result['form'].div_yield.label}}  \((\%) \)
-                                                {{result['form'].div_yield.data}}
-                                            </span>
+                                        {{result['form'].volatility_max.label}} \((\%) \):
+                                        {{result['form'].volatility_max.data}}
+                                    </span>
 
                                     <span class="mb-1">
+                                        {{result['form'].price.label}}:
+                                        {{result['form'].price.data}}
+                                    </span>
 
-                                                {{result['form'].time.label}}
-                                                {{result['form'].time.data}}
-                                            </span>
+                                    <span class="mb-1">
+                                        {{result['form'].risk_free.label}}  \((\%) \):
+                                        {{result['form'].risk_free.data}}
+                                    </span>
 
+                                    <span class="mb-1">
+                                        {{result['form'].div_yield.label}}  \((\%) \):
+                                        {{result['form'].div_yield.data}}
+                                    </span>
 
+                                    <span class="mb-1">
+                                        {{result['form'].time.label}}:
+                                        {{result['form'].time.data}}
+                                    </span>
                                 </div>
                             </div>
                         </fieldset>
@@ -90,7 +76,7 @@
                                 <div class="col-12">
 
                                     <div class="row border-bottom mb-2 pb-1">
-                                        <legend>Results</legend>
+                                        <legend>Fitted Volatility Smile</legend>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -119,8 +105,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <table class="table">
-                                        <thead class="thead-light">
+                                    <table class="table table-striped">
+                                        <thead>
                                         <th scope="col"> Description</th>
                                         <th scope="col"> Ceq</th>
                                         <th scope="col"> LogNormal</th>
@@ -129,35 +115,35 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td> Area</td>
+                                            <th> Area</th>
                                             <td> {{result['area_prices']}}</td>
                                             <td> 1</td>
                                             <td> {{result['area_returns']}}</td>
                                             <td> 1</td>
                                         </tr>
                                         <tr>
-                                            <td> Mean</td>
+                                            <th> Mean</th>
                                             <td> {{result['expected_price']}}</td>
                                             <td> {{result['expected_price']}}</td>
                                             <td> {{result['m1_returns']}}</td>
                                             <td> {{result['m1_returns']}}</td>
                                         </tr>
                                         <tr>
-                                            <td> Variance</td>
+                                            <th> Variance</th>
                                             <td> {{result['sigma2_price']}}</td>
                                             <td> {{result['sigma2_price']}}</td>
                                             <td> {{result['m2_returns']}}</td>
                                             <td> {{result['m2_returns']}}</td>
                                         </tr>
                                         <tr>
-                                            <td> Skewness</td>
+                                            <th> Skewness</th>
                                             <td> {{result['skewness_prices']}}</td>
                                             <td> {{result['skewness_prices_log_n']}}</td>
                                             <td> {{result['skewness_log_returns']}}</td>
                                             <td> {{result['skewness_normal']}}</td>
                                         </tr>
                                         <tr>
-                                            <td> Kurtosis</td>
+                                            <th> Kurtosis</th>
                                             <td> {{result['kurtosis_prices']}}</td>
                                             <td> {{result['kurtosis_prices_log_n']}}</td>
                                             <td> {{result['kurtosis_log_returns']}}</td>
@@ -171,14 +157,14 @@
                     </div>
 
                     <div class="col-12">
-                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
                             <div class="row border-bottom mb-2 pb-1">
                                 <legend>Kolmogorov Smirnov Test</legend>
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <table class="table">
-                                        <thead class="thead-light">
+                                    <table class="table table-striped">
+                                        <thead>
                                         <th scope="col"></th>
                                         <th scope="col"> Cdf Prices</th>
                                         <th scope="col"> Cdf Returns</th>
@@ -186,13 +172,13 @@
 
                                         <tbody>
                                         <tr>
-                                            <td> Statistic Value</td>
+                                            <th> Statistic Value</th>
                                             <td> {{result['statistic_prices']}}</td>
                                             <td> {{result['statistic_returns']}}</td>
 
                                         </tr>
                                         <tr>
-                                            <td> PValue</td>
+                                            <th> PValue</th>
                                             <td> {{result['pvalue_prices']}}</td>
                                             <td> {{result['pvalue_returns']}}</td>
 
@@ -209,41 +195,66 @@
 
         <div class="row d-flex justify-content-center">
 
-            <div class="col-12 plot">
-                <div id="plot_return_distribution"
-                     class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_return_distribution'][0]|safe}}
-                    {{ result['plot_return_distribution'][1]|safe}}
-                </div>
+            <div class="unresponsive col-12">
+                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Implied CEQ Returns Distribution</legend>
+                    </div>
+                    <div id="plot_return_distribution" class="d-flex justify-content-center">
+                        {{ result['plot_return_distribution'][0]|safe}}
+                        {{ result['plot_return_distribution'][1]|safe}}
+                    </div>
+                </fieldset>
+            </div>
 
+            <div class="unresponsive col-12">
                 {% if result['plot_index_distribution'] != None %}
-                <div id="plot_index_distribution"
-                     class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_index_distribution'][0]|safe }}
-                    {{ result['plot_index_distribution'][1]|safe }}
-                </div>
+                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Implied CEQ index distribution</legend>
+                    </div>
+                    <div id="plot_index_distribution" class="d-flex justify-content-center">
+                        {{ result['plot_index_distribution'][0]|safe }}
+                        {{ result['plot_index_distribution'][1]|safe }}
+                    </div>
+                </fieldset>
                 {% endif %}
+            </div>
 
+            <div class="unresponsive col-12">
                 {% if result['plot_index_cdf'] != None %}
-                <div id="plot_index_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_index_cdf'][0]|safe}}
-                    {{ result['plot_index_cdf'][1]|safe}}
-                </div>
+                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Implied CEQ Prices CDF</legend>
+                    </div>
+                    <div id="plot_index_cdf" class="d-flex justify-content-center">
+                        {{ result['plot_index_cdf'][0]|safe}}
+                        {{ result['plot_index_cdf'][1]|safe}}
+                    </div>
+                </fieldset>
                 {% endif %}
+            </div>
 
+            <div class="unresponsive col-12">
                 {% if result['plot_return_cdf'] != None %}
-                <div id="plot_return_cdf" class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_return_cdf'][0]|safe}}
-                    {{ result['plot_return_cdf'][1]|safe}}
-                </div>
+                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Implied CEQ Returns CDF</legend>
+                    </div>
+                    <div id="plot_return_cdf" class="d-flex justify-content-center">
+                        {{ result['plot_return_cdf'][0]|safe}}
+                        {{ result['plot_return_cdf'][1]|safe}}
+                    </div>
+                </fieldset>
                 {% endif %}
 
                 {% endif %}
             </div>
-   
+
             <div class="col-12 d-flex mb-3 justify-content-center">
 
-                <form style="text-align:center;" class="" method="POST" action="/shimko_theoretical/old/delete/{{ result.id }}">
+                <form style="text-align:center;" class="" method="POST"
+                      action="/shimko_theoretical/old/delete/{{ result.id }}">
                     <input type="submit" value="Delete"
                            title="Delete this post from database">
                 </form>
@@ -253,8 +264,9 @@
 
     </div>
 </div>
-{% endfor %}
 <hr>
+{% endfor %}
+
 <center>
     <form method="POST" action="/shimko_theoretical/old/delete/-1">
         <input type="submit" value="Delete all">
@@ -263,9 +275,9 @@
 {% else %}
 <div class="row d-flex align-content-center">
     <div style="text-align:center;" class="col">
-<span class="text-white animated fadeInDown">No previous simulations</span>
-        </div>
+        <span class="text-white animated fadeInDown">No previous simulations</span>
     </div>
+</div>
 {% endif %}
 
 {% include 'footer.html' %}

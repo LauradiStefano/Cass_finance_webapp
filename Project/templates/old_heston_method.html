@@ -1,102 +1,84 @@
 {% include 'header.html' %}
-
 {% if data %}
 {% for result in data %}
-<hr> <!--hr is a line-->
+
 <div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
-    <div class="row mb-4">
-        <div class="col-md-5 col-12">
-
-            <div class="row">
-                <div class="col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft">
-
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Input</legend>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 d-flex flex-column">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
                                 <span class="mb-1">
                                     \(\mu\):
                                     {{result['form'].mu.data}}
                                 </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
                                     \(v_{0}\):
                                     {{result['form'].volatility_t0.data}}
                                 </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
                                     \(\hat{v}\):
                                     {{result['form'].volatility_hat.data}}
                                 </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
                                     \(\lambda\):
                                     {{result['form'].lam.data}}
                                 </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
                                     \(\chi\):
                                     {{result['form'].chi.data}}
                                 </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
                                     \(\rho\):
                                     {{result['form'].rho.data}}
                                 </span>
 
-                            </div>
-                            <div class="col-6 font-weight-bold d-flex flex-column">
+                                </div>
+                                <div class="col-12 font-weight-bold d-flex flex-column">
                                 <span class="mb-1">
-                                    {{result['form'].price.label}}
-                                </span>
-                                <span class="mb-1">
+                                    {{result['form'].price.label}}:
                                     {{result['form'].price.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].risk_free.label}} \((\%) \)
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].risk_free.label}} \((\%) \):
                                     {{result['form'].risk_free.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].dividend_yield.label}} \((\%) \)
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].dividend_yield.label}} \((\%) \):
                                     {{result['form'].dividend_yield.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].strike_min.label}}
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].strike_min.label}}:
                                     {{result['form'].strike_min.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].strike_max.label}}
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].strike_max.label}}:
                                     {{result['form'].strike_max.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].time.label}}
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].time.label}}:
                                     {{result['form'].time.data}}
                                 </span>
-                                <span class="mb-1">
-                                    {{result['form'].call_put.label}}
-                                </span>
-                                <span class="mb-1">
+                                    <span class="mb-1">
+                                    {{result['form'].call_put.label}}:
                                     {{dict(result['form'].call_put.choices).get(result['form'].call_put.data)}}
                                 </span>
 
+                                </div>
+
                             </div>
-
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </div>
                 </div>
-
             </div>
-
-
-            <div class="col-md-7 col-12">
+            <div class="col-md-9 col-12">
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
@@ -106,49 +88,58 @@
                             </div>
                             {% if result['plot_return_underlying_distribution'] != None %}
                             <div class="row">
-                                <table class="table">
-                                    <thead class="thead-light">
-                                    <th scope="col"> Mean</th>
-                                    <th scope="col"> Variance</th>
-                                    <th scope="col"> Skewness</th>
-                                    <th scope="col"> Kurtosis</th>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col"> Mean</th>
+                                        <th scope="col"> Variance</th>
+                                        <th scope="col"> Skewness</th>
+                                        <th scope="col"> Kurtosis</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
 
-                                        <td> {{result['mean']}}</td>
-                                        <td> {{result['variance']}}</td>
-                                        <td> {{result['skewness']}}</td>
-                                        <td> {{result['kurtosis']}}</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            <td> {{result['mean']}}</td>
+                                            <td> {{result['variance']}}</td>
+                                            <td> {{result['skewness']}}</td>
+                                            <td> {{result['kurtosis']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </fieldset>
                     </div>
-
                 </div>
-            </div>
-
-
-            <div class="col-12 plot">
-
-                <div id="plot_return_underlying_distribution"
-                     class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_return_underlying_distribution'][0]|safe }}
-                    {{ result['plot_return_underlying_distribution'][1]|safe }}
-                </div>
-
-                <div id="plot_implied_volatility"
-                     class="shadow-sm p-3 mb-3 bg-white rounded d-flex justify-content-center">
-                    {{ result['plot_implied_volatility'][0]|safe }}
-                    {{ result['plot_implied_volatility'][1]|safe }}
-                </div>
-
-                {% endif %}
             </div>
         </div>
     </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns Distribution</legend>
+                </div>
+                <div id="plot_return_underlying_distribution" class="d-flex justify-content-center">
+                    {{ result['plot_return_underlying_distribution'][0]|safe}}
+                    {{ result['plot_return_underlying_distribution'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied Volatility Profile</legend>
+                </div>
+                <div id="plot_implied_volatility" class="d-flex justify-content-center">
+                    {{ result['plot_implied_volatility'][0]|safe}}
+                    {{ result['plot_implied_volatility'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="col-12 d-flex mb-3 justify-content-center">
 
@@ -158,10 +149,10 @@
         </form>
 
     </div>
-
 </div>
-{% endfor %}
 <hr>
+{% endfor %}
+
 <center>
     <div class="row">
         <form method="POST" action="/heston_method/old/delete/-1">
@@ -174,7 +165,8 @@
     <div style="text-align:center;" class="col">
         <span class="text-white animated fadeInDown">No previous simulations</span>
     </div>
-</div>{% endif %}
+</div>
+{% endif %}
 
 {% include 'footer.html' %}
 

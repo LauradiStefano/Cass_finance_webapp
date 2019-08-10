@@ -11,7 +11,7 @@ def check_vg_distribution(form, field):
 
 
 class ComputeForm(wtf.Form):
-    type_choice = wtf.SelectField('Distribution',
+    type_choice = wtf.SelectField('Model',
                                   choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'NIG'), ('3', 'CGMY')], default='0')
 
     mu = wtf.FloatField(label='Mu', default=0,

@@ -3,7 +3,7 @@
 
 <head>
 
-    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css" />
+    <link rel="stylesheet" href="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css"/>
     <script type="text/javascript" src="http://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
     <script type="text/javascript">Bokeh.set_log_level("info");</script>
     <script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
@@ -24,68 +24,66 @@
 
 <body>
 
-    {% if just_registered == '1'  %}
-    <div class="alert alert-success"> Thank you for your registration</div>
-    {% endif %}
+{% if just_registered == '1' %}
+<div class="alert alert-success"> Thank you for your registration</div>
+{% endif %}
 
-    <!-- CONTAINER -->
-    <div class="container" id="home">
-        <div class="row d-flex justify-content-center">
+<!-- CONTAINER -->
+<div class="container" id="home">
+    <div class="row d-flex justify-content-center">
 
-            <div class="col-12 bg-white">
-                <a href="shimko_theoretical"> Shimko Theoretical </a>
-            </div>
-
-            <div class="col-12 bg-white">
-                <a href="shimko_market"> Shimko Market </a>
-            </div>
-
-            <div class="col-12 bg-white">
-                <a href="levy_process"> COS Method - Lévy Processes </a>
-            </div>
-
-            <div class="col-12 bg-white">
-                <a href="heston_process">
-                    COS Method - Heston Model
-                </a>
-            </div>
-
-            <div class="col-12 bg-white">
-                <a href="asian_option"> Asian Option </a>
-            </div>
-
-        </div> <!-- /container -->
-        <div class="row d-flex justify-content-center">
-            <div class="col-12 mt-5">
-    <span class="text-white">
-        {% if user is defined%}
-        {% if user.is_authenticated %}
-        Logged in as {{user.username}}
-        {% if index is not defined %}
-        <a class="mx-3" href="{{request.path}}/old">Previous simulations</a>
-        {% endif %}
-        <a class="mx-2" href="/logout">Logout</a>
-        {% else %}
-        <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
-        {% endif %}
-        {% else %}
-        {% if login is defined %}
-        <a class="mx-2" href="/reg">Register</a>
-        {% elif register is defined %}
-        <a class="mx-2" href="/login">Login</a>
-        {% elif old is defined %}
-        <a class="mx-2" href={{back_url}}> Back to the Model </a>
-        {% endif %}
-        {% endif %}
-    </span>
+        <div class="col-12 bg-white">
+            <a href="shimko_theoretical"> Shimko Theoretical </a>
         </div>
 
+        <div class="col-12 bg-white">
+            <a href="shimko_market"> Shimko Market </a>
         </div>
 
+        <div class="col-12 bg-white">
+            <a href="levy_process"> COS Method - Lévy Processes </a>
+        </div>
+
+        <div class="col-12 bg-white">
+            <a href="heston_process">
+                COS Method - Heston Model
+            </a>
+        </div>
+
+        <div class="col-12 bg-white">
+            <a href="asian_option"> Asian Option </a>
+        </div>
+
+    </div> <!-- /container -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mt-5">
+            <span class="text-white">
+                {% if user is defined%}
+                {% if user.is_authenticated %}
+                Logged in as {{user.username}}
+                {% if index is not defined %}
+                <a class="mx-3" href="{{request.path}}/old">Previous simulations</a>
+                {% endif %}
+                <a class="mx-2" href="/logout">Logout</a>
+                {% else %}
+                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
+                {% endif %}
+                {% else %}
+                {% if login is defined %}
+                <a class="mx-2" href="/reg">Register</a>
+                {% elif register is defined %}
+                <a class="mx-2" href="/login">Login</a>
+                {% elif old is defined %}
+                <a class="mx-2" href={{back_url}}> Back to the Model </a>
+                {% endif %}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
 
 
-
-        {% include 'footer.html' %}
+{% include 'footer.html' %}
 
 </body>
 </html>

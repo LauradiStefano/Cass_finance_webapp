@@ -23,26 +23,25 @@ dl, ol, ul{
 h1 {
     font-family: 'Source Serif Pro', serif;
     font-size: 24px;
-    font-weight: 400;
+    font-weight: normal;
 }
 
 h2 {
     font-size: 14px !important;
-        font-weight: 200;
+        font-weight: normal;
 }
 
 h3 {
     font-size: 16px !important;
         color: #FFFFFF;
-        font-weight: 200;
+        font-weight: normal;
 }
 
 h6{
     font-size: 14px;
         color: #1E1E1E;
     font-variant: small-caps;
-        font-weight: 600;
-
+        font-weight: bold;
 }
 
 p {
@@ -51,24 +50,30 @@ p {
 }
 
 table {
-    table-layout:fixed;
-    width:100%;
-}
-
-tr:nth-child(even){
-    background-color:#F5F5F5;   /*colore alternato celle (even=righe pari, odd=righe dispari)*/
+    table-layout: fixed;
+    width: 100%;
 }
 
 label {
     text-transform: uppercase;
     font-size: 12px;
     color: #1E1E1E;
-    font-weight: 600;
+    font-weight: normal;
 }
 
-td, th {
+span {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+td {
     font-size: 14px;
     color: inherit;
+}
+th {
+    font-size: 14px;
+    color: inherit;
+    font-weight: bold;
 }
 
 hr {
@@ -243,8 +248,13 @@ form{
 .plot {
 }
 
-.MathJax_CHTML {
-    font-size: 14px !important;
+.mjx-char {
+    font-size: 16px !important;
+
+}
+
+.mjx-chtml {
+    text-align: left !important;
 }
 
 

@@ -10,15 +10,11 @@
     </div>
 </div>
 
-<!-- CONTAINER -->
 <div class="container">
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="">
 
-            <!-- FIRST ROW -->
             <div class="row">
-
-                <!-- Parameters -->
                 <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
@@ -26,10 +22,9 @@
                             <legend>Model Parameters</legend>
                         </div>
 
-                        <!-- MU -->
                         <div class="row">
-                            <div class="col">
-                                $$\mu $$
+                            <div class="col mb-1">
+                                <label> $$\mu $$ </label>
                                 {{form.mu}}
                                 {% if form.mu.errors %}
                                 {% for error in form.mu.errors %}
@@ -38,11 +33,9 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- V -->
                         <div class="row">
-                            <div class="col">
-                                $$ v_{0} $$
+                            <div class="col mb-1">
+                                <label> $$ v_{0} $$ </label>
                                 {{form.volatility_t0}}
                                 {% if form.volatility_t0.errors %}
                                 {% for error in form.volatility_t0.errors %}
@@ -51,11 +44,9 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- HAT -->
                         <div class="row">
-                            <div class="col">
-                                $$\hat{v} $$
+                            <div class="col mb-1">
+                                <label> $$\hat{v} $$ </label>
                                 {{form.volatility_hat}}
                                 {% if form.volatility_hat.errors %}
                                 {% for error in form.volatility_hat.errors %}
@@ -64,11 +55,9 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- CHI -->
                         <div class="row">
-                            <div class="col">
-                                $$\chi $$
+                            <div class="col mb-1">
+                                <label> $$\chi $$ </label>
                                 {{form.chi}}
                                 {% if form.chi.errors %}
                                 {% for error in form.chi.errors %}
@@ -77,11 +66,9 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- RHO -->
                         <div class="row">
-                            <div class="col">
-                                $$\rho $$
+                            <div class="col mb-1">
+                                <label> $$\rho $$ </label>
                                 {{form.rho}}
                                 {% if form.rho.errors %}
                                 {% for error in form.rho.errors %}
@@ -90,11 +77,9 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- LAMBDA -->
                         <div class="row">
-                            <div class="col">
-                                $$\lambda $$
+                            <div class="col mb-1">
+                                <label> $$\lambda $$ </label>
                                 {{form.lam}}
                                 {% if form.lam.errors %}
                                 {% for error in form.lam.errors %}
@@ -105,20 +90,16 @@
                         </div>
 
                     </fieldset>
-                </div> <!-- /col parameters -->
+                </div>
 
-
-                <!-- OTHER FOUR -->
                 <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
                         </div>
-
-                        <!-- SPOT PRICE -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.price.label}}
                                 {{form.price}}
                                 {% if form.price.errors %}
@@ -128,10 +109,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- TIME TO EXPIRATION -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.time.label}}
                                 {{form.time}}
                                 {% if form.time.errors %}
@@ -141,10 +120,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- RISK FREE -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.risk_free.label}} \((\%) \)
                                 {{form.risk_free}}
                                 {% if form.risk_free.errors %}
@@ -154,10 +131,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- DIVIDEND YELD -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.dividend_yield.label}} \((\%) \)
                                 {{form.dividend_yield}}
                                 {% if form.dividend_yield.errors %}
@@ -167,10 +142,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- STRIKE MIN -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.strike_min.label}}
                                 {{form.strike_min}}
                                 {% if form.strike_min.errors %}
@@ -180,10 +153,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- STRIKE MAX -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.strike_max.label}}
                                 {{form.strike_max}}
                                 {% if form.strike_max.errors %}
@@ -193,10 +164,8 @@
                                 {% endif %}
                             </div>
                         </div>
-
-                        <!-- SOME PLOT -->
-                        <div class="row mb-1 mt-1">
-                            <div class="col mb-2">
+                        <div class="row">
+                            <div class="col mb-1">
                                 {{form.call_put.label}}
                                 {{form.call_put}}
                                 {% if form.call_put.errors %}
@@ -207,12 +176,9 @@
                             </div>
                         </div>
                     </fieldset>
-                </div> <!-- /col other four -->
-
+                </div>
             </div>
 
-
-            <!-- COMPUTE -->
             <div class="row mt-3">
                 <div class="col d-flex justify-content-center">
                     {{form.button_compute}}
@@ -221,16 +187,15 @@
         </form>
     </div>
 
-
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_return_underlying_distribution != None %}
         <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
-                <table class="table">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <table class="table table-striped">
                     <div class="row border-bottom mb-2 pb-1">
                         <legend>Table of Moments</legend>
                     </div>
-                    <thead class="thead-light">
+                    <thead>
 
                     <th scope="col"> Mean</th>
                     <th scope="col"> Variance</th>
@@ -239,7 +204,6 @@
                     </thead>
                     <tbody>
                     <tr>
-
                         <td>{{mean}}</td>
                         <td>{{variance}}</td>
                         <td>{{skewness}}</td>
@@ -250,7 +214,6 @@
             </fieldset>
         </div>
 
-
         <div class="col-12 d-flex mb-3 justify-content-center">
             <div id="button_view_details" class="popup_table_open">
                 {{form.button_view_details}}
@@ -258,7 +221,7 @@
         </div>
 
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Pdf Underlying Asset</legend>
                 </div>
@@ -270,7 +233,7 @@
         </div>
 
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied Volatility Profile</legend>
                 </div>
@@ -287,8 +250,8 @@
         <div class="row border-bottom mb-2 pb-1">
             <legend>Table of Volatility & Prices</legend>
         </div>
-        <table class="table" id="table_export">
-            <thead class="thead-light">
+        <table class="table table-striped" id="table_export">
+            <thead>
             <th scope="col"> Strike</th>
             <th scope="col"> Prices</th>
             <th scope="col"> Implied Volatility</th>
@@ -308,7 +271,6 @@
             {{form.button_export_table}}
         </div>
     </div>
-</div>
 </div>
 {% endif%}
 

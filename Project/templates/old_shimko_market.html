@@ -2,205 +2,248 @@
 
 {% if data %}
 {% for result in data %}
-<hr> <!--hr is a line-->
+
 <div class="container">
-
-    <div class="row">
-        <div class="col-md-3 col-12">
-            <div class="row">
-                <div class="col-12 output">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Input</legend>
-                        </div>
-                        <div class="row">
-
-                            <!--\((\%) \) is a Mathjax symbol for % -->
-
-                            <div class="col d-flex flex-column">
-                                {{result['form'].price.label}}
-                                {{result['form'].price.data}}
-
-                                {{result['form'].call_put_flag.label}}
-                                {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}}
-
-                                {% if result['form'].risk_dividend.data == '0' %}
-                                {{result['form'].risk_free.label}} \((\%) \)
-                                {{result['form'].risk_free.data}}
-                                {{result['form'].div_yield.label}} \((\%) \)
-                                {{result['form'].div_yield.data}}
-                                {%endif%}
-
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
                             </div>
-                        </div>
-
-                    </fieldset>
-                </div>
-
-                <div class="col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Results</legend>
-                        </div>
-                        <!--\((\%) \) is a Mathjax symbol for % -->
-                        {% if result[' plot_implied_volatility'] != None %}
-                        <div class="row d-flex flex-column">
-                            <span class="mb-1"> \(a_{0}\): {{result ['a0']}}</span>
-                            <span class="mb-1"> \(a_{1}\): {{result ['a1']}}</span>
-                            <span class="mb-1"> \(a_{2}\): {{result ['a2']}}</span>
-                            <span class="mb-1"> \(R^{2}\): {{result ['r2']}}</span>
-                            <br>
-
-                            {% if result['form'].risk_dividend.data == '1' %}
-                            <span class="mb-1 font-weight-bold"> Risk Free \((\%) \): {{result['risk_free']}}</span>
-                            <span class="mb-1 font-weight-bold"> Dividend Yield \((\%) \): {{result['div_yield']}}</span>
-                            {% endif %}
-
-
-                            <span class="mb-1"> File Name: {{result['file_name']}}</span>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-9 col-12">
-            <div class="row">
-                <div class="col">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend> Table of moments</legend>
-                        </div>
-                        <table class="table">
-                            <thead class="thead-light">
-                            <th scope="col"> Description</th>
-                            <th scope="col"> Ceq</th>
-                            <th scope="col"> LogNormal</th>
-                            <th scope="col"> Ceq Return</th>
-                            <th scope="col"> Normal</th>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td> Area</td>
-                                <td> {{result['area_prices']}}</td>
-                                <td> 1</td>
-                                <td> {{result['area_returns']}}</td>
-                                <td> 1</td>
-                            </tr>
-                            <tr>
-                                <td> Mean</td>
-                                <td> {{result['expected_price']}}</td>
-                                <td> {{result['expected_price']}}</td>
-                                <td> {{result['m1_returns']}}</td>
-                                <td> {{result['m1_returns']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Variance</td>
-                                <td> {{result['sigma2_price']}}</td>
-                                <td> {{result['sigma2_price']}}</td>
-                                <td> {{result['m2_returns']}}</td>
-                                <td> {{result['m2_returns']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Skewness</td>
-                                <td> {{result['skewness_prices']}}</td>
-                                <td> {{result['skewness_prices_log_n']}}</td>
-                                <td> {{result['skewness_log_returns']}}</td>
-                                <td> {{result['skewness_normal']}}</td>
-                            </tr>
-                            <tr>
-                                <td> Kurtosis</td>
-                                <td> {{result['kurtosis_prices']}}</td>
-                                <td> {{result['kurtosis_prices_log_n']}}</td>
-                                <td> {{result['kurtosis_log_returns']}}</td>
-                                <td> {{result['kurtosis_normal']}}</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </fieldset>
-                </div>
-            </div>
-
-            <div class="col">
-                <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend> Kolmogorov Smirnov Test</legend>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                        {{result['form'].price.label}}:
+                                        {{result['form'].price.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].call_put_flag.label}}:
+                                        {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}}
+                                    </span>
+                                    <span class="mb-1">
+                                    {% if result['form'].risk_dividend.data == '0' %}
+                                        {{result['form'].risk_free.label}} \((\%) \)
+                                        {{result['form'].risk_free.data}}
+                                        {{result['form'].div_yield.label}} \((\%) \)
+                                        {{result['form'].div_yield.data}}
+                                    {%endif%}
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
-                    <table class="table">
-                        <thead class="thead-light">
-                        <th scope="col"></th>
-                        <th scope="col"> Cdf Prices</th>
-                        <th scope="col"> Cdf Returns</th>
-                        </thead>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row border-bottom mb-2 pb-1">
+                                        <legend>Results</legend>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {% if result[' plot_implied_volatility'] != None %}
+                                            <div class="row d-flex flex-column">
+                                                <span class="mb-1"> \(a_{0}\): {{result ['a0']}}</span>
+                                                <span class="mb-1"> \(a_{1}\): {{result ['a1']}}</span>
+                                                <span class="mb-1"> \(a_{2}\): {{result ['a2']}}</span>
+                                                <span class="mb-1"> \(R^{2}\): {{result ['r2']}}</span>
 
-                        <tbody>
-                        <tr>
-                            <td> Statistic Value</td>
-                            <td> {{result['statistic_prices']}}</td>
-                            <td> {{result['statistic_returns']}}</td>
+                                                {% if result['form'].risk_dividend.data == '1' %}
+                                                <span class="mb-1"> Risk Free \((\%) \): {{result['risk_free']}}</span>
+                                                <span class="mb-1"> Dividend Yield \((\%) \): {{result['div_yield']}}</span>
+                                                {% endif %}
 
-                        </tr>
-                        <tr>
-                            <td> PValue</td>
-                            <td> {{result['pvalue_prices']}}</td>
-                            <td> {{result['pvalue_returns']}}</td>
+                                                <span class="mb-1"> FileName: {{result['file_name']}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend> Table of moments</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col"> Description</th>
+                                        <th scope="col"> Ceq</th>
+                                        <th scope="col"> LogNormal</th>
+                                        <th scope="col"> Ceq Return</th>
+                                        <th scope="col"> Normal</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th> Area</th>
+                                            <td> {{result['area_prices']}}</td>
+                                            <td> 1</td>
+                                            <td> {{result['area_returns']}}</td>
+                                            <td> 1</td>
+                                        </tr>
+                                        <tr>
+                                            <th> Mean</th>
+                                            <td> {{result['expected_price']}}</td>
+                                            <td> {{result['expected_price']}}</td>
+                                            <td> {{result['m1_returns']}}</td>
+                                            <td> {{result['m1_returns']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th> Variance</th>
+                                            <td> {{result['sigma2_price']}}</td>
+                                            <td> {{result['sigma2_price']}}</td>
+                                            <td> {{result['m2_returns']}}</td>
+                                            <td> {{result['m2_returns']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th> Skewness</th>
+                                            <td> {{result['skewness_prices']}}</td>
+                                            <td> {{result['skewness_prices_log_n']}}</td>
+                                            <td> {{result['skewness_log_returns']}}</td>
+                                            <td> {{result['skewness_normal']}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th> Kurtosis</th>
+                                            <td> {{result['kurtosis_prices']}}</td>
+                                            <td> {{result['kurtosis_prices_log_n']}}</td>
+                                            <td> {{result['kurtosis_log_returns']}}</td>
+                                            <td> {{result['kurtosis_normal']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend> Kolmogorov Smirnov Test</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col"></th>
+                                        <th scope="col"> Cdf Prices</th>
+                                        <th scope="col"> Cdf Returns</th>
+                                        </thead>
 
-                        </tr>
-                        </tbody>
-                    </table>
-                </fieldset>
+                                        <tbody>
+                                        <tr>
+                                            <th> Statistic Value</th>
+                                            <td> {{result['statistic_prices']}}</td>
+                                            <td> {{result['statistic_returns']}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th> PValue</th>
+                                            <td> {{result['pvalue_prices']}}</td>
+                                            <td> {{result['pvalue_returns']}}</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="col-12 plot">
-            <div id="plot_implied_volatility" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
-                {{ result['plot_implied_volatility'][0]|safe}}
-                {{ result['plot_implied_volatility'][1]|safe}}
-            </div>
-
-            <div id="plot_return_distribution" class="shadow-sm mb-3 bg-white rounded d-flex justify-content-center">
-                {{ result['plot_return_distribution'][0]|safe}}
-                {{ result['plot_return_distribution'][1]|safe}}
-            </div>
-
-            {% if result[' plot_index_distribution'] != None %}
-            <div id="plot_index_distribution" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
-                {{ result['plot_index_distribution'][0]|safe }}
-                {{ result['plot_index_distribution'][1]|safe }}
-            </div>
-            {% endif %}
-
-            {% if result[' plot_index_cdf'] != None %}
-            <div id="plot_index_cdf" class="shadow-sm  mb-3 bg-white rounded d-flex justify-content-center">
-                {{ result['plot_index_cdf'][0]|safe}}
-                {{ result['plot_index_cdf'][1]|safe}}
-            </div>
-            {% endif %}
-
-            {% if result[' plot_return_cdf'] != None %}
-            <div id="plot_return_cdf" class="shadow-sm mb-3 bg-white rounded d-flex justify-content-center">
-                {{ result['plot_return_cdf'][0]|safe}}
-                {{ result['plot_return_cdf'][1]|safe}}
-            </div>
-            {% endif %}
-
-            {% endif %}
-        </div>
-
-        <div class="col-12">
-            <form style="text-align:center;" method="POST" action="/shimko_market/old/delete/{{ result.id }}">
-                <input type="submit" value="Delete"
-                       title="Delete this post from database">
-            </form>
-        </div>
-
     </div>
 
+    <div class="row d-flex justify-content-center">
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend> Implied Volatility Profile</legend>
+                </div>
+                <div id="plot_implied_volatility" class="d-flex justify-content-center">
+                    {{ result['plot_implied_volatility'][0]|safe}}
+                    {{ result['plot_implied_volatility'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns Distribution</legend>
+                </div>
+                <div id="plot_return_distribution" class="d-flex justify-content-center">
+                    {{ result['plot_return_distribution'][0]|safe}}
+                    {{ result['plot_return_distribution'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        {% if result[' plot_index_distribution'] != None %}
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend> Implied CEQ index distribution</legend>
+                </div>
+                <div id="plot_index_distribution" class="d-flex justify-content-center">
+                    {{ result['plot_index_distribution'][0]|safe }}
+                    {{ result['plot_index_distribution'][1]|safe }}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
 
+        {% if result[' plot_index_cdf'] != None %}
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend> Implied CEQ Prices CDF</legend>
+                </div>
+                <div id="plot_index_cdf" class="d-flex justify-content-center">
+                    {{ result['plot_index_cdf'][0]|safe}}
+                    {{ result['plot_index_cdf'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
+
+        {% if result[' plot_return_cdf'] != None %}
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend> Implied CEQ Returns CDF</legend>
+                </div>
+                <div id="plot_return_cdf" class="d-flex justify-content-center">
+                    {{ result['plot_return_cdf'][0]|safe}}
+                    {{ result['plot_return_cdf'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
+
+        {% endif %}
+    </div>
+
+    <div class="col-12 d-flex mb-3 justify-content-center">
+
+        <form style="text-align:center;" method="POST" action="/shimko_market/old/delete/{{ result.id }}">
+            <input type="submit" value="Delete"
+                   title="Delete this post from database">
+        </form>
+    </div>
 </div>
-
-{% endfor %}
 <hr>
+{% endfor %}
+
 <center>
     <form method="POST" action="/shimko_market/old/delete/-1">
         <input type="submit" value="Delete all">
@@ -211,7 +254,8 @@
     <div style="text-align:center;" class="col">
         <span class="text-white animated fadeInDown">No previous simulations</span>
     </div>
-</div>{% endif %}
+</div>
+{% endif %}
 
 {% include 'footer.html' %}
 

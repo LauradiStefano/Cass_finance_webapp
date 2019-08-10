@@ -10,16 +10,12 @@
     </div>
 </div>
 
-<!-- CONTAINER -->
 <div class="container">
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="">
 
-            <!-- FIRST ROW -->
             <div class="row">
-
-                <!-- STRIKE -->
-                <div class="col-6">
+                <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
 
                         <div class="row border-bottom mb-2 pb-1">
@@ -65,10 +61,8 @@
                             </div>
                         </div>
                     </fieldset>
-
-                </div> <!-- /col strike -->
-                <!-- IMPLIED VOLATILITY % -->
-                <div class="col-6">
+                </div>
+                <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Implied Volatility \((\%) \)</legend>
@@ -114,23 +108,18 @@
                         </div>
 
                     </fieldset>
-                </div> <!-- /col implied volatility -->
-
+                </div>
             </div>
 
-
-            <!-- SECOND ROW -->
             <div class="row">
-
-                <!-- OTHER FOUR -->
                 <div class="col-md-8 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft custom-overlay">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
                         </div>
-                        <!-- SPOT PRICE -->
+
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.price.label}}
                                 {{form.price}}
                                 {% if form.price.errors %}
@@ -141,9 +130,8 @@
                             </div>
                         </div>
 
-                        <!-- TIME TO EXPIRATION -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.time.label}}
                                 {{form.time}}
                                 {% if form.time.errors %}
@@ -154,9 +142,8 @@
                             </div>
                         </div>
 
-                        <!-- RISK FREE -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.risk_free.label}} \((\%) \)
                                 {{form.risk_free}}
 
@@ -168,9 +155,8 @@
                             </div>
                         </div>
 
-                        <!-- DIVIDEND YELD -->
                         <div class="row">
-                            <div class="col mb-2">
+                            <div class="col mb-1">
                                 {{form.div_yield.label}} \((\%) \)
                                 {{form.div_yield}}
 
@@ -182,25 +168,23 @@
                             </div>
                         </div>
                     </fieldset>
-                </div> <!-- /col other four -->
+                </div>
 
                 <div class="col-md-4 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInUp custom-overlay">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight custom-overlay">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Plot Selector</legend>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col mb-1">
                                 {{form.plot_choice}}
                             </div>
                         </div>
                     </fieldset>
                 </div>
-
             </div>
 
-            <!-- COMPUTE -->
             <div class="row mt-3">
                 <div class="col d-flex justify-content-center">
                     {{form.button_compute}}
@@ -208,26 +192,26 @@
             </div>
 
         </form>
-    </div> <!-- /row justify-content-center -->
+    </div>
 
     <div class="row d-flex justify-content-center">
-        <!-- RESULTS -->
         {% if plot_implied_volatility != None %}
         <div class="col-md-4 col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Results</legend>
                 </div>
 
-                <!--Smile -->
                 <div class="row">
                     <div class="col-12">
                         <h6>Fitted Volatility Smile </h6>
                         \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)
                         <hr>
-                        <p class="font-weight-light"> \(a_{0}\): {{a0}}</p>
-                        <p class="font-weight-light"> \(a_{1}\): {{a1}}</p>
-                        <p class="font-weight-light"> \(a_{2}\): {{a2}}</p>
+                        <div class="row d-flex flex-column">
+                            <span class="font-weight-light mb-1"> \(a_{0}\): {{a0}}</span>
+                            <span class="font-weight-light mb-1"> \(a_{1}\): {{a1}}</span>
+                            <span class="font-weight-light mb-1"> \(a_{2}\): {{a2}}</span>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -241,14 +225,13 @@
             </fieldset>
         </div>
 
-
         <div class="col-md-8 col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Kolmogorov Smirnov Test</legend>
                 </div>
-                <table class="table">
-                    <thead class="thead-light">
+                <table class="table table-striped">
+                    <thead >
                     <th scope="col"></th>
                     <th scope="col"> Cdf Prices</th>
                     <th scope="col"> Cdf Returns</th>
@@ -256,13 +239,13 @@
 
                     <tbody>
                     <tr>
-                        <td> Statistic Value</td>
+                        <th> Statistic Value</th>
                         <td> {{statistic_prices}}</td>
                         <td> {{statistic_returns}}</td>
 
                     </tr>
                     <tr>
-                        <td> PValue</td>
+                        <th> PValue</th>
                         <td> {{pvalue_prices}}</td>
                         <td> {{pvalue_returns}}</td>
 
@@ -275,7 +258,7 @@
 
     <div class="row d-flex justify-content-center">
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied Volatility Profile</legend>
                 </div>
@@ -287,7 +270,7 @@
         </div>
 
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Returns Distribution</legend>
                 </div>
@@ -297,12 +280,10 @@
                 </div>
             </fieldset>
         </div>
-    </div>
 
-    {%if plot_index_distribution != None%}
-    <div class="row d-flex justify-content-center">
+        {%if plot_index_distribution != None%}
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ index distribution</legend>
                 </div>
@@ -312,13 +293,11 @@
                 </div>
             </fieldset>
         </div>
-    </div>
-    {%endif%}
+        {%endif%}
 
-    {%if plot_index_cdf != None%}
-    <div class="row d-flex justify-content-center">
+        {%if plot_index_cdf != None%}
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Prices CDF</legend>
                 </div>
@@ -328,13 +307,11 @@
                 </div>
             </fieldset>
         </div>
-    </div>
-    {%endif%}
+        {%endif%}
 
-    {%if plot_return_cdf != None%}
-    <div class="row d-flex justify-content-center">
+        {%if plot_return_cdf != None%}
         <div class="unresponsive col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Returns CDF</legend>
                 </div>
@@ -344,9 +321,8 @@
                 </div>
             </fieldset>
         </div>
-
+        {% endif %}
     </div>
-    {%endif%}
 
     {% endif %}
 </div> <!-- /container -->
@@ -356,8 +332,8 @@
     <div class="row border-bottom mb-2 pb-1">
         <legend>Table of Moments</legend>
     </div>
-    <table class="table" id="table_export">
-        <thead class="thead-light">
+    <table class="table table-striped" id="table_export">
+        <thead>
         <th scope="col"> Description</th>
         <th scope="col"> Ceq</th>
         <th scope="col"> LogNormal</th>
@@ -366,35 +342,35 @@
         </thead>
         <tbody>
         <tr>
-            <td> Area</td>
+            <th> Area</th>
             <td> {{area_prices}}</td>
             <td> 1</td>
             <td> {{area_returns}}</td>
             <td> 1</td>
         </tr>
         <tr>
-            <td> Mean</td>
+            <th> Mean</th>
             <td> {{expected_price}}</td>
             <td> {{expected_price}}</td>
             <td> {{m1_returns}}</td>
             <td> {{m1_returns}}</td>
         </tr>
         <tr>
-            <td> Variance</td>
+            <th> Variance</th>
             <td> {{sigma2_price}}</td>
             <td> {{sigma2_price}}</td>
             <td> {{m2_returns}}</td>
             <td> {{m2_returns}}</td>
         </tr>
         <tr>
-            <td> Skewness</td>
+            <th> Skewness</th>
             <td> {{skewness_prices}}</td>
             <td> {{skewness_prices_log_n}}</td>
             <td> {{skewness_log_returns}}</td>
             <td> {{skewness_normal}}</td>
         </tr>
         <tr>
-            <td> Kurtosis</td>
+            <th> Kurtosis</th>
             <td> {{kurtosis_prices}}</td>
             <td> {{kurtosis_prices_log_n}}</td>
             <td> {{kurtosis_log_returns}}</td>
