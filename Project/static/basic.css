@@ -135,14 +135,6 @@ form{
     width: 100%;
 }
 
-.custom-overlay:hover{
-    background-color: #f7feff !important;
-    -webkit-transition: all 0.3s ease-in-out;
-    -moz-transition: all 0.3s ease-in-out;
-    -o-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-}
-
 #user_form{
     width: 300px;
 }
@@ -240,12 +232,6 @@ form{
 .navbar {
     background-color: rgba(255, 255, 255, 0);
     font-weight: 700;
-}
-
-
-/* BOKEH */
-
-.plot {
 }
 
 .mjx-char {
