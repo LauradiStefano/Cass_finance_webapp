@@ -173,7 +173,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
     ))
 
     hover_implied_volatility = HoverTool(attachment="above", names=['implied vol'],
-                                         tooltips=[("Strike", "@strike"), ("Implied vol", "@implied_volatility")])
+                                         tooltips=[("Strike", "@strike"), ("Implied Vol", "@implied_volatility")])
 
     x_range = [strike_min, strike_max + 10]
     y_range = [0, max(implied_volatility) + 0.03]
@@ -288,8 +288,8 @@ def compute_index_underlying_distribution(a0, a1, a2, s0, risk_free, div_yield, 
     x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
 
     pdf_prices = lambda k: ImpliedPDFPrices_FullRange(a0, a1, a2, SD, B, k, strike_min, strike_max, x_fit_lgn)
-    st = np.arange(strike_min * 0.8, strike_max * 1.2, step_k)  # output per grafico
-    pdf = [float(pdf_prices(x)) for x in st]  # output grafico2
+    st = np.arange(strike_min * 0.8, strike_max * 1.2, step_k)
+    pdf = [float(pdf_prices(x)) for x in st]
 
     pdf_bench_log_prices = lambda k: lognorm.pdf(k, sigma2 ** 0.5, mu, expected_price)
     pdf_bench_log_prices = [float(pdf_bench_log_prices(x)) for x in st]

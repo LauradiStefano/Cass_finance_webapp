@@ -121,7 +121,7 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
     ))
 
     hover_implied = HoverTool(attachment="left", names=['implied vol'],
-                              tooltips=[("Strike", "@strike"), ("Impl vol", "@implied_volatility")])
+                              tooltips=[("Strike", "@strike"), ("Implied Vol", "@implied_volatility")])
 
     x_range = [min(strike) * 0.9, max(strike) * 1.1]
     y_range = [0, max(implied_volatility) * 1.75]

@@ -296,13 +296,13 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
     ))
 
     hover_volatility = HoverTool(attachment="left", names=['implied vol'],
-                                 tooltips=[("Strike", "@strike_plot"), ("Implied vol", "@implied_volatility")])
+                                 tooltips=[("Strike", "@strike_plot"), ("Implied Vol", "@implied_volatility")])
 
-    hover_call = HoverTool(attachment="above", names=['call'], tooltips=[("Strike call", "@strike_call"),
+    hover_call = HoverTool(attachment="above", names=['call'], tooltips=[("Strike Call", "@strike_call"),
                                                                          ("Vol Call", "@volatility_t_call")])
 
-    hover_put = HoverTool(attachment="below", names=['put'], tooltips=[("Strike put", "@strike_put"),
-                                                                       ("Vol put", "@volatility_t_put")])
+    hover_put = HoverTool(attachment="below", names=['put'], tooltips=[("Strike Put", "@strike_put"),
+                                                                       ("Vol Put", "@volatility_t_put")])
 
     x_range = [strike_min, strike_max + 10]
     y_range = [0, max(volatility_time) + 0.02]
