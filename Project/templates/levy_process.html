@@ -32,6 +32,8 @@
                         <div class="row">
                             <div class="col mb-1">
                                 <label> $$ \mu $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.mu}}
                                 {% if form.mu.errors %}
                                 {% for error in form.mu.errors %}
@@ -45,6 +47,8 @@
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ \sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_normal}}
                                 {% if form.sigma_normal.errors %}
                                 {% for error in form.sigma_normal.errors %}
@@ -58,22 +62,30 @@
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_vg}}
                                 {% if form.sigma_vg.errors %}
                                 {% for error in form.sigma_vg.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\kappa $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.kappa_vg}}
                                 {% if form.kappa_vg.errors %}
                                 {% for error in form.kappa_vg.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\theta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.theta_vg}}
                                 {% if form.theta_vg.errors %}
                                 {% for error in form.theta_vg.errors %}
@@ -87,22 +99,30 @@
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_nig}}
                                 {% if form.sigma_nig.errors %}
                                 {% for error in form.sigma_nig.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\kappa $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.kappa_nig}}
                                 {% if form.kappa_nig.errors %}
                                 {% for error in form.kappa_nig.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\theta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.theta_nig}}
                                 {% if form.theta_nig.errors %}
                                 {% for error in form.theta_nig.errors %}
@@ -116,30 +136,41 @@
                              {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ C $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.c}}
                                 {% if form.c.errors %}
                                 {% for error in form.c.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ G $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.g}}
                                 {% if form.g.errors %}
                                 {% for error in form.g.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ M $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.m}}
                                 {% if form.m.errors %}
                                 {% for error in form.m.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ Y $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.y}}
                                 {% if form.y.errors %}
                                 {% for error in form.y.errors %}
@@ -388,6 +419,9 @@
             }
         });
     });
+
+
+
 
 
 

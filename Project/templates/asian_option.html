@@ -16,7 +16,7 @@
         <form class="" method="post" action="">
 
             <div class="row">
-                <div class="col-md-3 col-12">
+                <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
 
                         <div class="row border-bottom mb-2 pb-1">
@@ -34,6 +34,8 @@
                              !=None %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label>$$ \sigma $$</label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_gaussian}}
                                 {% if form.sigma_gaussian.errors %}
                                 {% for error in form.sigma_gaussian.errors %}
@@ -46,22 +48,30 @@
                         <div id="vg" class="row" {% if form.model_choice.data !='1' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ v $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.kappa_vg}}
                                 {% if form.kappa_vg.errors %}
                                 {% for error in form.kappa_vg.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\theta $$</label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.theta_vg}}
                                 {% if form.theta_vg.errors %}
                                 {% for error in form.theta_vg.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_vg}}
                                 {% if form.sigma_vg.errors %}
                                 {% for error in form.sigma_vg.errors %}
@@ -69,45 +79,58 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
-
                         </div>
 
                         <div id="heston" class="row" {% if form.model_choice.data !='2' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\alpha $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.alpha_heston}}
                                 {% if form.alpha_heston.errors %}
                                 {% for error in form.alpha_heston.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\beta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.beta_heston}}
                                 {% if form.beta_heston.errors %}
                                 {% for error in form.beta_heston.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\gamma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.gamma_heston}}
                                 {% if form.gamma_heston.errors %}
                                 {% for error in form.gamma_heston.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\rho $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.rho_heston}}
                                 {% if form.rho_heston.errors %}
                                 {% for error in form.rho_heston.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\ V_{0} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.volatility_t0}}
                                 {% if form.volatility_t0.errors %}
                                 {% for error in form.volatility_t0.errors %}
@@ -120,22 +143,30 @@
                         <div id="nig" class="row" {% if form.model_choice.data !='3' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ a $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.a_nig}}
                                 {% if form.a_nig.errors %}
                                 {% for error in form.a_nig.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ b $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.b_nig}}
                                 {% if form.b_nig.errors %}
                                 {% for error in form.b_nig.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\delta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.delta_nig}}
                                 {% if form.delta_nig.errors %}
                                 {% for error in form.delta_nig.errors %}
@@ -148,30 +179,41 @@
                         <div id="cgmy" class="row" {% if form.model_choice.data !='4' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ C $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.c}}
                                 {% if form.c.errors %}
                                 {% for error in form.c.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ G $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.g}}
                                 {% if form.g.errors %}
                                 {% for error in form.g.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ M $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.m}}
                                 {% if form.m.errors %}
                                 {% for error in form.m.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ Y $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.y}}
                                 {% if form.y.errors %}
                                 {% for error in form.y.errors %}
@@ -185,22 +227,30 @@
                              {%endif%}>
                             <div class="col mb-1">
                                 <label> $$ a $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.a_meixner}}
                                 {% if form.a_meixner.errors %}
                                 {% for error in form.a_meixner.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ b $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.b_meixner}}
                                 {% if form.b_meixner.errors %}
                                 {% for error in form.b_meixner.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\delta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.delta_meixner}}
                                 {% if form.delta_meixner.errors %}
                                 {% for error in form.delta_meixner.errors %}
@@ -213,30 +263,41 @@
                         <div id="mjd" class="row" {% if form.model_choice.data !='6' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_mjd}}
                                 {% if form.sigma_mjd.errors %}
                                 {% for error in form.sigma_mjd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ l $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.lam_mjd}}
                                 {% if form.lam_mjd.errors %}
                                 {% for error in form.lam_mjd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\mu_{x} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.mu_x_mjd}}
                                 {% if form.mu_x_mjd.errors %}
                                 {% for error in form.mu_x_mjd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\sigma_{x} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_x_mjd}}
                                 {% if form.sigma_x_mjd.errors %}
                                 {% for error in form.sigma_x_mjd.errors %}
@@ -249,38 +310,52 @@
                         <div id="dejd" class="row" {% if form.model_choice.data !='7' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_dejd}}
                                 {% if form.sigma_dejd.errors %}
                                 {% for error in form.sigma_dejd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ l $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.lam_dejd}}
                                 {% if form.lam_dejd.errors %}
                                 {% for error in form.lam_dejd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\rho $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.rho_dejd}}
                                 {% if form.rho_dejd.errors %}
                                 {% for error in form.rho_dejd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\eta_{1} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.eta1_dejd}}
                                 {% if form.eta1_dejd.errors %}
                                 {% for error in form.eta1_dejd.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\eta_{2} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.eta2_dejd}}
                                 {% if form.eta2_dejd.errors %}
                                 {% for error in form.eta2_dejd.errors %}
@@ -293,6 +368,8 @@
                         <div id="cev" class="row" {% if form.model_choice.data !='8' %} style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\beta $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.beta_cev}}
                                 {% if form.beta_cev.errors %}
                                 {% for error in form.beta_cev.errors %}
@@ -306,22 +383,30 @@
                              {%endif%}>
                             <div class="col mb-1">
                                 <label> $$\varepsilon $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.epsilon_exp}}
                                 {% if form.epsilon_exp.errors %}
                                 {% for error in form.epsilon_exp.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$ \kappa_{1} $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.k1_exp}}
                                 {% if form.k1_exp.errors %}
                                 {% for error in form.k1_exp.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                            <div class="col mb-1">
                                 <label> $$\sigma $$ </label>
+                            </div>
+                            <div class="col-11 mb-1">
                                 {{form.sigma_exp}}
                                 {% if form.sigma_exp.errors %}
                                 {% for error in form.sigma_exp.errors %}
@@ -333,7 +418,7 @@
                     </fieldset>
                 </div>
 
-                <div class="col-md-9 col-12">
+                <div class="col-md-8 col-12">
                     <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInDown ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameter</legend>
@@ -705,6 +790,8 @@
                             }
                         });
                     });
+
+
 
 
 
