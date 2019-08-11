@@ -42,7 +42,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="row border-bottom mb-2 pb-1">
-                                        <legend>Results</legend>
+                                        <legend>Fitted Volatility Smile</legend>
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
@@ -52,6 +52,27 @@
                                                 <span class="mb-1"> \(a_{1}\): {{result ['a1']}}</span>
                                                 <span class="mb-1"> \(a_{2}\): {{result ['a2']}}</span>
                                                 <span class="mb-1"> \(R^{2}\): {{result ['r2']}}</span>
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row border-bottom mb-2 pb-1">
+                                        <legend>Details Model</legend>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            {% if result[' plot_implied_volatility'] != None %}
+                                            <div class="row d-flex flex-column">
 
                                                 {% if result['form'].risk_dividend.data == '1' %}
                                                 <span class="mb-1"> Risk Free \((\%) \): {{result['risk_free']}}</span>
