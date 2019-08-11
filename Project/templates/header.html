@@ -23,7 +23,7 @@
 </head>
 
 <body>
-
+{% if index is not defined %}
 <header>
     <nav class="navbar navbar-expand-xl navbar-dark">
         <a class="navbar-brand" href="/">Finance Web App</a>
@@ -32,29 +32,23 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
+            <ul class="navbar-nav mr-auto" id="navbarDropdown">
+
                 <li class="nav-item">
-                    <a class="nav-link" href="/shimko_theoretical">
+                    <a class="nav-link" href="/shimko_theoretical" role="button" aria-haspopup="true"
+                       aria-expanded="false">
                         Shimko Theoretical
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/shimko_market">
+                    <a class="nav-link" href="/shimko_market" role="button" aria-haspopup="true" aria-expanded="false">
                         Shimko Market
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/levy_process">
+                    <a class="nav-link" href="/levy_process" role="button" aria-haspopup="true" aria-expanded="false">
                         Lévy Process
                     </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/heston_method">
+                    <a class="nav-link" href="/heston_method" role="button" aria-haspopup="true" aria-expanded="false">
                         Heston Method
                     </a>
                 </li>
@@ -64,12 +58,7 @@
                         Asian Option
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">
-                        ...
-                    </a>
-                </li>
+
             </ul>
             <div class="dropdown-divider"></div>
 
@@ -99,3 +88,5 @@
     </nav>
     <hr>
 </header>
+{% endif %}
+
