@@ -17,7 +17,7 @@ class ComputeForm(wtf.Form):
 
     risk_dividend = wtf.RadioField('Interest Rate & Dividend Yield', choices=[('0', 'True'), ('1', 'False')],
                                    default='1')
-    call_put_flag = wtf.RadioField('Call-Put', choices=[('0', 'Put'), ('1', 'Call'), ('2', 'Both')],
+    call_put_flag = wtf.RadioField('Call-Put', choices=[ ('1', 'Call'), ('0', 'Put'), ('2', 'Both')],
                                    validators=[InputRequired()], default='2')
     plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf Prices'), ('1', 'Cdf Prices'),
                                                       ('2', 'Cdf Returns')])
