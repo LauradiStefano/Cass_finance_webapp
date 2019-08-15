@@ -5,7 +5,7 @@
         <div class="col p-3 m-4">
             <h1 class="title text-center text-light">COS Method - Heston Model</h1>
             <h2 class="lead text-center text-light animated fadeInDown">A pricing method for European option based on
-                Fourier-Cosine series expansions: </h2>
+                Fourier-Cosine series expansions </h2>
         </div>
     </div>
 </div>
@@ -15,13 +15,12 @@
         <form class="" method="post" action="">
 
             <div class="row">
-                <div class="col-md-6 col-12">
+                <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Model Parameters</legend>
                         </div>
-
                         <div class="row">
                             <div class="col mb-1">
                                 <label> $$\mu $$ </label>
@@ -104,8 +103,8 @@
                     </fieldset>
                 </div>
 
-                <div class="col-md-6 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
@@ -153,6 +152,15 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Strike & Call-Put Selector</legend>
                         </div>
                         <div class="row">
                             <div class="col mb-1">

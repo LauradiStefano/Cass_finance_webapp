@@ -418,15 +418,15 @@
                     </fieldset>
                 </div>
 
-                <div class="col-md-8 col-12">
+                <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInDown ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameter</legend>
                         </div>
 
-                        <div id="general" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                        <div id="general_price" class="row" {% if form.model_choice.data=='9' %} style="display:none"
                              {%endif%}>
-                            <div id="price" class="col mb-1">
+                            <div class="col mb-1">
                                 {{form.price.label}}
                                 {{form.price}}
                                 {% if form.price.errors %}
@@ -434,7 +434,12 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="general_risk_free" class="row" {% if form.model_choice.data=='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.risk_free.label}} \((\%) \)
                                 {{form.risk_free}}
                                 {% if form.risk_free.errors %}
@@ -445,8 +450,8 @@
                             </div>
                         </div>
 
-                        <div id="exp" class="row" {% if form.model_choice.data !='9' %} style="display:none" {%endif%}>
-
+                        <div id="exp_price" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                             {%endif%}>
                             <div class="col mb-1">
                                 {{form.price_exp.label}}
                                 {{form.price_exp}}
@@ -455,7 +460,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="exp_risk_free" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.risk_free_exp.label}} \((\%) \)
                                 {{form.risk_free_exp}}
                                 {% if form.risk_free_exp.errors %}
@@ -466,7 +475,7 @@
                             </div>
                         </div>
 
-                        <div id="parameters_general" class="row" {% if form.model_choice.data=='9' %}
+                        <div id="general_time" class="row" {% if form.model_choice.data=='9' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -477,7 +486,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="general_step" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.step.label}}
                                 {{form.step}}
                                 {% if form.step.errors %}
@@ -485,7 +498,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="general_strike" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.strike.label}}
                                 {{form.strike}}
                                 {% if form.strike.errors %}
@@ -493,11 +510,10 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
                             </div>
                         </div>
 
-                        <div id="parameters_exp" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                        <div id="exp_time" class="row" {% if form.model_choice.data !='9' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.time_exp.label}}
@@ -507,7 +523,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="exp_step" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.step_exp.label}}
                                 {{form.step_exp}}
                                 {% if form.step_exp.errors %}
@@ -515,7 +535,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
+                            </div>
+                        </div>
+                        <div id="exp_strike" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
                                 {{form.strike_exp.label}}
                                 {{form.strike_exp}}
                                 {% if form.strike_exp.errors %}
@@ -526,6 +550,9 @@
                             </div>
                         </div>
                     </fieldset>
+                </div>
+
+                <div class="col-md-4 col-12">
                     <fieldset class="shadow-sm p-3 mb-3 bg-white rounded animated fadeInRight ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>FFT Implementation Parameters</legend>
@@ -539,49 +566,58 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
-                                <div id="upper_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
-                                    {{form.upper_range.label}}
-                                    {{form.upper_range}}
-                                    {% if form.upper_range.errors %}
-                                    {% for error in form.upper_range.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
-
-                                <div id="lower_gen" {% if form.model_choice.data=='9' %} style="display:none" {%endif%}>
-                                    {{form.lower_range.label}}
-                                    {{form.lower_range}}
-                                    {% if form.lower_range.errors %}
-                                    {% for error in form.lower_range.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
-
-                                <div id="upper_exp" {% if form.model_choice.data !='9' %} style="display:none"
-                                     {%endif%}>
-                                    {{form.upper_range_exp.label}}
-                                    {{form.upper_range_exp}}
-                                    {% if form.upper_range_exp.errors %}
-                                    {% for error in form.upper_range_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
-
-                                <div id="lower_exp" class="col-xs-2" {% if form.model_choice.data !='9' %}
-                                     style="display:none" {%endif%}>
-                                    {{form.lower_range_exp.label}}
-                                    {{form.lower_range_exp}}
-                                    {% if form.lower_range_exp.errors %}
-                                    {% for error in form.lower_range_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
-
+                            </div>
+                        </div>
+                        <div id="general_upper" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.upper_range.label}}
+                                {{form.upper_range}}
+                                {% if form.upper_range.errors %}
+                                {% for error in form.upper_range.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div id="general_lower" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.lower_range.label}}
+                                {{form.lower_range}}
+                                {% if form.lower_range.errors %}
+                                {% for error in form.lower_range.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div id="exp_upper" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.upper_range_exp.label}}
+                                {{form.upper_range_exp}}
+                                {% if form.upper_range_exp.errors %}
+                                {% for error in form.upper_range_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div id="exp_lower" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.lower_range_exp.label}}
+                                {{form.lower_range_exp}}
+                                {% if form.lower_range_exp.errors %}
+                                {% for error in form.lower_range_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
                                 {{form.dump.label}}
                                 {{form.dump}}
                                 {% if form.dump.errors %}
@@ -589,7 +625,11 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col mb-1">
                                 {{form.tolerance.label}}
                                 {{form.tolerance}}
                                 {% if form.tolerance.errors %}
@@ -677,14 +717,21 @@
                         var cev = $('#cev')
                         var exponential = $('#exponential')
 
-                        var general = $('#general')
-                        var exp = $('#exp')
-                        var parGen = $('#parameters_general')
-                        var parExp = $('#parameters_exp')
-                        var upper_gen = $('#upper_gen')
-                        var lower_gen = $('#lower_gen')
-                        var upper_exp = $('#upper_exp')
-                        var lower_exp = $('#lower_exp')
+                        var generalPrice = $('#general_price')
+                        var generalRiskFree = $('#general_risk_free')
+                        var generalTime = $('#general_time')
+                        var generalStep = $('#general_step')
+                        var generalStrike = $('#general_strike')
+                        var generalUpper = $('#general_upper')
+                        var generalLower = $('#general_lower')
+
+                        var expPrice = $('#exp_price')
+                        var expRiskFree = $('#exp_risk_free')
+                        var expTime = $('#exp_time')
+                        var expStep = $('#exp_step')
+                        var expStrike = $('#exp_strike')
+                        var expUpper = $('#exp_upper')
+                        var expLower = $('#exp_lower')
 
                         function reset() {
                             gaussian.hide();
@@ -697,105 +744,137 @@
                             dejd.hide();
                             cev.hide();
                             exponential.hide();
-                            general.hide();
-                            exp.hide();
-                            parGen.hide();
-                            parExp.hide();
-                            upper_gen.hide();
-                            lower_gen.hide();
-                            upper_exp.hide();
-                            lower_exp.hide();
+
+                            generalPrice.hide();
+                            generalRiskFree.hide();
+                            generalTime.hide();
+                            generalStep.hide();
+                            generalStrike.hide();
+                            generalUpper.hide();
+                            generalLower.hide();
+
+                            expPrice.hide();
+                            expRiskFree.hide();
+                            expTime.hide();
+                            expStep.hide();
+                            expStrike.hide();
+                            expUpper.hide();
+                            expLower.hide();
                         }
 
                         select_model.on('change', function () {
                             if (select_model.val() == '0') {
                                 reset();
                                 gaussian.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '1') {
                                 reset();
                                 vg.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '2') {
                                 reset();
                                 heston.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '3') {
                                 reset();
                                 nig.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '4') {
                                 reset();
                                 cgmy.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '5') {
                                 reset();
                                 meixner.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '6') {
                                 reset();
                                 mjd.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '7') {
                                 reset();
                                 dejd.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else if (select_model.val() == '8') {
                                 reset();
                                 cev.show();
-                                general.show();
-                                parGen.show();
-                                upper_gen.show();
-                                lower_gen.show();
+                                generalPrice.show();
+                                generalRiskFree.show();
+                                generalTime.show();
+                                generalStep.show();
+                                generalStrike.show();
+                                generalUpper.show();
+                                generalLower.show();
 
                             } else {
                                 reset();
                                 exponential.show();
-                                exp.show();
-                                parExp.show();
-                                upper_exp.show();
-                                lower_exp.show();
+                                expPrice.show();
+                                expRiskFree.show();
+                                expTime.show();
+                                expStep.show();
+                                expStrike.show();
+                                expUpper.show();
+                                expLower.show();
                             }
                         });
                     });
-
-
-
-
-
-
 
 </script>
 </body>

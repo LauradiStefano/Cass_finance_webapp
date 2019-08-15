@@ -165,7 +165,7 @@ form{
     margin: 0 auto; !important;
 }
 
-.col, .col-6, .col-md-4, .col-md-8, .col-12, .col-sm {
+.col, .col-6, .col-md-4, .col-md-8, .col-12, .col-11, .col-sm {
     margin: 0 auto !important;
     padding: 7px;
     overflow: hidden;
@@ -201,7 +201,7 @@ form{
 }
 
 #call_put li {
-    display: inline-block;
+    display: block;
     padding-right: 1rem;
 }
 
