@@ -1,6 +1,6 @@
 {% include 'header.html' %}
 
-<body>
+<body class="lightbg">
 
 {% if just_registered == '1' %}
 <div class="alert alert-success"> Thank you for your registration</div>
@@ -8,31 +8,32 @@
 
 <!-- CONTAINER -->
 <div class="container" id="home">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex
+ justify-content-center animate-home">
 
-        <div class="col-12 bg-white">
-            <a href="shimko_theoretical"> Shimko Theoretical </a>
+        <div class="col-12 firstsection">
+            <a class="animated pulse slower infinite" href="shimko_theoretical"> Shimko Theoretical </a>
         </div>
 
-        <div class="col-12 bg-white">
-            <a href="shimko_market"> Shimko Market </a>
+        <div class="col-12 fadeInDown firstsection">
+            <a class="animated pulse slower infinite"  href="shimko_market"> Shimko Market </a>
         </div>
 
-        <div class="col-12 bg-white">
-            <a href="levy_process"> COS Method - Lévy Processes </a>
+        <div class="col-12 fadeInDown secondsection">
+            <a href="levy_process" class="animated pulse slower infinite" > COS Method - Lévy Processes </a>
         </div>
 
-        <div class="col-12 bg-white">
-            <a href="heston_method"> COS Method - Heston Model </a>
+        <div class="col-12 fadeInDown secondsection">
+            <a href="heston_method" class="animated pulse slower infinite" > COS Method - Heston Model </a>
         </div>
 
-        <div class="col-12 bg-white">
-            <a href="asian_option"> Asian Option </a>
+        <div class="col-12 fadeInDown thirdsection">
+            <a href="asian_option" class="animated pulse slower infinite" > Asian Option </a>
         </div>
 
     </div> <!-- /container -->
-    <div class="row d-flex justify-content-center">
-        <div class="col-12 mt-5">
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-12 pt-5 mt-5">
             <span class="text-white">
                 {% if user is defined%}
                 {% if user.is_authenticated %}
@@ -57,9 +58,42 @@
         </div>
     </div>
 </div>
-
-
+    
 {% include 'footer.html' %}
 
+    <script>
+        
+        
+    $('.animate-home div').each(function(i) {
+  $(this).css('opacity', 0);
+  $(this).delay(300 * i).animate({
+    'opacity': 1.0
+  }, 450);
+});
+        
+        $(".firstsection a").on('mouseenter',function() { 
+    $(document.body).css("background-color", "#1E1E1E");
+});
+        
+        $(".firstsection a").on('mouseleave',function() { 
+    $(document.body).css("background-color", "#FAFAFA");
+});
+        
+                $(".secondsection a").on('mouseenter',function() { 
+    $(document.body).css("background-color", "#460C11");
+});
+        
+        $(".secondsection a").on('mouseleave',function() { 
+    $(document.body).css("background-color", "#FAFAFA");
+});
+        
+                       $(".thirdsection a").on('mouseenter',function() { 
+    $(document.body).css("background-color", "#262A2A");
+});
+        
+        $(".thirdsection a").on('mouseleave',function() { 
+    $(document.body).css("background-color", "#FAFAFA");
+});
+    </script>
 </body>
 </html>

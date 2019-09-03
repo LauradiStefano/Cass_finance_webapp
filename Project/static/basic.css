@@ -1,17 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Catamaran&display=swap');
 
 html{
     height: 100%;
 }
 
+.lightbg{
+        background-color:#fafafa;
+}
+
 body{
-    background: #1E1E1E;
+    background-color:#1E1E1E;
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Helvetica', sans-serif;
+     -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease; 
 }
 
 dl, ol, ul{
@@ -151,6 +160,12 @@ form{
 
 #home {
     text-align: center;
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
 }
 
 .unresponsive{
@@ -174,6 +189,28 @@ form{
 .row.border-bottom {
     border-bottom: 1.5px solid #C8202E!important;
 }
+
+#sidebar-wrapper{
+  z-index:1;
+  position: absolute;
+  width:0;
+  height:100%;
+  overflow-y:hidden;
+  background: #5b4282;
+  opacity:0.9;
+	transition:all .5s;
+	display:flex;
+	align-items:center;
+}
+
+#wrapper.menuDisplayed #sidebar-wrapper{
+  width:250px;
+}
+
+#wrapper.menuDisplayed #page-content-wrapper{
+  padding-left:250px;
+}
+    
 
 .navbar-brand{
     color: #C8202E !important;
@@ -233,5 +270,86 @@ form{
     text-align: left !important;
 }
 
+.firstsection {
 
+    text-align: center;
+}
+
+.firstsection a{
+font-family: Catamaran;
+      font-weight: 700;    font-size: 2.5vw;
+
+    color: #838690;
+    text-decoration: none;
+        text-transform: uppercase;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease; 
+  cursor: pointer;
+      padding:5rem;
+}
+
+
+
+.firstsection a:hover{
+  letter-spacing: 1vw; 
+color: white;
+font-size: 3vw;
+
+}
+
+.secondsection {
+
+    text-align: center;
+}
+
+.secondsection a{
+font-family: Catamaran;
+      font-weight: 700;    font-size: 2.5vw;
+    color: #838690;
+    text-decoration: none;
+        text-transform: uppercase;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease; 
+  cursor: pointer;
+          padding:5rem;
+
+}
+
+.secondsection a:hover{
+letter-spacing: 1vw; 
+color: white;
+font-size: 3vw;
+}
+
+.thirdsection {
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+.thirdsection a{
+font-family: Catamaran;
+      font-weight: 700;    font-size: 2.5vw;
+    color: #838690;
+    text-decoration: none;
+        text-transform: uppercase;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease; 
+  cursor: pointer;
+          padding:5rem;
+
+}
+
+.thirdsection a:hover{
+  letter-spacing: 1vw; 
+color: white;
+font-size: 3vw;
+
+}
 
