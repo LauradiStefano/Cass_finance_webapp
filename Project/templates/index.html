@@ -62,7 +62,15 @@
 {% include 'footer.html' %}
 
     <script>
-        
+        var yourElements = document.querySelectorAll('container');
+
+		for (var i = 0; i < yourElements.length; i++) {
+			const element = yourElements[i];
+
+			element.addEventListener('touchstart', function(e) {
+				e.preventDefault();
+			});
+		}
         
     $('.animate-home div').each(function(i) {
   $(this).css('opacity', 0);

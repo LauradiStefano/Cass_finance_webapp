@@ -277,7 +277,7 @@ form{
 
 .firstsection a{
 font-family: Catamaran;
-      font-weight: 700;    font-size: 2.5vw;
+      font-weight: 700;    font-size: 2vw;
 
     color: #838690;
     text-decoration: none;
@@ -295,7 +295,7 @@ font-family: Catamaran;
 .firstsection a:hover{
   letter-spacing: 1vw; 
 color: white;
-font-size: 2.7vw;
+font-size: 2.2vw;
 
 }
 
@@ -306,7 +306,7 @@ font-size: 2.7vw;
 
 .secondsection a{
 font-family: Catamaran;
-      font-weight: 700;    font-size: 2.5vw;
+      font-weight: 700;    font-size: 2vw;
     color: #838690;
     text-decoration: none;
         text-transform: uppercase;
@@ -322,7 +322,7 @@ font-family: Catamaran;
 .secondsection a:hover{
 letter-spacing: 1vw; 
 color: white;
-font-size: 2.7vw;
+font-size: 2.2vw;
 }
 
 .thirdsection {
@@ -333,7 +333,7 @@ font-size: 2.7vw;
 
 .thirdsection a{
 font-family: Catamaran;
-      font-weight: 700;    font-size: 2.5vw;
+      font-weight: 700;    font-size: 2vw;
     color: #838690;
     text-decoration: none;
         text-transform: uppercase;
@@ -349,7 +349,7 @@ font-family: Catamaran;
 .thirdsection a:hover{
   letter-spacing: 1vw; 
 color: white;
-font-size: 2.7vw;
+font-size: 2.2vw;
 
 }
 
