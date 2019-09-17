@@ -1,0 +1,245 @@
+{% include 'header.html' %}
+{% if data %}
+{% for result in data %}
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                        {{result['form'].type_choice.label}}:
+                                        {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                    </span>
+                                    <span class="mb-1">
+                                        \(\mu\):
+                                        {{result['form'].mu.data}}
+                                    </span>
+
+                                    <div id="normal">
+                                        {% if result['form'].type_choice.data == '0' %}
+                                        <span class="mb-1">
+                                            \(\sigma\):
+                                            {{result['form'].sigma_normal.data}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="vg">
+                                        {% if result['form'].type_choice.data == '1' %}
+                                        <span class="mb-1">
+                                            \(\sigma\):
+                                            {{result['form'].sigma_vg.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\kappa\):
+                                            {{result['form'].kappa_vg.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\theta\):
+                                            {{result['form'].theta_vg.data}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="nig">
+                                        {% if result['form'].type_choice.data == '2' %}
+                                        <span class="mb-1">
+                                            \(\sigma\):
+                                            {{result['form'].sigma_nig.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\kappa\):
+                                            {{result['form'].kappa_nig.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\theta\):
+                                            {{result['form'].theta_nig.data}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="cgmy">
+                                        {% if result['form'].type_choice.data == '3' %}
+                                        <span class="mb-1">
+                                            \(C\):
+                                            {{result['form'].c.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(G\):
+                                            {{result['form'].g.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(M\):
+                                            {{result['form'].m.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(Y\):
+                                            {{result['form'].y.data}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                        {{result['form'].price.label}}:
+                                        {{result['form'].price.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].risk_free.label}} \((\%) \):
+                                        {{result['form'].risk_free.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].dividend_yield.label}} \((\%) \):
+                                        {{result['form'].dividend_yield.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].strike_min.label}}:
+                                        {{result['form'].strike_min.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].strike_max.label}}:
+                                        {{result['form'].strike_max.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].time.label}}:
+                                        {{result['form'].time.data}}
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].call_put.label}}:
+                                        {{dict(result['form'].call_put.choices).get(result['form'].call_put.data)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Table of Moments</legend>
+                            </div>
+                            {% if result['plot_return_underlying_distribution'] != None %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col"> Distribution</th>
+                                        <th scope="col"> Mean</th>
+                                        <th scope="col"> Variance</th>
+                                        <th scope="col"> Skewness</th>
+                                        <th scope="col"> Kurtosis</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                            </td>
+                                            <td> {{result['mean']}}</td>
+                                            <td> {{result['variance']}}</td>
+                                            <td> {{result['skewness']}}</td>
+                                            <td> {{result['kurtosis']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns Distribution</legend>
+                </div>
+                <div id="plot_return_underlying_distribution" class="d-flex justify-content-center">
+                    {{ result['plot_return_underlying_distribution'][0]|safe}}
+                    {{ result['plot_return_underlying_distribution'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied Volatility Profile</legend>
+                </div>
+                <div id="plot_implied_volatility" class="d-flex justify-content-center">
+                    {{ result['plot_implied_volatility'][0]|safe}}
+                    {{ result['plot_implied_volatility'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-12 d-flex mb-3 justify-content-center">
+    <form style="text-align:center;" method="POST" action="/levy_process/old/delete/{{ result.id }}">
+        <input type="submit" value="Delete Single Simulation"
+               title="Delete this post from database">
+    </form>
+</div>
+<hr>
+{% endfor %}
+
+<center>
+    <div class="row">
+        <form method="POST" action="/levy_process/old/delete/-1">
+            <input type="submit" value="Delete All Simulations">
+        </form>
+    </div>
+</center>
+{% else %}
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
