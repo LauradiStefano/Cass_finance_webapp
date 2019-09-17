@@ -86,6 +86,7 @@
                                                 <span class="mb-1"> \(a_{1}\): {{result ['a1']}}</span>
                                                 <span class="mb-1"> \(a_{2}\): {{result ['a2']}}</span>
                                             </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -207,8 +208,8 @@
                 </fieldset>
             </div>
 
+            {% if result['plot_index_distribution'] != None %}
             <div class="unresponsive col-12">
-                {% if result['plot_index_distribution'] != None %}
                 <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                     <div class="row border-bottom mb-2 pb-1">
                         <legend>Implied CEQ index distribution</legend>
@@ -218,11 +219,11 @@
                         {{ result['plot_index_distribution'][1]|safe }}
                     </div>
                 </fieldset>
-                {% endif %}
             </div>
+            {% endif %}
 
+            {% if result['plot_index_cdf'] != None %}
             <div class="unresponsive col-12">
-                {% if result['plot_index_cdf'] != None %}
                 <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                     <div class="row border-bottom mb-2 pb-1">
                         <legend>Implied CEQ Prices CDF</legend>
@@ -232,11 +233,11 @@
                         {{ result['plot_index_cdf'][1]|safe}}
                     </div>
                 </fieldset>
-                {% endif %}
             </div>
+            {% endif %}
 
+            {% if result['plot_return_cdf'] != None %}
             <div class="unresponsive col-12">
-                {% if result['plot_return_cdf'] != None %}
                 <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                     <div class="row border-bottom mb-2 pb-1">
                         <legend>Implied CEQ Returns CDF</legend>
@@ -246,16 +247,15 @@
                         {{ result['plot_return_cdf'][1]|safe}}
                     </div>
                 </fieldset>
-                {% endif %}
 
-                {% endif %}
             </div>
+            {% endif %}
 
             <div class="col-12 d-flex mb-3 justify-content-center">
 
                 <form style="text-align:center;" class="" method="POST"
                       action="/shimko_theoretical/old/delete/{{ result.id }}">
-                    <input type="submit" value="Delete"
+                    <input type="submit" value="Delete Single Simulation"
                            title="Delete this post from database">
                 </form>
 

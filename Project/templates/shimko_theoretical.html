@@ -224,7 +224,7 @@
                     <legend>Kolmogorov Smirnov Test</legend>
                 </div>
                 <table class="table table-striped">
-                    <thead >
+                    <thead>
                     <th scope="col"></th>
                     <th scope="col"> Cdf Prices</th>
                     <th scope="col"> Cdf Returns</th>
@@ -325,53 +325,55 @@
     <div class="row border-bottom mb-2 pb-1">
         <legend>Table of Moments</legend>
     </div>
-    <table class="table table-striped table-hover" id="table_export">
-        <thead>
-        <th scope="col"> Description</th>
-        <th scope="col"> Ceq</th>
-        <th scope="col"> LogNormal</th>
-        <th scope="col"> Ceq Return</th>
-        <th scope="col"> Normal</th>
-        </thead>
-        <tbody>
-        <tr>
-            <th> Area</th>
-            <td> {{area_prices}}</td>
-            <td> 1</td>
-            <td> {{area_returns}}</td>
-            <td> 1</td>
-        </tr>
-        <tr>
-            <th> Mean</th>
-            <td> {{expected_price}}</td>
-            <td> {{expected_price}}</td>
-            <td> {{m1_returns}}</td>
-            <td> {{m1_returns}}</td>
-        </tr>
-        <tr>
-            <th> Variance</th>
-            <td> {{sigma2_price}}</td>
-            <td> {{sigma2_price}}</td>
-            <td> {{m2_returns}}</td>
-            <td> {{m2_returns}}</td>
-        </tr>
-        <tr>
-            <th> Skewness</th>
-            <td> {{skewness_prices}}</td>
-            <td> {{skewness_prices_log_n}}</td>
-            <td> {{skewness_log_returns}}</td>
-            <td> {{skewness_normal}}</td>
-        </tr>
-        <tr>
-            <th> Kurtosis</th>
-            <td> {{kurtosis_prices}}</td>
-            <td> {{kurtosis_prices_log_n}}</td>
-            <td> {{kurtosis_log_returns}}</td>
-            <td> {{kurtosis_normal}}</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div>
+        <table class="table table-striped table-hover" id="table_export">
+            <thead>
+            <th scope="col"> Description</th>
+            <th scope="col"> Ceq</th>
+            <th scope="col"> LogNormal</th>
+            <th scope="col"> Ceq Return</th>
+            <th scope="col"> Normal</th>
+            </thead>
+            <tbody>
+            <tr>
+                <th> Area</th>
+                <td> {{area_prices}}</td>
+                <td> 1</td>
+                <td> {{area_returns}}</td>
+                <td> 1</td>
+            </tr>
+            <tr>
+                <th> Mean</th>
+                <td> {{expected_price}}</td>
+                <td> {{expected_price}}</td>
+                <td> {{m1_returns}}</td>
+                <td> {{m1_returns}}</td>
+            </tr>
+            <tr>
+                <th> Variance</th>
+                <td> {{sigma2_price}}</td>
+                <td> {{sigma2_price}}</td>
+                <td> {{m2_returns}}</td>
+                <td> {{m2_returns}}</td>
+            </tr>
+            <tr>
+                <th> Skewness</th>
+                <td> {{skewness_prices}}</td>
+                <td> {{skewness_prices_log_n}}</td>
+                <td> {{skewness_log_returns}}</td>
+                <td> {{skewness_normal}}</td>
+            </tr>
+            <tr>
+                <th> Kurtosis</th>
+                <td> {{kurtosis_prices}}</td>
+                <td> {{kurtosis_prices_log_n}}</td>
+                <td> {{kurtosis_log_returns}}</td>
+                <td> {{kurtosis_normal}}</td>
+            </tr>
+            </tbody>
+        </table>
+         <hr>
+    </div>
     <div class="row d-flex justify-content-center">
         {{form.button_export_table}}
     </div>

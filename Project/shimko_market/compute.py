@@ -358,7 +358,7 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
     fig.line(x='ret_t', y='pdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
              line_width=4, name='pdf norm')
 
-    fig.legend.location = "top_right"
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
     fig.legend.click_policy = "hide"
 
@@ -412,7 +412,7 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
 
     fig.square(x=s0, y=0, legend="Spot Price", color="#050402", size=8)
 
-    fig.legend.location = "top_right"
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
     fig.legend.click_policy = "hide"
 

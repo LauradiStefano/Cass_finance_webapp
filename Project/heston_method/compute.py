@@ -66,7 +66,7 @@ def create_plot_return_underlying_distribution(returns, heston_pdf, norm_pdf):
     fig.line(x='returns', y='norm_pdf', source=data, legend="Benchmark Normal", color="#D21F1B",
              alpha=0.6, line_width=3, name='pdf norm')
 
-    fig.legend.location = "top_right"
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
