@@ -28,220 +28,258 @@
                             </div>
                         </div>
 
-                        <div class="row" id="vasicek" {% if form.type_choice.data !='0' and form.type_choice !=None %}
-                             style="display:none" {%endif%}>
-                            <div class="col mb-1">
-                                <label> $$ \kappa $$ </label>
+                        <div class="row">
+                            <div class="col" id="vasicek" {% if form.type_choice.data !='0' and form.type_choice !=None
+                                 %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$ \kappa $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_vasicek}}
+                                        {% if form.kappa_vasicek.errors %}
+                                        {% for error in form.kappa_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$ \theta $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_vasicek}}
+                                        {% if form.theta_vasicek.errors %}
+                                        {% for error in form.theta_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$ \sigma $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_vasicek}}
+                                        {% if form.sigma_vasicek.errors %}
+                                        {% for error in form.sigma_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$ \rho $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_vasicek}}
+                                        {% if form.rho_vasicek.errors %}
+                                        {% for error in form.rho_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-11 mb-1">
-                                {{form.kappa_vasicek}}
-                                {% if form.kappa_vasicek.errors %}
-                                {% for error in form.kappa_vasicek.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+
+                            <div class="col" id="cir" {% if form.type_choice.data !='1' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\kappa $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_cir}}
+                                        {% if form.kappa_cir.errors %}
+                                        {% for error in form.kappa_cir.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\theta $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_cir}}
+                                        {% if form.theta_cir.errors %}
+                                        {% for error in form.theta_cir.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\sigma $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_cir}}
+                                        {% if form.sigma_cir.errors %}
+                                        {% for error in form.sigma_cir.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\rho $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_cir}}
+                                        {% if form.rho_cir.errors %}
+                                        {% for error in form.rho_cir.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col mb-1">
-                                <label> $$ \theta $$ </label>
+
+                            <div class="col" id="nelson_siegel" {% if form.type_choice.data !='2' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{0} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta0_nelson}}
+                                        {% if form.beta0_nelson.errors %}
+                                        {% for error in form.beta0_nelson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{1} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta1_nelson}}
+                                        {% if form.beta1_nelson.errors %}
+                                        {% for error in form.beta1_nelson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{2} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta2_nelson}}
+                                        {% if form.beta2_nelson.errors %}
+                                        {% for error in form.beta2_nelson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\tau $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.tau_nelson}}
+                                        {% if form.tau_nelson.errors %}
+                                        {% for error in form.tau_nelson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-11 mb-1">
-                                {{form.theta_vasicek}}
-                                {% if form.theta_vasicek.errors %}
-                                {% for error in form.theta_vasicek.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$ \sigma $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.sigma_vasicek}}
-                                {% if form.sigma_vasicek.errors %}
-                                {% for error in form.sigma_vasicek.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$ \rho $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.rho_vasicek}}
-                                {% if form.rho_vasicek.errors %}
-                                {% for error in form.rho_vasicek.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+
+                            <div class="col" id="svensson" {% if form.type_choice.data !='3' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta{0} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta0_svensson}}
+                                        {% if form.beta0_svensson.errors %}
+                                        {% for error in form.beta0_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{1} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta1_svensson}}
+                                        {% if form.beta1_svensson.errors %}
+                                        {% for error in form.beta1_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{2} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta2_svensson}}
+                                        {% if form.beta2_svensson.errors %}
+                                        {% for error in form.beta2_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\beta_{3} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta3_svensson}}
+                                        {% if form.beta3_svensson.errors %}
+                                        {% for error in form.beta3_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\tau_{1} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.tau1_svensson}}
+                                        {% if form.tau1_svensson.errors %}
+                                        {% for error in form.tau1_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        <label> $$\tau_{2} $$ </label>
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.tau2_svensson}}
+                                        {% if form.tau2_svensson.errors %}
+                                        {% for error in form.tau2_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="row" id="cir" {% if form.type_choice.data !='1' %}
-                             style="display:none" {%endif%}>
-                            <div class="col mb-1">
-                                <label> $$\kappa $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.kappa_cir}}
-                                {% if form.kappa_cir.errors %}
-                                {% for error in form.kappa_cir.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\theta $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.theta_cir}}
-                                {% if form.theta_cir.errors %}
-                                {% for error in form.theta_cir.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\sigma $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.sigma_cir}}
-                                {% if form.sigma_cir.errors %}
-                                {% for error in form.sigma_cir.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\rho $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.rho_cir}}
-                                {% if form.rho_cir.errors %}
-                                {% for error in form.rho_cir.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row" id="nelson_siegel" {% if form.type_choice.data !='2' %}
-                             style="display:none" {%endif%}>
-                            <div class="col mb-1">
-                                <label> $$\beta_{0} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta0_nelson}}
-                                {% if form.beta0_nelson.errors %}
-                                {% for error in form.beta0_nelson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\beta_{1} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta1_nelson}}
-                                {% if form.beta1_nelson.errors %}
-                                {% for error in form.beta1_nelson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\beta_{2} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta2_nelson}}
-                                {% if form.beta2_nelson.errors %}
-                                {% for error in form.beta2_nelson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\tau $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.tau_nelson}}
-                                {% if form.tau_nelson.errors %}
-                                {% for error in form.tau_nelson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row" id="svensson" {% if form.type_choice.data !='3' %} style="display:none"
-                             {%endif%}>
-                            <div class="col mb-1">
-                                <label> $$\beta{0} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta0_svensson}}
-                                {% if form.beta0_svensson.errors %}
-                                {% for error in form.beta0_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\beta_{1} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta1_svensson}}
-                                {% if form.beta1_svensson.errors %}
-                                {% for error in form.beta1_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\beta_{2} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta2_svensson}}
-                                {% if form.beta2_svensson.errors %}
-                                {% for error in form.beta2_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\beta_{3} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.beta3_svensson}}
-                                {% if form.beta3_svensson.errors %}
-                                {% for error in form.beta3_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\tau_{1} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.tau1_svensson}}
-                                {% if form.tau1_svensson.errors %}
-                                {% for error in form.tau1_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col mb-1">
-                                <label> $$\tau_{2} $$ </label>
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.tau2_svensson}}
-                                {% if form.tau2_svensson.errors %}
-                                {% for error in form.tau2_svensson.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
                     </fieldset>
                 </div>
 
@@ -264,7 +302,7 @@
                             </div>
                         </div>
 
-                         <div class="row">
+                        <div class="row">
                             <div class="col mb-1">
                                 {{form.least_fmin.label}}
                                 {{form.least_fmin}}
@@ -288,92 +326,92 @@
     </div>
     {#
     <!--<div class="row p-3 d-flex justify-content-center">-->
-        <!--{% if plot_return_underlying_distribution != None %}-->
-        <!--<div class="col-12">-->
-            <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-                <!--<table class="table table-striped">-->
-                    <!--<div class="row border-bottom mb-2 pb-1">-->
-                        <!--<legend>Table of Moments</legend>-->
-                    <!--</div>-->
-                    <!--<thead>-->
-                    <!--<th scope="col"> Model</th>-->
-                    <!--<th scope="col"> Mean</th>-->
-                    <!--<th scope="col"> Variance</th>-->
-                    <!--<th scope="col"> Skewness</th>-->
-                    <!--<th scope="col"> Kurtosis</th>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr>-->
-                        <!--<td> {{dict(form.type_choice.choices).get(form.type_choice.data)}}</td>-->
-                        <!--<td> {{mean}}</td>-->
-                        <!--<td> {{variance}}</td>-->
-                        <!--<td> {{skewness}}</td>-->
-                        <!--<td> {{kurtosis}}</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</fieldset>-->
-        <!--</div>-->
+    <!--{% if plot_return_underlying_distribution != None %}-->
+    <!--<div class="col-12">-->
+    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
+    <!--<table class="table table-striped">-->
+    <!--<div class="row border-bottom mb-2 pb-1">-->
+    <!--<legend>Table of Moments</legend>-->
+    <!--</div>-->
+    <!--<thead>-->
+    <!--<th scope="col"> Model</th>-->
+    <!--<th scope="col"> Mean</th>-->
+    <!--<th scope="col"> Variance</th>-->
+    <!--<th scope="col"> Skewness</th>-->
+    <!--<th scope="col"> Kurtosis</th>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr>-->
+    <!--<td> {{dict(form.type_choice.choices).get(form.type_choice.data)}}</td>-->
+    <!--<td> {{mean}}</td>-->
+    <!--<td> {{variance}}</td>-->
+    <!--<td> {{skewness}}</td>-->
+    <!--<td> {{kurtosis}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+    <!--</fieldset>-->
+    <!--</div>-->
 
-        <!--<div class="col-12 d-flex mb-3 justify-content-center">-->
-            <!--<div id="button_view_details" class="popup_table_open">-->
-                <!--{{form.button_view_details}}-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--<div class="col-12 d-flex mb-3 justify-content-center">-->
+    <!--<div id="button_view_details" class="popup_table_open">-->
+    <!--{{form.button_view_details}}-->
+    <!--</div>-->
+    <!--</div>-->
 
-        <!--<div class="unresponsive col-12">-->
-            <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-                <!--<div class="row border-bottom mb-2 pb-1">-->
-                    <!--<legend>Pdf Underlying Asset</legend>-->
-                <!--</div>-->
-                <!--<div id="plot_return_underlying_distribution" class="d-flex justify-content-center">-->
-                    <!--{{plot_return_underlying_distribution[0]|safe}}-->
-                    <!--{{plot_return_underlying_distribution[1]|safe}}-->
-                <!--</div>-->
-            <!--</fieldset>-->
-        <!--</div>-->
+    <!--<div class="unresponsive col-12">-->
+    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
+    <!--<div class="row border-bottom mb-2 pb-1">-->
+    <!--<legend>Pdf Underlying Asset</legend>-->
+    <!--</div>-->
+    <!--<div id="plot_return_underlying_distribution" class="d-flex justify-content-center">-->
+    <!--{{plot_return_underlying_distribution[0]|safe}}-->
+    <!--{{plot_return_underlying_distribution[1]|safe}}-->
+    <!--</div>-->
+    <!--</fieldset>-->
+    <!--</div>-->
 
-        <!--<div class="unresponsive col-12">-->
-            <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-                <!--<div class="row border-bottom mb-2 pb-1">-->
-                    <!--<legend>Implied Volatility Profile</legend>-->
-                <!--</div>-->
-                <!--<div id="plot_implied_volatility" class="d-flex justify-content-center">-->
-                    <!--{{plot_implied_volatility[0]|safe}}-->
-                    <!--{{plot_implied_volatility[1]|safe}}-->
-                <!--</div>-->
-            <!--</fieldset>-->
-        <!--</div>-->
-        <!--{%endif%}-->
+    <!--<div class="unresponsive col-12">-->
+    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
+    <!--<div class="row border-bottom mb-2 pb-1">-->
+    <!--<legend>Implied Volatility Profile</legend>-->
+    <!--</div>-->
+    <!--<div id="plot_implied_volatility" class="d-flex justify-content-center">-->
+    <!--{{plot_implied_volatility[0]|safe}}-->
+    <!--{{plot_implied_volatility[1]|safe}}-->
+    <!--</div>-->
+    <!--</fieldset>-->
+    <!--</div>-->
+    <!--{%endif%}-->
     <!--</div>-->
 
     <!--<div id="popup_table" style="display:none">-->
 
-        <!--<div class="row border-bottom mb-2 pb-1">-->
-            <!--<legend>Table of Volatility & Prices</legend>-->
-        <!--</div>-->
-        <!--<div class="table_wrapper">-->
-            <!--<table class="table table-striped table-hover" id="table_export">-->
-                <!--<thead>-->
-                <!--<th scope="col"> Strike</th>-->
-                <!--<th scope="col"> Prices</th>-->
-                <!--<th scope="col"> Implied Volatility</th>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--{%for i in range(number_of_strike)%}-->
-                <!--<tr>-->
-                    <!--<td>{{strike[i]}}</td>-->
-                    <!--<td>{{option_prices[i]}}</td>-->
-                    <!--<td>{{implied_volatility[i]}}</td>-->
-                <!--</tr>-->
-                <!--{%endfor%}-->
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
-        <!--<hr>-->
-        <!--<div class="row d-flex justify-content-center">-->
-            <!--{{form.button_export_table}}-->
-        <!--</div>-->
+    <!--<div class="row border-bottom mb-2 pb-1">-->
+    <!--<legend>Table of Volatility & Prices</legend>-->
+    <!--</div>-->
+    <!--<div class="table_wrapper">-->
+    <!--<table class="table table-striped table-hover" id="table_export">-->
+    <!--<thead>-->
+    <!--<th scope="col"> Strike</th>-->
+    <!--<th scope="col"> Prices</th>-->
+    <!--<th scope="col"> Implied Volatility</th>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--{%for i in range(number_of_strike)%}-->
+    <!--<tr>-->
+    <!--<td>{{strike[i]}}</td>-->
+    <!--<td>{{option_prices[i]}}</td>-->
+    <!--<td>{{implied_volatility[i]}}</td>-->
+    <!--</tr>-->
+    <!--{%endfor%}-->
+    <!--</tbody>-->
+    <!--</table>-->
+    <!--</div>-->
+    <!--<hr>-->
+    <!--<div class="row d-flex justify-content-center">-->
+    <!--{{form.button_export_table}}-->
+    <!--</div>-->
     <!--</div>-->#}
 </div>
 {% include 'footer.html' %}
@@ -410,6 +448,13 @@
             }
         });
     });
+
+
+
+
+
+
+
 
 
 

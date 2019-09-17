@@ -5,6 +5,7 @@ from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
 from app import app
+from term_structure.controller import controller_term_structure
 from asian_option.controller import controller_asian_option, controller_old_asian_option, delete_asian_option_simulation
 from db_models import db, User
 from heston_method.controller import controller_heston_method, controller_old_heston_method, \
@@ -63,6 +64,12 @@ def asian_option():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_asian_option(current_user, request)
     return render_template("asian_option.html", **template_variables)
+
+
+@app.route('/term_structure', methods=['GET', 'POST'])
+def term_structure():
+    template_variables = controller_term_structure(current_user, request)
+    return render_template("term_structure.html", **template_variables)
 
 
 @app.route('/shimko_theoretical/old')
