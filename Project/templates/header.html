@@ -25,7 +25,8 @@
 <body>
 {% if index is not defined %}
 <header>
-    <nav class="navbar navbar-dark">
+    <nav class="navbar navbar-expand-xl navbar-dark">
+        <a class="navbar-brand" href="/">Finance Web App</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,28 +34,45 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto" id="navbarDropdown">
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/shimko_theoretical" role="button" aria-haspopup="true"
-                       aria-expanded="false">
-                        Shimko Theoretical
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Shimko Method
                     </a>
-                    <a class="nav-link" href="/shimko_market" role="button" aria-haspopup="true" aria-expanded="false">
-                        Shimko Market
-                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/shimko_theoretical">
+                            Shimko Theoretical
+                        </a>
+                        <a class="dropdown-item" href="/shimko_market">
+                            Shimko Market
+                        </a>
+                    </div>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/levy_process" role="button" aria-haspopup="true" aria-expanded="false">
-                        Lévy Process
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Cos Method
                     </a>
-                    <a class="nav-link" href="/heston_method" role="button" aria-haspopup="true" aria-expanded="false">
-                        Heston Method
-                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/levy_process">
+                            Lévy Process
+                        </a>
+                        <a class="dropdown-item" href="/heston_method">
+                            Heston Method
+                        </a>
+                    </div>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/asian_option">
                         Asian Option
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/term_structure">
+                        Term Structure Modelling
                     </a>
                 </li>
 
@@ -85,6 +103,7 @@
             </span>
         </div>
     </nav>
+    <hr>
 </header>
 {% endif %}
 

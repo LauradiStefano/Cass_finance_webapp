@@ -1,107 +1,115 @@
 {% include 'header.html' %}
 
-<body class="lightbg">
-
 {% if just_registered == '1' %}
 <div class="alert alert-success"> Thank you for your registration</div>
 {% endif %}
 
 <!-- CONTAINER -->
-<div class="container" id="home">
-    <div class="row d-flex
- justify-content-center animate-home">
+<div class="container_home" id="home">
 
-        <div class="col-12 firstsection">
-            <a class="animated pulse slower infinite" href="shimko_theoretical"> Shimko Theoretical </a>
-        </div>
-
-        <div class="col-12 fadeInDown firstsection">
-            <a class="animated pulse slower infinite"  href="shimko_market"> Shimko Market </a>
-        </div>
-
-        <div class="col-12 fadeInDown secondsection">
-            <a href="levy_process" class="animated pulse slower infinite" > COS Method - Lévy Processes </a>
-        </div>
-
-        <div class="col-12 fadeInDown secondsection">
-            <a href="heston_method" class="animated pulse slower infinite" > COS Method - Heston Model </a>
-        </div>
-
-        <div class="col-12 fadeInDown thirdsection">
-            <a href="asian_option" class="animated pulse slower infinite" > Asian Option </a>
-        </div>
-
-    </div> <!-- /container -->
-    <div class="row d-flex justify-content-center mt-5">
-        <div class="col-12 pt-5 mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-12 mt-5">
             <span class="text-white">
                 {% if user is defined%}
-                {% if user.is_authenticated %}
-                Logged in as {{user.username}}
-                {% if index is not defined %}
-                <a class="mx-3" href="{{request.path}}/old">Previous simulations</a>
-                {% endif %}
-                <a class="mx-2" href="/logout">Logout</a>
-                {% else %}
-                <a class="mx-2" href="/login">Login</a>|<a class="mx-2" href="/reg">Register</a>
-                {% endif %}
-                {% else %}
-                {% if login is defined %}
-                <a class="mx-2" href="/reg">Register</a>
-                {% elif register is defined %}
-                <a class="mx-2" href="/login">Login</a>
-                {% elif old is defined %}
-                <a class="mx-2" href={{back_url}}> Back to the Model </a>
-                {% endif %}
+                    {% if user.is_authenticated %}
+                    Logged in as {{user.username}}
+                    <a class="mx-2" href="/logout">Logout</a>
+                    {% endif %}
                 {% endif %}
             </span>
         </div>
     </div>
+
+    <div class="row d-flex justify-content-center">
+
+        <form>
+            <div class="row">
+                <div class="col-md col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Shimko Method</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
+                                <a class="line_text" href="shimko_theoretical"> Shimko Theoretical </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
+                                <a class="line_text" href="shimko_market"> Shimko Market </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Cos Method</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
+                                <a class="line_text" href="levy_process"> Lévy Process </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
+                                <a class="line_text" href="heston_method"> Heston Model </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Asian Option</legend>
+                        </div>
+                        <div class="row line_height">
+                            <div class="col mb-1">
+                                <a class="line_text" href="asian_option"> Asian Option </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-md col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Term Structure Modelling</legend>
+                        </div>
+                        <div class="row line_height">
+                            <div class="col mb-1">
+                                <a class="line_text" href="term_structure"> Term Structure </a>
+                                <div class="line_button"></div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="row d-flex justify-content-center button_container">
+        <div class="col-12 mt-5">
+            <span class="text-white">
+                {% if user is defined%}
+                    {% if not user.is_authenticated %}
+                    <a class="mx-2 link_user animated fadeInDown" href="/reg">Register</a> <a
+                    class="mx-2 link_user animated fadeInDown" href="/login">Login</a>
+                    {% endif %}
+                {% endif %}
+            </span>
+        </div>
+    </div>
+
 </div>
-    
+
+
 {% include 'footer.html' %}
 
-    <script>
-        var yourElements = document.querySelectorAll('container');
-
-		for (var i = 0; i < yourElements.length; i++) {
-			const element = yourElements[i];
-
-			element.addEventListener('touchstart', function(e) {
-				e.preventDefault();
-			});
-		}
-        
-    $('.animate-home div').each(function(i) {
-  $(this).css('opacity', 0);
-  $(this).delay(300 * i).animate({
-    'opacity': 1.0
-  }, 450);
-});
-        
-        $(".firstsection a").on('mouseenter',function() { 
-    $(document.body).css("background-color", "#1E1E1E");
-});
-        
-        $(".firstsection a").on('mouseleave',function() { 
-    $(document.body).css("background-color", "#FAFAFA");
-});
-        
-                $(".secondsection a").on('mouseenter',function() { 
-    $(document.body).css("background-color", "#460C11");
-});
-        
-        $(".secondsection a").on('mouseleave',function() { 
-    $(document.body).css("background-color", "#FAFAFA");
-});
-        
-                       $(".thirdsection a").on('mouseenter',function() { 
-    $(document.body).css("background-color", "#262A2A");
-});
-        
-        $(".thirdsection a").on('mouseleave',function() { 
-    $(document.body).css("background-color", "#FAFAFA");
-});
-    </script>
 </body>
 </html>
