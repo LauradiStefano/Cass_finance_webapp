@@ -203,3 +203,87 @@ def interest_rate_term_structure(ttm, market_spot_rate, model_spot_rate):
 
     return script, div
 
+
+
+
+def plot_error_interest_rate(ttm, spot_rate_model_error):
+    
+    # tools = "save, box_zoom, crosshair, reset"
+    # labels = ["model_error"]
+    # colors = ["#0095B6"]
+
+    x = list(range(0, len(spot_rate_model_error)+1))
+
+
+    # data = ColumnDataSource(data=dict(
+    #      x = x,
+    #      spot_rate_model_error = spot_rate_model_error
+    #     ))
+
+    #  tooltips = [
+    #      ("time", "@ttm"),
+    #      ("spot rate model_error", "@spot_rate_model_error")
+    #  ]
+    
+    # p = plt.figure(x_range=x, title=" Capital Share & Interest Share", plot_height=300, toolbar_location="left",
+    #                tools=tools, tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
+    #  # add a line renderer with legend and line thickness
+    # p.vbar(x= x,  width=0.5, bottom=0, top=spot_rate_model_error, color="#CAB2D6")
+
+   
+
+    # p.toolbar.active_drag = None
+    # p.legend.orientation = "horizontal"
+    # p.legend.location = "top_left"
+
+    p = bp.figure(plot_width=450, plot_height=450)
+    p.vbar(x = x, width=0.5, bottom=0, top=spot_rate_model_error, color="#0095B6")
+
+
+    from bokeh.embed import components
+    script, div = components(p)
+
+    return script, div
+
+    
+
+
+def plot_error_discount_factor(ttm, discount_factor_model_error):
+    
+    # tools = "save, box_zoom, crosshair, reset"
+    # labels = ["model_error"]
+    # colors = ["#0095B6"]
+
+    x = list(range(0, len(discount_factor_model_error)+1))
+
+
+    # data = ColumnDataSource(data=dict(
+    #      x = x,
+    #      spot_rate_model_error = spot_rate_model_error
+    #     ))
+
+    #  tooltips = [
+    #      ("time", "@ttm"),
+    #      ("spot rate model_error", "@spot_rate_model_error")
+    #  ]
+    
+    # p = plt.figure(x_range=x, title=" Capital Share & Interest Share", plot_height=300, toolbar_location="left",
+    #                tools=tools, tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
+    #  # add a line renderer with legend and line thickness
+    # p.vbar(x= x,  width=0.5, bottom=0, top=spot_rate_model_error, color="#CAB2D6")
+
+   
+
+    # p.toolbar.active_drag = None
+    # p.legend.orientation = "horizontal"
+    # p.legend.location = "top_left"
+
+    p = bp.figure(plot_width=450, plot_height=450)
+    p.vbar(x = x, width=0.5, bottom=0, top=discount_factor_model_error, color="#0095B6")
+
+
+    from bokeh.embed import components
+    script, div = components(p)
+
+    return script, div
+
