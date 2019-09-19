@@ -30,6 +30,26 @@ def upload_input(filename=None):
 
     return data
 
+def create_objective_vector(model, kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek, kappa_cir, theta_cir, sigma_cir, rho_cir, beta0_nelson, 
+                            beta1_nelson, beta2_nelson, tau_nelson, beta0_svensson, beta1_svensson, beta2_svensson, beta3_svensson, tau1_svensson,
+                            tau2_svensson):
+    model = int(model)
+
+    if model == 1:
+        x0 = [kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek ]
+
+    elif model == 2:
+        x0 = [kappa_cir, theta_cir, sigma_cir, rho_cir ]
+        
+    elif model == 3:
+        x0 = [ beta0_nelson, beta1_nelson, beta2_nelson, tau_nelson]
+
+    else :
+        x0 = [beta0_svensson, beta1_svensson, beta2_svensson, beta3_svensson, tau1_svensson, tau2_svensson]
+
+    
+    return x0
+
 
 def fitting_method(model, x0, data, flag1, flag2):
     time = (data["Maturity"].tolist())
@@ -100,6 +120,41 @@ def fitting_method(model, x0, data, flag1, flag2):
 
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
         discount_factor_model_error, spot_rate_model_error, param, time
+
+
+def create_vector_parameters_table(model, param):
+
+    if model == 1:
+        kappa_vasicek_output = param[0]
+        theta_vasicek_output = param[1]
+        sigma_vasicek_output = param[2]
+        rho_vasicek_output = param[3] 
+
+    elif model == 2:
+        kappa_cir_output = param[0]
+        theta_cir_output = param[1]
+        sigma_cir_output = param[2]
+        rho_cir_output = param[3] 
+        
+    elif model == 3:
+        beta0_nelson_output = param[0]
+        beta1_nelson_output = param[1]
+        beta2_nelson_output = param[2]
+        tau_nelson_output = param[3]
+
+    else :
+        beta0_svensson_output = param[0]
+        beta1_svensson_output = param[1]
+        beta2_svensson_output = param[2]
+        beta3_svensson_output = param[3]
+        tau1_svensson_output = param[4]
+        tau2_svensson_output = param[5]
+
+    
+    return kappa_vasicek_output,theta_vasicek_output,sigma_vasicek_output,rho_vasicek_output, \
+        kappa_cir_output, theta_cir_output, sigma_cir_output,rho_cir_output, beta0_nelson_output, \
+        beta1_nelson_output, beta2_nelson_output, tau_nelson_output, beta0_svensson_output, \
+        beta1_svensson_output, beta2_svensson_output, beta3_svensson_output, tau1_svensson_output, tau2_svensson_output 
 
 
 def create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor):
