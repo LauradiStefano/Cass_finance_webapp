@@ -2,9 +2,8 @@ import wtforms as wtf
 
 
 class ComputeForm(wtf.Form):
-    model_choice = wtf.SelectField('Model',
-                                  choices=[('0', 'Vasicek'), ('1', 'CIR'), ('2', 'Nelson Siegel'), ('3', 'Svensson')],
-                                  default='0')
+    model_choice = wtf.SelectField('Model', choices=[('0', 'Vasicek'), ('1', 'CIR'),
+                                                     ('2', 'Nelson Siegel'), ('3', 'Svensson')], default='0')
 
     # Vasicek distribution
     kappa_vasicek = wtf.FloatField(label='Kappa', default=1,

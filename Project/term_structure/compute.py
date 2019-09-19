@@ -34,6 +34,9 @@ def upload_input(filename=None):
 def fitting_method(model, x0, data, flag1, flag2):
     time = (data["Maturity"].tolist())
     market_discount_factor = (data["Discount Factor"].tolist())
+    model = int(model)
+    flag1 = int(flag1)
+    flag2 = int(flag2)
 
     if model == 1:
 

@@ -44,8 +44,8 @@ def controller_term_structure(user, request):
 
             market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
                 discount_factor_model_error, spot_rate_model_error, parameters, time = \
-                fitting_method (form.model_choice.data, variables, file_name, form.discount_factor.data,
-                                form.least_fmin.data)
+                fitting_method(form.model_choice.data, variables, file_name, form.discount_factor.data,
+                               form.least_fmin.data)
 
             plot_discount_factor_term_structure = \
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
