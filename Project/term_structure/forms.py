@@ -2,7 +2,7 @@ import wtforms as wtf
 
 
 class ComputeForm(wtf.Form):
-    type_choice = wtf.SelectField('Model',
+    model_choice = wtf.SelectField('Model',
                                   choices=[('0', 'Vasicek'), ('1', 'CIR'), ('2', 'Nelson Siegel'), ('3', 'Svensson')],
                                   default='0')
 
@@ -36,7 +36,7 @@ class ComputeForm(wtf.Form):
     tau_nelson = wtf.FloatField(label='Tau', default=1,
                                 validators=[wtf.validators.InputRequired()])
 
-    # Svensson
+    # Svensson distribution
     beta0_svensson = wtf.FloatField(label='Beta0', default=1,
                                     validators=[wtf.validators.InputRequired()])
     beta1_svensson = wtf.FloatField(label='Beta1', default=1,
@@ -51,8 +51,8 @@ class ComputeForm(wtf.Form):
                                    validators=[wtf.validators.InputRequired()])
 
     # Contract parameters
-    import_file = wtf.FloatField(label='Import',
-                                 validators=[wtf.validators.InputRequired()])
+    file_name = wtf.FileField(label='Import File')
+
     discount_factor = wtf.RadioField(label='Discount Factor', choices=[('0', 'Discount'), ('1', 'Factor Spot Race')],
                                      default='0')
     least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Least Squares'), ('1', 'Fmin')],

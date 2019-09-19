@@ -11,7 +11,7 @@
 
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <form class="" method="post" action="">
+        <form class="" method="post" action="" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -23,13 +23,13 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.type_choice.label}}
-                                {{form.type_choice}}
+                                {{form.model_choice.label}}
+                                {{form.model_choice}}
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col" id="vasicek" {% if form.type_choice.data !='0' and form.type_choice !=None
+                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice !=None
                                  %}
                                  style="display:none" {%endif%}>
                                 <div class="row">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="cir" {% if form.type_choice.data !='1' %}
+                            <div class="col" id="cir" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -142,7 +142,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="nelson_siegel" {% if form.type_choice.data !='2' %}
+                            <div class="col" id="nelson_siegel" {% if form.model_choice.data !='2' %}
                                  style="display:none" {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -198,7 +198,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="svensson" {% if form.type_choice.data !='3' %} style="display:none"
+                            <div class="col" id="svensson" {% if form.model_choice.data !='3' %} style="display:none"
                                  {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -292,6 +292,18 @@
 
                         <div class="row">
                             <div class="col mb-1">
+                                {{form.file_name.label}}
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
                                 {{form.discount_factor.label}}
                                 {{form.discount_factor}}
                                 {% if form.discount_factor.errors %}
@@ -324,101 +336,130 @@
             </div>
         </form>
     </div>
-    {#
-    <!--<div class="row p-3 d-flex justify-content-center">-->
-    <!--{% if plot_return_underlying_distribution != None %}-->
-    <!--<div class="col-12">-->
-    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-    <!--<table class="table table-striped">-->
-    <!--<div class="row border-bottom mb-2 pb-1">-->
-    <!--<legend>Table of Moments</legend>-->
-    <!--</div>-->
-    <!--<thead>-->
-    <!--<th scope="col"> Model</th>-->
-    <!--<th scope="col"> Mean</th>-->
-    <!--<th scope="col"> Variance</th>-->
-    <!--<th scope="col"> Skewness</th>-->
-    <!--<th scope="col"> Kurtosis</th>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr>-->
-    <!--<td> {{dict(form.type_choice.choices).get(form.type_choice.data)}}</td>-->
-    <!--<td> {{mean}}</td>-->
-    <!--<td> {{variance}}</td>-->
-    <!--<td> {{skewness}}</td>-->
-    <!--<td> {{kurtosis}}</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
-    <!--</fieldset>-->
-    <!--</div>-->
+    <div class="row p-3 d-flex justify-content-center">
+        {% if plot_discount_factor_term_structure != None %}
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <table class="table table-striped">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Table of Moments</legend>
+                    </div>
+                    <thead>
+                    <th scope="col"> Model</th>
+                    <th scope="col"> param1</th>
+                    <th scope="col"> param2</th>
+                    <th scope="col"> param3</th>
+                    <th scope="col"> param4</th>
+                    <th scope="col"> param5</th>
+                    <th scope="col"> param6</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td> {{dict(form.model_choice.choices).get(form.model_choice.data)}}</td>
+                        <td> -- </td>
+                        <td> -- </td>
+                        <td> -- </td>
+                        <td> -- </td>
+                        <td> -- </td>
+                        <td> -- </td>
+                        <td> -- </td>
 
-    <!--<div class="col-12 d-flex mb-3 justify-content-center">-->
-    <!--<div id="button_view_details" class="popup_table_open">-->
-    <!--{{form.button_view_details}}-->
-    <!--</div>-->
-    <!--</div>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+        </div>
 
-    <!--<div class="unresponsive col-12">-->
-    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-    <!--<div class="row border-bottom mb-2 pb-1">-->
-    <!--<legend>Pdf Underlying Asset</legend>-->
-    <!--</div>-->
-    <!--<div id="plot_return_underlying_distribution" class="d-flex justify-content-center">-->
-    <!--{{plot_return_underlying_distribution[0]|safe}}-->
-    <!--{{plot_return_underlying_distribution[1]|safe}}-->
-    <!--</div>-->
-    <!--</fieldset>-->
-    <!--</div>-->
+        {#<div class="col-12 d-flex mb-3 justify-content-center">
+            <div id="button_view_details" class="popup_table_open">
+                {{form.button_view_details}}
+            </div>
+        </div>#}
 
-    <!--<div class="unresponsive col-12">-->
-    <!--<fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">-->
-    <!--<div class="row border-bottom mb-2 pb-1">-->
-    <!--<legend>Implied Volatility Profile</legend>-->
-    <!--</div>-->
-    <!--<div id="plot_implied_volatility" class="d-flex justify-content-center">-->
-    <!--{{plot_implied_volatility[0]|safe}}-->
-    <!--{{plot_implied_volatility[1]|safe}}-->
-    <!--</div>-->
-    <!--</fieldset>-->
-    <!--</div>-->
-    <!--{%endif%}-->
-    <!--</div>-->
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Discount Factor Term Structure</legend>
+                </div>
+                <div id="plot_discount_factor_term_structure" class="d-flex justify-content-center">
+                    {{plot_discount_factor_term_structure[0]|safe}}
+                    {{plot_discount_factor_term_structure[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
 
-    <!--<div id="popup_table" style="display:none">-->
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Model Error Discount Factor</legend>
+                </div>
+                <div id="plot_error_discount_factor" class="d-flex justify-content-center">
+                    {{plot_error_discount_factor[0]|safe}}
+                    {{plot_error_discount_factor[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
 
-    <!--<div class="row border-bottom mb-2 pb-1">-->
-    <!--<legend>Table of Volatility & Prices</legend>-->
-    <!--</div>-->
-    <!--<div class="table_wrapper">-->
-    <!--<table class="table table-striped table-hover" id="table_export">-->
-    <!--<thead>-->
-    <!--<th scope="col"> Strike</th>-->
-    <!--<th scope="col"> Prices</th>-->
-    <!--<th scope="col"> Implied Volatility</th>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--{%for i in range(number_of_strike)%}-->
-    <!--<tr>-->
-    <!--<td>{{strike[i]}}</td>-->
-    <!--<td>{{option_prices[i]}}</td>-->
-    <!--<td>{{implied_volatility[i]}}</td>-->
-    <!--</tr>-->
-    <!--{%endfor%}-->
-    <!--</tbody>-->
-    <!--</table>-->
-    <!--</div>-->
-    <!--<hr>-->
-    <!--<div class="row d-flex justify-content-center">-->
-    <!--{{form.button_export_table}}-->
-    <!--</div>-->
-    <!--</div>-->#}
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Spot Rate Term Structure</legend>
+                </div>
+                <div id="plot_interest_rate_term_structure" class="d-flex justify-content-center">
+                    {{plot_interest_rate_term_structure[0]|safe}}
+                    {{plot_interest_rate_term_structure[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Model Error Spot Rate</legend>
+                </div>
+                <div id="plot_error_interest_rate" class="d-flex justify-content-center">
+                    {{plot_error_interest_rate[0]|safe}}
+                    {{plot_error_interest_rate[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        {%endif%}
+    </div>
+
+    {#<div id="popup_table" style="display:none">
+
+        <div class="row border-bottom mb-2 pb-1">
+            <legend>Table of Volatility & Prices</legend>
+        </div>
+        <div class="table_wrapper">
+            <table class="table table-striped table-hover" id="table_export">
+                <thead>
+                <th scope="col"> Strike</th>
+                <th scope="col"> Prices</th>
+                <th scope="col"> Implied Volatility</th>
+                </thead>
+                <tbody>
+                {%for i in range(number_of_strike)%}
+                <tr>
+                    <td>{{strike[i]}}</td>
+                    <td>{{option_prices[i]}}</td>
+                    <td>{{implied_volatility[i]}}</td>
+                </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div class="row d-flex justify-content-center">
+            {{form.button_export_table}}
+        </div>
+    </div>#}
 </div>
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
     $(function(){
-        var select_distribution = $('#type_choice');
+        var select_distribution = $('#model_choice');
         var vasicek = $('#vasicek');
         var cir = $('#cir');
         var nelsonSiegel = $('#nelson_siegel');
@@ -448,6 +489,7 @@
             }
         });
     });
+
 
 
 

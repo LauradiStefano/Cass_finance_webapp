@@ -335,3 +335,54 @@ class asian_option(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_asian_option', lazy='dynamic'))
+
+
+class term_structure(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    model_choice = db.Column(db.String())
+
+    # Vasicek distribution
+    kappa_vasicek = db.Column(db.Float())
+    theta_vasicek = db.Column(db.Float())
+    sigma_vasicek = db.Column(db.Float())
+    rho_vasicek = db.Column(db.Float())
+
+    # Cir distribution
+    kappa_cir = db.Column(db.Float())
+    theta_cir = db.Column(db.Float())
+    sigma_cir = db.Column(db.Float())
+    rho_cir = db.Column(db.Float())
+
+    # Nelson Siegel distribution
+    beta0_nelson = db.Column(db.Float())
+    beta1_nelson = db.Column(db.Float())
+    beta2_nelson = db.Column(db.Float())
+    tau_nelson = db.Column(db.Float())
+
+    # Svensson distribution
+    beta0_svensson = db.Column(db.Float())
+    beta1_svensson = db.Column(db.Float())
+    beta2_svensson = db.Column(db.Float())
+    beta3_svensson = db.Column(db.Float())
+    tau1_svensson = db.Column(db.Float())
+    tau2_svensson = db.Column(db.Float())
+
+    import_file = db.Column(db.Float())
+    discount_factor = db.Column(db.Float())
+    least_fmin = db.Column(db.Float())
+
+    parameters = db.Column(db.Float())
+    time = db.Column(db.Float())
+    market_discount_factor = db.Column(db.Float())
+    model_discount_factor = db.Column(db.Float())
+    market_spot_rate = db.Column(db.Float())
+    model_spot_rate = db.Column(db.Float())
+    discount_factor_model_error = db.Column(db.Float())
+    spot_rate_model_error = db.Column(db.Float())
+
+    button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_asian_option', lazy='dynamic'))

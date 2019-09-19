@@ -35,28 +35,28 @@ def index():
 def shimko_theoretical():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_shimko_theoretical(current_user, request)
-    return render_template("shimko_theoretical.html", **template_variables)
+    return render_template("shimko_theoretical.html", **template_variables, table_export=True)
 
 
 @app.route('/shimko_market', methods=['GET', 'POST'])
 def shimko_market():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_shimko_market(current_user, request)
-    return render_template("shimko_market.html", **template_variables)
+    return render_template("shimko_market.html", **template_variables, table_export=True)
 
 
 @app.route('/levy_process', methods=['GET', 'POST'])
 def levy_process():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_levy_process(current_user, request)
-    return render_template("levy_process.html", **template_variables)
+    return render_template("levy_process.html", **template_variables, table_export=True)
 
 
 @app.route('/heston_method', methods=['GET', 'POST'])
 def heston_method():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_heston_method(current_user, request)
-    return render_template("heston_method.html", **template_variables)
+    return render_template("heston_method.html", **template_variables, table_export=True)
 
 
 @app.route('/asian_option', methods=['GET', 'POST'])
