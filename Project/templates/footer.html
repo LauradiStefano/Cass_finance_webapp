@@ -12,6 +12,7 @@
 
 <script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.js"></script>
 
+{% if table_export is defined %}
 <script>
 
 var exportTable = document.getElementById('table_export');
@@ -36,6 +37,7 @@ buttonExportTable.addEventListener('click', function (e) {
 
 
 </script>
+{% endif %}
 
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML">
