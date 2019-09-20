@@ -26,6 +26,7 @@ def controller_term_structure(user, request):
     spot_rate_model_error = None
     parameters = None
     time = None
+    name_param = None
     number_of_time = 0
 
     plot_discount_factor_term_structure = None
@@ -58,7 +59,8 @@ def controller_term_structure(user, request):
                                form.least_fmin.data)
 
             number_of_time = len(time)
-            # number_of_parameters = len(parameters)
+
+            name_param = form.name_parameters[form.model_choice.data]
 
             plot_discount_factor_term_structure = \
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -80,6 +82,7 @@ def controller_term_structure(user, request):
             object.discount_factor_model_error = json.dumps(discount_factor_model_error)
             object.spot_rate_model_error = json.dumps(spot_rate_model_error)
             object.number_of_time = json.dumps(number_of_time)
+            object.name_param = json.dumps(name_param)
 
             object.user = user
             db.session.add(object)
@@ -102,6 +105,7 @@ def controller_term_structure(user, request):
                 discount_factor_model_error = json.loads(instance.discount_factor_model_error)
                 spot_rate_model_error = json.loads(instance.spot_rate_model_error)
                 number_of_time = json.loads(instance.number_of_time)
+                name_param = json.loads(instance.name_param)
 
                 plot_discount_factor_term_structure = \
                     create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -116,8 +120,9 @@ def controller_term_structure(user, request):
     model_discount_factor = [round(x, 4) for x in model_discount_factor] if model_discount_factor is not None else None
     market_spot_rate = [round(x, 4) for x in market_spot_rate] if market_spot_rate is not None else None
     model_spot_rate = [round(x, 4) for x in model_spot_rate] if model_spot_rate is not None else None
+    parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
-    return {'form': form, 'user': user, 'parameters': parameters, 'time': time,
+    return {'form': form, 'user': user, 'parameters': parameters, 'time': time, 'name_param': name_param,
             'market_discount_factor': market_discount_factor, 'model_discount_factor': model_discount_factor,
             'market_spot_rate': market_spot_rate, 'model_spot_rate': model_spot_rate, 'number_of_time': number_of_time,
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
@@ -160,6 +165,8 @@ def controller_old_term_structure(user):
                 create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
             plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error)
             plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error)
+
+            parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
             data.append({'form': form, 'id': id, 'parameters': parameters,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,

@@ -5,8 +5,14 @@ class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model', choices=[('0', 'Vasicek'), ('1', 'CIR'),
                                                      ('2', 'Nelson Siegel'), ('3', 'Svensson')], default='0')
 
+    name_parameters = {
+        '0': ['k', 't', 's', 'r'],
+        '1': ['k', 't', 's', 'r'],
+        '2': ['beta0', 'beta1', 'beta2', 'tau'],
+        '3': ['beta0', 'beta1', 'beta2', 'tau1', 'tau2']}
+
     # Vasicek distribution
-    kappa_vasicek = wtf.FloatField(label='Kappa', default=1,
+    kappa_vasicek = wtf.FloatField(label='name_parameters[''][0]', default=1,
                                    validators=[wtf.validators.InputRequired()])
     theta_vasicek = wtf.FloatField(label='Theta', default=1,
                                    validators=[wtf.validators.InputRequired()])
@@ -36,7 +42,7 @@ class ComputeForm(wtf.Form):
                                 validators=[wtf.validators.InputRequired()])
 
     # Svensson distribution
-    beta0_svensson = wtf.FloatField(label='Beta0', default=1,
+    beta0_svensson = wtf.FloatField(label='beta', default=1,
                                     validators=[wtf.validators.InputRequired()])
     beta1_svensson = wtf.FloatField(label='Beta1', default=1,
                                     validators=[wtf.validators.InputRequired()])

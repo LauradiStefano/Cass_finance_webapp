@@ -122,41 +122,6 @@ def fitting_method(model, x0, data, flag1, flag2):
            discount_factor_model_error, spot_rate_model_error, param, time
 
 
-# def create_vector_parameters_table(model, param):
-#     model = int(model)
-#
-#     if model == 0:
-#         kappa_vasicek_output = param[0]
-#         theta_vasicek_output = param[1]
-#         sigma_vasicek_output = param[2]
-#         rho_vasicek_output = param[3]
-#
-#     elif model == 1:
-#         kappa_cir_output = param[0]
-#         theta_cir_output = param[1]
-#         sigma_cir_output = param[2]
-#         rho_cir_output = param[3]
-#
-#     elif model == 2:
-#         beta0_nelson_output = param[0]
-#         beta1_nelson_output = param[1]
-#         beta2_nelson_output = param[2]
-#         tau_nelson_output = param[3]
-#
-#     else:
-#         beta0_svensson_output = param[0]
-#         beta1_svensson_output = param[1]
-#         beta2_svensson_output = param[2]
-#         beta3_svensson_output = param[3]
-#         tau1_svensson_output = param[4]
-#         tau2_svensson_output = param[5]
-#
-#     return kappa_vasicek_output, theta_vasicek_output, sigma_vasicek_output, rho_vasicek_output, \
-#            kappa_cir_output, theta_cir_output, sigma_cir_output, rho_cir_output, beta0_nelson_output, \
-#            beta1_nelson_output, beta2_nelson_output, tau_nelson_output, beta0_svensson_output, \
-#            beta1_svensson_output, beta2_svensson_output, beta3_svensson_output, tau1_svensson_output, tau2_svensson_output
-
-
 def create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor):
     data = ColumnDataSource(data=dict(
         time=time,

@@ -29,7 +29,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice !=None
+                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice
+                                 !=None
                                  %}
                                  style="display:none" {%endif%}>
                                 <div class="row">
@@ -346,20 +347,16 @@
                     </div>
                     <thead>
                     <th scope="col"> Model</th>
-                    <th scope="col"> param1</th>
-                    <th scope="col"> param2</th>
-                    <th scope="col"> param3</th>
-                    <th scope="col"> param4</th>
-                    <th scope="col"> param5</th>
-                    <th scope="col"> param6</th>
+                    {%for name in name_param%}
+                    <th scope="col"> {{name}}</th>
+                    {%endfor%}
                     </thead>
                     <tbody>
                     <tr>
-                        {#{%for i in range(number_of_time)%}#}
                         <td> {{dict(form.model_choice.choices).get(form.model_choice.data)}}</td>
-                        <td>  </td>
-                        {#{%endfor%}#}
-
+                        {%for param in parameters%}
+                        <td>{{param}}</td>
+                        {%endfor%}
                     </tr>
                     </tbody>
                 </table>
@@ -489,6 +486,8 @@
             }
         });
     });
+
+
 
 
 
