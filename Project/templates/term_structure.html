@@ -284,7 +284,7 @@
                 </div>
 
                 <div class="col-md-6 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
 
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
@@ -342,7 +342,7 @@
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
                     <div class="row border-bottom mb-2 pb-1">
-                        <legend>Table of Moments</legend>
+                        <legend>Table of Parameters</legend>
                     </div>
                     <thead>
                     <th scope="col"> Model</th>
@@ -355,14 +355,10 @@
                     </thead>
                     <tbody>
                     <tr>
+                        {#{%for i in range(number_of_time)%}#}
                         <td> {{dict(form.model_choice.choices).get(form.model_choice.data)}}</td>
-                        <td> -- </td>
-                        <td> -- </td>
-                        <td> -- </td>
-                        <td> -- </td>
-                        <td> -- </td>
-                        <td> -- </td>
-                        <td> -- </td>
+                        <td>  </td>
+                        {#{%endfor%}#}
 
                     </tr>
                     </tbody>
@@ -370,11 +366,11 @@
             </fieldset>
         </div>
 
-        {#<div class="col-12 d-flex mb-3 justify-content-center">
+        <div class="col-12 d-flex mb-3 justify-content-center">
             <div id="button_view_details" class="popup_table_open">
                 {{form.button_view_details}}
             </div>
-        </div>#}
+        </div>
 
         <div class="unresponsive col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
@@ -426,7 +422,7 @@
         {%endif%}
     </div>
 
-    {#<div id="popup_table" style="display:none">
+    <div id="popup_table" style="display:none">
 
         <div class="row border-bottom mb-2 pb-1">
             <legend>Table of Volatility & Prices</legend>
@@ -434,16 +430,20 @@
         <div class="table_wrapper">
             <table class="table table-striped table-hover" id="table_export">
                 <thead>
-                <th scope="col"> Strike</th>
-                <th scope="col"> Prices</th>
-                <th scope="col"> Implied Volatility</th>
+                <th scope="col"> Time to Maturity</th>
+                <th scope="col"> Model Discount Factor</th>
+                <th scope="col"> Market Discount Factor</th>
+                <th scope="col"> Model Spot Rate</th>
+                <th scope="col"> Market Spot Rate</th>
                 </thead>
                 <tbody>
-                {%for i in range(number_of_strike)%}
+                {%for i in range(number_of_time)%}
                 <tr>
-                    <td>{{strike[i]}}</td>
-                    <td>{{option_prices[i]}}</td>
-                    <td>{{implied_volatility[i]}}</td>
+                    <td>{{time[i]}}</td>
+                    <td>{{model_discount_factor[i]}}</td>
+                    <td>{{market_discount_factor[i]}}</td>
+                    <td>{{model_spot_rate[i]}}</td>
+                    <td>{{market_spot_rate[i]}}</td>
                 </tr>
                 {%endfor%}
                 </tbody>
@@ -453,7 +453,7 @@
         <div class="row d-flex justify-content-center">
             {{form.button_export_table}}
         </div>
-    </div>#}
+    </div>
 </div>
 {% include 'footer.html' %}
 
