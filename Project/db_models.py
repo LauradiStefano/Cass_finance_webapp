@@ -383,6 +383,7 @@ class term_structure(db.Model):
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_asian_option', lazy='dynamic'))
