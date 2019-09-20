@@ -104,9 +104,9 @@ class ComputeForm(wtf.Form):
     sigma_exp = wtf.FloatField(label='Sigma', default=0.361786273,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1E+20)])
 
-    price_exp = wtf.FloatField(label='Spot Price', default=3.8384,
+    price_exp = wtf.FloatField(label='Spot Price', default=3.89849373300000,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_exp = wtf.FloatField(label='Strike', default=49.323468,
+    strike_exp = wtf.FloatField(label='Strike', default=49.3280918417284,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free_exp = wtf.FloatField(label='Interest Rate', default=0.01,
                                    validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
@@ -118,7 +118,7 @@ class ComputeForm(wtf.Form):
     lower_range_exp = wtf.FloatField(label='Lower Bound Range', default=3, validators=[wtf.validators.InputRequired()])
 
     # Implementation Parameter
-    grid = wtf.FloatField(label='Grid Point (2^)', default=15,
+    grid = wtf.FloatField(label='Grid Point (2^)', default=12,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(2, 20)])
     upper_range = wtf.FloatField(label='Upper Bound Range', default=2, validators=[wtf.validators.InputRequired()])
     lower_range = wtf.FloatField(label='Lower Bound Range', default=-2, validators=[wtf.validators.InputRequired()])
