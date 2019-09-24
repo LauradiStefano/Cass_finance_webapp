@@ -5,7 +5,6 @@ from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
 from app import app
-from term_structure.controller import controller_term_structure
 from asian_option.controller import controller_asian_option, controller_old_asian_option, delete_asian_option_simulation
 from db_models import db, User
 from heston_method.controller import controller_heston_method, controller_old_heston_method, \
@@ -15,6 +14,8 @@ from shimko_market.controller import controller_shimko_market, controller_old_sh
     delete_shimko_market_simulation
 from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical, \
     delete_shimko_theoretical_simulation
+from term_structure.controller import controller_term_structure, controller_old_term_structure, \
+    delete_term_structure_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -108,6 +109,13 @@ def old_asian_option():
     return render_template("old_asian_option.html", **template_variables, back_url=url_for('asian_option'), old=True)
 
 
+@app.route('/term_structure/old')
+def old_term_structure():
+    template_variables = controller_old_term_structure(current_user)
+    return render_template("old_term_structure.html", **template_variables, back_url=url_for('term_structure'),
+                           old=True)
+
+
 @app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -136,6 +144,12 @@ def delete_heston_method(id):
 @login_required
 def delete_asian_option(id):
     return delete_asian_option_simulation(current_user, id)
+
+
+@app.route('/term_structure/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_term_structure(id):
+    return delete_term_structure_simulation(current_user, id)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
