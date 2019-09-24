@@ -10,7 +10,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-    file_name = wtf.FileField(label='Import File')
+    file_data = wtf.FileField(label='Import File')
     price = wtf.FloatField(label='Spot Price', validators=[InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Interest Rate', default=5.04, validators=[InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield', default=3.14, validators=[InputRequired()])

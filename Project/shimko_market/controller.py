@@ -20,7 +20,7 @@ from shimko_market.forms import ComputeForm
 def controller_shimko_market(user, request):
     form = ComputeForm(request.form)
 
-    file_name = None
+    file_data = None
 
     a0 = None
     a1 = None
@@ -62,13 +62,13 @@ def controller_shimko_market(user, request):
 
     if request.method == "POST" and request.files and form.validate():
 
-        file = request.files[form.file_name.name]
+        file = request.files[form.file_data.name]
 
         if file and allowed_file(file.filename):
-            file_name = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
+            file_data = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-        strike_data, call_market, put_market, time = upload_input(file_name)
+        strike_data, call_market, put_market, time = upload_input(file_data)
 
         a0, a1, a2, strike_plot, implied_volatility, strike_min, strike_max, div_yield, risk_free, volatility_time, r2 \
             = volatility_term_structure(form.price.data, form.call_put_flag.data, time, call_market, put_market,

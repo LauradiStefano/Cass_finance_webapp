@@ -18,7 +18,7 @@ from term_structure.forms import ComputeForm
 def controller_term_structure(user, request):
     form = ComputeForm(request.form)
 
-    file_name = None
+    file_data = None
     market_discount_factor = None
     market_spot_rate = None
     model_discount_factor = None
@@ -37,13 +37,13 @@ def controller_term_structure(user, request):
 
     if request.method == "POST":
         if form.validate():
-            file = request.files[form.file_name.name]
+            file = request.files[form.file_data.name]
 
             if file and allowed_file(file.filename):
-                file_name = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
+                file_data = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            file_name = upload_input(file_name)
+            file_data = upload_input(file_data)
 
             variables = create_objective_vector(form.model_choice.data, form.kappa_vasicek.data,
                                                 form.theta_vasicek.data, form.sigma_vasicek.data, form.rho_vasicek.data,
@@ -56,7 +56,7 @@ def controller_term_structure(user, request):
 
             market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
             discount_factor_model_error, spot_rate_model_error, parameters, time = \
-                fitting_method(form.model_choice.data, variables, file_name, form.discount_factor.data,
+                fitting_method(form.model_choice.data, variables, file_data, form.discount_factor.data,
                                form.least_fmin.data)
 
             number_of_time = len(time)

@@ -56,10 +56,10 @@ class ComputeForm(wtf.Form):
                                    validators=[wtf.validators.InputRequired()])
 
     # Contract parameters
-    file_name = wtf.FileField(label='Import File')
+    file_data = wtf.FileField(label='Import File')
 
-    discount_factor = wtf.RadioField(label='Discount Factor', choices=[('0', 'Discount Factor'), ('1', 'Spot Race')],
-                                     default='0')
+    discount_factor = wtf.RadioField(label='Discount Factor-Spot Rate', choices=[('0', 'Discount Factor'),
+                                                                                 ('1', 'Spot Rare')], default='0')
     least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Least Squares'), ('1', 'Fmin')],
                                 default='0')
 
