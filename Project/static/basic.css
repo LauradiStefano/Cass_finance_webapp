@@ -172,10 +172,9 @@ form{
 }
 
 #home .line_height {
-    display: inline-block;
     justify-content:center;
     text-align: center;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 #home a{
@@ -190,7 +189,7 @@ form{
     border-color: #C8202E;
     border-radius: 0.25rem;
     padding: 15px;
-    display:inline-block;
+    display: inline-block;
     height: 60px;
     width: 200px;
     font-size: 20px;
@@ -217,10 +216,6 @@ form{
 
 #home .button_container{
     margin: 50px;
-}
-
-.unresponsive{
-    min-width:720px !important;
 }
 
 .container {

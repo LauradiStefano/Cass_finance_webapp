@@ -651,7 +651,7 @@
 
     {% if plot_lower_bound != None %}
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Table of Asian Option Lower Bound</legend>
@@ -669,7 +669,11 @@
                     <tr>
                         <td>{{optimal_strike}}</td>
                         <td>{{optimal_lower_bound}}</td>
-                        <td>{{form.strike.data}}</td>
+                        {% if form.model_choice.data =='9' %}
+                        <td>{{form.strike_exp.data}}</td>
+                        {% else %}
+                        <td> {{form.strike.data}}</td>
+                        {% endif %}
                         <td>{{lower_bound_strike}}</td>
                     </tr>
                     </tbody>
@@ -681,7 +685,7 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Asian Option Lower Bound</legend>

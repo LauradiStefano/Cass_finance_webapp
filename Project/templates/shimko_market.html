@@ -24,10 +24,10 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.file_name.label}}
-                                {{form.file_name}}
-                                {% if form.file_name.errors %}
-                                {% for error in form.file_name.errors %}
+                                {{form.file_data.label}}
+                                {{form.file_data}}
+                                {% if form.file_data.errors %}
+                                {% for error in form.file_data.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -178,7 +178,6 @@
                             <span class="font-weight-light mb-1"> Interest Rate \((\%)\): {{risk_free}}</span>
                             <span class="font-weight-light mb-1"> Dividend Yield \((\%)\): {{div_yield}}</span>
                             {%endif%}
-                            {#<span class="font-weight-light mb-1"> FileName: {{file_name}}</span>#}
                         </div>
                     </div>
                 </div>
@@ -215,7 +214,7 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied Volatility Profile</legend>
@@ -227,7 +226,7 @@
             </fieldset>
         </div>
 
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Returns Distribution</legend>
@@ -242,7 +241,7 @@
 
     {%if plot_index_distribution != None%}
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ index distribution</legend>
@@ -258,7 +257,7 @@
 
     {%if plot_index_cdf != None%}
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Prices CDF</legend>
@@ -274,7 +273,7 @@
 
     {%if plot_return_cdf != None%}
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Returns CDF</legend>

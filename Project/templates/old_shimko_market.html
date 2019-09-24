@@ -78,8 +78,6 @@
                                                 <span class="mb-1"> Risk Free \((\%) \): {{result['risk_free']}}</span>
                                                 <span class="mb-1"> Dividend Yield \((\%) \): {{result['div_yield']}}</span>
                                                 {% endif %}
-
-                                                {#<span class="mb-1"> FileName: {{result['file_name']}}</span>#}
                                             </div>
                                         </div>
                                     </div>
@@ -187,7 +185,7 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend> Implied Volatility Profile</legend>
@@ -198,7 +196,7 @@
                 </div>
             </fieldset>
         </div>
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Implied CEQ Returns Distribution</legend>
@@ -210,7 +208,7 @@
             </fieldset>
         </div>
         {% if result[' plot_index_distribution'] != None %}
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend> Implied CEQ index distribution</legend>
@@ -224,7 +222,7 @@
         {% endif %}
 
         {% if result[' plot_index_cdf'] != None %}
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend> Implied CEQ Prices CDF</legend>
@@ -238,7 +236,7 @@
         {% endif %}
 
         {% if result[' plot_return_cdf'] != None %}
-        <div class="unresponsive col-12">
+        <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend> Implied CEQ Returns CDF</legend>
