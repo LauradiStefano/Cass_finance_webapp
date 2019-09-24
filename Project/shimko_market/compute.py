@@ -47,7 +47,7 @@ def upload_input(filename=None):
         put_market.append(y[2])
         call_market.append(y[1])
 
-    return filename, strike_data, call_market, put_market, time
+    return strike_data, call_market, put_market, time
 
 
 def volatility_term_structure(s0, call_put_flag, time, call_market, put_market, strike_data, risk_dividend,

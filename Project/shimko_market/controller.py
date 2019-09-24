@@ -68,7 +68,7 @@ def controller_shimko_market(user, request):
             file_name = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_name))
 
-        file_name, strike_data, call_market, put_market, time = upload_input(file_name)
+        strike_data, call_market, put_market, time = upload_input(file_name)
 
         a0, a1, a2, strike_plot, implied_volatility, strike_min, strike_max, div_yield, risk_free, volatility_time, r2 \
             = volatility_term_structure(form.price.data, form.call_put_flag.data, time, call_market, put_market,
@@ -131,7 +131,6 @@ def controller_shimko_market(user, request):
             # json.dumps return a array string
             # json.loads convert from string to array
 
-            object.file_name = file_name
             object.strike_data = json.dumps(list(map(int, strike_data)))
             # map(TIPO, VET)is a function to convert in "TIPO" all elements of VET
             # list converts the returned object to list
@@ -197,7 +196,6 @@ def controller_shimko_market(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
-                file_name = instance.file_name
                 strike_data = json.loads(instance.strike_data)
                 a0 = instance.a0
                 a1 = instance.a1
@@ -291,7 +289,7 @@ def controller_shimko_market(user, request):
     pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
     pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
-    return {'form': form, 'user': user, 'file_name': file_name, 'a0': a0, 'a1': a1, 'a2': a2,
+    return {'form': form, 'user': user, 'a0': a0, 'a1': a1, 'a2': a2,
             'area_prices': area_prices, 'expected_price': expected_price, 'sigma2_price': sigma2_price,
             'skewness_prices': skewness_prices, 'kurtosis_prices': kurtosis_prices,
             'skewness_prices_log_n': skewness_prices_log_n, 'kurtosis_prices_log_n': kurtosis_prices_log_n,
@@ -309,7 +307,7 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        field.data = getattr(instance, field.name)
+        field.data = getattr(instance, field.name, None)
     return form
 
 
@@ -323,7 +321,6 @@ def controller_old_shimko_market(user):
             # page old.html, store the date and the plot (previous simulation)
 
             id = instance.id
-            file_name = instance.file_name
             strike_data = json.loads(instance.strike_data)
             a0 = instance.a0
             a1 = instance.a1
@@ -420,7 +417,7 @@ def controller_old_shimko_market(user):
             pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
             pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
-            data.append({'form': form, 'id': id, 'file_name': file_name, 'a0': a0, 'a1': a1, 'a2': a2,
+            data.append({'form': form, 'id': id, 'a0': a0, 'a1': a1, 'a2': a2,
                          'area_prices': area_prices, 'expected_price': expected_price, 'sigma2_price': sigma2_price,
                          'skewness_prices': skewness_prices, 'kurtosis_prices': kurtosis_prices,
                          'skewness_prices_log_n': skewness_prices_log_n, 'kurtosis_prices_log_n': kurtosis_prices_log_n,
