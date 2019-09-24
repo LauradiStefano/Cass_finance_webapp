@@ -204,7 +204,8 @@ def create_plot_error_interest_rate(spot_rate_model_error):
                                 tooltips=[("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
-                    plot_height=450, toolbar_location="right", x_axis_label='x', y_axis_label='y')
+                    plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
+                    y_axis_label='Model Error Spot Rate')
 
     fig.quad(top='spot_rate_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
              legend="Spot Rate Model Error", color="#0095B6", line_color="#ffffff", alpha=0.9, name='spot rate')
@@ -230,7 +231,8 @@ def create_plot_error_discount_factor(discount_factor_model_error):
                                       tooltips=[("Discount Factor Error", "@discount_factor_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_discount_factor],
-                    plot_height=450, toolbar_location="right", x_axis_label='x', y_axis_label='y')
+                    plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
+                    y_axis_label='Model Error Discount Factor')
 
     fig.quad(top='discount_factor_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
              legend="Discount Factor Model Error", color="#0095B6", line_color="#ffffff", alpha=0.9,

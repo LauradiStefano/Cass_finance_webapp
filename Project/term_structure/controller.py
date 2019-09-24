@@ -1,5 +1,6 @@
 import json
 import os
+import numpy as np
 
 from flask import url_for, redirect
 from sqlalchemy import desc
@@ -73,14 +74,14 @@ def controller_term_structure(user, request):
             object = compute()
             form.populate_obj(object)
 
-            object.parameters = json.dumps(parameters)
+            object.parameters = json.dumps(parameters.tolist())
             object.time = json.dumps(time)
             object.market_discount_factor = json.dumps(market_discount_factor)
-            object.model_discount_factor = json.dumps(model_discount_factor)
-            object.market_spot_rate = json.dumps(market_spot_rate)
-            object.model_spot_rate = json.dumps(model_spot_rate)
-            object.discount_factor_model_error = json.dumps(discount_factor_model_error)
-            object.spot_rate_model_error = json.dumps(spot_rate_model_error)
+            object.model_discount_factor = json.dumps(model_discount_factor.tolist())
+            object.market_spot_rate = json.dumps(market_spot_rate.tolist())
+            object.model_spot_rate = json.dumps(model_spot_rate.tolist())
+            object.discount_factor_model_error = json.dumps(discount_factor_model_error.tolist())
+            object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
             object.number_of_time = json.dumps(number_of_time)
             object.name_param = json.dumps(name_param)
 
@@ -96,14 +97,14 @@ def controller_term_structure(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
-                parameters = json.loads(instance.parameters)
+                parameters = np.array(json.loads(instance.parameters))
                 time = json.loads(instance.time)
                 market_discount_factor = json.loads(instance.market_discount_factor)
-                model_discount_factor = json.loads(instance.model_discount_factor)
-                market_spot_rate = json.loads(instance.market_spot_rate)
-                model_spot_rate = json.loads(instance.model_spot_rate)
-                discount_factor_model_error = json.loads(instance.discount_factor_model_error)
-                spot_rate_model_error = json.loads(instance.spot_rate_model_error)
+                model_discount_factor = np.array(json.loads(instance.model_discount_factor))
+                market_spot_rate = np.array(json.loads(instance.market_spot_rate))
+                model_spot_rate = np.array(json.loads(instance.model_spot_rate))
+                discount_factor_model_error = np.array(json.loads(instance.discount_factor_model_error))
+                spot_rate_model_error = np.array(json.loads(instance.spot_rate_model_error))
                 number_of_time = json.loads(instance.number_of_time)
                 name_param = json.loads(instance.name_param)
 
@@ -135,7 +136,7 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        field.data = getattr(instance, field.name)
+        field.data = getattr(instance, field.name, None)
     return form
 
 
@@ -150,14 +151,15 @@ def controller_old_term_structure(user):
             # page old.html, store the date and the plot (previous simulation)
 
             id = instance.id
-            parameters = json.loads(instance.parameters)
+            parameters = np.array(json.loads(instance.parameters))
             time = json.loads(instance.time)
             market_discount_factor = json.loads(instance.market_discount_factor)
-            model_discount_factor = json.loads(instance.model_discount_factor)
-            market_spot_rate = json.loads(instance.market_spot_rate)
-            model_spot_rate = json.loads(instance.model_spot_rate)
-            discount_factor_model_error = json.loads(instance.discount_factor_model_error)
-            spot_rate_model_error = json.loads(instance.spot_rate_model_error)
+            model_discount_factor = np.array(json.loads(instance.model_discount_factor))
+            market_spot_rate = np.array(json.loads(instance.market_spot_rate))
+            model_spot_rate = np.array(json.loads(instance.model_spot_rate))
+            discount_factor_model_error = np.array(json.loads(instance.discount_factor_model_error))
+            spot_rate_model_error = np.array(json.loads(instance.spot_rate_model_error))
+            name_param = json.loads(instance.name_param)
 
             plot_discount_factor_term_structure = \
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -168,7 +170,7 @@ def controller_old_term_structure(user):
 
             parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
-            data.append({'form': form, 'id': id, 'parameters': parameters,
+            data.append({'form': form, 'id': id, 'parameters': parameters, 'name_param': name_param,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
                          'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
                          'plot_error_discount_factor': plot_error_discount_factor,

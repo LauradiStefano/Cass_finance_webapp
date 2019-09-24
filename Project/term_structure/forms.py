@@ -58,11 +58,11 @@ class ComputeForm(wtf.Form):
     # Contract parameters
     file_name = wtf.FileField(label='Import File')
 
-    discount_factor = wtf.RadioField(label='Discount Factor', choices=[('0', 'Discount'), ('1', 'Factor Spot Race')],
+    discount_factor = wtf.RadioField(label='Discount Factor', choices=[('0', 'Discount Factor'), ('1', 'Spot Race')],
                                      default='0')
     least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Least Squares'), ('1', 'Fmin')],
                                 default='0')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
-    button_view_details = wtf.SubmitField(label='View Details')
+    button_view_details = wtf.SubmitField(label='View Details') 

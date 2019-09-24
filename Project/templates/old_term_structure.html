@@ -16,106 +16,111 @@
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
-                                        {{result['form'].type_choice.label}}:
-                                        {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
-                                    </span>
-                                    <span class="mb-1">
-                                        \(\mu\):
-                                        {{result['form'].mu.data}}
+                                        {{result['form'].model_choice.label}}:
+                                        {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
                                     </span>
 
-                                    <div id="normal">
-                                        {% if result['form'].type_choice.data == '0' %}
-                                        <span class="mb-1">
-                                            \(\sigma\):
-                                            {{result['form'].sigma_normal.data}}
-                                        </span>
-                                        {%endif%}
-                                    </div>
-
-                                    <div id="vg">
-                                        {% if result['form'].type_choice.data == '1' %}
-                                        <span class="mb-1">
-                                            \(\sigma\):
-                                            {{result['form'].sigma_vg.data}}<br/>
-                                        </span>
+                                    <div id="vasicek">
+                                        {% if result['form'].model_choice.data == '0' %}
                                         <span class="mb-1">
                                             \(\kappa\):
-                                            {{result['form'].kappa_vg.data}}<br/>
+                                            {{result['form'].kappa_vasicek.data}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             \(\theta\):
-                                            {{result['form'].theta_vg.data}}
+                                            {{result['form'].theta_vasicek.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\sigma\):
+                                            {{result['form'].sigma_vasicek.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\rho\):
+                                            {{result['form'].rho_vasicek.data}}
                                         </span>
                                         {%endif%}
                                     </div>
 
-                                    <div id="nig">
-                                        {% if result['form'].type_choice.data == '2' %}
-                                        <span class="mb-1">
-                                            \(\sigma\):
-                                            {{result['form'].sigma_nig.data}}<br/>
-                                        </span>
+                                    <div id="cir">
+                                        {% if result['form'].model_choice.data == '1' %}
                                         <span class="mb-1">
                                             \(\kappa\):
-                                            {{result['form'].kappa_nig.data}}<br/>
+                                            {{result['form'].kappa_cir.data}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             \(\theta\):
-                                            {{result['form'].theta_nig.data}}
+                                            {{result['form'].theta_cir.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\sigma\):
+                                            {{result['form'].sigma_cir.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(\rho\):
+                                            {{result['form'].rho_cir.data}}
                                         </span>
                                         {%endif%}
                                     </div>
 
-                                    <div id="cgmy">
-                                        {% if result['form'].type_choice.data == '3' %}
+                                    <div id="nelson_siegel">
+                                        {% if result['form'].model_choice.data == '2' %}
                                         <span class="mb-1">
-                                            \(C\):
-                                            {{result['form'].c.data}}<br/>
+                                            \(\beta_{0}\):
+                                            {{result['form'].beta0_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(G\):
-                                            {{result['form'].g.data}}<br/>
+                                            \(\beta_{1}\):
+                                            {{result['form'].beta1_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(M\):
-                                            {{result['form'].m.data}}<br/>
+                                            \(\beta_{2}\):
+                                            {{result['form'].beta2_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(Y\):
-                                            {{result['form'].y.data}}
+                                            \(\tau\):
+                                            {{result['form'].tau_nelson.data}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="svensson">
+                                        {% if result['form'].model_choice.data == '3' %}
+                                        <span class="mb-1">
+                                            \(beta_{0}\):
+                                            {{result['form'].beta0_svensson.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(beta_{1}\):
+                                            {{result['form'].beta1_svensson.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(beta_{2}\):
+                                            {{result['form'].beta2_svensson.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(beta_{3}\):
+                                            {{result['form'].beta3_svensson.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(tau_{1}\):
+                                            {{result['form'].tau1_svensson.data}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            \(tau_{2}\):
+                                            {{result['form'].tau2_svensson.data}}
                                         </span>
                                         {%endif%}
                                     </div>
                                 </div>
                                 <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
-                                        {{result['form'].price.label}}:
-                                        {{result['form'].price.data}}
+                                        {{result['form'].discount_factor.label}}:<br/>
+                                        {{dict(result['form'].discount_factor.choices).get(result['form'].discount_factor.data)}}
+
                                     </span>
-                                    <span class="mb-1">
-                                        {{result['form'].risk_free.label}} \((\%) \):
-                                        {{result['form'].risk_free.data}}
-                                    </span>
-                                    <span class="mb-1">
-                                        {{result['form'].dividend_yield.label}} \((\%) \):
-                                        {{result['form'].dividend_yield.data}}
-                                    </span>
-                                    <span class="mb-1">
-                                        {{result['form'].strike_min.label}}:
-                                        {{result['form'].strike_min.data}}
-                                    </span>
-                                    <span class="mb-1">
-                                        {{result['form'].strike_max.label}}:
-                                        {{result['form'].strike_max.data}}
-                                    </span>
-                                    <span class="mb-1">
-                                        {{result['form'].time.label}}:
-                                        {{result['form'].time.data}}
-                                    </span>
-                                    <span class="mb-1">
-                                        {{result['form'].call_put.label}}:
-                                        {{dict(result['form'].call_put.choices).get(result['form'].call_put.data)}}
+                                   <span class="mb-1">
+                                        {{result['form'].least_fmin.label}}:<br/>
+                                        {{dict(result['form'].least_fmin.choices).get(result['form'].least_fmin.data)}}
                                     </span>
                                 </div>
                             </div>
@@ -129,28 +134,26 @@
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
 
                             <div class="row border-bottom mb-2 pb-1">
-                                <legend>Table of Moments</legend>
+                                <legend>Table of Parameters</legend>
                             </div>
-                            {% if result['plot_return_underlying_distribution'] != None %}
+                            {% if result['plot_discount_factor_term_structure'] != None %}
                             <div class="row">
                                 <div class="col-12">
                                     <table class="table table-striped">
                                         <thead>
-                                        <th scope="col"> Distribution</th>
-                                        <th scope="col"> Mean</th>
-                                        <th scope="col"> Variance</th>
-                                        <th scope="col"> Skewness</th>
-                                        <th scope="col"> Kurtosis</th>
+                                        <th scope="col"> Model</th>
+                                        {%for name in result['name_param']%}
+                                        <th scope="col"> {{name}}</th>
+                                        {%endfor%}
                                         </thead>
                                         <tbody>
                                         <tr>
                                             <td>
-                                                {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
+                                                {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
                                             </td>
-                                            <td> {{result['mean']}}</td>
-                                            <td> {{result['variance']}}</td>
-                                            <td> {{result['skewness']}}</td>
-                                            <td> {{result['kurtosis']}}</td>
+                                            {%for param in result['parameters']%}
+                                            <td> {{param}}</td>
+                                            {%endfor%}
                                         </tr>
                                         </tbody>
                                     </table>
@@ -167,11 +170,11 @@
         <div class="unresponsive col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied CEQ Returns Distribution</legend>
+                    <legend>Discount Factor Term Structure</legend>
                 </div>
-                <div id="plot_return_underlying_distribution" class="d-flex justify-content-center">
-                    {{ result['plot_return_underlying_distribution'][0]|safe}}
-                    {{ result['plot_return_underlying_distribution'][1]|safe}}
+                <div id="plot_discount_factor_term_structure" class="d-flex justify-content-center">
+                    {{ result['plot_discount_factor_term_structure'][0]|safe}}
+                    {{ result['plot_discount_factor_term_structure'][1]|safe}}
                 </div>
             </fieldset>
         </div>
@@ -179,14 +182,39 @@
         <div class="unresponsive col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied Volatility Profile</legend>
+                    <legend>Model Error Discount Factor</legend>
                 </div>
-                <div id="plot_implied_volatility" class="d-flex justify-content-center">
-                    {{ result['plot_implied_volatility'][0]|safe}}
-                    {{ result['plot_implied_volatility'][1]|safe}}
+                <div id="plot_error_discount_factor" class="d-flex justify-content-center">
+                    {{ result['plot_error_discount_factor'][0]|safe}}
+                    {{ result['plot_error_discount_factor'][1]|safe}}
                 </div>
             </fieldset>
         </div>
+
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Spot Rate Term Structure</legend>
+                </div>
+                <div id="plot_interest_rate_term_structure" class="d-flex justify-content-center">
+                    {{ result['plot_interest_rate_term_structure'][0]|safe}}
+                    {{ result['plot_interest_rate_term_structure'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="unresponsive col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Model Error Spot Rate</legend>
+                </div>
+                <div id="plot_error_interest_rate" class="d-flex justify-content-center">
+                    {{ result['plot_error_interest_rate'][0]|safe}}
+                    {{ result['plot_error_interest_rate'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
     </div>
     {% endif %}
 </div>
