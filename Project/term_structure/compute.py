@@ -139,7 +139,7 @@ def create_plot_discount_factor_term_structure(time, market_discount_factor, mod
     y_range = [min(model_discount_factor), max(model_discount_factor) + 0.2]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
-                    y_range=y_range, plot_height=500, toolbar_location="right", x_axis_label='Time',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time',
                     y_axis_label='Discount Factor')
 
     fig.line(x='time', y='model_discount_factor', source=data, legend='Model Discount Factor Term Structure',
@@ -174,7 +174,7 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
     y_range = [min(model_spot_rate), max(model_spot_rate) + 0.002]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_market], x_range=x_range,
-                    y_range=y_range, plot_height=500, toolbar_location="right", x_axis_label='Time',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time',
                     y_axis_label='Spot Rate')
 
     fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend='Model Spot Rate Term Structure',
@@ -205,7 +205,7 @@ def create_plot_error_interest_rate(spot_rate_model_error, time):
                                 tooltips=[("Maturity", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
-                    plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
                     y_axis_label='Model Error Spot Rate')
 
     fig.quad(top='spot_rate_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
@@ -234,7 +234,7 @@ def create_plot_error_discount_factor(discount_factor_model_error, time):
                                                 ("Discount Factor Error", "@discount_factor_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_discount_factor],
-                    plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
                     y_axis_label='Model Error Discount Factor')
 
     fig.quad(top='discount_factor_model_error', bottom=0, left='edges_left', right='edges_right', source=data,

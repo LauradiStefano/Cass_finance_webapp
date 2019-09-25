@@ -178,7 +178,7 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
     x_range = [strike_min, strike_max + 10]
     y_range = [0, max(implied_volatility) + 0.03]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_implied_volatility], x_range=x_range,
-                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Exercise price',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Exercise price',
                     y_axis_label='Volatility x root time')
 
     fig.line(x='strike', y='implied_volatility', source=data, color="#0095B6", line_width=4, alpha=0.8,
@@ -257,7 +257,7 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
                              tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_normal], x_range=x_range,
-                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Log Returns',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
                     y_axis_label='Probability Density')
 
     fig.line(x='ret_t', y='pdf_ret', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
@@ -316,7 +316,7 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
     x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, max(pdf) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_pdf, hover_log_norm], x_range=x_range,
-                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Index Value',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Index Value',
                     y_axis_label='Probability Density')
 
     fig.line(x='st', y='pdf', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
@@ -372,7 +372,7 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
     x_range = [strike_min * 0.8, strike_max * 1.2]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_cdf, hover_log_norm], x_range=x_range,
-                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Index Value',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Index Value',
                     y_axis_label='Cumulative Probability')
 
     fig.line(x='st', y='cdf_prices', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
@@ -426,7 +426,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     x_range = [min(ret_t), max(ret_t)]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_cdf, hover_norm], x_range=x_range,
-                    y_range=y_range, plot_height=450, toolbar_location="right", x_axis_label='Log Returns',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
                     y_axis_label='Cumulative Probability')
 
     fig.line(x='ret_t', y='cdf_returns', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
