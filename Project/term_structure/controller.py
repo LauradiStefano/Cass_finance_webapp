@@ -56,8 +56,8 @@ def controller_term_structure(user, request):
 
             market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
             discount_factor_model_error, spot_rate_model_error, parameters, time = \
-                fitting_method(form.model_choice.data, variables, file_data, form.discount_factor.data,
-                               form.least_fmin.data)
+                fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
+                               form.discount_factor.data)
 
             number_of_time = len(time)
 

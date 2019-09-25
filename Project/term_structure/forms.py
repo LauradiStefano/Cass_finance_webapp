@@ -58,8 +58,8 @@ class ComputeForm(wtf.Form):
     # Contract parameters
     file_data = wtf.FileField(label='Import File')
 
-    discount_factor = wtf.RadioField(label='Discount Factor-Spot Rate', choices=[('0', 'Discount Factor'),
-                                                                                 ('1', 'Spot Rare')], default='0')
+    discount_factor = wtf.RadioField(label='Discount Factor-Spot Rate', choices=[('0', 'Spot Rate'),
+                                                                                 ('1', 'Discount Factor')], default='0')
     least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Least Squares'), ('1', 'Fmin')],
                                 default='0')
 
