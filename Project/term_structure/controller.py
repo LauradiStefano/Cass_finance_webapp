@@ -1,7 +1,7 @@
 import json
 import os
-import numpy as np
 
+import numpy as np
 from flask import url_for, redirect
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
@@ -67,8 +67,8 @@ def controller_term_structure(user, request):
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
             plot_interest_rate_term_structure = \
                 create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
-            plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error)
-            plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error)
+            plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
+            plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
         if user.is_authenticated:  # store data in db
             object = compute()
@@ -112,8 +112,8 @@ def controller_term_structure(user, request):
                     create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
                 plot_interest_rate_term_structure = \
                     create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
-                plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error)
-                plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error)
+                plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
+                plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
     time = [round(x, 4) for x in time] if time is not None else None
     market_discount_factor = [round(x, 4) for x in
@@ -165,8 +165,8 @@ def controller_old_term_structure(user):
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
             plot_interest_rate_term_structure = \
                 create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
-            plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error)
-            plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error)
+            plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
+            plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
             parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 

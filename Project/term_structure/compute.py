@@ -192,16 +192,17 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
     return script, div
 
 
-def create_plot_error_interest_rate(spot_rate_model_error):
+def create_plot_error_interest_rate(spot_rate_model_error, time):
     edges = list(range(0, len(spot_rate_model_error) + 1))
     data = ColumnDataSource(data=dict(
         spot_rate_model_error=spot_rate_model_error,
+        time=time,
         edges_left=edges[:-1],
         edges_right=edges[1:]
     ))
 
     hover_spot_rate = HoverTool(attachment="left", names=['spot rate'],
-                                tooltips=[("Spot Rate Error", "@spot_rate_model_error")])
+                                tooltips=[("Maturity", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
                     plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
@@ -219,16 +220,18 @@ def create_plot_error_interest_rate(spot_rate_model_error):
     return script, div
 
 
-def create_plot_error_discount_factor(discount_factor_model_error):
+def create_plot_error_discount_factor(discount_factor_model_error, time):
     edges = list(range(0, len(discount_factor_model_error) + 1))
     data = ColumnDataSource(data=dict(
         discount_factor_model_error=discount_factor_model_error,
+        time=time,
         edges_left=edges[:-1],
         edges_right=edges[1:]
     ))
 
     hover_discount_factor = HoverTool(attachment="left", names=['discount factor'],
-                                      tooltips=[("Discount Factor Error", "@discount_factor_model_error")])
+                                      tooltips=[("Maturity", "@time"),
+                                                ("Discount Factor Error", "@discount_factor_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_discount_factor],
                     plot_height=450, toolbar_location="right", x_axis_label='Series of Data',
