@@ -23,19 +23,19 @@
                                     <div id="vasicek">
                                         {% if result['form'].model_choice.data == '0' %}
                                         <span class="mb-1">
-                                            \(\kappa\):
+                                            {{result['form'].kappa_vasicek.label}}:
                                             {{result['form'].kappa_vasicek.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\theta\):
+                                            {{result['form'].theta_vasicek.label}}:
                                             {{result['form'].theta_vasicek.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_vasicek.label}}:
                                             {{result['form'].sigma_vasicek.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\rho\):
+                                            {{result['form'].rho_vasicek.label}}:
                                             {{result['form'].rho_vasicek.data}}
                                         </span>
                                         {%endif%}
@@ -44,19 +44,19 @@
                                     <div id="cir">
                                         {% if result['form'].model_choice.data == '1' %}
                                         <span class="mb-1">
-                                            \(\kappa\):
+                                            {{result['form'].kappa_cir.label}}:
                                             {{result['form'].kappa_cir.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\theta\):
+                                            {{result['form'].theta_cir.label}}:
                                             {{result['form'].theta_cir.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_cir.label}}:
                                             {{result['form'].sigma_cir.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\rho\):
+                                            {{result['form'].rho_cir.label}}:
                                             {{result['form'].rho_cir.data}}
                                         </span>
                                         {%endif%}
@@ -65,19 +65,19 @@
                                     <div id="nelson_siegel">
                                         {% if result['form'].model_choice.data == '2' %}
                                         <span class="mb-1">
-                                            \(\beta_{0}\):
+                                            {{result['form'].beta0_nelson.label}}:
                                             {{result['form'].beta0_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\beta_{1}\):
+                                            {{result['form'].beta1_nelson.label}}:
                                             {{result['form'].beta1_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\beta_{2}\):
+                                            {{result['form'].beta2_nelson.label}}:
                                             {{result['form'].beta2_nelson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\tau\):
+                                            {{result['form'].tau.label}}:
                                             {{result['form'].tau_nelson.data}}
                                         </span>
                                         {%endif%}
@@ -86,27 +86,27 @@
                                     <div id="svensson">
                                         {% if result['form'].model_choice.data == '3' %}
                                         <span class="mb-1">
-                                            \(beta_{0}\):
+                                            {{result['form'].beta0_svensson.label}}:
                                             {{result['form'].beta0_svensson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(beta_{1}\):
+                                            {{result['form'].beta1_svensson.label}}:
                                             {{result['form'].beta1_svensson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(beta_{2}\):
+                                            {{result['form'].beta2_svensson.label}}:
                                             {{result['form'].beta2_svensson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(beta_{3}\):
+                                            {{result['form'].beta3_svensson.label}}:
                                             {{result['form'].beta3_svensson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(tau_{1}\):
+                                            {{result['form'].tau1_svensson.label}}:
                                             {{result['form'].tau1_svensson.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(tau_{2}\):
+                                            {{result['form'].tau2_svensson.label}}:
                                             {{result['form'].tau2_svensson.data}}
                                         </span>
                                         {%endif%}
@@ -118,7 +118,7 @@
                                         {{dict(result['form'].least_fmin.choices).get(result['form'].least_fmin.data)}}
 
                                     </span>
-                                   <span class="mb-1">
+                                    <span class="mb-1">
                                         {{result['form'].discount_factor.label}}:<br/>
                                         {{dict(result['form'].discount_factor.choices).get(result['form'].discount_factor.data)}}
                                     </span>

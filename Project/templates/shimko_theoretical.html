@@ -82,8 +82,8 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Min</label>
-                                {{ (form.strike_min) }}
+                                {{ form.strike_min.label}}
+                                {{ form.strike_min }}
                                 {% if form.strike_min.errors %}
                                 {% for error in form.strike_min.errors %}
                                 <div style="color: red;">{{ error }}</div>
@@ -94,8 +94,8 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Atm</label>
-                                {{ (form.strike_atm) }}
+                                {{form.strike_atm.label}}
+                                {{ form.strike_atm }}
                                 {% if form.strike_atm.errors %}
                                 {% for error in form.strike_atm.errors %}
                                 <div style="color: red;">{{ error }}</div>
@@ -106,8 +106,8 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Max</label>
-                                {{ (form.strike_max) }}
+                                {{form.strike_max.label}}
+                                {{ form.strike_max }}
                                 {% if form.strike_max.errors %}
                                 {% for error in form.strike_max.errors %}
                                 <div style="color: red;">{{ error }}</div>
@@ -126,7 +126,7 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Min</label>
+                                {{form.volatility_min.label}}
                                 {{ (form.volatility_min) }}
                                 {% if form.volatility_min.errors %}
                                 {% for error in form.volatility_min.errors %}
@@ -138,7 +138,7 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Atm</label>
+                                {{form.volatility_atm.label}}
                                 {{ (form.volatility_atm) }}
                                 {% if form.volatility_atm.errors %}
                                 {% for error in form.volatility_atm.errors %}
@@ -150,7 +150,7 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                <label>Max</label>
+                                {{form.volatility_max.label}}
                                 {{ (form.volatility_max) }}
                                 {% if form.volatility_max.errors %}
                                 {% for error in form.volatility_max.errors %}
@@ -372,7 +372,7 @@
             </tr>
             </tbody>
         </table>
-         <hr>
+        <hr>
     </div>
     <div class="row d-flex justify-content-center">
         {{form.button_export_table}}

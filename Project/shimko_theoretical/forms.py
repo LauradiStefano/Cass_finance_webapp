@@ -9,19 +9,19 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-    strike_min = wtf.FloatField(label='Min Strike', default=325,
+    strike_min = wtf.FloatField(label='Min', default=325,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
-    strike_atm = wtf.FloatField(label='Atm Strike', default=390,
+    strike_atm = wtf.FloatField(label='Atm', default=390,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_max = wtf.FloatField(label='Max Strike', default=425,
+    strike_max = wtf.FloatField(label='Max', default=425,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
-    volatility_min = wtf.FloatField(label='Min Volatility ', default=11.3,
+    volatility_min = wtf.FloatField(label='Min', default=11.3,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    volatility_atm = wtf.FloatField(label='Atm Volatility', default=6.5,
+    volatility_atm = wtf.FloatField(label='Atm', default=6.5,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    volatility_max = wtf.FloatField(label='Max Volatility', default=4.5,
+    volatility_max = wtf.FloatField(label='Max', default=4.5,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     price = wtf.FloatField(label='Spot Price', default=387,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])

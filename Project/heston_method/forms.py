@@ -9,16 +9,16 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-    mu = wtf.FloatField(label='Mu', default=-0.1473, validators=[wtf.validators.InputRequired()])
-    volatility_t0 = wtf.FloatField(label='Vol t0', default=0.0175,
+    mu = wtf.FloatField(label='$$ \mu $$', default=-0.1473, validators=[wtf.validators.InputRequired()])
+    volatility_t0 = wtf.FloatField(label=r'$$ \ v_0 $$', default=0.0175,
                                    validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    volatility_hat = wtf.FloatField(label='Vol hat', default=0.0398,
+    volatility_hat = wtf.FloatField(label='$$ \hat{v} $$', default=0.0398,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    lam = wtf.FloatField(label='Lamda', default=1.5768,
+    lam = wtf.FloatField(label='$$ \lambda $$', default=1.5768,
                          validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    chi = wtf.FloatField(label='Chi', default=0.5751,
+    chi = wtf.FloatField(label='$$ \chi $$', default=0.5751,
                          validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    rho = wtf.FloatField(label='Rho', default=-0.5711,
+    rho = wtf.FloatField(label=r'$$ \rho $$', default=-0.5711,
                          validators=[wtf.validators.InputRequired(), validators.NumberRange(-1, 1)])
 
     price = wtf.FloatField(label='Spot Price', default=100,

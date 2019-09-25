@@ -20,14 +20,14 @@
                                         {{dict(result['form'].type_choice.choices).get(result['form'].type_choice.data)}}
                                     </span>
                                     <span class="mb-1">
-                                        \(\mu\):
+                                        {{result['form'].mu.label}}:
                                         {{result['form'].mu.data}}
                                     </span>
 
                                     <div id="normal">
                                         {% if result['form'].type_choice.data == '0' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_normal.label}}:
                                             {{result['form'].sigma_normal.data}}
                                         </span>
                                         {%endif%}
@@ -36,15 +36,15 @@
                                     <div id="vg">
                                         {% if result['form'].type_choice.data == '1' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_vg.label}}:
                                             {{result['form'].sigma_vg.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\kappa\):
+                                            {{result['form'].kappa_vg.label}}:
                                             {{result['form'].kappa_vg.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\theta\):
+                                            {{result['form'].theta_vg.label}}:
                                             {{result['form'].theta_vg.data}}
                                         </span>
                                         {%endif%}
@@ -53,15 +53,15 @@
                                     <div id="nig">
                                         {% if result['form'].type_choice.data == '2' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_nig.label}}:
                                             {{result['form'].sigma_nig.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\kappa\):
+                                            {{result['form'].kappa_nig.label}}:
                                             {{result['form'].kappa_nig.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\theta\):
+                                            {{result['form'].theta_nig.label}}:
                                             {{result['form'].theta_nig.data}}
                                         </span>
                                         {%endif%}
@@ -70,19 +70,19 @@
                                     <div id="cgmy">
                                         {% if result['form'].type_choice.data == '3' %}
                                         <span class="mb-1">
-                                            \(C\):
+                                            {{result['form'].c.label}}:
                                             {{result['form'].c.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(G\):
+                                            {{result['form'].g.label}}:
                                             {{result['form'].g.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(M\):
+                                            {{result['form'].m.label}}:
                                             {{result['form'].m.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(Y\):
+                                            {{result['form'].y.label}}:
                                             {{result['form'].y.data}}
                                         </span>
                                         {%endif%}

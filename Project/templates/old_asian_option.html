@@ -23,7 +23,7 @@
                                     <div id="gaussian">
                                         {% if result['form'].model_choice.data == '0' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_gaussian.label}}::
                                             {{result['form'].sigma_gaussian.data}} 
                                         </span>
                                         {%endif%}
@@ -32,15 +32,15 @@
                                     <div id="vg">
                                         {% if result['form'].model_choice.data == '1' %}
                                         <span class="mb-1">
-                                            \(v \):
+                                            {{result['form'].kappa_vg.label}}:
                                             {{result['form'].kappa_vg.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\theta\):
+                                            {{result['form'].theta_vg.label}}:
                                             {{result['form'].theta_vg.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_vg.label}}:
                                             {{result['form'].sigma_vg.data}}
                                         </span>
                                         {%endif%}
@@ -48,23 +48,23 @@
                                     <div id="heston">
                                         {% if result['form'].model_choice.data == '2' %}
                                         <span class="mb-1">
-                                            \(\alpha\):
+                                            {{result['form'].alpha_heston.label}}:
                                             {{result['form'].alpha_heston.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\beta\):
+                                            {{result['form'].beta_heston.label}}:
                                             {{result['form'].beta_heston.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\gamma\):
+                                            {{result['form'].gamma_heston.label}}:
                                             {{result['form'].gamma_heston.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\rho\):
+                                            {{result['form'].rho_heston.label}}:
                                             {{result['form'].rho_heston.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(V_{0}\):
+                                            {{result['form'].volatility_t0.label}}:
                                             {{result['form'].volatility_t0.data}} 
                                         </span>>
                                         {%endif%}
@@ -72,15 +72,15 @@
                                     <div id="nig">
                                         {% if result['form'].model_choice.data == '3' %}
                                         <span class="mb-1">
-                                            \(a\):
+                                            {{result['form'].a_nig.label}}:
                                             {{result['form'].a_nig.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(b\):
+                                            {{result['form'].b_nig.label}}:
                                             {{result['form'].b_nig.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\delta\):
+                                            {{result['form'].delta_nig.label}}:
                                             {{result['form'].delta_nig.data}} 
                                         </span>
                                         {%endif%}
@@ -88,19 +88,19 @@
                                     <div id="cgmy">
                                         {% if result['form'].model_choice.data == '4' %}
                                         <span class="mb-1">
-                                            \(C\):
+                                            {{result['form'].c.label}}:
                                             {{result['form'].c.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(G\):
+                                            {{result['form'].g.label}}:
                                             {{result['form'].g.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(M\):
+                                            {{result['form'].m.label}}:
                                             {{result['form'].m.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(Y\):
+                                            {{result['form'].y.label}}:
                                             {{result['form'].y.data}} 
                                         </span>
                                         {%endif%}
@@ -108,15 +108,15 @@
                                     <div id="meixer">
                                         {% if result['form'].model_choice.data == '5' %}
                                         <span class="mb-1">
-                                            \(a\):
+                                            {{result['form'].a_meixner.label}}:
                                             {{result['form'].a_meixner.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(b\):
+                                            {{result['form'].b_meixner.label}}:
                                             {{result['form'].b_meixner.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\delta\):
+                                            {{result['form'].delta_meixner.label}}:
                                             {{result['form'].delta_meixner.data}} 
                                         </span>
                                         {%endif%}
@@ -124,19 +124,19 @@
                                     <div id="mjd">
                                         {% if result['form'].model_choice.data == '6' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_mjd.label}}:
                                             {{result['form'].sigma_mjd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(l\):
+                                            {{result['form'].lam_mjd.label}}:
                                             {{result['form'].lam_mjd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\mu_{x}\):
+                                            {{result['form'].mu_x_mjd.label}}:
                                             {{result['form'].mu_x_mjd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\sigma_{x}\):
+                                            {{result['form'].sigma_x_mjd.label}}:
                                             {{result['form'].sigma_x_mjd.data}} 
                                         </span>
                                         {%endif%}
@@ -144,23 +144,23 @@
                                     <div id="dejd">
                                         {% if result['form'].model_choice.data == '7' %}
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_dejd.label}}:
                                             {{result['form'].sigma_dejd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(l\):
+                                            {{result['form'].lam_dejd.label}}:
                                             {{result['form'].lam_dejd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\rho\):
+                                            {{result['form'].rho_dejd.label}}:
                                             {{result['form'].rho_dejd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\eta_{1}\):
+                                            {{result['form'].eta1_dejd.label}}:
                                             {{result['form'].eta1_dejd.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\eta_{2}\):
+                                            {{result['form'].eta2_dejd.label}}:
                                             {{result['form'].eta2_dejd.data}} 
                                         </span>
                                         {%endif%}
@@ -168,7 +168,7 @@
                                     <div id="cev">
                                         {% if result['form'].model_choice.data == '8' %}
                                         <span class="mb-1">
-                                            \(\beta\):
+                                            {{result['form'].beta_cev.label}}:
                                             {{result['form'].beta_cev.data}}
                                         </span>
                                         {%endif%}
@@ -176,15 +176,15 @@
                                     <div id="exp_gau">
                                         {% if result['form'].model_choice.data == '9' %}
                                         <span class="mb-1">
-                                            \(\epsilon\):
+                                            {{result['form'].epsilon_exp.label}}:
                                             {{result['form'].epsilon_exp.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(k_{1}\):
+                                            {{result['form'].k1_exp.label}}:
                                             {{result['form'].k1_exp.data}}<br/>
                                         </span>
                                         <span class="mb-1">
-                                            \(\sigma\):
+                                            {{result['form'].sigma_exp.label}}:
                                             {{result['form'].sigma_exp.data}}
                                         </span>
                                         {%endif%}

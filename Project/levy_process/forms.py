@@ -14,37 +14,37 @@ class ComputeForm(wtf.Form):
     type_choice = wtf.SelectField('Model',
                                   choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'NIG'), ('3', 'CGMY')], default='0')
 
-    mu = wtf.FloatField(label='Mu', default=0,
+    mu = wtf.FloatField(label='$$ \mu $$', default=0,
                         validators=[wtf.validators.InputRequired()])
 
     # Normal distribution
-    sigma_normal = wtf.FloatField(label='Sigma', default=0.12,
+    sigma_normal = wtf.FloatField(label='$$ \sigma $$', default=0.12,
                                   validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     # VG distribution
-    sigma_vg = wtf.FloatField(label='Sigma', default=0.12,
+    sigma_vg = wtf.FloatField(label='$$ \sigma $$', default=0.12,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    kappa_vg = wtf.FloatField(label='Kappa', default=0.2,
+    kappa_vg = wtf.FloatField(label='$$ \kappa $$', default=0.2,
                               validators=[wtf.validators.InputRequired()])
-    theta_vg = wtf.FloatField(label='Theta', default=-0.14,
+    theta_vg = wtf.FloatField(label=r'$$ \theta $$', default=-0.14,
                               validators=[wtf.validators.InputRequired(), check_vg_distribution])
 
     # NIG distribution
-    sigma_nig = wtf.FloatField(label='Sigma', default=0.1622,
+    sigma_nig = wtf.FloatField(label='$$ \sigma $$', default=0.1622,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    kappa_nig = wtf.FloatField(label='Kappa', default=0.2,
+    kappa_nig = wtf.FloatField(label='$$ \kappa $$', default=0.2,
                                validators=[wtf.validators.InputRequired()])
-    theta_nig = wtf.FloatField(label='Theta', default=-0.12882,
+    theta_nig = wtf.FloatField(label=r'$$ \theta $$', default=-0.12882,
                                validators=[wtf.validators.InputRequired()])
 
     # CGMY distribution
-    c = wtf.FloatField(label='C', default=1,
+    c = wtf.FloatField(label='$$ C $$', default=1,
                        validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    g = wtf.FloatField(label='G', default=5,
+    g = wtf.FloatField(label='$$ G $$', default=5,
                        validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    m = wtf.FloatField(label='M', default=5,
+    m = wtf.FloatField(label='$$ M $$', default=5,
                        validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    y = wtf.FloatField(label='Y', default=0.5,
+    y = wtf.FloatField(label='$$ Y $$', default=0.5,
                        validators=[wtf.validators.InputRequired(), validators.NumberRange(0.0001, 1.9999)])
 
     # Contract parameters
