@@ -2,7 +2,7 @@ import json
 import os
 
 import numpy as np
-from flask import redirect, url_for, flash
+from flask import redirect, url_for
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 

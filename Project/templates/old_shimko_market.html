@@ -24,6 +24,10 @@
                                         {{dict(result['form'].call_put_flag.choices).get(result['form'].call_put_flag.data)}}
                                     </span>
                                     <span class="mb-1">
+                                        {{result['form'].file_name.label}}:
+                                        {{result['form'].file_name.data}}
+                                    </span>
+                                    <span class="mb-1">
                                     {% if result['form'].risk_dividend.data == '0' %}
                                         {{result['form'].risk_free.label}} \((\%) \)
                                         {{result['form'].risk_free.data}}

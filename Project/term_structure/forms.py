@@ -1,4 +1,6 @@
 import wtforms as wtf
+from wtforms import validators, StringField
+from wtforms.validators import InputRequired
 
 
 class ComputeForm(wtf.Form):
@@ -12,49 +14,51 @@ class ComputeForm(wtf.Form):
         '3': [r'$$ \beta_{0} $$', r'$$ \beta_{1} $$', r'$$ \beta_{2} $$', r'$$ \beta_{3} $$', r'$$ \tau_{1} $$',
               r'$$ \tau_{2} $$']}
 
+    file_name = StringField(label='Name DataSet', validators=[InputRequired(), validators.Length(max=15)])
+
     # Vasicek distribution
     kappa_vasicek = wtf.FloatField(label=name_parameters['0'][0], default=1,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[InputRequired()])
     theta_vasicek = wtf.FloatField(label=name_parameters['0'][1], default=1,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[InputRequired()])
     sigma_vasicek = wtf.FloatField(label=name_parameters['0'][2], default=1,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[InputRequired()])
     rho_vasicek = wtf.FloatField(label=name_parameters['0'][3], default=1,
-                                 validators=[wtf.validators.InputRequired()])
+                                 validators=[InputRequired()])
 
     # Cir distribution
     kappa_cir = wtf.FloatField(label=name_parameters['1'][0], default=1,
-                               validators=[wtf.validators.InputRequired()])
+                               validators=[InputRequired()])
     theta_cir = wtf.FloatField(label=name_parameters['1'][1], default=1,
-                               validators=[wtf.validators.InputRequired()])
+                               validators=[InputRequired()])
     sigma_cir = wtf.FloatField(label=name_parameters['1'][2], default=1,
-                               validators=[wtf.validators.InputRequired()])
+                               validators=[InputRequired()])
     rho_cir = wtf.FloatField(label=name_parameters['1'][3], default=1,
-                             validators=[wtf.validators.InputRequired()])
+                             validators=[InputRequired()])
 
     # Nelson Siegel
     beta0_nelson = wtf.FloatField(label=name_parameters['2'][0], default=1,
-                                  validators=[wtf.validators.InputRequired()])
+                                  validators=[InputRequired()])
     beta1_nelson = wtf.FloatField(label=name_parameters['2'][1], default=1,
-                                  validators=[wtf.validators.InputRequired()])
+                                  validators=[InputRequired()])
     beta2_nelson = wtf.FloatField(label=name_parameters['2'][2], default=1,
-                                  validators=[wtf.validators.InputRequired()])
+                                  validators=[InputRequired()])
     tau_nelson = wtf.FloatField(label=name_parameters['2'][3], default=1,
-                                validators=[wtf.validators.InputRequired()])
+                                validators=[InputRequired()])
 
     # Svensson distribution
     beta0_svensson = wtf.FloatField(label=name_parameters['3'][0], default=1,
-                                    validators=[wtf.validators.InputRequired()])
+                                    validators=[InputRequired()])
     beta1_svensson = wtf.FloatField(label=name_parameters['3'][1], default=1,
-                                    validators=[wtf.validators.InputRequired()])
+                                    validators=[InputRequired()])
     beta2_svensson = wtf.FloatField(label=name_parameters['3'][2], default=1,
-                                    validators=[wtf.validators.InputRequired()])
+                                    validators=[InputRequired()])
     beta3_svensson = wtf.FloatField(label=name_parameters['3'][3], default=1,
-                                    validators=[wtf.validators.InputRequired()])
+                                    validators=[InputRequired()])
     tau1_svensson = wtf.FloatField(label=name_parameters['3'][4], default=1,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[InputRequired()])
     tau2_svensson = wtf.FloatField(label=name_parameters['3'][5], default=1,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[InputRequired()])
 
     # Contract parameters
     file_data = wtf.FileField(label='Import File')

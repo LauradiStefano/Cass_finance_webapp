@@ -148,6 +148,7 @@ class shimko_market_model(db.Model):
     pvalue_prices = db.Column(db.Float())
     pvalue_returns = db.Column(db.Float())
     risk_dividend = db.Column(db.String())
+    file_name = db.Column(db.String())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
@@ -339,6 +340,7 @@ class term_structure(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
     model_choice = db.Column(db.String())
+    file_name = db.Column(db.String())
 
     # Vasicek distribution
     kappa_vasicek = db.Column(db.Float())

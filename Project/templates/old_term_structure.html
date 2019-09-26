@@ -114,6 +114,10 @@
                                 </div>
                                 <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
+                                            {{result['form'].file_name.label}}:
+                                            {{result['form'].file_name.data}}<br/>
+                                        </span>
+                                    <span class="mb-1">
                                         {{result['form'].least_fmin.label}}:<br/>
                                         {{dict(result['form'].least_fmin.choices).get(result['form'].least_fmin.data)}}
 
@@ -220,7 +224,7 @@
 </div>
 
 <div class="col-12 d-flex mb-3 justify-content-center">
-    <form style="text-align:center;" method="POST" action="/levy_process/old/delete/{{ result.id }}">
+    <form style="text-align:center;" method="POST" action="/term_structure/old/delete/{{ result.id }}">
         <input type="submit" value="Delete Single Simulation"
                title="Delete this post from database">
     </form>
@@ -230,7 +234,7 @@
 
 <center>
     <div class="row">
-        <form method="POST" action="/levy_process/old/delete/-1">
+        <form method="POST" action="/term_structure/old/delete/-1">
             <input type="submit" value="Delete All Simulations">
         </form>
     </div>

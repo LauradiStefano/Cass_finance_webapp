@@ -34,6 +34,18 @@
                             </div>
                         </div>
 
+                         <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_name.label}}
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col mb-1">
                                 {{form.price.label}}
