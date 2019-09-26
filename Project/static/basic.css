@@ -15,10 +15,6 @@ body{
     position: relative;
 }
 
-dl, ol, ul{
-    margin-bottom: 0px !important;
-}
-
 h1 {
     font-family: 'Source Serif Pro', serif;
     font-size: 24px;
@@ -27,13 +23,7 @@ h1 {
 
 h2 {
     font-size: 14px !important;
-        font-weight: normal;
-}
-
-h3 {
-    font-size: 16px !important;
-        color: #FFFFFF;
-        font-weight: normal;
+        font-weight: normal !important;
 }
 
 h6{
@@ -43,18 +33,12 @@ h6{
         font-weight: bold;
 }
 
-p {
-    font-size: 16px;
-    color: #1E1E1E;
-}
-
 /*fieldset{
     background:linear-gradient(45deg, #D2D2D2, transparent);
 }*/
 
 table {
     table-layout: fixed;
-    width: 100%;
     text-align: center;
     vertical-align: middle !important;
 }
@@ -152,9 +136,6 @@ form{
     list-style-position: inside;
     list-style: none;
 }
-#previous{
-    width: 100% !important;
-}
 
 #home {
     text-align: center;
@@ -183,8 +164,6 @@ form{
     text-decoration: none !important;
 }
 
-
-
 #home .link_user{
     border: 1.5px solid;
     background: #C8202E;
@@ -195,7 +174,6 @@ form{
     height: 60px;
     width: 200px;
     font-size: 20px;
-    color: #ffffff;
     margin: 5px;
 }
 
@@ -232,7 +210,7 @@ form{
     margin: 0;
 }
 
-.col, .col-6, .col-md-4, .col-md-8, .col-12, .col-11, .col-sm {
+.col, .col-md-4, .col-md-8, .col-12, .col-11 {
     margin: 0 auto !important;
     padding: 7px;
     overflow: hidden;
@@ -252,7 +230,6 @@ form{
 
 .lead{
     color: #D1CFCB !important;
-    font-size: 16px;
 }
 
 .nav-link{
@@ -265,11 +242,6 @@ form{
 
 .nav-link:hover{
     color: #ffffff !important;
-}
-
-#call_put li {
-    display: block;
-    padding-right: 1rem;
 }
 
 .popup_content {
