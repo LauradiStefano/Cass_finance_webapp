@@ -33,6 +33,10 @@ h6{
         font-weight: bold;
 }
 
+dl, ol, ul{
+    margin-bottom: 0px !important;
+}
+
 /*fieldset{
     background:linear-gradient(45deg, #D2D2D2, transparent);
 }*/
@@ -284,6 +288,11 @@ form{
 
 .dropdown-menu {
     width:180px;
+}
+
+ ul #call_put_flag  {
+    display: block;
+    padding-right: 1rem;
 }
 
 .navbar {

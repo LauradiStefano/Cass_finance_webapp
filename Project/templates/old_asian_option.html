@@ -23,7 +23,7 @@
                                     <div id="gaussian">
                                         {% if result['form'].model_choice.data == '0' %}
                                         <span class="mb-1">
-                                            {{result['form'].sigma_gaussian.label}}::
+                                            {{result['form'].sigma_gaussian.label}}:
                                             {{result['form'].sigma_gaussian.data}} 
                                         </span>
                                         {%endif%}
@@ -196,22 +196,22 @@
                                         {% if result['form'].model_choice.data != '9' %}
                                         <span class="mb-1">
                                         {{result['form'].price.label}}:
-                                        {{result['form'].price.data}}
+                                        {{result['form'].price.data}}<br/>
                                         </span>
 
                                         <span class="mb-1">
                                         {{result['form'].risk_free.label}} \((\%) \):
-                                        {{result['form'].risk_free.data}}
+                                        {{result['form'].risk_free.data}}<br/>
                                         </span>
 
                                         <span class="mb-1">
                                         {{result['form'].time.label}}:
-                                        {{result['form'].time.data}}
+                                        {{result['form'].time.data}}<br/>
                                         </span>
 
                                         <span class="mb-1">
                                         {{result['form'].step.label}}:
-                                        {{result['form'].step.data}}
+                                        {{result['form'].step.data}}<br/>
                                         </span>
 
                                         <span class="mb-1">
