@@ -183,6 +183,8 @@ form{
     text-decoration: none !important;
 }
 
+
+
 #home .link_user{
     border: 1.5px solid;
     background: #C8202E;
@@ -216,6 +218,10 @@ form{
 
 #home .button_container{
     margin: 50px;
+}
+
+#home a.mx-2{
+    color:#ffffff;
 }
 
 .container {
@@ -296,6 +302,16 @@ form{
 .popup_content hr {
     flex: none;
     width: 100%;
+}
+
+.plot {
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 auto;
+}
+
+.dropdown-menu {
+    width:180px;
 }
 
 .navbar {
