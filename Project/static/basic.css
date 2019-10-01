@@ -168,7 +168,7 @@ form{
     text-decoration: none !important;
 }
 
-#home .link_user{
+#home a.mx-2.link_user{
     border: 1.5px solid;
     background: #C8202E;
     border-color: #C8202E;
@@ -199,11 +199,12 @@ form{
 }
 
 #home .button_container{
-    margin: 50px;
+    margin: 50px 0;
 }
 
 #home a.mx-2{
     color:#ffffff;
+    font-size: 13px;
 }
 
 .container {
@@ -286,11 +287,7 @@ form{
     margin: 0 auto;
 }
 
-.dropdown-menu {
-    width:180px;
-}
-
- ul #call_put_flag  {
+#call_put_flag  {
     display: block;
     padding-right: 1rem;
 }
@@ -305,7 +302,8 @@ form{
 }
 
 .mjx-chtml {
-    text-align: left !important;
+    text-align: center !important;
+    font-weight: bold !important;
 }
 
 
