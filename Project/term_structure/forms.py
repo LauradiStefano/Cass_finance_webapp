@@ -14,7 +14,7 @@ class ComputeForm(wtf.Form):
         '3': [r'$$ \beta_{0} $$', r'$$ \beta_{1} $$', r'$$ \beta_{2} $$', r'$$ \beta_{3} $$', r'$$ \tau_{1} $$',
               r'$$ \tau_{2} $$']}
 
-    file_name = StringField(label='Name DataSet', validators=[InputRequired(), validators.Length(max=15)])
+    file_name = StringField(label='Name DataSet', validators=[InputRequired(), validators.Length(max=25)])
 
     # Vasicek distribution
     kappa_vasicek = wtf.FloatField(label=name_parameters['0'][0], default=1,
