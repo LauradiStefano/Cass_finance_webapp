@@ -95,11 +95,11 @@
 
     <div class="row d-flex justify-content-center button_container">
         <div class="col-12 mt-5">
-            <span class="text-white">
+            <span>
                 {% if user is defined%}
                     {% if not user.is_authenticated %}
-                    <a class="mx-2 link_user animated fadeInDown" href="/reg">Register</a> <a
-                    class="mx-2 link_user animated fadeInDown" href="/login">Login</a>
+                    <a class="mx-2 link_user animated fadeInDown" href="/reg">Register</a>
+                    <a class="mx-2 link_user animated fadeInDown" href="/login">Login</a>
                     {% endif %}
                 {% endif %}
             </span>

@@ -30,16 +30,20 @@
                         </div>
 
                         <div class="row">
-                            <div class="col mb-1">
-                                {{form.mu.label}}
-                            </div>
-                            <div class="col-11 mb-1">
-                                {{form.mu}}
-                                {% if form.mu.errors %}
-                                {% for error in form.mu.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu}}
+                                        {% if form.mu.errors %}
+                                        {% for error in form.mu.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -166,7 +170,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1">
-                                       {{form.g.label}}
+                                        {{form.g.label}}
                                     </div>
                                     <div class="col-11 mb-1">
                                         {{form.g}}
@@ -442,6 +446,8 @@
             }
         });
     });
+
+
 
 
 
