@@ -47,8 +47,8 @@ def heston_phi(g1, g2, n, N, dt, r, a, b, eta, rho, S0, v0):
         if k != 0:
             v = -1j * heston_psi1(v, g1 + g2 * (1 - k / (N + 1)), dt, a, eta, rho)
 
-    output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(
-        heston_psi1(v, (g1 + g2) * N / (N + 1), dt, a, eta, rho) * v0) * np.exp(term)
+    term = term + heston_psi0(v, g1+g2, 0, r, a, b, eta, rho)
+    output = np.exp(1j*(g1+g2)*np.log(S0))*np.exp(heston_psi1(v, g1+g2, 0, a, eta, rho)*v0)*np.exp(term)
 
     return output
 
