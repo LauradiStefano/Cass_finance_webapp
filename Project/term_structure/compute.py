@@ -115,8 +115,8 @@ def fitting_method(model, x0, data, flag1, flag2):
     model_spot_rate = -np.log(model_discount_factor) / time
     market_spot_rate = -np.log(market_discount_factor) / time
 
-    discount_factor_model_error = (model_discount_factor - market_discount_factor) ** 2
-    spot_rate_model_error = (model_spot_rate - market_spot_rate) ** 2
+    discount_factor_model_error =  market_discount_factor - model_discount_factor
+    spot_rate_model_error = market_spot_rate - model_spot_rate
 
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
            discount_factor_model_error, spot_rate_model_error, param, time
