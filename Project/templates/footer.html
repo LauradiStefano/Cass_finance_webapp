@@ -18,21 +18,25 @@
 var exportTable = document.getElementById('table_export');
 
 var instance = new TableExport(exportTable, {
-    formats: ['xls'],
+    formats: ['xlsx'],
     exportButtons: false,
     filename: "computed_data",
     trimWhitespace: true,
     sheetname: "data"
 });
 
-var exportData = instance.getExportData()['table_export']['xls'];
+var exportData = instance.getExportData();
+
+var xlsxData = exportData.table_export.xlsx;
 
 var buttonExportTable = document.getElementById('button_export_table');
 
 buttonExportTable.addEventListener('click', function (e) {
     //                   // data          // mime              // name              // extension
-    instance.export2file(exportData.data, exportData.mimeType, exportData.filename, exportData.fileExtension);
+    instance.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges,
+    xlsxData.RTL, xlsxData.sheetname);
 });
+
 
 
 
