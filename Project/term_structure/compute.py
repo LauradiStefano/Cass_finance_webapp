@@ -14,6 +14,7 @@ from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 from scipy import optimize
 from scipy.optimize import least_squares
+from math import sqrt
 
 from term_structure.fit_df_CIR import fit_df_CIR
 from term_structure.fit_df_NelsonSiegel import fit_df_NelsonSiegel
@@ -118,8 +119,12 @@ def fitting_method(model, x0, data, flag1, flag2):
     discount_factor_model_error =  market_discount_factor - model_discount_factor
     spot_rate_model_error = market_spot_rate - model_spot_rate
 
+    rmse_discount_factor = sqrt(np.mean((market_discount_factor - model_discount_factor)**2))
+    rmse_spot_rate = sqrt(np.mean((market_spot_rate - model_spot_rate)**2))
+    
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
-           discount_factor_model_error, spot_rate_model_error, param, time
+           discount_factor_model_error, spot_rate_model_error, param, time, \
+           rmse_discount_factor, rmse_spot_rate 
 
 
 def create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor):
