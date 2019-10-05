@@ -116,7 +116,7 @@ def fitting_method(model, x0, data, flag1, flag2):
     model_spot_rate = -np.log(model_discount_factor) / time
     market_spot_rate = -np.log(market_discount_factor) / time
 
-    discount_factor_model_error =  market_discount_factor - model_discount_factor
+    discount_factor_model_error = market_discount_factor - model_discount_factor
     spot_rate_model_error = market_spot_rate - model_spot_rate
 
     rmse_discount_factor = sqrt(np.mean((market_discount_factor - model_discount_factor)**2))
@@ -135,17 +135,17 @@ def create_plot_discount_factor_term_structure(time, market_discount_factor, mod
     ))
 
     hover_market = HoverTool(attachment="left", names=['market discount factor'],
-                             tooltips=[("Maturity", "@time"), ("Market Discount Factor", "@market_discount_factor")])
+                             tooltips=[("TTM", "@time"), ("Market Discount Factor", "@market_discount_factor")])
 
     hover_model = HoverTool(attachment="right", names=['model discount factor'],
-                            tooltips=[("Maturity", "@time"), ("Model Discount Factor", "@model_discount_factor")])
+                            tooltips=[("TTM", "@time"), ("Model Discount Factor", "@model_discount_factor")])
 
     x_range = [min(time), max(time) + 1]
     y_range = [min(model_discount_factor), max(model_discount_factor) + 0.2]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
-                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time',
-                    y_axis_label='Discount Factor')
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
+                    x_axis_label='Time to Maturity', y_axis_label='Discount Factor')
 
     fig.line(x='time', y='model_discount_factor', source=data, legend='Model Discount Factor Term Structure',
              color="#0095B6", line_width=4, alpha=0.9, name='model discount factor')
@@ -170,16 +170,17 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
     ))
 
     hover_market = HoverTool(attachment="left", names=['market spot rate'],
-                             tooltips=[("Maturity", "@time"), ("Market Spot Rate", "@market_spot_rate")])
+                             tooltips=[("TTM", "@time"), ("Market Spot Rate", "@market_spot_rate")])
 
     hover_model = HoverTool(attachment="right", names=['model spot rate'],
-                            tooltips=[("Maturity", "@time"), ("Model Spot Rate", "@model_spot_rate")])
+                            tooltips=[("TTM", "@time"), ("Model Spot Rate", "@model_spot_rate")])
 
     x_range = [min(time), max(time) + 1]
     y_range = [min(model_spot_rate), max(model_spot_rate) + 0.002]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_market], x_range=x_range,
-                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
+                    x_axis_label='Time to Maturity',
                     y_axis_label='Spot Rate')
 
     fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend='Model Spot Rate Term Structure',
@@ -207,17 +208,16 @@ def create_plot_error_interest_rate(spot_rate_model_error, time):
     ))
 
     hover_spot_rate = HoverTool(attachment="left", names=['spot rate'],
-                                tooltips=[("Maturity", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
+                                tooltips=[("TTM", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
                     y_axis_label='Model Error Spot Rate')
 
     fig.quad(top='spot_rate_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
-             legend="Spot Rate Model Error", color="#0095B6", line_color="#ffffff", alpha=0.9, name='spot rate')
+             color="#0095B6", line_color="#ffffff", alpha=0.9, name='spot rate')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "top_left"
 
     from bokeh.embed import components
     script, div = components(fig)
@@ -235,7 +235,7 @@ def create_plot_error_discount_factor(discount_factor_model_error, time):
     ))
 
     hover_discount_factor = HoverTool(attachment="left", names=['discount factor'],
-                                      tooltips=[("Maturity", "@time"),
+                                      tooltips=[("TTM", "@time"),
                                                 ("Discount Factor Error", "@discount_factor_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_discount_factor],
@@ -243,11 +243,9 @@ def create_plot_error_discount_factor(discount_factor_model_error, time):
                     y_axis_label='Model Error Discount Factor')
 
     fig.quad(top='discount_factor_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
-             legend="Discount Factor Model Error", color="#0095B6", line_color="#ffffff", alpha=0.9,
-             name='discount factor')
+             color="#0095B6", line_color="#ffffff", alpha=0.9, name='discount factor')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "top_left"
 
     from bokeh.embed import components
     script, div = components(fig)

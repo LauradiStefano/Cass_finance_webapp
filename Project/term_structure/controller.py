@@ -28,6 +28,9 @@ def controller_term_structure(user, request):
     parameters = None
     time = None
     name_param = None
+    rmse_discount_factor = None
+    rmse_spot_rate = None
+
     number_of_time = 0
 
     plot_discount_factor_term_structure = None
@@ -55,9 +58,9 @@ def controller_term_structure(user, request):
                                                 form.tau2_svensson.data)
 
             market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
-            discount_factor_model_error, spot_rate_model_error, parameters, time = \
-                fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
-                               form.discount_factor.data)
+            discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \
+            rmse_spot_rate = fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
+                                            form.discount_factor.data)
 
             number_of_time = len(time)
 
@@ -84,6 +87,8 @@ def controller_term_structure(user, request):
             object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
             object.number_of_time = json.dumps(number_of_time)
             object.name_param = json.dumps(name_param)
+            object.rmse_discount_factor = rmse_discount_factor
+            object.rmse_spot_rate = rmse_spot_rate
 
             object.user = user
             db.session.add(object)
@@ -107,6 +112,8 @@ def controller_term_structure(user, request):
                 spot_rate_model_error = np.array(json.loads(instance.spot_rate_model_error))
                 number_of_time = json.loads(instance.number_of_time)
                 name_param = json.loads(instance.name_param)
+                rmse_discount_factor = instance.rmse_discount_factor
+                rmse_spot_rate = instance.rmse_spot_rate
 
                 plot_discount_factor_term_structure = \
                     create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -123,9 +130,13 @@ def controller_term_structure(user, request):
     model_spot_rate = [round(x, 4) for x in model_spot_rate] if model_spot_rate is not None else None
     parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
+    rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
+    rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
+
     return {'form': form, 'user': user, 'parameters': parameters, 'time': time, 'name_param': name_param,
             'market_discount_factor': market_discount_factor, 'model_discount_factor': model_discount_factor,
             'market_spot_rate': market_spot_rate, 'model_spot_rate': model_spot_rate, 'number_of_time': number_of_time,
+            'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
             'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
             'plot_error_discount_factor': plot_error_discount_factor,
@@ -160,6 +171,8 @@ def controller_old_term_structure(user):
             discount_factor_model_error = np.array(json.loads(instance.discount_factor_model_error))
             spot_rate_model_error = np.array(json.loads(instance.spot_rate_model_error))
             name_param = json.loads(instance.name_param)
+            rmse_discount_factor = instance.rmse_discount_factor
+            rmse_spot_rate = instance.rmse_spot_rate
 
             plot_discount_factor_term_structure = \
                 create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -169,8 +182,11 @@ def controller_old_term_structure(user):
             plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
             parameters = [round(x, 4) for x in parameters] if parameters is not None else None
+            rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
+            rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
 
             data.append({'form': form, 'id': id, 'parameters': parameters, 'name_param': name_param,
+                         'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
                          'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
                          'plot_error_discount_factor': plot_error_discount_factor,

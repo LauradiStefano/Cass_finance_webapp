@@ -381,6 +381,8 @@ class term_structure(db.Model):
     spot_rate_model_error = db.Column(db.String())
     name_param = db.Column(db.String())
     number_of_time = db.Column(db.String())
+    rmse_discount_factor = db.Column(db.Float())
+    rmse_spot_rate = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
