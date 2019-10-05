@@ -114,13 +114,12 @@
                                 </div>
                                 <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
-                                            {{result['form'].file_name.label}}:
-                                            {{result['form'].file_name.data}}<br/>
-                                        </span>
+                                            {{result['form'].file_name.label}}:<br/>
+                                            {{result['form'].file_name.data}}
+                                    </span>
                                     <span class="mb-1">
                                         {{result['form'].least_fmin.label}}:<br/>
                                         {{dict(result['form'].least_fmin.choices).get(result['form'].least_fmin.data)}}
-
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].discount_factor.label}}:<br/>
@@ -138,7 +137,7 @@
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
 
                             <div class="row border-bottom mb-2 pb-1">
-                                <legend>Table of Parameters</legend>
+                                <legend>Table of Fitted Parameters</legend>
                             </div>
                             {% if result['plot_discount_factor_term_structure'] != None %}
                             <div class="row">
@@ -149,6 +148,8 @@
                                         {%for name in result['name_param']%}
                                         <th scope="col"> {{name}}</th>
                                         {%endfor%}
+                                        <th>Rmse DF</th>
+                                        <th>Rmse SR</th>
                                         </thead>
                                         <tbody>
                                         <tr>
@@ -158,6 +159,8 @@
                                             {%for param in result['parameters']%}
                                             <td> {{param}}</td>
                                             {%endfor%}
+                                            <td>{{result.rmse_discount_factor}}</td>
+                                            <td>{{result.rmse_spot_rate}}</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -186,7 +189,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Model Error Discount Factor</legend>
+                    <legend>Fitting Error: Market Discount Factor - Model Discount Factor<</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{ result['plot_error_discount_factor'][0]|safe}}
@@ -210,7 +213,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Model Error Spot Rate</legend>
+                    <legend>Fitting Error: Market Spot Rate - Model Spot Rate<</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{ result['plot_error_interest_rate'][0]|safe}}

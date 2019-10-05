@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col p-3 m-4">
-            <h1 class="title text-center text-light">Term Structure Modelling</h1>
+            <h1 class="title text-center text-light">Term Structure Fitting</h1>
             <h2 class="lead text-center text-light animated fadeInDown"> Fitting Market Term Structure </h2>
         </div>
     </div>
@@ -33,6 +33,7 @@
                                  !=None
                                  %}
                                  style="display:none" {%endif%}>
+                                $$ dr(t) = k(\theta-r(t))dt+\sigma dW (t) $$
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.kappa_vasicek.label}}
@@ -89,6 +90,7 @@
 
                             <div class="col" id="cir" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
+                                $$ dr(t) = k(\theta-r(t))dt+\sigma\sqrt{r(t)}dW(t) $$
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.kappa_cir.label}}
@@ -145,6 +147,9 @@
 
                             <div class="col" id="nelson_siegel" {% if form.model_choice.data !='2' %}
                                  style="display:none" {%endif%}>
+                                $$ Spot Rate(t)=
+                                \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}} \right)+
+                                \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}}-e^{-\frac{t}{\tau}}\right) $$
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.beta0_nelson.label}}
@@ -201,6 +206,13 @@
 
                             <div class="col" id="svensson" {% if form.model_choice.data !='3' %} style="display:none"
                                  {%endif%}>
+                                $$ Spot Rate(t)=
+                                \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}} \right)+
+                                \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}}-e^
+                                {-\frac{t}{\tau_{1}}}\right)+ \\
+                                \beta_{3}\left({\frac{1-e^{-\frac{t}{\tau_{2}}}}{\frac{t}{\tau_{2}}}}-e^
+                                {-\frac{t}{\tau_{2}}}\right)$$
+
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.beta0_svensson.label}}
@@ -303,7 +315,7 @@
                             </div>
                         </div>
 
-                         <div class="row">
+                        <div class="row">
                             <div class="col mb-1">
                                 {{form.file_name.label}}
                                 {{form.file_name}}
@@ -337,7 +349,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                         {{ form.csrf_token }}
+                        {{ form.csrf_token }}
                     </fieldset>
                 </div>
             </div>
@@ -355,13 +367,15 @@
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
                     <div class="row border-bottom mb-2 pb-1">
-                        <legend>Table of Parameters</legend>
+                        <legend>Table of Fitted Parameters</legend>
                     </div>
                     <thead>
                     <th scope="col"> Model</th>
                     {%for name in name_param%}
                     <th scope="col"> {{name}}</th>
                     {%endfor%}
+                    <th>Rmse DF</th>
+                    <th>Rmse SR</th>
                     </thead>
                     <tbody>
                     <tr>
@@ -369,6 +383,8 @@
                         {%for param in parameters%}
                         <td>{{param}}</td>
                         {%endfor%}
+                        <td>{{rmse_discount_factor}}</td>
+                        <td>{{rmse_spot_rate}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -396,7 +412,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Model Error Discount Factor</legend>
+                    <legend>Fitting Error: Market Discount Factor - Model Discount Factor</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_error_discount_factor[0]|safe}}
@@ -420,7 +436,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Model Error Spot Rate</legend>
+                    <legend>Fitting Error: Market Spot Rate - Model Spot Rate</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_error_interest_rate[0]|safe}}
@@ -434,7 +450,7 @@
     <div id="popup_table" style="display:none">
 
         <div class="row border-bottom mb-2 pb-1">
-            <legend>Table of Volatility & Prices</legend>
+            <legend>Results</legend>
         </div>
         <div class="table_wrapper">
             <table class="table table-striped table-hover" id="table_export">
@@ -498,6 +514,7 @@
             }
         });
     });
+
 
 
 
