@@ -38,7 +38,7 @@ def controller_asian_option(user, request):
                                form.lower_range_exp.data, form.grid.data, form.upper_range.data,
                                form.lower_range.data, form.dump.data, form.tolerance.data)
 
-            plot_lower_bound = create_plot_lower_bound(lam, lower_bound, form.strike.data, optimal_strike)
+            plot_lower_bound = create_plot_lower_bound(lam, lower_bound)
 
         if user.is_authenticated:  # store data in db
             object = compute()
@@ -49,7 +49,6 @@ def controller_asian_option(user, request):
 
             object.lam = json.dumps(lam.tolist())
             object.lower_bound = json.dumps(lower_bound.tolist())
-            object.strike = form.strike.data
             object.optimal_strike = optimal_strike
             object.optimal_lower_bound = optimal_lower_bound
             object.lower_bound_strike = lower_bound_strike
@@ -65,13 +64,12 @@ def controller_asian_option(user, request):
 
                 lam = np.array(json.loads(instance.lam))
                 lower_bound = np.array(json.loads(instance.lower_bound))
-                strike = instance.strike
                 optimal_strike = instance.optimal_strike
                 optimal_lower_bound = instance.optimal_lower_bound
                 lower_bound_strike = instance.lower_bound_strike
 
                 plot_lower_bound = \
-                    create_plot_lower_bound(lam, lower_bound, strike, optimal_strike)
+                    create_plot_lower_bound(lam, lower_bound)
 
     optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
     optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
@@ -102,21 +100,20 @@ def controller_old_asian_option(user):
             id = instance.id
             lam = np.array(json.loads(instance.lam))
             lower_bound = np.array(json.loads(instance.lower_bound))
-            strike = instance.strike
             optimal_strike = instance.optimal_strike
             optimal_lower_bound = instance.optimal_lower_bound
             lower_bound_strike = instance.lower_bound_strike
 
             plot_lower_bound = \
-                create_plot_lower_bound(lam, lower_bound, strike, optimal_strike)
+                create_plot_lower_bound(lam, lower_bound)
 
             optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
             optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
             lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
 
             data.append({'form': form, 'id': id, 'optimal_strike': optimal_strike,
-                         'optimal_lower_bound': optimal_lower_bound, 'strike': strike,
-                         'lower_bound_strike': lower_bound_strike, 'plot_lower_bound': plot_lower_bound})
+                         'optimal_lower_bound': optimal_lower_bound, 'lower_bound_strike': lower_bound_strike,
+                         'plot_lower_bound': plot_lower_bound})
 
     return {'data': data}
 

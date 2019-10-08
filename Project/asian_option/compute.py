@@ -98,7 +98,7 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
 
-def create_plot_lower_bound(lam, lower_bound, strike, strike_exp_lcr):
+def create_plot_lower_bound(lam, lower_bound):
     data = ColumnDataSource(data=dict(
         lam=lam,
         lower_bound=lower_bound
@@ -116,9 +116,6 @@ def create_plot_lower_bound(lam, lower_bound, strike, strike_exp_lcr):
 
     fig.line(x='lam', y='lower_bound', source=data, legend="Lower Bound Function", color="#0095B6", alpha=0.9,
              line_width=4, name='lower bound')
-
-    # fig.square(x=strike_exp_lcr, y=0, source=data, legend='Optimal Strike', color="#D21F1B", size=9)
-    # fig.square(x=strike, y=0, source=data, legend='Strike', color="#050402", size=7)
 
     fig.legend.location = "top_right"
     fig.toolbar.active_drag = None
