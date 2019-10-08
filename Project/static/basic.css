@@ -232,7 +232,7 @@ form{
     margin: 0;
 }
 
-.col, .col-md-4, .col-md-8, .col-12, .col-11 {
+.col, .col-md-4, .col-md-8, .col-12, .col-11, .col-lg-3, .col-md-6{
     margin: 0 auto !important;
     padding: 7px;
     overflow: hidden;
@@ -321,6 +321,10 @@ form{
 .mjx-chtml {
     text-align: center !important;
     font-weight: bold !important;
+}
+
+.MathJax_CHTML span {
+    font-size: 18px;
 }
 
 
