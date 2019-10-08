@@ -746,9 +746,9 @@
                         <td>{{optimal_strike}}</td>
                         <td>{{optimal_lower_bound}}</td>
                         {% if form.model_choice.data =='9' %}
-                        <td>{{form.strike_exp.data}}</td>
+                        <td>{{form.strike_exp.data|round(4)}}</td>
                         {% else %}
-                        <td> {{form.strike.data}}</td>
+                        <td> {{form.strike.data|round(4)}}</td>
                         {% endif %}
                         <td>{{lower_bound_strike}}</td>
                     </tr>

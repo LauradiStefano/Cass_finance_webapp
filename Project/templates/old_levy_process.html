@@ -21,14 +21,14 @@
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].mu.label}}:
-                                        {{result['form'].mu.data}}
+                                        {{result['form'].mu.data|round(4)}}
                                     </span>
 
                                     <div id="normal">
                                         {% if result['form'].type_choice.data == '0' %}
                                         <span class="mb-1">
                                             {{result['form'].sigma_normal.label}}:
-                                            {{result['form'].sigma_normal.data}}
+                                            {{result['form'].sigma_normal.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
@@ -37,15 +37,15 @@
                                         {% if result['form'].type_choice.data == '1' %}
                                         <span class="mb-1">
                                             {{result['form'].sigma_vg.label}}:
-                                            {{result['form'].sigma_vg.data}}<br/>
+                                            {{result['form'].sigma_vg.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].kappa_vg.label}}:
-                                            {{result['form'].kappa_vg.data}}<br/>
+                                            {{result['form'].kappa_vg.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].theta_vg.label}}:
-                                            {{result['form'].theta_vg.data}}
+                                            {{result['form'].theta_vg.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
@@ -54,15 +54,15 @@
                                         {% if result['form'].type_choice.data == '2' %}
                                         <span class="mb-1">
                                             {{result['form'].sigma_nig.label}}:
-                                            {{result['form'].sigma_nig.data}}<br/>
+                                            {{result['form'].sigma_nig.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].kappa_nig.label}}:
-                                            {{result['form'].kappa_nig.data}}<br/>
+                                            {{result['form'].kappa_nig.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].theta_nig.label}}:
-                                            {{result['form'].theta_nig.data}}
+                                            {{result['form'].theta_nig.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
@@ -71,19 +71,19 @@
                                         {% if result['form'].type_choice.data == '3' %}
                                         <span class="mb-1">
                                             {{result['form'].c.label}}:
-                                            {{result['form'].c.data}}<br/>
+                                            {{result['form'].c.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].g.label}}:
-                                            {{result['form'].g.data}}<br/>
+                                            {{result['form'].g.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].m.label}}:
-                                            {{result['form'].m.data}}<br/>
+                                            {{result['form'].m.data|round(4)}}<br/>
                                         </span>
                                         <span class="mb-1">
                                             {{result['form'].y.label}}:
-                                            {{result['form'].y.data}}
+                                            {{result['form'].y.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
@@ -91,27 +91,27 @@
                                 <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
                                         {{result['form'].price.label}}:
-                                        {{result['form'].price.data}}
+                                        {{result['form'].price.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].risk_free.label}} \((\%) \):
-                                        {{result['form'].risk_free.data}}
+                                        {{result['form'].risk_free.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].dividend_yield.label}} \((\%) \):
-                                        {{result['form'].dividend_yield.data}}
+                                        {{result['form'].dividend_yield.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].strike_min.label}}:
-                                        {{result['form'].strike_min.data}}
+                                        {{result['form'].strike_min.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].strike_max.label}}:
-                                        {{result['form'].strike_max.data}}
+                                        {{result['form'].strike_max.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].time.label}}:
-                                        {{result['form'].time.data}}
+                                        {{result['form'].time.data|round(4)}}<br/>
                                     </span>
                                     <span class="mb-1">
                                         {{result['form'].call_put.label}}:
