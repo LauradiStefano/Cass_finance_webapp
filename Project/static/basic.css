@@ -207,22 +207,43 @@ form{
     font-size: 13px;
 }
 
-.dropdown-menu {
-    background: none;
-    border: none;
+@media only screen and (max-width: 1200px){
+    .dropdown-menu {
+        background: none;
+        border: none;
+    }
+
+    .dropdown-item {
+        font-size: 14px;
+        color: #D1CFCB;
+        text-decoration: none;
+    }
+
+    .dropdown-item:hover {
+        background-color: #1E1E1E;
+        border: none;
+        color: #5F5F5F;
+    }
 }
 
-.dropdown-item {
-    font-size: 14px;
-    color: #D1CFCB;
-    text-decoration: none;
+@media only screen and (min-width: 1200px){
+    .dropdown-menu {
+        background: #ffffff;
+        border: none;
+    }
+
+    .dropdown-item {
+        font-size: 14px;
+        color: #1E1E1E;
+        text-decoration: none;
+    }
+
+    .dropdown-item:hover {
+        background-color: none;
+        border: none;
+        color:#5F5F5F;
 }
 
-.dropdown-item:hover {
-    background-color: #1E1E1E;
-    border: none;
-    color: #5F5F5F;
-}
 
 .container {
     margin: 0 auto;
