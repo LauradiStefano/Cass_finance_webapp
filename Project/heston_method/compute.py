@@ -48,10 +48,10 @@ def create_plot_return_underlying_distribution(returns, heston_pdf, norm_pdf):
         norm_pdf=norm_pdf
     ))
 
-    hover_returns = HoverTool(attachment="left", names=['pdf ret'],
+    hover_returns = HoverTool(attachment="above", names=['pdf ret'],
                               tooltips=[("Returns", "@returns"), ("Pdf", "@heston_pdf")])
 
-    hover_norm_pdf = HoverTool(attachment="right", names=['pdf norm'],
+    hover_norm_pdf = HoverTool(attachment="below", names=['pdf norm'],
                                tooltips=[("Returns", "@returns"), ("Pdf Norm", "@norm_pdf")])
 
     x_range = [min(returns), max(returns)]
@@ -81,7 +81,7 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
         implied_volatility=implied_volatility
     ))
 
-    hover_implied = HoverTool(attachment="left", names=['implied vol'],
+    hover_implied = HoverTool(attachment="above", names=['implied vol'],
                               tooltips=[("Strike", "@strike"), ("Implied Vol", "@implied_volatility")])
 
     x_range = [min(strike) * 0.9, max(strike) * 1.1]

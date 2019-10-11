@@ -134,10 +134,10 @@ def create_plot_discount_factor_term_structure(time, market_discount_factor, mod
         model_discount_factor=model_discount_factor
     ))
 
-    hover_market = HoverTool(attachment="left", names=['market discount factor'],
+    hover_market = HoverTool(attachment="above", names=['market discount factor'],
                              tooltips=[("TTM", "@time"), ("Market Discount Factor", "@market_discount_factor")])
 
-    hover_model = HoverTool(attachment="right", names=['model discount factor'],
+    hover_model = HoverTool(attachment="below", names=['model discount factor'],
                             tooltips=[("TTM", "@time"), ("Model Discount Factor", "@model_discount_factor")])
 
     x_range = [min(time), max(time) + 1]
@@ -169,10 +169,10 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
         model_spot_rate=model_spot_rate
     ))
 
-    hover_market = HoverTool(attachment="left", names=['market spot rate'],
+    hover_market = HoverTool(attachment="above", names=['market spot rate'],
                              tooltips=[("TTM", "@time"), ("Market Spot Rate", "@market_spot_rate")])
 
-    hover_model = HoverTool(attachment="right", names=['model spot rate'],
+    hover_model = HoverTool(attachment="below", names=['model spot rate'],
                             tooltips=[("TTM", "@time"), ("Model Spot Rate", "@model_spot_rate")])
 
     x_range = [min(time), max(time) + 1]
@@ -207,7 +207,7 @@ def create_plot_error_interest_rate(spot_rate_model_error, time):
         edges_right=edges[1:]
     ))
 
-    hover_spot_rate = HoverTool(attachment="left", names=['spot rate'],
+    hover_spot_rate = HoverTool(attachment="above", names=['spot rate'],
                                 tooltips=[("TTM", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
@@ -234,7 +234,7 @@ def create_plot_error_discount_factor(discount_factor_model_error, time):
         edges_right=edges[1:]
     ))
 
-    hover_discount_factor = HoverTool(attachment="left", names=['discount factor'],
+    hover_discount_factor = HoverTool(attachment="above", names=['discount factor'],
                                       tooltips=[("TTM", "@time"),
                                                 ("Discount Factor Error", "@discount_factor_model_error")])
 

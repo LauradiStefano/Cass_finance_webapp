@@ -104,7 +104,7 @@ def create_plot_lower_bound(lam, lower_bound):
         lower_bound=lower_bound
     ))
 
-    hover_lower_bound = HoverTool(attachment="left", names=['lower bound'],
+    hover_lower_bound = HoverTool(attachment="above", names=['lower bound'],
                                   tooltips=[("Lambda", "@lam"), ("Lower Bound", "@lower_bound")])
 
     # x_range = [(strike - (strike - strike_exp_lcr)) * 0.75, (strike + (strike - strike_exp_lcr)) * 1.25]

@@ -294,7 +294,7 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
         volatility_t_put=volatility_t_put
     ))
 
-    hover_volatility = HoverTool(attachment="left", names=['implied vol'],
+    hover_volatility = HoverTool(attachment="above", names=['implied vol'],
                                  tooltips=[("Strike", "@strike_plot"), ("Implied Vol", "@implied_volatility")])
 
     hover_call = HoverTool(attachment="above", names=['call'], tooltips=[("Strike Call", "@strike_call"),
@@ -342,10 +342,10 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
         pdf_bench_norm_returns=pdf_bench_norm_returns
     ))
 
-    hover_returns = HoverTool(attachment="left", names=['pdf ret'], tooltips=[("Return", "@ret_t"),
+    hover_returns = HoverTool(attachment="above", names=['pdf ret'], tooltips=[("Return", "@ret_t"),
                                                                               ("Pdf", "@pdf_ret")])
 
-    hover_normal = HoverTool(attachment="right", names=['pdf norm'],
+    hover_normal = HoverTool(attachment="below", names=['pdf norm'],
                              tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_normal], x_range=x_range,
@@ -393,9 +393,9 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
         pdf_bench_log_prices=pdf_bench_log_prices
     ))
 
-    hover_pdf = HoverTool(attachment="left", names=['pdf prices'], tooltips=[("Strike", "@st"), ("Pdf", "@pdf")])
+    hover_pdf = HoverTool(attachment="above", names=['pdf prices'], tooltips=[("Strike", "@st"), ("Pdf", "@pdf")])
 
-    hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
+    hover_log_norm = HoverTool(attachment="below", names=['bench logNorm'],
                                tooltips=[("Strike", "@st"), ("Bench LogNorm", "@pdf_bench_log_prices")])
 
     x_range = [strike_min * 0.8, strike_max * 1.2]
@@ -446,9 +446,9 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
         cdf_bench_log_prices=cdf_bench_log_prices
     ))
 
-    hover_cdf = HoverTool(attachment="left", names=['cdf'], tooltips=[("Strike", "@st"), ("Cdf", "@cdf_prices")])
+    hover_cdf = HoverTool(attachment="above", names=['cdf'], tooltips=[("Strike", "@st"), ("Cdf", "@cdf_prices")])
 
-    hover_log_norm = HoverTool(attachment="right", names=['bench logNorm'],
+    hover_log_norm = HoverTool(attachment="below", names=['bench logNorm'],
                                tooltips=[("Strike", "@st"), ("Bench LogNorm", "@cdf_bench_log_prices")])
 
     x_range = [strike_min * 0.8, strike_max * 1.2]
@@ -496,10 +496,10 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
         cdf_bench_norm_returns=cdf_bench_norm_returns
     ))
 
-    hover_cdf = HoverTool(attachment="left", names=['cdf ret'], tooltips=[("Strike", "@ret_t"),
+    hover_cdf = HoverTool(attachment="above", names=['cdf ret'], tooltips=[("Strike", "@ret_t"),
                                                                           ("Cdf", "@cdf_returns")])
 
-    hover_norm = HoverTool(attachment="right", names=['bench norm'],
+    hover_norm = HoverTool(attachment="below", names=['bench norm'],
                            tooltips=[("Strike", "@ret_t"), ("Bench Norm", "@cdf_bench_norm_returns")])
 
     x_range = [min(ret_t), max(ret_t)]
