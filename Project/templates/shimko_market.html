@@ -34,7 +34,7 @@
                             </div>
                         </div>
 
-                         <div class="row">
+                        <div class="row">
                             <div class="col mb-1">
                                 {{form.file_name.label}}
                                 {{form.file_name}}
@@ -145,6 +145,13 @@
 
         </form>
     </div>
+
+    {% if compute_not_allowed %}
+    <div class="alert alert-warning">
+        <strong>Warning!</strong>
+        To continue you must register
+    </div>
+    {% endif %}
 
     <div class="row d-flex justify-content-center">
         {% if plot_implied_volatility != None %}
@@ -375,6 +382,7 @@
             }
         });
     });
+
 
 </script>
 </body>

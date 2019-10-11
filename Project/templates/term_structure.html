@@ -362,7 +362,6 @@
                                 {% endif %}
                             </div>
                         </div>
-                        {{ form.csrf_token }}
                     </fieldset>
                 </div>
             </div>
@@ -374,6 +373,14 @@
             </div>
         </form>
     </div>
+
+    {% if compute_not_allowed %}
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>
+            To continue you must register
+        </div>
+    {% endif %}
+
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_discount_factor_term_structure != None %}
         <div class="col-12">

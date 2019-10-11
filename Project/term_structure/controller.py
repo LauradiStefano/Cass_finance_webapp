@@ -30,6 +30,7 @@ def controller_term_structure(user, request):
     name_param = None
     rmse_discount_factor = None
     rmse_spot_rate = None
+    compute_not_allowed = False
 
     number_of_time = 0
 
@@ -39,63 +40,67 @@ def controller_term_structure(user, request):
     plot_error_interest_rate = None
 
     if request.method == "POST":
-        if form.validate():
-            file = request.files[form.file_data.name]
+        if user.is_authenticated:
+            if form.validate() and request.files:
+                file = request.files[form.file_data.name]
 
-            if file and allowed_file(file.filename):
-                file_data = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
+                if file and allowed_file(file.filename):
+                    file_data = secure_filename(file.filename)
+                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            file_data = upload_input(file_data)
+                file_data = upload_input(file_data)
 
-            variables = create_objective_vector(form.model_choice.data, form.kappa_vasicek.data,
-                                                form.theta_vasicek.data, form.sigma_vasicek.data, form.rho_vasicek.data,
-                                                form.kappa_cir.data, form.theta_cir.data, form.sigma_cir.data,
-                                                form.rho_cir.data, form.beta0_nelson.data, form.beta1_nelson.data,
-                                                form.beta2_nelson.data, form.tau_nelson.data, form.beta0_svensson.data,
-                                                form.beta1_svensson.data, form.beta2_svensson.data,
-                                                form.beta3_svensson.data, form.tau1_svensson.data,
-                                                form.tau2_svensson.data)
+                variables = create_objective_vector(form.model_choice.data, form.kappa_vasicek.data,
+                                                    form.theta_vasicek.data, form.sigma_vasicek.data,
+                                                    form.rho_vasicek.data,
+                                                    form.kappa_cir.data, form.theta_cir.data, form.sigma_cir.data,
+                                                    form.rho_cir.data, form.beta0_nelson.data, form.beta1_nelson.data,
+                                                    form.beta2_nelson.data, form.tau_nelson.data,
+                                                    form.beta0_svensson.data,
+                                                    form.beta1_svensson.data, form.beta2_svensson.data,
+                                                    form.beta3_svensson.data, form.tau1_svensson.data,
+                                                    form.tau2_svensson.data)
 
-            market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
-            discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \
-            rmse_spot_rate = fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
-                                            form.discount_factor.data)
+                market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
+                discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \
+                rmse_spot_rate = fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
+                                                form.discount_factor.data)
 
-            number_of_time = len(time)
+                number_of_time = len(time)
 
-            name_param = form.name_parameters[form.model_choice.data]
+                name_param = form.name_parameters[form.model_choice.data]
 
-            plot_discount_factor_term_structure = \
-                create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
-            plot_interest_rate_term_structure = \
-                create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
-            plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
-            plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
+                plot_discount_factor_term_structure = \
+                    create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
+                plot_interest_rate_term_structure = \
+                    create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
+                plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
+                plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            object.parameters = json.dumps(parameters.tolist())
-            object.time = json.dumps(time)
-            object.market_discount_factor = json.dumps(market_discount_factor)
-            object.model_discount_factor = json.dumps(model_discount_factor.tolist())
-            object.market_spot_rate = json.dumps(market_spot_rate.tolist())
-            object.model_spot_rate = json.dumps(model_spot_rate.tolist())
-            object.discount_factor_model_error = json.dumps(discount_factor_model_error.tolist())
-            object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
-            object.number_of_time = json.dumps(number_of_time)
-            object.name_param = json.dumps(name_param)
-            object.rmse_discount_factor = rmse_discount_factor
-            object.rmse_spot_rate = rmse_spot_rate
+                object.parameters = json.dumps(parameters.tolist())
+                object.time = json.dumps(time)
+                object.market_discount_factor = json.dumps(market_discount_factor)
+                object.model_discount_factor = json.dumps(model_discount_factor.tolist())
+                object.market_spot_rate = json.dumps(market_spot_rate.tolist())
+                object.model_spot_rate = json.dumps(model_spot_rate.tolist())
+                object.discount_factor_model_error = json.dumps(discount_factor_model_error.tolist())
+                object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
+                object.number_of_time = json.dumps(number_of_time)
+                object.name_param = json.dumps(name_param)
+                object.rmse_discount_factor = rmse_discount_factor
+                object.rmse_spot_rate = rmse_spot_rate
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+        else:
+            compute_not_allowed = True
 
     else:
-
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_term_structure.count() > 0:
                 instance = user.compute_term_structure.order_by(
@@ -140,7 +145,7 @@ def controller_term_structure(user, request):
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
             'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
             'plot_error_discount_factor': plot_error_discount_factor,
-            'plot_error_interest_rate': plot_error_interest_rate}
+            'plot_error_interest_rate': plot_error_interest_rate, 'compute_not_allowed': compute_not_allowed}
 
 
 def populate_form_from_instance(instance):
