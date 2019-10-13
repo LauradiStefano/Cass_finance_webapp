@@ -134,7 +134,7 @@ def fitting_method(model, x0, data, flag1, flag2):
     rmse_discount_factor = sqrt(np.mean((market_discount_factor - model_discount_factor)**2))
     rmse_spot_rate = sqrt(np.mean((market_spot_rate - model_spot_rate)**2))
     
-    daily_discount_factor.insert(0,1)
+    daily_discount_factor = np.insert(daily_discount_factor, 0, 1.0)
     annual_basis_date.insert(0,0)
     
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
