@@ -22,9 +22,15 @@
                         </div>
 
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col mb-1 container_model">
                                 {{form.model_choice.label}}
                                 {{form.model_choice}}
+                                <div class="icon_help">
+                                    <img src="/static/icon_help.png">
+                                    <div id="help_formula">
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -33,15 +39,15 @@
                                  !=None
                                  %}
                                  style="display:none" {%endif%}>
-
-                                $$ dr(t) = k(\theta-r(t))dt+\sigma dW (t)$$
-
-                                $$ SpotRates(t) =
-                                -\frac{ A(t)}{t} +\frac{B\left(t\right)}{t} \times r\left(0\right), \\
-                                B\left(t\right) = \frac{1-e^{-\kappa (t)}}{\kappa}, \\
-                                A\left(t\right) = \left(B\left(t\right)-(t)\right)\left(\theta-\frac{\sigma^2}
-                                {2\kappa^2}\right)-\frac{\sigma^2B\left(t\right)^2}{4\kappa} $$
-
+                                <div class="model_formula">
+                                    \begin{eqnarray*}
+                                    dr(t) &=& k(\theta-r(t))dt+\sigma dW (t)\\
+                                    SpotRates(t) &=&
+                                    -\frac{ A(t)}{t} +\frac{B\left(t\right)}{t} \times r\left(0\right), \\
+                                    B\left(t\right) &=& \frac{1-e^{-\kappa (t)}}{\kappa}, \\
+                                    A\left(t\right) &=& \left(B\left(t\right)-(t)\right)\left(\theta-\frac{\sigma^2}
+                                    {2\kappa^2}\right)-\frac{\sigma^2B\left(t\right)^2}{4\kappa} \end{eqnarray*}
+                                </div>
 
                                 <div class="row">
                                     <div class="col mb-1">
@@ -99,10 +105,12 @@
 
                             <div class="col" id="cir" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
-                                $$ dr(t) = k(\theta-r(t))dt+\sigma\sqrt{r(t)}dW(t) $$
-
-                                $$SpotRates(t) -\frac{ A(t)}{t}+\frac{B\left(t\right)}{t \times r\left(0\right)$$
-
+                                <div class="model_formula">
+                                    $$
+                                    dr(t) = k(\theta-r(t))dt+\sigma\sqrt{r(t)}dW(t)\\
+                                    SpotRates(t) -\frac{ A(t)}{t}+\frac{B\left(t\right)}{t} \times
+                                    r\left(0\right)$$
+                                </div>
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.kappa_cir.label}}
@@ -159,10 +167,12 @@
 
                             <div class="col" id="nelson_siegel" {% if form.model_choice.data !='2' %}
                                  style="display:none" {%endif%}>
-                                $$ Spot Rate(t)=
-                                \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}} \right)+
-                                \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}}-e^{-\frac{t}{\tau}}\right)
-                                $$
+                                <div class="model_formula">
+                                    $$ SpotRates(t)= \\
+                                    \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}} \right)+
+                                    \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau}}}{\frac{t}{\tau}}}-e^{-\frac{t}{\tau}}\right)
+                                    $$
+                                </div>
                                 <div class="row">
                                     <div class="col mb-1">
                                         {{form.beta0_nelson.label}}
@@ -219,12 +229,15 @@
 
                             <div class="col" id="svensson" {% if form.model_choice.data !='3' %} style="display:none"
                                  {%endif%}>
-                                $$ Spot Rate(t)=
-                                \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}} \right)+
-                                \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}}-e^
-                                {-\frac{t}{\tau_{1}}}\right)+ \\
-                                \beta_{3}\left({\frac{1-e^{-\frac{t}{\tau_{2}}}}{\frac{t}{\tau_{2}}}}-e^
-                                {-\frac{t}{\tau_{2}}}\right)$$
+                                <div class="model_formula">
+                                    $$ SpotRates(t)= \\
+                                    \beta_{0}+\beta_{1}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}}
+                                    \right)+
+                                    \beta_{2}\left({\frac{1-e^{-\frac{t}{\tau_{1}}}}{\frac{t}{\tau_{1}}}}-e^
+                                    {-\frac{t}{\tau_{1}}}\right)+ \\
+                                    \beta_{3}\left({\frac{1-e^{-\frac{t}{\tau_{2}}}}{\frac{t}{\tau_{2}}}}-e^
+                                    {-\frac{t}{\tau_{2}}}\right)$$
+                                </div>
 
                                 <div class="row">
                                     <div class="col mb-1">
@@ -375,10 +388,10 @@
     </div>
 
     {% if compute_not_allowed %}
-        <div class="alert alert-warning">
-            <strong>Warning!</strong>
-            To continue you must register
-        </div>
+    <div class="alert alert-warning">
+        <strong>Warning!</strong>
+        To continue you must register
+    </div>
     {% endif %}
 
     <div class="row p-3 d-flex justify-content-center">
@@ -510,30 +523,64 @@
         var nelsonSiegel = $('#nelson_siegel');
         var svensson = $('#svensson');
 
-        select_distribution.on('change', function() {
+        var help_formula = $('#help_formula');
+
+        update = function() {
+            var vasicek_formula = $('#vasicek > .model_formula')[0].innerHTML;
+            var cir_formula = $('#cir > .model_formula')[0].innerHTML;
+            var nelsonSiegel_formula = $('#nelson_siegel > .model_formula')[0].innerHTML;
+            var svensson_formula = $('#svensson > .model_formula')[0].innerHTML;
             if (select_distribution.val() == '0') {
                 vasicek.show();
                 cir.hide();
                 nelsonSiegel.hide();
                 svensson.hide();
+                help_formula.html(vasicek_formula);
             } else if (select_distribution.val() == '1') {
                 vasicek.hide();
                 cir.show();
                 nelsonSiegel.hide();
                 svensson.hide();
+                help_formula.html(cir_formula);
             } else if (select_distribution.val() == '2') {
                 vasicek.hide();
                 cir.hide();
                 nelsonSiegel.show();
                 svensson.hide();
+                help_formula.html(nelsonSiegel_formula);
             } else {
                 vasicek.hide();
                 cir.hide();
                 nelsonSiegel.hide();
                 svensson.show();
+                help_formula.html(svensson_formula);
             }
+        };
+
+        select_distribution.on('change', update);
+
+        var icon_help = $('.icon_help').first();
+        icon_help.on('mouseenter', function() {
+            help_formula.show();
         });
+
+        icon_help.on('mouseleave', function() {
+            help_formula.hide();
+        });
+
+        update();
     });
+
+
+
+
+
+
+
+
+
+
+
 
 
 

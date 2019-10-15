@@ -348,5 +348,34 @@ form{
     font-size: 18px;
 }
 
+img {
+    height: 20px;
+    width: 20px;
+}
 
+.icon_help {
+    display:inline-block;
+    position:relative;
+    z-index:1000;
+}
+
+.icon_help > div {
+    position:absolute;
+    background-color: #ffffff;
+    left:50%;
+    transform:translateX(-50%);
+    padding: 3px;
+    border-radius: 3px;
+    border: solid 1px;
+    border-color: #B2B2B2;
+
+}
+
+.container_model {
+    overflow:visible;
+}
+
+.model_formula, #help_formula {
+    display:none;
+}
 
