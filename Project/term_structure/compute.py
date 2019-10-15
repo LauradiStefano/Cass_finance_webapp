@@ -6,6 +6,7 @@ Created on Tue Sep 10 15:17:49 2019
 """
 
 import os
+from math import sqrt
 
 import bokeh.plotting as bp
 import numpy as np
@@ -14,13 +15,12 @@ from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 from scipy import optimize
 from scipy.optimize import least_squares
-from math import sqrt
 
-from term_structure.get_dates import list_of_daily_dates
 from term_structure.fit_df_CIR import fit_df_CIR
 from term_structure.fit_df_NelsonSiegel import fit_df_NelsonSiegel
 from term_structure.fit_df_Svensson import fit_df_Svensson
 from term_structure.fit_df_Vasicek import fit_df_Vasicek
+from term_structure.get_dates import list_of_daily_dates
 from term_structure.get_df_CIR import get_df_CIR
 from term_structure.get_df_NelsonSiegel import get_df_NelsonSiegel
 from term_structure.get_df_Svensson import get_df_Svensson
@@ -60,6 +60,7 @@ def fitting_method(model, x0, data, flag1, flag2):
     flag1 = int(flag1)
     flag2 = int(flag2)
     dates, annual_basis_date = list_of_daily_dates(time)
+    discount_factor = []
     if model == 0:
 
         if flag1 == 0:
@@ -69,13 +70,13 @@ def fitting_method(model, x0, data, flag1, flag2):
             discount_factor = get_df_Vasicek(param, time)
             daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
 
-            
+
         else:
 
             param = optimize.fmin(lambda y: fit_df_Vasicek(y, data, flag1, flag2), x0)
             discount_factor = get_df_Vasicek(param, time)
             daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
-            
+
     elif model == 1:
 
         if flag1 == 0:
@@ -85,7 +86,7 @@ def fitting_method(model, x0, data, flag1, flag2):
             discount_factor = get_df_CIR(param, time)
             daily_discount_factor = get_df_CIR(param, annual_basis_date)
 
-            
+
         else:
 
             param = optimize.fmin(lambda y: fit_df_CIR(y, data, flag1, flag2), x0)
@@ -101,7 +102,7 @@ def fitting_method(model, x0, data, flag1, flag2):
             param = res_1.x
             discount_factor = get_df_NelsonSiegel(param, time)
             daily_discount_factor = get_df_NelsonSiegel(param, annual_basis_date)
-            
+
         else:
 
             param = optimize.fmin(lambda y: fit_df_NelsonSiegel(y, data, flag1, flag2), x0)
@@ -122,7 +123,6 @@ def fitting_method(model, x0, data, flag1, flag2):
             discount_factor = get_df_Svensson(param, time)
             daily_discount_factor = get_df_Svensson(param, annual_basis_date)
 
-
     model_discount_factor = discount_factor
 
     model_spot_rate = -np.log(model_discount_factor) / time
@@ -131,15 +131,15 @@ def fitting_method(model, x0, data, flag1, flag2):
     discount_factor_model_error = market_discount_factor - model_discount_factor
     spot_rate_model_error = market_spot_rate - model_spot_rate
 
-    rmse_discount_factor = sqrt(np.mean((market_discount_factor - model_discount_factor)**2))
-    rmse_spot_rate = sqrt(np.mean((market_spot_rate - model_spot_rate)**2))
-    
+    rmse_discount_factor = sqrt(np.mean((market_discount_factor - model_discount_factor) ** 2))
+    rmse_spot_rate = sqrt(np.mean((market_spot_rate - model_spot_rate) ** 2))
+
     daily_discount_factor = np.insert(daily_discount_factor, 0, 1.0)
-    annual_basis_date.insert(0,0)
+    annual_basis_date.insert(0, 0)
     
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
            discount_factor_model_error, spot_rate_model_error, param, time, \
-           rmse_discount_factor, rmse_spot_rate#, daily_discount_factor, annual_basis_date, dates 
+           rmse_discount_factor, rmse_spot_rate  # , daily_discount_factor, annual_basis_date, dates
 
 
 def create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor):
