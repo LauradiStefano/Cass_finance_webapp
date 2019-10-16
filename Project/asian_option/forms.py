@@ -108,7 +108,7 @@ class ComputeForm(wtf.Form):
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     strike_exp = wtf.FloatField(label='Strike', default=49.3280918417284,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free_exp = wtf.FloatField(label='Interest Rate', default=0.01,
+    risk_free_exp = wtf.FloatField(label='Interest Rate \((\%) \)', default=0.01,
                                    validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     time_exp = wtf.FloatField(label='Time to Maturity', default=0.083333,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
@@ -128,8 +128,8 @@ class ComputeForm(wtf.Form):
     # Contract Parameters
     price = wtf.FloatField(label='Spot Price', default=100,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Interest Rate', default=3.67, validators=[wtf.validators.InputRequired()])
-    # dividend_yield = wtf.FloatField(label='Dividend Yield (%)', default=0,
+    risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=3.67, validators=[wtf.validators.InputRequired()])
+    # dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0,
     #                                 validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to Maturity', default=1,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])

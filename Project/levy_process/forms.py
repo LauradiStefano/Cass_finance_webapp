@@ -54,8 +54,8 @@ class ComputeForm(wtf.Form):
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     strike_max = wtf.FloatField(label='Strike Max', default=130,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Interest Rate', default=2, validators=[wtf.validators.InputRequired()])
-    dividend_yield = wtf.FloatField(label='Dividend Yield', default=0, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=2, validators=[wtf.validators.InputRequired()])
+    dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0, validators=[wtf.validators.InputRequired()])
     time = wtf.FloatField(label='Time to expiration', default=0.2,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     call_put = wtf.RadioField('Call-Put', choices=[('1', 'Call'), ('0', 'Put')], default='1')

@@ -11,14 +11,14 @@ class MultiCheckboxField(SelectMultipleField):
 
 class ComputeForm(wtf.Form):
     file_data = wtf.FileField(label='Import File')
-    file_name = StringField(label='Name DataSet', validators=[InputRequired(), validators.Length(max=25)])
+    file_name = StringField(label='DataSet Name', validators=[InputRequired(), validators.Length(max=25)])
     price = wtf.FloatField(label='Spot Price', validators=[InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Interest Rate', default=5.04, validators=[InputRequired()])
-    div_yield = wtf.FloatField(label='Dividend Yield', default=3.14, validators=[InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=5.04, validators=[InputRequired()])
+    div_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=3.14, validators=[InputRequired()])
 
     risk_dividend = wtf.RadioField('Interest Rate & Dividend Yield', choices=[('0', 'True'), ('1', 'False')],
                                    default='1')
-    call_put_flag = wtf.RadioField('Call-Put', choices=[ ('1', 'Call'), ('0', 'Put'), ('2', 'Both')],
+    call_put_flag = wtf.RadioField('Call-Put', choices=[('1', 'Call'), ('0', 'Put'), ('2', 'Both')],
                                    validators=[InputRequired()], default='2')
     plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf Prices'), ('1', 'Cdf Prices'),
                                                       ('2', 'Cdf Returns')])

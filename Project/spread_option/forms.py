@@ -8,9 +8,9 @@ class ComputeForm(wtf.Form):
     price_2 = wtf.FloatField(label='Spot Price', default=96,
                              validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
-    dividend_yield_1 = wtf.FloatField(label='Dividend Yield', default=0.05,
+    dividend_yield_1 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0.05,
                                       validators=[wtf.validators.InputRequired()])
-    dividend_yield_2 = wtf.FloatField(label='Dividend Yield', default=0.05,
+    dividend_yield_2 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0.05,
                                       validators=[wtf.validators.InputRequired()])
 
     volatility_1 = wtf.FloatField(label='$$ \sigma $$', default=0.2,
@@ -21,7 +21,7 @@ class ComputeForm(wtf.Form):
 
     strike = wtf.FloatField(label='Strike', default=4,
                             validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    risk_free = wtf.FloatField(label='Interest Rate', default=10, validators=[wtf.validators.InputRequired()])
+    risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=10, validators=[wtf.validators.InputRequired()])
 
     time = wtf.FloatField(label='Time to Matutity', default=0.5,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
