@@ -14,6 +14,8 @@ from shimko_market.controller import controller_shimko_market, controller_old_sh
     delete_shimko_market_simulation
 from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical, \
     delete_shimko_theoretical_simulation
+from spread_option.controller import controller_spread_option, controller_old_spread_option, \
+    delete_spread_option_simulation
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation
 
@@ -73,6 +75,12 @@ def term_structure():
     return render_template("term_structure.html", **template_variables)
 
 
+@app.route('/spread_option', methods=['GET', 'POST'])
+def spread_option():
+    template_variables = controller_spread_option(current_user, request)
+    return render_template("spread_option.html", **template_variables)
+
+
 @app.route('/shimko_theoretical/old')
 @login_required
 def old_shimko_theoretical():
@@ -116,6 +124,13 @@ def old_term_structure():
                            old=True)
 
 
+@app.route('/spread_option/old')
+def old_spread_option():
+    template_variables = controller_old_spread_option(current_user)
+    return render_template("old_spread_option.html", **template_variables, back_url=url_for('spread_option'),
+                           old=True)
+
+
 @app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -150,6 +165,12 @@ def delete_asian_option(id):
 @login_required
 def delete_term_structure(id):
     return delete_term_structure_simulation(current_user, id)
+
+
+@app.route('/spread_option/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_spread_option(id):
+    return delete_spread_option_simulation(current_user, id)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

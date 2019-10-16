@@ -1,0 +1,127 @@
+{% include 'header.html' %}
+{% if data %}
+{% for result in data %}
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                <span class="mb-1">
+                                    {{result['form'].strike.label}}:
+                                    {{result['form'].strike.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].time.label}}:
+                                    {{result['form'].time.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].risk_free.label}}:
+                                    {{result['form'].risk_free.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].rho.label}}:
+                                    {{result['form'].rho.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].dump.label}}:
+                                    {{result['form'].dump.data|round(4)}}<br/>
+                                </span>
+                                </div>
+
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                <span class="mb-1">
+                                    {{result['form'].price_1.label}}:
+                                    {{result['form'].price_1.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].dividend_yield_1.label}} \((\%) \):
+                                    {{result['form'].dividend_yield_1.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].volatility_1.label}} \((\%) \):
+                                    {{result['form'].volatility_1.data|round(4)}}<br/>
+                                </span>
+                                </div>
+
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                    {{result['form'].price_2.label}}:
+                                    {{result['form'].price_2.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].dividend_yield_2.label}}:
+                                    {{result['form'].dividend_yield_2.data|round(4)}}<br/>
+                                </span>
+                                    <span class="mb-1">
+                                    {{result['form'].volatility_2.label}}:
+                                    {{result['form'].volatility_2.data|round(4)}}<br/>
+                                </span>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Result</legend>
+                            </div>
+                            {% if result['spread_option_price'] != None %}
+                            <div class="row">
+                                <div class="col-12">
+                                     <span class="mb-1"> Spread Option Price: {{result ['spread_option_price']}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="col-12 d-flex mb-3 justify-content-center">
+
+        <form style="text-align:center;" method="POST" action="/heston_method/old/delete/{{ result.id }}">
+            <input type="submit" value="Delete Single Simulation"
+                   title="Delete this post from database">
+        </form>
+
+    </div>
+</div>
+<hr>
+{% endfor %}
+
+<center>
+    <div class="row">
+        <form method="POST" action="/heston_method/old/delete/-1">
+            <input type="submit" value="Delete All Simulations">
+        </form>
+    </div>
+</center>
+{% else %}
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+
+</body>
+</html>

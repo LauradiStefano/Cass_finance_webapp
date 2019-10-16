@@ -1,0 +1,209 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Spread Option</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">--</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="">
+
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.strike.label}}
+                                {{form.strike}}
+                                {% if form.strike.errors %}
+                                {% for error in form.strike.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.risk_free.label}} \((\%) \)
+                                {{form.risk_free}}
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.rho.label}} \((\%) \)
+                                {{form.rho}}
+                                {% if form.rho.errors %}
+                                {% for error in form.rho.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.dump.label}} \((\%) \)
+                                {{form.dump}}
+                                {% if form.dump.errors %}
+                                {% for error in form.dump.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>First Option</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{ form.price_1.label}}
+                                {{ form.price_1 }}
+                                {% if form.price_1.errors %}
+                                {% for error in form.price_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.dividend_yield_1.label}}
+                                {{ form.dividend_yield_1 }}
+                                {% if form.dividend_yield_1.errors %}
+                                {% for error in form.dividend_yield_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.volatility_1.label}}
+                                {{ form.volatility_1 }}
+                                {% if form.volatility_1.errors %}
+                                {% for error in form.volatility_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-4 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Second Option</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.price_2.label}}
+                                {{ (form.price_2) }}
+                                {% if form.price_2.errors %}
+                                {% for error in form.price_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.dividend_yield_2.label}}
+                                {{ (form.dividend_yield_2) }}
+                                {% if form.dividend_yield_2.errors %}
+                                {% for error in form.dividend_yield_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.volatility_2.label}}
+                                {{ (form.volatility_2) }}
+                                {% if form.volatility_2.errors %}
+                                {% for error in form.volatility_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {% if spread_option_price != None %}
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 col-12">
+                <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Results</legend>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row d-flex flex-column">
+                                <span class="font-weight-light mb-1"> Spread Option Price: {{spread_option_price}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+{% include 'footer.html' %}
+
+</body>
+</html>

@@ -390,3 +390,27 @@ class term_structure(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_term_structure', lazy='dynamic'))
+
+
+class spread_option(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    price_1 = db.Column(db.Float())
+    price_2 = db.Column(db.Float())
+    dividend_yield_1 = db.Column(db.Float())
+    dividend_yield_2 = db.Column(db.Float())
+    volatility_1 = db.Column(db.Float())
+    volatility_2 = db.Column(db.Float())
+
+    strike = db.Column(db.Float())
+    risk_free = db.Column(db.Float())
+    time = db.Column(db.Float())
+    rho = db.Column(db.Float())
+    dump = db.Column(db.Float())
+
+    button_compute = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_spread_option', lazy='dynamic'))
+
+

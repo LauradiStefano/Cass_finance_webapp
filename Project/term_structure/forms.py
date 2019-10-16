@@ -14,7 +14,7 @@ class ComputeForm(wtf.Form):
         '3': [r'$$ \beta_{0} $$', r'$$ \beta_{1} $$', r'$$ \beta_{2} $$', r'$$ \beta_{3} $$', r'$$ \tau_{1} $$',
               r'$$ \tau_{2} $$']}
 
-    file_name = StringField(label='Name DataSet', validators=[InputRequired(), validators.Length(max=25)])
+    file_name = StringField(label='Save output as...', validators=[InputRequired(), validators.Length(max=25)])
 
     # Vasicek distribution
     kappa_vasicek = wtf.FloatField(label=name_parameters['0'][0], default=0.1,
@@ -65,7 +65,7 @@ class ComputeForm(wtf.Form):
 
     discount_factor = wtf.RadioField(label='Discount Factor-Spot Rate', choices=[('0', 'Spot Rate'),
                                                                                  ('1', 'Discount Factor')], default='0')
-    least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'No Linear Least Squares'), ('1', 'Fmin')],
+    least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Non Linear Least Squares'), ('1', 'Fmin')],
                                 default='0')
 
     button_compute = wtf.SubmitField(label='Compute')
