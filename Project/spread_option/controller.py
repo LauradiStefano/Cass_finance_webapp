@@ -13,7 +13,7 @@ def controller_spread_option(user, request):
     if request.method == "POST":
         if form.validate():
             spread_option_price = price_spread_option(form.risk_free.data, form.time.data, form.price_1.data,
-                                                      form.price_2.data, form.dividend_yield_1,
+                                                      form.price_2.data, form.dividend_yield_1.data,
                                                       form.dividend_yield_2.data, form.strike.data, form.dump.data,
                                                       form.volatility_1.data, form.volatility_2.data, form.rho.data)
 
