@@ -32,11 +32,11 @@ def controller_heston_method(user, request):
     if request.method == "POST":
         if form.validate():
             heston_pdf, returns, implied_volatility, strike, option_prices, mean, variance, skewness, kurtosis, \
-                norm_pdf = heston_pdf_and_volatility(form.price.data, form.strike_min.data, form.strike_max.data,
-                                                     form.time.data, form.volatility_t0.data, form.chi.data,
-                                                     form.lam.data, form.rho.data, form.volatility_hat.data,
-                                                     form.mu.data, form.risk_free.data, form.dividend_yield.data,
-                                                     form.call_put.data)
+            norm_pdf = heston_pdf_and_volatility(form.price.data, form.strike_min.data, form.strike_max.data,
+                                                 form.time.data, form.volatility_t0.data, form.chi.data,
+                                                 form.lam.data, form.rho.data, form.volatility_hat.data,
+                                                 form.mu.data, form.risk_free.data, form.dividend_yield.data,
+                                                 form.call_put.data)
 
             number_of_strike = len(strike)
 
@@ -92,8 +92,8 @@ def controller_heston_method(user, request):
 
                 plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
-    implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
-    option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
+    implied_volatility = [round(x, 6) for x in implied_volatility] if implied_volatility is not None else None
+    option_prices = [round(x, 6) for x in option_prices] if option_prices is not None else None
     mean = round(mean, 4) if mean is not None else None
     variance = round(variance, 4) if variance is not None else None
     skewness = round(skewness, 4) if skewness is not None else None

@@ -106,8 +106,8 @@ def controller_levy_process(user, request):
     variance = round(variance, 4) if variance is not None else None
     skewness = round(skewness, 4) if skewness is not None else None
     kurtosis = round(kurtosis, 4) if kurtosis is not None else None
-    implied_volatility = [round(x, 4) for x in implied_volatility] if implied_volatility is not None else None
-    option_prices = [round(x, 4) for x in option_prices] if option_prices is not None else None
+    implied_volatility = [round(x, 6) for x in implied_volatility] if implied_volatility is not None else None
+    option_prices = [round(x, 6) for x in option_prices] if option_prices is not None else None
 
     return {'form': form, 'user': user, 'plot_return_underlying_distribution': plot_return_underlying_distribution,
             'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,

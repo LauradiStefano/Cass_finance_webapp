@@ -127,12 +127,12 @@ def controller_term_structure(user, request):
                 plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
                 plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
-    time = [round(x, 4) for x in time] if time is not None else None
-    market_discount_factor = [round(x, 4) for x in
+    time = [round(x, 6) for x in time] if time is not None else None
+    market_discount_factor = [round(x, 6) for x in
                               market_discount_factor] if market_discount_factor is not None else None
-    model_discount_factor = [round(x, 4) for x in model_discount_factor] if model_discount_factor is not None else None
-    market_spot_rate = [round(x, 4) for x in market_spot_rate] if market_spot_rate is not None else None
-    model_spot_rate = [round(x, 4) for x in model_spot_rate] if model_spot_rate is not None else None
+    model_discount_factor = [round(x, 6) for x in model_discount_factor] if model_discount_factor is not None else None
+    market_spot_rate = [round(x, 6) for x in market_spot_rate] if market_spot_rate is not None else None
+    model_spot_rate = [round(x, 6) for x in model_spot_rate] if model_spot_rate is not None else None
     parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
     rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
@@ -186,7 +186,7 @@ def controller_old_term_structure(user):
             plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
             plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
-            parameters = [round(x, 4) for x in parameters] if parameters is not None else None
+            parameters = [round(x, 6) for x in parameters] if parameters is not None else None
             rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
             rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
 

@@ -29,8 +29,8 @@ def controller_spread_option(user, request):
 
     else:
         if user.is_authenticated:  # user authenticated, store the data
-            if user.compute_heston_method.count() > 0:
-                instance = user.compute_heston_method.order_by(desc('id')).first()
+            if user.compute_spread_option.count() > 0:
+                instance = user.compute_spread_option.order_by(desc('id')).first()
                 form = populate_form_from_instance(instance)
 
                 spread_option_price = instance.spread_option_price
