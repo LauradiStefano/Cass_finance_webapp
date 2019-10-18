@@ -21,6 +21,14 @@ def controller_shimko_market(user, request):
     form = ComputeForm(request.form)
 
     file_data = None
+    strike_data = None
+    put_market = None
+    call_market = None
+    strike_plot = None
+    implied_volatility = None
+    strike_min = None
+    strike_max = None
+    volatility_time = None
 
     a0 = None
     a1 = None
@@ -39,7 +47,9 @@ def controller_shimko_market(user, request):
     m2_returns = None
     skewness_log_returns = None
     kurtosis_log_returns = None
+    pdf_returns = None
     pdf_bench_log_prices = None
+    pdf_bench_norm_returns = None
     r2 = None
     skewness_normal = None
     kurtosis_normal = None
@@ -47,6 +57,7 @@ def controller_shimko_market(user, request):
     cdf_returns = None
     cdf_bench_log_prices = None
     cdf_bench_norm_returns = None
+    returns_t = None
     statistic_prices = None
     statistic_returns = None
     pvalue_prices = None
@@ -114,9 +125,9 @@ def controller_shimko_market(user, request):
                                                                                     strike_max,
                                                                                     expected_price, sigma2, mu)
 
-                plot_index_distribution = create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices,
-                                                                                    form.price.data, strike_min,
-                                                                                    strike_max)
+                    plot_index_distribution = create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices,
+                                                                                        form.price.data, strike_min,
+                                                                                        strike_max)
 
                 if '1' in form.plot_choice.data:
                     cdf_prices, cdf_bench_log_prices, st = compute_underlying_cdf(a0, a1, a2, form.price.data,
@@ -135,7 +146,7 @@ def controller_shimko_market(user, request):
                                                                                          std_deviation_log_ret,
                                                                                          returns_t)
 
-                plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
+                    plot_return_cdf = create_plot_return_cdf(returns_t, cdf_returns, cdf_bench_norm_returns)
 
             if user.is_authenticated:  # store data in db
                 object = compute()
