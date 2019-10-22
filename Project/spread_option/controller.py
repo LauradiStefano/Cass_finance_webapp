@@ -51,7 +51,7 @@ def populate_form_from_instance(instance):
 def controller_old_spread_option(user):
     data = []
     if user.is_authenticated():
-        instances = user.compute_heston_method.order_by(desc('id')).all()
+        instances = user.compute_spread_option.order_by(desc('id')).all()
         for instance in instances:
             form = populate_form_from_instance(instance)
 
@@ -62,7 +62,7 @@ def controller_old_spread_option(user):
 
             spread_option_price = round(spread_option_price, 6) if spread_option_price is not None else None
 
-            data.append({'form': form, 'id': id, 'spread_option_price':spread_option_price})
+            data.append({'form': form, 'id': id, 'spread_option_price': spread_option_price})
 
     return {'data': data}
 

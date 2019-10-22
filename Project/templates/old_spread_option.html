@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="row">
-            <div class="col-md-3 col-12">
+            <div class="col-md-4 col-12">
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
@@ -24,29 +24,30 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
-                                <span class="mb-1">
-                                    {{result['form'].strike.label}}:
-                                    {{result['form'].strike.data|round(4)}}<br/>
-                                </span>
+                                    <span class="mb-1">
+                                        {{result['form'].strike.label}}:
+                                        {{result['form'].strike.data|round(4)}}<br/>
+                                    </span>
                                     <span class="mb-1">
                                     {{result['form'].time.label}}:
                                     {{result['form'].time.data|round(4)}}<br/>
-                                </span>
+                                    </span>
                                     <span class="mb-1">
                                     {{result['form'].risk_free.label}}:
                                     {{result['form'].risk_free.data|round(4)}}<br/>
-                                </span>
+                                    </span>
                                     <span class="mb-1">
                                     {{result['form'].rho.label}}:
                                     {{result['form'].rho.data|round(4)}}<br/>
-                                </span>
+                                    </span>
                                     <span class="mb-1">
                                     {{result['form'].dump.label}}:
                                     {{result['form'].dump.data|round(4)}}<br/>
-                                </span>
+                                    </span>
                                 </div>
 
                                 <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <label>First Asset</label>
                                 <span class="mb-1">
                                     {{result['form'].price_1.label}}:
                                     {{result['form'].price_1.data|round(4)}}<br/>
@@ -62,6 +63,7 @@
                                 </div>
 
                                 <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <label>Second Asset</label>
                                     <span class="mb-1">
                                     {{result['form'].price_2.label}}:
                                     {{result['form'].price_2.data|round(4)}}<br/>
@@ -81,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 col-12">
+            <div class="col-md-8 col-12">
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
@@ -92,7 +94,7 @@
                             {% if result['spread_option_price'] != None %}
                             <div class="row">
                                 <div class="col-12">
-                                     <span class="mb-1"> Spread Option Price: {{result ['spread_option_price']}}</span>
+                                    <span class="mb-1"> Spread Option Price: {{result ['spread_option_price']}}</span>
                                 </div>
                             </div>
                         </fieldset>
@@ -103,9 +105,9 @@
     </div>
     {% endif %}
 
-    <div class="col-12 d-flex mb-3 justify-content-center">
+    <div class="col-12 d-flex justify-content-center">
 
-        <form style="text-align:center;" method="POST" action="/heston_method/old/delete/{{ result.id }}">
+        <form style="text-align:center;" method="POST" action="/spread_option/old/delete/{{ result.id }}">
             <input type="submit" value="Delete Single Simulation"
                    title="Delete this post from database">
         </form>
@@ -117,7 +119,7 @@
 
 <center>
     <div class="row">
-        <form method="POST" action="/heston_method/old/delete/-1">
+        <form method="POST" action="/spread_option/old/delete/-1">
             <input type="submit" value="Delete All Simulations">
         </form>
     </div>

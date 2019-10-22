@@ -407,6 +407,7 @@ class spread_option(db.Model):
     time = db.Column(db.Float())
     rho = db.Column(db.Float())
     dump = db.Column(db.Float())
+    spread_option_price = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
 
