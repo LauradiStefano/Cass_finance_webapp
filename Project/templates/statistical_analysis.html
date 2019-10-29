@@ -16,10 +16,10 @@
             <div class="row">
 
                 <div class="col-md-12 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Contract Parameters</legend>
+                            <legend>Import Stock Prices</legend>
                         </div>
 
                         <div class="row">
@@ -64,7 +64,7 @@
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped table-hover" id="table_export">
                     <div class="row border-bottom mb-2 pb-1">
-                        <legend>Table of Statistical Analysis</legend>
+                        <legend>Table of Statistical Analysis (Returns)</legend>
                     </div>
                     <thead>
                     <th scope="col"> Tickers</th>
@@ -77,8 +77,8 @@
                     <th scope="col"> Max Return</th>
                     <th scope="col"> Jb Test</th>
                     <th scope="col"> Pvalue</th>
-
                     </thead>
+
                     <tbody>
                     {%for i in range(number_of_tickers)%}
                     <tr>

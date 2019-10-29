@@ -54,9 +54,9 @@ def controller_statistical_analysis(user, request):
             object.variance = json.dumps(variance)
             object.skewness = json.dumps(skewness)
             object.kurtosis = json.dumps(kurtosis)
-            object.min_return = json.dumps(min_return.tolist())
-            object.max_return = json.dumps(max_return.tolist())
-            object.jb_test = json.dumps(jb_test.tolist())
+            object.min_return = json.dumps(min_return)
+            object.max_return = json.dumps(max_return)
+            object.jb_test = json.dumps(jb_test)
             object.pvalue = json.dumps(pvalue)
             object.tickers = json.dumps(tickers)
             object.number_of_tickers = number_of_tickers
