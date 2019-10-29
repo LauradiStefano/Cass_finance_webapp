@@ -1,0 +1,289 @@
+{% include 'header.html' %}
+{% if data %}
+{% for result in data %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Term Structure Fitting</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">Previous Simulations</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-3 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                        {{result['form'].model_choice.label}}:
+                                        {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
+                                    </span>
+
+                                    <div id="vasicek">
+                                        {% if result['form'].model_choice.data == '0' %}
+                                        <span class="mb-1">
+                                            {{result['form'].kappa_vasicek.label}}:
+                                            {{result['form'].kappa_vasicek.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].theta_vasicek.label}}:
+                                            {{result['form'].theta_vasicek.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_vasicek.label}}:
+                                            {{result['form'].sigma_vasicek.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].rho_vasicek.label}}:
+                                            {{result['form'].rho_vasicek.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="cir">
+                                        {% if result['form'].model_choice.data == '1' %}
+                                        <span class="mb-1">
+                                            {{result['form'].kappa_cir.label}}:
+                                            {{result['form'].kappa_cir.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].theta_cir.label}}:
+                                            {{result['form'].theta_cir.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_cir.label}}:
+                                            {{result['form'].sigma_cir.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].rho_cir.label}}:
+                                            {{result['form'].rho_cir.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="nelson_siegel">
+                                        {% if result['form'].model_choice.data == '2' %}
+                                        <span class="mb-1">
+                                            {{result['form'].beta0_nelson.label}}:
+                                            {{result['form'].beta0_nelson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta1_nelson.label}}:
+                                            {{result['form'].beta1_nelson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta2_nelson.label}}:
+                                            {{result['form'].beta2_nelson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].tau.label}}:
+                                            {{result['form'].tau_nelson.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="svensson">
+                                        {% if result['form'].model_choice.data == '3' %}
+                                        <span class="mb-1">
+                                            {{result['form'].beta0_svensson.label}}:
+                                            {{result['form'].beta0_svensson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta1_svensson.label}}:
+                                            {{result['form'].beta1_svensson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta2_svensson.label}}:
+                                            {{result['form'].beta2_svensson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta3_svensson.label}}:
+                                            {{result['form'].beta3_svensson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].tau1_svensson.label}}:
+                                            {{result['form'].tau1_svensson.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].tau2_svensson.label}}:
+                                            {{result['form'].tau2_svensson.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+                                </div>
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                            {{result['form'].file_name.label}}:<br/>
+                                            {{result['form'].file_name.data}}<br/>
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].least_fmin.label}}:<br/>
+                                        {{dict(result['form'].least_fmin.choices).get(result['form'].least_fmin.data)}}<br/>
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].discount_factor.label}}:<br/>
+                                        {{dict(result['form'].discount_factor.choices).get(result['form'].discount_factor.data)}}
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Table of Fitted Parameters</legend>
+                            </div>
+                            {% if result['plot_discount_factor_term_structure'] != None %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col"> Model</th>
+                                        {%for name in result['name_param']%}
+                                        <th scope="col"> {{name}}</th>
+                                        {%endfor%}
+                                        <th>RMSE DF</th>
+                                        <th>RMSE SR</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
+                                            </td>
+                                            {%for param in result['parameters']%}
+                                            <td> {{param}}</td>
+                                            {%endfor%}
+                                            <td>{{result.rmse_discount_factor}}</td>
+                                            <td>{{result.rmse_spot_rate}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Discount Factor Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_discount_factor_term_structure'][0]|safe}}
+                    {{ result['plot_discount_factor_term_structure'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Fitting Error: Market Discount Factor - Model Discount Factor<</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_error_discount_factor'][0]|safe}}
+                    {{ result['plot_error_discount_factor'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Spot Rate Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_interest_rate_term_structure'][0]|safe}}
+                    {{ result['plot_interest_rate_term_structure'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Fitting Error: Market Spot Rate - Model Spot Rate<</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_error_interest_rate'][0]|safe}}
+                    {{ result['plot_error_interest_rate'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-12 d-flex mb-3 justify-content-center">
+    <form style="text-align:center;" method="POST" action="/term_structure/old/delete/{{ result.id }}">
+        <input type="submit" value="Delete Single Simulation"
+               title="Delete this post from database">
+    </form>
+</div>
+<hr>
+{% endfor %}
+
+<center>
+    <div class="row">
+        <form method="POST" action="/term_structure/old/delete/-1">
+            <input type="submit" value="Delete All Simulations">
+        </form>
+    </div>
+</center>
+{% else %}
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
