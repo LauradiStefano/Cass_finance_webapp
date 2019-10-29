@@ -16,6 +16,8 @@ from shimko_theoretical.controller import controller_old_shimko_theoretical, con
     delete_shimko_theoretical_simulation
 from spread_option.controller import controller_spread_option, controller_old_spread_option, \
     delete_spread_option_simulation
+from statistical_analysis.controller import controller_statistical_analysis, controller_old_statistical_analysis, \
+    delete_statistical_analysis_simulation
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation
 
@@ -81,6 +83,12 @@ def spread_option():
     return render_template("spread_option.html", **template_variables)
 
 
+@app.route('/statistical_analysis', methods=['GET', 'POST'])
+def statistical_analysis():
+    template_variables = controller_statistical_analysis(current_user, request)
+    return render_template("statistical_analysis.html", **template_variables, table_export=True)
+
+
 @app.route('/shimko_theoretical/old')
 @login_required
 def old_shimko_theoretical():
@@ -131,6 +139,13 @@ def old_spread_option():
                            old=True)
 
 
+@app.route('/statistical_analysis/old')
+def old_statistical_analysis():
+    template_variables = controller_old_statistical_analysis(current_user)
+    return render_template("old_statistical_analysis.html", **template_variables,
+                           back_url=url_for('statistical_analysis'), old=True)
+
+
 @app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -171,6 +186,12 @@ def delete_term_structure(id):
 @login_required
 def delete_spread_option(id):
     return delete_spread_option_simulation(current_user, id)
+
+
+@app.route('/statistical_analysis/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_statistical_analysis(id):
+    return delete_statistical_analysis_simulation(current_user, id)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

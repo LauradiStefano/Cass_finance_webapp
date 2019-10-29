@@ -1,0 +1,112 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Statistical Analysis</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> -- </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="" enctype="multipart/form-data">
+
+            <div class="row">
+
+                <div class="col-md-12 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_data.label}}
+                                {{form.file_data}}
+                                {% if form.file_data.errors %}
+                                {% for error in form.file_data.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_name.label}}
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row p-3 d-flex justify-content-center">
+        {% if tickers != None %}
+        <div class="col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <table class="table table-striped table-hover" id="table_export">
+                    <div class="row border-bottom mb-2 pb-1">
+                        <legend>Table of Statistical Analysis</legend>
+                    </div>
+                    <thead>
+                    <th scope="col"> Tickers</th>
+                    <th scope="col"> Mean</th>
+                    <th scope="col"> Volatility</th>
+                    <th scope="col"> Variance</th>
+                    <th scope="col"> Skewness</th>
+                    <th scope="col"> Kurtosis</th>
+                    <th scope="col"> Min Return</th>
+                    <th scope="col"> Max Return</th>
+                    <th scope="col"> Jb Test</th>
+                    <th scope="col"> Pvalue</th>
+
+                    </thead>
+                    <tbody>
+                    {%for i in range(number_of_tickers)%}
+                    <tr>
+                        <td>{{tickers[i]}}</td>
+                        <td>{{mean[i]}}</td>
+                        <td>{{volatility[i]}}</td>
+                        <td>{{variance[i]}}</td>
+                        <td>{{skewness[i]}}</td>
+                        <td>{{kurtosis[i]}}</td>
+                        <td>{{min_return[i]}}</td>
+                        <td>{{max_return[i]}}</td>
+                        <td>{{jb_test[i]}}</td>
+                        <td>{{pvalue[i]}}</td>
+                    </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+                <hr>
+                <div class="row d-flex justify-content-center">
+                    {{form.button_export_table}}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+{% include 'footer.html' %}
+
+</body>
+</html>
