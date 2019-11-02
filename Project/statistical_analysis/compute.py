@@ -1,75 +1,102 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Oct 28 22:22:28 2019
+Created on Fri Nov  1 20:10:49 2019
 
 @author: Diego
 """
-import os
 
-import numpy as np
-import pandas as pd
-import scipy.stats
-
-
-def upload_input(filename=None):
-    data = pd.read_excel(os.path.join('uploads/', filename))
+def import_dataset(filename=None, tickers, start_day, start_month, start_year, end_day, end_month, end_year):
+    if model == 0:
+        start = dt.datetime (start_year, start_month, start_day)
+        end = dt.datetime (end_year, end_month, end_day)
+        #tickers = ['AAPL', 'MMM', 'IBM']
+        data = pd.DataFrame()
+        
+        
+        
+        #for i in range(0, len(tickers)):
+        for i in range(0, len(tickers)):
+            df = web.DataReader (tickers[i], 'yahoo', start, end)
+            price = df['Adj Close']
+            #price = np.vstack(adj_close)
+            data.insert(i, tickers[i], price, True) 
+            
+        
+        data = data.reset_index()
+        
+    else:
+    
+        data = pd.read_excel(os.path.join('uploads/', filename))
+    
     return data
 
 
-def compute_table(data):
-    # dates = (data["Time"].tolist())
 
+def compute_table(data):
+
+    dates = (data["Time"].tolist())
+    
     del data['Time']
     tickers = list(data.columns.values)
-    # data =data.T
+    #data =data.T
     data_array = []
-
-    for i in range(0, len(data)):
+    
+    for i in range(0,len(data)):
         data_array.append((np.array(data.loc[i])))
-
-    prices = np.vstack(data_array)
-
+    
+    prices = np.vstack( data_array)
+    
     log_returns = []
-    for i in range(0, len(prices) - 1):
-        log_return = np.log(prices[i + 1] / prices[i])
+    for i in range(0,len(prices)-1):
+        log_return = np.log(prices[i+1]/prices[i])
         log_returns.append(log_return)
-
-    log_returns = np.vstack(log_returns)
-
+            
+    log_returns = np.vstack( log_returns)
+    #m = ['Mean']
+    #sg = ['Standard Deviation']
+    #sg2= ['Variance']
+    #sk = ['Skewness']
+    #ku = ['Kurtosis']
+    #minr = ['Min log returns']
+    #maxr = ['Max log returns']
+    
     m = []
     sg = []
-    sg2 = []
+    sg2= []
     sk = []
     ku = []
     minr = []
     maxr = []
     jarque_bera_test_statistic = []
-
-    for i in range(0, len(log_returns[0])):
+        
+    for i in range(0,len(log_returns[0])):
+        
         m.append(np.mean(log_returns[:, i]))
-
+        
         sg.append(np.std(log_returns[:, i]))
-        sg2.append(np.var(log_returns[:, i]))
+        sg2.append(np.var(log_returns[:, i]) )
         sk.append(scipy.stats.skew(log_returns[:, i]))
         ku.append(scipy.stats.kurtosis(log_returns[:, i]))
         minr.append(min(log_returns[:, i]))
         maxr.append(max(log_returns[:, i]))
-
-    if len(log_returns) >= 2000:
+        
+    if len(log_returns)>=2000:
         jb_statistic = []
         p_value = []
-        for i in range(0, len(log_returns[0])):
+        for i in range(0,len(log_returns[0])):
+        
             jarque_bera_test_statistic.append(scipy.stats.jarque_bera(log_returns[:, i]))
 
-        for i in range(0, len(tickers)):
-            x = jarque_bera_test_statistic[i]
+        for i in range(0,len(tickers)):
+        
+            x =  jarque_bera_test_statistic[i]
             jb_statistic.append(x[0])
             p_value.append(x[1])
-
+   
     else:
         jb_statistic = None
         p_value = None
-
+        
     mean = m
     volatility = sg
     variance = sg2
@@ -77,5 +104,5 @@ def compute_table(data):
     kurtosis = ku
     min_return = minr
     max_return = maxr
-
-    return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers
+     
+    return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers    
