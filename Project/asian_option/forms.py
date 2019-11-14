@@ -122,7 +122,7 @@ class ComputeForm(wtf.Form):
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(2, 20)])
     upper_range = wtf.FloatField(label='Upper Bound Range', default=2, validators=[wtf.validators.InputRequired()])
     lower_range = wtf.FloatField(label='Lower Bound Range', default=-2, validators=[wtf.validators.InputRequired()])
-    dump = wtf.FloatField(label='Dump Parameter', default=1.5, validators=[wtf.validators.InputRequired()])
+    dump = wtf.FloatField(label='Damping Coefficient', default=1.5, validators=[wtf.validators.InputRequired()])
     tolerance = wtf.FloatField(label='Tolerance', default=0.00001, validators=[wtf.validators.InputRequired()])
 
     # Contract Parameters
