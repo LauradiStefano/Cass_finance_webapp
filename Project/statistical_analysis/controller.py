@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from app import allowed_file, app
 from db_models import db
 from db_models import statisitcal_analysis as compute
-from statistical_analysis.compute import upload_input, compute_table
+from statistical_analysis.compute import import_dataset, compute_table
 from statistical_analysis.forms import ComputeForm
 
 
@@ -38,7 +38,9 @@ def controller_statistical_analysis(user, request):
                 file_data = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            file_data = upload_input(file_data)
+            file_data = import_dataset(file_data, form.tickers.data, form.start_day.data, form.start_month.data,
+                                       form.start_year.data, form.end_day.data, form.end_month.data, form.end_year.data,
+                                       form.method_choice.data)
 
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers = \
                 compute_table(file_data)

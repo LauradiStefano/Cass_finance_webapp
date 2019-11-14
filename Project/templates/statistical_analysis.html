@@ -14,8 +14,31 @@
         <form class="" method="post" action="" enctype="multipart/form-data">
 
             <div class="row">
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
-                <div class="col-md-12 col-12">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Method</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.method_choice.label}}
+                                {{form.method_choice}}
+                                {% if form.method_choice.errors %}
+                                {% for error in form.method_choice.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                </div>
+                <div class="col-md-6 col-12" id="import_file" {% if form.method_choice.data !='0' %}
+                     style="display:none"
+                     {%endif%}>
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
@@ -40,6 +63,88 @@
                                 {{form.file_name}}
                                 {% if form.file_name.errors %}
                                 {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+                <div class="col-md-6 col-12" id="tickers" {% if form.method_choice.data !='1' %} style="display:none"
+                     {%endif%}>
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Tickers</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.ticker.label}}
+                                {{form.ticker}}
+                                {% if form.ticker.errors %}
+                                {% for error in form.ticker.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <label> Start Date</label>
+                        <div class="row">
+                            <div class="col-4 mb-1">
+                                {{form.start_day.label}}
+                                {{form.start_day}}
+                                {% if form.start_day.errors %}
+                                {% for error in form.start_day.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.start_month.label}}
+                                {{form.start_month}}
+                                {% if form.start_month.errors %}
+                                {% for error in form.start_month.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.start_year.label}}
+                                {{form.start_year}}
+                                {% if form.start_year.errors %}
+                                {% for error in form.start_year.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <label> End Date</label>
+                        <div class="row">
+                            <div class="col-4 mb-1">
+                                {{form.end_day.label}}
+                                {{form.end_day}}
+                                {% if form.end_day.errors %}
+                                {% for error in form.end_day.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.end_month.label}}
+                                {{form.end_month}}
+                                {% if form.end_month.errors %}
+                                {% for error in form.end_month.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.end_year.label}}
+                                {{form.end_year}}
+                                {% if form.end_year.errors %}
+                                {% for error in form.end_year.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -107,6 +212,28 @@
 
 </div>
 {% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var select_method_choice = $('#method_choice');
+        var import_file = $('#import_file');
+        var tickers = $('#tickers')
+
+        select_method_choice.on('click', function() {
+            if ($('[name=method_choice]:radio:checked').val() == '0') {
+                import_file.show();
+                tickers.hide();
+            } else {
+                import_file.hide();
+                tickers.show();
+            }
+        });
+    });
+
+
+
+
+</script>
 
 </body>
 </html>
