@@ -300,6 +300,20 @@ form{
     max-height: calc(100% - 20px);
 }
 
+.popup_content .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #2F2F2F;
+}
+.popup_content .close:hover {
+  color: #8F8F8F;
+}
+
 .popup_content table {
     margin: auto;
     align-content: center;
