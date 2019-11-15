@@ -14,27 +14,26 @@ import pandas_datareader.data as web
 import scipy.stats
 
 
-def import_dataset(filename, tickers, start_day, start_month, start_year, end_day, end_month, end_year, model):
-    model = int(model)
+def import_dataset_file_excel(filename):
+    data = pd.read_excel(os.path.join('uploads/', filename))
 
-    if model == 0:
-        data = pd.read_excel(os.path.join('uploads/', filename))
+    return data
 
-    else:  # model == '1'
 
-        start = dt.datetime(start_year, start_month, start_day)
-        end = dt.datetime(end_year, end_month, end_day)
-        # tickers = ['AAPL', 'MMM', 'IBM']
-        data = pd.DataFrame()
+def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, end_month, end_year):
+    start = dt.datetime(start_year, start_month, start_day)
+    end = dt.datetime(end_year, end_month, end_day)
+    # tickers = ['AAPL', 'MMM', 'IBM']
+    data = pd.DataFrame()
 
-        # for i in range(0, len(tickers)):
-        for i in range(0, len(tickers)):
-            df = web.DataReader(tickers[i], 'yahoo', start, end)
-            price = df['Adj Close']
-            # price = np.vstack(adj_close)
-            data.insert(i, tickers[i], price, True)
+    # for i in range(0, len(tickers)):
+    for i in range(0, len(tickers)):
+        df = web.DataReader(tickers[i], 'yahoo', start, end)
+        price = df['Adj Close']
+        # price = np.vstack(adj_close)
+        data.insert(i, tickers[i], price, True)
 
-        data = data.reset_index()
+    data = data.reset_index()
 
     return data
 

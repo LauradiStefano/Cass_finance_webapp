@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from app import allowed_file, app
 from db_models import db
 from db_models import statisitcal_analysis as compute
-from statistical_analysis.compute import import_dataset, compute_table
+from statistical_analysis.compute import import_dataset_tickers, import_dataset_file_excel, compute_table
 from statistical_analysis.forms import ComputeForm
 
 
@@ -31,16 +31,22 @@ def controller_statistical_analysis(user, request):
     number_of_tickers = 0
 
     if request.method == "POST":
-        if form.validate() and request.files:
-            file = request.files[form.file_data.name]
+        if form.validate():
+            if form.method_choice.data == '0':
+                if request.files:
+                    file = request.files[form.file_data.name]
 
-            if file and allowed_file(file.filename):
-                file_data = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
+                    if file and allowed_file(file.filename):
+                        file_data = secure_filename(file.filename)
+                        file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            file_data = import_dataset(file_data, form.ticker.data, form.start_day.data, form.start_month.data,
-                                       form.start_year.data, form.end_day.data, form.end_month.data, form.end_year.data,
-                                       form.method_choice.data)
+                file_data = import_dataset_file_excel(file_data)
+
+            else:  # form.method_choice.data == '1'
+
+                file_data = import_dataset_tickers(form.ticker.data, form.start_day.data, form.start_month.data,
+                                                   form.start_year.data, form.end_day.data, form.end_month.data,
+                                                   form.end_year.data)
 
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers = \
                 compute_table(file_data)
