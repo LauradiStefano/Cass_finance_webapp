@@ -5,7 +5,7 @@ from wtforms import validators
 class ComputeForm(wtf.Form):
     price_1 = wtf.FloatField(label=r'Spot Price \((S0_\left(1\right)) \)', default=100,
                              validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    price_2 = wtf.FloatField(label=r'Spot Price \((S0_\left(1\right)) \)', default=96,
+    price_2 = wtf.FloatField(label=r'Spot Price \((S0_\left(2\right)) \)', default=96,
                              validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     dividend_yield_1 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=5,
