@@ -18,6 +18,10 @@ def import_dataset(filename, tickers, start_day, start_month, start_year, end_da
     model = int(model)
 
     if model == 0:
+        data = pd.read_excel(os.path.join('uploads/', filename))
+
+    else:  # model == '1'
+
         start = dt.datetime(start_year, start_month, start_day)
         end = dt.datetime(end_year, end_month, end_day)
         # tickers = ['AAPL', 'MMM', 'IBM']
@@ -32,15 +36,11 @@ def import_dataset(filename, tickers, start_day, start_month, start_year, end_da
 
         data = data.reset_index()
 
-    else:  # model == '1'
-
-        data = pd.read_excel(os.path.join('uploads/', filename))
-
     return data
 
 
 def compute_table(data):
-    dates = (data["Time"].tolist())
+    # dates = (data["Time"].tolist())
 
     del data['Time']
     tickers = list(data.columns.values)

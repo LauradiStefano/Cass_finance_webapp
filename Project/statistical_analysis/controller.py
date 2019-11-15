@@ -38,7 +38,7 @@ def controller_statistical_analysis(user, request):
                 file_data = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            file_data = import_dataset(file_data, form.tickers.data, form.start_day.data, form.start_month.data,
+            file_data = import_dataset(file_data, form.ticker.data, form.start_day.data, form.start_month.data,
                                        form.start_year.data, form.end_day.data, form.end_month.data, form.end_year.data,
                                        form.method_choice.data)
 
@@ -92,8 +92,8 @@ def controller_statistical_analysis(user, request):
     kurtosis = [round(x, 6) for x in kurtosis] if kurtosis is not None else None
     min_return = [round(x, 6) for x in min_return] if min_return is not None else None
     max_return = [round(x, 6) for x in max_return] if max_return is not None else None
-    jb_test = [round(x, 6) for x in jb_test] if jb_test is not None else None
-    pvalue = [round(x, 6) for x in pvalue] if pvalue is not None else None
+    jb_test = [round(x, 2) for x in jb_test] if jb_test is not None else None
+    pvalue = [round(x, 2) for x in pvalue] if pvalue is not None else None
 
     return {'form': form, 'user': user, 'min_return': min_return, 'mean': mean, 'volatility': volatility,
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
@@ -138,8 +138,8 @@ def controller_old_statistical_analysis(user):
             kurtosis = [round(x, 6) for x in kurtosis] if kurtosis is not None else None
             min_return = [round(x, 6) for x in min_return] if min_return is not None else None
             max_return = [round(x, 6) for x in max_return] if max_return is not None else None
-            jb_test = [round(x, 6) for x in jb_test] if jb_test is not None else None
-            pvalue = [round(x, 6) for x in pvalue] if pvalue is not None else None
+            jb_test = [round(x, 2) for x in jb_test] if jb_test is not None else None
+            pvalue = [round(x, 2) for x in pvalue] if pvalue is not None else None
 
             data.append({'form': form, 'id': id, 'mean': mean, 'volatility': volatility, 'variance': variance,
                          'skewness': skewness, 'kurtosis': kurtosis, 'min_return': min_return, 'max_return': max_return,

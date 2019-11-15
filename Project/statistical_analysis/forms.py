@@ -8,16 +8,17 @@ class ComputeForm(wtf.Form):
                                    validators=[InputRequired()])
 
     file_data = wtf.FileField(label='Import File')
-    file_name = StringField(label='DataSet Name', validators=[InputRequired(), validators.Length(max=25)])
-    ticker = StringField(label='Tickers', validators=[InputRequired(), validators.Length(max=25)])
+    file_name = StringField(label='DataSet Name', default='Test',
+                            validators=[InputRequired(), validators.Length(max=25)])
+    ticker = StringField(label='Tickers', default='AAA', validators=[InputRequired()])
 
-    start_day = IntegerField(label='Day', validators=[InputRequired(), validators.Length(max=25)])
-    start_month = IntegerField(label='Month', validators=[InputRequired(), validators.Length(max=25)])
-    start_year = IntegerField(label='Year', validators=[InputRequired(), validators.Length(max=25)])
+    start_day = IntegerField(label='Day', default=1, validators=[InputRequired()])
+    start_month = IntegerField(label='Month', default=1, validators=[InputRequired()])
+    start_year = IntegerField(label='Year', default=2000, validators=[InputRequired()])
 
-    end_day = IntegerField(label='Day', validators=[InputRequired(), validators.Length(max=25)])
-    end_month = IntegerField(label='Month', validators=[InputRequired(), validators.Length(max=25)])
-    end_year = IntegerField(label='Year', validators=[InputRequired(), validators.Length(max=25)])
+    end_day = IntegerField(label='Day', default=1, validators=[InputRequired()])
+    end_month = IntegerField(label='Month', default=1, validators=[InputRequired()])
+    end_year = IntegerField(label='Year', default=2000, validators=[InputRequired()])
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
