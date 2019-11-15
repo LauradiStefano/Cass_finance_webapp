@@ -342,14 +342,21 @@
                         </div>
 
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
+                                 <div class="icon_help_input">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_input">
+                                        To identify the dataset
+                                    </div>
+                                </div>
                                 {{form.file_name}}
                                 {% if form.file_name.errors %}
                                 {% for error in form.file_name.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
+
                             </div>
                         </div>
 
@@ -525,6 +532,7 @@
         var svensson = $('#svensson');
 
         var help_formula = $('#help_formula');
+        var help_input = $('#help_input');
 
         update = function() {
             var vasicek_formula = $('#vasicek > .model_formula')[0].innerHTML;
@@ -561,12 +569,22 @@
         select_distribution.on('change', update);
 
         var icon_help = $('.icon_help').first();
+        var icon_help_input = $('.icon_help_input').first();
+
         icon_help.on('mouseenter', function() {
             help_formula.show();
         });
 
-        icon_help.on('mouseleave', function() {
+          icon_help.on('mouseleave', function() {
             help_formula.hide();
+        });
+
+        icon_help_input.on('mouseenter', function(){
+            help_input.show();
+        });
+
+        icon_help_input.on('mouseleave', function() {
+            help_input.hide();
         });
 
         update();

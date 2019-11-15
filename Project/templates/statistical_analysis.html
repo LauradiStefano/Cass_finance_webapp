@@ -58,8 +58,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
+                                <div class="icon_help_input">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_input">
+                                        To identify the dataset
+                                    </div>
+                                </div>
                                 {{form.file_name}}
                                 {% if form.file_name.errors %}
                                 {% for error in form.file_name.errors %}
@@ -217,7 +223,7 @@
     $(function(){
         var select_method_choice = $('#method_choice');
         var import_file = $('#import_file');
-        var tickers = $('#tickers')
+        var tickers = $('#tickers');
 
         select_method_choice.on('click', function() {
             if ($('[name=method_choice]:radio:checked').val() == '0') {
@@ -227,6 +233,16 @@
                 import_file.hide();
                 tickers.show();
             }
+        });
+
+        var help_input = $('#help_input');
+        var icon_help_input = $('.icon_help_input').first();
+        icon_help_input.on('mouseenter', function(){
+            help_input.show();
+        });
+
+        icon_help_input.on('mouseleave', function(){
+            help_input.hide();
         });
     });
 

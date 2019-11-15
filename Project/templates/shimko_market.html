@@ -35,8 +35,14 @@
                         </div>
 
                         <div class="row">
-                            <div class="col mb-1">
+                            <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
+                                <div class="icon_help_input">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_input">
+                                        To identify the dataset
+                                    </div>
+                                </div>
                                 {{form.file_name}}
                                 {% if form.file_name.errors %}
                                 {% for error in form.file_name.errors %}
@@ -381,6 +387,16 @@
             } else {
                 risk_free.hide();
             }
+        });
+
+        var help_input = $('#help_input');
+        var icon_help_input = $('.icon_help_input').first();
+        icon_help_input.on('mouseenter', function() {
+            help_input.show();
+        });
+
+        icon_help_input.on('mouseleave', function() {
+            help_input.hide();
         });
     });
 
