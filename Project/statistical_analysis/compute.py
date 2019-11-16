@@ -16,6 +16,7 @@ import scipy.stats
 
 def import_dataset_file_excel(filename):
     data = pd.read_excel(os.path.join('uploads/', filename))
+    del data['Time']
 
     return data
 
@@ -25,7 +26,9 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     end = dt.datetime(end_year, end_month, end_day)
     # tickers = ['AAPL', 'MMM', 'IBM']
     data = pd.DataFrame()
-
+    nature = type(tickers)
+    if nature == str:
+         tickers = [tickers]
     # for i in range(0, len(tickers)):
     for i in range(0, len(tickers)):
         df = web.DataReader(tickers[i], 'yahoo', start, end)
@@ -34,6 +37,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
         data.insert(i, tickers[i], price, True)
 
     data = data.reset_index()
+    del data['Date']
 
     return data
 
@@ -41,7 +45,6 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 def compute_table(data):
     # dates = (data["Time"].tolist())
 
-    del data['Time']
     tickers = list(data.columns.values)
     # data =data.T
     data_array = []
