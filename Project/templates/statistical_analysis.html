@@ -87,13 +87,18 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.ticker.label}}
-                                {{form.ticker}}
-                                {% if form.ticker.errors %}
-                                {% for error in form.ticker.errors %}
+                                {{form.tickers.label}}
+                                {{form.tickers}}
+                                {% if form.tickers.errors %}
+                                {% for error in form.tickers.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                {{form.button_add_row}}
                             </div>
                         </div>
                         <label> Start Date</label>
@@ -245,9 +250,6 @@
             help_input.hide();
         });
     });
-
-
-
 
 </script>
 

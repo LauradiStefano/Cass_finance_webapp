@@ -22,11 +22,14 @@ def import_dataset_file_excel(filename):
 
 
 def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, end_month, end_year):
+
     start = dt.datetime(start_year, start_month, start_day)
     end = dt.datetime(end_year, end_month, end_day)
-    # tickers = ['AAPL', 'MMM', 'IBM']
+
     data = pd.DataFrame()
     nature = type(tickers)
+
+    # questo è da fare su controller
     if nature == str:
          tickers = [tickers]
     # for i in range(0, len(tickers)):
