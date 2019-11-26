@@ -25,11 +25,6 @@
                             <div class="col mb-1">
                                 {{form.method_choice.label}}
                                 {{form.method_choice}}
-                                {% if form.method_choice.errors %}
-                                {% for error in form.method_choice.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
                             </div>
                         </div>
 
@@ -87,10 +82,9 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.tickers.label}}
-                                {{form.tickers}}
-                                {% if form.tickers.errors %}
-                                {% for error in form.tickers.errors %}
+                                {{form.flist}}
+                                {% if form.flist.errors %}
+                                {% for error in form.flist.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -98,9 +92,10 @@
                         </div>
                         <div class="row">
                             <div class="col d-flex justify-content-center">
-                                {{form.button_add_row}}
+                                {{form.button_add_field}}
                             </div>
                         </div>
+
                         <label> Start Date</label>
                         <div class="row">
                             <div class="col-4 mb-1">
@@ -250,6 +245,17 @@
             help_input.hide();
         });
     });
+
+    $(document).ready(function() {
+    $("#button_add_field").click(function() {
+        var new_input = $("<input required type='text' value=''></input>")
+            .attr("id", "new_input")
+            .attr("name", "new_input")
+        $("#flist").append(new_input);
+    });
+    });
+
+
 
 </script>
 

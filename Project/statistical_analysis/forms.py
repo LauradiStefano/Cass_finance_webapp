@@ -12,7 +12,8 @@ class ComputeForm(wtf.Form):
                             validators=[InputRequired(), validators.Length(max=25)])
     tickers = StringField(label='Tickers', default='AAPL',
                           validators=[InputRequired()])
-    # ticker_list = FieldList(StringField(tickers), min_entries=1)
+
+    flist = FieldList(tickers, min_entries=1)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
@@ -24,4 +25,4 @@ class ComputeForm(wtf.Form):
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
-    button_add_row = wtf.SubmitField(label='Add Row')
+    button_add_field = wtf.SubmitField(label='Add Row')

@@ -259,6 +259,16 @@ form{
     overflow: hidden;
 }
 
+#flist-0{
+    margin: 3px auto !important;
+    overflow: hidden;
+}
+
+#flist > input{
+    margin: 3px auto !important;
+    overflow: hidden;
+}
+
 .row.border-bottom {
     border-bottom: 1.5px solid #C8202E!important;
 }
