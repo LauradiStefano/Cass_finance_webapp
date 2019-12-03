@@ -269,6 +269,23 @@ form{
     overflow: hidden;
 }
 
+/*#button_delete_field{
+    margin-top: 16px;
+    width: 85px;
+    height: 25px;
+    font-size: 12px;
+    text-align: center;
+    padding: 2px;
+}*/
+
+#button_add_field{
+    width: 85px;
+    height: 25px;
+    font-size: 12px;
+    text-align: center;
+    padding: 2px;
+}
+
 .row.border-bottom {
     border-bottom: 1.5px solid #C8202E!important;
 }
