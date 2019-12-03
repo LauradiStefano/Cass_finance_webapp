@@ -10,10 +10,8 @@ class ComputeForm(wtf.Form):
     file_data = wtf.FileField(label='Import File')
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
-    tickers = StringField(label='Tickers', default='AAPL',
-                          validators=[InputRequired()])
 
-    flist = FieldList(tickers, min_entries=1)
+    flist = FieldList(StringField(label='Tickers', default='AAPL'), min_entries=1)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])

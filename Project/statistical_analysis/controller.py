@@ -44,7 +44,7 @@ def controller_statistical_analysis(user, request):
 
             else:  # form.method_choice.data == '1'
 
-                file_data = import_dataset_tickers(form.tickers.data, form.start_day.data, form.start_month.data,
+                file_data = import_dataset_tickers(form.flist.data, form.start_day.data, form.start_month.data,
                                                    form.start_year.data, form.end_day.data, form.end_month.data,
                                                    form.end_year.data)
 

@@ -247,15 +247,17 @@
     });
 
     $(document).ready(function() {
-    $("#button_add_field").click(function() {
-        var new_input = $("<input required type='text' value=''></input>")
-            .attr("id", "new_input")
-            .attr("name", "new_input")
-        $("#flist").append(new_input);
-    });
-    });
+        var field_number = 1;
+        $('#button_add_field').click(function() {
+        var new_input = $("<input required type='text' ></input>")
+            .attr('id', 'flist-' + field_number)
+            .attr('name', 'flist-' + field_number)
 
+        $('#flist').append(new_input);
+        field_number++;
 
+        });
+    });
 
 </script>
 
