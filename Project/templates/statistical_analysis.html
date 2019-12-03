@@ -248,6 +248,7 @@
 
     $(document).ready(function() {
         var field_number = 1;
+
         $('#button_add_field').click(function() {
         var new_input = $("<input required type='text' ></input>")
             .attr('id', 'flist-' + field_number)
@@ -255,8 +256,8 @@
 
         $('#flist').append(new_input);
         field_number++;
-
         });
+
     });
 
 </script>

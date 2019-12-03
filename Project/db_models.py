@@ -418,7 +418,16 @@ class spread_option(db.Model):
 class statisitcal_analysis(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
+    method_choice = db.Column(db.String())
     file_name = db.Column(db.String())
+
+    start_day = db.Column(db.Integer())
+    start_month = db.Column(db.Integer())
+    start_year = db.Column(db.Integer())
+
+    end_day = db.Column(db.Integer())
+    end_month = db.Column(db.Integer())
+    end_year = db.Column(db.Integer())
 
     mean = db.Column(db.String())
     variance = db.Column(db.String())
@@ -434,6 +443,7 @@ class statisitcal_analysis(db.Model):
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
+    button_add_field = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_statistical_analysis', lazy='dynamic'))
