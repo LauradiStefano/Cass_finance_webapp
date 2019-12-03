@@ -124,9 +124,9 @@
             <span class="navbar-text">
                 {% if user is defined%}
                     {% if user.is_authenticated %}
-                    Logged in as {{user.username}}
+                    <a class="mx-2">Logged in as {{user.username}}</a>
                         {% if index is not defined %}
-                        <a class="mx-3" href="{{request.path}}/old">Previous simulations</a>
+                        <a class="mx-2" href="{{request.path}}/old">Previous simulations</a>
                         {% endif %}
                     <a class="mx-2" href="/logout">Logout</a>
                     {% else %}
