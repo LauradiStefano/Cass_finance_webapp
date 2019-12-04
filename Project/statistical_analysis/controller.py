@@ -110,7 +110,13 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        field.data = getattr(instance, field.name, None)
+        if type(field.data) == list:
+            field.data.pop()  # remove tickers name in field
+            # for x in instance.tickers:
+            #     field.data.append(x)
+        else:
+            field.data = getattr(instance, field.name, None)  # get a value or, if it doesn't exist, a default value
+
     return form
 
 
