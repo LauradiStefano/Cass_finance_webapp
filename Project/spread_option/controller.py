@@ -44,7 +44,7 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        field.data = getattr(instance, field.name)
+        field.data = getattr(instance, field.name, None)  # get a value or, if it doesn't exist, a default value
     return form
 
 
