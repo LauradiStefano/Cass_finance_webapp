@@ -344,9 +344,9 @@
                         <div class="row">
                             <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
-                                <div class="icon_help_input">
+                                <div id="icon_help_dataset">
                                     <img src="/static/icon_help.png">
-                                    <div class="model_formula" id="help_input">
+                                    <div class="model_formula" id="help_dataset">
                                         To identify the dataset
                                     </div>
                                 </div>
@@ -356,7 +356,6 @@
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
-
                             </div>
                         </div>
 
@@ -487,11 +486,10 @@
         {%endif%}
     </div>
 
-    <div id="popup_table" style="display:none">
+    <div id="popup_table">
 
         <div class="row border-bottom mb-2 pb-1">
             <legend>Results</legend>
-            <a class="close" href="term_structure">&times;</a>
         </div>
         <div class="table_wrapper">
             <table class="table table-striped table-hover" id="table_export">
@@ -532,7 +530,7 @@
         var svensson = $('#svensson');
 
         var help_formula = $('#help_formula');
-        var help_input = $('#help_input');
+        var help_dataset = $('#help_dataset');
 
         update = function() {
             var vasicek_formula = $('#vasicek > .model_formula')[0].innerHTML;
@@ -544,7 +542,7 @@
                 cir.hide();
                 nelsonSiegel.hide();
                 svensson.hide();
-                help_formula.html(vasicek_formula);
+                help_formula.html(vasicek_formula).hide();
             } else if (select_distribution.val() == '1') {
                 vasicek.hide();
                 cir.show();
@@ -569,7 +567,7 @@
         select_distribution.on('change', update);
 
         var icon_help = $('.icon_help').first();
-        var icon_help_input = $('.icon_help_input').first();
+        var icon_help_dataset = $('#icon_help_dataset');
 
         icon_help.on('mouseenter', function() {
             help_formula.show();
@@ -579,16 +577,17 @@
             help_formula.hide();
         });
 
-        icon_help_input.on('mouseenter', function(){
-            help_input.show();
+        icon_help_dataset.on('mouseenter', function(){
+            help_dataset.show();
         });
 
-        icon_help_input.on('mouseleave', function() {
-            help_input.hide();
+        icon_help_dataset.on('mouseleave', function() {
+            help_dataset.hide();
         });
 
         update();
     });
+
 
 
 

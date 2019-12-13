@@ -327,18 +327,24 @@ form{
     max-height: calc(100% - 20px);
 }
 
-.popup_content .close {
+.popup_content .popup_close {
   position: absolute;
   top: 20px;
   right: 30px;
   transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
   text-decoration: none;
-  color: #2F2F2F    ;
+  color: #2F2F2F;
+  background: none;
+  border: none;
 }
-.popup_content .close:hover {
+
+.popup_content .popup_close:hover {
   color: #8F8F8F;
+}
+
+.popup_close span {
+ font-size: 20px;
+ font-weight: bold;
 }
 
 .popup_content table {
@@ -394,7 +400,7 @@ img {
     width: 20px;
 }
 
-.icon_help, .icon_help_input {
+.icon_help, #icon_help_dataset {
     display:inline-block;
     position:relative;
     z-index:1000;
@@ -412,7 +418,7 @@ img {
 
 }
 
-.icon_help_input > div {
+#icon_help_dataset > div {
     position:absolute;
     background-color: #ffffff;
     left:50%;
@@ -428,7 +434,7 @@ img {
     overflow:visible;
 }
 
-.model_formula, #help_input {
+.model_formula, #help_dataset {
     display:none;
     height:30px;
     width:200px;

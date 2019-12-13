@@ -2,9 +2,17 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
 
-<script type="text/javascript">$('#popup_table').popup(); </script>
+<script>
+  $( function() {
+    $('#popup_table').popup();
+    $('#popup_table').popup('addclosebutton');
+  });
+
+</script>
 
 <script src="https://unpkg.com/xlsx@0.14.3/dist/xlsx.full.min.js"></script>
 
@@ -36,6 +44,8 @@ buttonExportTable.addEventListener('click', function (e) {
     instance.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges,
     xlsxData.RTL, xlsxData.sheetname);
 });
+
+
 
 
 
