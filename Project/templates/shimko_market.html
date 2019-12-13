@@ -34,12 +34,12 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                           <div class="row">
                             <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
-                                <div class="icon_help_input">
+                                <div id="icon_help_dataset">
                                     <img src="/static/icon_help.png">
-                                    <div class="model_formula" id="help_input">
+                                    <div class="model_formula" id="help_dataset">
                                         To identify the dataset
                                     </div>
                                 </div>
@@ -51,6 +51,7 @@
                                 {% endif %}
                             </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col mb-1">
@@ -189,7 +190,7 @@
                     </div>
                 </div>
             </fieldset>
-
+            {%if form.risk_dividend.data == '1'%}
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Details Model</legend>
@@ -198,15 +199,13 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row d-flex flex-column">
-
-                            {%if form.risk_dividend.data == '1'%}
                             <span class="font-weight-light mb-1"> Interest Rate \((\%)\): {{risk_free}}</span>
                             <span class="font-weight-light mb-1"> Dividend Yield \((\%)\): {{div_yield}}</span>
-                            {%endif%}
                         </div>
                     </div>
                 </div>
             </fieldset>
+            {%endif%}
         </div>
 
         <div class="col-md-8 col-12">
@@ -389,16 +388,17 @@
             }
         });
 
-        var help_input = $('#help_input');
-        var icon_help_input = $('.icon_help_input').first();
-        icon_help_input.on('mouseenter', function() {
-            help_input.show();
+        var help_dataset = $('#help_dataset');
+        var icon_help_dataset = $('#icon_help_dataset');
+         icon_help_dataset.on('mouseenter', function(){
+            help_dataset.show();
         });
 
-        icon_help_input.on('mouseleave', function() {
-            help_input.hide();
+        icon_help_dataset.on('mouseleave', function() {
+            help_dataset.hide();
         });
     });
+
 
 
 </script>
