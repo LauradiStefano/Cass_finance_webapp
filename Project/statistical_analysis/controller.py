@@ -138,7 +138,7 @@ def controller_old_statistical_analysis(user):
             kurtosis = json.loads(instance.kurtosis)
             min_return = json.loads(instance.min_return)
             max_return = json.loads(instance.max_return)
-            jb_test = np.array(json.loads(instance.jb_test))
+            jb_test = (json.loads(instance.jb_test))
             pvalue = json.loads(instance.pvalue)
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers

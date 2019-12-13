@@ -24,10 +24,31 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
+                                    {% if result['form'].method_choice.data == '0' %}
                                     <span class="mb-1">
-                                            {{result['form'].file_name.label}}:<br/>
-                                            {{result['form'].file_name.data}}<br/>
+                                        <label>Method</label>:<br/>
+                                        {{dict(result['form'].method_choice.choices).get(result['form'].method_choice.data)}}
                                     </span>
+                                    <span class="mb-1">
+                                        {{result['form'].file_name.label}}:<br/>
+                                        {{result['form'].file_name.data}}
+                                    </span>
+
+                                    {% else %}
+                                     <span class="mb-1">
+                                        <label>Method</label>:<br/>
+                                        {{dict(result['form'].method_choice.choices).get(result['form'].method_choice.data)}}
+                                    </span>
+                                     <span class="mb-1">
+                                        <label>Start Date</label>:<br/>
+                                        {{result['form'].start_day.data}}/{{result['form'].start_month.data}}/{{result['form'].start_year.data}}
+                                    </span>
+
+                                     <span class="mb-1">
+                                        <label>End Date</label>:<br/>
+                                        {{result['form'].end_day.data}}/{{result['form'].end_month.data}}/{{result['form'].end_year.data}}
+                                    </span>
+                                    {%endif%}
                                 </div>
                             </div>
                         </fieldset>
