@@ -55,9 +55,9 @@
                         <div class="row">
                             <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
-                                <div class="icon_help_input">
+                                 <div id="icon_help_dataset">
                                     <img src="/static/icon_help.png">
-                                    <div class="model_formula" id="help_input">
+                                    <div class="model_formula" id="help_dataset">
                                         To identify the dataset
                                     </div>
                                 </div>
@@ -235,14 +235,14 @@
             }
         });
 
-        var help_input = $('#help_input');
-        var icon_help_input = $('.icon_help_input').first();
-        icon_help_input.on('mouseenter', function(){
-            help_input.show();
+        var help_dataset = $('#help_dataset');
+        var icon_help_dataset = $('#icon_help_dataset');
+        icon_help_dataset.on('mouseenter', function(){
+            help_dataset.show();
         });
 
-        icon_help_input.on('mouseleave', function(){
-            help_input.hide();
+        icon_help_dataset.on('mouseleave', function() {
+            help_dataset.hide();
         });
     });
 
