@@ -87,7 +87,7 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
 
     else:  # type choice == 9 Ou exp gaussian model
 
-        risk_free_exp = risk_free_exp/100
+        risk_free_exp = risk_free_exp / 100
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
             exp_gaussian_option(price_exp, strike_exp, time_exp, risk_free_exp, N_exp, epsilon_exp, k1_exp, sigma_exp,
                                 Nfft, lmax_exp, lmin_exp, delta,

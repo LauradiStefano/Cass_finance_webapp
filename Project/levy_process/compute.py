@@ -45,7 +45,7 @@ def cos_pdf_underlying_asset(type_choice, parameters, time):
     pdf_underlying_asset = get_pdf_cos(type_choice, underlying_prices, a, b, parameters, time, N)
 
     mean, variance, skewness, kurtosis = compute_moments(type_choice, parameters, time)
-    norm_pdf = norm.pdf(underlying_prices, mean, variance ** 0.5 )
+    norm_pdf = norm.pdf(underlying_prices, mean, variance ** 0.5)
 
     return pdf_underlying_asset, underlying_prices, mean, variance, skewness, kurtosis, norm_pdf
 

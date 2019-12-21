@@ -190,50 +190,9 @@ def create_implied_volatility_plot(strike, implied_volatility, s0, strike_min, s
     fig.legend.location = "bottom_left"
     fig.toolbar.active_drag = None
 
-    callback = CustomJS(args=dict(source=data, a0=a0, a1=a1, a2=a2, strike_min=strike_min, strike_atm=strike_atm,
-                                  strike_max=strike_max, y_range=fig.y_range), code="""
-        var data = source.data;
-        var vol_min = vol_min.value;
-        var vol_atm = vol_atm.value;
-        var vol_max = vol_max.value;
-        var strike = data['strike'];
-        var volatility = data['volatility'];
-        var implied_volatility = data['implied_volatility'];
-        
-        var strike_matrix =([[1, strike_min, (Math.pow(strike_min,2))], [1, strike_atm, (Math.pow(strike_atm,2))], 
-        [1, strike_max, (Math.pow(strike_max,2))]]);
-        var inv_strike_matrix = math.inv(strike_matrix);
-        volatility [0] = vol_min;
-        volatility [1] = vol_atm;
-        volatility [2] = vol_max;
-        var parameters = math.multiply(inv_strike_matrix, math.transpose(volatility));
-        a0=parameters[0];
-        a1=parameters[1];
-        a2=parameters[2];
-        
-        for (var i = 0; i < strike.length; i++) {
-            implied_volatility[i] = a0 + a1 * strike[i] + a2 * Math.pow(strike[i], 2);
-        }
-        y_range.end = math.max(implied_volatility)+0.02;
-        source.change.emit();
-    """)
-
-    vol_min_slider = Slider(start=0, end=0.5, value=volatility[0], step=.05, title="Min", callback=callback)
-    callback.args["vol_min"] = vol_min_slider
-
-    vol_atm_slider = Slider(start=0, end=0.5, value=volatility[1], step=.05, title="Atm", callback=callback)
-    callback.args["vol_atm"] = vol_atm_slider
-
-    vol_max_slider = Slider(start=0, end=0.5, value=volatility[2], step=.05, title="Max", callback=callback)
-    callback.args["vol_max"] = vol_max_slider
-
-    layout = column(
-        fig,
-        column(vol_min_slider, vol_atm_slider, vol_max_slider)
-    )
-
     from bokeh.embed import components
-    script, div = components(layout)
+    script, div = components(fig)
+
     return script, div
 
 
