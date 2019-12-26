@@ -452,6 +452,9 @@ class statisitcal_analysis(db.Model):
 class portfolio_analysis(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
+    file_name = db.Column(db.String())
+    n_portfolio = db.Column(db.Integer())
+
     returns = db.Column(db.String())
     standard_deviations = db.Column(db.String())
     means = db.Column(db.String())

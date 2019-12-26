@@ -46,8 +46,8 @@ def controller_portfolio_analysis(user, request):
             form.populate_obj(object)
 
             object.returns = json.dumps(returns.tolist())
-            object.standard_deviations = json.dumps(standard_deviations)
-            object.means = json.dumps(means)
+            object.standard_deviations = json.dumps(standard_deviations.tolist())
+            object.means = json.dumps(means.tolist())
             object.efficient_means = json.dumps(efficient_means.tolist())
             object.efficient_std = json.dumps(efficient_std.tolist())
 
@@ -63,8 +63,8 @@ def controller_portfolio_analysis(user, request):
                 form = populate_form_from_instance(instance)
 
                 returns = np.array(json.loads(instance.returns))
-                standard_deviations = json.loads(instance.standard_deviations)
-                means = json.loads(instance.means)
+                standard_deviations = np.array(json.loads(instance.standard_deviations))
+                means = np.array(json.loads(instance.means))
                 efficient_means = np.array(json.loads(instance.efficient_means))
                 efficient_std = np.array(json.loads(instance.efficient_std))
 
@@ -93,9 +93,10 @@ def controller_old_portfolio_analysis(user):
 
             # page old.html, store the date and the plot (previous simulation)
 
+            id = instance.id
             returns = np.array(json.loads(instance.returns))
-            standard_deviations = json.loads(instance.standard_deviations)
-            means = json.loads(instance.means)
+            standard_deviations = np.array(json.loads(instance.standard_deviations))
+            means = np.array(json.loads(instance.means))
             efficient_means = np.array(json.loads(instance.efficient_means))
             efficient_std = np.array(json.loads(instance.efficient_std))
 

@@ -154,7 +154,7 @@ def old_statistical_analysis():
                            back_url=url_for('statistical_analysis'), old=True)
 
 
-@app.route('/portfolio_anlysis/old')
+@app.route('/portfolio_analysis/old')
 def old_portfolio_analysis():
     template_variables = controller_old_portfolio_analysis(current_user)
     return render_template("old_portfolio_analysis.html", **template_variables,
