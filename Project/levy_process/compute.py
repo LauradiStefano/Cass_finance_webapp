@@ -66,7 +66,7 @@ def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying
                                tooltips=[("Returns", "@underlying_prices"), ("Pdf Norm", "@norm_pdf")])
 
     x_range = [min(underlying_prices), max(underlying_prices)]
-    y_range = [0, max(max(norm_pdf),max(pdf_underlying_asset)) * 1.10]
+    y_range = [0, max(max(norm_pdf), max(pdf_underlying_asset)) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_norm_pdf], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Returns',
                     y_axis_label='Probability')
