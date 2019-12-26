@@ -119,41 +119,40 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
         ticker_means=ticker_means,
         ticker_standard_deviations=ticker_standard_deviations))
 
-    hover_data_efficient = HoverTool(attachment="above", names=['efficient combination'],
-                                     tooltips=[("ef_standard_deviations", "@ef_standard_deviations"),
-                                               ("ef_means", "@ef_means")])
+    hover_data_efficient = HoverTool(attachment="above", names=['efficient portfolios'],
+                                     tooltips=[("Eff Std", "@ef_standard_deviations"),
+                                               ("Eff Means", "@ef_means")])
 
-    hover_data_randomize = HoverTool(attachment="below", names=['model spot rate'],
-                                     tooltips=[("standard_deviations", "@standard_deviations"), ("means", "@means")])
+    hover_data_randomize = HoverTool(attachment="below", names=['data random'],
+                                     tooltips=[("Std", "@standard_deviations"), ("Means", "@means")])
 
-    hover_data_ticker = HoverTool(attachment="below", names=['model spot rate'],
-                                  tooltips=[("ticker_standard_deviations", "@ticker_standard_deviations"),
-                                            ("ticker_means", "@ticker_means")])
+    hover_data_ticker = HoverTool(attachment="below", names=['data ticker'],
+                                  tooltips=[("Ticker Std", "@ticker_standard_deviations"),
+                                            ("Ticker Mean", "@ticker_means")])
 
-    y_range = [min(ticker_means), max(ticker_means)]
-    x_range = [min(ef_standard_deviations) - min(ef_standard_deviations) * 0.05, max(ticker_standard_deviations)]
+    y_range = [min(ticker_means) - 0.00006, max(ticker_means) + 0.00006]
+    x_range = [min(ef_standard_deviations) - min(ef_standard_deviations) * 0.05,
+               max(ticker_standard_deviations) + 0.002]
 
     fig = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair'],
+        tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
         x_axis_label='Standard Deviation', y_axis_label=' Mean')
 
-    fig.circle(x='ef_standard_deviations', y='ef_means', source=data_efficient, color="orange",
-               legend='Efficient Portfolios', size=6, name='efficient portfolios')
+    fig.circle(x='standard_deviations', y='means', source=data_randomize, legend="Random Port",
+               color="#0095B6", size=5, name='data random')
 
-    fig.circle(x='standard_deviations', y='means', source=data_randomize, color="green",
-               legend='Random Generated Portfolios', size=6,
-               name='Random Generated Portfolios')
+    fig.circle(x='ef_standard_deviations', y='ef_means', source=data_efficient, legend="Efficient Port",
+               color="#2F2F2F", size=6, name='efficient portfolios')
 
-    fig.circle(x='ticker_standard_deviations', y='ticker_means', source=data_ticker, color="blue",
-               legend='Mean amd standard deviation single asset', size=6,
-               name='Mean and Standard Deviation (single asset)')
+    fig.circle(x='ticker_standard_deviations', y='ticker_means', source=data_ticker,
+               legend="Mean and Std Single Asset", color="#D21F1B", size=6, alpha=0.7, name='data ticker')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "bottom_left"
     fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
     script, div = components(fig)
 
-    return script
+    return script, div
