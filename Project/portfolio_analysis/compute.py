@@ -12,6 +12,8 @@ Created on Thu Dec 19 22:02:29 2019
 @author: Diego
 """
 
+import os
+
 import bokeh.plotting as bp
 import numpy as np
 import pandas as pd
@@ -21,18 +23,6 @@ from scipy.optimize import minimize
 
 from portfolio_analysis.useful_functions import sumweigth, expret, variance, random_portfolio
 
-
-# ------------------------------------------------------------------------------
-# INPUTS
-# n_portfolios = come valore di default va bene 100
-# il file xlsx con tanti colonne quanti sono i titoli in portafoglio
-
-# OUTPUT
-# genera portafogli casuali con peso totale =1 (no vendite allo scoperto)
-# calcola portafogli ottimali (numero di combinazioni calcolate n_portfolios/10)
-# target minimo =0 (portafoglio efficente con media minore)
-# target massimo = valore atteso massimo tra i singoli titoli(portafoglio efficiente con media maggiore)
-# ------------------------------------------------------------------------------
 
 def upload_input(filename=None):
     data = pd.read_excel(os.path.join('uploads/', filename))
@@ -110,10 +100,10 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
     ef_standard_deviations = EFstds  # deviazioni standard dei portafogli efficienti
     ef_means = EFmeans  # valori attesi dei portafogli efficienti
 
-    return return_vec, standard_deviations, means, ef_means, ef_standard_deviations
+    return standard_deviations, means, ef_means, ef_standard_deviations
 
 
-def plot_efficient_frontier(return_vec, standard_deviations, means, ef_means, ef_standard_deviations):
+def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_means, ef_standard_deviations):
     ticker_means = np.mean(return_vec, axis=1)
     ticker_standard_deviations = np.std(return_vec, axis=1)
 
@@ -144,7 +134,7 @@ def plot_efficient_frontier(return_vec, standard_deviations, means, ef_means, ef
     x_range = [min(ef_standard_deviations) - min(ef_standard_deviations) * 0.05, max(ticker_standard_deviations)]
 
     fig = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
+        tools=['save, pan, box_zoom, reset, crosshair'],
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
         x_axis_label='Standard Deviation', y_axis_label=' Mean')
 
@@ -161,6 +151,7 @@ def plot_efficient_frontier(return_vec, standard_deviations, means, ef_means, ef
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_right"
+    fig.legend.click_policy = "hide"
 
     from bokeh.embed import components
     script, div = components(fig)

@@ -10,6 +10,8 @@ from db_models import db, User
 from heston_method.controller import controller_heston_method, controller_old_heston_method, \
     delete_heston_method_simulation
 from levy_process.controller import controller_levy_process, controller_old_levy_process, delete_levy_process_simulation
+from portfolio_analysis.controller import controller_portfolio_analysis, controller_old_portfolio_analysis, \
+    delete_portfolio_analysis_simulation
 from shimko_market.controller import controller_shimko_market, controller_old_shimko_market, \
     delete_shimko_market_simulation
 from shimko_theoretical.controller import controller_old_shimko_theoretical, controller_shimko_theoretical, \
@@ -89,6 +91,12 @@ def statistical_analysis():
     return render_template("statistical_analysis.html", **template_variables, table_export=True)
 
 
+@app.route('/portfolio_analysis', methods=['GET', 'POST'])
+def portfolio_analysis():
+    template_variables = controller_portfolio_analysis(current_user, request)
+    return render_template("portfolio_analysis.html", **template_variables)
+
+
 @app.route('/shimko_theoretical/old')
 @login_required
 def old_shimko_theoretical():
@@ -146,6 +154,13 @@ def old_statistical_analysis():
                            back_url=url_for('statistical_analysis'), old=True)
 
 
+@app.route('/portfolio_anlysis/old')
+def old_portfolio_analysis():
+    template_variables = controller_old_portfolio_analysis(current_user)
+    return render_template("old_portfolio_analysis.html", **template_variables,
+                           back_url=url_for('portfolio_analysis'), old=True)
+
+
 @app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -192,6 +207,12 @@ def delete_spread_option(id):
 @login_required
 def delete_statistical_analysis(id):
     return delete_statistical_analysis_simulation(current_user, id)
+
+
+@app.route('/portfolio_analysis/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_portfolio_analysis(id):
+    return delete_portfolio_analysis_simulation(current_user, id)
 
 
 @app.route('/reg', methods=['GET', 'POST'])

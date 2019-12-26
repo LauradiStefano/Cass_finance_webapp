@@ -447,3 +447,18 @@ class statisitcal_analysis(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_statistical_analysis', lazy='dynamic'))
+
+
+class portfolio_analysis(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    returns = db.Column(db.String())
+    standard_deviations = db.Column(db.String())
+    means = db.Column(db.String())
+    efficient_means = db.Column(db.String())
+    efficient_std = db.Column(db.String())
+
+    button_compute = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_portfolio_analysis', lazy='dynamic'))

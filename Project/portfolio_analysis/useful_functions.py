@@ -22,7 +22,7 @@ def variance(x, Sigma):
     ''' 
     Compute the variance of a portfolio given the covariance matrix
     '''
-    return (np.dot(x.T, np.dot(Sigma, x)))
+    return np.dot(x.T, np.dot(Sigma, x))
 
 
 def rand_weights(n):
