@@ -55,7 +55,7 @@
                         <div class="row">
                             <div class="col mb-1 container_model">
                                 {{form.file_name.label}}
-                                 <div id="icon_help_dataset">
+                                <div id="icon_help_dataset">
                                     <img src="/static/icon_help.png">
                                     <div class="model_formula" id="help_dataset">
                                         To identify the dataset
@@ -259,6 +259,17 @@
         field_number++;
         });
 
+    });
+
+    $(document).ready(function() {
+        var select_method_choice = $('#method_choice');
+        $('#button_compute').prop('disabled', true);
+
+        select_method_choice.on('click', function() {
+            if ($('[name=method_choice]:radio:checked').val() != '') {
+                $('#button_compute').prop('disabled', false)
+            }
+        });
     });
 
 </script>
