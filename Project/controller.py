@@ -1,4 +1,5 @@
 import os
+from _socket import gethostname
 
 from flask import render_template, request, redirect, url_for
 from flask_login import LoginManager, current_user, \
@@ -251,7 +252,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-if __name__ == '__main__':
-    if not os.path.isfile(os.path.join(os.path.dirname(__file__), 'sqlite.db')):
-        db.create_all()
+if not os.path.isfile(os.path.join(os.path.dirname(__file__), 'sqlite.db')):
+    db.create_all()
+if 'liveweb' not in gethostname():  # this is not run on pythonanywhere
     app.run(debug=True)
