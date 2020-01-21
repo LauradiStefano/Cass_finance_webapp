@@ -18,9 +18,9 @@ import bokeh.plotting as bp
 import numpy as np
 import pandas as pd
 from bokeh.models import HoverTool
-from bokeh.plotting import ColumnDataSource
+from bokeh.plotting import ColumnDataSource, figure
 from scipy.optimize import minimize
-
+from bokeh.palettes import brewer
 from portfolio_analysis.useful_functions import sumweigth, expret, variance, random_portfolio
 
 
@@ -100,7 +100,7 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
     ef_standard_deviations = EFstds  # deviazioni standard dei portafogli efficienti
     ef_means = EFmeans  # valori attesi dei portafogli efficienti
 
-    return standard_deviations, means, ef_means, ef_standard_deviations
+    return standard_deviations, means, ef_means, ef_standard_deviations, feffweights 
 
 
 def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_means, ef_standard_deviations):
@@ -155,3 +155,30 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
     script, div = components(fig)
 
     return script, div
+
+def efficient_weights(ef_means, feffweights):
+    N=ef_means
+    df = pd.DataFrame(feffweights).add_prefix('y')
+    df.index=ef_means
+    
+    
+    df_top = df.cumsum(axis=1)
+    df_bottom = df_top.shift(axis=1).fillna({'y0': 0})[::-1]
+    df_stack = pd.concat([df_bottom, df_top], ignore_index=True)
+    df_stack
+    
+    areas = stacked(df)
+    colors = brewer['BuGn'][areas.shape[1]]
+    x2 = np.hstack((df.index[::-1], df.index))
+    
+    p = figure(title = 'Efficient Frontier Weights', x_range=(min(ef_means), max(ef_means)), y_range=(0, 1))
+    p.grid.minor_grid_line_color = '#eeeeee'
+    
+    p.patches([x2] * areas.shape[1], [areas[c].values for c in areas],
+              color=colors, alpha=0.8, line_color=None)
+
+    from bokeh.embed import components
+    script, div = components(p)
+    
+    
+    return p, div
