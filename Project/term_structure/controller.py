@@ -31,6 +31,9 @@ def controller_term_structure(user, request):
     rmse_discount_factor = None
     rmse_spot_rate = None
     compute_not_allowed = False
+    daily_discount_factor = None
+    annual_basis_date = None
+    daily_model_spot_rate = None
 
     number_of_time = 0
 
@@ -63,10 +66,11 @@ def controller_term_structure(user, request):
 
                 market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
                 discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \
-                rmse_spot_rate = fitting_method(form.model_choice.data, variables, file_data, form.least_fmin.data,
-                                                form.discount_factor.data)
+                rmse_spot_rate, daily_discount_factor, annual_basis_date, daily_model_spot_rate = fitting_method(
+                    form.model_choice.data, variables, file_data, form.least_fmin.data,
+                    form.discount_factor.data)
 
-                number_of_time = len(time)
+                number_of_time = len(annual_basis_date)
 
                 name_param = form.name_parameters[form.model_choice.data]
 
@@ -76,6 +80,10 @@ def controller_term_structure(user, request):
                     create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_rate)
                 plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
                 plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
+
+                print(type(annual_basis_date))
+                print(type(daily_model_spot_rate))
+
 
             if user.is_authenticated:  # store data in db
                 object = compute()
@@ -92,7 +100,9 @@ def controller_term_structure(user, request):
                 object.number_of_time = json.dumps(number_of_time)
                 object.name_param = json.dumps(name_param)
                 object.rmse_discount_factor = rmse_discount_factor
-                object.rmse_spot_rate = rmse_spot_rate
+                object.daily_discount_factor = json.dumps(daily_discount_factor.tolist())
+                object.annual_basis_date = json.dumps(annual_basis_date)
+                object.daily_model_spot_rate = json.dumps(daily_model_spot_rate.tolist())
 
                 object.user = user
                 db.session.add(object)
@@ -119,6 +129,9 @@ def controller_term_structure(user, request):
                 name_param = json.loads(instance.name_param)
                 rmse_discount_factor = instance.rmse_discount_factor
                 rmse_spot_rate = instance.rmse_spot_rate
+                annual_basis_date = json.loads(instance.annual_basis_date)
+                daily_discount_factor = np.array(json.loads(instance.daily_discount_factor))
+                daily_model_spot_rate = np.array(json.loads(instance.daily_model_spot_rate))
 
                 plot_discount_factor_term_structure = \
                     create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -135,6 +148,10 @@ def controller_term_structure(user, request):
     model_spot_rate = [round(x, 6) for x in model_spot_rate] if model_spot_rate is not None else None
     parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
+    # annual_basis_date = [round(x, 6) for x in annual_basis_date] if annual_basis_date is not None else None
+    # daily_discount_factor = [round(x, 6) for x in daily_discount_factor] if daily_discount_factor is not None else None
+    # daily_model_spot_rate = [round(x, 6) for x in daily_model_spot_rate] if daily_model_spot_rate is not None else None
+
     rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
     rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
 
@@ -142,6 +159,8 @@ def controller_term_structure(user, request):
             'market_discount_factor': market_discount_factor, 'model_discount_factor': model_discount_factor,
             'market_spot_rate': market_spot_rate, 'model_spot_rate': model_spot_rate, 'number_of_time': number_of_time,
             'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
+            'annual_basis_date': annual_basis_date, 'daily_model_spot_rate': daily_model_spot_rate,
+            'daily_discount_factor': daily_discount_factor,
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
             'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
             'plot_error_discount_factor': plot_error_discount_factor,
