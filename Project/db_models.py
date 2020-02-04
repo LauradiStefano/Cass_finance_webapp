@@ -384,7 +384,7 @@ class term_structure(db.Model):
     rmse_discount_factor = db.Column(db.Float())
     rmse_spot_rate = db.Column(db.Float())
 
-    annual_basic_date = db.Column(db.String())
+    annual_basis_date = db.Column(db.String())
     daily_discount_factor = db.Column(db.String())
     daily_model_spot_rate = db.Column(db.String())
 
