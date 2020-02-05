@@ -89,6 +89,18 @@
                 </div>
             </fieldset>
         </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Efficient Frontier Weights</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_efficient_weights[0]|safe}}
+                    {{plot_efficient_weights[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
         {% endif %}
     </div>
 </div>

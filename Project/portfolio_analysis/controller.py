@@ -9,7 +9,8 @@ from werkzeug.utils import secure_filename
 from app import allowed_file, app
 from db_models import db
 from db_models import portfolio_analysis as compute
-from portfolio_analysis.compute import upload_input, compute_efficient_frontier, create_plot_efficient_frontier
+from portfolio_analysis.compute import upload_input, compute_efficient_frontier, create_plot_efficient_frontier, \
+    create_plot_efficient_weights
 from portfolio_analysis.forms import ComputeForm
 
 
@@ -22,7 +23,9 @@ def controller_portfolio_analysis(user, request):
     means = None
     efficient_means = None
     efficient_std = None
+    efficient_weights = None
     plot_efficient_frontier = None
+    plot_efficient_weights = None
 
     if request.method == "POST":
         if form.validate() and request.files:
@@ -34,12 +37,13 @@ def controller_portfolio_analysis(user, request):
 
             returns, n_assets = upload_input(file_data)
 
-            standard_deviations, means, efficient_means, efficient_std = \
+            standard_deviations, means, efficient_means, efficient_std, efficient_weights = \
                 compute_efficient_frontier(returns, n_assets, form.n_portfolio.data)
 
             plot_efficient_frontier = \
                 create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                efficient_std)
+            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
 
         if user.is_authenticated:  # store data in db
             object = compute()
@@ -50,6 +54,7 @@ def controller_portfolio_analysis(user, request):
             object.means = json.dumps(means.tolist())
             object.efficient_means = json.dumps(efficient_means.tolist())
             object.efficient_std = json.dumps(efficient_std.tolist())
+            object.efficient_weights = json.dumps(efficient_weights.tolist())
 
             object.user = user
             db.session.add(object)
@@ -67,12 +72,15 @@ def controller_portfolio_analysis(user, request):
                 means = np.array(json.loads(instance.means))
                 efficient_means = np.array(json.loads(instance.efficient_means))
                 efficient_std = np.array(json.loads(instance.efficient_std))
+                efficient_weights = np.array(json.load(instance.efficient_weights))
 
                 plot_efficient_frontier = \
                     create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                    efficient_std)
+                plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
 
-    return {'form': form, 'user': user, 'plot_efficient_frontier': plot_efficient_frontier}
+    return {'form': form, 'user': user, 'plot_efficient_frontier': plot_efficient_frontier,
+            'plot_efficient_weights': plot_efficient_weights}
 
 
 def populate_form_from_instance(instance):
