@@ -55,7 +55,7 @@ def create_plot_return_underlying_distribution(returns, heston_pdf, norm_pdf):
                                tooltips=[("Returns", "@returns"), ("Pdf Norm", "@norm_pdf")])
 
     x_range = [min(returns), max(returns)]
-    y_range = [0, max(heston_pdf) * 1.10]
+    y_range = [0, max(max(heston_pdf),max(norm_pdf)) * 1.10]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_norm_pdf], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Returns',
                     y_axis_label='Probability')
