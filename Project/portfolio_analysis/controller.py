@@ -72,7 +72,7 @@ def controller_portfolio_analysis(user, request):
                 means = np.array(json.loads(instance.means))
                 efficient_means = np.array(json.loads(instance.efficient_means))
                 efficient_std = np.array(json.loads(instance.efficient_std))
-                efficient_weights = np.array(json.load(instance.efficient_weights))
+                efficient_weights = np.array(json.loads(instance.efficient_weights))
 
                 plot_efficient_frontier = \
                     create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
@@ -107,12 +107,15 @@ def controller_old_portfolio_analysis(user):
             means = np.array(json.loads(instance.means))
             efficient_means = np.array(json.loads(instance.efficient_means))
             efficient_std = np.array(json.loads(instance.efficient_std))
+            efficient_weights = np.array(json.loads(instance.efficient_weights))
 
             plot_efficient_frontier = \
                 create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                efficient_std)
+            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
 
-            data.append({'form': form, 'id': id, 'plot_efficient_frontier': plot_efficient_frontier})
+            data.append({'form': form, 'id': id, 'plot_efficient_frontier': plot_efficient_frontier,
+                         'plot_efficient_weights': plot_efficient_weights})
 
     return {'data': data}
 
