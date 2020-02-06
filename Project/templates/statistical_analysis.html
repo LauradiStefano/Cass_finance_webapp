@@ -12,7 +12,10 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="" enctype="multipart/form-data">
-
+            <div class="example_file">
+                <a href="/static/download_example/dataset_statistical_analysis.xlsx">
+                    Example File: Statistical Analysis Dataset.xlsx</a>
+            </div>
             <div class="row">
                 <div class="col-md-6 col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
@@ -31,9 +34,11 @@
 
                     </fieldset>
                 </div>
+
                 <div class="col-md-6 col-12" id="import_file" {% if form.method_choice.data !='0' %}
                      style="display:none"
                      {%endif%}>
+
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
@@ -271,6 +276,8 @@
             }
         });
     });
+
+
 
 </script>
 

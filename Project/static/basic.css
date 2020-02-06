@@ -442,3 +442,18 @@ img {
 }
 
 
+.example_file {
+    text-align: right;
+    padding: 2px 7px;
+}
+
+.example_file, a {
+    color: #C0C0C0;
+
+}
+
+.example_file, a:hover, a:active {
+    color: #808080;
+    text-decoration: None !important;
+}
+
