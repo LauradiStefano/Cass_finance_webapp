@@ -81,10 +81,6 @@ def controller_term_structure(user, request):
                 plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
                 plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
-                print(type(annual_basis_date))
-                print(type(daily_model_spot_rate))
-
-
             if user.is_authenticated:  # store data in db
                 object = compute()
                 form.populate_obj(object)
