@@ -405,6 +405,7 @@
 
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_discount_factor_term_structure != None %}
+        <div class="download_data"> Click Here to Download the Implicit Data</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -519,7 +520,6 @@
     </div>
 </div>
 {% include 'footer.html' %}
-
 <script charset="utf-8" type="text/javascript">
     $(function(){
         var select_distribution = $('#model_choice');
@@ -585,53 +585,28 @@
         });
 
         update();
+
+        var download_data = $('.download_data');
+
+        download_data.on('click', function (){
+
+        var market_spot_rate = {{market_spot_rate}};
+        var model_spot_rate = {{model_spot_rate}};
+
+        var market_discount_factor = {{market_discount_factor}};
+        var model_discount_factor = {{model_discount_factor}};
+
+
+
+        var blob = new Blob([market_spot_rate], {type: "text/plain;charset=utf-8"});
+
+           saveAs(blob, "file.txt");
+
+        });
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
+
+
 </body>
 </html>
