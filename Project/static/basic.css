@@ -449,11 +449,19 @@ img {
 
 .example_file, a {
     color: #C0C0C0;
-
 }
 
 .example_file, a:hover, a:active {
     color: #808080;
     text-decoration: None !important;
+}
+
+.download_data {
+    color: #C0C0C0;
+    cursor: pointer;
+}
+
+div.download_data:hover, div.download_data:active {
+    color: #808080;
 }
 
