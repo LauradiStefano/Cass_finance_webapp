@@ -47,17 +47,17 @@ class ComputeForm(wtf.Form):
                                 validators=[InputRequired()])
 
     # Svensson distribution
-    beta0_svensson = wtf.FloatField(label=name_parameters['3'][0], default=1,
+    beta0_svensson = wtf.FloatField(label=name_parameters['3'][0], default=0.472,
                                     validators=[InputRequired()])
-    beta1_svensson = wtf.FloatField(label=name_parameters['3'][1], default=1,
+    beta1_svensson = wtf.FloatField(label=name_parameters['3'][1], default=-1.086,
                                     validators=[InputRequired()])
-    beta2_svensson = wtf.FloatField(label=name_parameters['3'][2], default=1,
+    beta2_svensson = wtf.FloatField(label=name_parameters['3'][2], default=12.189,
                                     validators=[InputRequired()])
-    beta3_svensson = wtf.FloatField(label=name_parameters['3'][3], default=1,
+    beta3_svensson = wtf.FloatField(label=name_parameters['3'][3], default=-14.293,
                                     validators=[InputRequired()])
-    tau1_svensson = wtf.FloatField(label=name_parameters['3'][4], default=1,
+    tau1_svensson = wtf.FloatField(label=name_parameters['3'][4], default=2.132,
                                    validators=[InputRequired()])
-    tau2_svensson = wtf.FloatField(label=name_parameters['3'][5], default=1,
+    tau2_svensson = wtf.FloatField(label=name_parameters['3'][5], default=2.307,
                                    validators=[InputRequired()])
 
     # Contract parameters

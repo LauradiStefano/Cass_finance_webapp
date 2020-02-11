@@ -115,6 +115,7 @@ def fitting_method(model, x0, data, flag1, flag2):
 
             res_1 = least_squares(lambda y: fit_df_Svensson(y, data, flag1, flag2), x0)
             param = res_1.x
+            discount_factor = get_df_Svensson(param, time)
             daily_discount_factor = get_df_Svensson(param, annual_basis_date)
 
         else:
