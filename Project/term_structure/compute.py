@@ -138,7 +138,7 @@ def fitting_method(model, x0, data, flag1, flag2):
     annual_basis_date.insert(0, 0)
     daily_model_spot_rate = -np.log(daily_discount_factor) / annual_basis_date
 
-    dates = str(dates)
+    #dates = str(dates)
 
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
            discount_factor_model_error, spot_rate_model_error, param, time, \
