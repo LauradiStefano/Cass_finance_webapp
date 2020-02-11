@@ -387,6 +387,7 @@ class term_structure(db.Model):
     annual_basis_date = db.Column(db.String())
     daily_discount_factor = db.Column(db.String())
     daily_model_spot_rate = db.Column(db.String())
+    dates = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())

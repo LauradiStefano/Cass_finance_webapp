@@ -34,6 +34,7 @@ def controller_term_structure(user, request):
     daily_discount_factor = None
     annual_basis_date = None
     daily_model_spot_rate = None
+    dates = None
 
     number_of_time = 0
 
@@ -66,7 +67,7 @@ def controller_term_structure(user, request):
 
                 market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
                 discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \
-                rmse_spot_rate, daily_discount_factor, annual_basis_date, daily_model_spot_rate = fitting_method(
+                rmse_spot_rate, daily_discount_factor, annual_basis_date, daily_model_spot_rate, dates = fitting_method(
                     form.model_choice.data, variables, file_data, form.least_fmin.data,
                     form.discount_factor.data)
 
@@ -99,6 +100,7 @@ def controller_term_structure(user, request):
                 object.daily_discount_factor = json.dumps(daily_discount_factor.tolist())
                 object.annual_basis_date = json.dumps(annual_basis_date)
                 object.daily_model_spot_rate = json.dumps(daily_model_spot_rate.tolist())
+                object.dates = json.dumps(dates)
 
                 object.user = user
                 db.session.add(object)
@@ -128,6 +130,7 @@ def controller_term_structure(user, request):
                 annual_basis_date = json.loads(instance.annual_basis_date)
                 daily_discount_factor = np.array(json.loads(instance.daily_discount_factor))
                 daily_model_spot_rate = np.array(json.loads(instance.daily_model_spot_rate))
+                dates = json.loads(instance.dates)
 
                 plot_discount_factor_term_structure = \
                     create_plot_discount_factor_term_structure(time, market_discount_factor, model_discount_factor)
@@ -157,7 +160,7 @@ def controller_term_structure(user, request):
             'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
             'annual_basis_date': annual_basis_date, 'daily_model_spot_rate': daily_model_spot_rate,
             'daily_discount_factor': daily_discount_factor, 'discount_factor_model_error': discount_factor_model_error,
-            'spot_rate_model_error': spot_rate_model_error,
+            'spot_rate_model_error': spot_rate_model_error, 'dates': dates,
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
             'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
             'plot_error_discount_factor': plot_error_discount_factor,

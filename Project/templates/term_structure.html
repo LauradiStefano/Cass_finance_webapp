@@ -498,6 +498,7 @@
         <div class="table_wrapper">
             <table class="table table-striped table-hover" id="table_export">
                 <thead>
+                <th scope="col"> Dates</th>
                 <th scope="col"> Annual Basis Date</th>
                 <th scope="col"> Daily Discount Factor</th>
                 <th scope="col"> Daily Spot Rate</th>
@@ -505,6 +506,7 @@
                 <tbody>
                 {%for i in range(number_of_time)%}
                 <tr>
+                    <td>{{dates[i]}}</td>
                     <td>{{annual_basis_date[i]}}</td>
                     <td>{{daily_discount_factor[i]}}</td>
                     <td>{{daily_model_spot_rate[i]}}</td>
