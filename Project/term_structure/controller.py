@@ -147,6 +147,10 @@ def controller_term_structure(user, request):
     model_spot_rate = [round(x, 6) for x in model_spot_rate] if model_spot_rate is not None else None
     parameters = [round(x, 4) for x in parameters] if parameters is not None else None
 
+    discount_factor_model_error = [round(x, 6) for x in
+                                   discount_factor_model_error] if discount_factor_model_error is not None else None
+    spot_rate_model_error = [round(x, 6) for x in spot_rate_model_error] if spot_rate_model_error is not None else None
+
     annual_basis_date = [round(x, 6) for x in annual_basis_date] if annual_basis_date is not None else None
     daily_discount_factor = [round(x, 6) for x in daily_discount_factor] if daily_discount_factor is not None else None
     daily_model_spot_rate = [round(x, 6) for x in daily_model_spot_rate] if daily_model_spot_rate is not None else None
