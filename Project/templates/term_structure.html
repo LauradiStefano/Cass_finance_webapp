@@ -405,7 +405,7 @@
 
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_discount_factor_term_structure != None %}
-        <div class="download_data"> Click Here to Download the Implicit Data</div>
+        <div class="download_data"> Click here to download the implicit data</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -590,25 +590,35 @@
 
         var download_data = $('.download_data');
 
-        download_data.on('click', function (){
-
         var market_spot_rate = {{market_spot_rate}};
         var model_spot_rate = {{model_spot_rate}};
 
         var market_discount_factor = {{market_discount_factor}};
         var model_discount_factor = {{model_discount_factor}};
 
+        var spot_rate_model_error = {{spot_rate_model_error}}
+        var discount_factor_model_error = {{discount_factor_model_error}}
 
+        download_data.on('click', function (){
 
-        var blob = new Blob([market_spot_rate], {type: "text/plain;charset=utf-8"});
+        var csv = 'Maket SR, Model SR, Market DF, Model DF, Error SP, Error DF\n';
 
-           saveAs(blob, "file.txt");
+        var i;
+        for (i=0; i< market_spot_rate.length; i++) {
+            row = market_spot_rate[i] + ',' + model_spot_rate[i] + ',' + market_discount_factor[i] + ',' + model_discount_factor[i] + ',' + spot_rate_model_error[i] + ',' + discount_factor_model_error[i] + '\n';
+            csv += row;
+        }
+
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'term_structure_data.csv';
+        hiddenElement.click();
 
         });
     });
 
 </script>
-
 
 </body>
 </html>
