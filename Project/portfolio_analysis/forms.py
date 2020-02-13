@@ -8,7 +8,7 @@ class ComputeForm(wtf.Form):
 
     file_data = wtf.FileField(label='Import File')
 
-    n_portfolio = wtf.IntegerField(label='Number of Portfolio', default=100,
+    n_portfolio = wtf.IntegerField(label='Number of Portfolios', default=100,
                                    validators=[wtf.validators.InputRequired()])
 
     button_compute = wtf.SubmitField(label='Compute')
