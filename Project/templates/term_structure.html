@@ -14,7 +14,7 @@
         <form class="" method="post" action="" enctype="multipart/form-data">
             <div class="example_file">
                 <a href="/static/download_example/dataset_term_structure.xlsx">
-                    Example File: Term Structure Dataset.xlsx</a>
+                    Excel Template File: Term Structure Dataset.xlsx</a>
             </div>
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -405,7 +405,7 @@
 
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_discount_factor_term_structure != None %}
-        <div class="download_data"> Click here to download the implicit data</div>
+        <div class="download_data"> Click here to download the fitted term structures</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -455,7 +455,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Fitting Error: Market Discount Factor - Model Discount Factor</legend>
+                    <legend>Fitting Error: Market Discount Factor - Model Discount Factor </legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_error_discount_factor[0]|safe}}
@@ -498,10 +498,10 @@
         <div class="table_wrapper">
             <table class="table table-striped table-hover" id="table_export">
                 <thead>
-                <th scope="col"> Dates (m/d/y)</th>
-                <th scope="col"> Annual Basis Date</th>
-                <th scope="col"> Daily Discount Factor</th>
-                <th scope="col"> Daily Spot Rate</th>
+                <th scope="col"> Dates (mm/dd/yyyy)</th>
+                <th scope="col"> Year Fraction</th>
+                <th scope="col"> Discount Factor</th>
+                <th scope="col"> Spot Rate</th>
                 </thead>
                 <tbody>
                 {%for i in range(number_of_time)%}
