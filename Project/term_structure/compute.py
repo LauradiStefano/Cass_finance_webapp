@@ -202,7 +202,7 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
     fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend='Model Spot Rate Term Structure',
              line_width=4, alpha=0.8, name='model spot rate')
 
-    fig.circle(x='time', y='market_spot_rate', source=data, color="#D21F1B", legend='Market spot rate', size=6,
+    fig.circle(x='time', y='market_spot_rate', source=data, color="#D21F1B", legend='Market Spot Rate', size=6,
                name='market spot rate')
 
     fig.toolbar.active_drag = None
