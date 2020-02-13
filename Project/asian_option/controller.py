@@ -74,9 +74,12 @@ def controller_asian_option(user, request):
     optimal_strike = round(optimal_strike, 4) if optimal_strike is not None else None
     optimal_lower_bound = round(optimal_lower_bound, 4) if optimal_lower_bound is not None else None
     lower_bound_strike = round(lower_bound_strike, 4) if lower_bound is not None else None
+    lam = [round(x, 6) for x in lam] if lam is not None else None
+    lower_bound = [round(x, 6) for x in lower_bound] if lower_bound is not None else None
 
     return {'form': form, 'user': user, 'optimal_strike': optimal_strike, 'optimal_lower_bound': optimal_lower_bound,
-            'lower_bound_strike': lower_bound_strike, 'plot_lower_bound': plot_lower_bound}
+            'lower_bound_strike': lower_bound_strike, 'lam': lam, 'lower_bound': lower_bound,
+            'plot_lower_bound': plot_lower_bound}
 
 
 def populate_form_from_instance(instance):

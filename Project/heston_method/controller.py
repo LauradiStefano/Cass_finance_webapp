@@ -99,10 +99,12 @@ def controller_heston_method(user, request):
     skewness = round(skewness, 4) if skewness is not None else None
     kurtosis = round(kurtosis, 4) if kurtosis is not None else None
 
+    heston_pdf = [round(x, 6) for x in heston_pdf] if heston_pdf is not None else None
+
     return {'form': form, 'user': user, 'plot_return_underlying_distribution': plot_return_underlying_distribution,
             'plot_implied_volatility': plot_implied_volatility, 'strike': strike, 'number_of_strike': number_of_strike,
             'implied_volatility': implied_volatility, 'option_prices': option_prices, 'mean': mean,
-            'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis}
+            'heston_pdf': heston_pdf, 'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis}
 
 
 def populate_form_from_instance(instance):

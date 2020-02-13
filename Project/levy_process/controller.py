@@ -109,10 +109,13 @@ def controller_levy_process(user, request):
     implied_volatility = [round(x, 6) for x in implied_volatility] if implied_volatility is not None else None
     option_prices = [round(x, 6) for x in option_prices] if option_prices is not None else None
 
+    pdf_underlying_asset = [round(x, 6) for x in pdf_underlying_asset] if pdf_underlying_asset is not None else None
+
     return {'form': form, 'user': user, 'plot_return_underlying_distribution': plot_return_underlying_distribution,
             'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,
             'skewness': skewness, 'kurtosis': kurtosis, 'number_of_strike': number_of_strike, 'strike': strike,
-            'option_prices': option_prices, 'implied_volatility': implied_volatility}
+            'option_prices': option_prices, 'implied_volatility': implied_volatility,
+            'pdf_underlying_asset': pdf_underlying_asset}
 
 
 def populate_form_from_instance(instance):

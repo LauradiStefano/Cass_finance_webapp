@@ -255,6 +255,11 @@ def controller_shimko_theoretical(user, request):
     pvalue_prices = round(pvalue_prices, 4) if pvalue_prices is not None else None
     pvalue_returns = round(pvalue_returns, 4) if pvalue_returns is not None else None
 
+    pdf_returns = [round(x, 6) for x in pdf_returns] if pdf_returns is not None else None
+    pdf = [round(x, 6) for x in pdf] if pdf is not None else None
+    cdf_returns = [round(x, 6) for x in cdf_returns] if cdf_returns is not None else None
+    cdf_prices = [round(x, 6) for x in cdf_prices] if cdf_prices is not None else None
+
     return {'form': form, 'user': user, 'a0': a0, 'a1': a1, 'a2': a2, 'area_prices': area_prices,
             'expected_price': expected_price, 'sigma2_price': sigma2_price, 'skewness_prices': skewness_prices,
             'kurtosis_prices': kurtosis_prices, 'skewness_prices_log_n': skewness_prices_log_n,
@@ -263,6 +268,7 @@ def controller_shimko_theoretical(user, request):
             'kurtosis_log_returns': kurtosis_log_returns, 'skewness_normal': skewness_normal,
             'kurtosis_normal': kurtosis_normal, 'statistic_prices': statistic_prices,
             'statistic_returns': statistic_returns, 'pvalue_prices': pvalue_prices, 'pvalue_returns': pvalue_returns,
+            'pdf_returns': pdf_returns, 'pdf': pdf, 'cdf_returns': cdf_returns, 'cdf_prices': cdf_prices,
             'plot_implied_volatility': plot_implied_volatility, 'plot_index_distribution': plot_index_distribution,
             'plot_index_cdf': plot_index_cdf, 'plot_return_distribution': plot_return_distribution,
             'plot_return_cdf': plot_return_cdf}
