@@ -197,8 +197,7 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_market], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-                    x_axis_label='Time to Maturity',
-                    y_axis_label='Spot Rate')
+                    x_axis_label='Time to Maturity', y_axis_label='Spot Rate')
 
     fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend='Model Spot Rate Term Structure',
              line_width=4, alpha=0.8, name='model spot rate')
@@ -228,7 +227,7 @@ def create_plot_error_interest_rate(spot_rate_model_error, time):
                                 tooltips=[("TTM", "@time"), ("Spot Rate Error", "@spot_rate_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_spot_rate],
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time to Maturity',
                     y_axis_label='Model Error Spot Rate')
 
     fig.quad(top='spot_rate_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
@@ -256,7 +255,7 @@ def create_plot_error_discount_factor(discount_factor_model_error, time):
                                                 ("Discount Factor Error", "@discount_factor_model_error")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_discount_factor],
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Time to Maturity',
                     y_axis_label='Model Error Discount Factor')
 
     fig.quad(top='discount_factor_model_error', bottom=0, left='edges_left', right='edges_right', source=data,
