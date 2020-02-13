@@ -213,6 +213,7 @@
 
     <div class="row p-3 d-flex justify-content-center">
         {% if plot_return_underlying_distribution != None %}
+         <div class="download_data"> Click here to download the implicit data</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -301,6 +302,33 @@
 {% endif%}
 
 {% include 'footer.html' %}
+<script charset="utf-8" type="text/javascript">
+ $(function(){
+
+        var download_data = $('.download_data');
+
+        var heston_pdf = {{heston_pdf}};
+
+        download_data.on('click', function (){
+
+        var csv = 'Heston Pdf\n';
+
+        var i;
+        for (i=0; i< heston_pdf.length; i++) {
+            row = heston_pdf[i] + '\n';
+            csv += row;
+        }
+
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'heston_data.csv';
+        hiddenElement.click();
+
+        });
+    });
+
+</script>
 
 </body>
 </html>
