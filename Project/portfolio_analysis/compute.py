@@ -38,7 +38,7 @@ def upload_input(filename=None):
     return_vec = np.ndarray.transpose(return_vec)
     n_assets = len(tickers)
 
-    return return_vec, n_assets
+    return return_vec, n_assets, tickers
 
 
 def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
@@ -151,7 +151,7 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
     return script, div
 
 
-def create_plot_efficient_weights(ef_means, feffweights):
+def create_plot_efficient_weights(ef_means, feffweights, tickers):
     # N = len(ef_means)
     # feffweights = eff_weights
 

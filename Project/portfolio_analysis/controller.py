@@ -19,6 +19,7 @@ def controller_portfolio_analysis(user, request):
 
     returns = None
     file_data = None
+    tickers = None
     standard_deviations = None
     means = None
     efficient_means = None
@@ -35,7 +36,7 @@ def controller_portfolio_analysis(user, request):
                 file_data = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            returns, n_assets = upload_input(file_data)
+            returns, n_assets, tickers = upload_input(file_data)
 
             standard_deviations, means, efficient_means, efficient_std, efficient_weights = \
                 compute_efficient_frontier(returns, n_assets, form.n_portfolio.data)
@@ -43,7 +44,7 @@ def controller_portfolio_analysis(user, request):
             plot_efficient_frontier = \
                 create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                efficient_std)
-            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
+            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
 
         if user.is_authenticated:  # store data in db
             object = compute()
@@ -55,6 +56,7 @@ def controller_portfolio_analysis(user, request):
             object.efficient_means = json.dumps(efficient_means.tolist())
             object.efficient_std = json.dumps(efficient_std.tolist())
             object.efficient_weights = json.dumps(efficient_weights.tolist())
+            object.tickers = json.dumps(tickers.tolist())
 
             object.user = user
             db.session.add(object)
@@ -73,11 +75,12 @@ def controller_portfolio_analysis(user, request):
                 efficient_means = np.array(json.loads(instance.efficient_means))
                 efficient_std = np.array(json.loads(instance.efficient_std))
                 efficient_weights = np.array(json.loads(instance.efficient_weights))
+                tickers = np.array(json.load(instance.tickers))
 
                 plot_efficient_frontier = \
                     create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                    efficient_std)
-                plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
+                plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
 
     return {'form': form, 'user': user, 'plot_efficient_frontier': plot_efficient_frontier,
             'plot_efficient_weights': plot_efficient_weights}
@@ -108,11 +111,12 @@ def controller_old_portfolio_analysis(user):
             efficient_means = np.array(json.loads(instance.efficient_means))
             efficient_std = np.array(json.loads(instance.efficient_std))
             efficient_weights = np.array(json.loads(instance.efficient_weights))
+            tickers = np.array(json.load(instance.tickers))
 
             plot_efficient_frontier = \
                 create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
                                                efficient_std)
-            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights)
+            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
 
             data.append({'form': form, 'id': id, 'plot_efficient_frontier': plot_efficient_frontier,
                          'plot_efficient_weights': plot_efficient_weights})

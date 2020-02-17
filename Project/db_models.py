@@ -466,6 +466,7 @@ class portfolio_analysis(db.Model):
     efficient_means = db.Column(db.String())
     efficient_std = db.Column(db.String())
     efficient_weights = db.Column(db.String())
+    tickers = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
 
