@@ -465,3 +465,8 @@ div.download_data:hover, div.download_data:active {
     color: #808080;
 }
 
+.img_logo {
+    height: 30px;
+    width: 290px;
+}
+
