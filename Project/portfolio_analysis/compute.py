@@ -154,12 +154,15 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
 def create_plot_efficient_weights(ef_means, feffweights, tickers):
     # N = len(ef_means)
     # feffweights = eff_weights
+    df =pd.DataFrame(feffweights, columns = tickers)
 
-    df = pd.DataFrame(feffweights).add_prefix('y')
+    #df = pd.DataFrame(feffweights).add_prefix('y')
     df.index = ef_means
-
+    
     df_top = df.cumsum(axis=1)
-    df_bottom = df_top.shift(axis=1).fillna({'y0': 0})[::-1]
+    #df_bottom = df_top.shift(axis=1).fillna({'y0': 0})[::-1]
+    df_bottom = df_top.shift(axis=1).fillna({tickers[0]: 0})[::-1]
+
     df_stack = pd.concat([df_bottom, df_top], ignore_index=True)
 
     areas = df_stack

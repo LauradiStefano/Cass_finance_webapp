@@ -56,7 +56,7 @@ def controller_portfolio_analysis(user, request):
             object.efficient_means = json.dumps(efficient_means.tolist())
             object.efficient_std = json.dumps(efficient_std.tolist())
             object.efficient_weights = json.dumps(efficient_weights.tolist())
-            object.tickers = json.dumps(tickers.tolist())
+            object.tickers = json.dumps(tickers)
 
             object.user = user
             db.session.add(object)
