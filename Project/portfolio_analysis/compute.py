@@ -124,8 +124,8 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
                                   tooltips=[("Ticker Std", "@ticker_standard_deviations"),
                                             ("Ticker Mean", "@ticker_means")])
 
-    y_range = [min(ticker_means) - 0.00006, max(ticker_means) + 0.00006]
-    x_range = [0, max(ticker_standard_deviations) + 0.002]
+    y_range = [min(min(ticker_means),min(means),min(ef_means))*1.05, max(max(ticker_means),max(means),max(ef_means))*1.05]
+    x_range = [min(min(ticker_standard_deviations),min(ef_standard_deviations),min(standard_deviations))*0.95, max(max(ticker_standard_deviations),max(ef_standard_deviations),max(standard_deviations))*1.05]
 
     fig = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
