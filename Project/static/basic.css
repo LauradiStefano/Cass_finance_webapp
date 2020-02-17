@@ -147,7 +147,7 @@ form{
 
 .container_home{
     position: absolute;
-    top: 50px;
+    top: 30px;
     left: 60px;
     right: 70px;
 }
@@ -199,7 +199,7 @@ form{
 }
 
 #home .button_container{
-    margin: 50px 0;
+    margin: 20px 0;
 }
 
 #home a.mx-2{
@@ -468,5 +468,20 @@ div.download_data:hover, div.download_data:active {
 .img_logo {
     height: 30px;
     width: 290px;
+}
+
+.img_logo_home {
+    position: relative;
+    margin-bottom: 2rem;
+    height: 60px;
+    width: 600px;
+}
+
+.alert-warning {
+    font-size: 12px;
+}
+
+.alert {
+    padding: .25rem 0.50rem;
 }
 
