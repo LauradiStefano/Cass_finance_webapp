@@ -30,7 +30,7 @@
                                 {{form.model_choice}}
                                 <div class="icon_help">
                                     <img src="/static/icon_help.png">
-                                    <div id="help_formula">
+                                    <div id="help_formula" style="display:none">
 
                                     </div>
                                 </div>
@@ -601,7 +601,7 @@
 
         download_data.on('click', function (){
 
-        var csv = 'Maket SR, Model SR, Market DF, Model DF, Error SP, Error DF\n';
+        var csv = 'Market SR, Model SR, Market DF, Model DF, Error SP, Error DF\n';
 
         var i;
         for (i=0; i< market_spot_rate.length; i++) {
