@@ -44,7 +44,8 @@ def price_spread_option(risk_free, time, price_1, price_2, dividend_yiled_1, div
                                           alpha, k, d, parameter)
 
     # valutazione Fusai ottimizzata (quadgstrike)
-    # function = lambda x : -integral_spread(strike, price_1, price_2, dividend_yiled_1, dividend_yield_2, time, risk_free, x[0], x[1], d, parameter)
+    # function = lambda x : -integral_spread(strike, price_1, price_2, dividend_yiled_1, dividend_yield_2,
+    # time, risk_free, x[0], x[1], d, parameter)
     # opt_parameters= scipy.optimize.least_squares(function, [alpha, k])
 
     return spread_option_price
