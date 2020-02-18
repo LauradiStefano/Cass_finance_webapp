@@ -310,17 +310,17 @@ def create_implied_volatility_plot(call_put_flag, strike_plot, implied_volatilit
                     x_axis_label='Exercise price', y_axis_label='Volatility x root time')
 
     fig.line(x='strike_plot', y='implied_volatility', source=data_implied_vol, color="#0095B6",
-             legend='Volatility Structure', line_width=4, alpha=0.8, name='implied vol')
+             legend_label='Volatility Structure', line_width=4, alpha=0.8, name='implied vol')
 
-    fig.square(x=s0, y=0, legend='Spot Price', color="#050402", size=8)
+    fig.square(x=s0, y=0, legend_label='Spot Price', color="#050402", size=8)
 
     if call_put_flag == 1 or call_put_flag == 2:
         fig.circle(x='strike_call', y='volatility_t_call', source=data_call, color="#D21F1B",
-                   legend='Implied Volatility of Market Call Option Price', size=6, name='call')
+                   legend_label='Implied Volatility of Market Call Option Price', size=6, name='call')
 
     if call_put_flag == 0 or call_put_flag == 2:
         fig.circle(x='strike_put', y='volatility_t_put', source=data_put, color="#120A8F",
-                   legend='Implied Volatility of Market Put Option Price', size=6, name='put')
+                   legend_label='Implied Volatility of Market Put Option Price', size=6, name='put')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_left"
@@ -351,11 +351,11 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
                     y_axis_label='Probability Density')
 
-    fig.line(x='ret_t', y='pdf_ret', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
-             name='pdf ret')
+    fig.line(x='ret_t', y='pdf_ret', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
+             line_width=4, name='pdf ret')
 
-    fig.line(x='ret_t', y='pdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
-             line_width=4, name='pdf norm')
+    fig.line(x='ret_t', y='pdf_bench_norm_returns', source=data, legend_label="Benchmark Normal", color="#D21F1B",
+             alpha=0.6, line_width=4, name='pdf norm')
 
     fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
@@ -403,13 +403,14 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Index Value',
                     y_axis_label='Probability Density')
 
-    fig.line(x='st', y='pdf', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
+    fig.line(x='st', y='pdf', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
              name='pdf prices')
 
-    fig.line(x='st', y='pdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
+    fig.line(x='st', y='pdf_bench_log_prices', source=data, legend_label="Benchmark LogNormal", color="#D21F1B",
+             alpha=0.6,
              line_width=4, name='bench logNorm')
 
-    fig.square(x=s0, y=0, legend="Spot Price", color="#050402", size=8)
+    fig.square(x=s0, y=0, legend_label="Spot Price", color="#050402", size=8)
 
     fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
@@ -456,11 +457,11 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Index Value',
                     y_axis_label='Cumulative Probability')
 
-    fig.line(x='st', y='cdf_prices', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9, line_width=4,
-             name='cdf')
+    fig.line(x='st', y='cdf_prices', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
+             line_width=4, name='cdf')
 
-    fig.line(x='st', y='cdf_bench_log_prices', source=data, legend="Benchmark LogNormal", color="#D21F1B", alpha=0.6,
-             line_width=4, name='bench logNorm')
+    fig.line(x='st', y='cdf_bench_log_prices', source=data, legend_label="Benchmark LogNormal", color="#D21F1B",
+             alpha=0.6, line_width=4, name='bench logNorm')
 
     fig.legend.location = "bottom_right"
     fig.toolbar.active_drag = None
@@ -507,11 +508,11 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
                     y_axis_label='Cumulative Probability')
 
-    fig.line(x='ret_t', y='cdf_returns', source=data, legend="CEQ distribution", color="#0095B6", alpha=0.9,
+    fig.line(x='ret_t', y='cdf_returns', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
              line_width=4, name='cdf ret')
 
-    fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend="Benchmark Normal", color="#D21F1B", alpha=0.6,
-             line_width=4, name='bench norm')
+    fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend_label="Benchmark Normal", color="#D21F1B",
+             alpha=0.6, line_width=4, name='bench norm')
 
     fig.legend.location = "bottom_right"
     fig.toolbar.active_drag = None

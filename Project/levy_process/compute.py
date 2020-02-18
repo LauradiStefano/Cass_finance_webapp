@@ -71,9 +71,9 @@ def create_plot_return_underlying_distribution(underlying_prices, pdf_underlying
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Returns',
                     y_axis_label='Probability')
 
-    fig.line(x='underlying_prices', y='pdf_underlying_asset', source=data, legend="Pdf distribution", color="#0095B6",
-             alpha=0.9, line_width=4, name='pdf ret')
-    fig.line(x='underlying_prices', y='norm_pdf', source=data, legend="Benchmark Normal", color="#D21F1B",
+    fig.line(x='underlying_prices', y='pdf_underlying_asset', source=data, legend_label="Pdf distribution",
+             color="#0095B6", alpha=0.9, line_width=4, name='pdf ret')
+    fig.line(x='underlying_prices', y='norm_pdf', source=data, legend_label="Benchmark Normal", color="#D21F1B",
              alpha=0.6, line_width=3, name='pdf norm')
 
     fig.legend.location = "top_left"
@@ -129,9 +129,9 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Exercise price',
                     y_axis_label='Volatility x root time')
 
-    fig.line(x='strike', y='implied_volatility', source=data, legend='Implied volatility', color="#0095B6",
+    fig.line(x='strike', y='implied_volatility', source=data, legend_label='Implied volatility', color="#0095B6",
              line_width=4, alpha=0.8, name='implied vol')
-    fig.square(x=spot_price, y=0, source=data, legend='Spot Price', color="#050402", size=8)
+    fig.square(x=spot_price, y=0, source=data, legend_label='Spot Price', color="#050402", size=8)
 
     fig.legend.orientation = "horizontal"
     fig.legend.location = "bottom_right"

@@ -134,14 +134,14 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
         x_axis_label='Standard Deviation', y_axis_label=' Mean')
 
-    fig.circle(x='standard_deviations', y='means', source=data_randomize, legend="Random Port",
+    fig.circle(x='standard_deviations', y='means', source=data_randomize, legend_label="Random Port",
                color="#0095B6", size=5, name='data random')
 
-    fig.circle(x='ef_standard_deviations', y='ef_means', source=data_efficient, legend="Efficient Port",
+    fig.circle(x='ef_standard_deviations', y='ef_means', source=data_efficient, legend_label="Efficient Port",
                color="#2F2F2F", size=6, name='efficient portfolios')
 
     fig.circle(x='ticker_standard_deviations', y='ticker_means', source=data_ticker,
-               legend="Mean and Std Single Asset", color="#D21F1B", size=6, alpha=0.7, name='data ticker')
+               legend_label="Mean and Std Single Asset", color="#D21F1B", size=6, alpha=0.7, name='data ticker')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_left"
@@ -184,7 +184,7 @@ def create_plot_efficient_weights(ef_means, feffweights, tickers):
     # names = ["y%d" % i for i in range(N)]
 
     for a, area in enumerate(areas):
-        fig.patch(x2, areas[area], color=colors[a], legend=area, alpha=0.8, line_color=None)
+        fig.patch(x2, areas[area], color=colors[a], legend_label=area, alpha=0.8, line_color=None)
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_left"

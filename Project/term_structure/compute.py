@@ -163,11 +163,11 @@ def create_plot_discount_factor_term_structure(time, market_discount_factor, mod
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                     x_axis_label='Time to Maturity', y_axis_label='Discount Factor')
 
-    fig.line(x='time', y='model_discount_factor', source=data, legend='Model Discount Factor Term Structure',
+    fig.line(x='time', y='model_discount_factor', source=data, legend_label='Model Discount Factor Term Structure',
              color="#0095B6", line_width=4, alpha=0.9, name='model discount factor')
 
-    fig.circle(x='time', y='market_discount_factor', source=data, color="#D21F1B", legend='Market Discount Factor',
-               size=6, name='market discount factor')
+    fig.circle(x='time', y='market_discount_factor', source=data, color="#D21F1B",
+               legend_label='Market Discount Factor', size=6, name='market discount factor')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "top_right"
@@ -198,10 +198,10 @@ def create_plot_interest_rate_term_structure(time, market_spot_rate, model_spot_
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                     x_axis_label='Time to Maturity', y_axis_label='Spot Rate')
 
-    fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend='Model Spot Rate Term Structure',
+    fig.line(x='time', y='model_spot_rate', source=data, color="#0095B6", legend_label='Model Spot Rate Term Structure',
              line_width=4, alpha=0.8, name='model spot rate')
 
-    fig.circle(x='time', y='market_spot_rate', source=data, color="#D21F1B", legend='Market Spot Rate', size=6,
+    fig.circle(x='time', y='market_spot_rate', source=data, color="#D21F1B", legend_label='Market Spot Rate', size=6,
                name='market spot rate')
 
     fig.toolbar.active_drag = None
