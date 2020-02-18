@@ -25,10 +25,9 @@ def price_spread_option(risk_free, time, price_1, price_2, dividend_yiled_1, div
     #    d=.75; NC = 1000; dk = 0.5;
 
     # calcolo prezzi frd
-    risk_free = risk_free/100
-    dividend_yiled_1 = dividend_yiled_1/100
-    dividend_yield_2 = dividend_yield_2/100
-    #print(risk_free, time, price_1, price_2, dividend_yiled_1, dividend_yield_2, strike, d, volatility_1, volatility_2, correlation)
+    risk_free = risk_free / 100
+    dividend_yiled_1 = dividend_yiled_1 / 100
+    dividend_yield_2 = dividend_yield_2 / 100
     F2 = price_2 * math.exp((risk_free - dividend_yield_2) * time)
 
     # GMB: vq maybe v1, v2, rho

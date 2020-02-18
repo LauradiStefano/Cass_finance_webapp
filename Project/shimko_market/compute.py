@@ -213,7 +213,6 @@ def compute_shimko_table(a0, a1, a2, s0, risk_free, div_yield, time, strike_min,
 
 def kolmogorov_smirnov_test(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price, sigma2,
                             ret_t, mu, m1_ret, std_deviation_log_ret):
- 
     SD = s0 * math.exp(-div_yield * time)
     B = math.exp(-risk_free * time)
     step_k = 0.5
@@ -343,7 +342,7 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
     ))
 
     hover_returns = HoverTool(attachment="above", names=['pdf ret'], tooltips=[("Return", "@ret_t"),
-                                                                              ("Pdf", "@pdf_ret")])
+                                                                               ("Pdf", "@pdf_ret")])
 
     hover_normal = HoverTool(attachment="below", names=['pdf norm'],
                              tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
@@ -371,8 +370,8 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
 def compute_underlying_distribution(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price,
                                     sigma2, mu):
     step_k = 0.5
-    SD = s0 * math.exp(-div_yield/100 * (time))
-    B = math.exp(-risk_free/100 * (time))
+    SD = s0 * math.exp(-div_yield / 100 * (time))
+    B = math.exp(-risk_free / 100 * (time))
 
     x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
 
@@ -425,8 +424,8 @@ def create_plot_index_underlying_distribution(st, pdf, pdf_bench_log_prices, s0,
 def compute_underlying_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, expected_price, sigma2,
                            mu):
     step_k = 0.5
-    SD = s0 * math.exp(-div_yield/100 * (time))
-    B = math.exp(-risk_free/100 * (time))
+    SD = s0 * math.exp(-div_yield / 100 * (time))
+    B = math.exp(-risk_free / 100 * (time))
 
     x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
 
@@ -475,8 +474,8 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
 
 def compute_returns_cdf(a0, a1, a2, s0, risk_free, div_yield, time, strike_min, strike_max, m1_ret,
                         std_deviation_log_ret, ret_t):
-    SD = s0 * math.exp(-div_yield/100 * (time))
-    B = math.exp(-risk_free/100 * (time))
+    SD = s0 * math.exp(-div_yield / 100 * (time))
+    B = math.exp(-risk_free / 100 * (time))
 
     x_fit_lgn = get_lognormal_fit(a0, a1, a2, SD, B, strike_min, strike_max)
 
@@ -497,7 +496,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     ))
 
     hover_cdf = HoverTool(attachment="above", names=['cdf ret'], tooltips=[("Strike", "@ret_t"),
-                                                                          ("Cdf", "@cdf_returns")])
+                                                                           ("Cdf", "@cdf_returns")])
 
     hover_norm = HoverTool(attachment="below", names=['bench norm'],
                            tooltips=[("Strike", "@ret_t"), ("Bench Norm", "@cdf_bench_norm_returns")])

@@ -124,8 +124,10 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
                                   tooltips=[("Ticker Std", "@ticker_standard_deviations"),
                                             ("Ticker Mean", "@ticker_means")])
 
-    y_range = [min(min(ticker_means),min(means),min(ef_means))*1.05, max(max(ticker_means),max(means),max(ef_means))*1.05]
-    x_range = [min(min(ticker_standard_deviations),min(ef_standard_deviations),min(standard_deviations))*0.95, max(max(ticker_standard_deviations),max(ef_standard_deviations),max(standard_deviations))*1.05]
+    y_range = [min(min(ticker_means), min(means), min(ef_means)) * 1.05,
+               max(max(ticker_means), max(means), max(ef_means)) * 1.05]
+    x_range = [min(min(ticker_standard_deviations), min(ef_standard_deviations), min(standard_deviations)) * 0.95,
+               max(max(ticker_standard_deviations), max(ef_standard_deviations), max(standard_deviations)) * 1.05]
 
     fig = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
@@ -154,13 +156,13 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
 def create_plot_efficient_weights(ef_means, feffweights, tickers):
     # N = len(ef_means)
     # feffweights = eff_weights
-    df =pd.DataFrame(feffweights, columns = tickers)
+    df = pd.DataFrame(feffweights, columns=tickers)
 
-    #df = pd.DataFrame(feffweights).add_prefix('y')
+    # df = pd.DataFrame(feffweights).add_prefix('y')
     df.index = ef_means
-    
+
     df_top = df.cumsum(axis=1)
-    #df_bottom = df_top.shift(axis=1).fillna({'y0': 0})[::-1]
+    # df_bottom = df_top.shift(axis=1).fillna({'y0': 0})[::-1]
     df_bottom = df_top.shift(axis=1).fillna({tickers[0]: 0})[::-1]
 
     df_stack = pd.concat([df_bottom, df_top], ignore_index=True)

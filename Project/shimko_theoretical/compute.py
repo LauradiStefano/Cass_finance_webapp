@@ -9,8 +9,7 @@ import math
 
 import bokeh.plotting as bp
 import numpy as np
-from bokeh.layouts import column
-from bokeh.models import CustomJS, Slider, HoverTool
+from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
 from scipy import integrate
 from scipy.stats import norm, lognorm, ks_2samp
