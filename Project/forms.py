@@ -10,7 +10,7 @@ class RegistrationForm(wtf.Form):
         label='Username', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     password = wtf.PasswordField(label='Password',
                                  validators=[wtf.validators.DataRequired(),
-                                             validators.Length(min=6, message='Minimum 6 characters'),
+                                             validators.Length(min=6, message='Password length should be at least 6'),
                                              wtf.validators.EqualTo('confirm', message='Passwords must match')])
     confirm = wtf.PasswordField(label='Confirm Password', validators=[wtf.validators.DataRequired()])
 
