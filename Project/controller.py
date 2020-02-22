@@ -98,6 +98,12 @@ def portfolio_analysis():
     return render_template("portfolio_analysis.html", **template_variables)
 
 
+@app.route('/plot_statistical_analysis', methods=['GET', 'POST'])
+def plot_statistical_analysis():
+    template_variables = controller_statistical_analysis(current_user, request)
+    return render_template("plot_statistical_analysis.html", **template_variables)
+
+
 @app.route('/shimko_theoretical/old')
 @login_required
 def old_shimko_theoretical():
@@ -250,6 +256,11 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template("about.html", about=True)
 
 
 if not os.path.isfile(os.path.join(os.path.dirname(__file__), 'sqlite.db')):
