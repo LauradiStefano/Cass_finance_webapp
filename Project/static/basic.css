@@ -152,6 +152,13 @@ form{
     right: 70px;
 }
 
+.container_about{
+    position: absolute;
+    top: 50px;
+    left: 60px;
+    right: 70px;
+}
+
 #home fieldset {
     height: 150px;
 }
@@ -485,3 +492,6 @@ div.download_data:hover, div.download_data:active {
     padding: .25rem 0.50rem;
 }
 
+.about_page {
+    color: white !important;
+}
