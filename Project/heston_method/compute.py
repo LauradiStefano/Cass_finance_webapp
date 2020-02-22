@@ -32,8 +32,9 @@ def heston_pdf_and_volatility(spot_price, strike_min, strike_max, time, v0, chi,
 
     implied_volatility = find_vol(option_prices, call_put, spot_price, strike, time, risk_free, dividend_yield)
     central = 1
-    mean, std, skewness, kurtosis = momHeston(lam, chi, v_hat, rho, time, risk_free, spot_price, v0, central)
-    mean = mu * time
+    mean, std, skewness, kurtosis = momHeston(lam, v_hat, chi, rho, time, risk_free, spot_price, v0, central)
+    mean =mean+mu*time
+    
     norm_pdf = norm.pdf(returns, mean, std)
 
     variance = std ** 2
