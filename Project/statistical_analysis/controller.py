@@ -1,7 +1,6 @@
 import json
 import os
 
-import numpy as np
 from flask import url_for, redirect
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
