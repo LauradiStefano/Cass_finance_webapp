@@ -1,3 +1,5 @@
+from string import ascii_uppercase, ascii_lowercase, digits
+
 import wtforms as wtf
 import wtforms.fields.html5 as html5
 from wtforms import validators
@@ -5,20 +7,47 @@ from wtforms import validators
 import db_models
 
 
+def contains(required_chars, s):
+    return any(c in required_chars for c in s)
+
+
+def contains_upper(s):
+    return contains(ascii_uppercase, s)
+
+
+def contains_lower(s):
+    return contains(ascii_lowercase, s)
+
+
+def contains_digit(s):
+    return contains(digits, s)
+
+
+def contains_special(s):
+    return contains(r"""!@$%^&*()_-+={}[]|\,.></?~`"':;""", s)
+
+
+def length(s):
+    return len(s) >= 5
+
+
 def check_password(form, field):
     password = form.password.data
 
-    if len(password) < 5:
+    if length(password) == False:
         raise validators.ValidationError('Password must be at least 5 characters long')
 
-    # if password.isupper():
-    #     raise validators.ValidationError('upper')
-    #
-    # if password.islower() :
-    #     raise validators.ValidationError('lower')
-    #
-    # if password.isalnum() == False:
-    #     raise validators.ValidationError('number')
+    if contains_upper(password) == False:
+        raise validators.ValidationError('Password must contain at least one upper case character')
+
+    if contains_lower(password) == False:
+        raise validators.ValidationError('Password must contain at least one lower case character')
+
+    if contains_digit(password) == False:
+        raise validators.ValidationError('Password must contain at least one number')
+
+    if contains_special(password) == False:
+        raise validators.ValidationError('Password must contain at least one special characters')
 
 
 class RegistrationForm(wtf.Form):
