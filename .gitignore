@@ -1,6 +1,7 @@
 **/sqlite.db
 Project/.vs/
 Project/uploads/
+./Project/.idea/misc.xml
 
 # Created by https://www.gitignore.io/api/flask,python,windows,pycharm
 # Edit at https://www.gitignore.io/?templates=flask,python,windows,pycharm
@@ -211,7 +212,7 @@ dmypy.json
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
+#.idea/misc.xml
 # *.ipr
 
 # Sonarlint plugin
