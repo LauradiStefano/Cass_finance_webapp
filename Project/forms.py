@@ -5,13 +5,29 @@ from wtforms import validators
 import db_models
 
 
+def check_password(form, field):
+    password = form.password.data
+
+    if len(password) < 5:
+        raise validators.ValidationError('Password must be at least 5 characters long')
+
+    # if password.isupper():
+    #     raise validators.ValidationError('upper')
+    #
+    # if password.islower() :
+    #     raise validators.ValidationError('lower')
+    #
+    # if password.isalnum() == False:
+    #     raise validators.ValidationError('number')
+
+
 class RegistrationForm(wtf.Form):
     username = wtf.StringField(
         label='Username', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     password = wtf.PasswordField(label='Password',
                                  validators=[wtf.validators.DataRequired(),
-                                             validators.Length(min=6, message='Password length should be at least 6'),
-                                             wtf.validators.EqualTo('confirm', message='Passwords must match')])
+                                             wtf.validators.EqualTo('confirm', message='Passwords must match'),
+                                             check_password])
     confirm = wtf.PasswordField(label='Confirm Password', validators=[wtf.validators.DataRequired()])
 
     email = html5.EmailField(label='Email',
