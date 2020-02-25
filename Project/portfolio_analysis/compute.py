@@ -149,7 +149,7 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
     fig = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-        x_axis_label='Sd', y_axis_label=' Mean')
+        x_axis_label='Standard Deviation', y_axis_label=' Expected Return')
 
     fig.circle(x='standard_deviations', y='means', source=data_randomize, legend_label="Random Port",
                color="#0095B6", size=5, name='data random')
