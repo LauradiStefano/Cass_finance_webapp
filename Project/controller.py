@@ -92,16 +92,16 @@ def statistical_analysis():
     return render_template("statistical_analysis.html", **template_variables, table_export=True)
 
 
-@app.route('/portfolio_analysis', methods=['GET', 'POST'])
-def portfolio_analysis():
-    template_variables = controller_portfolio_analysis(current_user, request)
-    return render_template("portfolio_analysis.html", **template_variables)
-
-
 @app.route('/plot_statistical_analysis', methods=['GET', 'POST'])
 def plot_statistical_analysis():
     template_variables = controller_statistical_analysis(current_user, request)
     return render_template("plot_statistical_analysis.html", **template_variables)
+
+
+@app.route('/portfolio_analysis', methods=['GET', 'POST'])
+def portfolio_analysis():
+    template_variables = controller_portfolio_analysis(current_user, request)
+    return render_template("portfolio_analysis.html", **template_variables)
 
 
 @app.route('/shimko_theoretical/old')
