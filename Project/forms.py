@@ -34,19 +34,19 @@ def length(s):
 def check_password(form, field):
     password = form.password.data
 
-    if length(password) == False:
+    if not length(password):
         raise validators.ValidationError('Password must be at least 5 characters long')
 
-    if contains_upper(password) == False:
+    if not contains_upper(password):
         raise validators.ValidationError('Password must contain at least one upper case character')
 
-    if contains_lower(password) == False:
+    if not contains_lower(password):
         raise validators.ValidationError('Password must contain at least one lower case character')
 
-    if contains_digit(password) == False:
+    if not contains_digit(password):
         raise validators.ValidationError('Password must contain at least one number')
 
-    if contains_special(password) == False:
+    if not contains_special(password):
         raise validators.ValidationError('Password must contain at least one special characters')
 
 
