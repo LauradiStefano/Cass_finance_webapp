@@ -246,7 +246,7 @@ def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = form.get_user()
-        login_user(user)
+        login_user(user, remember=True)
         return redirect(url_for('index'))
     return render_template("login.html", form=form, login=True)
 
