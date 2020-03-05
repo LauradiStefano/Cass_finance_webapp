@@ -21,14 +21,21 @@
             </span>
         </div>
     </div>
-
-    <div class="row d-flex justify-content-center">
-        <img class="img_logo_home" src="/static/logo_financial.png">
+    <div class="row">
+        <div class="col d-flex justify-content-start">
+            <img class="img_logo_home" src="/static/logo_financial.png">
+        </div>
     </div>
-    <div class="row d-flex justify-content-center">
-        <a class="about_page" href="/about">
-            About Page
-        </a>
+    <div class="row ">
+        <div class="col d-flex justify-content-start description_project">
+            <p>
+                Description of web application <br/>
+                <a class="link_about" href="/about">Read More...</a>
+            </p>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <img class="img_screen_home" src="/static/screen_webapp.png">
+        </div>
     </div>
 
     <div class="row d-flex justify-content-center">
@@ -40,40 +47,71 @@
 
         <form>
             <div class="row">
+
                 <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft">
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Shimko Method</legend>
+                            <div class="col-6 title_container">
+                                <img class="img_icon" src="/static/icon_bar_chart.png">
+                            </div>
+                            <div class="col-6 title_container">
+                                <legend>Option</legend>
+                            </div>
+
                         </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="shimko_theoretical"> Shimko Theoretical </a>
-                                <div class="line_button"></div>
+                        <div class="project_list">
+                            <div class="row">
+                                <div class="col mb-1 shimko_method">
+                                    <a class="line_text"> Shimko Method</a>
+                                    <div class="option_shimko" style="display:none">
+                                        <a class="shimko_link" href="/shimko_theoretical">Shimko Theoretical</a> |
+                                        <a class="shimko_link" href="/shimko_market">Shimko Market</a>
+                                    </div>
+                                    <div class="line_button"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-1 cos_method">
+                                    <a class="line_text"> Cos Method</a>
+                                    <div class="option_cos" style="display:none">
+                                        <a class="cos_link" href="/levy_process">Lévy Process</a> |
+                                        <a class="cos_link" href="/heston_method">Heston Method</a>
+                                    </div>
+                                    <div class="line_button"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="asian_option"> Asian Option</a>
+                                    <div class="line_button"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="spread_option"> Spread Option</a>
+                                    <div class="line_button"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="shimko_market"> Shimko Market </a>
-                                <div class="line_button"></div>
-                            </div>
-                        </div>
+
                     </fieldset>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft">
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Cos Method</legend>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="levy_process"> Lévy Process </a>
-                                <div class="line_button"></div>
+                            <div class="col-6 title_container">
+                                <img class="img_icon" src="/static/icon_yield.png">
+                            </div>
+                            <div class="col-6 title_container">
+                                <legend>Yield Curve</legend>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="heston_method"> Heston Model </a>
-                                <div class="line_button"></div>
+                        <div class="project_list">
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="term_structure"> Term Structure Fitting </a>
+                                    <div class="line_button"></div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -81,18 +119,19 @@
                 <div class="col-lg-3 col-md-6">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight">
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Asian & Spread</legend>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="asian_option"> Asian Option </a>
-                                <div class="line_button"></div>
+                            <div class="col-6 title_container">
+                                <img class="img_icon" src="/static/icon_thermometer.png">
+                            </div>
+                            <div class="col-6 title_container">
+                                <legend>Temperature</legend>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                <a class="line_text" href="spread_option"> Spread Option </a>
-                                <div class="line_button"></div>
+                        <div class="project_list">
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="#"> Temperature </a>
+                                    <div class="line_button"></div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -100,74 +139,29 @@
                 <div class="col-lg-3 col-md-6">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Term Structure Fitting</legend>
+                            <div class="col-6 title_container">
+                                <img class="img_icon" src="/static/icon_portfolio.png">
+                            </div>
+                            <div class="col-6 title_container">
+                                <legend>Analysis</legend>
+                            </div>
                         </div>
-                        <div class="row line_height">
-                            <div class="col mb-1">
-                                <a class="line_text" href="term_structure"> Term Structure </a>
-                                <div class="line_button"></div>
+                        <div class="project_list">
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="statistical_analysis"> Statistical Analysis </a>
+                                    <div class="line_button"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col mb-1">
+                                    <a class="line_text" href="portfolio_analysis"> Portfolio Analysis </a>
+                                    <div class="line_button"></div>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Statistical Analysis</legend>
-                        </div>
-                        <div class="row line_height">
-                            <div class="col mb-1">
-                                <a class="line_text" href="statistical_analysis"> Statistical Analysis </a>
-                                <div class="line_button"></div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Portfolio Analysis</legend>
-                        </div>
-                        <div class="row line_height">
-                            <div class="col mb-1">
-                                <a class="line_text" href="portfolio_analysis"> Portfolio Analysis </a>
-                                <div class="line_button"></div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Temperature</legend>
-                        </div>
-                        <div class="row line_height">
-                            <div class="col mb-1">
-                                <a class="line_text" href="#"> Temperature </a>
-                                <div class="line_button"></div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Barrier Option</legend>
-                        </div>
-                        <div class="row line_height">
-                            <div class="col mb-1">
-                                <a class="line_text" href="#"> Barrier Option </a>
-                                <div class="line_button"></div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
             </div>
         </form>
 
@@ -187,9 +181,40 @@
     </div>
 
 </div>
-
-
 {% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var shimko_method = $('.shimko_method');
+        var option_shimko = $('.option_shimko');
+        var cos_method = $('.cos_method');
+        var option_cos = $('.option_cos');
+
+        shimko_method.on('mouseenter', function(){
+            option_shimko.show();
+        });
+        shimko_method.on('mouseleave', function(){
+            option_shimko.hide();
+        });
+
+        cos_method.on('mouseenter', function(){
+            option_cos.show();
+        });
+        cos_method.on('mouseleave', function(){
+            option_cos.hide();
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
