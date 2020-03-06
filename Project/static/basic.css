@@ -187,7 +187,7 @@ form{
     margin: 0 auto;
     background: #808080;
     width: 9em;
-    height: 2px;
+    height: 0.06em;
     transition: width 0.5s;
 }
 
@@ -229,6 +229,31 @@ fieldset > .project_list {
 
 #home .shimko_link, .cos_link{
     font-size:12px !important;
+}
+
+.img_logo_home {
+    position: relative;
+    margin-bottom: 2rem;
+    height: 60px;
+    width: 600px;
+}
+
+.img_screen_home {
+    position: relative;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    height: 200px;
+    width: 500px;
+}
+
+.img_icon {
+    height: 30px;
+    width: 30px;
+}
+
+#home .title_container{
+    margin-left: -50px;
+    margin-bottom: 2px;
 }
 
 @media only screen and (max-width: 1200px){
@@ -491,31 +516,6 @@ div.download_data:hover, div.download_data:active {
 .img_logo {
     height: 30px;
     width: 290px;
-}
-
-.img_logo_home {
-    position: relative;
-    margin-bottom: 2rem;
-    height: 60px;
-    width: 600px;
-}
-
-.img_screen_home {
-    position: relative;
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-    height: 200px;
-    width: 500px;
-}
-
-.img_icon {
-    height: 30px;
-    width: 30px;
-}
-
-#home .title_container{
-    margin-left: -50px;
-    margin-bottom: 2px;
 }
 
 .alert-warning {
