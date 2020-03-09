@@ -9,28 +9,28 @@ class MultiCheckboxField(SelectMultipleField):
 
 
 class ComputeForm(wtf.Form):
-    strike_min = wtf.FloatField(label='Min', default=325,
+    strike_min = wtf.FloatField(label='Minimum', default=325,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
-    strike_atm = wtf.FloatField(label='Atm', default=390,
+    strike_atm = wtf.FloatField(label='At-The-Money', default=390,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_max = wtf.FloatField(label='Max', default=425,
+    strike_max = wtf.FloatField(label='Maximum', default=425,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
-    volatility_min = wtf.FloatField(label='Min', default=11.3,
+    volatility_min = wtf.FloatField(label='Minimum', default=11.3,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    volatility_atm = wtf.FloatField(label='Atm', default=6.5,
+    volatility_atm = wtf.FloatField(label='At-The-Money', default=6.5,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    volatility_max = wtf.FloatField(label='Max', default=4.5,
+    volatility_max = wtf.FloatField(label='Maximum', default=4.5,
                                     validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    price = wtf.FloatField(label='Spot Price', default=387,
+    price = wtf.FloatField(label='Current Spot Price', default=387,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=5.04, validators=[wtf.validators.InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0, validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time to expiration', default=0.1666,
+    time = wtf.FloatField(label='Time to Maturity (Years)', default=0.1666,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf Prices'), ('1', 'Cdf Prices'),
-                                                      ('2', 'Cdf Returns')])
+    plot_choice = MultiCheckboxField('Plot', choices=[('0', 'Pdf of Spot Prices'), ('1', 'Cdf of Spot Prices'),
+                                                      ('2', 'Cdf of Log-Returns')])
     button_compute = wtf.SubmitField(label='Compute')
     button_view_details = wtf.SubmitField(label='View Details')
     button_export_table = wtf.SubmitField(label='Export Table')

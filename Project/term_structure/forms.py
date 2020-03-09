@@ -4,8 +4,8 @@ from wtforms.validators import InputRequired
 
 
 class ComputeForm(wtf.Form):
-    model_choice = wtf.SelectField('Model', choices=[('0', 'Vasicek'), ('1', 'CIR'),
-                                                     ('2', 'Nelson Siegel'), ('3', 'Svensson')], default='0')
+    model_choice = wtf.SelectField('Model', choices=[('0', 'Vasicek'), ('1', 'Cox-Ingersoll-Ross'),
+                                                     ('2', 'Nelson-Siegel'), ('3', 'Svensson')], default='0')
 
     name_parameters = {
         '0': ['$$ \kappa $$', r'$$ \theta $$', '$$ \sigma $$', r'$$ v_{0} $$'],
@@ -63,11 +63,12 @@ class ComputeForm(wtf.Form):
     # Contract parameters
     file_data = wtf.FileField(label='Import File')
 
-    discount_factor = wtf.RadioField(label='Calibrate to Spot Rate Term or Discount Factor Term',
-                                     choices=[('0', 'Spot Rate'),
-                                              ('1', 'Discount Factor')], default='0')
-    least_fmin = wtf.RadioField(label='Optimization Method', choices=[('0', 'Non Linear Least Squares'), ('1', 'Fmin')],
-                                default='0')
+    discount_factor = wtf.RadioField(label='Calibrate to:',
+                                     choices=[('0', 'Spot Rate Term Structure'),
+                                              ('1', 'Discount Factor Term Structure')], default='0')
+    least_fmin = wtf.RadioField(label='Optimization Method',
+                                choices=[('0', ' Levenberg-Marquardt (Non Linear Least Squares)'),
+                                         ('1', 'Downill Simplex Algorithm (Fmin)')], default='0')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')

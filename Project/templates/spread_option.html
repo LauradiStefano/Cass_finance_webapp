@@ -4,8 +4,7 @@
     <div class="row">
         <div class="col p-3 m-4">
             <h1 class="title text-center text-light">Spread Option</h1>
-            <h2 class="lead text-center text-light animated fadeInDown">A General Closed-Form Spread Option Pricing
-                Formula</h2>
+            <h2 class="lead text-center text-light animated fadeInDown">Closed Form Formula (Normal Log-Returns)</h2>
         </div>
     </div>
 </div>
@@ -15,7 +14,147 @@
         <form class="" method="post" action="">
 
             <div class="row">
-                <div class="col-md-3 col-12">
+
+
+                <div class="col-md col-12">
+                    1
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>First Asset</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{ form.price_1.label}}
+                                {{ form.price_1 }}
+                                {% if form.price_1.errors %}
+                                {% for error in form.price_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.dividend_yield_1.label}}
+                                {{ form.dividend_yield_1 }}
+                                {% if form.dividend_yield_1.errors %}
+                                {% for error in form.dividend_yield_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!--<div class="row">-->
+                            <!--<div class="col mb-1">-->
+                                <!--{{form.volatility_1.label}}-->
+                                <!--{{ form.volatility_1 }}-->
+                                <!--{% if form.volatility_1.errors %}-->
+                                <!--{% for error in form.volatility_1.errors %}-->
+                                <!--<div style="color: red;">{{ error }}</div>-->
+                                <!--{% endfor %}-->
+                                <!--{% endif %}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </fieldset>
+                </div>
+
+                <div class="col-md col-12">
+                    2
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Second Asset</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.price_2.label}}
+                                {{ (form.price_2) }}
+                                {% if form.price_2.errors %}
+                                {% for error in form.price_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.dividend_yield_2.label}}
+                                {{form.dividend_yield_2 }}
+                                {% if form.dividend_yield_2.errors %}
+                                {% for error in form.dividend_yield_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!--<div class="row">-->
+                            <!--<div class="col mb-1">-->
+                                <!--{{form.volatility_2.label}}-->
+                                <!--{{form.volatility_2 }}-->
+                                <!--{% if form.volatility_2.errors %}-->
+                                <!--{% for error in form.volatility_2.errors %}-->
+                                <!--<div style="color: red;">{{ error }}</div>-->
+                                <!--{% endfor %}-->
+                                <!--{% endif %}-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    </fieldset>
+                </div>
+
+                <div class="col-md col-12">
+                    3
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Covariance Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.volatility_1.label}}
+                                {{form.volatility_1}}
+                                {% if form.volatility_1.errors %}
+                                {% for error in form.volatility_1.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.volatility_2.label}}
+                                {{form.volatility_2}}
+                                {% if form.volatility_2.errors %}
+                                {% for error in form.volatility_2.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.rho.label}}
+                                {{form.rho}}
+                                {% if form.rho.errors %}
+                                {% for error in form.rho.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md col-12">
+                    4
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Contract Parameters</legend>
@@ -59,112 +198,11 @@
                     </fieldset>
                 </div>
 
-                <div class="col-md-3 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
-
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>First Asset</legend>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{ form.price_1.label}}
-                                {{ form.price_1 }}
-                                {% if form.price_1.errors %}
-                                {% for error in form.price_1.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.dividend_yield_1.label}}
-                                {{ form.dividend_yield_1 }}
-                                {% if form.dividend_yield_1.errors %}
-                                {% for error in form.dividend_yield_1.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.volatility_1.label}}
-                                {{ form.volatility_1 }}
-                                {% if form.volatility_1.errors %}
-                                {% for error in form.volatility_1.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-
-                <div class="col-md-3 col-12">
+                <div class="col-md col-12">
+                    5
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Second Asset</legend>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.price_2.label}}
-                                {{ (form.price_2) }}
-                                {% if form.price_2.errors %}
-                                {% for error in form.price_2.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.dividend_yield_2.label}}
-                                {{form.dividend_yield_2 }}
-                                {% if form.dividend_yield_2.errors %}
-                                {% for error in form.dividend_yield_2.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.volatility_2.label}}
-                                {{form.volatility_2 }}
-                                {% if form.volatility_2.errors %}
-                                {% for error in form.volatility_2.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                    </fieldset>
-                </div>
-
-                <div class="col-md-3 col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
-                        <div class="row border-bottom mb-2 pb-1">
-                            <legend>Asset Parameters</legend>
-                        </div>
-
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.rho.label}}
-                                {{form.rho}}
-                                {% if form.rho.errors %}
-                                {% for error in form.rho.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
+                            <legend>FFT Fourier Parameters</legend>
                         </div>
 
                         <div class="row">

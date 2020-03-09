@@ -106,22 +106,22 @@ class ComputeForm(wtf.Form):
 
     price_exp = wtf.FloatField(label='Spot Price', default=3.89849373300000,
                                validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_exp = wtf.FloatField(label='Strike', default=49.3280918417284,
+    strike_exp = wtf.FloatField(label='Price', default=49.3280918417284,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free_exp = wtf.FloatField(label='Interest Rate \((\%) \)', default=0.01,
                                    validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    time_exp = wtf.FloatField(label='Time to Maturity', default=0.083333,
+    time_exp = wtf.FloatField(label='Time to Maturity (Years)', default=0.083333,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    step_exp = wtf.FloatField(label='Monitoring Frequency', default=22,
+    step_exp = wtf.FloatField(label='Number of Monitoring Dates', default=22,
                               validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    upper_range_exp = wtf.FloatField(label='Upper Bound Range', default=6, validators=[wtf.validators.InputRequired()])
-    lower_range_exp = wtf.FloatField(label='Lower Bound Range', default=3, validators=[wtf.validators.InputRequired()])
+    upper_range_exp = wtf.FloatField(label='Grid Upper Bound', default=6, validators=[wtf.validators.InputRequired()])
+    lower_range_exp = wtf.FloatField(label='Grid Lower Bound', default=3, validators=[wtf.validators.InputRequired()])
 
     # Implementation Parameter
-    grid = wtf.FloatField(label='Grid Point (2^)', default=12,
+    grid = wtf.FloatField(label='Grid Points (2^)', default=12,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(2, 20)])
-    upper_range = wtf.FloatField(label='Upper Bound Range', default=2, validators=[wtf.validators.InputRequired()])
-    lower_range = wtf.FloatField(label='Lower Bound Range', default=-2, validators=[wtf.validators.InputRequired()])
+    upper_range = wtf.FloatField(label='Grid Upper Bound', default=2, validators=[wtf.validators.InputRequired()])
+    lower_range = wtf.FloatField(label='Grid Lower Bound', default=-2, validators=[wtf.validators.InputRequired()])
     dump = wtf.FloatField(label='Damping Coefficient', default=1.5, validators=[wtf.validators.InputRequired()])
     tolerance = wtf.FloatField(label='Tolerance', default=0.00001, validators=[wtf.validators.InputRequired()])
 
@@ -131,11 +131,11 @@ class ComputeForm(wtf.Form):
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=3.67, validators=[wtf.validators.InputRequired()])
     # dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0,
     #                                 validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time to Maturity', default=1,
+    time = wtf.FloatField(label='Time to Maturity (Years)', default=1,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    step = wtf.FloatField(label='Monitoring Frequency', default=12,
+    step = wtf.FloatField(label='Number of Monitoring Dates', default=12,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike = wtf.FloatField(label='Strike', default=100,
+    strike = wtf.FloatField(label='Price', default=100,
                             validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     button_compute = wtf.SubmitField(label='Compute')

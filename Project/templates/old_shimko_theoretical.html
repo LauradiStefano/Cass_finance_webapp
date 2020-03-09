@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col p-3 m-4">
-            <h1 class="title text-center text-light">Shimko Bounds of Probability</h1>
+            <h1 class="title text-center text-light">Implied Distribution</h1>
             <h2 class="lead text-center text-light animated fadeInDown">Previous Simulations</h2>
         </div>
     </div>
@@ -24,6 +24,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <legend> Prices </legend>
                                     <span class="mb-1">
                                         {{result['form'].strike_min.label}}:
                                         {{result['form'].strike_min.data|round(4)}}<br/>
@@ -32,12 +33,11 @@
                                         {{result['form'].strike_atm.label}}:
                                         {{result['form'].strike_atm.data|round(4)}}<br/>
                                     </span>
-
                                     <span class="mb-1">
                                         {{result['form'].strike_max.label}}:
                                         {{result['form'].strike_max.data|round(4)}}<br/>
                                     </span>
-
+                                    <legend> Implied Volatility </legend>
                                     <span class="mb-1">
                                         {{result['form'].volatility_min.label}} \((\%) \):
                                         {{result['form'].volatility_min.data|round(4)}}<br/>

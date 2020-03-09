@@ -3,9 +3,9 @@ from wtforms import validators
 
 
 class ComputeForm(wtf.Form):
-    price_1 = wtf.FloatField(label=r'Spot Price \((S0_\left(1\right)) \)', default=100,
+    price_1 = wtf.FloatField(label=r'Spot Price \((S_1) \)', default=100,
                              validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    price_2 = wtf.FloatField(label=r'Spot Price \((S0_\left(2\right)) \)', default=96,
+    price_2 = wtf.FloatField(label=r'Spot Price \((S_2)\)', default=96,
                              validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     dividend_yield_1 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=5,
@@ -13,17 +13,17 @@ class ComputeForm(wtf.Form):
     dividend_yield_2 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=5,
                                       validators=[wtf.validators.InputRequired()])
 
-    volatility_1 = wtf.FloatField(label='Volatility \((\sigma_1) \)', default=0.2,
+    volatility_1 = wtf.FloatField(label='Volatility First Asset \((\sigma_1) \)', default=0.2,
                                   validators=[wtf.validators.InputRequired()])
 
-    volatility_2 = wtf.FloatField(label='Volatility \((\sigma_2) \)', default=0.1,
+    volatility_2 = wtf.FloatField(label='Volatility Second Asset \((\sigma_2) \)', default=0.1,
                                   validators=[wtf.validators.InputRequired()])
 
     strike = wtf.FloatField(label='Strike', default=4,
                             validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=10, validators=[wtf.validators.InputRequired()])
 
-    time = wtf.FloatField(label='Time to Matutity', default=1,
+    time = wtf.FloatField(label='Time to Maturity (Years)', default=1,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     rho = wtf.FloatField(label=r' Correlation \((\rho) \)', default=0.5,

@@ -4,7 +4,7 @@ from wtforms.validators import InputRequired
 
 
 class ComputeForm(wtf.Form):
-    method_choice = wtf.RadioField('Choose the Method', choices=[('0', 'Import File Excel'), ('1', 'Tickers')],
+    method_choice = wtf.RadioField('Choose the Method', choices=[('0', 'Excel File'), ('1', 'Yahoo Tickers')],
                                    validators=[InputRequired()])
 
     file_data = wtf.FileField(label='Import File')
@@ -23,5 +23,5 @@ class ComputeForm(wtf.Form):
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
-    button_add_field = wtf.SubmitField(label='Add Row')
-    # button_delete_field = wtf.SubmitField(label='Delete Row')
+    button_add_field = wtf.SubmitField(label='Add Ticker')
+    button_delete_field = wtf.SubmitField(label='Delete Row')

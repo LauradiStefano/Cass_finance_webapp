@@ -3,8 +3,8 @@
 <div class="container">
     <div class="row">
         <div class="col p-3 m-4">
-            <h1 class="title text-center text-light">Statistical Analysis</h1>
-            <h2 class="lead text-center text-light animated fadeInDown"> -- </h2>
+            <h1 class="title text-center text-light">Return Data Statistics</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> Statistical Analysis of Returns </h2>
         </div>
     </div>
 </div>
@@ -14,7 +14,7 @@
         <form class="" method="post" action="" enctype="multipart/form-data">
             <div class="example_file">
                 <a href="/static/download_example/dataset_statistical_analysis.xlsx">
-                    Excel Template File: Statistical Analysis Dataset.xlsx</a>
+                    Excel Template File: Return Data Statistics Dataset.xlsx</a>
             </div>
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -42,7 +42,7 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Import Stock Prices</legend>
+                            <legend>Import Prices</legend>
                         </div>
 
                         <div class="row">
@@ -82,7 +82,7 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Tickers</legend>
+                            <legend>Yahoo Tickers</legend>
                         </div>
 
                         <div class="row">
@@ -94,6 +94,10 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
+
+                            <!--<div class="col mb-1">-->
+                                <!--{{form.button_delete_field}}-->
+                            <!--</div>-->
                         </div>
                         <div class="row">
                             <div class="col d-flex justify-content-center">
@@ -198,7 +202,7 @@
                     <tbody>
                     {%for i in range(number_of_tickers)%}
                     <tr>
-                        <td> <a href="plot_statistical_analysis"> {{tickers[i]}} </a> </td>
+                        <td><a href="plot_statistical_analysis"> {{tickers[i]}} </a></td>
                         <td>{{mean[i]}}</td>
                         <td>{{volatility[i]}}</td>
                         <td>{{variance[i]}}</td>
@@ -259,8 +263,12 @@
         var new_input = $("<input required type='text' ></input>")
             .attr('id', 'flist-' + field_number)
             .attr('name', 'flist-' + field_number)
+        var new_button = $("<input required type='submit' ></input>")
+            .attr('id', 'button_delete_field-' + field_number)
+            .attr('name', 'button_delete_field-' + field_number)
 
         $('#flist').append(new_input);
+        $('#button_delete_field').append(new_button);
         field_number++;
         });
 
@@ -276,6 +284,7 @@
             }
         });
     });
+
 
 
 
