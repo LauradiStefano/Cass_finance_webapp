@@ -390,7 +390,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     fig.line(x='ret_t', y='cdf_returns', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
              line_width=4, name='cdf ret')
 
-    fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend_albel="Benchmark Normal", color="#D21F1B",
+    fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend_label="Benchmark Normal", color="#D21F1B",
              alpha=0.6, line_width=4, name='bench norm')
 
     fig.legend.location = "bottom_right"
