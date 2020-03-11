@@ -4,8 +4,9 @@ from wtforms.validators import InputRequired
 
 
 class ComputeForm(wtf.Form):
-    model_choice = wtf.SelectField('Model', choices=[('0', 'Vasicek'), ('1', 'Cox-Ingersoll-Ross'),
-                                                     ('2', 'Nelson-Siegel'), ('3', 'Svensson')], default='0')
+    model_choice = wtf.SelectField('Model',
+                                   choices=[('1', 'Cox-Ingersoll-Ross'), ('2', 'Nelson-Siegel'), ('3', 'Svensson'),
+                                            ('0', 'Vasicek')], default='1')
 
     name_parameters = {
         '0': ['$$ \kappa $$', r'$$ \theta $$', '$$ \sigma $$', r'$$ v_{0} $$'],

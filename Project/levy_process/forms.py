@@ -50,9 +50,9 @@ class ComputeForm(wtf.Form):
     # Contract parameters
     price = wtf.FloatField(label='Spot Price', default=100,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_min = wtf.FloatField(label='Strike Min', default=70,
+    strike_min = wtf.FloatField(label='Minimum Strike', default=70,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
-    strike_max = wtf.FloatField(label='Strike Max', default=130,
+    strike_max = wtf.FloatField(label='Maximum Strike', default=130,
                                 validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=2, validators=[wtf.validators.InputRequired()])
     dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0, validators=[wtf.validators.InputRequired()])

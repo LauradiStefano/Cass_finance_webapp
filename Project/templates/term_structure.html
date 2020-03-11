@@ -38,73 +38,6 @@
                         </div>
 
                         <div class="row">
-                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice
-                                 !=None
-                                 %}
-                                 style="display:none" {%endif%}>
-                                <div class="model_formula">
-                                    \begin{eqnarray*}
-                                    dr(t) &=& k(\theta-r(t))dt+\sigma dW (t)\\
-                                    SpotRates(t) &=&
-                                    -\frac{ A(t)}{t} +\frac{B\left(t\right)}{t} \times r\left(0\right), \\
-                                    B\left(t\right) &=& \frac{1-e^{-\kappa (t)}}{\kappa}, \\
-                                    A\left(t\right) &=& \left(B\left(t\right)-(t)\right)\left(\theta-\frac{\sigma^2}
-                                    {2\kappa^2}\right)-\frac{\sigma^2B\left(t\right)^2}{4\kappa} \end{eqnarray*}
-                                </div>
-
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.kappa_vasicek.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.kappa_vasicek}}
-                                        {% if form.kappa_vasicek.errors %}
-                                        {% for error in form.kappa_vasicek.errors %}
-                                        <div style="color: red;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.theta_vasicek.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.theta_vasicek}}
-                                        {% if form.theta_vasicek.errors %}
-                                        {% for error in form.theta_vasicek.errors %}
-                                        <div style="color: red;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_vasicek.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_vasicek}}
-                                        {% if form.sigma_vasicek.errors %}
-                                        {% for error in form.sigma_vasicek.errors %}
-                                        <div style="color: red;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.rho_vasicek.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.rho_vasicek}}
-                                        {% if form.rho_vasicek.errors %}
-                                        {% for error in form.rho_vasicek.errors %}
-                                        <div style="color: red;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="col" id="cir" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
@@ -315,6 +248,74 @@
                                         {{form.tau2_svensson}}
                                         {% if form.tau2_svensson.errors %}
                                         {% for error in form.tau2_svensson.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice
+                                 !=None
+                                 %}
+                                 style="display:none" {%endif%}>
+                                <div class="model_formula">
+                                    \begin{eqnarray*}
+                                    dr(t) &=& k(\theta-r(t))dt+\sigma dW (t)\\
+                                    SpotRates(t) &=&
+                                    -\frac{ A(t)}{t} +\frac{B\left(t\right)}{t} \times r\left(0\right), \\
+                                    B\left(t\right) &=& \frac{1-e^{-\kappa (t)}}{\kappa}, \\
+                                    A\left(t\right) &=& \left(B\left(t\right)-(t)\right)\left(\theta-\frac{\sigma^2}
+                                    {2\kappa^2}\right)-\frac{\sigma^2B\left(t\right)^2}{4\kappa} \end{eqnarray*}
+                                </div>
+
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.kappa_vasicek.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_vasicek}}
+                                        {% if form.kappa_vasicek.errors %}
+                                        {% for error in form.kappa_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.theta_vasicek.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_vasicek}}
+                                        {% if form.theta_vasicek.errors %}
+                                        {% for error in form.theta_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_vasicek.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_vasicek}}
+                                        {% if form.sigma_vasicek.errors %}
+                                        {% for error in form.sigma_vasicek.errors %}
+                                        <div style="color: red;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.rho_vasicek.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_vasicek}}
+                                        {% if form.rho_vasicek.errors %}
+                                        {% for error in form.rho_vasicek.errors %}
                                         <div style="color: red;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -616,6 +617,7 @@
 
         });
     });
+
 
 
 </script>

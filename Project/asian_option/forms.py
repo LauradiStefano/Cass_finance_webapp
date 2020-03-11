@@ -23,8 +23,8 @@ def check_nig_distribution(form, field):
 
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model',
-                                   choices=[('0', 'GBM'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
-                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV'), ('9', 'OUM')],
+                                   choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'Heston'), ('3', 'NIG'), ('4', 'CGMY'),
+                                            ('5', 'Meixner'), ('6', 'MJD'), ('7', 'DEJD'), ('8', 'CEV'), ('9', 'O-U')],
                                    default='0')
 
     # GBM distribution

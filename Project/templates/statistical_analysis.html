@@ -276,7 +276,9 @@
 
     $(document).ready(function() {
         var select_method_choice = $('#method_choice');
-        $('#button_compute').prop('disabled', true);
+        if ($('[name=method_choice]:radio:checked').val() == undefined) {
+            $('#button_compute').prop('disabled', true);
+        }
 
         select_method_choice.on('click', function() {
             if ($('[name=method_choice]:radio:checked').val() != '') {
@@ -284,9 +286,6 @@
             }
         });
     });
-
-
-
 
 </script>
 
