@@ -87,6 +87,7 @@ legend {
     color: #1E1E1E;
     margin-bottom: 0;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 input[type=text], input[type=number], input[type=time], input[type=password], input[type=email]{
@@ -229,6 +230,10 @@ fieldset > .project_list {
 
 #home .shimko_link, .cos_link{
     font-size:12px !important;
+}
+
+#home .option_shimko, .option_cos{
+    white-space: nowrap;
 }
 
 .img_logo_home {
