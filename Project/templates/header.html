@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto" id="navbarDropdown">
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown header_title">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Implied Distribution
@@ -65,7 +65,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown header_title">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         Plain Vanilla Options
@@ -95,25 +95,25 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item header_title">
                     <a class="nav-link" href="/term_structure">
                         Term Structure Fitting
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item header_title">
                     <a class="nav-link" href="/statistical_analysis">
                         Return Data Statistics
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item header_title">
                     <a class="nav-link" href="/portfolio_analysis">
                         Portfolio Construction
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item header_title">
                     <a class="nav-link" href="/#">
                         Temperature
                     </a>
@@ -128,7 +128,7 @@
             </ul>
             <div class="dropdown-divider"></div>
 
-            <span class="navbar-text">
+            <span class="navbar-text header_title">
                 {% if user is defined%}
                     {% if user.is_authenticated %}
                     <a class="mx-2">Logged in as {{user.username}}</a>
@@ -148,7 +148,6 @@
                     <a class="mx-2" href={{back_url}}> Back to the Model </a>
                     {% endif %}
                 {% endif %}
-
             </span>
         </div>
     </nav>

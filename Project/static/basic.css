@@ -261,6 +261,10 @@ fieldset > .project_list {
     margin-bottom: 2px;
 }
 
+.header_title {
+    white-space: nowrap;
+}
+
 @media only screen and (max-width: 1200px){
     .dropdown-menu {
         background: none;
