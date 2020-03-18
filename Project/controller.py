@@ -263,6 +263,16 @@ def about():
     return render_template("about.html", about=True)
 
 
+@app.route('/terms_service', methods=['GET', 'POST'])
+def terms_service():
+    return render_template("terms_service.html", about=True)
+
+
+@app.route('/privacy', methods=['GET', 'POST'])
+def privacy():
+    return render_template("privacy.html", about=True)
+
+
 if not os.path.isfile(os.path.join(os.path.dirname(__file__), 'sqlite.db')):
     db.create_all()
 if 'liveweb' not in gethostname():  # this is not run on pythonanywhere

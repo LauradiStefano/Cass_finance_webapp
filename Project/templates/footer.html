@@ -1,3 +1,26 @@
+
+<footer>
+    <hr>
+    <nav class="footer">
+        <div class="row">
+            <div class="col d-flex justify-content-start">
+                <img class="img_logo_cass" src="/static/logo_cass.png">
+            </div>
+            <div class="col d-flex justify-content-end">
+                <div class="col-xs-2 ">
+                    <a class="nav-link" href="/about">About</a>
+                </div>
+
+                <div class="col-xs-2">
+                    <a class="nav-link" href="/terms_service">Terms of Service</a>
+                </div>
+                <div class="col-xs-2">
+                    <a class="nav-link" href="/privacy">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -11,6 +34,13 @@
     $('#popup_table').popup();
     $('#popup_table').popup('addclosebutton');
   });
+
+
+
+
+
+
+
 
 </script>
 
@@ -46,6 +76,13 @@ buttonExportTable.addEventListener('click', function (e) {
     instance.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges,
     xlsxData.RTL, xlsxData.sheetname);
 });
+
+
+
+
+
+
+
 </script>
 {% endif %}
 
