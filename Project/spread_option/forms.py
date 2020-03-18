@@ -13,10 +13,10 @@ class ComputeForm(wtf.Form):
     dividend_yield_2 = wtf.FloatField(label='Dividend Yield \((\%) \)', default=5,
                                       validators=[wtf.validators.InputRequired()])
 
-    volatility_1 = wtf.FloatField(label='Volatility First Asset \((\sigma_1) \)', default=0.2,
+    volatility_1 = wtf.FloatField(label=r'Volatility 1st Asset \((\sigma_1) \)', default=0.2,
                                   validators=[wtf.validators.InputRequired()])
 
-    volatility_2 = wtf.FloatField(label='Volatility Second Asset \((\sigma_2) \)', default=0.1,
+    volatility_2 = wtf.FloatField(label='Volatility 2nd Asset \((\sigma_2) \)', default=0.1,
                                   validators=[wtf.validators.InputRequired()])
 
     strike = wtf.FloatField(label='Strike', default=4,
