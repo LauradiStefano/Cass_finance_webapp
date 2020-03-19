@@ -561,6 +561,12 @@ footer {
     background: #404040;
 }
 
+.footer_hr{
+    border: 1px;
+    height: 1px;
+    background-image: linear-gradient(to right,  #ccc, #616161, #ccc );
+}
+
 .term_link{
     color: #1E1E1E !important;
     font-size: 12px;
