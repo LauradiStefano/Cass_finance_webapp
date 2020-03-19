@@ -87,7 +87,6 @@ legend {
     color: #1E1E1E;
     margin-bottom: 0;
     font-weight: bold;
-    white-space: nowrap;
 }
 
 input[type=text], input[type=number], input[type=time], input[type=password], input[type=email]{
@@ -259,6 +258,10 @@ fieldset > .project_list {
 #home .title_container{
     margin-left: -50px;
     margin-bottom: 2px;
+}
+
+#home legend {
+    white-space: nowrap;
 }
 
 .header_title {
