@@ -123,7 +123,7 @@ def create_plot_lower_bound(lam, lower_bound):
     fig.line(x='lam', y='lower_bound', source=data, legend_label="Lower Bound Function", color="#0095B6", alpha=0.9,
              line_width=4, name='lower bound')
 
-    fig.legend.location = "top_right"
+    fig.legend.location = "bottom_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
