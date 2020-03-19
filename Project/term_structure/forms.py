@@ -67,9 +67,9 @@ class ComputeForm(wtf.Form):
     discount_factor = wtf.RadioField(label='Calibrate to:',
                                      choices=[('0', 'Spot Rate Term Structure'),
                                               ('1', 'Discount Factor Term Structure')], default='0')
-    least_fmin = wtf.RadioField(label='Optimization Method',
-                                choices=[('0', ' Levenberg-Marquardt (Non Linear Least Squares)'),
-                                         ('1', 'Downill Simplex Algorithm (Fmin)')], default='0')
+    least_fmin = wtf.RadioField(label='Optimization Method:',
+                                choices=[('0', ' Levenberg-Marquardt '),
+                                         ('1', 'Downill Simplex Algorithm')], default='0')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')

@@ -557,3 +557,17 @@ div.download_data:hover, div.download_data:active {
 footer {
     background: #404040;
 }
+
+.term_link{
+    color: #1E1E1E !important;
+    font-size: 12px;
+}
+
+.term_link:hover, .term_link:active {
+    color: #8F8F8F !important;
+    text-decoration: None !important;
+}
+
+.container_term_link {
+    margin-left: 1.1em;
+}
