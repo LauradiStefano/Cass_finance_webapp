@@ -445,6 +445,7 @@ class statisitcal_analysis(db.Model):
     pvalue = db.Column(db.String())
     number_of_tickers = db.Column(db.Integer())
     tickers = db.Column(db.String())
+    n_observation = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())

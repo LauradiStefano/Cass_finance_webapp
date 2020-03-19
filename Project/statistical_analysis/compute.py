@@ -55,7 +55,7 @@ def compute_table(data):
         data_array.append((np.array(data.loc[i])))
 
     prices = np.vstack(data_array)
-    
+
     log_returns = []
     for i in range(0, len(prices) - 1):
         log_return = np.log(prices[i + 1] / prices[i])
@@ -103,13 +103,12 @@ def compute_table(data):
     else:
         jb_statistic = None
         p_value = None
- 
+
     n_observations = []
 
     for i in range(0, len(tickers)):
         observations = len(log_returns[:, i])
         n_observations.append(observations)
-
 
     mean = m
     volatility = sg
@@ -118,5 +117,6 @@ def compute_table(data):
     kurtosis = ku
     min_return = minr
     max_return = maxr
-    print("type",type(m))
-    return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers #,n_observations
+    print("type", type(m))
+    return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers, \
+           n_observations

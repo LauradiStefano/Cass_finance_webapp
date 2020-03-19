@@ -188,6 +188,7 @@
                     </div>
                     <thead>
                     <th scope="col"> Tickers</th>
+                    <th scope="col"> Observation</th>
                     <th scope="col"> Mean</th>
                     <th scope="col"> Volatility</th>
                     <th scope="col"> Variance</th>
@@ -203,6 +204,7 @@
                     {%for i in range(number_of_tickers)%}
                     <tr>
                         <td><a href="plot_statistical_analysis"> {{tickers[i]}} </a></td>
+                        <td>{{n_observation[i]}}</td>
                         <td>{{mean[i]}}</td>
                         <td>{{volatility[i]}}</td>
                         <td>{{variance[i]}}</td>

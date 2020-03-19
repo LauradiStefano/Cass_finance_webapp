@@ -26,6 +26,7 @@ def controller_statistical_analysis(user, request):
     jb_test = None
     pvalue = None
     tickers = None
+    n_observation = None
 
     number_of_tickers = 0
 
@@ -47,8 +48,8 @@ def controller_statistical_analysis(user, request):
                                                    form.start_year.data, form.end_day.data, form.end_month.data,
                                                    form.end_year.data)
 
-            mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers = \
-                compute_table(file_data)
+            mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers, \
+            n_observation = compute_table(file_data)
 
             number_of_tickers = len(tickers)
 
@@ -67,6 +68,7 @@ def controller_statistical_analysis(user, request):
             object.pvalue = json.dumps(pvalue)
             object.tickers = json.dumps(tickers)
             object.number_of_tickers = number_of_tickers
+            object.n_observation = json.dumps(n_observation)
 
             object.user = user
             db.session.add(object)
@@ -89,6 +91,7 @@ def controller_statistical_analysis(user, request):
                 pvalue = json.loads(instance.pvalue)
                 tickers = json.loads(instance.tickers)
                 number_of_tickers = instance.number_of_tickers
+                n_observation = json.loads(instance.n_observation)
 
     mean = [round(x, 6) for x in mean] if mean is not None else None
     volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -102,7 +105,8 @@ def controller_statistical_analysis(user, request):
 
     return {'form': form, 'user': user, 'min_return': min_return, 'mean': mean, 'volatility': volatility,
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
-            'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers}
+            'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
+            'n_observation': n_observation}
 
 
 def populate_form_from_instance(instance):
@@ -141,6 +145,7 @@ def controller_old_statistical_analysis(user):
             pvalue = json.loads(instance.pvalue)
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers
+            n_observation = json.loads(instance.n_observation)
 
             mean = [round(x, 6) for x in mean] if mean is not None else None
             volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -154,7 +159,7 @@ def controller_old_statistical_analysis(user):
 
             data.append({'form': form, 'id': id, 'mean': mean, 'volatility': volatility, 'variance': variance,
                          'skewness': skewness, 'kurtosis': kurtosis, 'min_return': min_return, 'max_return': max_return,
-                         'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
+                         'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers, 'n_observation': n_observation,
                          'number_of_tickers': number_of_tickers})
 
     return {'data': data}
