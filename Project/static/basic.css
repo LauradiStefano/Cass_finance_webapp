@@ -558,12 +558,12 @@ footer {
 }
 
 .term_link{
-    color: #1E1E1E !important;
+    color: #337ab7 !important;
     font-size: 12px;
 }
 
 .term_link:hover, .term_link:active {
-    color: #8F8F8F !important;
+    color: #1E1E1E !important;
     text-decoration: None !important;
 }
 

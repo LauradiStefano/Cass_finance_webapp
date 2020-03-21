@@ -375,15 +375,17 @@
                         </div>
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.least_fmin.label}}
+                                {{form.least_fmin.label}} *
                                 {{form.least_fmin}}
                                 <div class="container_term_link">
+                                    *
                                     <a class="term_link"
                                        href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html">non
-                                        linear least squares</a>
+                                        linear least squares (levenberg-marquardt)</a>
                                     |
                                     <a class="term_link"
-                                       href=https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html>fmin</a>
+                                       href=https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html>fmin
+                                        (downill simplex algorithm)</a>
                                 </div>
                                 {% if form.least_fmin.errors %}
                                 {% for error in form.least_fmin.errors %}
@@ -623,6 +625,7 @@
 
         });
     });
+
 
 
 
