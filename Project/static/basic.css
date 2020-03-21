@@ -145,18 +145,8 @@ form{
     text-align: center;
 }
 
-.container_home{
-    position: absolute;
-    top: 30px;
-    left: 60px;
-    right: 70px;
-}
-
-.container_about{
-    position: absolute;
-    top: 50px;
-    left: 60px;
-    right: 70px;
+.container_home, .container_information {
+    margin: 30px 60px;
 }
 
 #home a{
@@ -306,7 +296,7 @@ fieldset > .project_list {
     }
 }
 
-.container {
+.container, {
     margin: 0 auto;
 }
 
