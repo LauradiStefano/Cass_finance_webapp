@@ -13,7 +13,7 @@
             <span class="text-white">
                 {% if user is defined%}
                     {% if user.is_authenticated %}
-                    Logged in as {{user.username}}
+                    Logged in as {{user.first_name}}
                     <a class="mx-2" href="/logout">Logout</a>
                     {% endif %}
                 {% endif %}
