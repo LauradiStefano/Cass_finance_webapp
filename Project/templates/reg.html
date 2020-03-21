@@ -1,68 +1,126 @@
 {% include 'header.html' %}
 
-<div id="user_form" class="container">
+<div class="container">
     <div class="row mt-5 d-flex justify-content-center">
         <form class="" method="post" action="">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Information</legend>
+                        </div>
 
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeIn text-center ">
-                <div class="row">
-                    <div class="col-12">
-                        {{ form.username.label }}
-                        {{ form.username(placeholder='username')}}
+                        <div class="row">
+                            <span class="user_reg_information">
+                                Please enter your account information below to use the web application. <br/>
 
-                        {% if form.username.errors %}
-                        {% for error in form.username.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
+                                We care about your <a class="privacy_link" href="/privacy">Privacy</a>. Your email and personal information is not shared with any
+                                third parties, and we only use your email for communications related to our service,
+                                such as password resets. <br/>
+
+                                By signing up you agree to our <a class="privacy_link" href="/terms_service">Terms of Service.</a>
+                            </span>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        {{ form.password.label }}
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Account Information</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1 container_model">
+                                {{form.title.label}}
+                                {{form.title}}
+                            </div>
+                        </div>
 
-                        {{ form.password(placeholder='password')}}
-
-                        {% if form.password.errors %}
-                        {% for error in form.password.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.first_name.label }}
+                                {{ form.first_name(placeholder='First Name')}}
+                                {% if form.first_name.errors %}
+                                {% for error in form.first_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                {{ form.second_name.label }}
+                                {{ form.second_name(placeholder='Second Name')}}
+                                {% if form.second_name.errors %}
+                                {% for error in form.second_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.organization.label }}
+                                {{ form.organization(placeholder='Organization')}}
+                                {% if form.organization.errors %}
+                                {% for error in form.organization.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                {{ form.job_title.label }}
+                                {{ form.job_title(placeholder='Job Title')}}
+                                {% if form.job_title.errors %}
+                                {% for error in form.job_title.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.password.label }}
+                                {{ form.password(placeholder='Password')}}
+                                {% if form.password.errors %}
+                                {% for error in form.password.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                {{ form.confirm.label }}
+                                {{form.confirm(placeholder='Confirm Password')}}
+                                {% if form.confirm.errors %}
+                                {% for error in form.confirm.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                {{ form.email.label }}
+                                {{form.email(placeholder='Email Address')}}
+                                {% if form.email.errors %}
+                                {% for error in form.email.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-12 text-center">
+                                {{form.button_registration}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="register_login_container">
+                            Already have an account?
+                            <a class="register_login_link" href="/login">Login</a>
+                        </div>
+                    </fieldset>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        {{ form.confirm.label }}
-
-                        {{form.confirm(placeholder='confirm password')}}
-
-                        {% if form.confirm.errors %}
-                        {% for error in form.confirm.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        {{ form.email.label }}
-
-                        {{form.email(placeholder='youremail@example.com')}}
-
-                        {% if form.email.errors %}
-                        {% for error in form.email.errors %}
-                        <div style="color: red;">{{ error }}</div>
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-12">
-                        {{form.button_registration}}
-                    </div>
-                </div>
-
-            </fieldset>
+            </div>
         </form>
 
     </div>

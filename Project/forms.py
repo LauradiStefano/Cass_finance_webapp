@@ -51,13 +51,21 @@ def check_password(form, field):
 
 
 class RegistrationForm(wtf.Form):
-    username = wtf.StringField(
-        label='Username', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
-    password = wtf.PasswordField(label='Password',
+    title = wtf.SelectField('Title', choices=[('0', 'Mr'), ('1', 'Mrs'), ('3', 'Ms')], default='0')
+
+    first_name = wtf.StringField(
+        label='First Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
+    second_name = wtf.StringField(
+        label='Second Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
+    organization = wtf.StringField(
+        label='Organization', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=40)])
+    job_title = wtf.StringField(
+        label='Job Title', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=40)])
+    password = wtf.PasswordField(label='Create Password',
                                  validators=[wtf.validators.DataRequired(),
                                              wtf.validators.EqualTo('confirm', message='Passwords must match'),
                                              check_password])
-    confirm = wtf.PasswordField(label='Confirm Password', validators=[wtf.validators.DataRequired()])
+    confirm = wtf.PasswordField(label='Verify Password', validators=[wtf.validators.DataRequired()])
 
     email = html5.EmailField(label='Email',
                              validators=[wtf.validators.DataRequired(),
@@ -69,15 +77,15 @@ class RegistrationForm(wtf.Form):
         if not wtf.Form.validate(self):
             return False
 
-        if db_models.db.session.query(db_models.User).filter_by(username=self.username.data).count() > 0:
-            self.username.errors.append('User already exists')
+        if db_models.db.session.query(db_models.User).filter_by(email=self.email.data).count() > 0:
+            self.email.errors.append('User already exists')
             return False
 
         return True
 
 
 class LoginForm(wtf.Form):
-    username = wtf.StringField(label='Username')
+    email = html5.EmailField(label='Email')
     password = wtf.PasswordField(label='Password')
     button_login = wtf.SubmitField(label='Log In')
 
@@ -88,7 +96,7 @@ class LoginForm(wtf.Form):
         user = self.get_user()
 
         if user is None:
-            self.username.errors.append('Unknown username')
+            self.email.errors.append('Unknown user')
             return False
 
         if not user.check_password(self.password.data):
@@ -99,4 +107,4 @@ class LoginForm(wtf.Form):
 
     def get_user(self):
         return db_models.db.session.query(db_models.User).filter_by(
-            username=self.username.data).first()
+            email=self.email.data).first()
