@@ -1,5 +1,4 @@
 {% include 'header.html' %}
-
 {% if just_registered == '1' %}
 <div class="alert alert-success">
     <strong>Success!</strong>
@@ -9,7 +8,11 @@
 
 <div class="container_home" id="home">
 
-    <div class="row d-flex justify-content-end">
+    <div class="row">
+        <div class="col d-flex justify-content-start">
+            <img class="img_logo_home" src="/static/logo_financial.png">
+        </div>
+        <div class="col d-flex justify-content-end">
             <span class="text-white">
                 {% if user is defined%}
                     {% if user.is_authenticated %}
@@ -18,10 +21,6 @@
                     {% endif %}
                 {% endif %}
             </span>
-    </div>
-    <div class="row">
-        <div class="col d-flex justify-content-start">
-            <img class="img_logo_home" src="/static/logo_financial.png">
         </div>
     </div>
     <div class="row">
@@ -62,8 +61,10 @@
                                 <div class="col mb-1 shimko_method">
                                     <a class="line_text"> Implied Distribution</a>
                                     <div class="option_shimko" style="display:none">
-                                        <a class="shimko_link" href="/shimko_theoretical">Illustration</a> |
-                                        <a class="shimko_link" href="/shimko_market">Market Application</a>
+                                        <a class="shimko_link"
+                                           href="/implied_distribution_illustration">Illustration</a> |
+                                        <a class="shimko_link" href="/implied_distribution_market_application">Market
+                                            Application</a>
                                     </div>
                                     <div class="line_button"></div>
                                 </div>
@@ -72,15 +73,15 @@
                                 <div class="col mb-1 cos_method">
                                     <a class="line_text"> Plain Vanilla Options</a>
                                     <div class="option_cos" style="display:none">
-                                        <a class="cos_link" href="/levy_process">Lévy Processes</a> |
-                                        <a class="cos_link" href="/heston_method">Heston Model</a>
+                                        <a class="cos_link" href="/plain_vanilla_levy_process">Lévy Processes</a> |
+                                        <a class="cos_link" href="/plain_vanilla_heston_method">Heston Model</a>
                                     </div>
                                     <div class="line_button"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-1">
-                                    <a class="line_text" href="asian_option"> Asian Options</a>
+                                    <a class="line_text" href="asian_options"> Asian Options</a>
                                     <div class="line_button"></div>
                                 </div>
                             </div>
@@ -147,13 +148,13 @@
                         <div class="project_list">
                             <div class="row">
                                 <div class="col mb-1">
-                                    <a class="line_text" href="statistical_analysis"> Return Data Statistics</a>
+                                    <a class="line_text" href="return_data_statistics"> Return Data Statistics</a>
                                     <div class="line_button"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col mb-1">
-                                    <a class="line_text" href="portfolio_analysis"> Portfolio Construction </a>
+                                    <a class="line_text" href="portfolio_construction"> Portfolio Construction </a>
                                     <div class="line_button"></div>
                                 </div>
                             </div>
@@ -202,6 +203,8 @@
             option_cos.hide();
         });
     });
+
+
 
 
 
