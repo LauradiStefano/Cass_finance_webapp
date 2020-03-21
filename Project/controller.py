@@ -39,39 +39,39 @@ def index():
     return render_template("index.html", user=current_user, index=True, just_registered=just_registered)
 
 
-@app.route('/shimko_theoretical', methods=['GET', 'POST'])
+@app.route('/implied_distribution_illustration', methods=['GET', 'POST'])
 def shimko_theoretical():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_shimko_theoretical(current_user, request)
-    return render_template("shimko_theoretical.html", **template_variables, table_export=True)
+    return render_template("implied_distribution_illustration.html", **template_variables, table_export=True)
 
 
-@app.route('/shimko_market', methods=['GET', 'POST'])
+@app.route('/implied_distribution_market_application', methods=['GET', 'POST'])
 def shimko_market():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_shimko_market(current_user, request)
-    return render_template("shimko_market.html", **template_variables, table_export=True)
+    return render_template("implied_distribution_market_application.html", **template_variables, table_export=True)
 
 
-@app.route('/levy_process', methods=['GET', 'POST'])
+@app.route('/plain_vanilla_levy_process', methods=['GET', 'POST'])
 def levy_process():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_levy_process(current_user, request)
-    return render_template("levy_process.html", **template_variables, table_export=True)
+    return render_template("plain_vanilla_levy_process.html", **template_variables, table_export=True)
 
 
-@app.route('/heston_method', methods=['GET', 'POST'])
+@app.route('/plain_vanilla_heston_method', methods=['GET', 'POST'])
 def heston_method():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_heston_method(current_user, request)
-    return render_template("heston_method.html", **template_variables, table_export=True)
+    return render_template("plain_vanilla_heston_method.html", **template_variables, table_export=True)
 
 
-@app.route('/asian_option', methods=['GET', 'POST'])
+@app.route('/asian_options', methods=['GET', 'POST'])
 def asian_option():
     # ** = {'a':1, 'b':2} --> (a=1, b=2)
     template_variables = controller_asian_option(current_user, request)
-    return render_template("asian_option.html", **template_variables)
+    return render_template("asian_options.html", **template_variables)
 
 
 @app.route('/term_structure', methods=['GET', 'POST'])
@@ -86,58 +86,62 @@ def spread_option():
     return render_template("spread_option.html", **template_variables)
 
 
-@app.route('/statistical_analysis', methods=['GET', 'POST'])
+@app.route('/return_data_statistics', methods=['GET', 'POST'])
 def statistical_analysis():
     template_variables = controller_statistical_analysis(current_user, request)
-    return render_template("statistical_analysis.html", **template_variables, table_export=True)
+    return render_template("return_data_statistics.html", **template_variables, table_export=True)
 
 
-@app.route('/plot_statistical_analysis', methods=['GET', 'POST'])
+@app.route('/plot_return_data_statistics', methods=['GET', 'POST'])
 def plot_statistical_analysis():
     template_variables = controller_statistical_analysis(current_user, request)
-    return render_template("plot_statistical_analysis.html", **template_variables)
+    return render_template("plot_return_data_statistics.html", **template_variables)
 
 
-@app.route('/portfolio_analysis', methods=['GET', 'POST'])
+@app.route('/portfolio_construction', methods=['GET', 'POST'])
 def portfolio_analysis():
     template_variables = controller_portfolio_analysis(current_user, request)
-    return render_template("portfolio_analysis.html", **template_variables)
+    return render_template("portfolio_construction.html", **template_variables)
 
 
-@app.route('/shimko_theoretical/old')
+@app.route('/implied_distribution_illustration/old')
 @login_required
 def old_shimko_theoretical():
     template_variables = controller_old_shimko_theoretical(current_user)
-    return render_template("old_shimko_theoretical.html", **template_variables, back_url=url_for('shimko_theoretical'),
+    return render_template("old_implied_distribution_illustration.html", **template_variables,
+                           back_url=url_for('shimko_theoretical'),
                            old=True)
 
 
-@app.route('/shimko_market/old')
+@app.route('/implied_distribution_market_application/old')
 @login_required
 def old_shimko_market():
     template_variables = controller_old_shimko_market(current_user)
-    return render_template("old_shimko_market.html", **template_variables, back_url=url_for('shimko_market'), old=True)
+    return render_template("old_implied_distribution_market_application.html", **template_variables,
+                           back_url=url_for('shimko_market'), old=True)
 
 
-@app.route('/levy_process/old')
+@app.route('/plain_vanilla_levy_process/old')
 @login_required
 def old_levy_process():
     template_variables = controller_old_levy_process(current_user)
-    return render_template("old_levy_process.html", **template_variables, back_url=url_for('levy_process'), old=True)
+    return render_template("old_plain_vanilla_levy_process.html", **template_variables,
+                           back_url=url_for('levy_process'), old=True)
 
 
-@app.route('/heston_method/old')
+@app.route('/plain_vanilla_heston_method/old')
 @login_required
 def old_heston_method():
     template_variables = controller_old_heston_method(current_user)
-    return render_template("old_heston_method.html", **template_variables, back_url=url_for('heston_method'), old=True)
+    return render_template("old_plain_vanilla_heston_method.html", **template_variables,
+                           back_url=url_for('heston_method'), old=True)
 
 
-@app.route('/asian_option/old')
+@app.route('/asian_options/old')
 @login_required
 def old_asian_option():
     template_variables = controller_old_asian_option(current_user)
-    return render_template("old_asian_option.html", **template_variables, back_url=url_for('asian_option'), old=True)
+    return render_template("old_asian_options.html", **template_variables, back_url=url_for('asian_option'), old=True)
 
 
 @app.route('/term_structure/old')
@@ -154,45 +158,45 @@ def old_spread_option():
                            old=True)
 
 
-@app.route('/statistical_analysis/old')
+@app.route('/return_data_statistics/old')
 def old_statistical_analysis():
     template_variables = controller_old_statistical_analysis(current_user)
-    return render_template("old_statistical_analysis.html", **template_variables,
+    return render_template("old_return_data_statistics.html", **template_variables,
                            back_url=url_for('statistical_analysis'), old=True)
 
 
-@app.route('/portfolio_analysis/old')
+@app.route('/portfolio_construction/old')
 def old_portfolio_analysis():
     template_variables = controller_old_portfolio_analysis(current_user)
-    return render_template("old_portfolio_analysis.html", **template_variables,
+    return render_template("old_portfolio_construction.html", **template_variables,
                            back_url=url_for('portfolio_analysis'), old=True)
 
 
-@app.route('/shimko_theoretical/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
     return delete_shimko_theoretical_simulation(current_user, id)
 
 
-@app.route('/shimko_market/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/implied_distribution_market_application/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_market(id):
     return delete_shimko_market_simulation(current_user, id)
 
 
-@app.route('/levy_process/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/plain_vanilla_levy_process/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_levy_process(id):
     return delete_levy_process_simulation(current_user, id)
 
 
-@app.route('/heston_method/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/plain_vanilla_heston_method/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_heston_method(id):
     return delete_heston_method_simulation(current_user, id)
 
 
-@app.route('/asian_option/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/asian_options/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_asian_option(id):
     return delete_asian_option_simulation(current_user, id)
@@ -210,13 +214,13 @@ def delete_spread_option(id):
     return delete_spread_option_simulation(current_user, id)
 
 
-@app.route('/statistical_analysis/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/return_data_statistics/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_statistical_analysis(id):
     return delete_statistical_analysis_simulation(current_user, id)
 
 
-@app.route('/portfolio_analysis/old/delete/<id>', methods=['GET', 'POST'])
+@app.route('/portfolio_construction/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_portfolio_analysis(id):
     return delete_portfolio_analysis_simulation(current_user, id)
