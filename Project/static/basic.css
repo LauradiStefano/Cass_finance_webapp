@@ -130,8 +130,8 @@ form{
     width: 100%;
 }
 
-#user_form{
-    width: 300px;
+.login_form{
+    max-width: 600px;
 }
 
 #plot_choice {
@@ -579,4 +579,32 @@ footer {
 
 .container_term_link {
     margin-left: 1.1em;
+}
+
+.register_login_container{
+    font-size: 12px;
+}
+
+.register_login_link {
+    color: #5F5F5F !important;
+}
+
+.register_login_link:hover, .register_login_link:active {
+    color: #8F8F8F !important;
+    text-decoration: None !important;
+}
+
+.user_reg_information{
+    color:#1E1E1E;
+    font-size: 14px;
+}
+
+.privacy_link {
+    color: #337ab7 !important;
+    font-size: 14px;
+}
+
+.privacy_link:hover, .privacy_link:active {
+    color: #1E1E1E !important;
+    text-decoration: None !important;
 }
