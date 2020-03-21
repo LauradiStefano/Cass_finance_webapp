@@ -8,12 +8,16 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
+    title = db.Column(db.String(10))
+    first_name = db.Column(db.String(80))
+    second_name = db.Column(db.String(80))
+    organization = db.Column(db.String(80))
+    job_title = db.Column(db.String(80))
     pw_hash = db.Column(db.String(80))
-    email = db.Column(db.String(120), nullable=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.email
 
     def check_password(self, pw):
         return check_password_hash(self.pw_hash, pw)
