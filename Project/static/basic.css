@@ -320,16 +320,7 @@ fieldset > .project_list {
     overflow: hidden;
 }
 
-/*#button_delete_field{
-    margin-top: 16px;
-    width: 85px;
-    height: 25px;
-    font-size: 12px;
-    text-align: center;
-    padding: 2px;
-}*/
-
-#button_add_field{
+#button_add_field, #button_delete_field{
     width: 85px;
     height: 25px;
     font-size: 12px;

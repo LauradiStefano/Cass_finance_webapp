@@ -94,14 +94,13 @@
                                 {% endfor %}
                                 {% endif %}
                             </div>
-
-                            <!--<div class="col mb-1">-->
-                                <!--{{form.button_delete_field}}-->
-                            <!--</div>-->
                         </div>
                         <div class="row">
                             <div class="col d-flex justify-content-center">
                                 {{form.button_add_field}}
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                {{form.button_delete_field}}
                             </div>
                         </div>
 
@@ -258,22 +257,27 @@
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function(){
+        var max_field = 20;
+        var add_button = $('#button_add_field');
+        var delete_button = $('#button_delete_field');
+        var wrapper = $('#flist');
+        var field_HTML = '<div><input type="text" name="flist-[]" id="flist-" value=""/></div>';
         var field_number = 1;
 
-        $('#button_add_field').click(function() {
-        var new_input = $("<input required type='text' ></input>")
-            .attr('id', 'flist-' + field_number)
-            .attr('name', 'flist-' + field_number)
-        var new_button = $("<input required type='submit' ></input>")
-            .attr('id', 'button_delete_field-' + field_number)
-            .attr('name', 'button_delete_field-' + field_number)
+        $(add_button).click(function(){
 
-        $('#flist').append(new_input);
-        $('#button_delete_field').append(new_button);
-        field_number++;
+            if(field_number < max_field){
+                field_number++;
+                $(wrapper).append(field_HTML);
+            }
         });
 
+        $(wrapper).click( 'delete_button', function(e){
+            e.preventDefault();
+            $(this).parent('div').remove();
+            field_number--;
+        });
     });
 
     $(document).ready(function() {
