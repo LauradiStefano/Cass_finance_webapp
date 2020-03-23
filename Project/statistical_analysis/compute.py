@@ -31,11 +31,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     end = dt.datetime(end_year, end_month, end_day)
 
     data = pd.DataFrame()
-    nature = type(tickers)
-
-    # questo è da fare su controller
-    if nature == str:
-        tickers = [tickers]
+    
     # for i in range(0, len(tickers)):
     for i in range(0, len(tickers)):
         df = web.DataReader(tickers[i], 'yahoo', start, end)
@@ -239,8 +235,7 @@ def create_plot_log_returns(log_returns, dates):
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_empirical, hover_normal], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-                    x_axis_label='Time',
-                    y_axis_label=' Log Returns')
+                    x_axis_label='Time', y_axis_label='Log Returns')
 
     fig.line(x='dates', y='log_returns', source=data, color="navy", legend='Log returns vs Dates', line_width=0.1,
              alpha=0.1, name='Log_Returns')
