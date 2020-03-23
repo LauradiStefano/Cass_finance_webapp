@@ -172,7 +172,7 @@ def create_histogram_distribution_plot(log_returns):
 
 
 def create_qq_plot(log_returns):
-    log_returns.tolist()
+    log_returns = list(log_returns[0])
     (x, empirical_distr), (slope, inter, cor) = scipy.stats.probplot(log_returns, dist="norm")  # , plot=pylab)
 
     theoretical_quantiles = x
