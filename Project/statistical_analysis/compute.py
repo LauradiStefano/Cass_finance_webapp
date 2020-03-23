@@ -23,7 +23,7 @@ def import_dataset_file_excel(filename):
     dates = data['Time']
     del data['Time']
 
-    return data#, dates
+    return data, dates
 
 
 def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, end_month, end_year):
@@ -44,10 +44,10 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
         data.insert(i, tickers[i], price, True)
 
     data = data.reset_index()
-    dates =data['Date']
+    dates = data['Date']
     del data['Date']
 
-    return data#, dates
+    return data, dates
 
 
 def compute_table(data):
@@ -131,7 +131,7 @@ def create_histogram_distribution_plot(log_returns):
     hist, edges = np.histogram(log_returns, density=True, bins=100)
     m = np.mean(log_returns)
     sg = np.std(log_returns)
-    log_returns.sort(reverse=False)
+    log_returns.sort()
     normal_pdf = lambda x: scipy.stats.norm.pdf(x, m, sg)
     norm_pdf = [normal_pdf(i) for i in log_returns]  # aggiungere all'output
 
@@ -220,34 +220,35 @@ def create_qq_plot(log_returns):
     return fig, div
 
 
-# def plot_log_returns(log_returns, dates):
-#     del dates[0]
-#     data = ColumnDataSource(data=dict(
-#         dates=dates,
-#         log_returns=log_returns,
-#     ))
-#
-#     hover_normal = HoverTool(attachment="above", names=['Normal Distr'],
-#                              tooltips=[("teoretical quantiles", "@dates"), ("Normal Distr", "@log_returns")])
-#
-#     hover_empirical = HoverTool(attachment="below", names=['model spot rate'],
-#                                 tooltips=[("teoretical quantiles", "@dates"), ("Empirical Distr", "@empirical_distr")])
-#
-#     x_range = [min(dates), max(dates)]
-#     y_range = [min(log_returns) - 0.01, max(log_returns) + 0.01]
-#
-#     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_empirical, hover_normal], x_range=x_range,
-#                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-#                     x_axis_label='Time',
-#                     y_axis_label=' Log Returns')
-#
-#     fig.line(x='dates', y='log_returns', source=data, color="navy", legend='Log returns vs Dates', line_width=0.1,
-#              alpha=0.1, name='Log_Returns')
-#
-#     fig.toolbar.active_drag = None
-#     fig.legend.location = "bottom_right"
-#
-#     from bokeh.embed import components
-#     script, div = components(fig)
-#
-#     return fig, div
+def create_plot_log_returns(log_returns, dates):
+    del dates[0]
+
+    data = ColumnDataSource(data=dict(
+        dates=dates,
+        log_returns=log_returns,
+    ))
+
+    hover_normal = HoverTool(attachment="above", names=['Normal Distr'],
+                             tooltips=[("Theoretical Quantiles", "@dates"), ("Normal Distr", "@log_returns")])
+
+    hover_empirical = HoverTool(attachment="below", names=['model spot rate'],
+                                tooltips=[("Theoretical Quantiles", "@dates"), ("Empirical Distr", "@empirical_distr")])
+
+    x_range = [min(dates), max(dates)]
+    y_range = [min(log_returns) - 0.01, max(log_returns) + 0.01]
+
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_empirical, hover_normal], x_range=x_range,
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
+                    x_axis_label='Time',
+                    y_axis_label=' Log Returns')
+
+    fig.line(x='dates', y='log_returns', source=data, color="navy", legend='Log returns vs Dates', line_width=0.1,
+             alpha=0.1, name='Log_Returns')
+
+    fig.toolbar.active_drag = None
+    fig.legend.location = "bottom_right"
+
+    from bokeh.embed import components
+    script, div = components(fig)
+
+    return fig, div

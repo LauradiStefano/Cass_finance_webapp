@@ -8,7 +8,8 @@ from werkzeug.utils import secure_filename
 from app import allowed_file, app
 from db_models import db
 from db_models import statisitcal_analysis as compute
-from statistical_analysis.compute import import_dataset_tickers, import_dataset_file_excel, compute_table
+from statistical_analysis.compute import import_dataset_tickers, import_dataset_file_excel, compute_table, \
+    create_histogram_distribution_plot, create_qq_plot, create_plot_log_returns
 from statistical_analysis.forms import ComputeForm
 
 
@@ -27,6 +28,12 @@ def controller_statistical_analysis(user, request):
     pvalue = None
     tickers = None
     n_observation = None
+    log_returns = None
+    dates = None
+
+    plot_qq = None
+    plot_histogram = None
+    plot_log_returns = None
 
     number_of_tickers = 0
 
@@ -40,16 +47,22 @@ def controller_statistical_analysis(user, request):
                         file_data = secure_filename(file.filename)
                         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-                file_data = import_dataset_file_excel(file_data)
+                file_data, dates = import_dataset_file_excel(file_data)
 
             else:  # form.method_choice.data == '1'
 
-                file_data = import_dataset_tickers(form.flist.data, form.start_day.data, form.start_month.data,
-                                                   form.start_year.data, form.end_day.data, form.end_month.data,
-                                                   form.end_year.data)
+                file_data, dates = import_dataset_tickers(form.flist.data, form.start_day.data, form.start_month.data,
+                                                          form.start_year.data, form.end_day.data, form.end_month.data,
+                                                          form.end_year.data)
 
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers, \
-            n_observation = compute_table(file_data)
+            n_observation, log_returns = compute_table(file_data)
+
+            plot_histogram = create_histogram_distribution_plot(log_returns)
+
+            plot_qq = create_qq_plot(log_returns)
+
+            plot_log_returns = create_plot_log_returns(log_returns, dates)
 
             number_of_tickers = len(tickers)
 
@@ -69,6 +82,8 @@ def controller_statistical_analysis(user, request):
             object.tickers = json.dumps(tickers)
             object.number_of_tickers = number_of_tickers
             object.n_observation = json.dumps(n_observation)
+            object.log_returns = json.dumps(log_returns)
+            object.dates = json.dumps(dates)
 
             object.user = user
             db.session.add(object)
@@ -92,6 +107,12 @@ def controller_statistical_analysis(user, request):
                 tickers = json.loads(instance.tickers)
                 number_of_tickers = instance.number_of_tickers
                 n_observation = json.loads(instance.n_observation)
+                log_returns = json.loads(instance.log_returns)
+                dates = json.loads(instance.dates)
+
+                plot_histogram = create_histogram_distribution_plot(log_returns)
+                plot_qq = create_qq_plot(log_returns)
+                plot_log_returns = create_plot_log_returns(log_returns, dates)
 
     mean = [round(x, 6) for x in mean] if mean is not None else None
     volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -106,7 +127,8 @@ def controller_statistical_analysis(user, request):
     return {'form': form, 'user': user, 'min_return': min_return, 'mean': mean, 'volatility': volatility,
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
             'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
-            'n_observation': n_observation}
+            'n_observation': n_observation, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
+            'plot_log_returns': plot_log_returns}
 
 
 def populate_form_from_instance(instance):
@@ -146,6 +168,12 @@ def controller_old_statistical_analysis(user):
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers
             n_observation = json.loads(instance.n_observation)
+            log_returns = json.loads(instance.log_returns)
+            dates = json.loads(instance.dates)
+
+            plot_histogram = create_histogram_distribution_plot(log_returns)
+            plot_qq = create_qq_plot(log_returns)
+            plot_log_returns = create_plot_log_returns(log_returns, dates)
 
             mean = [round(x, 6) for x in mean] if mean is not None else None
             volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -160,7 +188,8 @@ def controller_old_statistical_analysis(user):
             data.append({'form': form, 'id': id, 'mean': mean, 'volatility': volatility, 'variance': variance,
                          'skewness': skewness, 'kurtosis': kurtosis, 'min_return': min_return, 'max_return': max_return,
                          'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers, 'n_observation': n_observation,
-                         'number_of_tickers': number_of_tickers})
+                         'number_of_tickers': number_of_tickers, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
+                         'plot_log_returns': plot_log_returns})
 
     return {'data': data}
 
@@ -179,3 +208,22 @@ def delete_statistical_analysis_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_statistical_analysis'))
+
+# def controller_plot_statistical_analysis(user, id, ticker):
+#     data = []
+#     plot_histogram = None
+#
+#     if user.is_authenticated():
+#         instances = user.compute_statistical_analysis.order_by(desc('id')).all()
+#         for instance in instances:
+#             # page old.html, store the date and the plot (previous simulation)
+#
+#             id = instance.id
+#             log_returns = json.loads(instance.log_returns)
+#
+#             plot_histogram = create_histogram_distribution_plot(log_returns)
+#
+#             plot_qq = create_qq_plot(log_returns)
+#
+#             data.append({'id': id, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq})
+#     return {'data': data}

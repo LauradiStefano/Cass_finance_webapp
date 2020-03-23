@@ -92,10 +92,10 @@ def statistical_analysis():
     return render_template("return_data_statistics.html", **template_variables, table_export=True)
 
 
-@app.route('/plot_return_data_statistics', methods=['GET', 'POST'])
-def plot_statistical_analysis():
-    template_variables = controller_statistical_analysis(current_user, request)
-    return render_template("plot_return_data_statistics.html", **template_variables)
+# @app.route('/plot_return_data_statistics/<id><ticker>', methods=['GET', 'POST'])
+# def plot_statistical_analysis(id, ticker):
+#     template_variables = controller_plot_statistical_analysis(current_user, id, ticker)
+#     return render_template("plot_return_data_statistics.html", **template_variables)
 
 
 @app.route('/portfolio_construction', methods=['GET', 'POST'])

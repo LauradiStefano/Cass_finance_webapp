@@ -202,7 +202,7 @@
                     <tbody>
                     {%for i in range(number_of_tickers)%}
                     <tr>
-                        <td><a href="plot_statistical_analysis"> {{tickers[i]}} </a></td>
+                        <td><a href="plot_return_data_statistics"> {{tickers[i]}} </a></td>
                         <td>{{n_observation[i]}}</td>
                         <td>{{mean[i]}}</td>
                         <td>{{volatility[i]}}</td>
@@ -223,6 +223,43 @@
                 </div>
             </fieldset>
         </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Histogram</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_histogram[0]|safe}}
+                    {{plot_histogram[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Histogram</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_qq[0]|safe}}
+                    {{plot_qq[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Histogram</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_log_returns[0]|safe}}
+                    {{plot_log_returns[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
         {% endif %}
     </div>
 
@@ -257,26 +294,47 @@
         });
     });
 
-    $(document).ready(function(){
-        var max_field = 20;
-        var add_button = $('#button_add_field');
-        var delete_button = $('#button_delete_field');
-        var wrapper = $('#flist');
-        var field_HTML = '<div><input type="text" name="flist-[]" id="flist-" value=""/></div>';
-        var field_number = 1;
+    $(document).ready(function() {
+        var max_fields = 20;
+        var field_number = $('#flist').children().length ;
+        var min_fields = 1;
 
-        $(add_button).click(function(){
+        if (field_number == min_fields) {
+            $('#button_delete_field').prop('disabled', true);
+        } else {
+             $('#button_add_field').prop('disabled', true);
+        }
 
-            if(field_number < max_field){
+        $('#button_add_field').click(function(e) {
+            e.preventDefault();
+            if(field_number <= max_fields){
+                var new_input = $("<input required type='text' ></input>")
+                .attr('id', 'flist-' + field_number)
+                .attr('name', 'flist-' + field_number);
+
                 field_number++;
-                $(wrapper).append(field_HTML);
+                $('#flist').append(new_input);
+
+                $('#button_delete_field').prop('disabled', false);
+
+                if (field_number == max_fields) {
+                    $('#button_add_field').prop('disabled', true);
+                }
             }
         });
-
-        $(wrapper).click( 'delete_button', function(e){
+        $('#button_delete_field').click(function(e) {
             e.preventDefault();
-            $(this).parent('div').remove();
-            field_number--;
+            if (field_number > min_fields){
+                $('#flist').children().last().remove();
+                field_number--;
+
+                $('#button_add_field').prop('disabled', false);
+
+                if (field_number == min_fields) {
+                    $('#button_delete_field').prop('disabled', true);
+                }
+
+            }
         });
     });
 
@@ -292,6 +350,8 @@
             }
         });
     });
+
+
 
 </script>
 
