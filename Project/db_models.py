@@ -450,6 +450,8 @@ class statisitcal_analysis(db.Model):
     number_of_tickers = db.Column(db.Integer())
     tickers = db.Column(db.String())
     n_observation = db.Column(db.String())
+    log_returns = db.Column(db.String())
+    dates = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
