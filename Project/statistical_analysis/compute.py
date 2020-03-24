@@ -140,26 +140,27 @@ def create_histogram_distribution_plot(log_returns):
         edges_left=edges[:-1],
         edges_right=edges[1:]))
 
-    data_2 = ColumnDataSource(data=dict(log_returns=log_returns,
-                                        norm_pdf=norm_pdf))
+    data_2 = ColumnDataSource(data=dict(
+        log_returns=log_returns,
+        norm_pdf=norm_pdf))
 
     hover_histogram = HoverTool(attachment="above", names=['histogram'],
                                 tooltips=[("Edges", "@edges"),
-                                          ("Hist", "@histogram")])
+                                          ("Hist", "@hist")])
 
-    hover_theoretical = HoverTool(attachment="above", names=['discount factor'],
-                                  tooltips=[("Log Returns", "@log returns"),
-                                            ("Norm Pdf", "@norm pdf")])
+    hover_theoretical = HoverTool(attachment="below", names=['th distribution'],
+                                  tooltips=[("Log Returns", "@log_returns"),
+                                            ("Norm Pdf", "@norm_pdf")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_histogram, hover_theoretical],
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
                     y_axis_label='Model Error Discount Factor')
 
     fig.quad(top='hist', bottom=m, left='edges_left', right='edges_right', source=data_1,
-             color="#0095B6", line_color="#ffffff", alpha=1, name='Histogram Log Returns')
+             color="#0095B6", line_color="#ffffff", alpha=1, name='histogram')
 
     fig.line(x='log_returns', y='norm_pdf', source=data_2, color="#D21F1B", legend_label='Log returns PDF',
-             line_width=1, alpha=1, name='Theoretical Distribution')
+             line_width=1, alpha=1, name='th distribution')
 
     fig.toolbar.active_drag = None
 
@@ -187,11 +188,11 @@ def create_qq_plot(log_returns):
         empirical_distr=empirical_distr
     ))
 
-    hover_normal = HoverTool(attachment="above", names=['Normal Distr'],
+    hover_normal = HoverTool(attachment="above", names=['normal distr'],
                              tooltips=[("Theoretical Quantiles", "@theoretical_quantiles"),
                                        ("Normal Distr", "@normal_distr")])
 
-    hover_empirical = HoverTool(attachment="below", names=['model spot rate'],
+    hover_empirical = HoverTool(attachment="below", names=['empirical distr'],
                                 tooltips=[("Theoretical Quantiles", "@theoretical_quantiles"),
                                           ("Empirical Distr", "@empirical_distr")])
 
@@ -204,11 +205,11 @@ def create_qq_plot(log_returns):
 
     fig.circle(x='theoretical_quantiles', y='empirical_distr', source=data, color="#0095B6",
                legend_label='Empirical Distribution',
-               size=6, name='Normal Distribution')
+               size=6, name='normal distr')
 
     fig.line(x='theoretical_quantiles', y='normal_distr', source=data, color="#D21F1B",
              legend_label='Normal Distribution',
-             line_width=4, alpha=0.8, name='Empirical Distr')
+             line_width=4, alpha=0.8, name='empirical distr')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_right"
@@ -228,7 +229,7 @@ def create_plot_log_returns(log_returns, dates):
         log_returns=log_returns,
     ))
 
-    hover_normal = HoverTool(attachment="above", names=['Log returns'],
+    hover_normal = HoverTool(attachment="above", names=['log returns'],
                              tooltips=[("Date", "@dates"), ("Log returns", "@log_returns")])
 
     x_range = [min(dates), max(dates)]
@@ -239,7 +240,7 @@ def create_plot_log_returns(log_returns, dates):
                     x_axis_label='Time', y_axis_label='Log Returns')
 
     fig.line(x='dates', y='log_returns', source=data, color="#0095B6", legend_label='Log returns vs Dates',
-             line_width=1, alpha=0.5, name='Log_Returns')
+             line_width=1, alpha=0.5, name='log returns')
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_right"
