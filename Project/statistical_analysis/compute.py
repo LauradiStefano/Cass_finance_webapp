@@ -213,7 +213,7 @@ def create_qq_plot(log_returns):
     from bokeh.embed import components
     script, div = components(fig)
 
-    return fig, div
+    return script, div
 
 
 def create_plot_log_returns(log_returns, dates):
@@ -247,4 +247,4 @@ def create_plot_log_returns(log_returns, dates):
     from bokeh.embed import components
     script, div = components(fig)
 
-    return fig, div
+    return script, div
