@@ -218,6 +218,7 @@ def create_qq_plot(log_returns):
 
 def create_plot_log_returns(log_returns, dates):
     del dates[0]
+    log_returns = list(log_returns[0])
 
     data = ColumnDataSource(data=dict(
         dates=dates,
