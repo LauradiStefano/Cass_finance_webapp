@@ -124,22 +124,24 @@ def compute_table(data):
 
 
 def create_histogram_distribution_plot(log_returns):
+    log_returns = list(log_returns[:,0])
+
     hist, edges = np.histogram(log_returns, density=True, bins=100)
     m = np.mean(log_returns)
     sg = np.std(log_returns)
     log_returns.sort()
     normal_pdf = lambda x: scipy.stats.norm.pdf(x, m, sg)
     norm_pdf = [normal_pdf(i) for i in log_returns]  # aggiungere all'output
-
+    type(norm_pdf)
     # log_returns.sort(reverse = False)
 
-    data = ColumnDataSource(data=dict(
+    data_1 = ColumnDataSource(data=dict(
         hist=hist,
         edges_left=edges[:-1],
-        edges_right=edges[1:],
-        log_returns=log_returns,
-        norm_pdf=norm_pdf
-    ))
+        edges_right=edges[1:]))
+
+    data_2 = ColumnDataSource(data=dict(log_returns=log_returns,
+        norm_pdf=norm_pdf))
 
     hover_histogram = HoverTool(attachment="above", names=['histogram'],
                                 tooltips=[("Edges", "@edges"),
@@ -153,10 +155,10 @@ def create_histogram_distribution_plot(log_returns):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
                     y_axis_label='Model Error Discount Factor')
 
-    fig.quad(top='hist', bottom=0, left='edges_left', right='edges_right', source=data,
+    fig.quad(top='hist', bottom=m, left='edges_left', right='edges_right', source=data_1,
              color="#0095B6", line_color="#ffffff", alpha=1, name='Histogram Log Returns')
 
-    fig.line(x='log_returns', y='norm_pdf', source=data, color="#D21F1B", legend='Log returns PDF',
+    fig.line(x='log_returns', y='norm_pdf', source=data_2, color="#D21F1B", legend_label='Log returns PDF',
              line_width=1, alpha=1, name='Theoretical Distribution')
 
     fig.toolbar.active_drag = None
@@ -168,7 +170,8 @@ def create_histogram_distribution_plot(log_returns):
 
 
 def create_qq_plot(log_returns):
-    log_returns = list(log_returns[0])
+    log_returns = list(log_returns[:,0])
+    print("log_returns",log_returns)
     (x, empirical_distr), (slope, inter, cor) = scipy.stats.probplot(log_returns, dist="norm")  # , plot=pylab)
 
     theoretical_quantiles = x
@@ -201,10 +204,10 @@ def create_qq_plot(log_returns):
                     x_axis_label='Quantiles', y_axis_label=' Distribution')
 
     fig.circle(x='theoretical_quantiles', y='empirical_distr', source=data, color="#0095B6",
-               legend='Empirical Distribution',
+               legend_label='Empirical Distribution',
                size=6, name='Normal Distribution')
 
-    fig.line(x='theoretical_quantiles', y='normal_distr', source=data, color="#D21F1B", legend='Normal Distribution',
+    fig.line(x='theoretical_quantiles', y='normal_distr', source=data, color="#D21F1B", legend_label='Normal Distribution',
              line_width=4, alpha=0.8, name='Empirical Distr')
 
     fig.toolbar.active_drag = None
@@ -218,27 +221,26 @@ def create_qq_plot(log_returns):
 
 def create_plot_log_returns(log_returns, dates):
     del dates[0]
-    log_returns = list(log_returns[0])
+    log_returns = list(log_returns[:,0])
 
     data = ColumnDataSource(data=dict(
         dates=dates,
         log_returns=log_returns,
     ))
 
-    hover_normal = HoverTool(attachment="above", names=['Normal Distr'],
-                             tooltips=[("Theoretical Quantiles", "@dates"), ("Normal Distr", "@log_returns")])
+    hover_normal = HoverTool(attachment="above", names=['Log returns'],
+                             tooltips=[("Date", "@dates"), ("Log returns", "@log_returns")])
 
-    hover_empirical = HoverTool(attachment="below", names=['model spot rate'],
-                                tooltips=[("Theoretical Quantiles", "@dates"), ("Empirical Distr", "@empirical_distr")])
+    
 
     x_range = [min(dates), max(dates)]
     y_range = [min(log_returns) - 0.01, max(log_returns) + 0.01]
 
-    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_empirical, hover_normal], x_range=x_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_normal], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                     x_axis_label='Time', y_axis_label='Log Returns')
 
-    fig.line(x='dates', y='log_returns', source=data, color="navy", legend='Log returns vs Dates', line_width=0.1,
+    fig.line(x='dates', y='log_returns', source=data, color="blue", legend_label='Log returns vs Dates', line_width=1,
              alpha=0.1, name='Log_Returns')
 
     fig.toolbar.active_drag = None
