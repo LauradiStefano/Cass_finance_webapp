@@ -594,3 +594,7 @@ footer {
     color: #1E1E1E !important;
     text-decoration: None !important;
 }
+
+.old_label {
+    font-weight: bold;
+}

@@ -24,7 +24,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 font-weight-bold d-flex flex-column">
-                                    <legend> Prices </legend>
+                                    <label class="old_label"> Prices: </label>
                                     <span class="mb-1">
                                         {{result['form'].strike_min.label}}:
                                         {{result['form'].strike_min.data|round(4)}}<br/>
@@ -37,7 +37,7 @@
                                         {{result['form'].strike_max.label}}:
                                         {{result['form'].strike_max.data|round(4)}}<br/>
                                     </span>
-                                    <legend> Implied Volatility </legend>
+                                    <label class="old_label"> Implied Volatility: </label>
                                     <span class="mb-1">
                                         {{result['form'].volatility_min.label}} \((\%) \):
                                         {{result['form'].volatility_min.data|round(4)}}<br/>
@@ -202,74 +202,72 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
 
-            <div class=" col-12">
-                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend>Implied CEQ Returns Distribution</legend>
-                    </div>
-                    <div class="d-flex justify-content-center plot">
-                        {{ result['plot_return_distribution'][0]|safe}}
-                        {{ result['plot_return_distribution'][1]|safe}}
-                    </div>
-                </fieldset>
-            </div>
-
-            {% if result['plot_index_distribution'] != None %}
-            <div class=" col-12">
-                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend>Implied CEQ index distribution</legend>
-                    </div>
-                    <div class="d-flex justify-content-center plot">
-                        {{ result['plot_index_distribution'][0]|safe }}
-                        {{ result['plot_index_distribution'][1]|safe }}
-                    </div>
-                </fieldset>
-            </div>
-            {% endif %}
-
-            {% if result['plot_index_cdf'] != None %}
-            <div class=" col-12">
-                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend>Implied CEQ Prices CDF</legend>
-                    </div>
-                    <div class="d-flex justify-content-center plot">
-                        {{ result['plot_index_cdf'][0]|safe}}
-                        {{ result['plot_index_cdf'][1]|safe}}
-                    </div>
-                </fieldset>
-            </div>
-            {% endif %}
-
-            {% if result['plot_return_cdf'] != None %}
-            <div class=" col-12">
-                <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
-                    <div class="row border-bottom mb-2 pb-1">
-                        <legend>Implied CEQ Returns CDF</legend>
-                    </div>
-                    <div class="d-flex justify-content-center plot">
-                        {{ result['plot_return_cdf'][0]|safe}}
-                        {{ result['plot_return_cdf'][1]|safe}}
-                    </div>
-                </fieldset>
-
-            </div>
-            {% endif %}
-
-            <div class="col-12 d-flex mb-3 justify-content-center">
-
-                <form style="text-align:center;" class="" method="POST"
-                      action="/implied_distribution_illustration/old/delete/{{ result.id }}">
-                    <input type="submit" value="Delete Single Simulation"
-                           title="Delete this post from database">
-                </form>
-
-            </div>
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns Distribution</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_return_distribution'][0]|safe}}
+                    {{ result['plot_return_distribution'][1]|safe}}
+                </div>
+            </fieldset>
         </div>
+
+        {% if result['plot_index_distribution'] != None %}
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ index distribution</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_index_distribution'][0]|safe }}
+                    {{ result['plot_index_distribution'][1]|safe }}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
+
+        {% if result['plot_index_cdf'] != None %}
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Prices CDF</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_index_cdf'][0]|safe}}
+                    {{ result['plot_index_cdf'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+        {% endif %}
+
+        {% if result['plot_return_cdf'] != None %}
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Implied CEQ Returns CDF</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_return_cdf'][0]|safe}}
+                    {{ result['plot_return_cdf'][1]|safe}}
+                </div>
+            </fieldset>
+
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-12 d-flex mb-3 justify-content-center">
+
+        <form style="text-align:center;" class="" method="POST"
+              action="/implied_distribution_illustration/old/delete/{{ result.id }}">
+            <input type="submit" value="Delete Single Simulation"
+                   title="Delete this post from database">
+        </form>
 
     </div>
 </div>
