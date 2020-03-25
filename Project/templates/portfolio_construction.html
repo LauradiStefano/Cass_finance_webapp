@@ -77,8 +77,8 @@
         </form>
     </div>
 
+    {% if plot_efficient_frontier != None %}
     <div class="row p-3 d-flex justify-content-center">
-        {% if plot_efficient_frontier != None %}
 
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
@@ -103,8 +103,8 @@
                 </div>
             </fieldset>
         </div>
-        {% endif %}
     </div>
+    {% endif %}
 </div>
 {% include 'footer.html' %}
 
@@ -121,6 +121,7 @@
             help_dataset.hide();
         });
     });
+
 
 
 

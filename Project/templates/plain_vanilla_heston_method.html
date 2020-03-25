@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="">
-             <div class="example_file">
+            <div class="example_file">
                 <a href="/static/tutorial_model/plain_vanilla_heston_method_tutorial.pdf">
                     Tutorial File: Plain Vanilla Heston Method.pdf</a>
             </div>
@@ -92,7 +92,7 @@
                         </div>
                         <div class="row">
                             <div class="col mb-1">
-                               {{form.lam.label}}
+                                {{form.lam.label}}
                             </div>
                             <div class="col-11 mb-1">
                                 {{form.lam}}
@@ -211,9 +211,10 @@
         </form>
     </div>
 
+    {% if plot_return_underlying_distribution != None %}
     <div class="row p-3 d-flex justify-content-center">
-        {% if plot_return_underlying_distribution != None %}
-         <div class="download_data"> Click here to download the distribution</div>
+
+        <div class="download_data"> Click here to download the distribution</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -269,7 +270,7 @@
             </fieldset>
         </div>
     </div>
-
+    {% endif%}
     <div id="popup_table">
 
         <div class="row border-bottom mb-2 pb-1">
@@ -299,7 +300,7 @@
         </div>
     </div>
 </div>
-{% endif%}
+
 
 {% include 'footer.html' %}
 <script charset="utf-8" type="text/javascript">
@@ -327,6 +328,7 @@
 
         });
     });
+
 
 </script>
 

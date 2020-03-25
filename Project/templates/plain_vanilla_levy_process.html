@@ -13,7 +13,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="">
-             <div class="example_file">
+            <div class="example_file">
                 <a href="/static/tutorial_model/plain_vanilla_levy_process_tutorial.pdf">
                     Tutorial File: Plain Vanilla Lévy Process.pdf</a>
             </div>
@@ -327,8 +327,9 @@
         </form>
     </div>
 
+    {% if plot_return_underlying_distribution != None %}
     <div class="row p-3 d-flex justify-content-center">
-        {% if plot_return_underlying_distribution != None %}
+
         <div class="download_data"> Click here to download the distribution</div>
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
@@ -385,9 +386,9 @@
                 </div>
             </fieldset>
         </div>
-        {%endif%}
-    </div>
 
+    </div>
+    {%endif%}
     <div id="popup_table">
 
         <div class="row border-bottom mb-2 pb-1">
@@ -473,6 +474,8 @@
 
         });
     });
+
+
 
 </script>
 </body>
