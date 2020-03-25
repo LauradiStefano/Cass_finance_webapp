@@ -20,7 +20,7 @@ from bokeh.models import HoverTool
 
 def import_dataset_file_excel(filename):
     data = pd.read_excel(os.path.join('uploads/', filename))
-    dates = data['Time']
+    dates = data['Date'].tolist()
     del data['Time']
 
     return data, dates
@@ -39,7 +39,8 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
         data.insert(i, tickers[i], price, True)
 
     data = data.reset_index()
-    dates = data['Date']
+    dates = data['Date'].tolist()
+    print("dates",type(dates)) 
     del data['Date']
 
     return data, dates
