@@ -379,13 +379,15 @@
                                 {{form.least_fmin}}
                                 <div class="container_term_link">
                                     *
+                                    <span class="term_structure_text">
                                     <a class="term_link"
                                        href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.least_squares.html">non
-                                        linear least squares (levenberg-marquardt)</a>
+                                        linear least squares </a> (levenberg-marquardt)
                                     |
                                     <a class="term_link"
                                        href=https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html>fmin
-                                        (downill simplex algorithm)</a>
+                                        </a> (downill simplex algorithm)
+                                        </span>
                                 </div>
                                 {% if form.least_fmin.errors %}
                                 {% for error in form.least_fmin.errors %}
@@ -444,12 +446,6 @@
             </fieldset>
         </div>
 
-        <!--<div class="col-12 d-flex mb-3 justify-content-center">-->
-        <!--<div id="button_view_details" class="popup_table_open">-->
-        <!--{{form.button_view_details}}-->
-        <!--</div>-->
-        <!--</div>-->
-
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -499,35 +495,6 @@
         </div>
         {%endif%}
     </div>
-
-    <!--<div id="popup_table">-->
-
-    <!--<div class="row border-bottom mb-2 pb-1">-->
-    <!--<legend>Results</legend>-->
-    <!--</div>-->
-    <!--<div class="table_wrapper">-->
-    <!--<table class="table table-striped table-hover" id="table_export">-->
-    <!--<thead>-->
-    <!--<th scope="col"> Dates (mm/dd/yyyy)</th>-->
-    <!--<th scope="col"> Year Fraction</th>-->
-    <!--<th scope="col"> Discount Factor</th>-->
-    <!--<th scope="col"> Spot Rate</th>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--{%for i in range(number_of_time)%}-->
-    <!--<tr>-->
-    <!--<td>{{dates[i]}}</td>-->
-    <!--<td>{{annual_basis_date[i]}}</td>-->
-    <!--<td>{{daily_discount_factor[i]}}</td>-->
-    <!--<td>{{daily_model_spot_rate[i]}}</td>-->
-    <!--</tr>-->
-    <!--{%endfor%}-->
-    <!--</tbody>-->
-    <!--</table>-->
-    <!--</div>-->
-    <!--<hr>-->
-    <!---->
-    <!--</div>-->
 </div>
 {% include 'footer.html' %}
 <script charset="utf-8" type="text/javascript">
@@ -625,6 +592,7 @@
 
         });
     });
+
 
 
 
