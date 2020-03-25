@@ -3,6 +3,12 @@ import os
 from flask import Flask
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'W4gkO9rJYMYcSen'
+app.config['RECAPTCHA_USE_SSL'] = False
+app.config['RECAPTCHA_PUBLIC_KEY'] = '6LetxeMUAAAAABnzIFYTJ_49Cngyxls_HPi_jXKY'
+app.config['RECAPTCHA_PRIVATE_KEY'] = '6LetxeMUAAAAAKPywW_mQGuzvwrpczE6V7Pg8ZZg'
+app.config['RECAPTCHA_OPTIONS'] = {'theme': 'black'}
+
 app.config.from_object(__name__)
 
 UPLOAD_DIR = 'uploads/'

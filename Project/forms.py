@@ -1,4 +1,5 @@
 from string import ascii_uppercase, ascii_lowercase, digits
+from flask_wtf import RecaptchaField
 
 import wtforms as wtf
 import wtforms.fields.html5 as html5
@@ -71,6 +72,7 @@ class RegistrationForm(wtf.Form):
                              validators=[wtf.validators.DataRequired(),
                                          validators.Length(min=6, message='Please enter a valid email address'),
                                          validators.Email('Please enter a valid email address')])
+    recaptcha = RecaptchaField()
     button_registration = wtf.SubmitField(label='Sign Up')
 
     def validate(self):
