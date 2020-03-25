@@ -71,7 +71,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)

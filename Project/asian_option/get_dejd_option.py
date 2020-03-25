@@ -19,25 +19,21 @@ def dejd_charfn(u, dt, sigma, lam, p, eta1, eta2, r):
     return output
 
 
-# function output = DEJDCharFn(u, dt, sigma, lambda, p, eta1, eta2, r)
-# output = exp(dt*(1i*(r-lambda*(p*eta1/(eta1-1) + (1-p)*eta2/(eta2+1)-1)-sigma^2/2)*u+lambda*(p*eta1./(eta1-1i*u) + (1-p)*eta2./(eta2+1i*u)-1)-(u*sigma).^2/2))
-# end
-
 def dejd_phi(g1, g2, n, N, dt, sigma, lam, p, eta1, eta2, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(dejd_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, lam, p, eta1, eta2, r))  # corretto
+        term = term + np.log(dejd_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, lam, p, eta1, eta2, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(dejd_charfn(g2 * (1 - k / (N + 1)), dt, sigma, lam, p, eta1, eta2, r))  # corretto
+        term = term + np.log(dejd_charfn(g2 * (1 - k / (N + 1)), dt, sigma, lam, p, eta1, eta2, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def dejd_ft(u, delta, N, dt, sigma, lam, p, eta1, eta2, r, S0, K):  # corretto
+def dejd_ft(u, delta, N, dt, sigma, lam, p, eta1, eta2, r, S0, K):
 
     term = 0
 
@@ -57,7 +53,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)

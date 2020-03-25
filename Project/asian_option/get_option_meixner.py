@@ -17,26 +17,21 @@ def meixner_charfn(u, dt, a, b, d, r):
     return output
 
 
-# function output = MXNCharFn(u, dt, a, b, d, r)
-# output = exp(dt*(1i*(r-2*d*log(cos(b/2)/cosh(-1i*(a+b)/2)))*u)).*(cos(b/2)./cosh((a*u-1i*b)/2)).^(2*d*dt)
-# end
-
 def meixner_phi(g1, g2, n, N, dt, a, b, d, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(meixner_charfn(g1 + g2 * (1 - k / (N + 1)), dt, a, b, d, r))  # corretto
+        term = term + np.log(meixner_charfn(g1 + g2 * (1 - k / (N + 1)), dt, a, b, d, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(meixner_charfn(g2 * (1 - k / (N + 1)), dt, a, b, d, r))  # corretto
+        term = term + np.log(meixner_charfn(g2 * (1 - k / (N + 1)), dt, a, b, d, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def meixner_ft(u, delta, N, dt, a, b, d, r, S0, K):  # corretto
-
+def meixner_ft(u, delta, N, dt, a, b, d, r, S0, K):
     term = 0
 
     for j in range(0, N + 1):
@@ -54,8 +49,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
-
+    first_fft = np.fft.fft(vect_two)
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_fourth = np.exp(math.pi * 1j * a * np.arange(-m, 0) ** 2)
@@ -74,10 +68,6 @@ def fr_fourier_transform(x, a):
 def meixner_option(S0, K, T, r, n, a, b, d, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
-    # Nfft = 2 ** 15
-    #
-    # lmax = 2
-    # lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl

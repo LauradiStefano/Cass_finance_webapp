@@ -15,7 +15,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
@@ -89,15 +89,9 @@ def factor1(m, gamma, dt, r, sig):
 
 
 def CEVSpotPhi(g1, g2, n, N, dt, r, sig, gamma, X0):
-    #    N=12
-    #    g1 = 0
-    #    g2 = u-1j*delta
-    #    sig = sigma
-    #    X0 = 1
-    #    j = 0
     g = -1j * g1
     m = -1j * g2
-    #    n=j
+
     Lam = g * (n == N) + m / (N + 1)
 
     if n < N:
@@ -125,8 +119,6 @@ def CEVSpotPhi(g1, g2, n, N, dt, r, sig, gamma, X0):
 
 
 def CEVPhi(g1, g2, n, N, dt, r, sig, gamma, X0):
-    #    g1 = 0
-    #    g2 = u-1j*delta
     g = -1j * g1
     m = -1j * g2
     Lam = g * (n == N) + m / (N + 1)
@@ -174,19 +166,15 @@ def cev_option(S0, K, T, r, n, beta, Nfft, lmax, lmin, delta, tolerance):
     K = K / F
 
     dt = T / n
-
-    # Nfft = 2**15
-    # lmax = 3
-    # lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
-    # lmin = K+fix((lmin-K)/dl)*dl
+
     l = lmin + np.arange(0, Nfft, 1) * dl
     gamma = 2 * (beta + 1)
     sigma = 0.25 * (S0) ** -beta
 
     if gamma > 2:
-        # delta = -1.5
+
         umax = 10
         flag = 0
         while flag < 1:
@@ -196,7 +184,7 @@ def cev_option(S0, K, T, r, n, beta, Nfft, lmax, lmin, delta, tolerance):
             umax = umax + 10
 
     else:
-        # delta = 1.5
+
         umax = 10
         flag = 0
         while flag < 1:

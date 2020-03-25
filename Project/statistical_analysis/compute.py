@@ -32,11 +32,10 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 
     data = pd.DataFrame()
 
-    # for i in range(0, len(tickers)):
     for i in range(0, len(tickers)):
         df = web.DataReader(tickers[i], 'yahoo', start, end)
         price = df['Adj Close']
-        # price = np.vstack(adj_close)
+
         data.insert(i, tickers[i], price, True)
 
     data = data.reset_index()
@@ -47,10 +46,8 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 
 
 def compute_table(data):
-    # dates = (data["Time"].tolist())
-
     tickers = list(data.columns.values)
-    # data =data.T
+
     data_array = []
 
     for i in range(0, len(data)):
@@ -64,13 +61,6 @@ def compute_table(data):
         log_returns.append(log_return)
 
     log_returns = np.vstack(log_returns)
-    # m = ['Mean']
-    # sg = ['Standard Deviation']
-    # sg2= ['Variance']
-    # sk = ['Skewness']
-    # ku = ['Kurtosis']
-    # minr = ['Min log returns']
-    # maxr = ['Max log returns']
 
     m = []
     sg = []
@@ -133,7 +123,6 @@ def create_histogram_distribution_plot(log_returns):
     normal_pdf = lambda x: scipy.stats.norm.pdf(x, m, sg)
     norm_pdf = [normal_pdf(i) for i in log_returns]  # aggiungere all'output
     type(norm_pdf)
-    # log_returns.sort(reverse = False)
 
     data_1 = ColumnDataSource(data=dict(
         hist=hist,
@@ -172,15 +161,10 @@ def create_histogram_distribution_plot(log_returns):
 
 def create_qq_plot(log_returns):
     log_returns = list(log_returns[:, 0])
-    (x, empirical_distr), (slope, inter, cor) = scipy.stats.probplot(log_returns, dist="norm")  # , plot=pylab)
+    (x, empirical_distr), (slope, inter, cor) = scipy.stats.probplot(log_returns, dist="norm")
 
     theoretical_quantiles = x
-    # osmf = x.take([0, -1])  # endpoints
     normal_distr = slope * theoretical_quantiles + inter
-
-    # normal_empirical = qq_plot_data[0]
-    # teoretical_quantiles = normal_empirical[0]
-    # empirical_distr = normal_empirical[1]
 
     data = ColumnDataSource(data=dict(
         theoretical_quantiles=theoretical_quantiles,

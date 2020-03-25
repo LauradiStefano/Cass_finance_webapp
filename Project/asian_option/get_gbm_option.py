@@ -20,17 +20,17 @@ def gbm_phi(g1, g2, n, N, dt, sigma, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(gbm_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, r))  # corretto
+        term = term + np.log(gbm_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(gbm_charfn(g2 * (1 - k / (N + 1)), dt, sigma, r))  # corretto
+        term = term + np.log(gbm_charfn(g2 * (1 - k / (N + 1)), dt, sigma, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def gbm_ft(s, u, delta, N, dt, sigma, r, S0, K):  # corretto
+def gbm_ft(s, u, delta, N, dt, sigma, r, S0, K):
 
     term = 0
 

@@ -93,8 +93,6 @@ def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, 
                                 Nfft, lmax_exp, lmin_exp, delta,
                                 tolerance)
 
-        # ptrue_strike = ptrue_strike[0]
-
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
 
@@ -107,15 +105,14 @@ def create_plot_lower_bound(lam, lower_bound):
     hover_lower_bound = HoverTool(attachment="above", names=['lower bound'],
                                   tooltips=[("Lambda", "@lam"), ("Lower Bound", "@lower_bound")])
     max_range = []
-    for i in range(0,len(lower_bound)):
-        if lower_bound[i]>0.001:
+    for i in range(0, len(lower_bound)):
+        if lower_bound[i] > 0.001:
             max_range.append(lower_bound[i])
 
     max_range = len(max_range)
 
-    # x_range = [(strike - (strike - strike_exp_lcr)) * 0.75, (strike + (strike - strike_exp_lcr)) * 1.25]
     x_range = [min(lam), lam[max_range]]
-    y_range = [0, max(lower_bound) *1.05]
+    y_range = [0, max(lower_bound) * 1.05]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_lower_bound], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Strike',
                     y_axis_label='Lower Bound')

@@ -32,17 +32,17 @@ def nig_phi(g1, g2, n, N, dt, a, b, d, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(nig_charfn(g1 + g2 * (1 - k / (N + 1)), dt, a, b, d, r))  # corretto
+        term = term + np.log(nig_charfn(g1 + g2 * (1 - k / (N + 1)), dt, a, b, d, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(nig_charfn(g2 * (1 - k / (N + 1)), dt, a, b, d, r))  # corretto
+        term = term + np.log(nig_charfn(g2 * (1 - k / (N + 1)), dt, a, b, d, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def nig_ft(u, delta, N, dt, a, b, d, r, S0, K):  # corretto
+def nig_ft(u, delta, N, dt, a, b, d, r, S0, K):
 
     term = 0
 

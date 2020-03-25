@@ -56,7 +56,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
@@ -76,18 +76,11 @@ def fr_fourier_transform(x, a):
 def exp_gaussian_option(X0, K, T, r, n, epsilon, k1, sigma, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
-    # Nfft = 2**12
-
-    # lmax = 6
-    # lmin = 3
-
     dl = (lmax - lmin) / Nfft
 
     lmin = np.fix(lmin / dl) * dl
 
     l = lmin + np.arange(0, Nfft, 1) * dl
-
-    # delta = 1.5
 
     umax = 50
 
@@ -119,9 +112,7 @@ def exp_gaussian_option(X0, K, T, r, n, epsilon, k1, sigma, Nfft, lmax, lmin, de
     lcr = l[g1 == Ptrue]
 
     Exp_lcr = math.exp(lcr)
-    # K_Exp_lcr=K*Exp_lcr
-    # plot(l,g1)
 
-    Ptrue_K = 4.555555  # g1[l==0]
+    Ptrue_K = 4.555555
 
     return Ptrue, Exp_lcr, Ptrue_K, l, g1

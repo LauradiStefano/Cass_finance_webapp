@@ -16,27 +16,21 @@ def mjd_charfn(u, dt, sigma, lam, mews, sigmas, r):
 
     return output
 
-
-# function output = MJDCharFn(u, dt, sigma, lambda, mews, sigmas, r)
-# output = exp(dt*(1i*(r-lambda*(exp(mews+sigmas^2/2)-1)-sigma^2/2)*u+lambda*(exp(1i*u*mews-(u*sigmas).^2/2)-1)
-# -(u*sigma).^2/2))
-# end
-
 def mjd_phi(g1, g2, n, N, dt, sigma, lam, mews, sigmas, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(mjd_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, lam, mews, sigmas, r))  # corretto
+        term = term + np.log(mjd_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, lam, mews, sigmas, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(mjd_charfn(g2 * (1 - k / (N + 1)), dt, sigma, lam, mews, sigmas, r))  # corretto
+        term = term + np.log(mjd_charfn(g2 * (1 - k / (N + 1)), dt, sigma, lam, mews, sigmas, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def mjd_ft(u, delta, N, dt, sigma, lam, mews, sigmas, r, S0, K):  # corretto
+def mjd_ft(u, delta, N, dt, sigma, lam, mews, sigmas, r, S0, K):
 
     term = 0
 
@@ -56,7 +50,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
@@ -76,16 +70,11 @@ def fr_fourier_transform(x, a):
 def mjd_option(S0, K, T, r, n, sigma, lam, mews, sigmas, Nfft, lmax, lmin, delta, tolerance):
     dt = T / n
 
-    # Nfft = 2**15
-
-    # lmax = 2 lmin = -lmax
     dl = (lmax - lmin) / Nfft
     lmin = np.fix(lmin / dl) * dl
     l = lmin + np.arange(0, Nfft, 1) * dl
     umax = 50
 
-    # delta = 1.5
-    # umax = 50
     flag = 0
 
     while flag < 1:
@@ -113,6 +102,6 @@ def mjd_option(S0, K, T, r, n, sigma, lam, mews, sigmas, Nfft, lmax, lmin, delta
     lam = K * np.exp(l)
     K_Exp_lcr = K * math.exp(lcr)  # optimal strike
 
-    Ptrue_K = g1[l == 0]  #
+    Ptrue_K = g1[l == 0]
 
     return Ptrue, K_Exp_lcr, Ptrue_K, lam, g1

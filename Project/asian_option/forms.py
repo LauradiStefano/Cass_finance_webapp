@@ -129,8 +129,7 @@ class ComputeForm(wtf.Form):
     price = wtf.FloatField(label='Spot Price', default=100,
                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=3.67, validators=[wtf.validators.InputRequired()])
-    # dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0,
-    #                                 validators=[wtf.validators.InputRequired()])
+
     time = wtf.FloatField(label='Time to Maturity (Years)', default=1,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     step = wtf.FloatField(label='Number of Monitoring Dates', default=12,
@@ -139,5 +138,4 @@ class ComputeForm(wtf.Form):
                             validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
 
     button_compute = wtf.SubmitField(label='Compute')
-    # button_export_table = wtf.SubmitField(label='Export Table')
-    # button_table = wtf.SubmitField(label='View Details')
+

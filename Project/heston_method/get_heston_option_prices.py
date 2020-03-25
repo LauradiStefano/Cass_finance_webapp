@@ -40,14 +40,14 @@ def get_cos_prices(mu, S0, K, r, q, Tt, v0, chi, lam, rho, v_hat, call_put, N):
             V = -(2 / (b - a)) * (chiFO(a, 0, N, a, b) - psiFO(a, 0, N, a, b))
 
     CharFn = heston_charfn(np.arange(0, N, 1) * math.pi / (b - a), Tt, v0, chi, lam, rho, v_hat, murn)
-    Cfv = np.matrix(CharFn * V)  # corretto
+    Cfv = np.matrix(CharFn * V)
 
     for j in range(0, len(K)):
         k = np.log(S0 / K[j]) - a  # k=np.log(S0)-a
-        Exp_term = np.matrix(np.exp(1j * math.pi * (k) * np.arange(0, N, 1) / (b - a)));  # corretto
+        Exp_term = np.matrix(np.exp(1j * math.pi * (k) * np.arange(0, N, 1) / (b - a)));
 
         real_term = np.real(np.dot(Exp_term, Cfv.getT()) - 0.5 * Exp_term[0, 0] * Cfv[
-            0, 0])  # corretto il secondo termine della sottrazione
+            0, 0])
 
         price.append(float(K[j] * math.exp(-r * Tt) * real_term))  # transpose CFV
 

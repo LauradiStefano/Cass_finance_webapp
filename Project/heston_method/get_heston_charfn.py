@@ -9,7 +9,7 @@ import numpy as np
 
 
 def heston_charfn(u, Tt, v0, chi, lam, rho, v_hat, mu):
-    D = np.sqrt((lam - 1j * rho * chi * u) ** 2 + (u ** 2 + 1j * u) * chi ** 2)  # correzione
+    D = np.sqrt((lam - 1j * rho * chi * u) ** 2 + (u ** 2 + 1j * u) * chi ** 2)
     G = (lam - 1j * rho * chi * u - D) / (lam - 1j * rho * chi * u + D)
 
     # First term of product

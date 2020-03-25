@@ -21,17 +21,17 @@ def vg_phi(g1, g2, n, N, dt, sigma, theta, kappa, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(vg_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, theta, kappa, r))  # corretto
+        term = term + np.log(vg_charfn(g1 + g2 * (1 - k / (N + 1)), dt, sigma, theta, kappa, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(vg_charfn(g2 * (1 - k / (N + 1)), dt, sigma, theta, kappa, r))  # corretto
+        term = term + np.log(vg_charfn(g2 * (1 - k / (N + 1)), dt, sigma, theta, kappa, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def vg_ft(u, delta, N, dt, sigma, theta, kappa, r, S0, K):  # corretto
+def vg_ft(u, delta, N, dt, sigma, theta, kappa, r, S0, K):
 
     term = 0
 
@@ -51,8 +51,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
-
+    first_fft = np.fft.fft(vect_two)
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_fourth = np.exp(math.pi * 1j * a * np.arange(-m, 0) ** 2)

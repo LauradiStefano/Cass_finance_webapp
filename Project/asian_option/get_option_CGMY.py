@@ -18,26 +18,21 @@ def CGMY_charfn(u, dt, c, G, m, Y, r):
     return output
 
 
-# function output = CGMYCharFn(u, dt, c, G, m, Y, r)
-# output = exp(dt*(1i*(r-c*gamma(-Y)*((m-1)^Y-m^Y+(G+1)^Y-G^Y))*u+c*gamma(-Y)*((m-1i*u).^Y-m^Y+(G+1i*u).^Y-G^Y)))
-# end
-
 def CGMY_phi(g1, g2, n, N, dt, c, G, m, Y, r, S0):
     term = 0
 
     for k in range(1, n + 1):
-        term = term + np.log(CGMY_charfn(g1 + g2 * (1 - k / (N + 1)), dt, c, G, m, Y, r))  # corretto
+        term = term + np.log(CGMY_charfn(g1 + g2 * (1 - k / (N + 1)), dt, c, G, m, Y, r))
 
     for k in range(n + 1, N + 1):
-        term = term + np.log(CGMY_charfn(g2 * (1 - k / (N + 1)), dt, c, G, m, Y, r))  # corretto
+        term = term + np.log(CGMY_charfn(g2 * (1 - k / (N + 1)), dt, c, G, m, Y, r))
 
     output = np.exp(1j * (g1 + g2) * math.log(S0)) * np.exp(term)
 
     return output
 
 
-def CGMY_ft(u, delta, N, dt, c, G, m, Y, r, S0, K):  # corretto
-
+def CGMY_ft(u, delta, N, dt, c, G, m, Y, r, S0, K):
     term = 0
 
     for j in range(0, N + 1):
@@ -55,7 +50,7 @@ def fr_fourier_transform(x, a):
     # first fft
     vect_one = x * np.exp(-math.pi * 1j * a * np.arange(0, m) ** 2)
     vect_two = np.concatenate((vect_one, np.zeros(m)))
-    first_fft = np.fft.fft(vect_two)  # correto
+    first_fft = np.fft.fft(vect_two)
 
     # Second fft
     vect_third = np.exp(math.pi * 1j * a * np.arange(0, m) ** 2)
