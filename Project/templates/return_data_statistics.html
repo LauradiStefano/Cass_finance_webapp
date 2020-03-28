@@ -312,8 +312,10 @@
 
         if (field_number == min_fields) {
             $('#button_delete_field').prop('disabled', true);
+            $('#button_delete_field').css('opacity', '0.5');
         } else {
              $('#button_add_field').prop('disabled', true);
+             $('#button_add_field').css('opacity', '0.5');
         }
 
         $('#button_add_field').click(function(e) {
@@ -327,9 +329,11 @@
                 $('#flist').append(new_input);
 
                 $('#button_delete_field').prop('disabled', false);
+                $('#button_delete_field').css('opacity', '1');
 
                 if (field_number == max_fields) {
                     $('#button_add_field').prop('disabled', true);
+                    $('#button_add_field').css('opacity', '0.5');
                 }
             }
         });
@@ -340,9 +344,11 @@
                 field_number--;
 
                 $('#button_add_field').prop('disabled', false);
+                $('#button_add_field').css('opacity', '1');
 
                 if (field_number == min_fields) {
                     $('#button_delete_field').prop('disabled', true);
+                    $('#button_delete_field').css('opacity', '0.5');
                 }
 
             }
