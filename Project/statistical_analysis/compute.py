@@ -236,15 +236,16 @@ def create_plot_log_returns(log_returns, dates):
 
 
 def create_autocorrelation_function_plot(log_returns):
-    acf = acf(log_returns[:, 0], unbiased=True, nlags=nlags - 1)
+    nlags = 21
+    autorrelation_coefficient = acf(log_returns[:, 0], unbiased=True, nlags=nlags - 1)
 
     leg = [x for x in range(nlags)]
     z99 = 2.5758293035489004
     z95 = 1.959963984540054
-    fig = bp.figure(x_range=[-0.5, nlags], y_range=(-1, 1.1), title="Autocorrelation Function")
+    fig = bp.figure(x_range=[-0.5, nlags], y_range=(-1, 1.1), sizing_mode='scale_both') #title="Autocorrelation Function"
     fig.xaxis.axis_label = 'Lag'
     fig.yaxis.axis_label = 'Log-Returns Autocorrelation'
-    fig.circle(leg, acf, size=5, fill_color="#0095B6", line_color="#D21F1B", line_width=2)
+    fig.circle(leg, autorrelation_coefficient, size=5, fill_color="#0095B6", line_color="#D21F1B", line_width=2)
     fig.line(leg, y=z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
     fig.line(leg, y=z95 / np.sqrt(len(log_returns)), line_color='#808080')
     fig.line(leg, y=0.0, line_color='#000000')
