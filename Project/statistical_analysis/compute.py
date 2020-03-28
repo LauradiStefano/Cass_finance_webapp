@@ -16,6 +16,7 @@ import scipy.stats
 import scipy.stats
 from bokeh.models import ColumnDataSource
 from bokeh.models import HoverTool
+from statsmodels.tsa.stattools import acf
 
 
 def import_dataset_file_excel(filename):
@@ -40,7 +41,6 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 
     data = data.reset_index()
     dates = data['Date'].tolist()
-    print("dates",type(dates)) 
     del data['Date']
 
     return data, dates
@@ -111,7 +111,7 @@ def compute_table(data):
     min_return = minr
     max_return = maxr
     return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers, \
-           n_observations, log_returns,
+           n_observations, log_returns
 
 
 def create_histogram_distribution_plot(log_returns):
@@ -123,7 +123,6 @@ def create_histogram_distribution_plot(log_returns):
     log_returns.sort()
     normal_pdf = lambda x: scipy.stats.norm.pdf(x, m, sg)
     norm_pdf = [normal_pdf(i) for i in log_returns]  # aggiungere all'output
-    type(norm_pdf)
 
     data_1 = ColumnDataSource(data=dict(
         hist=hist,
@@ -229,6 +228,28 @@ def create_plot_log_returns(log_returns, dates):
 
     fig.toolbar.active_drag = None
     fig.legend.location = "bottom_right"
+
+    from bokeh.embed import components
+    script, div = components(fig)
+
+    return script, div
+
+
+def create_autocorrelation_function_plot(log_returns):
+    acf = acf(log_returns[:, 0], unbiased=True, nlags=nlags - 1)
+
+    leg = [x for x in range(nlags)]
+    z99 = 2.5758293035489004
+    z95 = 1.959963984540054
+    fig = bp.figure(x_range=[-0.5, nlags], y_range=(-1, 1.1), title="Autocorrelation Function")
+    fig.xaxis.axis_label = 'Lag'
+    fig.yaxis.axis_label = 'Log-Returns Autocorrelation'
+    fig.circle(leg, acf, size=5, fill_color="#0095B6", line_color="#D21F1B", line_width=2)
+    fig.line(leg, y=z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
+    fig.line(leg, y=z95 / np.sqrt(len(log_returns)), line_color='#808080')
+    fig.line(leg, y=0.0, line_color='#000000')
+    fig.line(leg, y=-z95 / np.sqrt(len(log_returns)), line_color='#808080')
+    fig.line(leg, y=-z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
 
     from bokeh.embed import components
     script, div = components(fig)

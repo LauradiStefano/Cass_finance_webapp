@@ -35,16 +35,16 @@
                                     </span>
 
                                     {% else %}
-                                     <span class="mb-1">
+                                    <span class="mb-1">
                                         <label>Method</label>:<br/>
                                         {{dict(result['form'].method_choice.choices).get(result['form'].method_choice.data)}}
                                     </span>
-                                     <span class="mb-1">
+                                    <span class="mb-1">
                                         <label>Start Date</label>:<br/>
                                         {{result['form'].start_day.data}}/{{result['form'].start_month.data}}/{{result['form'].start_year.data}}
                                     </span>
 
-                                     <span class="mb-1">
+                                    <span class="mb-1">
                                         <label>End Date</label>:<br/>
                                         {{result['form'].end_day.data}}/{{result['form'].end_month.data}}/{{result['form'].end_year.data}}
                                     </span>
@@ -70,7 +70,7 @@
                                     <table class="table table-striped table-hover">
                                         <thead>
                                         <th scope="col"> Tickers</th>
-                                        <th scope="col"> Observation </th>
+                                        <th scope="col"> Observation</th>
                                         <th scope="col"> Mean</th>
                                         <th scope="col"> Volatility</th>
                                         <th scope="col"> Variance</th>
@@ -104,6 +104,56 @@
                             </div>
                         </fieldset>
                     </div>
+                    <div class="row d-flex justify-content-center">
+                        <div class=" col-12">
+                            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Histogram</legend>
+                                </div>
+                                <div class="d-flex justify-content-center plot">
+                                    {{ result['plot_histogram'][0]|safe}}
+                                    {{ result['plot_histogram'][1]|safe}}
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class=" col-12">
+                            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>QQ Plot</legend>
+                                </div>
+                                <div class="d-flex justify-content-center plot">
+                                    {{ result['plot_qq'][0]|safe}}
+                                    {{ result['plot_qq'][1]|safe}}
+                                </div>
+                            </fieldset>
+                        </div>
+
+                         <div class=" col-12">
+                            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Log Returns</legend>
+                                </div>
+                                <div class="d-flex justify-content-center plot">
+                                    {{ result['plot_log_returns'][0]|safe}}
+                                    {{ result['plot_log_returns'][1]|safe}}
+                                </div>
+                            </fieldset>
+                        </div>
+
+                         <div class=" col-12">
+                            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                                <div class="row border-bottom mb-2 pb-1">
+                                    <legend>Autocorrelation</legend>
+                                </div>
+                                <div class="d-flex justify-content-center plot">
+                                    {{ result['plot_autocorrelation'][0]|safe}}
+                                    {{ result['plot_autocorrelation'][1]|safe}}
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
                     {% endif %}
                 </div>
             </div>

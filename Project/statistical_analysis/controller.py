@@ -1,6 +1,7 @@
 import json
 import os
 
+import numpy as np
 from flask import url_for, redirect
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
@@ -9,7 +10,7 @@ from app import allowed_file, app
 from db_models import db
 from db_models import statisitcal_analysis as compute
 from statistical_analysis.compute import import_dataset_tickers, import_dataset_file_excel, compute_table, \
-    create_histogram_distribution_plot, create_qq_plot, create_plot_log_returns
+    create_histogram_distribution_plot, create_qq_plot, create_plot_log_returns, create_autocorrelation_function_plot
 from statistical_analysis.forms import ComputeForm
 
 
@@ -34,6 +35,7 @@ def controller_statistical_analysis(user, request):
     plot_qq = None
     plot_histogram = None
     plot_log_returns = None
+    plot_autocorrelation = None
 
     number_of_tickers = 0
 
@@ -64,6 +66,8 @@ def controller_statistical_analysis(user, request):
 
             plot_log_returns = create_plot_log_returns(log_returns, dates)
 
+            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
+
             number_of_tickers = len(tickers)
 
         if user.is_authenticated:  # store data in db
@@ -82,8 +86,10 @@ def controller_statistical_analysis(user, request):
             object.tickers = json.dumps(tickers)
             object.number_of_tickers = number_of_tickers
             object.n_observation = json.dumps(n_observation)
-            object.log_returns = json.dumps(log_returns)
-            object.dates = json.dumps(dates)
+            print('log', type(log_returns))
+            print('dat', type(dates))
+            object.log_returns = json.dumps(log_returns.tolist())
+            object.dates = json.dumps(dates.tolist())
 
             object.user = user
             db.session.add(object)
@@ -107,8 +113,8 @@ def controller_statistical_analysis(user, request):
                 tickers = json.loads(instance.tickers)
                 number_of_tickers = instance.number_of_tickers
                 n_observation = json.loads(instance.n_observation)
-                log_returns = json.loads(instance.log_returns)
-                dates = json.loads(instance.dates)
+                log_returns = json.loads(np.array(instance.log_returns))
+                dates = json.loads(np.array(instance.dates))
 
                 plot_histogram = create_histogram_distribution_plot(log_returns)
                 plot_qq = create_qq_plot(log_returns)
@@ -128,7 +134,7 @@ def controller_statistical_analysis(user, request):
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
             'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
             'n_observation': n_observation, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
-            'plot_log_returns': plot_log_returns}
+            'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation}
 
 
 def populate_form_from_instance(instance):
@@ -168,12 +174,13 @@ def controller_old_statistical_analysis(user):
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers
             n_observation = json.loads(instance.n_observation)
-            log_returns = json.loads(instance.log_returns)
+            log_returns = json.loads(np.array(instance.log_returns))
             dates = json.loads(instance.dates)
 
             plot_histogram = create_histogram_distribution_plot(log_returns)
             plot_qq = create_qq_plot(log_returns)
             plot_log_returns = create_plot_log_returns(log_returns, dates)
+            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
 
             mean = [round(x, 6) for x in mean] if mean is not None else None
             volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -189,7 +196,7 @@ def controller_old_statistical_analysis(user):
                          'skewness': skewness, 'kurtosis': kurtosis, 'min_return': min_return, 'max_return': max_return,
                          'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers, 'n_observation': n_observation,
                          'number_of_tickers': number_of_tickers, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
-                         'plot_log_returns': plot_log_returns})
+                         'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation})
 
     return {'data': data}
 

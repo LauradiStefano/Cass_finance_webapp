@@ -260,6 +260,18 @@
                 </div>
             </fieldset>
         </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Autocorrelation</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_autocorrelation[0]|safe}}
+                    {{plot_autocorrelation[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
     </div>
      {% endif %}
 </div>
@@ -341,11 +353,13 @@
         var select_method_choice = $('#method_choice');
         if ($('[name=method_choice]:radio:checked').val() == undefined) {
             $('#button_compute').prop('disabled', true);
+            $('#button_compute').css('opacity', '0.3');
         }
 
         select_method_choice.on('click', function() {
             if ($('[name=method_choice]:radio:checked').val() != '') {
                 $('#button_compute').prop('disabled', false)
+                $("#button_compute").css('opacity', '1');
             }
         });
     });
