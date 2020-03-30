@@ -123,7 +123,7 @@ def controller_statistical_analysis(user, request):
             plot_histogram = create_histogram_distribution_plot(log_returns)
             plot_qq = create_qq_plot(log_returns)
             plot_log_returns = create_plot_log_returns(log_returns, dates)
-            plot_autocorrelation=create_autocorrelation_function_plot(log_returns)
+            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
 
     mean = [round(x, 6) for x in mean] if mean is not None else None
     volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -179,13 +179,6 @@ def controller_old_statistical_analysis(user):
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers
             n_observation = json.loads(instance.n_observation)
-            log_returns = json.loads(np.array(instance.log_returns))
-            dates = json.loads(instance.dates)
-
-            plot_histogram = create_histogram_distribution_plot(log_returns)
-            plot_qq = create_qq_plot(log_returns)
-            plot_log_returns = create_plot_log_returns(log_returns, dates)
-            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
 
             mean = [round(x, 6) for x in mean] if mean is not None else None
             volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -200,8 +193,7 @@ def controller_old_statistical_analysis(user):
             data.append({'form': form, 'id': id, 'mean': mean, 'volatility': volatility, 'variance': variance,
                          'skewness': skewness, 'kurtosis': kurtosis, 'min_return': min_return, 'max_return': max_return,
                          'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers, 'n_observation': n_observation,
-                         'number_of_tickers': number_of_tickers, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
-                         'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation})
+                         'number_of_tickers': number_of_tickers})
 
     return {'data': data}
 
