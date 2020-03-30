@@ -110,6 +110,7 @@ def compute_table(data):
     kurtosis = ku
     min_return = minr
     max_return = maxr
+
     return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers, \
            n_observations, log_returns
 

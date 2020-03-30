@@ -2,6 +2,7 @@ import json
 import os
 
 import numpy as np
+import pandas as pd
 from flask import url_for, redirect
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
@@ -86,39 +87,43 @@ def controller_statistical_analysis(user, request):
             object.tickers = json.dumps(tickers)
             object.number_of_tickers = number_of_tickers
             object.n_observation = json.dumps(n_observation)
-            print('log', type(log_returns))
-            print('dat', type(dates))
             object.log_returns = json.dumps(log_returns.tolist())
-            object.dates = json.dumps(dates.tolist())
+            dates = list(map(str, dates))  # map per ogni elemento in dates, converte in stringa (usa for che è uguale)
+            # list converto l'oggeto map
+            object.dates = json.dumps(dates)
 
             object.user = user
             db.session.add(object)
             db.session.commit()
     else:
-        if user.is_authenticated:  # user authenticated, store the data
-            if user.compute_statistical_analysis.count() > 0:
-                instance = user.compute_statistical_analysis.order_by(
-                    desc('id')).first()  # decreasing order db, take the last data saved
-                form = populate_form_from_instance(instance)
+        if user.is_authenticated and user.compute_statistical_analysis.count() > 0:
+            # user authenticated, store the data
+            # ricordarsi np.array prima
+            # timestamp modo in cui si leggono le date, per salvare nel db convertire in stringa
+            # riconvertire in timestap quando richiamato dal db (pd.timestamp)
+            instance = user.compute_statistical_analysis.order_by(
+                desc('id')).first()  # decreasing order db, take the last data saved
+            form = populate_form_from_instance(instance)
 
-                mean = json.loads(instance.mean)
-                volatility = json.loads(instance.volatility)
-                variance = json.loads(instance.variance)
-                skewness = json.loads(instance.skewness)
-                kurtosis = json.loads(instance.kurtosis)
-                min_return = json.loads(instance.min_return)
-                max_return = json.loads(instance.max_return)
-                jb_test = json.loads(instance.jb_test)
-                pvalue = json.loads(instance.pvalue)
-                tickers = json.loads(instance.tickers)
-                number_of_tickers = instance.number_of_tickers
-                n_observation = json.loads(instance.n_observation)
-                log_returns = json.loads(np.array(instance.log_returns))
-                dates = json.loads(np.array(instance.dates))
+            mean = json.loads(instance.mean)
+            volatility = json.loads(instance.volatility)
+            variance = json.loads(instance.variance)
+            skewness = json.loads(instance.skewness)
+            kurtosis = json.loads(instance.kurtosis)
+            min_return = json.loads(instance.min_return)
+            max_return = json.loads(instance.max_return)
+            jb_test = json.loads(instance.jb_test)
+            pvalue = json.loads(instance.pvalue)
+            tickers = json.loads(instance.tickers)
+            number_of_tickers = instance.number_of_tickers
+            n_observation = json.loads(instance.n_observation)
+            log_returns = np.array(json.loads(instance.log_returns))
+            dates = list(map(pd.Timestamp, json.loads(instance.dates)))
 
-                plot_histogram = create_histogram_distribution_plot(log_returns)
-                plot_qq = create_qq_plot(log_returns)
-                plot_log_returns = create_plot_log_returns(log_returns, dates)
+            plot_histogram = create_histogram_distribution_plot(log_returns)
+            plot_qq = create_qq_plot(log_returns)
+            plot_log_returns = create_plot_log_returns(log_returns, dates)
+            plot_autocorrelation=create_autocorrelation_function_plot(log_returns)
 
     mean = [round(x, 6) for x in mean] if mean is not None else None
     volatility = [round(x, 6) for x in volatility] if volatility is not None else None
