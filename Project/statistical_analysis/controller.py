@@ -88,8 +88,7 @@ def controller_statistical_analysis(user, request):
             object.number_of_tickers = number_of_tickers
             object.n_observation = json.dumps(n_observation)
             object.log_returns = json.dumps(log_returns.tolist())
-            dates = list(map(str, dates))  # map per ogni elemento in dates, converte in stringa (usa for che è uguale)
-            # list converto l'oggeto map
+            dates = list(map(str, dates))
             object.dates = json.dumps(dates)
 
             object.user = user
@@ -98,9 +97,6 @@ def controller_statistical_analysis(user, request):
     else:
         if user.is_authenticated and user.compute_statistical_analysis.count() > 0:
             # user authenticated, store the data
-            # ricordarsi np.array prima
-            # timestamp modo in cui si leggono le date, per salvare nel db convertire in stringa
-            # riconvertire in timestap quando richiamato dal db (pd.timestamp)
             instance = user.compute_statistical_analysis.order_by(
                 desc('id')).first()  # decreasing order db, take the last data saved
             form = populate_form_from_instance(instance)
