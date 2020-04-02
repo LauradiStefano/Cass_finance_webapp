@@ -21,7 +21,7 @@ from statsmodels.tsa.stattools import acf
 
 def import_dataset_file_excel(filename):
     data = pd.read_excel(os.path.join('uploads/', filename))
-    dates = data['Date'].tolist()
+    dates = data['Time'].tolist()
     del data['Time']
 
     return data, dates
