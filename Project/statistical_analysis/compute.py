@@ -224,7 +224,7 @@ def create_plot_log_returns(log_returns, dates):
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                     x_axis_label='Time', y_axis_label='Log Returns')
 
-    fig.line(x='dates', y='log_returns', source=data, color="#0095B6", legend_label='Log returns vs Dates',
+    fig.line(x='dates', y='log_returns', source=data, color="#0095B6", legend_label='Log Returns vs Dates',
              line_width=1, alpha=0.5, name='log returns')
 
     fig.toolbar.active_drag = None
