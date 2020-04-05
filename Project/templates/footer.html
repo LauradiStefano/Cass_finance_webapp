@@ -20,11 +20,12 @@
         </div>
     </nav>
 </footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hideshowpassword/2.0.8/hideShowPassword.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
 
@@ -33,13 +34,6 @@
     $('#popup_table').popup();
     $('#popup_table').popup('addclosebutton');
   });
-
-
-
-
-
-
-
 
 </script>
 
@@ -75,12 +69,6 @@ buttonExportTable.addEventListener('click', function (e) {
     instance.export2file(xlsxData.data, xlsxData.mimeType, xlsxData.filename, xlsxData.fileExtension, xlsxData.merges,
     xlsxData.RTL, xlsxData.sheetname);
 });
-
-
-
-
-
-
 
 </script>
 {% endif %}
