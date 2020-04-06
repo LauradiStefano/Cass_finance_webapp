@@ -9,6 +9,9 @@ class ComputeForm(wtf.Form):
     file_data = wtf.FileField(label='Import File')
 
     n_portfolio = wtf.IntegerField(label='Number of Simulated Portfolios', default=100,
-                                   validators=[wtf.validators.InputRequired()])
+                                   validators=[wtf.validators.InputRequired(),
+                                               validators.NumberRange
+                                               (min=0, max=10000,
+                                                message='The value must be between than 0 and 10000')])
 
     button_compute = wtf.SubmitField(label='Compute')

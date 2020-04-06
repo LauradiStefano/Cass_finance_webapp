@@ -3,6 +3,8 @@ from wtforms import SelectMultipleField, validators, StringField
 from wtforms.validators import InputRequired
 from wtforms.widgets import ListWidget, CheckboxInput
 
+from common_validators import greater_than_zero
+
 
 class MultiCheckboxField(SelectMultipleField):
     widget = ListWidget(prefix_label=False)
@@ -12,7 +14,7 @@ class MultiCheckboxField(SelectMultipleField):
 class ComputeForm(wtf.Form):
     file_data = wtf.FileField(label='Import File')
     file_name = StringField(label='DataSet Name', validators=[InputRequired(), validators.Length(max=25)])
-    price = wtf.FloatField(label='Current Spot Price', validators=[InputRequired(), validators.NumberRange(0, 1E+20)])
+    price = wtf.FloatField(label='Current Spot Price', validators=[InputRequired(), greater_than_zero])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=5.04, validators=[InputRequired()])
     div_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=3.14, validators=[InputRequired()])
 

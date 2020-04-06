@@ -2,6 +2,8 @@ import wtforms as wtf
 from wtforms import validators, StringField
 from wtforms.validators import InputRequired
 
+from common_validators import greater_than_zero
+
 
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model',
@@ -19,11 +21,11 @@ class ComputeForm(wtf.Form):
 
     # Vasicek distribution
     kappa_vasicek = wtf.FloatField(label=name_parameters['0'][0], default=0.1,
-                                   validators=[InputRequired()])
+                                   validators=[InputRequired(), greater_than_zero])
     theta_vasicek = wtf.FloatField(label=name_parameters['0'][1], default=0.05,
                                    validators=[InputRequired()])
     sigma_vasicek = wtf.FloatField(label=name_parameters['0'][2], default=0.03,
-                                   validators=[InputRequired()])
+                                   validators=[InputRequired(), greater_than_zero])
     rho_vasicek = wtf.FloatField(label=name_parameters['0'][3], default=0.04,
                                  validators=[InputRequired()])
 
