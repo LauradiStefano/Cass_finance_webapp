@@ -94,8 +94,10 @@ def compute_table(data):
             p_value.append(x[1])
 
     else:
-        jb_statistic = None
-        p_value = None
+        jb_statistic = None #'The JB statistics is not reliable if the sample size is smaller than 2000'
+
+        p_value = None #'The JB statistics is not reliable if the sample size is smaller than XXXX'
+
 
     n_observations = []
 
