@@ -530,8 +530,14 @@ div.download_data:hover, div.download_data:active {
 }
 
 .subtitle_shimko {
-    margin-left: 7em;
-    margin-right: 7em;
+    margin-left: 5em;
+    margin-right: 5em;
+
+}
+
+.shimko_title_container {
+    max-width: 800px;
+    text-align: center;
 }
 
 .footer {
