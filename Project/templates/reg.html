@@ -81,6 +81,7 @@
                             <div class="col">
                                 {{ form.password.label }}
                                 {{ form.password(placeholder='Password')}}
+                                <i id="show_password" class="glyphicon glyphicon-eye-open"></i>
                                 {% if form.password.errors %}
                                 {% for error in form.password.errors %}
                                 <div style="color: red;">{{ error }}</div>
@@ -132,6 +133,13 @@
 </div>
 
 {% include 'footer.html' %}
+
+<script>
+    $('#password + .glyphicon').on('click', function() {
+        $(this).toggleClass('glyphicon-eye-close').toggleClass('glyphicon-eye-open'); // toggle our classes for the eye icon
+        $('#password').togglePassword(); // activate the hideShowPassword plugin
+    });
+</script>
 
 </body>
 </html>
