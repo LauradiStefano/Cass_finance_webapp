@@ -56,16 +56,16 @@ class ComputeForm(wtf.Form):
             self.strike_max.errors.append('The value must be greater than minimum and at the money')
             valid = False
 
-        if self.volatility_min.data >= self.volatility_atm.data or self.volatility_min.data >= self.volatility_max.data:
-            self.volatility_min.errors.append('The value must be smaller than at the money and maximum')
-            valid = False
-
-        if self.volatility_atm.data <= self.volatility_min.data or self.volatility_atm.data >= self.volatility_max.data:
-            self.volatility_atm.errors.append('The value must be between minimum and maximum')
-            valid = False
-
-        if self.volatility_max.data <= self.volatility_min.data or self.volatility_max.data <= self.volatility_atm.data:
-            self.volatility_max.errors.append('The value must be greater than minimum and at the money')
-            valid = False
+##        if self.volatility_min.data >= self.volatility_atm.data or self.volatility_min.data >= self.volatility_max.data:
+##            self.volatility_min.errors.append('The value must be smaller than at the money and maximum')
+##            valid = False
+##
+##        if self.volatility_atm.data <= self.volatility_min.data or self.volatility_atm.data >= self.volatility_max.data:
+##            self.volatility_atm.errors.append('The value must be between minimum and maximum')
+##            valid = False
+##
+##        if self.volatility_max.data <= self.volatility_min.data or self.volatility_max.data <= self.volatility_atm.data:
+##            self.volatility_max.errors.append('The value must be greater than minimum and at the money')
+##            valid = False
 
         return valid
