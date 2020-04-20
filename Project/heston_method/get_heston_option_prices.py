@@ -35,7 +35,7 @@ def get_cos_prices(mu, S0, K, r, q, Tt, v0, chi, lam, rho, v_hat, call_put, N):
 
             V = ((2 / (b - a)) * (chiFO(0, b, N, a, b) - psiFO(0, b, N, a, b)))
 
-        elif call_put == -1:  # put
+        elif call_put == 0:  # put
 
             V = -(2 / (b - a)) * (chiFO(a, 0, N, a, b) - psiFO(a, 0, N, a, b))
 
