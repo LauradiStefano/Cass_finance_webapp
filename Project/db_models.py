@@ -452,6 +452,7 @@ class statisitcal_analysis(db.Model):
     n_observation = db.Column(db.String())
     log_returns = db.Column(db.String())
     dates = db.Column(db.String())
+    prices = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
