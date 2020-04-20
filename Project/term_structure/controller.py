@@ -1,8 +1,10 @@
+import csv
+import io
 import json
 import os
 
 import numpy as np
-from flask import url_for, redirect
+from flask import url_for, redirect, Response
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -37,6 +39,8 @@ def controller_term_structure(user, request):
     dates = None
 
     number_of_time = 0
+
+    sim_id = None
 
     plot_discount_factor_term_structure = None
     plot_interest_rate_term_structure = None
@@ -105,6 +109,7 @@ def controller_term_structure(user, request):
                 object.user = user
                 db.session.add(object)
                 db.session.commit()
+                sim_id = object.id
         else:
             compute_not_allowed = True
 
@@ -115,6 +120,7 @@ def controller_term_structure(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 parameters = np.array(json.loads(instance.parameters))
                 time = json.loads(instance.time)
                 market_discount_factor = json.loads(instance.market_discount_factor)
@@ -168,7 +174,8 @@ def controller_term_structure(user, request):
             'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
             'plot_interest_rate_term_structure': plot_interest_rate_term_structure,
             'plot_error_discount_factor': plot_error_discount_factor,
-            'plot_error_interest_rate': plot_error_interest_rate, 'compute_not_allowed': compute_not_allowed}
+            'plot_error_interest_rate': plot_error_interest_rate, 'compute_not_allowed': compute_not_allowed,
+            'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -230,10 +237,66 @@ def delete_term_structure_simulation(user, id):
             user.compute_term_structure.delete()
         else:
             try:
-                instance = user.compute_term_strucuture.filter_by(id=id).first()
+                instance = user.compute_term_structure.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
     return redirect(url_for('old_term_structure'))
+
+
+def controller_term_structure_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_term_structure.filter_by(id=id).first()
+
+        market_discount_factor_values = json.loads(instance.market_discount_factor)
+        model_discount_factor_values = np.array(json.loads(instance.model_discount_factor))
+        market_spot_rate_values = np.array(json.loads(instance.market_spot_rate))
+        model_spot_rate_values = np.array(json.loads(instance.model_spot_rate))
+        discount_factor_model_error_values = np.array(json.loads(instance.discount_factor_model_error))
+        spot_rate_model_error_values = np.array(json.loads(instance.spot_rate_model_error))
+
+        fieldnames = ['Market DF', 'Model DF', 'Market SR', 'Model SR', 'DF Error', 'SR Error']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2, value_3, value_4, value_5, value_6 \
+                in zip(market_discount_factor_values, model_discount_factor_values, market_spot_rate_values,
+                       model_spot_rate_values, discount_factor_model_error_values, spot_rate_model_error_values):
+            writer.writerow({'Market DF': value_1, 'Model DF': value_2, 'Market SR': value_3, 'Model SR': value_4,
+                             'DF Error': value_5, 'SR Error': value_6})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=term_data.csv"})
+
+    else:
+        return redirect(url_for('term_structure'))
+
+
+def controller_term_structure_daily_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_term_structure.filter_by(id=id).first()
+
+        dates_value = json.loads(instance.dates)
+        annual_basis_date_value = json.loads(instance.annual_basis_date)
+        daily_discount_factor_value = np.array(json.loads(instance.daily_discount_factor))
+        daily_model_spot_rate_value = np.array(json.loads(instance.daily_model_spot_rate))
+
+        fieldnames = ['Dates', 'Annual Basis Date', 'Daily DF', 'Daily SR']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2, value_3, value_4, \
+                in zip(dates_value, annual_basis_date_value, daily_discount_factor_value, daily_model_spot_rate_value):
+            writer.writerow({'Dates': value_1, 'Annual Basis Date': value_2, 'Daily DF': value_3, 'Daily SR': value_4})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=term_daily_data.csv"})
+
+    else:
+        return redirect(url_for('term_structure'))

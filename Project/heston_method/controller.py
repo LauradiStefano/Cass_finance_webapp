@@ -1,7 +1,9 @@
+import csv
+import io
 import json
 
 import numpy as np
-from flask import redirect, url_for
+from flask import redirect, url_for, Response
 from sqlalchemy import desc
 
 from db_models import db
@@ -25,6 +27,8 @@ def controller_heston_method(user, request):
     variance = None
     skewness = None
     kurtosis = None
+
+    sim_id = None
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
@@ -68,12 +72,14 @@ def controller_heston_method(user, request):
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_heston_method.count() > 0:
                 instance = user.compute_heston_method.order_by(desc('id')).first()
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 heston_pdf = json.loads(instance.heston_pdf)
                 returns = np.array(json.loads(instance.returns))
                 price = instance.price
@@ -104,7 +110,8 @@ def controller_heston_method(user, request):
     return {'form': form, 'user': user, 'plot_return_underlying_distribution': plot_return_underlying_distribution,
             'plot_implied_volatility': plot_implied_volatility, 'strike': strike, 'number_of_strike': number_of_strike,
             'implied_volatility': implied_volatility, 'option_prices': option_prices, 'mean': mean,
-            'heston_pdf': heston_pdf, 'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis}
+            'heston_pdf': heston_pdf, 'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis,
+            'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -143,7 +150,6 @@ def controller_old_heston_method(user):
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, price)
 
-
             mean = round(mean, 4) if mean is not None else None
             variance = round(variance, 4) if variance is not None else None
             skewness = round(skewness, 4) if skewness is not None else None
@@ -173,3 +179,25 @@ def delete_heston_method_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_heston_method'))
+
+
+def controller_heston_method_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_heston_method.filter_by(id=id).first()
+
+        pdf_values = json.loads(instance.heston_pdf)
+
+        fieldnames = ['Pdf Asset']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value in pdf_values:
+            writer.writerow({'Pdf Asset': value})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=heston_data.csv"})
+
+    else:
+        return redirect(url_for('heston_method'))

@@ -1,7 +1,9 @@
+import csv
+import io
 import json
 
 import numpy as np
-from flask import url_for, redirect
+from flask import url_for, redirect, Response
 from sqlalchemy import desc
 
 from db_models import db
@@ -51,6 +53,8 @@ def controller_shimko_theoretical(user, request):
     statistic_returns = None
     pvalue_prices = None
     pvalue_returns = None
+
+    sim_id = None
 
     plot_implied_volatility = None
     plot_index_distribution = None
@@ -163,6 +167,7 @@ def controller_shimko_theoretical(user, request):
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_shimko_theoretical.count() > 0:
@@ -170,6 +175,7 @@ def controller_shimko_theoretical(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 a0 = instance.a0
                 a1 = instance.a1
                 a2 = instance.a2
@@ -271,7 +277,7 @@ def controller_shimko_theoretical(user, request):
             'pdf_returns': pdf_returns, 'pdf': pdf, 'cdf_returns': cdf_returns, 'cdf_prices': cdf_prices,
             'plot_implied_volatility': plot_implied_volatility, 'plot_index_distribution': plot_index_distribution,
             'plot_index_cdf': plot_index_cdf, 'plot_return_distribution': plot_return_distribution,
-            'plot_return_cdf': plot_return_cdf}
+            'plot_return_cdf': plot_return_cdf, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -406,3 +412,43 @@ def delete_shimko_theoretical_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_shimko_theoretical'))
+
+
+def controller_shimko_theoretical_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_shimko_theoretical.filter_by(id=id).first()
+
+        pdf_returns_values = json.loads(instance.pdf_returns)
+
+        values_array = [pdf_returns_values]
+        fieldnames = ['Pdf Returns']
+
+        plot_choice = json.loads(instance.plot_choice)
+
+        if '0' in plot_choice:
+            pdf_values = json.loads(instance.pdf)
+            values_array.append(pdf_values)
+            fieldnames.append('Pdf Prices')
+
+        if '1' in plot_choice:
+            cdf_prices_values = json.loads(instance.cdf_prices)
+            values_array.append(cdf_prices_values)
+            fieldnames.append('Cdf Prices')
+
+        if '2' in plot_choice:
+            cdf_returns_values = json.loads(instance.cdf_returns)
+            values_array.append(cdf_returns_values)
+            fieldnames.append('Cdf Returns')
+
+        writer = csv.writer(csvfile)
+        writer.writerow(fieldnames)
+        for value in zip(*values_array):
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=shimko_theoretical.csv"})
+
+    else:
+        return redirect(url_for('shimko_theoretical'))

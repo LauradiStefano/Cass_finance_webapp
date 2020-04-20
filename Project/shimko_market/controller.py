@@ -1,8 +1,10 @@
+import csv
+import io
 import json
 import os
 
 import numpy as np
-from flask import redirect, url_for
+from flask import redirect, url_for, Response
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -64,7 +66,10 @@ def controller_shimko_market(user, request):
     pvalue_returns = None
     risk_free = None
     div_yield = None
+
     compute_not_allowed = False
+
+    sim_id = None
 
     plot_implied_volatility = None
     plot_index_distribution = None
@@ -212,6 +217,7 @@ def controller_shimko_market(user, request):
                 object.user = user
                 db.session.add(object)
                 db.session.commit()
+                sim_id = object.id
         else:
             compute_not_allowed = True
     else:
@@ -222,6 +228,7 @@ def controller_shimko_market(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 strike_data = json.loads(instance.strike_data)
                 a0 = instance.a0
                 a1 = instance.a1
@@ -327,7 +334,7 @@ def controller_shimko_market(user, request):
             'plot_implied_volatility': plot_implied_volatility, 'div_yield': div_yield, 'risk_free': risk_free,
             'plot_index_distribution': plot_index_distribution, 'plot_return_cdf': plot_return_cdf,
             'plot_return_distribution': plot_return_distribution, 'plot_index_cdf': plot_index_cdf,
-            'compute_not_allowed': compute_not_allowed}
+            'compute_not_allowed': compute_not_allowed, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -475,3 +482,43 @@ def delete_shimko_market_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_shimko_market'))
+
+
+def controller_shimko_market_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_shimko_market.filter_by(id=id).first()
+
+        pdf_returns_values = json.loads(instance.pdf_returns)
+
+        values_array = [pdf_returns_values]
+        fieldnames = ['Pdf Returns']
+
+        plot_choice = json.loads(instance.plot_choice)
+
+        if '0' in plot_choice:
+            pdf_values = json.loads(instance.pdf)
+            values_array.append(pdf_values)
+            fieldnames.append('Pdf Prices')
+
+        if '1' in plot_choice:
+            cdf_prices_values = json.loads(instance.cdf_prices)
+            values_array.append(cdf_prices_values)
+            fieldnames.append('Cdf Prices')
+
+        if '2' in plot_choice:
+            cdf_returns_values = json.loads(instance.cdf_returns)
+            values_array.append(cdf_returns_values)
+            fieldnames.append('Cdf Returns')
+
+        writer = csv.writer(csvfile)
+        writer.writerow(fieldnames)
+        for value in zip(*values_array):
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=test.csv"})
+
+    else:
+        return redirect(url_for('shimko_market'))

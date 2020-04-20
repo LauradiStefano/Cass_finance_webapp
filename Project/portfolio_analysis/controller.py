@@ -1,8 +1,10 @@
+import csv
+import io
 import json
 import os
 
 import numpy as np
-from flask import url_for, redirect
+from flask import url_for, redirect, Response
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -25,6 +27,9 @@ def controller_portfolio_analysis(user, request):
     efficient_means = None
     efficient_std = None
     efficient_weights = None
+
+    sim_id = None
+
     plot_efficient_frontier = None
     plot_efficient_weights = None
 
@@ -61,6 +66,7 @@ def controller_portfolio_analysis(user, request):
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
 
     else:
         if user.is_authenticated:  # user authenticated, store the data
@@ -69,6 +75,7 @@ def controller_portfolio_analysis(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 returns = np.array(json.loads(instance.returns))
                 standard_deviations = np.array(json.loads(instance.standard_deviations))
                 means = np.array(json.loads(instance.means))
@@ -83,7 +90,7 @@ def controller_portfolio_analysis(user, request):
                 plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
 
     return {'form': form, 'user': user, 'plot_efficient_frontier': plot_efficient_frontier,
-            'plot_efficient_weights': plot_efficient_weights}
+            'plot_efficient_weights': plot_efficient_weights, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -138,3 +145,25 @@ def delete_portfolio_analysis_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_portfolio_analysis'))
+
+
+def controller_portfolio_analysis_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_portfolio_analysis.filter_by(id=id).first()
+
+        efficient_weights_values = np.array(json.loads(instance.efficient_weights))
+        tickers = json.loads(instance.tickers)
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(tickers)
+        for value in efficient_weights_values:
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=test_data.csv"})
+
+    else:
+        return redirect(url_for('portfolio_analysis'))

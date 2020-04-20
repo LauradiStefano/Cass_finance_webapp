@@ -1,7 +1,9 @@
+import csv
+import io
 import json
 
 import numpy as np
-from flask import redirect, url_for
+from flask import redirect, url_for, Response
 from sqlalchemy import desc
 
 from db_models import db
@@ -26,6 +28,8 @@ def controller_levy_process(user, request):
     kurtosis = None
     norm_pdf = None
     number_of_strike = 0
+
+    sim_id = None
 
     plot_implied_volatility = None
     plot_return_underlying_distribution = None
@@ -78,12 +82,14 @@ def controller_levy_process(user, request):
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_levy_process.count() > 0:
                 instance = user.compute_levy_process.order_by(desc('id')).first()
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 pdf_underlying_asset = json.loads(instance.pdf_underlying_asset)
                 underlying_prices = np.array(json.loads(instance.underlying_prices))
                 price = instance.price
@@ -115,7 +121,7 @@ def controller_levy_process(user, request):
             'plot_implied_volatility': plot_implied_volatility, 'mean': mean, 'variance': variance,
             'skewness': skewness, 'kurtosis': kurtosis, 'number_of_strike': number_of_strike, 'strike': strike,
             'option_prices': option_prices, 'implied_volatility': implied_volatility,
-            'pdf_underlying_asset': pdf_underlying_asset}
+            'pdf_underlying_asset': pdf_underlying_asset, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -181,3 +187,25 @@ def delete_levy_process_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_levy_process'))
+
+
+def controller_levy_process_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_levy_process.filter_by(id=id).first()
+
+        pdf_values = json.loads(instance.pdf_underlying_asset)
+
+        fieldnames = ['Pdf Asset']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value in pdf_values:
+            writer.writerow({'Pdf Asset': value})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=levy_data.csv"})
+
+    else:
+        return redirect(url_for('levy_process'))

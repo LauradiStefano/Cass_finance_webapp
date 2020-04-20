@@ -1,7 +1,9 @@
+import csv
+import io
 import json
 
 import numpy as np
-from flask import redirect, url_for
+from flask import redirect, url_for, Response
 from sqlalchemy import desc
 
 from asian_option.compute import create_plot_lower_bound, compute_values
@@ -18,6 +20,8 @@ def controller_asian_option(user, request):
     optimal_strike = None
     optimal_lower_bound = None
     lower_bound_strike = None
+
+    sim_id = None
 
     plot_lower_bound = None
 
@@ -56,12 +60,14 @@ def controller_asian_option(user, request):
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_asian_option.count() > 0:
                 instance = user.compute_asian_option.order_by(desc('id')).first()
                 form = populate_form_from_instance(instance)
 
+                sim_id = instance.id
                 lam = np.array(json.loads(instance.lam))
                 lower_bound = np.array(json.loads(instance.lower_bound))
                 optimal_strike = instance.optimal_strike
@@ -79,7 +85,7 @@ def controller_asian_option(user, request):
 
     return {'form': form, 'user': user, 'optimal_strike': optimal_strike, 'optimal_lower_bound': optimal_lower_bound,
             'lower_bound_strike': lower_bound_strike, 'lam': lam, 'lower_bound': lower_bound,
-            'plot_lower_bound': plot_lower_bound}
+            'plot_lower_bound': plot_lower_bound, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -135,3 +141,26 @@ def delete_asian_option_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_asian_option'))
+
+
+def controller_asian_option_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_asian_option.filter_by(id=id).first()
+
+        lam_values = np.array(json.loads(instance.lam))
+        lower_bound_values = np.array(json.loads(instance.lower_bound))
+
+        fieldnames = ['Lam Asset', 'Lower Bound']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2 in zip(lam_values, lower_bound_values):
+            writer.writerow({'Lam Asset': value_1, 'Lower Bound': value_2})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=asian.csv"})
+
+    else:
+        return redirect(url_for('asian_option'))

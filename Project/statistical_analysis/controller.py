@@ -1,9 +1,11 @@
+import csv
+import io
 import json
 import os
 
 import numpy as np
 import pandas as pd
-from flask import url_for, redirect
+from flask import url_for, redirect, Response
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
 
@@ -32,6 +34,9 @@ def controller_statistical_analysis(user, request):
     n_observation = None
     log_returns = None
     dates = None
+    prices = None
+
+    sim_id = None
 
     plot_qq = None
     plot_histogram = None
@@ -59,7 +64,7 @@ def controller_statistical_analysis(user, request):
                                                           form.end_year.data)
 
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers, \
-            n_observation, log_returns = compute_table(file_data)
+            n_observation, log_returns, prices = compute_table(file_data)
 
             plot_histogram = create_histogram_distribution_plot(log_returns)
 
@@ -90,10 +95,12 @@ def controller_statistical_analysis(user, request):
             object.log_returns = json.dumps(log_returns.tolist())
             dates = list(map(str, dates))
             object.dates = json.dumps(dates)
+            object.prices = json.dumps(prices.tolist())
 
             object.user = user
             db.session.add(object)
             db.session.commit()
+            sim_id = object.id
     else:
         if user.is_authenticated and user.compute_statistical_analysis.count() > 0:
             # user authenticated, store the data
@@ -101,6 +108,7 @@ def controller_statistical_analysis(user, request):
                 desc('id')).first()  # decreasing order db, take the last data saved
             form = populate_form_from_instance(instance)
 
+            sim_id = instance.id
             mean = json.loads(instance.mean)
             volatility = json.loads(instance.volatility)
             variance = json.loads(instance.variance)
@@ -135,7 +143,7 @@ def controller_statistical_analysis(user, request):
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
             'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
             'n_observation': n_observation, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
-            'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation}
+            'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -208,6 +216,28 @@ def delete_statistical_analysis_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_statistical_analysis'))
+
+
+def controller_statistical_analysis_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_statistical_analysis.filter_by(id=id).first()
+
+        prices_values = np.array(json.loads(instance.prices))
+        tickers = json.loads(instance.tickers)
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(tickers)
+        for value in prices_values:
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=statistical_data.csv"})
+
+    else:
+        return redirect(url_for('statistical_analysis'))
 
 # def controller_plot_statistical_analysis(user, id, ticker):
 #     data = []
