@@ -71,7 +71,7 @@ class ComputeForm(wtf.Form):
                                               ('1', 'Discount Factor Term Structure')], default='0')
     least_fmin = wtf.RadioField(label='Optimization Method:',
                                 choices=[('0', ' Levenberg-Marquardt '),
-                                         ('1', 'Downill Simplex Algorithm')], default='0')
+                                         ('1', 'Downhill Simplex Algorithm')], default='0')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')

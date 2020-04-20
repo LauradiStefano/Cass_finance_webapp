@@ -1,8 +1,8 @@
 from string import ascii_uppercase, ascii_lowercase, digits
-from flask_wtf import RecaptchaField
 
 import wtforms as wtf
 import wtforms.fields.html5 as html5
+from flask_wtf import RecaptchaField
 from wtforms import validators
 
 import db_models
@@ -54,8 +54,8 @@ def check_password(form, field):
 class RegistrationForm(wtf.Form):
     title = wtf.SelectField('Title', choices=[('0', 'Mr'), ('1', 'Mrs'), ('3', 'Ms')], default='0')
 
-    first_name = wtf.StringField(
-        label='First Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
+    first_name = wtf.StringField(label='First Name',
+                                 validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     second_name = wtf.StringField(
         label='Second Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     organization = wtf.StringField(
