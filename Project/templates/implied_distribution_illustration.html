@@ -255,6 +255,12 @@
     </div>
 
     <div class="row d-flex justify-content-center">
+        {%if sim_id != None %}
+        <div>
+            <a href="/download_shimko_theoretical_data/{{sim_id}}" class="download_data ">
+                Click here to download the implicit values</a>
+        </div>
+        {% endif %}
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">

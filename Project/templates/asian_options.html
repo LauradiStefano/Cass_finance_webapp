@@ -727,7 +727,12 @@
 
     {% if plot_lower_bound != None %}
     <div class="row d-flex justify-content-center">
-         <div class="download_data"> Click here to download the implicit data</div>
+         {%if sim_id != None %}
+            <div>
+            <a href="/download_asian_data/{{sim_id}}" class="download_data">
+                Click here to download the implicit data</a>
+        </div>
+        {% endif %}
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -954,30 +959,6 @@
                                 expUpper.show();
                                 expLower.show();
                             }
-                        });
-
-
-                        var download_data = $('.download_data');
-
-                        var lambda = {{lam}};
-                        var lower_bound = {{lower_bound}};
-
-                        download_data.on('click', function (){
-
-                        var csv = 'Lambda, Lower Bound\n';
-
-                        var i;
-                        for (i=0; i< lower_bound.length; i++) {
-                            row = lambda[i] + ',' + lower_bound[i] + '\n';
-                            csv += row;
-                        }
-
-                        var hiddenElement = document.createElement('a');
-                        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-                        hiddenElement.target = '_blank';
-                        hiddenElement.download = 'asian_option_data.csv';
-                        hiddenElement.click();
-
                         });
                     });
 

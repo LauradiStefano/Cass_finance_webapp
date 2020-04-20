@@ -179,6 +179,12 @@
 
     {% if tickers != None %}
     <div class="row p-3 d-flex justify-content-center">
+        {%if sim_id != None %}
+            <div>
+                <a href="/download_statistical_data/{{sim_id}}" class="download_data">
+                    Click here to download the prices</a>
+            </div>
+        {% endif %}
 
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
@@ -273,7 +279,7 @@
             </fieldset>
         </div>
     </div>
-     {% endif %}
+    {% endif %}
 </div>
 {% include 'footer.html' %}
 
@@ -369,6 +375,7 @@
             }
         });
     });
+
 
 
 

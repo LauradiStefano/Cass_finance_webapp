@@ -80,6 +80,13 @@
     {% if plot_efficient_frontier != None %}
     <div class="row p-3 d-flex justify-content-center">
 
+        {%if sim_id != None %}
+        <div>
+            <a href="/download_portfolio_data/{{sim_id}}" class="download_data">
+                Click here to download the distribution</a>
+        </div>
+        {% endif %}
+
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -121,6 +128,7 @@
             help_dataset.hide();
         });
     });
+
 
 
 

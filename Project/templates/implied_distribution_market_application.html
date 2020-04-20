@@ -6,7 +6,7 @@
             <h1 class="title text-center text-light">Implied Distribution - Market Application</h1>
             <h2 class="lead text-center text-light animated fadeInDown subtitle_shimko">This tool calculates the
                 risk neutral density implied in market option prices to determine the probability that future prices
-                will lie in a given range <b>based on market prices</b> </h2>
+                will lie in a given range <b>based on market prices</b></h2>
         </div>
     </div>
 </div>
@@ -15,8 +15,8 @@
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="" enctype="multipart/form-data">
             <div class="example_file">
-                <a  href="/static/download_example/implied_distribution_market_application_dataset.xlsx">
-                Excel Template File: Implied Distribution Market Application.xlsx</a>
+                <a href="/static/download_example/implied_distribution_market_application_dataset.xlsx">
+                    Excel Template File: Implied Distribution Market Application.xlsx</a>
             </div>
             <div class="row">
                 <div class="col-md col-12">
@@ -243,6 +243,12 @@
     </div>
 
     <div class="row d-flex justify-content-center">
+        {%if sim_id != None %}
+        <div>
+            <a href="/download_shimko_market_data/{{sim_id}}" class="download_data">
+                Click here to download the implicit values</a>
+        </div>
+        {% endif %}
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -402,6 +408,9 @@
             help_dataset.hide();
         });
     });
+
+
+
 
 </script>
 </body>

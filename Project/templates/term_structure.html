@@ -386,7 +386,7 @@
                                     |
                                     <a class="term_link"
                                        href=https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html>fmin
-                                        </a> (downill simplex algorithm)
+                                        </a> (downhill simplex algorithm)
                                         </span>
                                 </div>
                                 {% if form.least_fmin.errors %}
@@ -415,10 +415,20 @@
     </div>
     {% endif %}
 
-     {% if plot_discount_factor_term_structure != None %}
+    {% if plot_discount_factor_term_structure != None %}
     <div class="row p-3 d-flex justify-content-center">
-
-        <div class="download_data"> Click here to download the fitted term structures</div>
+        {%if sim_id != None %}
+        <div class="row">
+            <div class="col-6">
+                <a href="/download_term_data/{{sim_id}}" class="download_data">
+                    Click here to download the fitted term structures</a>
+            </div>
+            <div class="col-6">
+                <a href="/download_term_daily_data/{{sim_id}}" class="download_data">
+                    Click here to download the daily term structures</a>
+            </div>
+        </div>
+        {% endif %}
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -563,36 +573,9 @@
         });
 
         update();
-
-        var download_data = $('.download_data');
-
-        var market_spot_rate = {{market_spot_rate}};
-        var model_spot_rate = {{model_spot_rate}};
-
-        var market_discount_factor = {{market_discount_factor}};
-        var model_discount_factor = {{model_discount_factor}};
-
-        var spot_rate_model_error = {{spot_rate_model_error}};
-        var discount_factor_model_error = {{discount_factor_model_error}};
-
-        download_data.on('click', function (){
-
-        var csv = 'Market SR, Model SR, Market DF, Model DF, Error SP, Error DF\n';
-
-        var i;
-        for (i=0; i< market_spot_rate.length; i++) {
-            row = market_spot_rate[i] + ',' + model_spot_rate[i] + ',' + market_discount_factor[i] + ',' + model_discount_factor[i] + ',' + spot_rate_model_error[i] + ',' + discount_factor_model_error[i] + '\n';
-            csv += row;
-        }
-
-        var hiddenElement = document.createElement('a');
-        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
-        hiddenElement.target = '_blank';
-        hiddenElement.download = 'term_structure_data.csv';
-        hiddenElement.click();
-
-        });
     });
+
+
 
 
 
