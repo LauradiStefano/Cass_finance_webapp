@@ -94,10 +94,9 @@ def compute_table(data):
             p_value.append(x[1])
 
     else:
-        jb_statistic = None #'The JB statistics is not reliable if the sample size is smaller than 2000'
+        jb_statistic = None  # 'The JB statistics is not reliable if the sample size is smaller than 2000'
 
-        p_value = None #'The JB statistics is not reliable if the sample size is smaller than XXXX'
-
+        p_value = None  # 'The JB statistics is not reliable if the sample size is smaller than XXXX'
 
     n_observations = []
 
@@ -114,7 +113,7 @@ def compute_table(data):
     max_return = maxr
 
     return mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_statistic, p_value, tickers, \
-           n_observations, log_returns
+           n_observations, log_returns, prices
 
 
 def create_histogram_distribution_plot(log_returns):
@@ -137,8 +136,7 @@ def create_histogram_distribution_plot(log_returns):
         norm_pdf=norm_pdf))
 
     hover_histogram = HoverTool(attachment="above", names=['histogram'],
-                                tooltips=[("Edges", "@edges"),
-                                          ("Hist", "@hist")])
+                                tooltips=[("Hist", "@hist")])
 
     hover_theoretical = HoverTool(attachment="below", names=['th distribution'],
                                   tooltips=[("Log Returns", "@log_returns"),

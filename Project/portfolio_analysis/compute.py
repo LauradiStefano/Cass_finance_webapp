@@ -31,8 +31,8 @@ def upload_input(filename=None):
 
     log_returns = []
     for i in range(0, len(prices) - 1):
-        #log_return = np.log(prices[i + 1] / prices[i])
-        log_return =(prices[i + 1] - prices[i])/prices[i]
+        # log_return = np.log(prices[i + 1] / prices[i])
+        log_return = (prices[i + 1] - prices[i]) / prices[i]
         log_returns.append(log_return)
 
     return_vec = np.vstack(log_returns)
@@ -60,7 +60,7 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
 
     con1 = ({'type': 'eq', 'fun': sumweigth})
     con = ([con1])
-    res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol':1e-12, 'disp': True}, constraints=con,
+    res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True}, constraints=con,
                    bounds=bnds)
     mintarget = expret(res.x, MeanV, 0)
     maxtarget = np.max(MeanV)
@@ -77,7 +77,7 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
         con2 = ({'type': 'eq', 'fun': expret, 'args': (MeanV, extarget,)})
         con = ([con1, con2])
         x0 = res.x
-        res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol':1e-12, 'disp': True},
+        res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True},
                        constraints=con, bounds=bnds)
         feff = np.c_[feff, [[res.fun], [extarget]]]
         feffweights = np.r_[feffweights, res.x]
@@ -125,11 +125,11 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
     hover_data_ticker = HoverTool(attachment="below", names=['data ticker'],
                                   tooltips=[("Ticker Std", "@ticker_standard_deviations"),
                                             ("Ticker Mean", "@ticker_means")])
-    means_array_min =min(means)
-    means_float_min=means_array_min[0]
+    means_array_min = min(means)
+    means_float_min = means_array_min[0]
 
-    means_array_max =max(means)
-    means_float_max=means_array_max[0]
+    means_array_max = max(means)
+    means_float_max = means_array_max[0]
 
     std_array_min = min(standard_deviations)
     std_float_min = std_array_min[0]
@@ -137,15 +137,13 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
     std_array_max = min(standard_deviations)
     std_float_max = std_array_max[0]
 
-    
-    
     y_range = [min(min(ticker_means), means_float_min, min(ef_means)) * 1.05,
                max(max(ticker_means), means_float_max, max(ef_means)) * 1.05]
     x_range = [min(min(ticker_standard_deviations), min(ef_standard_deviations), std_float_min) * 0.95,
                max(max(ticker_standard_deviations), max(ef_standard_deviations), std_float_max) * 1.05]
     print(min(ticker_standard_deviations))
     print(min(ef_standard_deviations))
-    print( min(standard_deviations))
+    print(min(standard_deviations))
     fig = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
