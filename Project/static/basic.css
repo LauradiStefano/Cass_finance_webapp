@@ -7,8 +7,10 @@ html{
 
 body{
     background: #1E1E1E;
-    height: 100%;
+    min-height: 100%;
     margin: 0;
+    padding: 0;
+    padding-bottom: 180px;
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: 'Helvetica', sans-serif;
@@ -501,6 +503,7 @@ img { /*icon_help*/
 .download_data {
     color: #C0C0C0;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 div.download_data:hover, div.download_data:active {
@@ -540,13 +543,17 @@ div.download_data:hover, div.download_data:active {
     text-align: center;
 }
 
-.footer {
+.footer_nav {
     padding: 0.5em;
     margin-bottom: 0;
 }
 
 footer {
     background: #404040;
+    position: absolute !important;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 .footer_hr{
