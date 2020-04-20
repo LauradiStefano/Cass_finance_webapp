@@ -20,6 +20,10 @@ from heston_method.getbs import find_vol
 # Pdf Heston Model
 def heston_pdf_and_volatility(spot_price, strike_min, strike_max, time, v0, chi, lam, rho, v_hat, mu, risk_free,
                               dividend_yield, call_put):
+
+
+    risk_free = risk_free/100
+    dividend_yield = dividend_yield/100
     heston_pdf = get_pdf_cos(time, v0, chi, lam, rho, v_hat, mu)
     nk = 1
     a, b = compute_heston_bounds(mu, time, v0, chi, lam, rho, v_hat)
