@@ -18,14 +18,14 @@ def theta_vg_check(form, field):
 
 def kappa_nig_check(form, field):
     kappa_nig = field.data
-    if kappa_nig <= 0 or kappa_nig >= 3:
-        raise validators.ValidationError('The value must be between 0 and 3')
+    if kappa_nig <= 0 or kappa_nig >= 6:
+        raise validators.ValidationError('The value must be between 0 and 6')
 
 
 def y_cgmy_check(form, field):
     y_cgmy = field.data
-    if y_cgmy <= 2:
-        raise validators.ValidationError('The value must be greater than 2')
+    if y_cgmy >= 2:
+        raise validators.ValidationError('The value must be smaller than 2')
 
 
 class ComputeForm(wtf.Form):
@@ -48,11 +48,11 @@ class ComputeForm(wtf.Form):
                               validators=[wtf.validators.InputRequired(), theta_vg_check])
 
     # NIG distribution
-    sigma_nig = wtf.FloatField(label='$$ \sigma $$', default=0.1622,
+    sigma_nig = wtf.FloatField(label='$$ \sigma $$', default=0.16,
                                validators=[wtf.validators.InputRequired(), greater_than_zero])
     kappa_nig = wtf.FloatField(label='$$ \kappa $$', default=0.2,
                                validators=[wtf.validators.InputRequired(), kappa_nig_check])
-    theta_nig = wtf.FloatField(label=r'$$ \theta $$', default=-0.12882,
+    theta_nig = wtf.FloatField(label=r'$$ \theta $$', default=-0.12,
                                validators=[wtf.validators.InputRequired(),
                                            validators.NumberRange(min=-1, max=1,
                                                                   message='The value must be between -1 and 1')])
@@ -64,7 +64,7 @@ class ComputeForm(wtf.Form):
                        validators=[wtf.validators.InputRequired(), greater_than_zero])
     m = wtf.FloatField(label='$$ M $$', default=5,
                        validators=[wtf.validators.InputRequired(), greater_than_zero])
-    y = wtf.FloatField(label='$$ Y $$', default=3,
+    y = wtf.FloatField(label='$$ Y $$', default=0.5,
                        validators=[wtf.validators.InputRequired(), y_cgmy_check])
 
     # Contract parameters
@@ -78,7 +78,7 @@ class ComputeForm(wtf.Form):
                                validators=[wtf.validators.InputRequired()])
     dividend_yield = wtf.FloatField(label='Dividend Yield \((\%) \)', default=0,
                                     validators=[wtf.validators.InputRequired()])
-    time = wtf.FloatField(label='Time to Maturity (Years)', default=0.2,
+    time = wtf.FloatField(label='Time to Maturity (Years)', default=0.5,
                           validators=[wtf.validators.InputRequired(), greater_than_zero])
     call_put = wtf.RadioField('Option Type', choices=[('1', 'Call'), ('0', 'Put')], default='1')
 
