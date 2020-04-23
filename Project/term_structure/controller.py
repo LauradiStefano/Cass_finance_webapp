@@ -161,8 +161,10 @@ def controller_term_structure(user, request):
     daily_discount_factor = [round(x, 6) for x in daily_discount_factor] if daily_discount_factor is not None else None
     daily_model_spot_rate = [round(x, 6) for x in daily_model_spot_rate] if daily_model_spot_rate is not None else None
 
-    rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
-    rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
+    rmse_discount_factor = rmse_discount_factor
+    rmse_spot_rate = rmse_spot_rate
+    #rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
+    #rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
 
     return {'form': form, 'user': user, 'parameters': parameters, 'time': time, 'name_param': name_param,
             'market_discount_factor': market_discount_factor, 'model_discount_factor': model_discount_factor,
