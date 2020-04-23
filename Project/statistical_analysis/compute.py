@@ -144,7 +144,7 @@ def create_histogram_distribution_plot(log_returns):
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_histogram, hover_theoretical],
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Series of Data',
-                    y_axis_label='Model Error Discount Factor')
+                    y_axis_label='Probability Distribution')
 
     fig.quad(top='hist', bottom=m, left='edges_left', right='edges_right', source=data_1,
              color="#0095B6", line_color="#ffffff", alpha=1, name='histogram')
