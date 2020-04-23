@@ -518,7 +518,7 @@ def controller_shimko_market_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=test.csv"})
+                        headers={"Content-disposition": "attachment; filename=shimko_market_data.csv"})
 
     else:
         return redirect(url_for('shimko_market'))

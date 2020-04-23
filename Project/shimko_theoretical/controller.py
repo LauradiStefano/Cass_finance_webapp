@@ -448,7 +448,7 @@ def controller_shimko_theoretical_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=shimko_theoretical.csv"})
+                        headers={"Content-disposition": "attachment; filename=shimko_theoretical_data.csv"})
 
     else:
         return redirect(url_for('shimko_theoretical'))

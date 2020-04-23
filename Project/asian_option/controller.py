@@ -160,7 +160,7 @@ def controller_asian_option_data(user, id):
             writer.writerow({'Lam Asset': value_1, 'Lower Bound': value_2})
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=asian.csv"})
+                        headers={"Content-disposition": "attachment; filename=asian_data.csv"})
 
     else:
         return redirect(url_for('asian_option'))

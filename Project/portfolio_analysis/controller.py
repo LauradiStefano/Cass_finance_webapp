@@ -163,7 +163,7 @@ def controller_portfolio_analysis_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=test_data.csv"})
+                        headers={"Content-disposition": "attachment; filename=portfolio_data.csv"})
 
     else:
         return redirect(url_for('portfolio_analysis'))
