@@ -16,7 +16,7 @@ class ComputeForm(wtf.Form):
 
     strike_atm = wtf.FloatField(label='At-The-Money', default=390,
                                 validators=[wtf.validators.InputRequired(), greater_than_zero])
-    strike_max = wtf.FloatField(label='Maximum', default=425,
+    strike_max = wtf.FloatField(label='Maximum', default=465,
                                 validators=[wtf.validators.InputRequired(), greater_than_zero])
 
     volatility_min = wtf.FloatField(label='Minimum', default=11.3,
