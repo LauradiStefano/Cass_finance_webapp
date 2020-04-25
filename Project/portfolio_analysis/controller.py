@@ -51,22 +51,22 @@ def controller_portfolio_analysis(user, request):
                                                efficient_std)
             plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            object.returns = json.dumps(returns.tolist())
-            object.standard_deviations = json.dumps(standard_deviations.tolist())
-            object.means = json.dumps(means.tolist())
-            object.efficient_means = json.dumps(efficient_means.tolist())
-            object.efficient_std = json.dumps(efficient_std.tolist())
-            object.efficient_weights = json.dumps(efficient_weights.tolist())
-            object.tickers = json.dumps(tickers)
+                object.returns = json.dumps(returns.tolist())
+                object.standard_deviations = json.dumps(standard_deviations.tolist())
+                object.means = json.dumps(means.tolist())
+                object.efficient_means = json.dumps(efficient_means.tolist())
+                object.efficient_std = json.dumps(efficient_std.tolist())
+                object.efficient_weights = json.dumps(efficient_weights.tolist())
+                object.tickers = json.dumps(tickers)
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
-            sim_id = object.id
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+                sim_id = object.id
 
     else:
         if user.is_authenticated:  # user authenticated, store the data

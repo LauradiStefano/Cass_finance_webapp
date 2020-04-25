@@ -114,60 +114,60 @@ def controller_shimko_theoretical(user, request):
 
                 plot_return_cdf = create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            # json.dumps return a array string
-            # json.loads convert from string to array
+                # json.dumps return a array string
+                # json.loads convert from string to array
 
-            object.a0 = a0
-            object.a1 = a1
-            object.a2 = a2
-            object.strike = json.dumps(strike.tolist())
-            object.implied_volatility = json.dumps(implied_volatility)
-            object.strike_min = form.strike_min.data
-            object.strike_atm = form.strike_atm.data
-            object.strike_max = form.strike_max.data
-            object.volatility = json.dumps(volatility)
-            object.pdf_returns = json.dumps(pdf_returns)
-            object.area_prices = area_prices
-            object.expected_price = expected_price
-            object.sigma2_price = sigma2_price
-            object.skewness_prices = skewness_prices
-            object.kurtosis_prices = kurtosis_prices
-            object.skewness_prices_log_n = skewness_prices_log_n
-            object.kurtosis_prices_log_n = kurtosis_prices_log_n
-            object.area_returns = area_returns
-            object.m1_returns = m1_returns
-            object.m2_returns = m2_returns
-            object.skewness_log_returns = skewness_log_returns
-            object.kurtosis_log_returns = kurtosis_log_returns
-            object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
-            object.price = form.price.data
-            object.ret_t = json.dumps(ret_t.tolist())
-            object.skewness_normal = skewness_normal
-            object.kurtosis_normal = kurtosis_normal
-            object.statistic_prices = statistic_prices
-            object.statistic_returns = statistic_returns
-            object.pvalue_prices = pvalue_prices
-            object.pvalue_returns = pvalue_returns
+                object.a0 = a0
+                object.a1 = a1
+                object.a2 = a2
+                object.strike = json.dumps(strike.tolist())
+                object.implied_volatility = json.dumps(implied_volatility)
+                object.strike_min = form.strike_min.data
+                object.strike_atm = form.strike_atm.data
+                object.strike_max = form.strike_max.data
+                object.volatility = json.dumps(volatility)
+                object.pdf_returns = json.dumps(pdf_returns)
+                object.area_prices = area_prices
+                object.expected_price = expected_price
+                object.sigma2_price = sigma2_price
+                object.skewness_prices = skewness_prices
+                object.kurtosis_prices = kurtosis_prices
+                object.skewness_prices_log_n = skewness_prices_log_n
+                object.kurtosis_prices_log_n = kurtosis_prices_log_n
+                object.area_returns = area_returns
+                object.m1_returns = m1_returns
+                object.m2_returns = m2_returns
+                object.skewness_log_returns = skewness_log_returns
+                object.kurtosis_log_returns = kurtosis_log_returns
+                object.pdf_bench_norm_returns = json.dumps(pdf_bench_norm_returns)
+                object.price = form.price.data
+                object.ret_t = json.dumps(ret_t.tolist())
+                object.skewness_normal = skewness_normal
+                object.kurtosis_normal = kurtosis_normal
+                object.statistic_prices = statistic_prices
+                object.statistic_returns = statistic_returns
+                object.pvalue_prices = pvalue_prices
+                object.pvalue_returns = pvalue_returns
 
-            if st is not None:
-                object.st = json.dumps(st.tolist())
-                object.pdf = json.dumps(pdf)
-                object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
-                object.cdf_prices = json.dumps(cdf_prices)
-                object.cdf_returns = json.dumps(cdf_returns)
-                object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
-                object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
+                if st is not None:
+                    object.st = json.dumps(st.tolist())
+                    object.pdf = json.dumps(pdf)
+                    object.pdf_bench_log_prices = json.dumps(pdf_bench_log_prices)
+                    object.cdf_prices = json.dumps(cdf_prices)
+                    object.cdf_returns = json.dumps(cdf_returns)
+                    object.cdf_bench_log_prices = json.dumps(cdf_bench_log_prices)
+                    object.cdf_bench_norm_returns = json.dumps(cdf_bench_norm_returns)
 
-            object.plot_choice = json.dumps(form.plot_choice.data)
+                object.plot_choice = json.dumps(form.plot_choice.data)
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
-            sim_id = object.id
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+                sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_shimko_theoretical.count() > 0:

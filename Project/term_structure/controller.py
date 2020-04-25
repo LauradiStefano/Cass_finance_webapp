@@ -86,31 +86,31 @@ def controller_term_structure(user, request):
                 plot_error_discount_factor = create_plot_error_discount_factor(discount_factor_model_error, time)
                 plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
-            if user.is_authenticated:  # store data in db
-                object = compute()
-                form.populate_obj(object)
+                if user.is_authenticated:  # store data in db
+                    object = compute()
+                    form.populate_obj(object)
 
-                object.parameters = json.dumps(parameters.tolist())
-                object.time = json.dumps(time)
-                object.market_discount_factor = json.dumps(market_discount_factor)
-                object.model_discount_factor = json.dumps(model_discount_factor.tolist())
-                object.market_spot_rate = json.dumps(market_spot_rate.tolist())
-                object.model_spot_rate = json.dumps(model_spot_rate.tolist())
-                object.discount_factor_model_error = json.dumps(discount_factor_model_error.tolist())
-                object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
-                object.number_of_time = json.dumps(number_of_time)
-                object.name_param = json.dumps(name_param)
-                object.rmse_discount_factor = rmse_discount_factor
-                object.rmse_spot_rate = rmse_spot_rate
-                object.daily_discount_factor = json.dumps(daily_discount_factor.tolist())
-                object.annual_basis_date = json.dumps(annual_basis_date)
-                object.daily_model_spot_rate = json.dumps(daily_model_spot_rate.tolist())
-                object.dates = json.dumps(dates)
+                    object.parameters = json.dumps(parameters.tolist())
+                    object.time = json.dumps(time)
+                    object.market_discount_factor = json.dumps(market_discount_factor)
+                    object.model_discount_factor = json.dumps(model_discount_factor.tolist())
+                    object.market_spot_rate = json.dumps(market_spot_rate.tolist())
+                    object.model_spot_rate = json.dumps(model_spot_rate.tolist())
+                    object.discount_factor_model_error = json.dumps(discount_factor_model_error.tolist())
+                    object.spot_rate_model_error = json.dumps(spot_rate_model_error.tolist())
+                    object.number_of_time = json.dumps(number_of_time)
+                    object.name_param = json.dumps(name_param)
+                    object.rmse_discount_factor = rmse_discount_factor
+                    object.rmse_spot_rate = rmse_spot_rate
+                    object.daily_discount_factor = json.dumps(daily_discount_factor.tolist())
+                    object.annual_basis_date = json.dumps(annual_basis_date)
+                    object.daily_model_spot_rate = json.dumps(daily_model_spot_rate.tolist())
+                    object.dates = json.dumps(dates)
 
-                object.user = user
-                db.session.add(object)
-                db.session.commit()
-                sim_id = object.id
+                    object.user = user
+                    db.session.add(object)
+                    db.session.commit()
+                    sim_id = object.id
         else:
             compute_not_allowed = True
 

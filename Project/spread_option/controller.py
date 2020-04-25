@@ -17,15 +17,15 @@ def controller_spread_option(user, request):
                                                       form.dividend_yield_2.data, form.strike.data, form.dump.data,
                                                       form.volatility_1.data, form.volatility_2.data, form.rho.data)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            object.spread_option_price = spread_option_price
+                object.spread_option_price = spread_option_price
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
 
     else:
         if user.is_authenticated:  # user authenticated, store the data

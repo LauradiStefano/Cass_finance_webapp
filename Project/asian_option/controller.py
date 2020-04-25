@@ -44,23 +44,23 @@ def controller_asian_option(user, request):
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            # json.dumps return a array string
-            # json.loads convert from string to array
+                # json.dumps return a array string
+                # json.loads convert from string to array
 
-            object.lam = json.dumps(lam.tolist())
-            object.lower_bound = json.dumps(lower_bound.tolist())
-            object.optimal_strike = optimal_strike
-            object.optimal_lower_bound = optimal_lower_bound
-            object.lower_bound_strike = lower_bound_strike
+                object.lam = json.dumps(lam.tolist())
+                object.lower_bound = json.dumps(lower_bound.tolist())
+                object.optimal_strike = optimal_strike
+                object.optimal_lower_bound = optimal_lower_bound
+                object.lower_bound_strike = lower_bound_strike
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
-            sim_id = object.id
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+                sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_asian_option.count() > 0:

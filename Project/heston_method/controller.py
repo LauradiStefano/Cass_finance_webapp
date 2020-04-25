@@ -49,30 +49,30 @@ def controller_heston_method(user, request):
 
             plot_implied_volatility = create_implied_volatility_plot(strike, implied_volatility, form.price.data)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            # json.dumps return a array string
-            # json.loads convert from string to array
+                # json.dumps return a array string
+                # json.loads convert from string to array
 
-            object.heston_pdf = json.dumps(heston_pdf)
-            object.returns = json.dumps(returns.tolist())
-            object.price = form.price.data
-            object.strike = json.dumps(strike.tolist())
-            object.implied_volatility = json.dumps(implied_volatility)
-            object.option_prices = json.dumps(option_prices)
-            object.number_of_strike = json.dumps(number_of_strike)
-            object.norm_pdf = json.dumps(norm_pdf.tolist())
-            object.mean = mean
-            object.variance = variance
-            object.skewness = skewness
-            object.kurtosis = kurtosis
+                object.heston_pdf = json.dumps(heston_pdf)
+                object.returns = json.dumps(returns.tolist())
+                object.price = form.price.data
+                object.strike = json.dumps(strike.tolist())
+                object.implied_volatility = json.dumps(implied_volatility)
+                object.option_prices = json.dumps(option_prices)
+                object.number_of_strike = json.dumps(number_of_strike)
+                object.norm_pdf = json.dumps(norm_pdf.tolist())
+                object.mean = mean
+                object.variance = variance
+                object.skewness = skewness
+                object.kurtosis = kurtosis
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
-            sim_id = object.id
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+                sim_id = object.id
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_heston_method.count() > 0:

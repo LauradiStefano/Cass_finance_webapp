@@ -68,31 +68,31 @@ def controller_statistical_analysis(user, request):
 
             number_of_tickers = len(tickers)
 
-        if user.is_authenticated:  # store data in db
-            object = compute()
-            form.populate_obj(object)
+            if user.is_authenticated:  # store data in db
+                object = compute()
+                form.populate_obj(object)
 
-            object.mean = json.dumps(mean)
-            object.volatility = json.dumps(volatility)
-            object.variance = json.dumps(variance)
-            object.skewness = json.dumps(skewness)
-            object.kurtosis = json.dumps(kurtosis)
-            object.min_return = json.dumps(min_return)
-            object.max_return = json.dumps(max_return)
-            object.jb_test = json.dumps(jb_test)
-            object.pvalue = json.dumps(pvalue)
-            object.tickers = json.dumps(tickers)
-            object.number_of_tickers = number_of_tickers
-            object.n_observation = json.dumps(n_observation)
-            object.log_returns = json.dumps(log_returns.tolist())
-            dates = list(map(str, dates))
-            object.dates = json.dumps(dates)
-            object.prices = json.dumps(prices.tolist())
+                object.mean = json.dumps(mean)
+                object.volatility = json.dumps(volatility)
+                object.variance = json.dumps(variance)
+                object.skewness = json.dumps(skewness)
+                object.kurtosis = json.dumps(kurtosis)
+                object.min_return = json.dumps(min_return)
+                object.max_return = json.dumps(max_return)
+                object.jb_test = json.dumps(jb_test)
+                object.pvalue = json.dumps(pvalue)
+                object.tickers = json.dumps(tickers)
+                object.number_of_tickers = number_of_tickers
+                object.n_observation = json.dumps(n_observation)
+                object.log_returns = json.dumps(log_returns.tolist())
+                dates = list(map(str, dates))
+                object.dates = json.dumps(dates)
+                object.prices = json.dumps(prices.tolist())
 
-            object.user = user
-            db.session.add(object)
-            db.session.commit()
-            sim_id = object.id
+                object.user = user
+                db.session.add(object)
+                db.session.commit()
+                sim_id = object.id
     else:
         if user.is_authenticated and user.compute_statistical_analysis.count() > 0:
             # user authenticated, store the data
