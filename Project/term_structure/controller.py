@@ -101,6 +101,7 @@ def controller_term_structure(user, request):
                 object.number_of_time = json.dumps(number_of_time)
                 object.name_param = json.dumps(name_param)
                 object.rmse_discount_factor = rmse_discount_factor
+                object.rmse_spot_rate = rmse_spot_rate
                 object.daily_discount_factor = json.dumps(daily_discount_factor.tolist())
                 object.annual_basis_date = json.dumps(annual_basis_date)
                 object.daily_model_spot_rate = json.dumps(daily_model_spot_rate.tolist())
@@ -161,11 +162,6 @@ def controller_term_structure(user, request):
     daily_discount_factor = [round(x, 6) for x in daily_discount_factor] if daily_discount_factor is not None else None
     daily_model_spot_rate = [round(x, 6) for x in daily_model_spot_rate] if daily_model_spot_rate is not None else None
 
-    rmse_discount_factor = rmse_discount_factor
-    rmse_spot_rate = rmse_spot_rate
-    #rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
-    #rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
-
     return {'form': form, 'user': user, 'parameters': parameters, 'time': time, 'name_param': name_param,
             'market_discount_factor': market_discount_factor, 'model_discount_factor': model_discount_factor,
             'market_spot_rate': market_spot_rate, 'model_spot_rate': model_spot_rate, 'number_of_time': number_of_time,
@@ -219,9 +215,7 @@ def controller_old_term_structure(user):
             plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
             parameters = [round(x, 6) for x in parameters] if parameters is not None else None
-            rmse_discount_factor = round(rmse_discount_factor, 4) if rmse_discount_factor is not None else None
-            rmse_spot_rate = round(rmse_spot_rate, 4) if rmse_spot_rate is not None else None
-
+            
             data.append({'form': form, 'id': id, 'parameters': parameters, 'name_param': name_param,
                          'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,
