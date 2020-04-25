@@ -485,7 +485,6 @@ img { /*icon_help*/
     text-align:center;
 }
 
-
 .example_file {
     text-align: right;
     padding: 2px 7px;
@@ -629,4 +628,22 @@ footer {
 
 .old_label {
     font-weight: bold;
+}
+
+.ticker_link {
+    color: #212529 !important;
+}
+
+.ticker_link:hover, .ticker_link:active {
+    color: #1E1E1E !important;
+    text-decoration: None !important;
+}
+
+.icon_external_link{
+    width: 13px;
+    height: 13px;
+    margin-bottom:0.3em;
+}
+.tooltip {
+ font-size: 12px;
 }
