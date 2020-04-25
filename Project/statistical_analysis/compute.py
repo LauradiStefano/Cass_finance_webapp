@@ -117,8 +117,6 @@ def compute_table(data):
 
 
 def create_histogram_distribution_plot(log_returns):
-    log_returns = list(log_returns[:, 0])
-
     hist, edges = np.histogram(log_returns, density=True, bins=100)
     m = np.mean(log_returns)
     sg = np.std(log_returns)
@@ -161,7 +159,6 @@ def create_histogram_distribution_plot(log_returns):
 
 
 def create_qq_plot(log_returns):
-    log_returns = list(log_returns[:, 0])
     (x, empirical_distr), (slope, inter, cor) = scipy.stats.probplot(log_returns, dist="norm")
 
     theoretical_quantiles = x
@@ -207,7 +204,6 @@ def create_qq_plot(log_returns):
 
 def create_plot_log_returns(log_returns, dates):
     del dates[0]
-    log_returns = list(log_returns[:, 0])
 
     data = ColumnDataSource(data=dict(
         dates=dates,
@@ -238,7 +234,7 @@ def create_plot_log_returns(log_returns, dates):
 
 def create_autocorrelation_function_plot(log_returns):
     nlags = 21
-    autorrelation_coefficient = acf(log_returns[:, 0], unbiased=True, nlags=nlags - 1)
+    autorrelation_coefficient = acf(log_returns, unbiased=True, nlags=nlags - 1)
 
     leg = [x for x in range(nlags)]
     z99 = 2.5758293035489004
