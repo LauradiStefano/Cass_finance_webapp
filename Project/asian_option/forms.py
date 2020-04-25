@@ -2,6 +2,7 @@ import math
 
 import wtforms as wtf
 from wtforms import validators
+from common_validators import greater_than_zero
 
 
 def check_vg_distribution(form, field):
@@ -127,15 +128,15 @@ class ComputeForm(wtf.Form):
 
     # Contract Parameters
     price = wtf.FloatField(label='Spot Price', default=100,
-                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
+                           validators=[wtf.validators.InputRequired(), greater_than_zero])
     risk_free = wtf.FloatField(label='Interest Rate \((\%) \)', default=3.67, validators=[wtf.validators.InputRequired()])
 
     time = wtf.FloatField(label='Time to Maturity (Years)', default=1,
-                          validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
+                          validators=[wtf.validators.InputRequired(), greater_than_zero])
     step = wtf.FloatField(label='Number of Monitoring Dates', default=12,
                           validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
     strike = wtf.FloatField(label='Price', default=100,
-                            validators=[wtf.validators.InputRequired(), validators.NumberRange(0, 1E+20)])
+                            validators=[wtf.validators.InputRequired(), greater_than_zero])
 
     button_compute = wtf.SubmitField(label='Compute')
 
