@@ -5,7 +5,7 @@
         <div class="col p-3 m-4">
             <h1 class="title text-center text-light">Statistical Analysis</h1>
             <h2 class="lead text-center text-light animated fadeInDown">
-                Simulation
+                Simulation of {{ticker}}
             </h2>
         </div>
     </div>
@@ -17,12 +17,12 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>plot 1</legend>
+                    <legend>Histogram</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
-
+                    {{plot_histogram[0]|safe}}
+                    {{plot_histogram[1]|safe}}
                 </div>
-
             </fieldset>
         </div>
     </div>
@@ -31,12 +31,12 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>plot 2</legend>
+                    <legend>QQ Plot</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
-
+                    {{plot_qq[0]|safe}}
+                    {{plot_qq[1]|safe}}
                 </div>
-
             </fieldset>
         </div>
     </div>
@@ -45,15 +45,30 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>plot 3</legend>
+                    <legend>Log Returns</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
-
+                    {{plot_log_returns[0]|safe}}
+                    {{plot_log_returns[1]|safe}}
                 </div>
-
             </fieldset>
         </div>
     </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Autocorrelation Function</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_autocorrelation[0]|safe}}
+                    {{plot_autocorrelation[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
 
 </div>
 

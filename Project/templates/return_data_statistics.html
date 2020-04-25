@@ -13,6 +13,8 @@
     <div class="row d-flex justify-content-center">
         <form class="" method="post" action="" enctype="multipart/form-data">
             <div class="example_file">
+                <a href="/static/tutorial_model/return_data_statistics_tutorial.pdf">
+                    Tutorial File: Return Data Statistic.pdf</a><br/>
                 <a href="/static/download_example/return_data_statistics_dataset.xlsx">
                     Excel Template File: Return Data Statistics Dataset.xlsx</a>
             </div>
@@ -180,10 +182,31 @@
     {% if tickers != None %}
     <div class="row p-3 d-flex justify-content-center">
         {%if sim_id != None %}
-            <div>
-                <a href="/download_statistical_data/{{sim_id}}" class="download_data">
+
+        <div class="row">
+            <div class="col-6">
+                <a href="/download_statistical_prices_data/{{sim_id}}" class="download_data">
                     Click here to download the prices</a>
             </div>
+            <div class="col-6">
+                <a href="/download_statistical_returns_data/{{sim_id}}" class="download_data">
+                    Click here to download the log-returns</a>
+            </div>
+        </div>
+
+        {% else %}
+
+        <div class="row">
+            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
+                 title="Log in to download file">
+                Click here to download the prices
+            </div>
+            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
+                 title="Log in to download file">
+                Click here to download the log-returns
+            </div>
+        </div>
+
         {% endif %}
 
         <div class="col-12">
@@ -209,7 +232,22 @@
                     <tbody>
                     {%for i in range(number_of_tickers)%}
                     <tr>
-                        <td><a href="plot_return_data_statistics"> {{tickers[i]}} </a></td>
+                        {% if sim_id != None %}
+                        <td>
+                            <a class="ticker_link" href="plot_return_data_statistics/{{sim_id}}/{{tickers[i]}}">
+                                {{tickers[i]}}
+                                <img class="icon_external_link" src="/static/icon_external_link.png">
+                            </a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <div data-toggle="tooltip" data-placement="top" title="Log in to analyze the ticker">
+                                {{tickers[i]}}
+                                <img class="icon_external_link" src="/static/icon_external_link.png">
+                            </div>
+                        </td>
+
+                        {%endif%}
                         <td>{{n_observation[i]}}</td>
                         <td>{{mean[i]}}</td>
                         <td>{{volatility[i]}}</td>
@@ -227,54 +265,6 @@
                 <hr>
                 <div class="row d-flex justify-content-center">
                     {{form.button_export_table}}
-                </div>
-            </fieldset>
-        </div>
-
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Histogram</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_histogram[0]|safe}}
-                    {{plot_histogram[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>QQ Plot</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_qq[0]|safe}}
-                    {{plot_qq[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Log Returns</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_log_returns[0]|safe}}
-                    {{plot_log_returns[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Autocorrelation Function</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_autocorrelation[0]|safe}}
-                    {{plot_autocorrelation[1]|safe}}
                 </div>
             </fieldset>
         </div>
@@ -319,7 +309,8 @@
         if (field_number == min_fields) {
             $('#button_delete_field').prop('disabled', true);
             $('#button_delete_field').css('opacity', '0.5');
-        } else {
+
+        } else if (field_number == max_fields){
              $('#button_add_field').prop('disabled', true);
              $('#button_add_field').css('opacity', '0.5');
         }
@@ -375,6 +366,33 @@
             }
         });
     });
+
+    $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -66,14 +66,6 @@ def controller_statistical_analysis(user, request):
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers, \
             n_observation, log_returns, prices = compute_table(file_data)
 
-            plot_histogram = create_histogram_distribution_plot(log_returns)
-
-            plot_qq = create_qq_plot(log_returns)
-
-            plot_log_returns = create_plot_log_returns(log_returns, dates)
-
-            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
-
             number_of_tickers = len(tickers)
 
         if user.is_authenticated:  # store data in db
@@ -121,13 +113,6 @@ def controller_statistical_analysis(user, request):
             tickers = json.loads(instance.tickers)
             number_of_tickers = instance.number_of_tickers
             n_observation = json.loads(instance.n_observation)
-            log_returns = np.array(json.loads(instance.log_returns))
-            dates = list(map(pd.Timestamp, json.loads(instance.dates)))
-
-            plot_histogram = create_histogram_distribution_plot(log_returns)
-            plot_qq = create_qq_plot(log_returns)
-            plot_log_returns = create_plot_log_returns(log_returns, dates)
-            plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
 
     mean = [round(x, 6) for x in mean] if mean is not None else None
     volatility = [round(x, 6) for x in volatility] if volatility is not None else None
@@ -142,8 +127,7 @@ def controller_statistical_analysis(user, request):
     return {'form': form, 'user': user, 'min_return': min_return, 'mean': mean, 'volatility': volatility,
             'variance': variance, 'skewness': skewness, 'kurtosis': kurtosis, 'number_of_tickers': number_of_tickers,
             'max_return': max_return, 'jb_test': jb_test, 'pvalue': pvalue, 'tickers': tickers,
-            'n_observation': n_observation, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq,
-            'plot_log_returns': plot_log_returns, 'plot_autocorrelation': plot_autocorrelation, 'sim_id': sim_id}
+            'n_observation': n_observation, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -218,7 +202,7 @@ def delete_statistical_analysis_simulation(user, id):
     return redirect(url_for('old_statistical_analysis'))
 
 
-def controller_statistical_analysis_data(user, id):
+def controller_statistical_analysis_prices_data(user, id):
     id = int(id)
     if user.is_authenticated:
         csvfile = io.StringIO()
@@ -234,26 +218,56 @@ def controller_statistical_analysis_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=statistical_data.csv"})
+                        headers={"Content-disposition": "attachment; filename=statistical_prices_data.csv"})
 
     else:
         return redirect(url_for('statistical_analysis'))
 
-# def controller_plot_statistical_analysis(user, id, ticker):
-#     data = []
-#     plot_histogram = None
-#
-#     if user.is_authenticated():
-#         instances = user.compute_statistical_analysis.order_by(desc('id')).all()
-#         for instance in instances:
-#             # page old.html, store the date and the plot (previous simulation)
-#
-#             id = instance.id
-#             log_returns = json.loads(instance.log_returns)
-#
-#             plot_histogram = create_histogram_distribution_plot(log_returns)
-#
-#             plot_qq = create_qq_plot(log_returns)
-#
-#             data.append({'id': id, 'plot_histogram': plot_histogram, 'plot_qq': plot_qq})
-#     return {'data': data}
+
+def controller_statistical_analysis_returns_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_statistical_analysis.filter_by(id=id).first()
+
+        log_returns_value = np.array(json.loads(instance.log_returns))
+        tickers = json.loads(instance.tickers)
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(tickers)
+        for value in log_returns_value:
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=statistical_returns_data.csv"})
+
+    else:
+        return redirect(url_for('statistical_analysis'))
+
+
+def controller_plot_statistical_analysis(user, id, ticker):
+
+    id = int(id)
+
+    if user.is_authenticated():
+        instance = user.compute_statistical_analysis.filter_by(id=id).first()
+
+        log_returns = np.array(json.loads(instance.log_returns))
+        dates = list(map(pd.Timestamp, json.loads(instance.dates)))
+        tickers = json.loads(instance.tickers)
+
+        if ticker not in tickers:
+            return redirect(url_for('statistical_analysis'))
+
+        ticker_index = tickers.index(ticker)
+        log_returns = list(log_returns[:, ticker_index])
+        plot_histogram = create_histogram_distribution_plot(log_returns)
+        plot_qq = create_qq_plot(log_returns)
+        plot_log_returns = create_plot_log_returns(log_returns, dates)
+        plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
+
+        return {'plot_histogram': plot_histogram, 'plot_qq': plot_qq, 'plot_log_returns': plot_log_returns,
+                'plot_autocorrelation': plot_autocorrelation, 'ticker': ticker}
+    else:
+        return redirect(url_for('statistical_analysis'))

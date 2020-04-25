@@ -22,7 +22,8 @@ from shimko_theoretical.controller import controller_old_shimko_theoretical, con
 from spread_option.controller import controller_spread_option, controller_old_spread_option, \
     delete_spread_option_simulation
 from statistical_analysis.controller import controller_statistical_analysis, controller_old_statistical_analysis, \
-    delete_statistical_analysis_simulation, controller_statistical_analysis_data
+    delete_statistical_analysis_simulation, controller_statistical_analysis_prices_data, \
+    controller_statistical_analysis_returns_data, controller_plot_statistical_analysis
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation, controller_term_structure_data, controller_term_structure_daily_data
 
@@ -94,10 +95,12 @@ def statistical_analysis():
     return render_template("return_data_statistics.html", **template_variables, table_export=True)
 
 
-# @app.route('/plot_return_data_statistics/<id><ticker>', methods=['GET', 'POST'])
-# def plot_statistical_analysis(id, ticker):
-#     template_variables = controller_plot_statistical_analysis(current_user, id, ticker)
-#     return render_template("plot_return_data_statistics.html", **template_variables)
+@app.route('/plot_return_data_statistics/<id>/<ticker>', methods=['GET', 'POST'])
+@login_required
+def plot_statistical_analysis(id, ticker):
+    template_variables = controller_plot_statistical_analysis(current_user, id, ticker)
+    return render_template("plot_return_data_statistics.html", **template_variables,
+                           back_url=url_for('statistical_analysis'), second_page=True)
 
 
 @app.route('/portfolio_construction', methods=['GET', 'POST'])
@@ -147,6 +150,7 @@ def old_asian_option():
 
 
 @app.route('/term_structure/old')
+@login_required
 def old_term_structure():
     template_variables = controller_old_term_structure(current_user)
     return render_template("old_term_structure.html", **template_variables, back_url=url_for('term_structure'),
@@ -154,6 +158,7 @@ def old_term_structure():
 
 
 @app.route('/spread_option/old')
+@login_required
 def old_spread_option():
     template_variables = controller_old_spread_option(current_user)
     return render_template("old_spread_option.html", **template_variables, back_url=url_for('spread_option'),
@@ -161,6 +166,7 @@ def old_spread_option():
 
 
 @app.route('/return_data_statistics/old')
+@login_required
 def old_statistical_analysis():
     template_variables = controller_old_statistical_analysis(current_user)
     return render_template("old_return_data_statistics.html", **template_variables,
@@ -168,6 +174,7 @@ def old_statistical_analysis():
 
 
 @app.route('/portfolio_construction/old')
+@login_required
 def old_portfolio_analysis():
     template_variables = controller_old_portfolio_analysis(current_user)
     return render_template("old_portfolio_construction.html", **template_variables,
@@ -229,6 +236,7 @@ def delete_portfolio_analysis(id):
 
 
 @app.route('/download_shimko_theoretical_data/<id>')
+@login_required
 def download_shimko_theoretical_data(id):
     response = controller_shimko_theoretical_data(current_user, id)
 
@@ -236,6 +244,7 @@ def download_shimko_theoretical_data(id):
 
 
 @app.route('/download_shimko_market_data/<id>')
+@login_required
 def download_shimko_market_data(id):
     response = controller_shimko_market_data(current_user, id)
 
@@ -243,6 +252,7 @@ def download_shimko_market_data(id):
 
 
 @app.route('/download_levy_data/<id>')
+@login_required
 def download_levy_data(id):
     response = controller_levy_process_data(current_user, id)
 
@@ -250,6 +260,7 @@ def download_levy_data(id):
 
 
 @app.route('/download_heston_data/<id>')
+@login_required
 def download_heston_data(id):
     response = controller_heston_method_data(current_user, id)
 
@@ -257,6 +268,7 @@ def download_heston_data(id):
 
 
 @app.route('/download_asian_data/<id>')
+@login_required
 def download_asian_data(id):
     response = controller_asian_option_data(current_user, id)
 
@@ -264,6 +276,7 @@ def download_asian_data(id):
 
 
 @app.route('/download_term_data/<id>')
+@login_required
 def download_term_data(id):
     response = controller_term_structure_data(current_user, id)
 
@@ -271,20 +284,31 @@ def download_term_data(id):
 
 
 @app.route('/download_term_daily_data/<id>')
+@login_required
 def download_term_daily_data(id):
     response = controller_term_structure_daily_data(current_user, id)
 
     return response
 
 
-@app.route('/download_statistical_data/<id>')
-def download_statistical_data(id):
-    response = controller_statistical_analysis_data(current_user, id)
+@app.route('/download_statistical_prices_data/<id>')
+@login_required
+def download_statistical_prices_data(id):
+    response = controller_statistical_analysis_prices_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_statistical_returns_data/<id>')
+@login_required
+def download_statistical_returns_data(id):
+    response = controller_statistical_analysis_returns_data(current_user, id)
 
     return response
 
 
 @app.route('/download_portfolio_data/<id>')
+@login_required
 def download_portfolio_data(id):
     response = controller_portfolio_analysis_data(current_user, id)
 
