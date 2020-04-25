@@ -159,12 +159,14 @@
         </form>
     </div>
 
-    {% if compute_not_allowed %}
-    <div class="alert alert-warning">
-        <strong>Warning!</strong>
-        Register to Continue
+    <div class="row d-flex justify-content-center">
+        {% if compute_not_allowed %}
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>
+            Register to Continue
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 
     {% if plot_implied_volatility != None %}
     <div class="row d-flex justify-content-center">
@@ -410,6 +412,7 @@
             help_dataset.hide();
         });
     });
+
 
 
 

@@ -409,13 +409,14 @@
             </div>
         </form>
     </div>
-
-    {% if compute_not_allowed %}
-    <div class="alert alert-warning">
-        <strong>Warning!</strong>
-        Register to Continue
+    <div class="row d-flex justify-content-center">
+        {% if compute_not_allowed %}
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>
+            Register to Continue
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 
     {% if plot_discount_factor_term_structure != None %}
     <div class="row p-3 d-flex justify-content-center">
