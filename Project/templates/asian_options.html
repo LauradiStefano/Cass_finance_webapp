@@ -499,134 +499,134 @@
                             <legend>Contract Parameters</legend>
                         </div>
 
-                            <div id="general_price" class="row" {% if form.model_choice.data=='9' %}
-                                 style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.price.label}}
-                                    {{form.price}}
-                                    {% if form.price.errors %}
-                                    {% for error in form.price.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        <div id="general_price" class="row" {% if form.model_choice.data=='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="general_risk_free" class="row" {% if form.model_choice.data=='9' %}
-                                 style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.risk_free.label}}
-                                    {{form.risk_free}}
-                                    {% if form.risk_free.errors %}
-                                    {% for error in form.risk_free.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="general_risk_free" class="row" {% if form.model_choice.data=='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.risk_free.label}}
+                                {{form.risk_free}}
+                                {% if form.risk_free.errors %}
+                                {% for error in form.risk_free.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
+                        </div>
 
-                            <div id="exp_price" class="row" {% if form.model_choice.data !='9' %} style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.price_exp.label}}
-                                    {{form.price_exp}}
-                                    {% if form.price_exp.errors %}
-                                    {% for error in form.price_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        <div id="exp_price" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_exp.label}}
+                                {{form.price_exp}}
+                                {% if form.price_exp.errors %}
+                                {% for error in form.price_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="exp_risk_free" class="row" {% if form.model_choice.data!='9' %}
-                                 style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.risk_free_exp.label}}
-                                    {{form.risk_free_exp}}
-                                    {% if form.risk_free_exp.errors %}
-                                    {% for error in form.risk_free_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="exp_risk_free" class="row" {% if form.model_choice.data!='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.risk_free_exp.label}}
+                                {{form.risk_free_exp}}
+                                {% if form.risk_free_exp.errors %}
+                                {% for error in form.risk_free_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
+                        </div>
 
-                            <div id="general_time" class="row" {% if form.model_choice.data=='9' %}
-                                 style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.time.label}}
-                                    {{form.time}}
-                                    {% if form.time.errors %}
-                                    {% for error in form.time.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        <div id="general_time" class="row" {% if form.model_choice.data=='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="general_step" class="row" {% if form.model_choice.data=='9' %} style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.step.label}}
-                                    {{form.step}}
-                                    {% if form.step.errors %}
-                                    {% for error in form.step.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="general_step" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.step.label}}
+                                {{form.step}}
+                                {% if form.step.errors %}
+                                {% for error in form.step.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="general_strike" class="row" {% if form.model_choice.data=='9' %}
-                                 style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.strike.label}}
-                                    {{form.strike}}
-                                    {% if form.strike.errors %}
-                                    {% for error in form.strike.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="general_strike" class="row" {% if form.model_choice.data=='9' %}
+                             style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.strike.label}}
+                                {{form.strike}}
+                                {% if form.strike.errors %}
+                                {% for error in form.strike.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
+                        </div>
 
-                            <div id="exp_time" class="row" {% if form.model_choice.data !='9' %} style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.time_exp.label}}
-                                    {{form.time_exp}}
-                                    {% if form.time_exp.errors %}
-                                    {% for error in form.time_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        <div id="exp_time" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.time_exp.label}}
+                                {{form.time_exp}}
+                                {% if form.time_exp.errors %}
+                                {% for error in form.time_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="exp_step" class="row" {% if form.model_choice.data!='9' %} style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.step_exp.label}}
-                                    {{form.step_exp}}
-                                    {% if form.step_exp.errors %}
-                                    {% for error in form.step_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="exp_step" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.step_exp.label}}
+                                {{form.step_exp}}
+                                {% if form.step_exp.errors %}
+                                {% for error in form.step_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
-                            <div id="exp_strike" class="row" {% if form.model_choice.data!='9' %} style="display:none"
-                                 {%endif%}>
-                                <div class="col mb-1">
-                                    {{form.strike_exp.label}}
-                                    {{form.strike_exp}}
-                                    {% if form.strike_exp.errors %}
-                                    {% for error in form.strike_exp.errors %}
-                                    <div style="color: red;">{{ error }}</div>
-                                    {% endfor %}
-                                    {% endif %}
-                                </div>
+                        </div>
+                        <div id="exp_strike" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                             {%endif%}>
+                            <div class="col mb-1">
+                                {{form.strike_exp.label}}
+                                {{form.strike_exp}}
+                                {% if form.strike_exp.errors %}
+                                {% for error in form.strike_exp.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
                             </div>
+                        </div>
 
                     </fieldset>
                 </div>
@@ -730,12 +730,18 @@
 
     {% if plot_lower_bound != None %}
     <div class="row d-flex justify-content-center">
-         {%if sim_id != None %}
-            <div>
+
+        {%if sim_id != None %}
+        <div>
             <a href="/download_asian_data/{{sim_id}}" class="download_data">
                 Click here to download the implicit data</a>
         </div>
+        {% else %}
+        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+            Click here to download the implicit data
+        </div>
         {% endif %}
+
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -964,6 +970,11 @@
                             }
                         });
                     });
+  $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+  });
+
+
 
 
 

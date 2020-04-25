@@ -255,12 +255,19 @@
     </div>
 
     <div class="row d-flex justify-content-center">
+
         {%if sim_id != None %}
         <div>
             <a href="/download_shimko_theoretical_data/{{sim_id}}" class="download_data ">
                 Click here to download the implicit values</a>
         </div>
+        {% else %}
+        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+            Click here to download the implicit values
+        </div>
+
         {% endif %}
+
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -391,6 +398,13 @@
 </div>
 
 {% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+</script>
 
 </body>
 </html>

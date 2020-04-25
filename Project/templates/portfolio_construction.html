@@ -87,6 +87,10 @@
             <a href="/download_portfolio_data/{{sim_id}}" class="download_data">
                 Click here to download the efficient portfolios composition</a>
         </div>
+        {% else %}
+        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+            Click here to download the efficient portfolios composition
+        </div>
         {% endif %}
 
         <div class=" col-12">
@@ -130,6 +134,12 @@
             help_dataset.hide();
         });
     });
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
 
 
 

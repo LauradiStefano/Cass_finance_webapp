@@ -214,12 +214,17 @@
     {% if plot_return_underlying_distribution != None %}
     <div class="row p-3 d-flex justify-content-center">
 
-         {%if sim_id != None %}
-            <div>
+        {%if sim_id != None %}
+        <div>
             <a href="/download_heston_data/{{sim_id}}" class="download_data">
                 Click here to download the distribution</a>
         </div>
+        {% else %}
+        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+           Click here to download the distribution
+        </div>
         {% endif %}
+
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <table class="table table-striped">
@@ -308,5 +313,13 @@
 
 
 {% include 'footer.html' %}
+<script charset="utf-8" type="text/javascript">
+    $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+</script>
+
 </body>
 </html>
