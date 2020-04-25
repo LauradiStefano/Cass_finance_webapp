@@ -55,7 +55,7 @@ def compute_table(data):
         data_array.append((np.array(data.loc[i])))
 
     prices = np.vstack(data_array)
-    
+
     log_returns = []
     for i in range(0, len(prices) - 1):
         log_return = np.log(prices[i + 1] / prices[i])
@@ -120,18 +120,20 @@ def create_histogram_distribution_plot(log_returns):
     hist, edges = np.histogram(log_returns, density=True, bins=100)
     m = np.mean(log_returns)
     sg = np.std(log_returns)
-    sorted_log_returns = sorted(log_returns)#.sort()
+    sorted_log_returns = sorted(log_returns)
     normal_pdf = lambda x: scipy.stats.norm.pdf(x, m, sg)
     norm_pdf = [normal_pdf(i) for i in sorted_log_returns]  # aggiungere all'output
 
     data_1 = ColumnDataSource(data=dict(
         hist=hist,
         edges_left=edges[:-1],
-        edges_right=edges[1:]))
+        edges_right=edges[1:]
+    ))
 
     data_2 = ColumnDataSource(data=dict(
         log_returns=sorted_log_returns,
-        norm_pdf=norm_pdf))
+        norm_pdf=norm_pdf
+    ))
 
     hover_histogram = HoverTool(attachment="above", names=['histogram'],
                                 tooltips=[("Hist", "@hist")])
