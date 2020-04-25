@@ -262,7 +262,9 @@ def controller_plot_statistical_analysis(user, id, ticker):
 
         ticker_index = tickers.index(ticker)
         log_returns = list(log_returns[:, ticker_index])
+        print("print1", log_returns)
         plot_histogram = create_histogram_distribution_plot(log_returns)
+        print("print2", log_returns)
         plot_qq = create_qq_plot(log_returns)
         plot_log_returns = create_plot_log_returns(log_returns, dates)
         plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
