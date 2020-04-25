@@ -21,9 +21,6 @@ def controller_shimko_theoretical(user, request):
     a0 = None
     a1 = None
     a2 = None
-    strike = None
-    implied_volatility = None
-    volatility = None
 
     st = None
     pdf = None
@@ -40,9 +37,6 @@ def controller_shimko_theoretical(user, request):
     m2_returns = None
     skewness_log_returns = None
     kurtosis_log_returns = None
-    pdf_bench_log_prices = None
-    pdf_bench_norm_returns = None
-    ret_t = None
     skewness_normal = None
     kurtosis_normal = None
     cdf_prices = None

@@ -17,7 +17,6 @@ def controller_levy_process(user, request):
     form = ComputeForm(request.form)
 
     pdf_underlying_asset = None
-    underlying_prices = None
     strike = None
     implied_volatility = None
     option_prices = None
@@ -26,7 +25,6 @@ def controller_levy_process(user, request):
     variance = None
     skewness = None
     kurtosis = None
-    norm_pdf = None
     number_of_strike = 0
 
     sim_id = None

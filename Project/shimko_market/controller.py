@@ -23,14 +23,6 @@ def controller_shimko_market(user, request):
     form = ComputeForm(request.form)
 
     file_data = None
-    strike_data = None
-    put_market = None
-    call_market = None
-    strike_plot = None
-    implied_volatility = None
-    strike_min = None
-    strike_max = None
-    volatility_time = None
 
     a0 = None
     a1 = None
@@ -49,9 +41,7 @@ def controller_shimko_market(user, request):
     m2_returns = None
     skewness_log_returns = None
     kurtosis_log_returns = None
-    pdf_returns = None
     pdf_bench_log_prices = None
-    pdf_bench_norm_returns = None
     r2 = None
     skewness_normal = None
     kurtosis_normal = None
@@ -59,7 +49,6 @@ def controller_shimko_market(user, request):
     cdf_returns = None
     cdf_bench_log_prices = None
     cdf_bench_norm_returns = None
-    returns_t = None
     statistic_prices = None
     statistic_returns = None
     pvalue_prices = None

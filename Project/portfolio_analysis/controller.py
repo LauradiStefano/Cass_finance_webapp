@@ -19,14 +19,7 @@ from portfolio_analysis.forms import ComputeForm
 def controller_portfolio_analysis(user, request):
     form = ComputeForm(request.form)
 
-    returns = None
     file_data = None
-    tickers = None
-    standard_deviations = None
-    means = None
-    efficient_means = None
-    efficient_std = None
-    efficient_weights = None
 
     sim_id = None
 

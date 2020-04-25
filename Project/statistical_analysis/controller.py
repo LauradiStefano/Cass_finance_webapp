@@ -32,16 +32,8 @@ def controller_statistical_analysis(user, request):
     pvalue = None
     tickers = None
     n_observation = None
-    log_returns = None
-    dates = None
-    prices = None
 
     sim_id = None
-
-    plot_qq = None
-    plot_histogram = None
-    plot_log_returns = None
-    plot_autocorrelation = None
 
     number_of_tickers = 0
 

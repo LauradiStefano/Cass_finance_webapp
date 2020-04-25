@@ -16,13 +16,11 @@ from heston_method.forms import ComputeForm
 def controller_heston_method(user, request):
     form = ComputeForm(request.form)
 
-    returns = None
     heston_pdf = None
     strike = None
     implied_volatility = None
     option_prices = None
     number_of_strike = 0
-    norm_pdf = None
     mean = None
     variance = None
     skewness = None
