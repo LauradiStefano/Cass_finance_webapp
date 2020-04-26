@@ -234,7 +234,7 @@
                     <tr>
                         {% if sim_id != None %}
                         <td>
-                            <a class="ticker_link" href="plot_return_data_statistics/{{sim_id}}/{{tickers[i]}}">
+                            <a class="ticker_link" href="/return_data_statistics/plot/{{sim_id}}/{{tickers[i]}}">
                                 {{tickers[i]}}
                                 <img class="icon_external_link" src="/static/icon_external_link.png">
                             </a>
@@ -246,7 +246,6 @@
                                 <img class="icon_external_link" src="/static/icon_external_link.png">
                             </div>
                         </td>
-
                         {%endif%}
                         <td>{{n_observation[i]}}</td>
                         <td>{{mean[i]}}</td>

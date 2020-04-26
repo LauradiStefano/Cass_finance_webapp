@@ -85,7 +85,25 @@
                                         <tbody>
                                         {% for i in range(result['number_of_tickers'])%}
                                         <tr>
-                                            <td>{{result['tickers'][i]}}</td>
+                                            {% if result.id != None %}
+                                            <td>
+                                                <a class="ticker_link"
+                                                   href="/return_data_statistics/plot/{{result.id}}/{{result['tickers'][i]}}">
+                                                    {{result['tickers'][i]}}
+                                                    <img class="icon_external_link"
+                                                         src="/static/icon_external_link.png">
+                                                </a>
+                                            </td>
+                                            {% else %}
+                                            <td>
+                                                <div data-toggle="tooltip" data-placement="top"
+                                                     title="Log in to analyze the ticker">
+                                                    {{result['tickers'][i]}}
+                                                    <img class="icon_external_link"
+                                                         src="/static/icon_external_link.png">
+                                                </div>
+                                            </td>
+                                            {%endif%}
                                             <td>{{result['n_observation'][i]}}</td>
                                             <td>{{result['mean'][i]}}</td>
                                             <td>{{result['volatility'][i]}}</td>
@@ -138,6 +156,11 @@
 {% endif %}
 
 {% include 'footer.html' %}
+<script charset="utf-8" type="text/javascript">
+      $(document).ready(function(){
+         $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 </body>
 </html>
 
