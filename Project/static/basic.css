@@ -632,6 +632,7 @@ footer {
 
 .ticker_link {
     color: #212529 !important;
+    white-space: nowrap;
 }
 
 .ticker_link:hover, .ticker_link:active {
