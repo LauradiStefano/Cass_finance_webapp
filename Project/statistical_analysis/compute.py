@@ -213,9 +213,8 @@ def create_plot_log_returns(log_returns, dates):
     ))
 
     hover_normal = HoverTool(attachment="above", names=['log returns'],
-                             tooltips=[('dates', '@dates{%F}'), ("Log returns", "@log_returns")],formatters={'@dates': 'datetime'})
+                             tooltips=[('Date', '@dates{%F}'), ("Log returns", "@log_returns")],formatters={'@dates': 'datetime'})
 
-    #[('Date', '@dates{%F}')],formatters={'dates': 'datetime'}
     x_range = [min(dates), max(dates)]
     y_range = [min(log_returns) - 0.01, max(log_returns) + 0.01]
 
