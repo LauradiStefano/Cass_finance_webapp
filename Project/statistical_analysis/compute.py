@@ -135,10 +135,10 @@ def create_histogram_distribution_plot(log_returns):
         norm_pdf=norm_pdf
     ))
 
-    hover_histogram = HoverTool(attachment="above", names=['histogram'],
+    hover_histogram = HoverTool(attachment="below", names=['histogram'],
                                 tooltips=[("Hist", "@hist")])
 
-    hover_theoretical = HoverTool(attachment="below", names=['th distribution'],
+    hover_theoretical = HoverTool(attachment="above", names=['th distribution'],
                                   tooltips=[("Log Returns", "@log_returns"),
                                             ("Norm Pdf", "@norm_pdf")])
 
@@ -213,7 +213,8 @@ def create_plot_log_returns(log_returns, dates):
     ))
 
     hover_normal = HoverTool(attachment="above", names=['log returns'],
-                             tooltips=[('Date', '@dates{%F}'), ("Log returns", "@log_returns")],formatters={'@dates': 'datetime'})
+                             tooltips=[('Date', '@dates{%F}'), ("Log returns", "@log_returns")],
+                             formatters={'@dates': 'datetime'})
 
     x_range = [min(dates), max(dates)]
     y_range = [min(log_returns) - 0.01, max(log_returns) + 0.01]
