@@ -259,27 +259,26 @@ def create_autocorrelation_function_plot(log_returns):
     return script, div
 
 
+def create_squared_autocorrelation_function_plot(log_returns):
+    nlags = 21
+    squared_log_returns = [i ** 2 for i in log_returns]
+    autorrelation_coefficient = acf(squared_log_returns, unbiased=True, nlags=nlags - 1)
 
-##def create_squared_autocorrelation_function_plot(log_returns):
-##    nlags = 21
-##    squared_log_returns = [i ** 2 for i in log_returns]
-##    autorrelation_coefficient = acf(squared_log_returns, unbiased=True, nlags=nlags - 1)
-##
-##    leg = [x for x in range(nlags)]
-##    z99 = 2.5758293035489004
-##    z95 = 1.959963984540054
-##    fig = bp.figure(tools=['save, pan, box_zoom, reset'], x_range=[-0.5, nlags], y_range=(-1, 1.1),
-##                    sizing_mode='scale_both')
-##    fig.xaxis.axis_label = 'Lag'
-##    fig.yaxis.axis_label = 'Squared Log-Returns Autocorrelation'
-##    fig.circle(leg, autorrelation_coefficient, size=8, fill_color="#0095B6", line_color="#D21F1B", line_width=1.5)
-##    fig.line(leg, y=z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
-##    fig.line(leg, y=z95 / np.sqrt(len(log_returns)), line_color='#808080')
-##    fig.line(leg, y=0.0, line_color='#000000')
-##    fig.line(leg, y=-z95 / np.sqrt(len(log_returns)), line_color='#808080')
-##    fig.line(leg, y=-z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
-##
-##    from bokeh.embed import components
-##    script, div = components(fig)
-##
-##    return script, div
+    leg = [x for x in range(nlags)]
+    z99 = 2.5758293035489004
+    z95 = 1.959963984540054
+    fig = bp.figure(tools=['save, pan, box_zoom, reset'], x_range=[-0.5, nlags], y_range=(-1, 1.1),
+                    sizing_mode='scale_both')
+    fig.xaxis.axis_label = 'Lag'
+    fig.yaxis.axis_label = 'Squared Log-Returns Autocorrelation'
+    fig.circle(leg, autorrelation_coefficient, size=8, fill_color="#0095B6", line_color="#D21F1B", line_width=1.5)
+    fig.line(leg, y=z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
+    fig.line(leg, y=z95 / np.sqrt(len(log_returns)), line_color='#808080')
+    fig.line(leg, y=0.0, line_color='#000000')
+    fig.line(leg, y=-z95 / np.sqrt(len(log_returns)), line_color='#808080')
+    fig.line(leg, y=-z99 / np.sqrt(len(log_returns)), line_dash='dashed', line_color='#808080')
+
+    from bokeh.embed import components
+    script, div = components(fig)
+
+    return script, div

@@ -13,7 +13,8 @@ from app import allowed_file, app
 from db_models import db
 from db_models import statisitcal_analysis as compute
 from statistical_analysis.compute import import_dataset_tickers, import_dataset_file_excel, compute_table, \
-    create_histogram_distribution_plot, create_qq_plot, create_plot_log_returns, create_autocorrelation_function_plot
+    create_histogram_distribution_plot, create_qq_plot, create_plot_log_returns, create_autocorrelation_function_plot, \
+    create_squared_autocorrelation_function_plot
 from statistical_analysis.forms import ComputeForm
 
 
@@ -239,7 +240,6 @@ def controller_statistical_analysis_returns_data(user, id):
 
 
 def controller_plot_statistical_analysis(user, id, ticker):
-
     id = int(id)
 
     if user.is_authenticated():
@@ -258,8 +258,10 @@ def controller_plot_statistical_analysis(user, id, ticker):
         plot_qq = create_qq_plot(log_returns)
         plot_log_returns = create_plot_log_returns(log_returns, dates)
         plot_autocorrelation = create_autocorrelation_function_plot(log_returns)
+        plot_squared_autocorrelation = create_squared_autocorrelation_function_plot(log_returns)
 
         return {'plot_histogram': plot_histogram, 'plot_qq': plot_qq, 'plot_log_returns': plot_log_returns,
-                'plot_autocorrelation': plot_autocorrelation, 'ticker': ticker}
+                'plot_autocorrelation': plot_autocorrelation,
+                'plot_squared_autocorrelation': plot_squared_autocorrelation, 'ticker': ticker}
     else:
         return redirect(url_for('statistical_analysis'))
