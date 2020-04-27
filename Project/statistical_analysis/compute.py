@@ -139,7 +139,7 @@ def create_histogram_distribution_plot(log_returns):
                                 tooltips=[("Hist", "@hist")])
 
     hover_theoretical = HoverTool(attachment="above", names=['th distribution'],
-                                  tooltips=[("Log Returns", "@log_returns"),
+                                  tooltips=[("Log-Returns", "@log_returns"),
                                             ("Norm Pdf", "@norm_pdf")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_histogram, hover_theoretical],
@@ -149,7 +149,7 @@ def create_histogram_distribution_plot(log_returns):
     fig.quad(top='hist', bottom=m, left='edges_left', right='edges_right', source=data_1,
              color="#0095B6", line_color="#ffffff", alpha=1, name='histogram')
 
-    fig.line(x='log_returns', y='norm_pdf', source=data_2, color="#D21F1B", legend_label='Log returns PDF',
+    fig.line(x='log_returns', y='norm_pdf', source=data_2, color="#D21F1B", legend_label='Log-Returns PDF',
              line_width=1, alpha=1, name='th distribution')
 
     fig.toolbar.active_drag = None
@@ -213,7 +213,7 @@ def create_plot_log_returns(log_returns, dates):
     ))
 
     hover_normal = HoverTool(attachment="above", names=['log returns'],
-                             tooltips=[('Date', '@dates{%F}'), ("Log returns", "@log_returns")],
+                             tooltips=[('Date', '@dates{%F}'), ("Log-Returns", "@log_returns")],
                              formatters={'@dates': 'datetime'})
 
     x_range = [min(dates), max(dates)]
@@ -221,9 +221,9 @@ def create_plot_log_returns(log_returns, dates):
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_normal], x_range=x_range,
                     y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-                    x_axis_label='Time', y_axis_label='Log Returns')
+                    x_axis_label='Time', y_axis_label='Log-Returns')
 
-    fig.line(x='dates', y='log_returns', source=data, color="#0095B6", legend_label='Log Returns vs Dates',
+    fig.line(x='dates', y='log_returns', source=data, color="#0095B6", legend_label='Log-Returns vs Dates',
              line_width=1, alpha=0.5, name='log returns')
 
     fig.toolbar.active_drag = None

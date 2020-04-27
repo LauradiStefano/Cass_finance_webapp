@@ -215,7 +215,7 @@ def create_plot_return_underlying_distribution(ret_t, pdf_ret, pdf_bench_norm_re
                              tooltips=[("Return", "@ret_t"), ("Benchmark Norm", "@pdf_bench_norm_returns")])
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_returns, hover_normal], x_range=x_range,
-                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log-Returns',
                     y_axis_label='Probability Density')
 
     fig.line(x='ret_t', y='pdf_ret', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
@@ -384,7 +384,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     x_range = [min(ret_t), max(ret_t)]
     y_range = [0, 1.1]
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_cdf, hover_norm], x_range=x_range,
-                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log Returns',
+                    y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Log-Returns',
                     y_axis_label='Cumulative Probability')
 
     fig.line(x='ret_t', y='cdf_returns', source=data, legend_label="CEQ distribution", color="#0095B6", alpha=0.9,
