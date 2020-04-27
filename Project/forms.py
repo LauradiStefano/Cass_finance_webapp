@@ -54,12 +54,12 @@ def check_password(form, field):
 class RegistrationForm(wtf.Form):
     title = wtf.SelectField('Title', choices=[('0', 'Mr'), ('1', 'Mrs'), ('3', 'Ms')], default='0')
 
-    first_name = wtf.StringField(label='First Name',
+    first_name = wtf.StringField(label='Given Name',
                                  validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     second_name = wtf.StringField(
-        label='Second Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
+        label='Family Name', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=25)])
     organization = wtf.StringField(
-        label='Organization', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=40)])
+        label='Organization', validators=[wtf.validators.DataRequired(), validators.Length(min=3, max=40)])
     job_title = wtf.StringField(
         label='Job Title', validators=[wtf.validators.DataRequired(), validators.Length(min=4, max=40)])
     password = wtf.PasswordField(label='Create Password',
