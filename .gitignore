@@ -2,6 +2,7 @@
 Project/.vs/
 Project/uploads/
 ./Project/.idea/misc.xml
+.idea
 
 # Created by https://www.gitignore.io/api/flask,python,windows,pycharm
 # Edit at https://www.gitignore.io/?templates=flask,python,windows,pycharm
