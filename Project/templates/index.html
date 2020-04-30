@@ -12,16 +12,16 @@
         <div class="col d-flex justify-content-start">
             <img class="img_logo_home" src="/static/logo_financial.png">
         </div>
+        {% if user is defined%}
         <div class="col d-flex justify-content-end">
             <span class="text-white">
-                {% if user is defined%}
                     {% if user.is_authenticated %}
                     Logged in as {{user.first_name}}
                     <a class="mx-2" href="/logout">Logout</a>
                     {% endif %}
-                {% endif %}
             </span>
         </div>
+        {% endif %}
     </div>
     <div class="row">
         <div class="col d-flex justify-content-start description_project">
@@ -183,37 +183,26 @@
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var shimko_method = $('.shimko_method');
         var option_shimko = $('.option_shimko');
         var cos_method = $('.cos_method');
         var option_cos = $('.option_cos');
 
-        shimko_method.on('mouseenter', function(){
+        shimko_method.on('mouseenter', function () {
             option_shimko.show();
         });
-        shimko_method.on('mouseleave', function(){
+        shimko_method.on('mouseleave', function () {
             option_shimko.hide();
         });
 
-        cos_method.on('mouseenter', function(){
+        cos_method.on('mouseenter', function () {
             option_cos.show();
         });
-        cos_method.on('mouseleave', function(){
+        cos_method.on('mouseleave', function () {
             option_cos.hide();
         });
     });
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>
