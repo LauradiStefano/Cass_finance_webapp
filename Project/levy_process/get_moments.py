@@ -125,7 +125,6 @@ def compute_moments(type_choice, parameters, dt):
         c2_x = mc2
         c3_x = mc3
         c4_x = mc4-3*mc2**2
-        #print(c1_x,c2_x,c3_x,c4_x)
         
         mean = mc1
         variance = mc2

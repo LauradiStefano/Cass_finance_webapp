@@ -43,7 +43,7 @@ def upload_input(filename=None):
 
 
 def compute_efficient_frontier(return_vec, n_assets, n_portfolios):
-    print(return_vec)
+
     n_portf_eff = 10
 
     means, stds = np.column_stack([
@@ -141,9 +141,7 @@ def create_plot_efficient_frontier(return_vec, standard_deviations, means, ef_me
                max(max(ticker_means), means_float_max, max(ef_means)) * 1.05]
     x_range = [min(min(ticker_standard_deviations), min(ef_standard_deviations), std_float_min) * 0.95,
                max(max(ticker_standard_deviations), max(ef_standard_deviations), std_float_max) * 1.05]
-    print(min(ticker_standard_deviations))
-    print(min(ef_standard_deviations))
-    print(min(standard_deviations))
+
     fig = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_data_efficient, hover_data_randomize, hover_data_ticker],
         x_range=x_range, y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
