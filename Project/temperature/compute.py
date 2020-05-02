@@ -5,6 +5,8 @@ Created on Wed Apr  8 14:03:23 2020
 @author: Diego
 """
 from bokeh.plotting import figure
+from bokeh.models import ColumnDataSource, HoverTool
+
 
 import datetime
 import pandas as pd
@@ -63,23 +65,43 @@ def compute_parametric_function(data):
     t_dates = np.asarray(t_dates)
     trend_temp_par = temp_3_9_A(t_dates, popt[0], popt[1], popt[2], popt[3], 2 * math.pi)
     R_temp_par = LogTemp - trend_temp_par
+    lambda_zero = popt[0]
+    lambda_one = popt[1]
+    lambda_two = popt[2]
+    lambda_three = popt[3]
 
-    return LogTemp, trend_temp_par
+    return LogTemp, trend_temp_par, lambda_zero, lambda_one, lambda_two, lambda_three
 
 
 def plot_parametric_function(LogTemp, trend_temp_par):
     x = [i for i in range(len(LogTemp))]
     y = [trend_temp_par[i] for i in x]
-    # LogTemp = [ LogTemp(i) for i in len(LogTemp)]
 
     x_range = [0, 1460]
     y_range = [min([min(y) - 1, min(LogTemp) - 1]), max([max(y) + 1, max(LogTemp) + 1])]
-    # p1 = figure(x_range=x_range ,y_range=y_range, title='Temperature seasonality component', tools=TOOLS)
-    fig = figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range,
-                 y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Days',
-                 y_axis_label="Λt", title="A Temperature seasonality component")
-    fig.line(x, y, line_color="blue", line_width=2)
-    fig.circle(x, LogTemp, line_color="blue", line_alpha=0.5, fill_color="yellow", fill_alpha=0.7)
+
+    data_model = ColumnDataSource(data=dict(
+        nDays = x,
+        model_temp = y
+    ))
+
+    data_imported = ColumnDataSource(data=dict(
+        nDays = x,
+        LogTemp=LogTemp
+    ))
+
+    hover_model = HoverTool(attachment="above", names=['Parametric Model'],
+                                     tooltips=[("nDays", "@nDays"), ("Model Temp", "@model_temp")])
+
+    hover_imported = HoverTool(attachment="above", names=['Imported temp'], tooltips=[("nDays", "@nDays"),
+                                                                             ("Log Temp", "@LogTemp")])
+
+    fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_imported], x_range=x_range, 
+                        y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label = 'Days',
+                        y_axis_label="Λt",title="A Temperature seasonality component" )
+
+    fig.line(x = "nDays", y = "model_temp", source = data_model, line_color="blue", line_width=2, name = "Parametric Model")
+    fig.circle(x = "nDays", y = "LogTemp", source = data_imported,  line_color = "blue", line_alpha = 0.5, fill_color= "yellow", fill_alpha = 0.7, name = "Imported temp")
 
     from bokeh.embed import components
     script, div = components(fig)
