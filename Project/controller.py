@@ -26,6 +26,7 @@ from statistical_analysis.controller import controller_statistical_analysis, con
     controller_statistical_analysis_returns_data, controller_plot_statistical_analysis
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation, controller_term_structure_data, controller_term_structure_daily_data
+from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -109,6 +110,12 @@ def portfolio_analysis():
     return render_template("portfolio_construction.html", **template_variables)
 
 
+@app.route('/mortgage', methods=['GET', 'POST'])
+def mortgage():
+    template_variables = controller_mortgage(current_user, request)
+    return render_template("mortgage.html", **template_variables)
+
+
 @app.route('/implied_distribution_illustration/old')
 @login_required
 def old_shimko_theoretical():
@@ -181,6 +188,14 @@ def old_portfolio_analysis():
                            back_url=url_for('portfolio_analysis'), old=True)
 
 
+@app.route('/mortgage/old')
+@login_required
+def old_mortgage():
+    template_variables = controller_old_mortgage(current_user)
+    return render_template("old_mortgage.html", **template_variables,
+                           back_url=url_for('portfolio_analysis'), old=True)
+
+
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -233,6 +248,12 @@ def delete_statistical_analysis(id):
 @login_required
 def delete_portfolio_analysis(id):
     return delete_portfolio_analysis_simulation(current_user, id)
+
+
+@app.route('/mortgage/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_mortgage(id):
+    return delete_mortgage_simulation(current_user, id)
 
 
 @app.route('/download_shimko_theoretical_data/<id>')
