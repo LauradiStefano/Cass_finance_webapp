@@ -480,3 +480,24 @@ class portfolio_analysis(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_portfolio_analysis', lazy='dynamic'))
+
+class mortgage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    capital_amount = db.Column(db.Float())
+    loan_term = db.Column(db.Float())
+    frequency = db.Column(db.String())
+    interest_rate = db.Column(db.Float())
+
+    dates = db.Column(db.String())
+    residual_share = db.Column(db.String())
+    capital_share = db.Column(db.String())
+    interest_share = db.Column(db.String())
+    debt_share = db.Column(db.String())
+    number_of_rates = db.Column(db.Integer())
+
+    button_compute = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_mortgage', lazy='dynamic'))
