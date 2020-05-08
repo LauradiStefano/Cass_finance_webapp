@@ -11,8 +11,8 @@ class ComputeForm(wtf.Form):
                                validators=[wtf.validators.InputRequired(),
                                            validators.NumberRange(min=1, message='The value must be greater than 1')])
 
-    frequency = wtf.SelectField('Frequency', choices=[('0', 'Mensile'), ('1', 'Trimestrale'), ('2', 'Quadrimestrale'),
-                                                      ('3', 'Semestrale'), ('4', 'Annua')], default='0')
+    frequency = wtf.SelectField('Frequency', choices=[('12', 'Mensile'), ('4', 'Trimestrale'), ('3', 'Quadrimestrale'),
+                                                      ('2', 'Semestrale'), ('1', 'Annua')], default='12')
     interest_rate = wtf.FloatField(label='Interest Rate \((\%) \)', default=2,
                                    validators=[wtf.validators.InputRequired()])
 

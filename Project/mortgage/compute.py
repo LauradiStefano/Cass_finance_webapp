@@ -1,5 +1,3 @@
-import bokeh.plotting as plt
-from bokeh.core.properties import value
 import datetime
 import calendar
 from bokeh.models import HoverTool
@@ -7,38 +5,40 @@ from bokeh.plotting import ColumnDataSource
 import bokeh.plotting as bp
 
 
-def mortgage_compute(S, i, n, m):
-    m = int(m)
-    z = i / 100  # tasso percentuale
-    nr = int(n) * m  # numero di rate totali
+def mortgage_compute(capital, rate, years, frequency):
+    frequency = int(frequency)
+    percentage_rate = rate / 100
+    number_of_rates = int(years) * frequency
 
-    # calcolo rata
-    im = z / nr
-    a = (1 - (1 + im) ** (-nr)) / im  # annuity
-    R = S / a  # rata costante
+    # compute rate
+    im = (1 + percentage_rate) ** (1 / frequency) - 1
+    annuity = (1 - (1 + im) ** (-number_of_rates)) / im
+    rate_value = capital / annuity  # constant rate
 
-    D = []
-    C = []
-    I = []
-    E = []
+    residual_debt = []
+    capital_share = []
+    interest_share = []
+    debt_share = []
 
-    D.append(S)  # debito residuo
-    C.append(0)  # quota capitale
-    I.append(0)  # quota interessi
-    E.append(0)  # quota debito
+    residual_debt.append(capital)
+    capital_share.append(0)
+    interest_share.append(0)
+    debt_share.append(0)
 
-    for j in range(1, int(nr + 1)):  # nr+1 escluso
-        I.append(im * D[j - 1])
-        C.append(R - I[j])
-        D.append(D[j - 1] - C[j])
-        E.append(E[j - 1] + C[j])
-    D = [round(x, 2) for x in D]
-    C = [round(x, 2) for x in C]
-    I = [round(x, 2) for x in I]
-    E = [round(x, 2) for x in E]
-    dates = generate_date(m, nr)
+    for j in range(1, int(number_of_rates + 1)):  # number_of_rates+1 excluded
+        interest_share.append(im * residual_debt[j - 1])
+        capital_share.append(rate_value - interest_share[j])
+        residual_debt.append(residual_debt[j - 1] - capital_share[j])
+        debt_share.append(debt_share[j - 1] + capital_share[j])
 
-    return dates, D, C, I, E
+    residual_debt = [round(x, 4) for x in residual_debt]
+    capital_share = [round(x, 4) for x in capital_share]
+    interest_share = [round(x, 4) for x in interest_share]
+    debt_share = [round(x, 4) for x in debt_share]
+    rate_value = round(rate_value, 4)
+    dates = [d.strftime("%d/%m/%y") for d in generate_date(frequency, number_of_rates)]
+
+    return rate_value, dates, residual_debt, capital_share, interest_share, debt_share
 
 
 def generate_date(frequency, nr):

@@ -494,6 +494,7 @@ class mortgage(db.Model):
     capital_share = db.Column(db.String())
     interest_share = db.Column(db.String())
     debt_share = db.Column(db.String())
+    rate_value = db.Column(db.Float())
     number_of_rates = db.Column(db.Integer())
 
     button_compute = db.Column(db.Integer())

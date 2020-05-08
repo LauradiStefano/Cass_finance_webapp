@@ -16,6 +16,7 @@ def controller_mortgage(user, request):
     interest_share = None
     debt_share = None
     dates = None
+    rate_value = None
 
     number_of_rates = 0
 
@@ -25,7 +26,7 @@ def controller_mortgage(user, request):
     if request.method == "POST":
         if form.validate():
 
-            dates, residual_debt, capital_share, interest_share, debt_share = \
+            rate_value, dates, residual_debt, capital_share, interest_share, debt_share = \
                 mortgage_compute(form.capital_amount.data, form.interest_rate.data, form.loan_term.data,
                                  form.frequency.data)
 
@@ -45,6 +46,7 @@ def controller_mortgage(user, request):
                 object.interest_share = json.dumps(interest_share)
                 object.debt_share = json.dumps(debt_share)
                 object.number_of_rates = json.dumps(number_of_rates)
+                object.rate_value = rate_value
 
                 object.user = user
                 db.session.add(object)
@@ -64,14 +66,18 @@ def controller_mortgage(user, request):
                 interest_share = json.loads(instance.interest_share)
                 debt_share = json.loads(instance.debt_share)
                 number_of_rates = json.loads(instance.number_of_rates)
+                rate_value = instance.rate_value
 
                 plot_capital_interest_share = \
                     create_capital_interest_plot(dates, capital_share, interest_share)
                 plot_debt_share = create_debt_plot(dates, debt_share)
 
+    rate_value = round(rate_value, 4) if rate_value is not None else None
+
     return {'form': form, 'user': user, 'dates': dates, 'residual_debt': residual_debt, 'capital_share': capital_share,
             'interest_share': interest_share, 'debt_share': debt_share, 'number_of_rates': number_of_rates,
-            'plot_capital_interest_share': plot_capital_interest_share, 'plot_debt_share': plot_debt_share}
+            'rate_value': rate_value, 'plot_capital_interest_share': plot_capital_interest_share,
+            'plot_debt_share': plot_debt_share}
 
 
 def populate_form_from_instance(instance):
@@ -97,12 +103,16 @@ def controller_old_mortgage(user):
             capital_share = json.loads(instance.capital_share)
             interest_share = json.loads(instance.interest_share)
             debt_share = json.loads(instance.debt_share)
+            rate_value = instance.rate_value
 
             plot_capital_interest_share = \
                 create_capital_interest_plot(dates, capital_share, interest_share)
             plot_debt_share = create_debt_plot(dates, debt_share)
 
-            data.append({'form': form, 'id': id, 'plot_capital_interest_share': plot_capital_interest_share,
+            rate_value = round(rate_value, 4) if rate_value is not None else None
+
+            data.append({'form': form, 'id': id, 'rate_value': rate_value,
+                         'plot_capital_interest_share': plot_capital_interest_share,
                          'plot_debt_share': plot_debt_share})
 
     return {'data': data}
