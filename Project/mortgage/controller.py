@@ -1,18 +1,10 @@
-import csv
-import io
 import json
-import os
 
-import numpy as np
 from flask import url_for, redirect, Response
 from sqlalchemy import desc
-from werkzeug.utils import secure_filename
-
-from app import allowed_file, app
 from db_models import db
 from db_models import portfolio_analysis as compute
-from portfolio_analysis.compute import upload_input, compute_efficient_frontier, create_plot_efficient_frontier, \
-    create_plot_efficient_weights
+from mortgage.compute import mortgage_compute, create_capital_interest_plot, create_debt_plot
 from mortgage.forms import ComputeForm
 
 
@@ -31,17 +23,17 @@ def controller_mortgage(user, request):
     plot_debt_share = None
 
     if request.method == "POST":
-        if form.validate() and request.files:
+        if form.validate():
 
-            returns, n_assets, tickers = upload_input(file_data)
+            dates, residual_debt, capital_share, interest_share, debt_share = \
+                mortgage_compute(form.capital_amount.data, form.interest_rate.data, form.loan_term.data,
+                                 form.frequency.data)
 
-            standard_deviations, means, efficient_means, efficient_std, efficient_weights = \
-                compute_efficient_frontier(returns, n_assets, form.n_portfolio.data)
+            number_of_rates = len(dates)
 
-            plot_efficient_frontier = \
-                create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
-                                               efficient_std)
-            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
+            plot_capital_interest_share = \
+                create_capital_interest_plot(dates, capital_share, interest_share)
+            plot_debt_share = create_debt_plot(dates, debt_share)
 
             if user.is_authenticated:  # store data in db
                 object = compute()
@@ -73,15 +65,13 @@ def controller_mortgage(user, request):
                 debt_share = json.loads(instance.debt_share)
                 number_of_rates = json.loads(instance.number_of_rates)
 
-                plot_efficient_frontier = \
-                    create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
-                                                   efficient_std)
-                plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
+                plot_capital_interest_share = \
+                    create_capital_interest_plot(dates, capital_share, interest_share)
+                plot_debt_share = create_debt_plot(dates, debt_share)
 
     return {'form': form, 'user': user, 'dates': dates, 'residual_debt': residual_debt, 'capital_share': capital_share,
             'interest_share': interest_share, 'debt_share': debt_share, 'number_of_rates': number_of_rates,
-            'plot_capital_interest_share': plot_capital_interest_share,
-            'plot_debt_share': plot_debt_share}
+            'plot_capital_interest_share': plot_capital_interest_share, 'plot_debt_share': plot_debt_share}
 
 
 def populate_form_from_instance(instance):
@@ -104,15 +94,13 @@ def controller_old_mortgage(user):
 
             id = instance.id
             dates = json.loads(instance.dates)
-            residual_debt = json.loads(instance.residual_debt)
             capital_share = json.loads(instance.capital_share)
             interest_share = json.loads(instance.interest_share)
             debt_share = json.loads(instance.debt_share)
 
             plot_capital_interest_share = \
-                create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
-                                               efficient_std)
-            plot_debt_share = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
+                create_capital_interest_plot(dates, capital_share, interest_share)
+            plot_debt_share = create_debt_plot(dates, debt_share)
 
             data.append({'form': form, 'id': id, 'plot_capital_interest_share': plot_capital_interest_share,
                          'plot_debt_share': plot_debt_share})
