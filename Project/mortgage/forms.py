@@ -18,3 +18,4 @@ class ComputeForm(wtf.Form):
 
     button_compute = wtf.SubmitField(label='Compute')
     button_view_details = wtf.SubmitField(label='View Details')
+    button_export_table = wtf.SubmitField(label='Export Table')
