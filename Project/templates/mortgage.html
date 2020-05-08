@@ -48,23 +48,25 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col mb-1">
-                                {{form.frequency.label}}
-                                {{form.frequency}}
-                                {% if form.frequency.errors %}
-                                {% for error in form.frequency.errors %}
-                                <div style="color: red;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="col mb-1">
                                 {{form.interest_rate.label}}
                                 {{form.interest_rate}}
                                 {% if form.interest_rate.errors %}
                                 {% for error in form.interest_rate.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.frequency.label}}<br/>
+                                {{form.frequency}}
+                                {% if form.frequency.errors %}
+                                {% for error in form.frequency.errors %}
                                 <div style="color: red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -88,13 +90,13 @@
         <div class="col-md-4 col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Result</legend>
+                    <legend>Rate Value</legend>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
                         <div class="row d-flex flex-column">
-                            <span class="font-weight-light mb-1"> Rate: {{rate_value}}}</span>
+                            <span class="font-weight-light mb-1 text-center"> Rate: {{rate_value}}</span>
                         </div>
                     </div>
                 </div>
@@ -134,37 +136,38 @@
         </div>
     </div>
     {% endif %}
-</div>
-<div id="popup_table">
 
-    <div class="row border-bottom mb-2 pb-1">
-        <legend>Ammortisation Plan</legend>
-    </div>
-    <div>
-        <table class="table table-striped table-hover" id="table_export">
-            <thead>
-            <th scope="col"> Date</th>
-            <th scope="col"> Residual Capital</th>
-            <th scope="col"> Capital Share</th>
-            <th scope="col"> Interst Share</th>
-            <th scope="col"> Debt Share</th>
-            </thead>
-            <tbody>
-            {%for i in range(number_of_rates)%}
-            <tr>
-                <td> {{dates[i]}}</td>
-                <td> {{residual_debt[i]}}</td>
-                <td> {{capital_share[i]}}</td>
-                <td> {{interest_share[i]}}</td>
-                <td> {{debt_share[i]}}</td>
-            </tr>
-            </tbody>
-            {%endfor%}
-        </table>
-        <hr>
-    </div>
-    <div class="row d-flex justify-content-center">
-        {{form.button_export_table}}
+    <div id="popup_table">
+
+        <div class="row border-bottom mb-2 pb-1">
+            <legend>Ammortisation Plan</legend>
+        </div>
+        <div class="table_wrapper">
+            <table class="table table-striped table-hover" id="table_export">
+                <thead>
+                <th scope="col"> Date</th>
+                <th scope="col"> Residual Capital</th>
+                <th scope="col"> Capital Share</th>
+                <th scope="col"> Interst Share</th>
+                <th scope="col"> Debt Share</th>
+                </thead>
+                <tbody>
+                {%for i in range(number_of_rates)%}
+                <tr>
+                    <td> {{dates[i]}}</td>
+                    <td> {{residual_debt[i]}}</td>
+                    <td> {{capital_share[i]}}</td>
+                    <td> {{interest_share[i]}}</td>
+                    <td> {{debt_share[i]}}</td>
+                </tr>
+                </tbody>
+                {%endfor%}
+            </table>
+            <hr>
+        </div>
+        <div class="row d-flex justify-content-center">
+            {{form.button_export_table}}
+        </div>
     </div>
 </div>
 {% include 'footer.html' %}
