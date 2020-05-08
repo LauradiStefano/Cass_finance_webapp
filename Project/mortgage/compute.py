@@ -1,8 +1,9 @@
 import datetime
 import calendar
-from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
-import bokeh.plotting as plt
+import bokeh.plotting as bp
+from bokeh.core.properties import value
+from bokeh.models import HoverTool
 
 
 def mortgage_compute(capital, rate, years, frequency):
@@ -58,67 +59,62 @@ def generate_date(frequency, nr):
 
 
 def create_capital_interest_plot(dates, capital_share, interest_share):
-    tools = "save, box_zoom, crosshair, reset"
     x = [str(v) for v in range(len(dates))]
     labels = ["capital_share", "interest_share"]
     colors = ["#0095B6", "#D21F1B"]
+
     data = ColumnDataSource(data=dict(
         x=x,
         dates=dates,
         capital_share=capital_share,
         interest_share=interest_share
-        ))
-    tooltips = [
-        ("date", "@dates"),
-        ("capital share", "@capital_share"),
-        ("interest share", "@interest_share")
-    ]
+    ))
+    hover_share = HoverTool(attachment="above", names=['share'],
+                            tooltips=[("Date", "@dates"), ("Capital Share", "@capital_share"),
+                                      ("Interest Share", "@interest_share")])
 
-    p = plt.figure(x_range=x, title=" Capital Share & Interest Share", plot_height=300, toolbar_location="left",
-                   tools=tools, tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_share], x_range=x,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Number of rates',
+                    y_axis_label='Amount')
 
-    # add a line renderer with legend and line thickness
-    p.vbar_stack(labels, x='x', width=0.9, color=colors, source=data)#legend=[value(x) for x in labels])
+    fig.vbar_stack(labels, x='x', width=0.9, alpha=0.8, color=colors, source=data,
+                   legend_label='Capital Share Interest Share', name='share')
 
-    p.toolbar.active_drag = None
-    p.legend.orientation = "horizontal"
-    p.legend.location = "bottom_center"
+    fig.legend.orientation = "horizontal"
+    fig.legend.location = "bottom_center"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
-    script, div = components(p)
+    script, div = components(fig)
 
     return script, div
 
 
 def create_debt_plot(dates, debt_share):
-    tools = "save, box_zoom, crosshair, reset"
     x = [str(v) for v in range(len(dates))]
     labels = ["debt_share"]
     colors = ["#0095B6"]
+
     data = ColumnDataSource(data=dict(
         x=x,
         dates=dates,
         debt_share=debt_share
     ))
 
-    tooltips = [
-        ("date", "@dates"),
-        ("debt share", "@debt_share")
-    ]
+    hover_share = HoverTool(attachment="above", names=['debt share'],
+                            tooltips=[("Date", "@dates"), ("Debt Share", "@debt_share")])
 
-    p = plt.figure(x_range=x, title="Debt Share", plot_height=300, toolbar_location="left", tools=tools,
-                   tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
-    # add a line renderer with legend and line thickness
-    p.vbar_stack(labels, x='x', width=0.9, color=colors,
-                 source=data)#, legend=[value(x) for x in labels]
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_share], x_range=x,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Number of rates',
+                    y_axis_label='Amount')
 
-    p.toolbar.active_drag = None
-    p.legend.orientation = "horizontal"
-    p.legend.location = "top_left"
+    fig.vbar_stack(labels, x='x', width=0.9, alpha=0.8, color=colors, source=data, legend_label="Debt Share",
+                   name='debt share')
+
+    fig.legend.location = "top_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
-    script, div = components(p)
-
+    script, div = components(fig)
 
     return script, div
-
