@@ -2,7 +2,7 @@ import datetime
 import calendar
 from bokeh.models import HoverTool
 from bokeh.plotting import ColumnDataSource
-import bokeh.plotting as bp
+import bokeh.plotting as plt
 
 
 def mortgage_compute(capital, rate, years, frequency):
@@ -58,62 +58,67 @@ def generate_date(frequency, nr):
 
 
 def create_capital_interest_plot(dates, capital_share, interest_share):
-    dates = [str(x) for x in dates]
-
+    tools = "save, box_zoom, crosshair, reset"
+    x = [str(v) for v in range(len(dates))]
+    labels = ["capital_share", "interest_share"]
+    colors = ["#0095B6", "#D21F1B"]
     data = ColumnDataSource(data=dict(
+        x=x,
         dates=dates,
         capital_share=capital_share,
         interest_share=interest_share
-    ))
+        ))
+    tooltips = [
+        ("date", "@dates"),
+        ("capital share", "@capital_share"),
+        ("interest share", "@interest_share")
+    ]
 
-    hover_capital_share = HoverTool(attachment="above", names=['capital share'],
-                                    tooltips=[("Date", "@dates"), ("Capital Share", "@capital_share")])
-    hover_interest_share = HoverTool(attachment="below", names=['interest share'],
-                                     tooltips=[("Date", "@dates"), ("Interest Share", "@interest_share")])
+    p = plt.figure(x_range=x, title=" Capital Share & Interest Share", plot_height=300, toolbar_location="left",
+                   tools=tools, tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
 
-    x_range = [min(dates), max(dates)]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_capital_share, hover_interest_share],
-                    x_range=x_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Dates',
-                    y_axis_label='Share')
+    # add a line renderer with legend and line thickness
+    p.vbar_stack(labels, x='x', width=0.9, color=colors, source=data)#legend=[value(x) for x in labels])
 
-    fig.vbar_stack(x='dates', y='capital_share', source=data, legend_label="Capital Share", color="#0095B6", alpha=0.9,
-                   line_width=4, name='capital share')
-    fig.vbar_stack(x='dates', y='interest_share', source=data, legend_label="Interest Share", color="#D21F1B",
-                   alpha=0.9, line_width=4, name='capital share')
-
-    fig.legend.location = "top_left"
-    fig.toolbar.active_drag = None
+    p.toolbar.active_drag = None
+    p.legend.orientation = "horizontal"
+    p.legend.location = "bottom_center"
 
     from bokeh.embed import components
-    script, div = components(fig)
+    script, div = components(p)
 
     return script, div
 
 
 def create_debt_plot(dates, debt_share):
-    dates = [str(x) for x in dates]
-
+    tools = "save, box_zoom, crosshair, reset"
+    x = [str(v) for v in range(len(dates))]
+    labels = ["debt_share"]
+    colors = ["#0095B6"]
     data = ColumnDataSource(data=dict(
+        x=x,
         dates=dates,
         debt_share=debt_share
     ))
 
-    hover_debt_share = HoverTool(attachment="above", names=['debt share'],
-                                    tooltips=[("Date", "@dates"), ("Debt Share", "@debt_share")])
+    tooltips = [
+        ("date", "@dates"),
+        ("debt share", "@debt_share")
+    ]
 
-    x_range = [min(dates), max(dates)]
-    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_debt_share],
-                    x_range=x_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Dates',
-                    y_axis_label='Debt Share')
+    p = plt.figure(x_range=x, title="Debt Share", plot_height=300, toolbar_location="left", tools=tools,
+                   tooltips=tooltips, x_axis_label='Number of rates', y_axis_label='Amount')
+    # add a line renderer with legend and line thickness
+    p.vbar_stack(labels, x='x', width=0.9, color=colors,
+                 source=data)#, legend=[value(x) for x in labels]
 
-    fig.vbar_stack(x='dates', y='debt_share', source=data, legend_label="Debt Share", color="#0095B6", alpha=0.9,
-                   line_width=4, name='debt share')
-
-    fig.legend.location = "top_left"
-    fig.toolbar.active_drag = None
+    p.toolbar.active_drag = None
+    p.legend.orientation = "horizontal"
+    p.legend.location = "top_left"
 
     from bokeh.embed import components
-    script, div = components(fig)
+    script, div = components(p)
+
 
     return script, div
 
