@@ -193,7 +193,7 @@ def old_portfolio_analysis():
 def old_mortgage():
     template_variables = controller_old_mortgage(current_user)
     return render_template("old_mortgage.html", **template_variables,
-                           back_url=url_for('portfolio_analysis'), old=True)
+                           back_url=url_for('mortgage'), old=True)
 
 
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
