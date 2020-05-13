@@ -3,7 +3,7 @@ import json
 from flask import url_for, redirect, Response
 from sqlalchemy import desc
 from db_models import db
-from db_models import portfolio_analysis as compute
+from db_models import mortgage as compute
 from mortgage.compute import mortgage_compute, create_capital_interest_plot, create_debt_plot
 from mortgage.forms import ComputeForm
 
@@ -51,8 +51,6 @@ def controller_mortgage(user, request):
                 object.user = user
                 db.session.add(object)
                 db.session.commit()
-
-
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_mortgage.count() > 0:
