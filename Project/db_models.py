@@ -490,12 +490,12 @@ class mortgage(db.Model):
     interest_rate = db.Column(db.Float())
 
     dates = db.Column(db.String())
-    residual_share = db.Column(db.String())
+    residual_debt = db.Column(db.String())
     capital_share = db.Column(db.String())
     interest_share = db.Column(db.String())
     debt_share = db.Column(db.String())
     rate_value = db.Column(db.Float())
-    number_of_rates = db.Column(db.Integer())
+    number_of_rates = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_view_details = db.Column(db.Integer())
