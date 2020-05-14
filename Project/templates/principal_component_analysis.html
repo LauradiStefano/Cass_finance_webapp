@@ -1,0 +1,378 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Principal Component Analysis</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> subtitle </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="" enctype="multipart/form-data">
+            <div class="example_file">
+                <a href="">
+                    Tutorial File: Principal Component Analysis.pdf</a><br/>
+                <a href="">
+                    Excel Template File: Principal Component Analysis.xlsx</a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Method</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.method_choice.label}}
+                                {{form.method_choice}}
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6 col-12" id="import_file" {% if form.method_choice.data !='0' %}
+                     style="display:none"
+                     {%endif%}>
+
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Import Prices</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_data.label}}
+                                {{form.file_data}}
+                                {% if form.file_data.errors %}
+                                {% for error in form.file_data.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1 container_model">
+                                {{form.file_name.label}}
+                                <div id="icon_help_dataset">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_dataset">
+                                        To identify the dataset
+                                    </div>
+                                </div>
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.price_return_flag.label}}
+                                {{form.price_return_flag}}
+                                {% if form.price_return_flag.errors %}
+                                {% for error in form.price_return_flag.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+                <div class="col-md-6 col-12" id="tickers" {% if form.method_choice.data !='1' %} style="display:none"
+                     {%endif%}>
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Yahoo Tickers</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.flist}}
+                                {% if form.flist.errors %}
+                                {% for error in form.flist.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col d-flex justify-content-center">
+                                {{form.button_add_field}}
+                            </div>
+                            <div class="col d-flex justify-content-center">
+                                {{form.button_delete_field}}
+                            </div>
+                        </div>
+
+                        <label> Start Date</label>
+                        <div class="row">
+                            <div class="col-4 mb-1">
+                                {{form.start_day.label}}
+                                {{form.start_day}}
+                                {% if form.start_day.errors %}
+                                {% for error in form.start_day.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.start_month.label}}
+                                {{form.start_month}}
+                                {% if form.start_month.errors %}
+                                {% for error in form.start_month.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.start_year.label}}
+                                {{form.start_year}}
+                                {% if form.start_year.errors %}
+                                {% for error in form.start_year.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <label> End Date</label>
+                        <div class="row">
+                            <div class="col-4 mb-1">
+                                {{form.end_day.label}}
+                                {{form.end_day}}
+                                {% if form.end_day.errors %}
+                                {% for error in form.end_day.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.end_month.label}}
+                                {{form.end_month}}
+                                {% if form.end_month.errors %}
+                                {% for error in form.end_month.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="col-4 mb-1">
+                                {{form.end_year.label}}
+                                {{form.end_year}}
+                                {% if form.end_year.errors %}
+                                {% for error in form.end_year.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if plot_cumulative_component != None %}
+    <div class="row p-3 d-flex justify-content-center">
+        {%if sim_id != None %}
+
+        <div class="row">
+            <div class="col-6">
+                <a href="/{{sim_id}}" class="download_data">
+                    Click here to ...</a>
+            </div>
+            <div class="col-6">
+                <a href="//{{sim_id}}" class="download_data">
+                    Click here to...</a>
+            </div>
+        </div>
+
+        {% else %}
+
+        <div class="row">
+            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
+                 title="Log in to download file">
+                Click here to..
+            </div>
+            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
+                 title="Log in to download file">
+                Click here to ...
+            </div>
+        </div>
+
+        {% endif %}
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Variance Component</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_variance_component[0]|safe}}
+                    {{plot_variance_component[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Cumulative Component</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_cumulative_component[0]|safe}}
+                    {{plot_cumulative_component[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Plot 1</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_one_loadings[0]|safe}}
+                    {{plot_one_loadings[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Plot 2</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_two_loadings[0]|safe}}
+                    {{plot_two_loadings[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function () {
+        var select_method_choice = $('#method_choice');
+        var import_file = $('#import_file');
+        var ticker = $('#tickers');
+
+        select_method_choice.on('click', function () {
+            if ($('[name=method_choice]:radio:checked').val() == '0') {
+                import_file.show();
+                ticker.hide();
+            } else {
+                import_file.hide();
+                ticker.show();
+            }
+        });
+
+        var help_dataset = $('#help_dataset');
+        var icon_help_dataset = $('#icon_help_dataset');
+
+        icon_help_dataset.on('mouseenter', function () {
+            help_dataset.show();
+        });
+
+        icon_help_dataset.on('mouseleave', function () {
+            help_dataset.hide();
+        });
+    });
+
+    $(document).ready(function () {
+        var max_fields = 20;
+        var field_number = $('#flist').children().length;
+        var min_fields = 1;
+
+        if (field_number == min_fields) {
+            $('#button_delete_field').prop('disabled', true);
+            $('#button_delete_field').css('opacity', '0.5');
+
+        } else if (field_number == max_fields) {
+            $('#button_add_field').prop('disabled', true);
+            $('#button_add_field').css('opacity', '0.5');
+        }
+
+        $('#button_add_field').click(function (e) {
+            e.preventDefault();
+            if (field_number <= max_fields) {
+                var new_input = $("<input required type='text' ></input>")
+                    .attr('id', 'flist-' + field_number)
+                    .attr('name', 'flist-' + field_number);
+
+                field_number++;
+                $('#flist').append(new_input);
+
+                $('#button_delete_field').prop('disabled', false);
+                $('#button_delete_field').css('opacity', '1');
+
+                if (field_number == max_fields) {
+                    $('#button_add_field').prop('disabled', true);
+                    $('#button_add_field').css('opacity', '0.5');
+                }
+            }
+        });
+        $('#button_delete_field').click(function (e) {
+            e.preventDefault();
+            if (field_number > min_fields) {
+                $('#flist').children().last().remove();
+                field_number--;
+
+                $('#button_add_field').prop('disabled', false);
+                $('#button_add_field').css('opacity', '1');
+
+                if (field_number == min_fields) {
+                    $('#button_delete_field').prop('disabled', true);
+                    $('#button_delete_field').css('opacity', '0.5');
+                }
+
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        var select_method_choice = $('#method_choice');
+        if ($('[name=method_choice]:radio:checked').val() == undefined) {
+            $('#button_compute').prop('disabled', true);
+            $('#button_compute').css('opacity', '0.3');
+        }
+
+        select_method_choice.on('click', function () {
+            if ($('[name=method_choice]:radio:checked').val() != '') {
+                $('#button_compute').prop('disabled', false)
+                $("#button_compute").css('opacity', '1');
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+</script>
+
+</body>
+</html>
