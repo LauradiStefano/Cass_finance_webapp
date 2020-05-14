@@ -27,6 +27,7 @@ from statistical_analysis.controller import controller_statistical_analysis, con
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation, controller_term_structure_data, controller_term_structure_daily_data
 from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
+from principal_component_analysis.controller import controller_principal_component_analysis
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -114,6 +115,12 @@ def portfolio_analysis():
 def mortgage():
     template_variables = controller_mortgage(current_user, request)
     return render_template("mortgage.html", **template_variables)
+
+
+@app.route('/principal_component_analysis', methods=['GET', 'POST'])
+def principal_component_analysis():
+    template_variables = controller_principal_component_analysis(current_user, request)
+    return render_template("principal_component_analysis.html", **template_variables)
 
 
 @app.route('/implied_distribution_illustration/old')
