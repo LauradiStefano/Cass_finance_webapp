@@ -457,6 +457,7 @@ class statisitcal_analysis(db.Model):
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
     button_add_field = db.Column(db.Integer())
+    button_delete_field = db.Column(db.Integer())
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_statistical_analysis', lazy='dynamic'))
@@ -507,22 +508,42 @@ class mortgage(db.Model):
 class principal_component_analysis(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
-    capital_amount = db.Column(db.Float())
-    loan_term = db.Column(db.Float())
-    frequency = db.Column(db.String())
-    interest_rate = db.Column(db.Float())
+    method_choice = db.Column(db.String())
+    file_name = db.Column(db.String())
 
-    dates = db.Column(db.String())
-    residual_debt = db.Column(db.String())
-    capital_share = db.Column(db.String())
-    interest_share = db.Column(db.String())
-    debt_share = db.Column(db.String())
-    rate_value = db.Column(db.Float())
-    number_of_rates = db.Column(db.String())
+    start_day = db.Column(db.Integer())
+    start_month = db.Column(db.Integer())
+    start_year = db.Column(db.Integer())
+
+    end_day = db.Column(db.Integer())
+    end_month = db.Column(db.Integer())
+    end_year = db.Column(db.Integer())
+
+    evalues = db.Column(db.String())
+    autovect = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
-    button_view_details = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
+    button_add_field = db.Column(db.Integer())
+    button_delete_field = db.Column(db.Integer())
+
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_principal_component_analysis', lazy='dynamic'))
+
+class temperature(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    file_name = db.Column(db.String())
+
+    log_temp = db.Column(db.Integer())
+    trend_temp_par = db.Column(db.Integer())
+
+    button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_add_field = db.Column(db.Integer())
+    button_delete_field = db.Column(db.Integer())
+
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_temperature', lazy='dynamic'))
