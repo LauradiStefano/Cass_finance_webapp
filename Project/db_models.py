@@ -482,6 +482,7 @@ class portfolio_analysis(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_portfolio_analysis', lazy='dynamic'))
 
+
 class mortgage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -505,6 +506,7 @@ class mortgage(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_mortgage', lazy='dynamic'))
 
+
 class principal_component_analysis(db.Model):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -527,9 +529,9 @@ class principal_component_analysis(db.Model):
     button_add_field = db.Column(db.Integer())
     button_delete_field = db.Column(db.Integer())
 
-
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_principal_component_analysis', lazy='dynamic'))
+
 
 class temperature(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -543,7 +545,6 @@ class temperature(db.Model):
     button_export_table = db.Column(db.Integer())
     button_add_field = db.Column(db.Integer())
     button_delete_field = db.Column(db.Integer())
-
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_temperature', lazy='dynamic'))

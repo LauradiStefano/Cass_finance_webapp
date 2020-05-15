@@ -29,7 +29,7 @@ from term_structure.controller import controller_term_structure, controller_old_
 from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
 from principal_component_analysis.controller import controller_principal_component_analysis, \
     controller_old_principal_component_analysis, delete_principal_component_analysis_simulation
-from temperature.controller import controller_temperature
+from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -219,6 +219,14 @@ def old_principal_component_analysis():
                            back_url=url_for('principal_component_analysis'), old=True)
 
 
+@app.route('/temperature/old')
+@login_required
+def old_temperature():
+    template_variables = controller_old_temperature(current_user)
+    return render_template("old_temperature.html", **template_variables,
+                           back_url=url_for('temperature'), old=True)
+
+
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -283,6 +291,12 @@ def delete_mortgage(id):
 @login_required
 def delete_principal_component_analysis(id):
     return delete_principal_component_analysis_simulation(current_user, id)
+
+
+@app.route('/temperature/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_temperature(id):
+    return delete_temperature_simulation(current_user, id)
 
 
 @app.route('/download_shimko_theoretical_data/<id>')
