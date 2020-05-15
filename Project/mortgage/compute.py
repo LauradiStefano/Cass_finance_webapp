@@ -78,7 +78,7 @@ def create_capital_interest_plot(dates, capital_share, interest_share):
                     y_axis_label='Amount')
 
     fig.vbar_stack(labels, x='x', width=0.9, alpha=0.8, color=colors, source=data,
-                   legend_label='Capital Share Interest Share', name='share')
+                   legend_label=["Capital Share", "Interest Share"], name='share')
 
     fig.legend.orientation = "horizontal"
     fig.legend.location = "bottom_center"
