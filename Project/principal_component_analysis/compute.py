@@ -12,7 +12,7 @@ import pandas_datareader.data as web
 import bokeh.plotting as bp
 
 from bokeh.models import ColumnDataSource
-from bokeh.palettes import Spectral6
+from bokeh.palettes import Blues9
 from bokeh.plotting import figure
 from bokeh.transform import factor_cmap
 
@@ -112,7 +112,7 @@ def create_plot_variance_component(evalues):
                     y_axis_label='Percentage')
 
     fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
     fig.legend.orientation = "horizontal"
@@ -143,7 +143,7 @@ def create_plot_cumulative_component(evalues):
                     y_axis_label='Percentage')
 
     fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
     fig.legend.orientation = "horizontal"
@@ -173,7 +173,7 @@ def create_plot_one_loadings(autovect):
                     y_axis_label='Percentage')
 
     fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
     # fig.y_range.start = -1
@@ -205,7 +205,7 @@ def create_plot_two_loadings(autovect):
                     y_axis_label='Percentage')
 
     fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
     # fig.y_range.start = -1
