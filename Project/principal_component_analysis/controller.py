@@ -57,7 +57,7 @@ def controller_principal_component_analysis(user, request):
                 object = compute()
                 form.populate_obj(object)
 
-                object.evalues = json.dumps(evalues.tolist())
+                object.evalues = json.dumps(evalues)
                 object.autovect = json.dumps(autovect.tolist())
 
                 object.user = user
@@ -67,13 +67,13 @@ def controller_principal_component_analysis(user, request):
 
     else:
         if user.is_authenticated:  # user authenticated, store the data
-            if user.compute_pca.count() > 0:
-                instance = user.compute_pca.order_by(
+            if user.compute_principal_component_analysis.count() > 0:
+                instance = user.compute_principal_component_analysis.order_by(
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
                 sim_id = instance.id
-                evalues = np.array(json.loads(instance.evalues))
+                evalues = json.loads(instance.evalues)
                 autovect = np.array(json.loads(instance.autovect))
 
                 plot_variance_component = create_plot_variance_component(evalues)
@@ -97,69 +97,68 @@ def populate_form_from_instance(instance):
     return form
 
 
-def controller_old_portfolio_analysis(user):
+def controller_old_principal_component_analysis(user):
     data = []
 
     if user.is_authenticated():
-        instances = user.compute_portfolio_analysis.order_by(desc('id')).all()
+        instances = user.compute_principal_component_analysis.order_by(desc('id')).all()
         for instance in instances:
             form = populate_form_from_instance(instance)
 
             # page old.html, store the date and the plot (previous simulation)
 
             id = instance.id
-            returns = np.array(json.loads(instance.returns))
-            standard_deviations = np.array(json.loads(instance.standard_deviations))
-            means = np.array(json.loads(instance.means))
-            efficient_means = np.array(json.loads(instance.efficient_means))
-            efficient_std = np.array(json.loads(instance.efficient_std))
-            efficient_weights = np.array(json.loads(instance.efficient_weights))
-            tickers = json.loads(instance.tickers)
+            evalues = json.loads(instance.evalues)
+            autovect = np.array(json.loads(instance.autovect))
 
-            plot_efficient_frontier = \
-                create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
-                                               efficient_std)
-            plot_efficient_weights = create_plot_efficient_weights(efficient_means, efficient_weights, tickers)
+            plot_variance_component = create_plot_variance_component(evalues)
 
-            data.append({'form': form, 'id': id, 'plot_efficient_frontier': plot_efficient_frontier,
-                         'plot_efficient_weights': plot_efficient_weights})
+            plot_cumulative_component = create_plot_cumulative_component(evalues)
+
+            plot_one_loadings = create_plot_one_loadings(autovect)
+
+            plot_two_loadings = create_plot_two_loadings(autovect)
+
+            data.append({'form': form, 'id': id, 'plot_variance_component': plot_variance_component,
+                         'plot_cumulative_component': plot_cumulative_component, 'plot_one_loadings': plot_one_loadings,
+                         'plot_two_loadings': plot_two_loadings})
 
     return {'data': data}
 
 
-def delete_portfolio_analysis_simulation(user, id):
+def delete_principal_component_analysis_simulation(user, id):
     id = int(id)
     if user.is_authenticated():
         if id == -1:
-            user.compute_portfolio_analysis.delete()
+            user.compute_principal_component_analysis.delete()
         else:
             try:
-                instance = user.compute_portfolio_analysis.filter_by(id=id).first()
+                instance = user.compute_principal_component_analysis.filter_by(id=id).first()
                 db.session.delete(instance)
             except:
                 pass
 
         db.session.commit()
-    return redirect(url_for('old_portfolio_analysis'))
+    return redirect(url_for('old_principal_component_analysis'))
 
 
-def controller_portfolio_analysis_data(user, id):
-    id = int(id)
-    if user.is_authenticated:
-        csvfile = io.StringIO()
-        instance = user.compute_portfolio_analysis.filter_by(id=id).first()
-
-        efficient_weights_values = np.array(json.loads(instance.efficient_weights))
-        tickers = json.loads(instance.tickers)
-
-        writer = csv.writer(csvfile)
-
-        writer.writerow(tickers)
-        for value in efficient_weights_values:
-            writer.writerow(value)
-
-        return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=portfolio_data.csv"})
-
-    else:
-        return redirect(url_for('portfolio_analysis'))
+# def controller_portfolio_analysis_data(user, id):
+#     id = int(id)
+#     if user.is_authenticated:
+#         csvfile = io.StringIO()
+#         instance = user.compute_portfolio_analysis.filter_by(id=id).first()
+#
+#         efficient_weights_values = np.array(json.loads(instance.efficient_weights))
+#         tickers = json.loads(instance.tickers)
+#
+#         writer = csv.writer(csvfile)
+#
+#         writer.writerow(tickers)
+#         for value in efficient_weights_values:
+#             writer.writerow(value)
+#
+#         return Response(csvfile.getvalue(), mimetype="text/csv",
+#                         headers={"Content-disposition": "attachment; filename=portfolio_data.csv"})
+#
+#     else:
+#         return redirect(url_for('portfolio_analysis'))

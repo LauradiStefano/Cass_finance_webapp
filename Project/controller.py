@@ -27,7 +27,9 @@ from statistical_analysis.controller import controller_statistical_analysis, con
 from term_structure.controller import controller_term_structure, controller_old_term_structure, \
     delete_term_structure_simulation, controller_term_structure_data, controller_term_structure_daily_data
 from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
-from principal_component_analysis.controller import controller_principal_component_analysis
+from principal_component_analysis.controller import controller_principal_component_analysis, \
+    controller_old_principal_component_analysis, delete_principal_component_analysis_simulation
+from temperature.controller import controller_temperature
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -123,6 +125,12 @@ def principal_component_analysis():
     return render_template("principal_component_analysis.html", **template_variables)
 
 
+@app.route('/temperature', methods=['GET', 'POST'])
+def temperature():
+    template_variables = controller_temperature(current_user, request)
+    return render_template("temperature.html", **template_variables)
+
+
 @app.route('/implied_distribution_illustration/old')
 @login_required
 def old_shimko_theoretical():
@@ -203,6 +211,14 @@ def old_mortgage():
                            back_url=url_for('mortgage'), old=True)
 
 
+@app.route('/principal_component_analysis/old')
+@login_required
+def old_principal_component_analysis():
+    template_variables = controller_old_principal_component_analysis(current_user)
+    return render_template("old_principal_component_analysis.html", **template_variables,
+                           back_url=url_for('principal_component_analysis'), old=True)
+
+
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -261,6 +277,12 @@ def delete_portfolio_analysis(id):
 @login_required
 def delete_mortgage(id):
     return delete_mortgage_simulation(current_user, id)
+
+
+@app.route('/principal_component_analysis/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_principal_component_analysis(id):
+    return delete_principal_component_analysis_simulation(current_user, id)
 
 
 @app.route('/download_shimko_theoretical_data/<id>')
