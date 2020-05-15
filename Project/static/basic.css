@@ -180,7 +180,7 @@ form {
 #home .line_button {
     margin: 0 auto;
     background: #808080;
-    width: 10em;
+    width: 14em;
     height: 0.07em;
     transition: width 0.5s;
 }
