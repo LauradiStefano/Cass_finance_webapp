@@ -7,7 +7,6 @@ Created on Wed Apr  8 14:03:23 2020
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource, HoverTool
 
-
 import datetime
 import pandas as pd
 import numpy as np
@@ -22,7 +21,7 @@ from statistics import mean
 
 def import_dataset_file_excel(filename):
     sheet_name = 'Datinofeb'
-    data = pd.read_excel(os.path.join('uploads/', filename, sheet_name=sheet_name))
+    data = pd.read_excel(os.path.join('uploads/', filename))
     return data
 
 
@@ -73,7 +72,7 @@ def compute_parametric_function(data):
     return LogTemp, trend_temp_par, lambda_zero, lambda_one, lambda_two, lambda_three
 
 
-def plot_parametric_function(LogTemp, trend_temp_par):
+def create_plot_parametric_function(LogTemp, trend_temp_par):
     x = [i for i in range(len(LogTemp))]
     y = [trend_temp_par[i] for i in x]
 
@@ -81,29 +80,31 @@ def plot_parametric_function(LogTemp, trend_temp_par):
     y_range = [min([min(y) - 1, min(LogTemp) - 1]), max([max(y) + 1, max(LogTemp) + 1])]
 
     data_model = ColumnDataSource(data=dict(
-        nDays = x,
-        model_temp = y
+        nDays=x,
+        model_temp=y
     ))
 
     data_imported = ColumnDataSource(data=dict(
-        nDays = x,
+        nDays=x,
         LogTemp=LogTemp
     ))
 
-    hover_model = HoverTool(attachment="above", names=['Parametric Model'],
-                                     tooltips=[("nDays", "@nDays"), ("Model Temp", "@model_temp")])
+    hover_model = HoverTool(attachment="above", names=['parametric model'],
+                            tooltips=[("nDays", "@nDays"), ("Model Temp", "@model_temp")])
 
-    hover_imported = HoverTool(attachment="above", names=['Imported temp'], tooltips=[("nDays", "@nDays"),
-                                                                             ("Log Temp", "@LogTemp")])
+    hover_imported = HoverTool(attachment="above", names=['imported temp'], tooltips=[("nDays", "@nDays"),
+                                                                                      ("Log Temp", "@LogTemp")])
 
-    fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_imported], x_range=x_range, 
-                        y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label = 'Days',
-                        y_axis_label="Λt",title="A Temperature seasonality component" )
+    fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_model, hover_imported], x_range=x_range,
+                 y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Days',
+                 y_axis_label="Λt")
 
-    fig.line(x = "nDays", y = "model_temp", source = data_model, line_color="blue", line_width=2, name = "Parametric Model")
-    fig.circle(x = "nDays", y = "LogTemp", source = data_imported,  line_color = "blue", line_alpha = 0.5, fill_color= "yellow", fill_alpha = 0.7, name = "Imported temp")
+    fig.line(x="nDays", y="model_temp", source=data_model, color="#0095B6", alpha=0.9, line_width=4,
+             name="parametric model")
+    fig.circle(x="nDays", y="LogTemp", source=data_imported, line_color="#D21F1B", line_alpha=0.5, fill_color="#D21F1B",
+               fill_alpha=0.5, name="imported temp")
 
     from bokeh.embed import components
     script, div = components(fig)
 
-    return fig, div
+    return script, div

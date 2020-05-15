@@ -1,0 +1,171 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Temperature</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> --- </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="" enctype="multipart/form-data">
+            <div class="example_file">
+                <a href="/">
+                    Tutorial File: Temperature Tutorial.pdf</a><br/>
+                <a href="/static/download_example/temperature_dataset.xlsx">
+                    Excel Template File: Temperature Dataset.xlsx</a>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_data.label}}
+                                {{form.file_data}}
+                                {% if form.file_data.errors %}
+                                {% for error in form.file_data.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1 container_model">
+                                {{form.file_name.label}}
+                                <div id="icon_help_dataset">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_dataset">
+                                        To identify the dataset
+                                    </div>
+                                </div>
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: red;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if plot_parametric_function != None %}
+    <div class="row p-3 d-flex justify-content-center">
+
+<!--        {%if sim_id != None %}-->
+<!--        <div>-->
+<!--            <a href="/download_portfolio_data/{{sim_id}}" class="download_data">-->
+<!--                Click here to download the efficient portfolios composition</a>-->
+<!--        </div>-->
+<!--        {% else %}-->
+<!--        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">-->
+<!--            Click here to download the efficient portfolios composition-->
+<!--        </div>-->
+<!--        {% endif %}-->
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Temperature Seasonality Component</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_parametric_function[0]|safe}}
+                    {{plot_parametric_function[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var help_dataset = $('#help_dataset').first();
+        var icon_help_dataset = $('#icon_help_dataset');
+
+        icon_help_dataset.on('mouseenter', function(){
+            help_dataset.show();
+        });
+
+        icon_help_dataset.on('mouseleave', function() {
+            help_dataset.hide();
+        });
+    });
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

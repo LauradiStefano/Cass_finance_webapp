@@ -15,7 +15,7 @@
             <div class="example_file">
                 <a href="">
                     Tutorial File: Principal Component Analysis.pdf</a><br/>
-                <a href="">
+                <a href="/static/download_example/principal_component_analysis_dataset.xlsx">
                     Excel Template File: Principal Component Analysis.xlsx</a>
             </div>
             <div class="row">
@@ -224,7 +224,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Variance Component</legend>
+                    <legend>Percentage Variance explained by each Component</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_variance_component[0]|safe}}
@@ -236,7 +236,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Cumulative Component</legend>
+                    <legend>Cumulative Percentage Variance Explained</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_cumulative_component[0]|safe}}
@@ -248,7 +248,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Plot 1</legend>
+                    <legend>Loadings with respect the 1 st PC</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_one_loadings[0]|safe}}
@@ -260,7 +260,7 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Plot 2</legend>
+                    <legend>Loadings with respect the 1 st PC</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
                     {{plot_two_loadings[0]|safe}}
