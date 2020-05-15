@@ -208,8 +208,6 @@ def create_plot_two_loadings(autovect):
              line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    # fig.y_range.start = -1
-    # fig.y_range.end = 1
     fig.legend.orientation = "horizontal"
     fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
