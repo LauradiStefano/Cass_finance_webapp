@@ -9,6 +9,7 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 import pandas_datareader.data as web
+import bokeh.plotting as bp
 
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Spectral6
@@ -103,18 +104,20 @@ def create_plot_variance_component(evalues):
         tickers=tickers,
         percentage=percentage))
 
-    fig = figure(x_range=tickers, plot_height=350, toolbar_location=None,
-                 title="Percentage Variance explained by each Component")
-    fig.xaxis.axis_label = 'Ticker'
-    fig.yaxis.axis_label = 'Percentage'
-    fig.vbar(x='tickers', top='percentage', width=0.9, source=data, legend_field="tickers",
-             line_color='white', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+    x_range = tickers
+    y_range = [0, 140]
+
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    y_axis_label='Percentage')
+
+    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.y_range.start = 0
-    fig.y_range.end = 140
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_center"
+    fig.legend.location = "top_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
     script, div = components(fig)
@@ -127,23 +130,25 @@ def create_plot_cumulative_component(evalues):
     tickers = [str(i) for i in range(len_tickers)]
     percentage = np.cumsum(evalues / sum(evalues) * 100)
 
-    source = ColumnDataSource(data=dict(tickers=tickers, percentage=percentage))
+    data = ColumnDataSource(data=dict(
+        tickers=tickers,
+        percentage=percentage
+    ))
 
-    fig = figure(x_range=tickers, plot_height=350, toolbar_location=None,
-                 title="Cumulative Percentage Variance Explained")
-    fig.xaxis.axis_label = 'Ticker'
-    fig.yaxis.axis_label = 'Percentage'
+    x_range = tickers
+    y_range = [0, 140]
 
-    fig.vbar(x='tickers', top='percentage', width=0.9, source=source, legend_field="tickers",
-             line_color='white', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    y_axis_label='Percentage')
+
+    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.y_range.start = 0
-    fig.y_range.end = 140
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_center"
-    # fig.toolbar.active_drag = None
-    # fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
     script, div = components(fig)
@@ -156,24 +161,26 @@ def create_plot_one_loadings(autovect):
 
     tickers = [str(i) for i in range(len(pca_one))]
 
-    source = ColumnDataSource(data=dict(
+    data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
     ))
 
-    fig = figure(x_range=tickers, plot_height=350, toolbar_location=None, title="Loadings with respect the 1 st PC")
-    fig.xaxis.axis_label = 'Ticker'
-    fig.yaxis.axis_label = 'Percentage'
+    x_range = tickers
+    y_range = [-1, 1]
 
-    fig.vbar(x='tickers', top='pca_one', width=0.9, source=source, legend_field="tickers",
-             line_color='white', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    y_axis_label='Percentage')
+
+    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.y_range.start = -1
-    fig.y_range.end = 1
+    # fig.y_range.start = -1
+    # fig.y_range.end = 1
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_center"
-    # fig.toolbar.active_drag = None
-    # fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
     script, div = components(fig)
@@ -186,24 +193,26 @@ def create_plot_two_loadings(autovect):
 
     tickers = [str(i) for i in range(len(pca_one))]
 
-    source = ColumnDataSource(data=dict(
+    data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
     ))
 
-    fig = figure(x_range=tickers, plot_height=350, toolbar_location=None, title="Loadings with respect the 1 st PC")
-    fig.xaxis.axis_label = 'Ticker'
-    fig.yaxis.axis_label = 'Percentage'
+    x_range = tickers
+    y_range = [-1, 1]
 
-    fig.vbar(x='tickers', top='pca_one', width=0.9, source=source, legend_field="tickers",
-             line_color='white', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    y_axis_label='Percentage')
+
+    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
+             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Spectral6, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.y_range.start = -1
-    fig.y_range.end = 1
+    # fig.y_range.start = -1
+    # fig.y_range.end = 1
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_center"
-    # fig.toolbar.active_drag = None
-    # fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
     script, div = components(fig)
