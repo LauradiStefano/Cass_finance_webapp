@@ -375,7 +375,7 @@ fieldset > .project_list {
     }
 
     .dropdown-item:hover {
-        background-color: none;
+        background-color: transparent;
         border: none;
         color: #5F5F5F;
     }
