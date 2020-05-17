@@ -31,7 +31,7 @@
                                 {{form.price}}
                                 {% if form.price.errors %}
                                 {% for error in form.price.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -43,7 +43,7 @@
                                 {{form.time}}
                                 {% if form.time.errors %}
                                 {% for error in form.time.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -56,7 +56,7 @@
 
                                 {% if form.risk_free.errors %}
                                 {% for error in form.risk_free.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -69,7 +69,7 @@
 
                                 {% if form.div_yield.errors %}
                                 {% for error in form.div_yield.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -90,7 +90,7 @@
                                 {{ form.strike_min }}
                                 {% if form.strike_min.errors %}
                                 {% for error in form.strike_min.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color:red;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -102,7 +102,7 @@
                                 {{ form.strike_atm }}
                                 {% if form.strike_atm.errors %}
                                 {% for error in form.strike_atm.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -114,7 +114,7 @@
                                 {{ form.strike_max }}
                                 {% if form.strike_max.errors %}
                                 {% for error in form.strike_max.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -134,7 +134,7 @@
                                 {{ (form.volatility_min) }}
                                 {% if form.volatility_min.errors %}
                                 {% for error in form.volatility_min.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -146,7 +146,7 @@
                                 {{ (form.volatility_atm) }}
                                 {% if form.volatility_atm.errors %}
                                 {% for error in form.volatility_atm.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -158,7 +158,7 @@
                                 {{ (form.volatility_max) }}
                                 {% if form.volatility_max.errors %}
                                 {% for error in form.volatility_max.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>

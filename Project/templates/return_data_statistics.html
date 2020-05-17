@@ -53,7 +53,7 @@
                                 {{form.file_data}}
                                 {% if form.file_data.errors %}
                                 {% for error in form.file_data.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -71,7 +71,7 @@
                                 {{form.file_name}}
                                 {% if form.file_name.errors %}
                                 {% for error in form.file_name.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -89,10 +89,10 @@
 
                         <div class="row">
                             <div class="col mb-1">
-                                {{form.flist}}
-                                {% if form.flist.errors %}
-                                {% for error in form.flist.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                {{form.tickers_list}}
+                                {% if form.tickers_list.errors %}
+                                {% for error in form.tickers_list.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -113,7 +113,7 @@
                                 {{form.start_day}}
                                 {% if form.start_day.errors %}
                                 {% for error in form.start_day.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -122,7 +122,7 @@
                                 {{form.start_month}}
                                 {% if form.start_month.errors %}
                                 {% for error in form.start_month.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -131,7 +131,7 @@
                                 {{form.start_year}}
                                 {% if form.start_year.errors %}
                                 {% for error in form.start_year.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -143,7 +143,7 @@
                                 {{form.end_day}}
                                 {% if form.end_day.errors %}
                                 {% for error in form.end_day.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -152,7 +152,7 @@
                                 {{form.end_month}}
                                 {% if form.end_month.errors %}
                                 {% for error in form.end_month.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -161,7 +161,7 @@
                                 {{form.end_year}}
                                 {% if form.end_year.errors %}
                                 {% for error in form.end_year.errors %}
-                                <div style="color: red;">{{ error }}</div>
+                                <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
@@ -302,7 +302,7 @@
 
     $(document).ready(function() {
         var max_fields = 20;
-        var field_number = $('#flist').children().length ;
+        var field_number = $('#tickers_list').children().length ;
         var min_fields = 1;
 
         if (field_number == min_fields) {
@@ -318,11 +318,11 @@
             e.preventDefault();
             if(field_number <= max_fields){
                 var new_input = $("<input required type='text' ></input>")
-                .attr('id', 'flist-' + field_number)
-                .attr('name', 'flist-' + field_number);
+                .attr('id', 'tickers_list-' + field_number)
+                .attr('name', 'tickers_list-' + field_number);
 
                 field_number++;
-                $('#flist').append(new_input);
+                $('#tickers_list').append(new_input);
 
                 $('#button_delete_field').prop('disabled', false);
                 $('#button_delete_field').css('opacity', '1');
@@ -336,7 +336,7 @@
         $('#button_delete_field').click(function(e) {
             e.preventDefault();
             if (field_number > min_fields){
-                $('#flist').children().last().remove();
+                $('#tickers_list').children().last().remove();
                 field_number--;
 
                 $('#button_add_field').prop('disabled', false);
