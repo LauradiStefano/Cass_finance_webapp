@@ -52,7 +52,7 @@ def controller_statistical_analysis(user, request):
 
             else:  # form.method_choice.data == '1'
 
-                file_data, dates = import_dataset_tickers(form.flist.data, form.start_day.data, form.start_month.data,
+                file_data, dates = import_dataset_tickers(form.tickers_list.data, form.start_day.data, form.start_month.data,
                                                           form.start_year.data, form.end_day.data, form.end_month.data,
                                                           form.end_year.data)
 
@@ -127,11 +127,7 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        if type(field.data) == list:
-            field.data.pop()  # remove tickers name in field
-            # for x in instance.tickers:
-            #     field.data.append(x)
-        else:
+        if not type(field.data) == list:  # dont't use the variables tickers_list
             field.data = getattr(instance, field.name, None)  # get a value or, if it doesn't exist, a default value
 
     return form

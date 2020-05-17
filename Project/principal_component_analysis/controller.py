@@ -41,7 +41,7 @@ def controller_principal_component_analysis(user, request):
 
                 evalues, autovect = import_dataset_file_excel(file_data, form.price_return_flag.data)
             else:
-                evalues, autovect = import_dataset_tickers(form.flist.data, form.start_day.data, form.start_month.data,
+                evalues, autovect = import_dataset_tickers(form.tickers_list.data, form.start_day.data, form.start_month.data,
                                                            form.start_year.data, form.end_day.data, form.end_month.data,
                                                            form.end_year.data)
 
@@ -93,7 +93,9 @@ def populate_form_from_instance(instance):
     """Repopulate form with previous values"""
     form = ComputeForm()
     for field in form:
-        field.data = getattr(instance, field.name, None)  # get a value or, if it doesn't exist, a default value
+        if not type(field.data) == list:  # dont't use the variables tickers_list
+            field.data = getattr(instance, field.name, None)  # get a value or, if it doesn't exist, a default value
+
     return form
 
 
@@ -140,7 +142,6 @@ def delete_principal_component_analysis_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_principal_component_analysis'))
-
 
 # def controller_portfolio_analysis_data(user, id):
 #     id = int(id)

@@ -401,6 +401,13 @@ def create_login():
 def login():
     from forms import LoginForm
     form = LoginForm(request.form)
+
+    if app.env == "development":
+        from forms import DevLoginForm
+        user = DevLoginForm(request.form).get_user()
+        login_user(user, remember=True)
+        return redirect(url_for('index'))
+
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         login_user(user, remember=True)
