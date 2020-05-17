@@ -180,13 +180,13 @@ form {
 #home .line_button {
     margin: 0 auto;
     background: #808080;
-    width: 14em;
-    height: 0.07em;
+    width: 0;
+    height: 1px;
     transition: width 0.5s;
 }
 
-#home a.line_text:hover ~ div.line_button {
-    width: 11em;
+#home .project_list > .row:hover .line_button{
+    width: 100%;
 }
 
 #home .button_container {
@@ -395,12 +395,12 @@ fieldset > .project_list {
     overflow: hidden;
 }
 
-#flist-0 {
+#tickers_list-0 {
     margin: 3px auto !important;
     overflow: hidden;
 }
 
-#flist > input {
+#tickers_list > input {
     margin: 3px auto !important;
     overflow: hidden;
 }
