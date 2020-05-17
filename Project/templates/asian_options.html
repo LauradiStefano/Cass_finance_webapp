@@ -782,255 +782,192 @@
                     <legend>Asian Option Lower Bound</legend>
                 </div>
                 <div class="d-flex justify-content-center plot">
-
                     {{plot_lower_bound[0]|safe}}
                     {{plot_lower_bound[1]|safe}}
-
                 </div>
-
             </fieldset>
         </div>
     </div>
-
     {%endif%}
-
 </div>
 
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-                    $(function () {
-                        var select_model = $('#model_choice');
-                        var gaussian = $('#gaussian');
-                        var vg = $('#vg');
-                        var heston = $('#heston');
-                        var nig = $('#nig');
-                        var cgmy = $('#cgmy');
-                        var meixner = $('#meixner');
-                        var mjd = $('#mjd');
-                        var dejd = $('#dejd');
-                        var cev = $('#cev');
-                        var exponential = $('#exponential');
-
-                        var generalPrice = $('#general_price');
-                        var generalRiskFree = $('#general_risk_free');
-                        var generalTime = $('#general_time');
-                        var generalStep = $('#general_step');
-                        var generalStrike = $('#general_strike');
-                        var generalUpper = $('#general_upper');
-                        var generalLower = $('#general_lower');
-
-                        var expPrice = $('#exp_price');
-                        var expRiskFree = $('#exp_risk_free');
-                        var expTime = $('#exp_time');
-                        var expStep = $('#exp_step');
-                        var expStrike = $('#exp_strike');
-                        var expUpper = $('#exp_upper');
-                        var expLower = $('#exp_lower');
-
-                        function reset() {
-                            gaussian.hide();
-                            vg.hide();
-                            heston.hide();
-                            nig.hide();
-                            cgmy.hide();
-                            meixner.hide();
-                            mjd.hide();
-                            dejd.hide();
-                            cev.hide();
-                            exponential.hide();
-
-                            generalPrice.hide();
-                            generalRiskFree.hide();
-                            generalTime.hide();
-                            generalStep.hide();
-                            generalStrike.hide();
-                            generalUpper.hide();
-                            generalLower.hide();
-
-                            expPrice.hide();
-                            expRiskFree.hide();
-                            expTime.hide();
-                            expStep.hide();
-                            expStrike.hide();
-                            expUpper.hide();
-                            expLower.hide();
-                        }
-
-                        select_model.on('change', function () {
-                            if (select_model.val() == '0') {
-                                reset();
-                                gaussian.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '1') {
-                                reset();
-                                vg.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '2') {
-                                reset();
-                                heston.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '3') {
-                                reset();
-                                nig.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '4') {
-                                reset();
-                                cgmy.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '5') {
-                                reset();
-                                meixner.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '6') {
-                                reset();
-                                mjd.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '7') {
-                                reset();
-                                dejd.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else if (select_model.val() == '8') {
-                                reset();
-                                cev.show();
-                                generalPrice.show();
-                                generalRiskFree.show();
-                                generalTime.show();
-                                generalStep.show();
-                                generalStrike.show();
-                                generalUpper.show();
-                                generalLower.show();
-
-                            } else {
-                                reset();
-                                exponential.show();
-                                expPrice.show();
-                                expRiskFree.show();
-                                expTime.show();
-                                expStep.show();
-                                expStrike.show();
-                                expUpper.show();
-                                expLower.show();
-                            }
-                        });
-                    });
-  $(document).ready(function(){
-         $('[data-toggle="tooltip"]').tooltip();
-  });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    $(function () {
+        var select_model = $('#model_choice');
+        var gaussian = $('#gaussian');
+        var vg = $('#vg');
+        var heston = $('#heston');
+        var nig = $('#nig');
+        var cgmy = $('#cgmy');
+        var meixner = $('#meixner');
+        var mjd = $('#mjd');
+        var dejd = $('#dejd');
+        var cev = $('#cev');
+        var exponential = $('#exponential');
+
+        var generalPrice = $('#general_price');
+        var generalRiskFree = $('#general_risk_free');
+        var generalTime = $('#general_time');
+        var generalStep = $('#general_step');
+        var generalStrike = $('#general_strike');
+        var generalUpper = $('#general_upper');
+        var generalLower = $('#general_lower');
+
+        var expPrice = $('#exp_price');
+        var expRiskFree = $('#exp_risk_free');
+        var expTime = $('#exp_time');
+        var expStep = $('#exp_step');
+        var expStrike = $('#exp_strike');
+        var expUpper = $('#exp_upper');
+        var expLower = $('#exp_lower');
+
+        function reset() {
+            gaussian.hide();
+            vg.hide();
+            heston.hide();
+            nig.hide();
+            cgmy.hide();
+            meixner.hide();
+            mjd.hide();
+            dejd.hide();
+            cev.hide();
+            exponential.hide();
+
+            generalPrice.hide();
+            generalRiskFree.hide();
+            generalTime.hide();
+            generalStep.hide();
+            generalStrike.hide();
+            generalUpper.hide();
+            generalLower.hide();
+
+            expPrice.hide();
+            expRiskFree.hide();
+            expTime.hide();
+            expStep.hide();
+            expStrike.hide();
+            expUpper.hide();
+            expLower.hide();
+        }
+
+        select_model.on('change', function () {
+            if (select_model.val() == '0') {
+                reset();
+                gaussian.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '1') {
+                reset();
+                vg.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '2') {
+                reset();
+                heston.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '3') {
+                reset();
+                nig.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '4') {
+                reset();
+                cgmy.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '5') {
+                reset();
+                meixner.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '6') {
+                reset();
+                mjd.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '7') {
+                reset();
+                dejd.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else if (select_model.val() == '8') {
+                reset();
+                cev.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
+            } else {
+                reset();
+                exponential.show();
+                expPrice.show();
+                expRiskFree.show();
+                expTime.show();
+                expStep.show();
+                expStrike.show();
+                expUpper.show();
+                expLower.show();
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
 
 </script>
