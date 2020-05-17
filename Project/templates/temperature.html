@@ -68,19 +68,48 @@
     </div>
 
     {% if plot_parametric_function != None %}
-    <div class="row p-3 d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
 
-<!--        {%if sim_id != None %}-->
-<!--        <div>-->
-<!--            <a href="/download_portfolio_data/{{sim_id}}" class="download_data">-->
-<!--                Click here to download the efficient portfolios composition</a>-->
-<!--        </div>-->
-<!--        {% else %}-->
-<!--        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">-->
-<!--            Click here to download the efficient portfolios composition-->
-<!--        </div>-->
-<!--        {% endif %}-->
+        <!--        {%if sim_id != None %}-->
+        <!--        <div>-->
+        <!--            <a href="/download_asian_data/{{sim_id}}" class="download_data">-->
+        <!--                Click here to download the implicit data</a>-->
+        <!--        </div>-->
+        <!--        {% else %}-->
+        <!--        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">-->
+        <!--            Click here to download the implicit data-->
+        <!--        </div>-->
+        <!--        {% endif %}-->
 
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Table of Lambda Values</legend>
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <th scope="col">Lambda 0</th>
+                    <th scope="col">Lambda 1</th>
+                    <th scope="col">Lambda 2</th>
+                    <th scope="col">Lambda 3</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>{{lambda_zero}}</td>
+                        <td>{{lambda_one}}</td>
+                        <td>{{lambda_two}}</td>
+                        <td>{{lambda_three}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </fieldset>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
@@ -98,72 +127,22 @@
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var help_dataset = $('#help_dataset').first();
         var icon_help_dataset = $('#icon_help_dataset');
 
-        icon_help_dataset.on('mouseenter', function(){
+        icon_help_dataset.on('mouseenter', function () {
             help_dataset.show();
         });
 
-        icon_help_dataset.on('mouseleave', function() {
+        icon_help_dataset.on('mouseleave', function () {
             help_dataset.hide();
         });
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

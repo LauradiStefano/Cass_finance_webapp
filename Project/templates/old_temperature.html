@@ -14,7 +14,7 @@
 <div class="container">
     <div class="row d-flex justify-content-center">
         <div class="row">
-            <div class="col-12">
+            <div class="col-md-3 col-12">
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
@@ -34,9 +34,41 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Table of Asian Option Lower Bound</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <th scope="col">Lambda 0</th>
+                                        <th scope="col">Lambda 1</th>
+                                        <th scope="col">Lambda 2</th>
+                                        <th scope="col">Lambda 3</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{result['lambda_zero']}}</td>
+                                            <td>{{result['lambda_one']}}</td>
+                                            <td>{{result['lambda_two']}}</td>
+                                            <td>{{result['lambda_three']}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     {% if result['plot_parametric_function'] != None %}
+
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">

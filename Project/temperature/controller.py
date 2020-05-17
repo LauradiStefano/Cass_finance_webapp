@@ -21,6 +21,10 @@ def controller_temperature(user, request):
     file_data = None
     log_temp = None
     trend_temp_par = None
+    lambda_zero = None
+    lambda_one = None
+    lambda_two = None
+    lambda_three = None
 
     sim_id = None
 
@@ -48,6 +52,10 @@ def controller_temperature(user, request):
 
                 object.log_temp = json.dumps(log_temp)
                 object.trend_temp_par = json.dumps(trend_temp_par.tolist())
+                object.lambda_zero = lambda_zero
+                object.lambda_one = lambda_one
+                object.lambda_two = lambda_two
+                object.lambda_three = lambda_three
 
                 object.user = user
                 db.session.add(object)
@@ -64,11 +72,21 @@ def controller_temperature(user, request):
                 # sim_id = instance.id
                 log_temp = json.loads(instance.log_temp)
                 trend_temp_par = np.array(json.loads(instance.trend_temp_par))
+                lambda_zero = instance.lambda_zero
+                lambda_one = instance.lambda_one
+                lambda_two = instance.lambda_two
+                lambda_three = instance.lambda_three
 
                 plot_parametric_function = \
                     create_plot_parametric_function(log_temp, trend_temp_par)
+                
+    lambda_zero = round(lambda_zero, 6) if lambda_zero is not None else None
+    lambda_one = round(lambda_one, 6) if lambda_one is not None else None
+    lambda_two = round(lambda_two, 6) if lambda_two is not None else None
+    lambda_three = round(lambda_three, 6) if lambda_three is not None else None
 
-    return {'form': form, 'user': user, 'plot_parametric_function': plot_parametric_function}
+    return {'form': form, 'user': user, 'lambda_zero': lambda_zero, 'lambda_one': lambda_one, 'lambda_two': lambda_two,
+            'lambda_three': lambda_three, 'plot_parametric_function': plot_parametric_function}
 
 
 def populate_form_from_instance(instance):
@@ -92,11 +110,22 @@ def controller_old_temperature(user):
             id = instance.id
             log_temp = json.loads(instance.log_temp)
             trend_temp_par = np.array(json.loads(instance.trend_temp_par))
+            lambda_zero = instance.lambda_zero
+            lambda_one = instance.lambda_one
+            lambda_two = instance.lambda_two
+            lambda_three = instance.lambda_three
 
             plot_parametric_function = \
                 create_plot_parametric_function(log_temp, trend_temp_par)
 
-            data.append({'form': form, 'id': id, 'plot_parametric_function': plot_parametric_function})
+            lambda_zero = round(lambda_zero, 6) if lambda_zero is not None else None
+            lambda_one = round(lambda_one, 6) if lambda_one is not None else None
+            lambda_two = round(lambda_two, 6) if lambda_two is not None else None
+            lambda_three = round(lambda_three, 6) if lambda_three is not None else None
+
+            data.append(
+                {'form': form, 'id': id, 'lambda_zero': lambda_zero, 'lambda_one': lambda_one, 'lambda_two': lambda_two,
+                 'lambda_three': lambda_three, 'plot_parametric_function': plot_parametric_function})
 
     return {'data': data}
 

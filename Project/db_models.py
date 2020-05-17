@@ -540,6 +540,10 @@ class temperature(db.Model):
 
     log_temp = db.Column(db.Integer())
     trend_temp_par = db.Column(db.Integer())
+    lambda_zero = db.Column(db.Float())
+    lambda_one = db.Column(db.Float())
+    lambda_two = db.Column(db.Float())
+    lambda_three = db.Column(db.Float())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
