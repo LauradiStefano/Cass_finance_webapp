@@ -110,3 +110,28 @@ class LoginForm(wtf.Form):
     def get_user(self):
         return db_models.db.session.query(db_models.User).filter_by(
             email=self.email.data).first()
+
+class DevLoginForm(wtf.Form):
+    email = html5.EmailField(label='Email')
+    password = wtf.PasswordField(label='Password')
+    button_login = wtf.SubmitField(label='Log In')
+
+    def validate(self):
+        if not wtf.Form.validate(self):
+            return False
+
+        user = self.get_user()
+
+        if user is None:
+            self.email.errors.append('Unknown user')
+            return False
+
+        if not user.check_password(self.password.data):
+            self.password.errors.append('Invalid password')
+            return False
+
+        return True
+
+    def get_user(self):
+        return db_models.db.session.query(db_models.User).filter_by(
+            email="prova@prova.com").first()

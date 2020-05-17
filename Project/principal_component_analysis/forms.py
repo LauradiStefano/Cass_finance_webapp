@@ -14,7 +14,7 @@ class ComputeForm(wtf.Form):
     price_return_flag = wtf.RadioField('Prices-Returns:', choices=[('0', 'Prices'), ('1', 'Returns')],
                                    validators=[InputRequired()], default='0')
 
-    flist = FieldList(StringField(label='Ticker', default='AAPL'), min_entries=1)
+    tickers_list = FieldList(StringField(label='Ticker', default='AAPL'), min_entries=1)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
@@ -27,4 +27,4 @@ class ComputeForm(wtf.Form):
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')
     button_add_field = wtf.SubmitField(label='Add Ticker')
-    button_delete_field = wtf.SubmitField(label='Delete Row')
+    button_delete_field = wtf.SubmitField(label='Delete Ticker')
