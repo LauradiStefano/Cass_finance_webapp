@@ -57,7 +57,7 @@ def controller_principal_component_analysis(user, request):
                 object = compute()
                 form.populate_obj(object)
 
-                object.evalues = json.dumps(evalues)
+                object.evalues = json.dumps(evalues.tolist())
                 object.autovect = json.dumps(autovect.tolist())
 
                 object.user = user
