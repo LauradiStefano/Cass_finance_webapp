@@ -86,7 +86,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 
     D, A = np.linalg.eig(covariance_matrix)
 
-    evalues = D
+    evalues = sorted(D, reverse=True)
 
     autovect = A
 
