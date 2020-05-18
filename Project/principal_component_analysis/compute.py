@@ -50,7 +50,11 @@ def import_dataset_file_excel(filename, price_or_return):
     evalues = sorted(D, reverse=True)
     evalues = np.array(evalues)
 
-
+    pc_terms = []
+    for i in range(0,len(evalues)):
+        z = "pc"+str(i)
+        pc_terms.append(z)
+        
     return evalues, autovect
 
 
@@ -92,6 +96,13 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     evalues = np.array(evalues)
     autovect = A
 
+    pc_terms = []
+    for i in range(0,len(evalues)):
+        z = "pc"+str(i)
+        pc_terms.append(z)
+        
+
+    
     return evalues, autovect
 
 
