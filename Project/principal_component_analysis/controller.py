@@ -39,11 +39,12 @@ def controller_principal_component_analysis(user, request):
                         file_data = secure_filename(file.filename)
                         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-                evalues, autovect = import_dataset_file_excel(file_data, form.price_return_flag.data)
+                evalues, autovect, pc_terms = import_dataset_file_excel(file_data, form.price_return_flag.data)
             else:
-                evalues, autovect = import_dataset_tickers(form.tickers_list.data, form.start_day.data, form.start_month.data,
-                                                           form.start_year.data, form.end_day.data, form.end_month.data,
-                                                           form.end_year.data)
+                evalues, autovect, pc_terms = import_dataset_tickers(form.tickers_list.data, form.start_day.data,
+                                                                     form.start_month.data, form.start_year.data,
+                                                                     form.end_day.data, form.end_month.data,
+                                                                     form.end_year.data)
 
             plot_variance_component = create_plot_variance_component(evalues)
 
@@ -57,8 +58,9 @@ def controller_principal_component_analysis(user, request):
                 object = compute()
                 form.populate_obj(object)
 
-                object.evalues = json.dumps(evalues)
+                object.evalues = json.dumps(evalues.tolist())
                 object.autovect = json.dumps(autovect.tolist())
+                object.pc_terms = json.dumps(pc_terms)
 
                 object.user = user
                 db.session.add(object)
@@ -143,23 +145,46 @@ def delete_principal_component_analysis_simulation(user, id):
         db.session.commit()
     return redirect(url_for('old_principal_component_analysis'))
 
-# def controller_portfolio_analysis_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_portfolio_analysis.filter_by(id=id).first()
-#
-#         efficient_weights_values = np.array(json.loads(instance.efficient_weights))
-#         tickers = json.loads(instance.tickers)
-#
-#         writer = csv.writer(csvfile)
-#
-#         writer.writerow(tickers)
-#         for value in efficient_weights_values:
-#             writer.writerow(value)
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=portfolio_data.csv"})
-#
-#     else:
-#         return redirect(url_for('portfolio_analysis'))
+
+def controller_principal_component_analysis_evalues_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_principal_component_analysis.filter_by(id=id).first()
+
+        evalues_values = np.array(json.loads(instance.evalues))
+        pc_terms = json.loads(instance.pc_terms)
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(pc_terms)
+        writer.writerow(evalues_values)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=test.csv"})
+
+    else:
+        return redirect(url_for('principal_component_analysis'))
+
+
+def controller_principal_component_analysis_autovect_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+
+        csvfile = io.StringIO()
+        instance = user.compute_principal_component_analysis.filter_by(id=id).first()
+
+        autovect_values = np.array(json.loads(instance.autovect))
+        pc_terms = json.loads(instance.pc_terms)
+
+        writer = csv.writer(csvfile)
+
+        writer.writerow(pc_terms)
+        for value in autovect_values:
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=eigenvector_data.csv"})
+
+    else:
+        return redirect(url_for('principal_component_analysis'))

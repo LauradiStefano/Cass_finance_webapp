@@ -524,6 +524,7 @@ class principal_component_analysis(db.Model):
 
     evalues = db.Column(db.String())
     autovect = db.Column(db.String())
+    pc_terms = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
