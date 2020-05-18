@@ -67,6 +67,18 @@
                                 {% endif %}
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.short_selling.label}}
+                                {{form.short_selling}}
+                                {% if form.short_selling.errors %}
+                                {% for error in form.short_selling.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
                     </fieldset>
                 </div>
             </div>

@@ -32,6 +32,10 @@
                                         {{result['form'].n_portfolio.label}}:<br/>
                                         {{result['form'].n_portfolio.data}}<br/>
                                     </span>
+                                    <span class="mb-1">
+                                        {{result['form'].short_selling.label}}<br/>
+                                        {{dict(result['form'].short_selling.choices).get(result['form'].short_selling.data)}}<br/>
+                                    </span>
                                 </div>
                             </div>
                         </fieldset>

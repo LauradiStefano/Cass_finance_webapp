@@ -468,6 +468,7 @@ class portfolio_analysis(db.Model):
 
     file_name = db.Column(db.String())
     n_portfolio = db.Column(db.Integer())
+    short_selling = db.Column(db.String())
 
     returns = db.Column(db.String())
     standard_deviations = db.Column(db.String())
