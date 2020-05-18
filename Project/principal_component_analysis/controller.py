@@ -57,7 +57,7 @@ def controller_principal_component_analysis(user, request):
                 object = compute()
                 form.populate_obj(object)
 
-                object.evalues = json.dumps(evalues.tolist())
+                object.evalues = json.dumps(evalues)
                 object.autovect = json.dumps(autovect.tolist())
 
                 object.user = user
@@ -73,7 +73,7 @@ def controller_principal_component_analysis(user, request):
                 form = populate_form_from_instance(instance)
 
                 sim_id = instance.id
-                evalues = json.loads(instance.evalues)
+                evalues = np.array(json.loads(instance.evalues))
                 autovect = np.array(json.loads(instance.autovect))
 
                 plot_variance_component = create_plot_variance_component(evalues)
@@ -110,7 +110,7 @@ def controller_old_principal_component_analysis(user):
             # page old.html, store the date and the plot (previous simulation)
 
             id = instance.id
-            evalues = json.loads(instance.evalues)
+            evalues = np.array(json.loads(instance.evalues))
             autovect = np.array(json.loads(instance.autovect))
 
             plot_variance_component = create_plot_variance_component(evalues)
