@@ -84,7 +84,16 @@
         <div class=" col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
-                    <legend>Table of Lambda Values</legend>
+                    <legend>
+                        Table of Lambda Values
+                        <div class="icon_help">
+                            <img src="/static/icon_help.png">
+                            <div class="model_formula" id="help_formula">
+                             FORMULA
+                            </div>
+                        </div>
+
+                    </legend>
                 </div>
 
                 <table class="table table-striped">
@@ -129,7 +138,9 @@
 <script charset="utf-8" type="text/javascript">
     $(function () {
         var help_dataset = $('#help_dataset').first();
+        var help_formula = $('#help_formula');
         var icon_help_dataset = $('#icon_help_dataset');
+        var icon_help = $('.icon_help').first();
 
         icon_help_dataset.on('mouseenter', function () {
             help_dataset.show();
@@ -138,12 +149,20 @@
         icon_help_dataset.on('mouseleave', function () {
             help_dataset.hide();
         });
+
+        icon_help.on('mouseenter', function() {
+            help_formula.show();
+        });
+
+          icon_help.on('mouseleave', function() {
+            help_formula.hide();
+        });
+
     });
 
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
-
 
 </script>
 </body>
