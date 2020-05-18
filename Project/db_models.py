@@ -512,6 +512,7 @@ class principal_component_analysis(db.Model):
 
     method_choice = db.Column(db.String())
     file_name = db.Column(db.String())
+    price_return_flag = db.Column(db.String())
 
     start_day = db.Column(db.Integer())
     start_month = db.Column(db.Integer())
