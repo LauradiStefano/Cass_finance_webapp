@@ -26,11 +26,12 @@ def import_dataset_file_excel(filename):
 
 
 def compute_parametric_function(data):
+    print(data)
     Old_Snow_Y = (data["Year"].tolist())
     Old_Snow_M = (data["Month"].tolist())
     Old_Snow_D = (data["Day"].tolist())
-    Old_Snow_Level = (data["snow data"].tolist())
-    Old_Temp_Level = (data["temp"].tolist())
+    Old_Snow_Level = (data["Snow Data"].tolist())
+    Old_Temp_Level = (data["Temp"].tolist())
 
     nm = 0
     Start_Day = 305  # 1st of Nov
