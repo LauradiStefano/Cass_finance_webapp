@@ -48,6 +48,8 @@ def import_dataset_file_excel(filename, price_or_return):
 
     autovect = A
     evalues = sorted(D, reverse=True)
+    evalues = np.array(evalues)
+
 
     return evalues, autovect
 
@@ -87,7 +89,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     D, A = np.linalg.eig(covariance_matrix)
 
     evalues = sorted(D, reverse=True)
-
+    evalues = np.array(evalues)
     autovect = A
 
     return evalues, autovect
