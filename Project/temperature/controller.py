@@ -69,7 +69,7 @@ def controller_temperature(user, request):
                     desc('id')).first()  # decreasing order db, take the last data saved
                 form = populate_form_from_instance(instance)
 
-                # sim_id = instance.id
+                sim_id = instance.id
                 log_temp = json.loads(instance.log_temp)
                 trend_temp_par = np.array(json.loads(instance.trend_temp_par))
                 lambda_zero = instance.lambda_zero
@@ -79,14 +79,14 @@ def controller_temperature(user, request):
 
                 plot_parametric_function = \
                     create_plot_parametric_function(log_temp, trend_temp_par)
-                
+
     lambda_zero = round(lambda_zero, 6) if lambda_zero is not None else None
     lambda_one = round(lambda_one, 6) if lambda_one is not None else None
     lambda_two = round(lambda_two, 6) if lambda_two is not None else None
     lambda_three = round(lambda_three, 6) if lambda_three is not None else None
 
     return {'form': form, 'user': user, 'lambda_zero': lambda_zero, 'lambda_one': lambda_one, 'lambda_two': lambda_two,
-            'lambda_three': lambda_three, 'plot_parametric_function': plot_parametric_function}
+            'lambda_three': lambda_three, 'plot_parametric_function': plot_parametric_function, 'sim_id': sim_id}
 
 
 def populate_form_from_instance(instance):
@@ -145,23 +145,28 @@ def delete_temperature_simulation(user, id):
         db.session.commit()
     return redirect(url_for('old_temperature'))
 
-# def controller_portfolio_analysis_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_portfolio_analysis.filter_by(id=id).first()
-#
-#         efficient_weights_values = np.array(json.loads(instance.efficient_weights))
-#         tickers = json.loads(instance.tickers)
-#
-#         writer = csv.writer(csvfile)
-#
-#         writer.writerow(tickers)
-#         for value in efficient_weights_values:
-#             writer.writerow(value)
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=portfolio_data.csv"})
-#
-#     else:
-#         return redirect(url_for('portfolio_analysis'))
+
+def controller_temperature_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_temperature.filter_by(id=id).first()
+
+        log_temp_values = json.loads(instance.log_temp)
+        trend_temp_par_values = np.array(json.loads(instance.trend_temp_par))
+
+        # trend_temp_par_values = [round(x, 9) for x in
+        #                          trend_temp_par_values] if trend_temp_par_values is not None else None
+
+        fieldnames = ['Log Temp', 'Trend Temp']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2 in zip(log_temp_values, trend_temp_par_values):
+            writer.writerow({'Log Temp': value_1, 'Trend Temp': value_2})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=temperature_data.csv"})
+
+    else:
+        return redirect(url_for('temperature'))
