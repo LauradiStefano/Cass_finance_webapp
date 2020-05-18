@@ -161,7 +161,7 @@ def controller_principal_component_analysis_evalues_data(user, id):
         writer.writerow(evalues_values)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=test.csv"})
+                        headers={"Content-disposition": "attachment; filename=eigenvalues_data.csv"})
 
     else:
         return redirect(url_for('principal_component_analysis'))
