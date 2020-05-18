@@ -51,13 +51,13 @@ def import_dataset_file_excel(filename, price_or_return):
     evalues = np.array(evalues)
 
     pc_terms = []
-    for i in range(1,len(evalues)):
-        z = "pc"+str(i)
+    for i in range(1, len(evalues)):
+        z = "pc" + str(i)
         pc_terms.append(z)
 
-    #pc_terms = np.array(pc_terms)
-        
-    return evalues, autovect
+    # pc_terms = np.array(pc_terms)
+
+    return evalues, autovect, pc_terms
 
 
 # Permette di calcolare la matrice varianza covarianza importando i prezzi di chiusura da Yahoo
@@ -99,13 +99,13 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     autovect = A
 
     pc_terms = []
-    for i in range(1,len(evalues)):
-        z = "pc"+str(i)
+    for i in range(1, len(evalues)):
+        z = "pc" + str(i)
         pc_terms.append(z)
-        
-    #pc_terms = np.array(pc_terms)
-    
-    return evalues, autovect
+
+    # pc_terms = np.array(pc_terms)
+
+    return evalues, autovect, pc_terms
 
 
 # def funzione che permette di calcolare gli evalues nel terzo caso di import
