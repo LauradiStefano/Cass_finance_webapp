@@ -28,8 +28,10 @@ from term_structure.controller import controller_term_structure, controller_old_
     delete_term_structure_simulation, controller_term_structure_data, controller_term_structure_daily_data
 from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
 from principal_component_analysis.controller import controller_principal_component_analysis, \
-    controller_old_principal_component_analysis, delete_principal_component_analysis_simulation
-from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation
+    controller_old_principal_component_analysis, delete_principal_component_analysis_simulation, \
+    controller_principal_component_analysis_autovect_data, controller_principal_component_analysis_evalues_data
+from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation, \
+    controller_temperature_data
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -375,6 +377,30 @@ def download_statistical_returns_data(id):
 @login_required
 def download_portfolio_data(id):
     response = controller_portfolio_analysis_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_temperature_data/<id>')
+@login_required
+def download_temperature_data(id):
+    response = controller_temperature_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_principal_evalues_data/<id>')
+@login_required
+def download_principal_evalues_data(id):
+    response = controller_principal_component_analysis_evalues_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_principal_autovect_data/<id>')
+@login_required
+def download_principal_autovect_data(id):
+    response = controller_principal_component_analysis_autovect_data(current_user, id)
 
     return response
 
