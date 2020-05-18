@@ -157,13 +157,13 @@ def controller_old_statistical_analysis(user):
             number_of_tickers = instance.number_of_tickers
             n_observation = json.loads(instance.n_observation)
 
-            mean = [round(x, 6) for x in mean] if mean is not None else None
-            volatility = [round(x, 6) for x in volatility] if volatility is not None else None
-            variance = [round(x, 6) for x in variance] if variance is not None else None
-            skewness = [round(x, 6) for x in skewness] if skewness is not None else None
-            kurtosis = [round(x, 6) for x in kurtosis] if kurtosis is not None else None
-            min_return = [round(x, 6) for x in min_return] if min_return is not None else None
-            max_return = [round(x, 6) for x in max_return] if max_return is not None else None
+            mean = [round(x, 4) for x in mean] if mean is not None else None
+            volatility = [round(x, 4) for x in volatility] if volatility is not None else None
+            variance = [round(x, 4) for x in variance] if variance is not None else None
+            skewness = [round(x, 4) for x in skewness] if skewness is not None else None
+            kurtosis = [round(x, 4) for x in kurtosis] if kurtosis is not None else None
+            min_return = [round(x, 4) for x in min_return] if min_return is not None else None
+            max_return = [round(x, 4) for x in max_return] if max_return is not None else None
             jb_test = [round(x, 2) for x in jb_test] if jb_test is not None else None
             pvalue = [round(x, 2) for x in pvalue] if pvalue is not None else None
 
