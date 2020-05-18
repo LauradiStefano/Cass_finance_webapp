@@ -12,9 +12,9 @@ class ComputeForm(wtf.Form):
                             validators=[InputRequired(), validators.Length(max=25)])
 
     price_return_flag = wtf.RadioField('Prices-Returns:', choices=[('0', 'Prices'), ('1', 'Returns')],
-                                   validators=[InputRequired()], default='0')
+                                       validators=[InputRequired()], default='0')
 
-    tickers_list = FieldList(StringField(label='Ticker', default='AAPL'), min_entries=1)
+    tickers_list = FieldList(StringField(label='Ticker'), min_entries=2)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
