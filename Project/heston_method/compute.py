@@ -98,7 +98,7 @@ def create_implied_volatility_plot(strike, implied_volatility, spot_price):
     fig.square(x=spot_price, y=0, source=data, legend_label='Spot Price', color="#050402", size=8)
 
     fig.legend.orientation = "horizontal"
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "bottom_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components

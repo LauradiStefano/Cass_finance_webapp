@@ -463,7 +463,7 @@ def create_plot_price_cdf(st, cdf_prices, cdf_bench_log_prices, strike_min, stri
     fig.line(x='st', y='cdf_bench_log_prices', source=data, legend_label="Benchmark LogNormal", color="#D21F1B",
              alpha=0.6, line_width=4, name='bench logNorm')
 
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
     fig.legend.click_policy = "hide"
 
@@ -514,7 +514,7 @@ def create_plot_return_cdf(ret_t, cdf_returns, cdf_bench_norm_returns):
     fig.line(x='ret_t', y='cdf_bench_norm_returns', source=data, legend_label="Benchmark Normal", color="#D21F1B",
              alpha=0.6, line_width=4, name='bench norm')
 
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
     fig.legend.click_policy = "hide"
 

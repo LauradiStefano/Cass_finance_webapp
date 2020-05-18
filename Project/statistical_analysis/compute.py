@@ -152,6 +152,7 @@ def create_histogram_distribution_plot(log_returns):
     fig.line(x='log_returns', y='norm_pdf', source=data_2, color="#D21F1B", legend_label='Log-Returns PDF',
              line_width=1, alpha=1, name='th distribution')
 
+    fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
@@ -196,7 +197,7 @@ def create_qq_plot(log_returns):
              line_width=4, alpha=0.8, name='empirical distr')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
 
     from bokeh.embed import components
     script, div = components(fig)
@@ -227,7 +228,7 @@ def create_plot_log_returns(log_returns, dates):
              line_width=1, alpha=0.5, name='log returns')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "bottom_right"
+    fig.legend.location = "top_left"
 
     from bokeh.embed import components
     script, div = components(fig)
