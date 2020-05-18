@@ -228,7 +228,7 @@ def create_plot_log_returns(log_returns, dates):
              line_width=1, alpha=0.5, name='log returns')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "top_left"
+    fig.legend.location = "bottom_center"
 
     from bokeh.embed import components
     script, div = components(fig)
