@@ -30,15 +30,16 @@ def rand_weights(n):
     k = np.random.rand(n)
     return k / sum(k)
 
-def rand_weights_zero_one(n, max):
+def rand_weights_zero_one(n, weights_max):
     done = False
     while not done:
         k = [random.uniform(-100, 100) for _ in range(0,n)]
         somma = abs(np.sum(k))
         value = k /somma
-        
-        #value= random.uniform(-1, 1)
-        condition = all(flag<max for flag in value)
+        list_1 = np.array(value)
+        list_2 = np.array(weights_max)
+        test = list_1<list_2
+        condition = all(test)
         if condition == True and sum(value)>0: #value[0]<max and value[1]<max and value[2]<max and sum(value)>0:
             done=True
         else:

@@ -20,7 +20,7 @@ from portfolio_analysis.useful_functions import sumweigth, expret, variance, ran
 
 def upload_input(filename=None):  # 1 short 0 no short
     data = pd.read_excel(os.path.join('uploads/', filename))
-
+    
     tickers = list(data.columns.values)
     weights = data.loc[0]
     weights_max = list(weights)
@@ -47,7 +47,8 @@ def upload_input(filename=None):  # 1 short 0 no short
 # short_selling 1 is permitted 0 is not permitted
 def compute_efficient_frontier(return_vec, n_assets, n_portfolios, weights_max, short_selling):
     n_portf_eff = 10
-
+    short_selling = float(short_selling)
+    print(short_selling)
     means, stds = np.column_stack([
         random_portfolio(return_vec, weights_max, short_selling)
         for _ in
@@ -62,8 +63,13 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios, weights_max, 
 
     con1 = ({'type': 'eq', 'fun': sumweigth})
     con = ([con1])
-    res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True}, constraints=con,
-                   bounds=bnds)
+    if short_selling == 0:
+        res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True}, constraints=con,
+                       bounds=bnds)
+    else :
+        res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True}, constraints=con)
+
+                    
     mintarget = expret(res.x, MeanV, 0)
     maxtarget = np.max(MeanV)
 
@@ -79,8 +85,13 @@ def compute_efficient_frontier(return_vec, n_assets, n_portfolios, weights_max, 
         con2 = ({'type': 'eq', 'fun': expret, 'args': (MeanV, extarget,)})
         con = ([con1, con2])
         x0 = res.x
-        res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True},
-                       constraints=con, bounds=bnds)
+        if short_selling == 0:
+            res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True},
+                           constraints=con, bounds=bnds)
+        else :
+            res = minimize(variance, x0, args=(Sigma,), method='SLSQP', options={'ftol': 1e-12, 'disp': True},
+                           constraints=con)
+            
         feff = np.c_[feff, [[res.fun], [extarget]]]
         feffweights = np.r_[feffweights, res.x]
 
