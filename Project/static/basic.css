@@ -567,6 +567,12 @@ img { /*icon_help*/
     text-align: center;
 }
 
+
+.lambda_formula {
+    display: none;
+    text-align: center;
+}
+
 .example_file {
     text-align: right;
     padding: 2px 7px;

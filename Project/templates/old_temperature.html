@@ -39,7 +39,15 @@
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
                             <div class="row border-bottom mb-2 pb-1">
-                                <legend>Table of Asian Option Lower Bound</legend>
+                                <legend>Table of Asian Option Lower Bound
+                                    <div class="icon_help">
+                                        <img src="/static/icon_help.png">
+                                        <div class="lambda_formula" id="help_formula">
+                                            $$ \Lambda_{t} = \lambda_{0} + \lambda_{1} t + \lambda_{2} sin(2\pi t) +
+                                            \lambda_{3} cos(2\pi t) $$
+                                        </div>
+                                    </div>
+                                </legend>
                             </div>
                             <div class="row">
                                 <div class="col-12">
@@ -111,6 +119,21 @@
 {% endif %}
 
 {% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function () {
+            var help_formula = $('#help_formula');
+            var icon_help = $('.icon_help').first();
+
+            icon_help.on('mouseenter', function () {
+                help_formula.show();
+            });
+
+            icon_help.on('mouseleave', function () {
+                help_formula.hide();
+            });
+        });
+</script>
 </body>
 </html>
 

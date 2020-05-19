@@ -88,8 +88,8 @@
                         Table of Lambda Values
                         <div class="icon_help">
                             <img src="/static/icon_help.png">
-                            <div class="model_formula" id="help_formula">
-                             FORMULA
+                            <div class="lambda_formula" id="help_formula">
+                                $$ \Lambda_{t} = \lambda_{0} + \lambda_{1} t + \lambda_{2} sin(2\pi t) + \lambda_{3} cos(2\pi t) $$
                             </div>
                         </div>
 
@@ -98,10 +98,10 @@
 
                 <table class="table table-striped">
                     <thead>
-                    <th scope="col">Lambda 0</th>
-                    <th scope="col">Lambda 1</th>
-                    <th scope="col">Lambda 2</th>
-                    <th scope="col">Lambda 3</th>
+                    <th scope="col">$$ \lambda_{0} $$</th>
+                    <th scope="col">$$ \lambda_{1} $$</th>
+                    <th scope="col">$$ \lambda_{2} $$</th>
+                    <th scope="col">$$ \lambda_{3} $$</th>
                     </thead>
 
                     <tbody>
@@ -154,7 +154,7 @@
             help_formula.show();
         });
 
-          icon_help.on('mouseleave', function() {
+        icon_help.on('mouseleave', function() {
             help_formula.hide();
         });
 
