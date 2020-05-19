@@ -5,7 +5,7 @@ Created on Thu Dec 19 20:42:55 2019
 @author: Diego
 """
 import numpy as np
-
+import random
 
 def sumweigth(x):
     return np.sum(x) - 1
@@ -30,14 +30,35 @@ def rand_weights(n):
     k = np.random.rand(n)
     return k / sum(k)
 
+def rand_weights_zero_one(n, max):
+    done = False
+    while not done:
+        k = [random.uniform(-100, 100) for _ in range(0,n)]
+        somma = abs(np.sum(k))
+        value = k /somma
+        
+        #value= random.uniform(-1, 1)
+        condition = all(flag<max for flag in value)
+        if condition == True and sum(value)>0: #value[0]<max and value[1]<max and value[2]<max and sum(value)>0:
+            done=True
+        else:
+            None
+    return value
 
-def random_portfolio(returns):
+
+def random_portfolio(returns, weights_max, short_selling):
     ''' 
     Returns the mean and standard deviation of returns for a random portfolio
     '''
 
     p = np.asmatrix(np.mean(returns, axis=1))  # mean of each assets
-    w = np.asmatrix(rand_weights(returns.shape[0]))  # random weight for each assets
+
+    if short_selling == 1:
+        w = np.asmatrix(rand_weights_zero_one(returns.shape[0], weights_max))#random weight for each assets
+    else:
+        w = np.asmatrix(rand_weights(returns.shape[0]))
+
+
     C = np.asmatrix(np.cov(returns))  # variance/covariance matrix
 
     mu = w * p.T  # portfolio mean
