@@ -13,48 +13,44 @@
 
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <div class="row">
-            <div class="col-md-12 col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
-
-                            <div class="row border-bottom mb-2 pb-1">
-                                <legend>Input</legend>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 font-weight-bold d-flex flex-column">
+        <div class="col-md-3 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Input</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 font-weight-bold d-flex flex-column">
                                     <span class="mb-1">
-                                            {{result['form'].capital_amount.label}}:<br/>
+                                            {{result['form'].capital_amount.label}}:
                                             {{result['form'].capital_amount.data}}<br/>
                                     </span>
-                                    <span class="mb-1">
-                                        {{result['form'].loan_term.label}}:<br/>
+                                <span class="mb-1">
+                                        {{result['form'].loan_term.label}}:
                                         {{result['form'].loan_term.data}}<br/>
                                     </span>
-                                    <span class="mb-1">
-                                        {{result['form'].frequency.label}}:<br/>
+                                <span class="mb-1">
+                                        {{result['form'].frequency.label}}:
                                         {{result['form'].frequency.data}}<br/>
                                     </span>
-                                    <span class="mb-1">
-                                        {{result['form'].interest_rate.label}}:<br/>
+                                <span class="mb-1">
+                                        {{result['form'].interest_rate.label}}:
                                         {{result['form'].interest_rate.data}}<br/>
                                     </span>
-                                </div>
                             </div>
-                        </fieldset>
-                    </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
         </div>
     </div>
     {% if result['plot_capital_interest_share'] != None %}
     <div class="row d-flex justify-content-center">
-        <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
-                <div class="row">
-                    <div class="col-12">
-
+        <div class="col-md-3 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Result</legend>
                         </div>
@@ -65,10 +61,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
                 </div>
-            </fieldset>
+            </div>
         </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
