@@ -100,10 +100,14 @@ def create_plot_parametric_function(LogTemp, trend_temp_par):
                  y_range=y_range, sizing_mode='scale_both', toolbar_location="right", x_axis_label='Days',
                  y_axis_label="Λt")
 
-    fig.line(x="nDays", y="model_temp", source=data_model, color="#0095B6", alpha=0.9, line_width=4,
-             name="parametric model")
-    fig.circle(x="nDays", y="LogTemp", source=data_imported, line_color="#D21F1B", line_alpha=0.5, fill_color="#D21F1B",
-               fill_alpha=0.5, name="imported temp")
+    fig.line(x="nDays", y="model_temp", source=data_model, legend_label='Parametric Model', color="#0095B6",
+             alpha=0.9, line_width=4, name="parametric model")
+    fig.circle(x="nDays", y="LogTemp", source=data_imported, legend_label='Imported Temperature', line_color="#D21F1B",
+               line_alpha=0.5, fill_color="#D21F1B", fill_alpha=0.5, name="imported temp")
+
+    fig.legend.orientation = "horizontal"
+    fig.legend.location = "bottom_left"
+    fig.toolbar.active_drag = None
 
     from bokeh.embed import components
     script, div = components(fig)
