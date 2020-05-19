@@ -14,7 +14,7 @@ class ComputeForm(wtf.Form):
                                                (min=0, max=10000,
                                                 message='The value must be between than 0 and 10000')])
 
-    short_selling = wtf.RadioField('Short Selling:', choices=[('0', 'Yes'), ('1', 'No')],
-                                   validators=[InputRequired()], default='0')
+    short_selling = wtf.RadioField('Short Selling:', choices=[('1', 'Yes'), ('0', 'No')],
+                                   validators=[InputRequired()], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')

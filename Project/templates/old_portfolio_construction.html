@@ -31,18 +31,18 @@
                                         {{result['form'].n_portfolio.label}}:
                                         {{result['form'].n_portfolio.data}}<br/>
                                     </span>
-                                    <span class="mb-1">
+                                <span class="mb-1">
                                         {{result['form'].short_selling.label}}
                                         {{dict(result['form'].short_selling.choices).get(result['form'].short_selling.data)}}
                                     </span>
-                                </div>
                             </div>
-                        </fieldset>
-                    </div>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
         </div>
     </div>
+
     {% if result['plot_efficient_frontier'] != None %}
     <div class="row d-flex justify-content-center">
         <div class="col-12">

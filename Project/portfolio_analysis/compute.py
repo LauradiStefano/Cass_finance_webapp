@@ -18,7 +18,7 @@ from scipy.optimize import minimize
 from portfolio_analysis.useful_functions import sumweigth, expret, variance, random_portfolio
 
 
-def upload_input(filename=None): #1 short 0 no short
+def upload_input(filename=None):  # 1 short 0 no short
     data = pd.read_excel(os.path.join('uploads/', filename))
 
     tickers = list(data.columns.values)
@@ -43,9 +43,9 @@ def upload_input(filename=None): #1 short 0 no short
 
     return return_vec, n_assets, tickers, weights_max
 
-#short_selling 1 is permitted 0 is not permitted
-def compute_efficient_frontier(return_vec, n_assets, n_portfolios, weights_max, short_selling):
 
+# short_selling 1 is permitted 0 is not permitted
+def compute_efficient_frontier(return_vec, n_assets, n_portfolios, weights_max, short_selling):
     n_portf_eff = 10
 
     means, stds = np.column_stack([

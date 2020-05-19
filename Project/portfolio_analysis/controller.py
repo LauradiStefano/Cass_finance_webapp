@@ -34,10 +34,11 @@ def controller_portfolio_analysis(user, request):
                 file_data = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-            returns, n_assets, tickers = upload_input(file_data)
+            returns, n_assets, tickers, weights_max = upload_input(file_data)
 
             standard_deviations, means, efficient_means, efficient_std, efficient_weights = \
-                compute_efficient_frontier(returns, n_assets, form.n_portfolio.data)
+                compute_efficient_frontier(returns, n_assets, form.n_portfolio.data, weights_max,
+                                           form.short_selling.data)
 
             plot_efficient_frontier = \
                 create_plot_efficient_frontier(returns, standard_deviations, means, efficient_means,
