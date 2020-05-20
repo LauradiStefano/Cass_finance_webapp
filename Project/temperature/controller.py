@@ -155,9 +155,6 @@ def controller_temperature_data(user, id):
         log_temp_values = json.loads(instance.log_temp)
         trend_temp_par_values = np.array(json.loads(instance.trend_temp_par))
 
-        # trend_temp_par_values = [round(x, 9) for x in
-        #                          trend_temp_par_values] if trend_temp_par_values is not None else None
-
         fieldnames = ['Log Temp', 'Trend Temp']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
