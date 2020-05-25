@@ -7,15 +7,7 @@ import numpy as np
 import pandas as pd
 
 
-## get_df_linear_interpolation
 
-def upload_input(filename=None):
-    data = pd.read_excel(os.path.join('uploads/', filename))
-    return data
-
-
-time = (data["Maturity"].tolist())
-data_df = (data["Discount Factor"].tolist())
 
 
 def linear_interp(data_df, time):

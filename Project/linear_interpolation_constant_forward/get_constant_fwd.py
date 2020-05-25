@@ -6,13 +6,7 @@
 import pandas as pd
 import numpy as np
 
-# INPUTS----------------------------------------------------------------------
 
-data = pd.read_excel(
-    r'C:\Users\Diego\Desktop\Code_Finance_Project\termstructuremodelling\termstructuremodelling_python\data.xlsx')
-
-time = (data["Maturity"].tolist())
-data_df = (data["Discount Factor"].tolist())
 
 
 def constant_fwd(data_df, time):
