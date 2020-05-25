@@ -96,40 +96,40 @@ def create_plot_discount_factor_term_structure(time_plot, market_discount_factor
     return script, div
 
 
-def create_plot_interest_rate_term_structure(time_plot, market_discount_factor, daily_time_plot, model_discount_factor):
+def create_plot_interest_rate_term_structure(time_plot, market_spot_rate, daily_time_plot, model_spot_rate):
     data_model = ColumnDataSource(data=dict(
         daily_time_plot=daily_time_plot,
-        model_discount_factor=model_discount_factor,
+        model_spot_rate=model_spot_rate,
     ))
 
     data_market = ColumnDataSource(data=dict(
         time_plot=time_plot,
-        market_discount_factor=market_discount_factor,
+        market_spot_rate=market_spot_rate,
     ))
 
     hover_market = HoverTool(attachment="above", names=['market spot rate'],
-                             tooltips=[("TTM", "@time_plot"), ("Market Spot Rate", "@market_discount_factor")])
+                             tooltips=[("TTM", "@time_plot"), ("Market Spot Rate", "@market_spot_rate")])
 
     hover_model = HoverTool(attachment="below", names=['model spot rate'],
                             tooltips=[("TTM", "@daily_time_plot"),
-                                      ("Interpolated Spot Rate", "@model_discount_factor")])
+                                      ("Interpolated Spot Rate", "@model_spot_rate")])
 
     x_range = [min(time_plot), max(time_plot) + 1]
-    y_range = [min(market_discount_factor) * 0.9, max(market_discount_factor) * 1.1]
+    y_range = [min(market_spot_rate) * 0.9, max(market_spot_rate) * 1.1]
 
     fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
                  y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                  x_axis_label='Time to Maturity', y_axis_label='Spot Rate')
 
-    fig.line(x='daily_time_plot', y='model_discount_factor', source=data_model,
+    fig.line(x='daily_time_plot', y='model_spot_rate', source=data_model,
              legend_label='Interpolated Spot Rate Term Structure',
              color="#0095B6", line_width=4, alpha=0.9, name='interpolated spot rate')
 
-    fig.circle(x='time_plot', y='market_discount_factor', source=data_market, color="#D21F1B",
+    fig.circle(x='time_plot', y='market_spot_rate', source=data_market, color="#D21F1B",
                legend_label='Market Spot Rate', size=6, name='market spot rate')
 
     fig.toolbar.active_drag = None
-    fig.legend.location = "top_right"
+    fig.legend.location = "bottom_right"
 
     from bokeh.embed import components
     script, div = components(fig)
