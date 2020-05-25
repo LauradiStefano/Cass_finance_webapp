@@ -70,9 +70,9 @@ def controller_linear_interpolation_constant_forward(user, request):
                     object.daily_time_plot = json.dumps(daily_time_plot)
                     object.market_discount_factor = json.dumps(market_discount_factor)
                     object.model_discount_factor = json.dumps(model_discount_factor)
-
                     object.market_spot_rate = json.dumps(market_spot_rate)
                     object.model_spot_rate = json.dumps(model_spot_rate)
+
                     object.user = user
                     db.session.add(object)
                     db.session.commit()
@@ -132,13 +132,15 @@ def controller_old_linear_interpolation_constant_forward(user):
             daily_time_plot = json.loads(instance.daily_time_plot)
             market_discount_factor = json.loads(instance.market_discount_factor)
             model_discount_factor = json.loads(instance.model_discount_factor)
+            market_spot_rate = json.loads(instance.market_spot_rate)
+            model_spot_rate = json.loads(instance.model_spot_rate)
 
             plot_discount_factor_term_structure = \
                 create_plot_discount_factor_term_structure(time_plot, market_discount_factor, daily_time_plot,
                                                            model_discount_factor)
             plot_interest_rate_term_structure = \
-                create_plot_interest_rate_term_structure(time_plot, market_discount_factor, daily_time_plot,
-                                                         model_discount_factor)
+                create_plot_interest_rate_term_structure(time_plot, market_spot_rate, daily_time_plot,
+                                                         model_spot_rate)
 
             data.append({'form': form, 'id': id,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,

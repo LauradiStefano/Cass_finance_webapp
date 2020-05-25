@@ -566,6 +566,8 @@ class linear_interpolation_constant_forward(db.Model):
     daily_time_plot = db.Column(db.String())
     market_discount_factor = db.Column(db.String())
     model_discount_factor = db.Column(db.String())
+    market_spot_rate = db.Column(db.String())
+    model_spot_rate = db.Column(db.String())
 
     button_compute = db.Column(db.Integer())
     button_export_table = db.Column(db.Integer())
