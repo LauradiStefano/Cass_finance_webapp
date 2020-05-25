@@ -7,9 +7,6 @@ import numpy as np
 import pandas as pd
 
 
-
-
-
 def linear_interp(data_df, time):
     if data_df[0] == 0:
         data_df = data_df.remove(0)

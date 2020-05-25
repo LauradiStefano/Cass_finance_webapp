@@ -119,7 +119,7 @@ def create_plot_interest_rate_term_structure(time_plot, market_discount_factor, 
 
     fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
                  y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
-                 x_axis_label='Time to Maturity', y_axis_label='spot rate')
+                 x_axis_label='Time to Maturity', y_axis_label='Spot Rate')
 
     fig.line(x='daily_time_plot', y='model_discount_factor', source=data_model,
              legend_label='Interpolated Spot Rate Term Structure',

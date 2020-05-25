@@ -7,8 +7,6 @@ import pandas as pd
 import numpy as np
 
 
-
-
 def constant_fwd(data_df, time):
     if data_df[0] == 0:
         data_df = data_df.remove(0)
