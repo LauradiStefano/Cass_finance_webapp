@@ -32,6 +32,7 @@ from principal_component_analysis.controller import controller_principal_compone
     controller_principal_component_analysis_autovect_data, controller_principal_component_analysis_evalues_data
 from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation, \
     controller_temperature_data
+from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -131,6 +132,12 @@ def principal_component_analysis():
 def temperature():
     template_variables = controller_temperature(current_user, request)
     return render_template("temperature.html", **template_variables)
+
+
+@app.route('/linear_interpolation_constant_forward', methods=['GET', 'POST'])
+def linear_interpolation_constant_forward():
+    template_variables = controller_linear_interpolation_constant_forward(current_user, request)
+    return render_template("linear_interpolation_constant_forward.html", **template_variables)
 
 
 @app.route('/implied_distribution_illustration/old')

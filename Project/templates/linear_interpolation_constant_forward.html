@@ -1,0 +1,162 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Linear Interpolation & Constant Forward</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> --- </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="" enctype="multipart/form-data">
+            <div class="example_file">
+                <a href="/">
+                    Tutorial File: Linear Interpolation & Constant Forward Tutorial.pdf</a><br/>
+                <a href="/">
+                    Excel Template File: Linear Interpolation & Constant Forward Dataset.xlsx</a>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.file_data.label}}
+                                {{form.file_data}}
+                                {% if form.file_data.errors %}
+                                {% for error in form.file_data.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1 container_model">
+                                {{form.file_name.label}}
+                                <div id="icon_help_dataset">
+                                    <img src="/static/icon_help.png">
+                                    <div class="model_formula" id="help_dataset">
+                                        To identify the dataset
+                                    </div>
+                                </div>
+                                {{form.file_name}}
+                                {% if form.file_name.errors %}
+                                {% for error in form.file_name.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.model_choices.label}}
+                                {{form.model_choices}}
+                                {% if form.model_choices.errors %}
+                                {% for error in form.model_choices.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row d-flex justify-content-center">
+        {% if compute_not_allowed %}
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>
+            Register to Continue
+        </div>
+        {% endif %}
+    </div>
+
+    {% if plot_discount_factor_term_structure != None %}
+    <div class="row p-3 d-flex justify-content-center">
+        {%if sim_id != None %}
+<!--        <div class="row">-->
+<!--            <div class="col-6">-->
+<!--                <a href="/download_term_data/{{sim_id}}" class="download_data">-->
+<!--                    Click here to download the fitted term structures</a>-->
+<!--            </div>-->
+<!--            <div class="col-6">-->
+<!--                <a href="/download_term_daily_data/{{sim_id}}" class="download_data">-->
+<!--                    Click here to download the daily term structures</a>-->
+<!--            </div>-->
+<!--        </div>-->
+        {% endif %}
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Discount Factor Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_discount_factor_term_structure[0]|safe}}
+                    {{plot_discount_factor_term_structure[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Spot Rate Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_interest_rate_term_structure[0]|safe}}
+                    {{plot_interest_rate_term_structure[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {%endif%}
+</div>
+{% include 'footer.html' %}
+<script charset="utf-8" type="text/javascript">
+    $(function(){
+        var help_dataset = $('#help_dataset');
+        var icon_help_dataset = $('#icon_help_dataset');
+
+        icon_help_dataset.on('mouseenter', function(){
+            help_dataset.show();
+        });
+
+        icon_help_dataset.on('mouseleave', function() {
+            help_dataset.hide();
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

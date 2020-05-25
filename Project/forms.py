@@ -111,6 +111,7 @@ class LoginForm(wtf.Form):
         return db_models.db.session.query(db_models.User).filter_by(
             email=self.email.data).first()
 
+
 class DevLoginForm(wtf.Form):
     email = html5.EmailField(label='Email')
     password = wtf.PasswordField(label='Password')

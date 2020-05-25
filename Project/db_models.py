@@ -555,3 +555,18 @@ class temperature(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_temperature', lazy='dynamic'))
+
+
+class linear_interpolation_constant_forward(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    file_name = db.Column(db.String())
+    model_choices = db.Column(db.String())
+
+    button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_add_field = db.Column(db.Integer())
+    button_delete_field = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_linear_interpolation_constant_forward', lazy='dynamic'))
