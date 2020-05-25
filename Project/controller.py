@@ -32,7 +32,8 @@ from principal_component_analysis.controller import controller_principal_compone
     controller_principal_component_analysis_autovect_data, controller_principal_component_analysis_evalues_data
 from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation, \
     controller_temperature_data
-from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward
+from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward, \
+    controller_old_linear_interpolation_constant_forward, delete_linear_interpolation_constant_forward_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -236,6 +237,14 @@ def old_temperature():
                            back_url=url_for('temperature'), old=True)
 
 
+@app.route('/linear_interpolation_constant_forward/old')
+@login_required
+def old_linear_interpolation_constant_forward():
+    template_variables = controller_old_linear_interpolation_constant_forward(current_user)
+    return render_template("old_linear_interpolation_constant_forward.html", **template_variables,
+                           back_url=url_for('linear_interpolation_constant_forward'), old=True)
+
+
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -306,6 +315,12 @@ def delete_principal_component_analysis(id):
 @login_required
 def delete_temperature(id):
     return delete_temperature_simulation(current_user, id)
+
+
+@app.route('/linear_interpolation_constant_forward/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_linear_interpolation_constant_forward(id):
+    return delete_linear_interpolation_constant_forward_simulation(current_user, id)
 
 
 @app.route('/download_shimko_theoretical_data/<id>')

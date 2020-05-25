@@ -1,0 +1,122 @@
+{% include 'header.html' %}
+{% if data %}
+{% for result in data %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Linear Interpolation & Constant Forward</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">Previous Simulations</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+            <div class="col-md-4 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                            <div class="row border-bottom mb-2 pb-1">
+                                <legend>Input</legend>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                            {{result['form'].file_name.label}}:
+                                            {{result['form'].file_name.data}}<br/>
+                                    </span>
+                                    <span class="mb-1">
+                                        {{result['form'].model_choices.label}}
+                                        {{dict(result['form'].model_choices.choices).get(result['form'].model_choices.data)}}<br/>
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+    </div>
+    {% if result['plot_discount_factor_term_structure'] != None %}
+    <div class="row d-flex justify-content-center">
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Discount Factor Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_discount_factor_term_structure'][0]|safe}}
+                    {{ result['plot_discount_factor_term_structure'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Spot Rate Term Structure</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_interest_rate_term_structure'][0]|safe}}
+                    {{ result['plot_interest_rate_term_structure'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-12 d-flex mb-3 justify-content-center">
+    <form style="text-align:center;" method="POST"
+          action="/linear_interpolation_constant_forward/old/delete/{{ result.id }}">
+        <input type="submit" value="Delete Single Simulation"
+               title="Delete this post from database">
+    </form>
+</div>
+<hr>
+{% endfor %}
+
+<center>
+    <div class="row">
+        <form method="POST" action="/linear_interpolation_constant_forward/old/delete/-1">
+            <input type="submit" value="Delete All Simulations">
+        </form>
+    </div>
+</center>
+{% else %}
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
