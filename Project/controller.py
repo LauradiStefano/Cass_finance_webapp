@@ -33,7 +33,8 @@ from principal_component_analysis.controller import controller_principal_compone
 from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation, \
     controller_temperature_data
 from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward, \
-    controller_old_linear_interpolation_constant_forward, delete_linear_interpolation_constant_forward_simulation
+    controller_old_linear_interpolation_constant_forward, delete_linear_interpolation_constant_forward_simulation, \
+    controller_linear_interpolation_constant_forward_data
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -423,6 +424,14 @@ def download_principal_evalues_data(id):
 @login_required
 def download_principal_autovect_data(id):
     response = controller_principal_component_analysis_autovect_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_linear_data/<id>')
+@login_required
+def download_linear_data(id):
+    response = controller_linear_interpolation_constant_forward_data(current_user, id)
 
     return response
 

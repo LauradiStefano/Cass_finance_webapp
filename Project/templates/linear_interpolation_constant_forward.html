@@ -90,16 +90,12 @@
     {% if plot_discount_factor_term_structure != None %}
     <div class="row p-3 d-flex justify-content-center">
         {%if sim_id != None %}
-<!--        <div class="row">-->
-<!--            <div class="col-6">-->
-<!--                <a href="/download_term_data/{{sim_id}}" class="download_data">-->
-<!--                    Click here to download the fitted term structures</a>-->
-<!--            </div>-->
-<!--            <div class="col-6">-->
-<!--                <a href="/download_term_daily_data/{{sim_id}}" class="download_data">-->
-<!--                    Click here to download the daily term structures</a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="row">
+            <div class="col-6">
+                <a href="/download_linear_data/{{sim_id}}" class="download_data">
+                    Click here to download the fitted term structures</a>
+            </div>
+        </div>
         {% endif %}
 
         <div class=" col-12">

@@ -72,6 +72,7 @@ def controller_linear_interpolation_constant_forward(user, request):
                     object.model_discount_factor = json.dumps(model_discount_factor)
                     object.market_spot_rate = json.dumps(market_spot_rate)
                     object.model_spot_rate = json.dumps(model_spot_rate)
+                    object.date_db = json.dumps(date_db)
 
                     object.user = user
                     db.session.add(object)
@@ -163,59 +164,28 @@ def delete_linear_interpolation_constant_forward_simulation(user, id):
 
         db.session.commit()
     return redirect(url_for('old_linear_interpolation_constant_forward'))
-#
-#
-# def controller_term_structure_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_term_structure.filter_by(id=id).first()
-#
-#         market_discount_factor_values = json.loads(instance.market_discount_factor)
-#         model_discount_factor_values = np.array(json.loads(instance.model_discount_factor))
-#         market_spot_rate_values = np.array(json.loads(instance.market_spot_rate))
-#         model_spot_rate_values = np.array(json.loads(instance.model_spot_rate))
-#         discount_factor_model_error_values = np.array(json.loads(instance.discount_factor_model_error))
-#         spot_rate_model_error_values = np.array(json.loads(instance.spot_rate_model_error))
-#
-#         fieldnames = ['Market DF', 'Model DF', 'Market SR', 'Model SR', 'DF Error', 'SR Error']
-#         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#         writer.writeheader()
-#         for value_1, value_2, value_3, value_4, value_5, value_6 \
-#                 in zip(market_discount_factor_values, model_discount_factor_values, market_spot_rate_values,
-#                        model_spot_rate_values, discount_factor_model_error_values, spot_rate_model_error_values):
-#             writer.writerow({'Market DF': value_1, 'Model DF': value_2, 'Market SR': value_3, 'Model SR': value_4,
-#                              'DF Error': value_5, 'SR Error': value_6})
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=term_data.csv"})
-#
-#     else:
-#         return redirect(url_for('term_structure'))
-#
-#
-# def controller_term_structure_daily_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_term_structure.filter_by(id=id).first()
-#
-#         dates_value = json.loads(instance.dates)
-#         annual_basis_date_value = json.loads(instance.annual_basis_date)
-#         daily_discount_factor_value = np.array(json.loads(instance.daily_discount_factor))
-#         daily_model_spot_rate_value = np.array(json.loads(instance.daily_model_spot_rate))
-#
-#         fieldnames = ['Dates', 'Annual Basis Date', 'Daily DF', 'Daily SR']
-#         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#         writer.writeheader()
-#         for value_1, value_2, value_3, value_4, \
-#                 in zip(dates_value, annual_basis_date_value, daily_discount_factor_value, daily_model_spot_rate_value):
-#             writer.writerow({'Dates': value_1, 'Annual Basis Date': value_2, 'Daily DF': value_3, 'Daily SR': value_4})
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=term_daily_data.csv"})
-#
-#     else:
-#         return redirect(url_for('term_structure'))
+
+
+def controller_linear_interpolation_constant_forward_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_linear_interpolation_constant_forward.filter_by(id=id).first()
+
+        model_discount_factor_values = json.loads(instance.model_discount_factor)
+        model_spot_rate_values = json.loads(instance.model_spot_rate)
+        date_db_values = json.loads(instance.date_db)
+
+        fieldnames = ['Maturity', 'Interpolation DF', 'Interpolation SR']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2, value_3 \
+                in zip(date_db_values, model_discount_factor_values, model_spot_rate_values):
+            writer.writerow({'Maturity': value_1, 'Interpolation DF': value_2, 'Interpolation SR': value_3})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=linear_constant_data.csv"})
+
+    else:
+        return redirect(url_for('linear_interpolation_contract_forward'))
