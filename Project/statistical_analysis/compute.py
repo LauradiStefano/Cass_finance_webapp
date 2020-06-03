@@ -136,7 +136,8 @@ def create_histogram_distribution_plot(log_returns):
     ))
 
     hover_histogram = HoverTool(attachment="below", names=['histogram'],
-                                tooltips=[("Hist", "@hist"), ("Edges Left", "@edges_left"), ("Edges Right", "@edges_right")])
+                                tooltips=[("Hist", "@hist"), ("Edges Left", "@edges_left"),
+                                          ("Edges Right", "@edges_right")])
 
     hover_theoretical = HoverTool(attachment="above", names=['th distribution'],
                                   tooltips=[("Log-Returns", "@log_returns"),
