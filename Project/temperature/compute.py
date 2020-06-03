@@ -16,9 +16,6 @@ from scipy.optimize import curve_fit
 from statistics import mean
 
 
-# from get_seasnp_corrected import get_seasnp_corrected
-# from statsmodels.tsa.arima_model import ARIMA
-
 def import_dataset_file_excel(filename):
     sheet_name = 'Datinofeb'
     data = pd.read_excel(os.path.join('uploads/', filename))
