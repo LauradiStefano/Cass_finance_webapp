@@ -452,6 +452,11 @@ fieldset > .project_list {
     display: flex !important;
     flex-direction: column;
     max-height: calc(100% - 20px);
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
 }
 
 .popup_content .popup_close {
