@@ -742,3 +742,7 @@ footer {
 .tooltip {
     font-size: 12px;
 }
+
+.mortgage_value_row {
+    margin-top: 20px;
+}
