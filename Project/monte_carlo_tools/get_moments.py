@@ -14,7 +14,7 @@ def get_moments(model, X0, parameters, T, NStep):
     p = 0.01
 
     horizon = np.arange(0, T + dt, dt)
-    if model == 1:  # ABM
+    if model == 0:  # ABM
         mu = parameters[0]
         sg = parameters[1]
         moments = np.zeros((len(horizon), 4))
@@ -30,7 +30,7 @@ def get_moments(model, X0, parameters, T, NStep):
 
 
 
-    elif model == 2:  # GBM
+    elif model == 1:  # GBM
         mu = parameters[0]
         sg = parameters[1]
         momgbm = lambda n: (X0 ** n) * np.exp(n * (mu - 0.5 * sg * sg) * horizon + n * n * sg * sg * horizon / 2)
@@ -50,27 +50,7 @@ def get_moments(model, X0, parameters, T, NStep):
         quantiles[:, 0] = lognorm.ppf(p, s, loc=0, scale=scale)
         quantiles[:, 1] = lognorm.ppf(1 - p, s, loc=0, scale=scale)
 
-
-
-
-    elif model == 4:  # GAUSSIAN MR
-        alpha = parameters[0]
-        mu = parameters[1]
-        sg = parameters[2]
-
-        moments = np.zeros((len(horizon), 4))
-        moments[:, 0] = np.exp(-alpha * horizon) * X0 + (1 - np.exp(-alpha * horizon)) * mu  # mean
-        moments[:, 1] = (sg * sg * (1 - np.exp(-2 * alpha * horizon)) / (2 * alpha)) ** 0.5  # mean
-        moments[:, 2] = np.full(shape=len(horizon), fill_value=0, dtype=np.int)  # skewness
-        moments[:, 3] = np.full(shape=len(horizon), fill_value=3, dtype=np.int)  # kurt
-
-        quantiles = np.zeros((len(horizon), 2))
-        quantiles[:, 0] = norm.ppf(0.05, moments[:, 0], moments[:, 1])
-        quantiles[:, 1] = norm.ppf(0.95, moments[:, 0], moments[:, 1])
-
-
-
-    elif model == 3:  # CIR - SR MR
+    elif model == 2:  # CIR - SR MR
         alpha = parameters[0]
         mu = parameters[1]
         sg = parameters[2]
@@ -87,6 +67,21 @@ def get_moments(model, X0, parameters, T, NStep):
         quantiles = np.zeros((len(horizon), 2))
         quantiles[:, 0] = k * ncx2.ppf(0.05, d, lam)
         quantiles[:, 1] = k * ncx2.ppf(0.95, d, lam)
+
+    elif model == 3:  # GAUSSIAN MR
+        alpha = parameters[0]
+        mu = parameters[1]
+        sg = parameters[2]
+
+        moments = np.zeros((len(horizon), 4))
+        moments[:, 0] = np.exp(-alpha * horizon) * X0 + (1 - np.exp(-alpha * horizon)) * mu  # mean
+        moments[:, 1] = (sg * sg * (1 - np.exp(-2 * alpha * horizon)) / (2 * alpha)) ** 0.5  # mean
+        moments[:, 2] = np.full(shape=len(horizon), fill_value=0, dtype=np.int)  # skewness
+        moments[:, 3] = np.full(shape=len(horizon), fill_value=3, dtype=np.int)  # kurt
+
+        quantiles = np.zeros((len(horizon), 2))
+        quantiles[:, 0] = norm.ppf(0.05, moments[:, 0], moments[:, 1])
+        quantiles[:, 1] = norm.ppf(0.95, moments[:, 0], moments[:, 1])
 
     else:  # Heston
         v0 = parameters[0]

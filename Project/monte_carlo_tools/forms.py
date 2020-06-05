@@ -4,30 +4,6 @@ from wtforms import validators
 from common_validators import greater_than_zero
 
 
-def kappa_vg_check(form, field):
-    kappa_vg = field.data
-    if kappa_vg <= 0 or kappa_vg >= 2.5:
-        raise validators.ValidationError('The value must be between 0 and 2.5')
-
-
-def theta_vg_check(form, field):
-    theta_vg = field.data
-    if theta_vg <= -1 or theta_vg >= 1:
-        raise validators.ValidationError('The value must be between -1 and 1')
-
-
-def kappa_nig_check(form, field):
-    kappa_nig = field.data
-    if kappa_nig <= 0 or kappa_nig >= 6:
-        raise validators.ValidationError('The value must be between 0 and 6')
-
-
-def y_cgmy_check(form, field):
-    y_cgmy = field.data
-    if y_cgmy >= 2:
-        raise validators.ValidationError('The value must be smaller than 2')
-
-
 class ComputeForm(wtf.Form):
     model_choice = wtf.SelectField('Model',
                                    choices=[('0', 'Arithmetic Brownian Motion'), ('1', 'Geometric Brownian Motion'),
@@ -65,11 +41,11 @@ class ComputeForm(wtf.Form):
     # Heston
     mu_heston = wtf.FloatField(label='$$ \mu $$', default=0,
                                validators=[wtf.validators.InputRequired()])
-    volatility_t0_heston = wtf.FloatField(label=r'$$ v_0 $$', default=0.2**2,
+    volatility_t0_heston = wtf.FloatField(label=r'$$ v_0 $$', default=0.2 ** 2,
                                           validators=[wtf.validators.InputRequired(), greater_than_zero])
     alpha_heston = wtf.FloatField(label=r'$$ \alpha $$', default=0.1,
                                   validators=[wtf.validators.InputRequired()])
-    beta_heston = wtf.FloatField(label=r'$$ \beta $$', default=0.25**2,
+    beta_heston = wtf.FloatField(label=r'$$ \beta $$', default=0.25 ** 2,
                                  validators=[wtf.validators.InputRequired()])
     eta_heston = wtf.FloatField(label=r'$$ \eta $$', default=0.2,
                                 validators=[wtf.validators.InputRequired()])
