@@ -35,6 +35,8 @@ from temperature.controller import controller_temperature, controller_old_temper
 from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward, \
     controller_old_linear_interpolation_constant_forward, delete_linear_interpolation_constant_forward_simulation, \
     controller_linear_interpolation_constant_forward_data
+from monte_carlo_tools.controller import controller_monte_carlo_tools, controller_old_monte_carlo_tools, \
+    delete_monte_carlo_tools_simulation
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -142,6 +144,12 @@ def linear_interpolation_constant_forward():
     return render_template("linear_interpolation_constant_forward.html", **template_variables)
 
 
+@app.route('/monte_carlo_tools', methods=['GET', 'POST'])
+def monte_carlo_tools():
+    template_variables = controller_monte_carlo_tools(current_user, request)
+    return render_template("monte_carlo_tools.html", **template_variables)
+
+
 @app.route('/implied_distribution_illustration/old')
 @login_required
 def old_shimko_theoretical():
@@ -246,6 +254,14 @@ def old_linear_interpolation_constant_forward():
                            back_url=url_for('linear_interpolation_constant_forward'), old=True)
 
 
+@app.route('/monte_carlo_tools/old')
+@login_required
+def old_monte_carlo_tools():
+    template_variables = controller_old_monte_carlo_tools(current_user)
+    return render_template("old_monte_carlo_tools.html", **template_variables,
+                           back_url=url_for('monte_carlo_tools'), old=True)
+
+
 @app.route('/implied_distribution_illustration/old/delete/<id>', methods=['GET', 'POST'])
 @login_required
 def delete_shimko_theretical(id):
@@ -322,6 +338,12 @@ def delete_temperature(id):
 @login_required
 def delete_linear_interpolation_constant_forward(id):
     return delete_linear_interpolation_constant_forward_simulation(current_user, id)
+
+
+@app.route('/monte_carlo_tools/old/delete/<id>', methods=['GET', 'POST'])
+@login_required
+def delete_monte_carlo_tolls(id):
+    return delete_monte_carlo_tools_simulation(current_user, id)
 
 
 @app.route('/download_shimko_theoretical_data/<id>')

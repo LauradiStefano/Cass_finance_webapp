@@ -577,3 +577,47 @@ class linear_interpolation_constant_forward(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('compute_linear_interpolation_constant_forward', lazy='dynamic'))
+
+
+class monte_carlo_tools(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+
+    model_choice = db.Column(db.String())
+
+    mu_abm = db.Column(db.Float())
+    sigma_abm = db.Column(db.Float())
+
+    mu_gbm = db.Column(db.Float())
+    sigma_gbm = db.Column(db.Float())
+
+    mu_cir = db.Column(db.Float())
+    sigma_cir = db.Column(db.Float())
+    alpha_cir = db.Column(db.Float())
+
+    mu_mrg = db.Column(db.Float())
+    sigma_mrg = db.Column(db.Float())
+    alpha_mrg = db.Column(db.Float())
+
+    mu_heston = db.Column(db.Float())
+    volatility_t0_heston = db.Column(db.Float())
+    alpha_heston = db.Column(db.Float())
+    beta_heston = db.Column(db.Float())
+    eta_heston = db.Column(db.Float())
+    rho_heston = db.Column(db.Float())
+
+    price = db.Column(db.Float())
+    time = db.Column(db.Float())
+    number_step = db.Column(db.Integer())
+    number_paths = db.Column(db.Integer())
+
+    simulated_paths = db.Column(db.String())
+    timestep = db.Column(db.String())
+    quantiles = db.Column(db.String())
+    moments = db.Column(db.String())
+
+    button_compute = db.Column(db.Integer())
+    button_export_table = db.Column(db.Integer())
+    button_view_details = db.Column(db.Integer())
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('compute_monte_carlo_tools', lazy='dynamic'))

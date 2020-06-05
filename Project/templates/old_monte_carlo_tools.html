@@ -1,0 +1,232 @@
+{% include 'header.html' %}
+{% if data %}
+{% for result in data %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Monte Carlo Tools</h1>
+            <h2 class="lead text-center text-light animated fadeInDown">Previous Simulations</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Input</legend>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                        {{result['form'].model_choice.label}}:
+                                        {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
+                                    </span>
+
+                                <div id="abm">
+                                    {% if result['form'].model_choice.data == '0' %}
+                                    <span class="mb-1">
+                                            {{result['form'].mu_abm.label}}:
+                                            {{result['form'].mu_abm.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].sigma_abm.label}}:
+                                            {{result['form'].sigma_abm.data|round(4)}}<br/>
+                                        </span>
+                                    {%endif%}
+                                </div>
+
+                                <div id="gbm">
+                                    {% if result['form'].model_choice.data == '1' %}
+                                    <span class="mb-1">
+                                            {{result['form'].mu_gbm.label}}:
+                                            {{result['form'].mu_gbm.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].sigma_gbm.label}}:
+                                            {{result['form'].sigma_gbm.data|round(4)}}<br/>
+                                        </span>
+                                    {%endif%}
+                                </div>
+
+                                <div id="cir">
+                                    {% if result['form'].model_choice.data == '2' %}
+                                    <span class="mb-1">
+                                            {{result['form'].mu_cir.label}}:
+                                            {{result['form'].mu_cir.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].sigma_cir.label}}:
+                                            {{result['form'].sigma_cir.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].alpha_cir.label}}:
+                                            {{result['form'].alpha_cir.data|round(4)}}<br/>
+                                        </span>
+                                    {%endif%}
+                                </div>
+
+                                <div id="mrg">
+                                    {% if result['form'].model_choice.data == '3' %}
+                                    <span class="mb-1">
+                                            {{result['form'].mu_mrg.label}}:
+                                            {{result['form'].mu_mrg.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].sigma_mrg.label}}:
+                                            {{result['form'].sigma_mrg.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].alpha_mrg.label}}:
+                                            {{result['form'].alpha_mrg.data|round(4)}}<br/>
+                                        </span>
+                                    {%endif%}
+                                </div>
+
+                                <div id="heston">
+                                    {% if result['form'].model_choice.data == '4' %}
+                                    <span class="mb-1">
+                                            {{result['form'].volatility_t0_heston.label}}:
+                                            {{result['form'].volatility_t0_heston.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].alpha_heston.label}}:
+                                            {{result['form'].alpha_heston.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].beta_heston.label}}:
+                                            {{result['form'].beta_heston.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].eta_heston.label}}:
+                                            {{result['form'].eta_heston.data|round(4)}}<br/>
+                                        </span>
+                                    <span class="mb-1">
+                                            {{result['form'].rho_heston.label}}:
+                                            {{result['form'].rho_heston.data|round(4)}}<br/>
+                                        </span>
+                                    {%endif%}
+                                </div>
+                            </div>
+                            <div class="col-12 font-weight-bold d-flex flex-column">
+                                    <span class="mb-1">
+                                            {{result['form'].price.label}}:
+                                            {{result['form'].price.data}}<br/>
+                                    </span>
+                                <span class="mb-1">
+                                            {{result['form'].time.label}}:
+                                            {{result['form'].time.data}}<br/>
+                                    </span>
+                                <span class="mb-1">
+                                            {{result['form'].number_step.label}}:
+                                            {{result['form'].number_step.data}}<br/>
+                                    </span>
+                                <span class="mb-1">
+                                            {{result['form'].number_paths.label}}:
+                                            {{result['form'].number_paths.data}}<br/>
+                                    </span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if result['plot_simulated_paths'] != None%}
+    <div class="row d-flex justify-content-center">
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Simulated Paths</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_simulated_paths'][0]|safe}}
+                    {{ result['plot_simulated_paths'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend> Moments</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_moments'][0]|safe}}
+                    {{ result['plot_moments'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Histogram</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{ result['plot_histogram'][0]|safe}}
+                    {{ result['plot_histogram'][1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-12 d-flex mb-3 justify-content-center">
+    <form style="text-align:center;" method="POST" action="/monte_carlo_tools/old/delete/{{ result.id }}">
+        <input type="submit" value="Delete Single Simulation"
+               title="Delete this post from database">
+    </form>
+</div>
+<hr>
+{% endfor %}
+
+<center>
+    <div class="row">
+        <form method="POST" action="/monte_carlo_tools/old/delete/-1">
+            <input type="submit" value="Delete All Simulations">
+        </form>
+    </div>
+</center>
+{% else %}
+<div class="row d-flex align-content-center">
+    <div style="text-align:center;" class="col">
+        <span class="text-white animated fadeInDown">No previous simulations</span>
+    </div>
+</div>
+{% endif %}
+
+{% include 'footer.html' %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

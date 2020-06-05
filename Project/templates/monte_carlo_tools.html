@@ -1,0 +1,443 @@
+{% include 'header.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col p-3 m-4">
+            <h1 class="title text-center text-light">Monte Carlo Tools</h1>
+            <h2 class="lead text-center text-light animated fadeInDown"> -- </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <form class="" method="post" action="">
+            <div class="example_file">
+                <a href="/">
+                    Tutorial File: Monte Carlo Tools.pdf</a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Model Selection & Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.model_choice.label}}
+                                {{form.model_choice}}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col" id="abm" {% if form.model_choice.data !='0' and form.model_choice !=None
+                                 %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_abm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_abm}}
+                                        {% if form.mu_abm.errors %}
+                                        {% for error in form.mu_abm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_abm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_abm}}
+                                        {% if form.sigma_abm.errors %}
+                                        {% for error in form.sigma_abm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="gbm" {% if form.model_choice.data !='1' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_gbm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_gbm}}
+                                        {% if form.mu_gbm.errors %}
+                                        {% for error in form.mu_gbm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_gbm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_gbm}}
+                                        {% if form.sigma_gbm.errors %}
+                                        {% for error in form.sigma_gbm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col" id="cir" {% if form.model_choice.data !='2' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_cir.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_cir}}
+                                        {% if form.mu_cir.errors %}
+                                        {% for error in form.mu_cir.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_cir.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_cir}}
+                                        {% if form.sigma_cir.errors %}
+                                        {% for error in form.sigma_cir.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_cir.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_cir}}
+                                        {% if form.alpha_cir.errors %}
+                                        {% for error in form.alpha_cir.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="mrg" {% if form.model_choice.data !='3' %}
+                                 style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_mrg}}
+                                        {% if form.mu_mrg.errors %}
+                                        {% for error in form.mu_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_mrg}}
+                                        {% if form.sigma_mrg.errors %}
+                                        {% for error in form.sigma_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_mrg}}
+                                        {% if form.alpha_mrg.errors %}
+                                        {% for error in form.alpha_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="heston" {% if form.model_choice.data !='4' %}
+                                 style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_heston}}
+                                        {% if form.mu_heston.errors %}
+                                        {% for error in form.mu_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.volatility_t0_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.volatility_t0_heston}}
+                                        {% if form.volatility_t0_heston.errors %}
+                                        {% for error in form.volatility_t0_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_heston}}
+                                        {% if form.alpha_heston.errors %}
+                                        {% for error in form.alpha_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.beta_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta_heston}}
+                                        {% if form.beta_heston.errors %}
+                                        {% for error in form.beta_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.eta_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.eta_heston}}
+                                        {% if form.eta_heston.errors %}
+                                        {% for error in form.eta_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.rho_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_heston}}
+                                        {% if form.rho_heston.errors %}
+                                        {% for error in form.rho_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
+
+                        <div class="row border-bottom mb-2 pb-1">
+                            <legend>Contract Parameters</legend>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.price.label}}
+                                {{form.price}}
+                                {% if form.price.errors %}
+                                {% for error in form.price.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.time.label}}
+                                {{form.time}}
+                                {% if form.time.errors %}
+                                {% for error in form.time.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.number_step.label}}
+                                {{form.number_step}}
+                                {% if form.number_step.errors %}
+                                {% for error in form.number_step.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col mb-1">
+                                {{form.number_paths.label}}
+                                {{form.number_paths}}
+                                {% if form.number_paths.errors %}
+                                {% for error in form.number_paths.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col d-flex justify-content-center">
+                    {{form.button_compute}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if plot_simulated_paths != None %}
+    <div class="row p-3 d-flex justify-content-center">
+
+        {%if sim_id != None %}
+        <div>
+            <a href="" class="download_data">
+                Click here to download the distribution</a>
+        </div>
+        {% else %}
+        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+            Click here to download the distribution
+        </div>
+        {% endif %}
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Simulated Paths</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_simulated_paths[0]|safe}}
+                    {{plot_simulated_paths[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Moments</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_moments[0]|safe}}
+                    {{plot_moments[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Histogram</legend>
+                </div>
+                <div class="d-flex justify-content-center plot">
+                    {{plot_histogram[0]|safe}}
+                    {{plot_histogram[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
+    </div>
+    {%endif%}
+</div>
+{% include 'footer.html' %}
+
+<script charset="utf-8" type="text/javascript">
+    $(function () {
+        var select_distribution = $('#model_choice');
+        var abm = $('#abm');
+        var gbm = $('#gbm');
+        var cir = $('#cir');
+        var mrg = $('#mrg');
+        var heston = $('#heston');
+
+        select_distribution.on('change', function () {
+            if (select_distribution.val() == '0') {
+                abm.show();
+                gbm.hide();
+                cir.hide();
+                mrg.hide();
+                heston.hide();
+            } else if (select_distribution.val() == '1') {
+                abm.hide();
+                gbm.show();
+                cir.hide();
+                mrg.hide();
+                heston.hide();
+            } else if (select_distribution.val() == '2') {
+                abm.hide();
+                gbm.hide();
+                cir.show();
+                mrg.hide();
+                heston.hide();
+            } else if (select_distribution.val() == '3') {
+                abm.hide();
+                gbm.hide();
+                cir.hide();
+                mrg.show();
+                heston.hide();
+            } else {
+                abm.hide();
+                gbm.hide();
+                cir.hide();
+                mrg.hide();
+                heston.show();
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+</script>
+</body>
+</html>
