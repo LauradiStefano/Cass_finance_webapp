@@ -9,14 +9,18 @@ from monte_carlo_tools.get_mc_cir import get_mc_cir
 from monte_carlo_tools.get_mc_heston import get_mc_heston
 from monte_carlo_tools.get_mc_gmr import get_mc_gmr
 from monte_carlo_tools.get_moments import get_moments
-from monte_carlo_tools.plot_simulated_paths import get_simulated_paths
-from monte_carlo_tools.moments_plot import get_moments_plot
 from monte_carlo_tools.histograms_plot import get_histograms_plot
+from scipy.stats import skew, kurtosis
+from bokeh.plotting import ColumnDataSource
+from bokeh.models import HoverTool
+from bokeh.layouts import gridplot
+from bokeh.palettes import Spectral11
+from bokeh.plotting import figure
+from bokeh.models import BoxAnnotation
 
-# from bokeh.plotting import figure, output_file, show
-# from bokeh.layouts import gridplot
-
+import bokeh.plotting as bp
 import numpy as np
+import itertools
 
 """Run  main_montecarlo_tool the output are 3 html page containing different plots
     
@@ -114,52 +118,220 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, X0, mu_abm, sigma_a
     return simulated_paths, moments, quantiles, timestep
 
 
-"""4 - Compute plot  3 different in html page"""
-
-"Plot simulated paths"
-
-
 def create_plot_simulated_paths(simulated_paths, timestep, NStep, NPaths, quantiles):
-    p1, p2 = get_simulated_paths(simulated_paths, timestep, NStep, NPaths, quantiles)
-    plots = {'Paths': p1, 'Hist': p2}
+    x = []
+    y = []
+    for i in range(0, NStep):
+        min_x = min(simulated_paths[i, :])
+        x.append(min_x)
+        max_y = max(simulated_paths[i, :])
+        y.append(max_y)
+
+    y_range = [min(x), max(y)]
+
+    fig_simulated_1 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+                                y_range=y_range, x_axis_label='Time')
+    colors = itertools.cycle(Spectral11)
+
+    for i, color in zip(range(0, NPaths), colors):
+        fig_simulated_1.line(timestep, simulated_paths[:, i], color=color)
+
+    last_quantiles = quantiles[-1, :]
+    confidence_interval = BoxAnnotation(bottom=last_quantiles[0], top=last_quantiles[1], fill_color='#0095B6',
+                                        fill_alpha=0.1)
+    fig_simulated_1.add_layout(confidence_interval)
+
+    hhist, hedges = np.histogram(simulated_paths[-1, :], bins=20)
+    # hzeros = np.zeros(len(hedges)-1)
+    # hmax = max(hhist)*1.0
+    # LINE_ARGS = dict(color="#3A5785", line_color=None)
+
+    fig_simulated_2 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+                                x_axis_label='Frequency', y_range=y_range)
+
+    fig_simulated_2.xgrid.grid_line_color = None
+    fig_simulated_2.quad(left=0, bottom=hedges[:-1], top=hedges[1:], right=hhist, color="#ffffff", line_color="#0095B6")
+    fig_simulated_2.add_layout(confidence_interval)
+
+    figure = gridplot([[fig_simulated_1, fig_simulated_2]], toolbar_location="right")
 
     from bokeh.embed import components
-    script, div = components(plots)
+    script, div = components(figure)
 
     return script, div
-
-
-# output_file("legend.html", title="example")
-# show(gridplot([p1, p2], ncols=2, plot_width=400, plot_height=400)) 
-
-
-"Plot moments"
 
 
 def create_plot_moments(simulated_paths, moments, timestep):
-    p3, p4, p5, p6 = get_moments_plot(simulated_paths, moments, timestep)
-    plots = {'exp_value': p3, 'st_dev': p4, 'skew': p5, 'kurt': p6}
+    exp_value_empirical = np.mean(simulated_paths, axis=1)
+    variance_empirical = np.var(simulated_paths, axis=1) ** 0.5
+    skewness_empirical = skew(simulated_paths, axis=1)
+    skewness_empirical[0] = 0
+    kurtosis_empirical = kurtosis(simulated_paths, axis=1) + 3
+    kurtosis_empirical[0] = 3
+
+    exp_value_theoretical = moments[:, 0]
+    variance_theoretical = moments[:, 1]
+    skewness_theoretical = moments[:, 2]
+    kurtosis_theoretical = moments[:, 3]
+
+    data_exp_value = ColumnDataSource(data=dict(
+        exp_value_theoretical=exp_value_theoretical,
+        exp_value_empirical=exp_value_empirical,
+        timestep=timestep))
+
+    hover_exp_theoretical = HoverTool(attachment="above", names=['theoretical expected value '],
+                                      tooltips=[("Theoretical Expected Value ", "@exp_value_theoretical"),
+                                                ("Nstep", "@timestep")])
+
+    hover_exp_empirical = HoverTool(attachment="below", names=['empirical expected value'],
+                                    tooltips=[("Empirical Expected Value ", "@exp_value_empirical"),
+                                              ("Nstep", "@timestep")])
+
+    fig_exp_value = bp.figure(
+        tools=['save, pan, box_zoom, reset, crosshair', hover_exp_theoretical, hover_exp_empirical],
+        sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Expected Value')
+
+    fig_exp_value.line(x='timestep', y='exp_value_theoretical', source=data_exp_value,
+                       legend_label="Theoretical Expected Value", color="#D21F1B", alpha=0.9, line_width=1,
+                       name='theoretical expected value')
+
+    fig_exp_value.line(x='timestep', y='exp_value_empirical', source=data_exp_value,
+                       legend_label="Empirical Expected Value", color="#0095B6", alpha=0.9, line_width=1,
+                       name='hover_exp_empirical')
+
+    fig_exp_value.legend.location = "bottom_left"
+    fig_exp_value.toolbar.active_drag = None
+
+    data_variance = ColumnDataSource(data=dict(
+        variance_theoretical=variance_theoretical,
+        variance_empirical=variance_empirical,
+        timestep=timestep))
+
+    hover_var_theoretical = HoverTool(attachment="above", names=['theoretical standard deviation'],
+                                      tooltips=[("Theoretical Variance ", "@variance_theoretical"),
+                                                ("Nstep", "@timestep")])
+
+    hover_var_empirical = HoverTool(attachment="below", names=['empirical standard deviation'],
+                                    tooltips=[("Empirical Variance ", "@variance_empirical"), ("Nstep", "@timestep")])
+
+    fig_variance_value = bp.figure(
+        tools=['save, pan, box_zoom, reset, crosshair', hover_var_theoretical, hover_var_empirical],
+        sizing_mode='scale_both', x_axis_label='Time', y_axis_label=' Standard Deviation')
+
+    fig_variance_value.line(x='timestep', y='variance_theoretical', source=data_variance,
+                            legend_label="Theoretical Standard Deviation", color="#D21F1B", alpha=0.9, line_width=1,
+                            name='theoretical standard deviation')
+
+    fig_variance_value.line(x='timestep', y='variance_theoretical', source=data_variance,
+                            legend_label="Empirical Standard Deviation", color="#0095B6", alpha=0.9, line_width=1,
+                            name='empirical standard deviation')
+
+    fig_variance_value.legend.location = "bottom_right"
+    fig_variance_value.toolbar.active_drag = None
+
+    data_skewness = ColumnDataSource(data=dict(
+        skewness_theoretical=skewness_theoretical,
+        skewness_empirical=skewness_empirical,
+        timestep=timestep))
+
+    hover_skew_theoretical = HoverTool(attachment="above", names=['theoretical skewness '],
+                                       tooltips=[("Theoretical Skewness ", "@skewness_theoretical"),
+                                                 ("Nstep", "@timestep")])
+
+    hover_skew_empirical = HoverTool(attachment="below", names=['empirical skewness'],
+                                     tooltips=[("Empirical Skewness ", "@skewness_empirical"), ("Nstep", "@timestep")])
+
+    fig_skewness_value = bp.figure(
+        tools=['save, pan, box_zoom, reset, crosshair', hover_skew_theoretical, hover_skew_empirical],
+        sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Skewness')
+
+    fig_skewness_value.line(x='timestep', y='skewness_theoretical', source=data_skewness,
+                            legend_label="Theoretical Skewness", color="#D21F1B", alpha=0.9, line_width=1,
+                            name='theoretical skewness')
+
+    fig_skewness_value.line(x='timestep', y='skewness_empirical', source=data_skewness,
+                            legend_label="Empirical Skewness", color="#0095B6", alpha=0.9, line_width=1,
+                            name='empirical skewness')
+
+    fig_skewness_value.legend.location = "top_right"
+    fig_skewness_value.toolbar.active_drag = None
+
+    data_kurtosis = ColumnDataSource(data=dict(
+        kurtosis_theoretical=kurtosis_theoretical,
+        kurtosis_empirical=kurtosis_empirical,
+        timestep=timestep))
+
+    hover_kurt_theoretical = HoverTool(attachment="above", names=['theoretical kurtosis '],
+                                       tooltips=[("Theoretical Kurtosis ", "@kurtosis_theoretical"),
+                                                 ("Nstep", "@timestep")])
+
+    hover_kurt_empirical = HoverTool(attachment="below", names=['empirical kurtosis'],
+                                     tooltips=[("Empirical Kurtosis ", "@kurtosis_empirical"), ("Nstep", "@timestep")])
+
+    fig_kurtosis_value = bp.figure(
+        tools=['save, pan, box_zoom, reset, crosshair', hover_kurt_theoretical, hover_kurt_empirical],
+        sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Kurtosis')
+
+    fig_kurtosis_value.line(x='timestep', y='kurtosis_theoretical', source=data_kurtosis,
+                            legend_label="Theoretical Kurtosis", color="#D21F1B", alpha=0.9, line_width=1,
+                            name='theoretical kurtosis')
+
+    fig_kurtosis_value.line(x='timestep', y='kurtosis_empirical', source=data_kurtosis,
+                            legend_label="Empirical Kurtosis", color="#0095B6", alpha=0.9, line_width=1,
+                            name='empirical kurtosis')
+
+    fig_kurtosis_value.legend.location = "bottom_right"
+    fig_kurtosis_value.toolbar.active_drag = None
+
+    figure = gridplot([[fig_exp_value, fig_variance_value], [fig_skewness_value, fig_kurtosis_value]],
+                      toolbar_location="right")
+
+    # gridplot([[s1, s2], [None, s3]], plot_width=250, plot_height=250)
 
     from bokeh.embed import components
-    script, div = components(plots)
+    script, div = components(figure)
     return script, div
-
-
-# output_file("moments.html", title="example")
-# show(gridplot([p3, p4, p5, p6], ncols=2, plot_width=400, plot_height=400)) 
-
-
-"plot histogram pdf"
 
 
 def create_plot_histogram(simulated_paths, NStep):
-    p7, p8, p9 = get_histograms_plot(simulated_paths, NStep)
+    t1 = int(NStep / 4)
+    t2 = int(NStep / 2)
+    t3 = NStep
 
-    plots = {'hist_t1': p7, 'hist_t2': p8, 'hist_t3': p9}
+    min_x = np.quantile(simulated_paths[-1, :], 0.01)
+    max_x = np.quantile(simulated_paths[-1, :], 0.99)
+    hhist, hedges = np.histogram(simulated_paths[t1, :], density=True, bins=100)
+
+    x_range = [min_x, max_x]
+
+    fig_hist_1 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+                           y_axis_location="right", x_range=x_range)
+
+    fig_hist_1.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t1)
+    fig_hist_1.xgrid.grid_line_color = None
+    fig_hist_1.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
+
+    hhist, hedges = np.histogram(simulated_paths[t2, :], density=True, bins=100)
+
+    fig_hist_2 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+                           y_axis_location="right", x_range=x_range)
+
+    fig_hist_2.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t2)
+    fig_hist_2.xgrid.grid_line_color = None
+    fig_hist_2.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
+
+    hhist, hedges = np.histogram(simulated_paths[t3, :], density=True, bins=100)
+
+    fig_hist_3 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+                           y_axis_location="right", x_range=x_range)
+
+    fig_hist_3.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t3)
+    fig_hist_3.xgrid.grid_line_color = None
+    fig_hist_3.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
+
+    figure = gridplot([[fig_hist_1, fig_hist_2], [fig_hist_3]], toolbar_location="right")
 
     from bokeh.embed import components
-    script, div = components(plots)
+    script, div = components(figure)
 
     return script, div
-# output_file("legend.html", title="Simulated Density")
-# show(gridplot([p7, p8, p9], ncols=2, plot_width=400, plot_height=400))
