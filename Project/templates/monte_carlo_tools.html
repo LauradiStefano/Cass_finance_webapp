@@ -339,7 +339,7 @@
 
         {%if sim_id != None %}
         <div>
-            <a href="" class="download_data">
+            <a href="/download_monte_carlo_paths_data/{{sim_id}}"class="download_data">
                 Click here to download the distribution</a>
         </div>
         {% else %}
@@ -353,7 +353,7 @@
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Simulated Paths</legend>
                 </div>
-                <div class="d-flex justify-content-center plot">
+                <div class="d-flex justify-content-center plot_monte_carlo">
                     {{plot_simulated_paths[0]|safe}}
                     {{plot_simulated_paths[1]|safe}}
                 </div>
@@ -365,7 +365,7 @@
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Moments</legend>
                 </div>
-                <div class="d-flex justify-content-center plot">
+                <div class="d-flex justify-content-center plot_monte_carlo">
                     {{plot_moments[0]|safe}}
                     {{plot_moments[1]|safe}}
                 </div>
@@ -377,7 +377,7 @@
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Histogram</legend>
                 </div>
-                <div class="d-flex justify-content-center plot">
+                <div class="d-flex justify-content-center plot_monte_carlo">
                     {{plot_histogram[0]|safe}}
                     {{plot_histogram[1]|safe}}
                 </div>
