@@ -9,13 +9,11 @@ from monte_carlo_tools.get_mc_cir import get_mc_cir
 from monte_carlo_tools.get_mc_heston import get_mc_heston
 from monte_carlo_tools.get_mc_gmr import get_mc_gmr
 from monte_carlo_tools.get_moments import get_moments
-from monte_carlo_tools.histograms_plot import get_histograms_plot
 from scipy.stats import skew, kurtosis
 from bokeh.plotting import ColumnDataSource
 from bokeh.models import HoverTool
 from bokeh.layouts import gridplot
 from bokeh.palettes import Spectral11
-from bokeh.plotting import figure
 from bokeh.models import BoxAnnotation
 
 import bokeh.plotting as bp
@@ -153,7 +151,7 @@ def create_plot_simulated_paths(simulated_paths, timestep, NStep, NPaths, quanti
     fig_simulated_2.quad(left=0, bottom=hedges[:-1], top=hedges[1:], right=hhist, color="#ffffff", line_color="#0095B6")
     fig_simulated_2.add_layout(confidence_interval)
 
-    figure = gridplot([[fig_simulated_1, fig_simulated_2]], toolbar_location="right")
+    figure = gridplot([[fig_simulated_1, fig_simulated_2]], sizing_mode='scale_both')
 
     from bokeh.embed import components
     script, div = components(figure)
@@ -179,7 +177,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
         exp_value_empirical=exp_value_empirical,
         timestep=timestep))
 
-    hover_exp_theoretical = HoverTool(attachment="above", names=['theoretical expected value '],
+    hover_exp_theoretical = HoverTool(attachment="above", names=['theoretical expected value'],
                                       tooltips=[("Theoretical Expected Value ", "@exp_value_theoretical"),
                                                 ("Nstep", "@timestep")])
 
@@ -197,7 +195,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
 
     fig_exp_value.line(x='timestep', y='exp_value_empirical', source=data_exp_value,
                        legend_label="Empirical Expected Value", color="#0095B6", alpha=0.9, line_width=1,
-                       name='hover_exp_empirical')
+                       name='empirical expected value')
 
     fig_exp_value.legend.location = "bottom_left"
     fig_exp_value.toolbar.active_drag = None
@@ -234,7 +232,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
         skewness_empirical=skewness_empirical,
         timestep=timestep))
 
-    hover_skew_theoretical = HoverTool(attachment="above", names=['theoretical skewness '],
+    hover_skew_theoretical = HoverTool(attachment="above", names=['theoretical skewness'],
                                        tooltips=[("Theoretical Skewness ", "@skewness_theoretical"),
                                                  ("Nstep", "@timestep")])
 
@@ -261,7 +259,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
         kurtosis_empirical=kurtosis_empirical,
         timestep=timestep))
 
-    hover_kurt_theoretical = HoverTool(attachment="above", names=['theoretical kurtosis '],
+    hover_kurt_theoretical = HoverTool(attachment="above", names=['theoretical kurtosis'],
                                        tooltips=[("Theoretical Kurtosis ", "@kurtosis_theoretical"),
                                                  ("Nstep", "@timestep")])
 
@@ -284,9 +282,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
     fig_kurtosis_value.toolbar.active_drag = None
 
     figure = gridplot([[fig_exp_value, fig_variance_value], [fig_skewness_value, fig_kurtosis_value]],
-                      toolbar_location="right")
-
-    # gridplot([[s1, s2], [None, s3]], plot_width=250, plot_height=250)
+                      sizing_mode='scale_both')
 
     from bokeh.embed import components
     script, div = components(figure)
@@ -329,7 +325,7 @@ def create_plot_histogram(simulated_paths, NStep):
     fig_hist_3.xgrid.grid_line_color = None
     fig_hist_3.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
 
-    figure = gridplot([[fig_hist_1, fig_hist_2], [fig_hist_3]], toolbar_location="right")
+    figure = gridplot([[fig_hist_1, fig_hist_2], [fig_hist_3]], sizing_mode='scale_both')
 
     from bokeh.embed import components
     script, div = components(figure)

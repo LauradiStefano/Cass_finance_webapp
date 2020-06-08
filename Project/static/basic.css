@@ -504,6 +504,12 @@ fieldset > .project_list {
     margin: 0 auto;
 }
 
+.plot_monte_carlo{
+    max-height: 2000px;
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
 #call_put_flag {
     display: block;
     padding-right: 1rem;
