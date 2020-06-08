@@ -7,13 +7,13 @@ Created on Thu May 21 12:04:29 2020
 from linear_interpolation_constant_forward.get_df_linear_interpolation import linear_interp
 from linear_interpolation_constant_forward.get_constant_fwd import constant_fwd
 from linear_interpolation_constant_forward.get_dates import list_of_daily_dates
-from bokeh.plotting import figure
 from bokeh.plotting import ColumnDataSource
 from bokeh.models import HoverTool
 
 import pandas as pd
 import numpy as np
 import os
+import bokeh.plotting as bp
 
 
 def upload_input(filename=None):
@@ -76,7 +76,7 @@ def create_plot_discount_factor_term_structure(time_plot, market_discount_factor
     x_range = [min(time_plot), max(time_plot) + 1]
     y_range = [min(model_discount_factor) * 0.9, max(model_discount_factor) * 1.1]
 
-    fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
                  y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                  x_axis_label='Time to Maturity', y_axis_label='Discount Factor')
 
@@ -117,7 +117,7 @@ def create_plot_interest_rate_term_structure(time_plot, market_spot_rate, daily_
     x_range = [min(time_plot), max(time_plot) + 1]
     y_range = [min(market_spot_rate) * 0.9, max(market_spot_rate) * 1.1]
 
-    fig = figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
+    fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair', hover_market, hover_model], x_range=x_range,
                  y_range=y_range, sizing_mode='scale_both', toolbar_location="right",
                  x_axis_label='Time to Maturity', y_axis_label='Spot Rate')
 
