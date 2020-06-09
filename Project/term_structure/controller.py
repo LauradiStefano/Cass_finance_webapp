@@ -271,28 +271,28 @@ def controller_term_structure_data(user, id):
     else:
         return redirect(url_for('term_structure'))
 
-#
-# def controller_term_structure_daily_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_term_structure.filter_by(id=id).first()
-#
-#         dates_value = json.loads(instance.dates)
-#         annual_basis_date_value = json.loads(instance.annual_basis_date)
-#         daily_discount_factor_value = np.array(json.loads(instance.daily_discount_factor))
-#         daily_model_spot_rate_value = np.array(json.loads(instance.daily_model_spot_rate))
-#
-#         fieldnames = ['Dates', 'Annual Basis Date', 'Daily DF', 'Daily SR']
-#         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#         writer.writeheader()
-#         for value_1, value_2, value_3, value_4, \
-#                 in zip(dates_value, annual_basis_date_value, daily_discount_factor_value, daily_model_spot_rate_value):
-#             writer.writerow({'Dates': value_1, 'Annual Basis Date': value_2, 'Daily DF': value_3, 'Daily SR': value_4})
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=term_daily_data.csv"})
-#
-#     else:
-#         return redirect(url_for('term_structure'))
+
+def controller_term_structure_daily_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_term_structure.filter_by(id=id).first()
+
+        dates_value = json.loads(instance.dates)
+        annual_basis_date_value = json.loads(instance.annual_basis_date)
+        daily_discount_factor_value = np.array(json.loads(instance.daily_discount_factor))
+        daily_model_spot_rate_value = np.array(json.loads(instance.daily_model_spot_rate))
+
+        fieldnames = ['Dates', 'Annual Basis Date', 'Daily DF', 'Daily SR']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for value_1, value_2, value_3, value_4, \
+                in zip(dates_value, annual_basis_date_value, daily_discount_factor_value, daily_model_spot_rate_value):
+            writer.writerow({'Dates': value_1, 'Annual Basis Date': value_2, 'Daily DF': value_3, 'Daily SR': value_4})
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=term_daily_data.csv"})
+
+    else:
+        return redirect(url_for('term_structure'))
