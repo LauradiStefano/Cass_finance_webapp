@@ -1,4 +1,5 @@
 import wtforms as wtf
+from flask_wtf.file import FileRequired
 from wtforms import validators, StringField, IntegerField, FieldList
 from wtforms.validators import InputRequired
 
@@ -7,7 +8,7 @@ class ComputeForm(wtf.Form):
     method_choice = wtf.RadioField('Choose the Method', choices=[('0', 'Excel File'), ('1', 'Yahoo Tickers')],
                                    validators=[InputRequired()])
 
-    file_data = wtf.FileField(label='Import File')
+    file_data = wtf.FileField(label='Import File', validators=[FileRequired()])
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
 

@@ -19,8 +19,6 @@ def controller_temperature(user, request):
     form = ComputeForm(request.form)
 
     file_data = None
-    log_temp = None
-    trend_temp_par = None
     lambda_zero = None
     lambda_one = None
     lambda_two = None
@@ -31,7 +29,7 @@ def controller_temperature(user, request):
     plot_parametric_function = None
 
     if request.method == "POST":
-        if form.validate() and request.files:
+        if form.validate and request.files:
             file = request.files[form.file_data.name]
 
             if file and allowed_file(file.filename):

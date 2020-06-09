@@ -1,4 +1,5 @@
 import wtforms as wtf
+from flask_wtf.file import FileRequired
 from wtforms import validators, StringField
 from wtforms.validators import InputRequired
 
@@ -64,7 +65,7 @@ class ComputeForm(wtf.Form):
                                    validators=[InputRequired()])
 
     # Contract parameters
-    file_data = wtf.FileField(label='Import File')
+    file_data = wtf.FileField(label='Import File', validators=[FileRequired()])
 
     discount_factor = wtf.RadioField(label='Calibrate to:',
                                      choices=[('0', 'Spot Rate Term Structure'),

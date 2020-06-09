@@ -27,7 +27,7 @@ def controller_portfolio_analysis(user, request):
     plot_efficient_weights = None
 
     if request.method == "POST":
-        if form.validate() and request.files:
+        if form.validate and request.files:
             file = request.files[form.file_data.name]
 
             if file and allowed_file(file.filename):

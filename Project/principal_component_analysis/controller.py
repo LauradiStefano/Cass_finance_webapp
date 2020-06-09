@@ -30,7 +30,7 @@ def controller_principal_component_analysis(user, request):
     plot_two_loadings = None
 
     if request.method == "POST":
-        if form.validate():
+        if form.validate:
             if form.method_choice.data == '0':
                 if request.files:
                     file = request.files[form.file_data.name]

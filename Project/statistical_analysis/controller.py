@@ -39,7 +39,7 @@ def controller_statistical_analysis(user, request):
     number_of_tickers = 0
 
     if request.method == "POST":
-        if form.validate():
+        if form.validate:
             if form.method_choice.data == '0':
                 if request.files:
                     file = request.files[form.file_data.name]

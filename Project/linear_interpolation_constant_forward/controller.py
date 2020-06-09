@@ -3,7 +3,6 @@ import io
 import json
 import os
 
-import numpy as np
 from flask import url_for, redirect, Response
 from sqlalchemy import desc
 from werkzeug.utils import secure_filename
@@ -20,19 +19,6 @@ def controller_linear_interpolation_constant_forward(user, request):
     form = ComputeForm(request.form)
 
     file_data = None
-    # market_discount_factor = None
-    # market_spot_rate = None
-    # model_discount_factor = None
-    # model_spot_rate = None
-    # discount_factor_model_error = None
-    # spot_rate_model_error = None
-    # parameters = None
-    # time = None
-    # name_param = None
-    # daily_discount_factor = None
-    # annual_basis_date = None
-    # daily_model_spot_rate = None
-    # dates = None
 
     compute_not_allowed = False
 
@@ -43,7 +29,7 @@ def controller_linear_interpolation_constant_forward(user, request):
 
     if request.method == "POST":
         if user.is_authenticated:
-            if form.validate() and request.files:
+            if form.validate and request.files:
                 file = request.files[form.file_data.name]
 
                 if file and allowed_file(file.filename):

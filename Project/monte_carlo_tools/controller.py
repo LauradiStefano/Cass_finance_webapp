@@ -134,23 +134,26 @@ def delete_monte_carlo_tools_simulation(user, id):
         db.session.commit()
     return redirect(url_for('old_monte_carlo_tools'))
 
-# def controller_levy_process_data(user, id):
-#     id = int(id)
-#     if user.is_authenticated:
-#         csvfile = io.StringIO()
-#         instance = user.compute_levy_process.filter_by(id=id).first()
-#
-#         pdf_values = json.loads(instance.pdf_underlying_asset)
-#
-#         fieldnames = ['Pdf Asset']
-#         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-#
-#         writer.writeheader()
-#         for value in pdf_values:
-#             writer.writerow({'Pdf Asset': value})
-#
-#         return Response(csvfile.getvalue(), mimetype="text/csv",
-#                         headers={"Content-disposition": "attachment; filename=levy_data.csv"})
-#
-#     else:
-#         return redirect(url_for('levy_process'))
+
+def controller_monte_carlo_tools_paths_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_monte_carlo_tools.filter_by(id=id).first()
+
+        timestep_values = np.array(json.loads(instance.timestep))
+
+        simulated_paths_values = np.array(json.loads(instance.simulated_paths))
+
+        fieldnames = ['Time Step', 'Simulated Paths']
+
+        writer = csv.writer(csvfile)
+        writer.writerow(fieldnames)
+        for value in zip(timestep_values, simulated_paths_values):
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=pro.csv"})
+
+    else:
+        return redirect(url_for('monte_carlo_tools'))
