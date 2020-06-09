@@ -149,7 +149,7 @@ def controller_monte_carlo_tools_paths_data(user, id):
 
         writer = csv.writer(csvfile)
         writer.writerow(fieldnames)
-        for value in zip(timestep_values, simulated_paths_values):
+        for value in zip(timestep_values, simulated_paths_values.tolist()):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
