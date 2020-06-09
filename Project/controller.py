@@ -36,7 +36,8 @@ from linear_interpolation_constant_forward.controller import controller_linear_i
     controller_old_linear_interpolation_constant_forward, delete_linear_interpolation_constant_forward_simulation, \
     controller_linear_interpolation_constant_forward_data
 from monte_carlo_tools.controller import controller_monte_carlo_tools, controller_old_monte_carlo_tools, \
-    delete_monte_carlo_tools_simulation, controller_monte_carlo_tools_paths_data
+    delete_monte_carlo_tools_simulation, controller_monte_carlo_tools_paths_data, \
+    controller_monte_carlo_tools_moments_quantiles_data
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -460,8 +461,16 @@ def download_linear_data(id):
 
 @app.route('/download_monte_carlo_paths_data/<id>')
 @login_required
-def download_monte_carlo_data(id):
+def download_monte_carlo_paths_data(id):
     response = controller_monte_carlo_tools_paths_data(current_user, id)
+
+    return response
+
+
+@app.route('/download_monte_carlo_moments_quantiles_data/<id>')
+@login_required
+def download_monte_carlo_moments_quantiles_data(id):
+    response = controller_monte_carlo_tools_moments_quantiles_data(current_user, id)
 
     return response
 

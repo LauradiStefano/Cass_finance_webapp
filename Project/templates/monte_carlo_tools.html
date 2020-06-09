@@ -338,13 +338,24 @@
     <div class="row p-3 d-flex justify-content-center">
 
         {%if sim_id != None %}
-        <div>
-            <a href="/download_monte_carlo_paths_data/{{sim_id}}"class="download_data">
-                Click here to download the distribution</a>
+        <div class="row">
+            <div class="col-6">
+                <a href="/download_monte_carlo_paths_data/{{sim_id}}" class="download_data">
+                    Click here to download the simulated paths</a>
+            </div>
+            <div class="col-6">
+                <a href="/download_monte_carlo_moments_quantiles_data/{{sim_id}}" class="download_data">
+                    Click here to download the moments and quantiles</a>
+            </div>
         </div>
         {% else %}
-        <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
-            Click here to download the distribution
+        <div class="row">
+            <div class="download_data col-6" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+                Click here to download the simulated paths
+            </div>
+             <div class="download_data col-6" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+                Click here to download the moments and quantiles
+            </div>
         </div>
         {% endif %}
 

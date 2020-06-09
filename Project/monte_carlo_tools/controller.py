@@ -153,6 +153,32 @@ def controller_monte_carlo_tools_paths_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
+                        headers={"Content-disposition": "attachment; filename=monte_carlo_paths_data.csv"})
+
+    else:
+        return redirect(url_for('monte_carlo_tools'))
+
+
+def controller_monte_carlo_tools_moments_quantiles_data(user, id):
+    id = int(id)
+    if user.is_authenticated:
+        csvfile = io.StringIO()
+        instance = user.compute_monte_carlo_tools.filter_by(id=id).first()
+
+        timestep_values = np.array(json.loads(instance.timestep))
+
+        moments_values = np.array(json.loads(instance.moments))
+
+        quantiles_values = np.array(json.loads(instance.quantiles))
+
+        fieldnames = ['Time Step', 'Moments', 'Quantiles']
+
+        writer = csv.writer(csvfile)
+        writer.writerow(fieldnames)
+        for value in zip(timestep_values, moments_values.tolist(), quantiles_values.tolist()):
+            writer.writerow(value)
+
+        return Response(csvfile.getvalue(), mimetype="text/csv",
                         headers={"Content-disposition": "attachment; filename=pro.csv"})
 
     else:
