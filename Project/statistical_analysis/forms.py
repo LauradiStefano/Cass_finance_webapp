@@ -8,7 +8,7 @@ class ComputeForm(wtf.Form):
     method_choice = wtf.RadioField('Choose the Method', choices=[('0', 'Excel File'), ('1', 'Yahoo Tickers')],
                                    validators=[InputRequired()])
 
-    file_data = wtf.FileField(label='Import File', validators=[FileRequired()])
+    file_data = wtf.FileField(label='Import File')
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
 

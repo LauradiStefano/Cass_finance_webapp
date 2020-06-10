@@ -7,7 +7,7 @@ from wtforms.validators import InputRequired
 class ComputeForm(wtf.Form):
     file_name = StringField(label='DataSet Name', validators=[InputRequired(), validators.Length(max=25)])
 
-    file_data = wtf.FileField(label='Import File', validators=[FileRequired()])
+    file_data = wtf.FileField(label='Import File')
 
     n_portfolio = wtf.IntegerField(label='Number of Simulated Portfolios', default=100,
                                    validators=[wtf.validators.InputRequired(),
@@ -19,3 +19,12 @@ class ComputeForm(wtf.Form):
                                    validators=[InputRequired()], default='1')
 
     button_compute = wtf.SubmitField(label='Compute')
+
+    # def validate(self):
+    #     if not super(ComputeForm, self).validate():
+    #         return False
+    #
+    #     if self.file_data.content_length == 0:
+    #         self.file_data.errors.appends('The value must be smaller than maximum')
+    #         return False
+    #     return True

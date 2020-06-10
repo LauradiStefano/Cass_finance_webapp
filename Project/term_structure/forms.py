@@ -65,7 +65,7 @@ class ComputeForm(wtf.Form):
                                    validators=[InputRequired()])
 
     # Contract parameters
-    file_data = wtf.FileField(label='Import File', validators=[FileRequired()])
+    file_data = wtf.FileField(label='Import File')
 
     discount_factor = wtf.RadioField(label='Calibrate to:',
                                      choices=[('0', 'Spot Rate Term Structure'),

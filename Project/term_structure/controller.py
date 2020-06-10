@@ -49,7 +49,7 @@ def controller_term_structure(user, request):
 
     if request.method == "POST":
         if user.is_authenticated:
-            if form.validate and request.files:
+            if form.validate() and request.files:
                 file = request.files[form.file_data.name]
 
                 if file and allowed_file(file.filename):
