@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="row d-flex justify-content-center">
-        <div class="col-md-4 col-12">
+        <div class="col-md-3 col-12">
             <div class="row">
                 <div class="col-12">
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
@@ -44,13 +44,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    {% if result['plot_capital_interest_share'] != None %}
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-4 col-12">
+        {% if result['plot_capital_interest_share'] != None %}
+        <div class="col-md-9 col-12">
             <div class="row">
                 <div class="col-12">
-                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
+                    <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown ">
                         <div class="row border-bottom mb-2 pb-1">
                             <legend>Result</legend>
                         </div>
@@ -66,7 +64,6 @@
             </div>
         </div>
     </div>
-
     <div class="row d-flex justify-content-center">
         <div class="col-12">
             <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
