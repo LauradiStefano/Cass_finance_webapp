@@ -179,7 +179,7 @@ def controller_monte_carlo_tools_moments_quantiles_data(user, id):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=pro.csv"})
+                        headers={"Content-disposition": "attachment; filename=monte_carlo_moments_quantiles_data.csv"})
 
     else:
         return redirect(url_for('monte_carlo_tools'))
