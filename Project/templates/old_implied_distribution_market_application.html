@@ -74,6 +74,8 @@
                         </fieldset>
                     </div>
                 </div>
+                {% if result['plot_implied_volatility'] != None %}
+                {% if result['form'].risk_dividend.data == '1' %}
                 <div class="row">
                     <div class="col-12">
                         <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInLeft ">
@@ -84,13 +86,13 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12">
-                                            {% if result[' plot_implied_volatility'] != None %}
+
                                             <div class="row d-flex flex-column">
 
-                                                {% if result['form'].risk_dividend.data == '1' %}
+
                                                 <span class="mb-1"> Risk Free \((\%) \): {{result['risk_free']}}</span>
                                                 <span class="mb-1"> Dividend Yield \((\%) \): {{result['div_yield']}}</span>
-                                                {% endif %}
+
                                             </div>
                                         </div>
                                     </div>
@@ -99,6 +101,7 @@
                         </fieldset>
                     </div>
                 </div>
+                {% endif %}
             </div>
             <div class="col-md-9 col-12">
                 <div class="row">
@@ -267,7 +270,8 @@
 
     <div class="col-12 d-flex mb-3 justify-content-center">
 
-        <form style="text-align:center;" method="POST" action="/implied_distribution_market_application/old/delete/{{ result.id }}">
+        <form style="text-align:center;" method="POST"
+              action="/implied_distribution_market_application/old/delete/{{ result.id }}">
             <input type="submit" value="Delete Single Simulation"
                    title="Delete this post from database">
         </form>
