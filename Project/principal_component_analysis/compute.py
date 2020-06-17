@@ -18,12 +18,14 @@ from bokeh.transform import factor_cmap
 
 
 def import_dataset_file_excel(filename, price_or_return):
+
     data = pd.read_excel(os.path.join('uploads/', filename))
-    if price_or_return == 1:
+
+    if price_or_return == 0: # log returns
         tickers = list(data.columns.values)
         data_array = []
 
-        for i in range(0, len(data)):
+        for i in range(0, len(data)): 
             data_array.append((np.array(data.loc[i])))
 
         prices = np.vstack(data_array)
@@ -35,7 +37,40 @@ def import_dataset_file_excel(filename, price_or_return):
 
         returns = np.vstack(log_returns)
 
-    else:
+    elif prices_or_return == 1: # percentage returns
+        tickers = list(data.columns.values)
+        data_array = []
+
+        for i in range(0, len(data)): 
+            data_array.append((np.array(data.loc[i])))
+
+        prices = np.vstack(data_array)
+
+        percentage_returns = []
+
+        for i in range(0, len(prices) - 1):
+            percentage_return = (prices[i + 1] - prices[i])/prices[i]
+            percentage_returns.append(percentage_return)
+        returns = percentage_returns
+
+    elif prices_or_return == 2: # changes
+        tickers = list(data.columns.values)
+        data_array = []
+
+        for i in range(0, len(data)): 
+            data_array.append((np.array(data.loc[i])))
+
+        prices = np.vstack(data_array)
+
+        changes = []
+
+        for i in range(0, len(prices) - 1):
+            change = prices[i + 1] - prices[i]
+            changes.append(change)
+        returns = changes
+
+    
+    else: 
         tickers = list(data.columns.values)
         data_array = []
         for i in range(0, len(data)):
@@ -43,8 +78,16 @@ def import_dataset_file_excel(filename, price_or_return):
 
         returns = np.vstack(data_array)
 
-    covariance_matrix = np.cov(returns.T)
-    D, A = np.linalg.eig(covariance_matrix)
+    
+    if cov_or_corr == 0 : #use covariance matrix
+        covariance_matrix = np.cov(returns.T)
+        D, A = np.linalg.eig(covariance_matrix)
+
+    else : # use corr coef
+        cor_mat = np.corrcoef(returns.T)
+        D, A = np.linalg.eig(covariance_matrix)
+
+
 
     autovect = A
     evalues = sorted(D, reverse=True)
@@ -111,7 +154,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 # def funzione che permette di calcolare gli evalues nel terzo caso di import
 
 
-def create_plot_variance_component(evalues):
+def create_plot_variance_component(evalues, desired_explained_variance):
     len_tickers = len(evalues)
     tickers = [str(i) for i in range(len_tickers)]
     percentage = evalues / sum(evalues) * 100
@@ -131,7 +174,7 @@ def create_plot_variance_component(evalues):
              line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.legend.orientation = "horizontal"
+    fig.legend.orientation = "horizont8al"
     fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
@@ -141,7 +184,7 @@ def create_plot_variance_component(evalues):
     return script, div
 
 
-def create_plot_cumulative_component(evalues):
+def create_plot_cumulative_component(evalues, desired_explained_variance):
     len_tickers = len(evalues)
     tickers = [str(i) for i in range(len_tickers)]
     percentage = np.cumsum(evalues / sum(evalues) * 100)
