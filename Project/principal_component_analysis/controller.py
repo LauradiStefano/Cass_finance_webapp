@@ -146,45 +146,24 @@ def delete_principal_component_analysis_simulation(user, id):
     return redirect(url_for('old_principal_component_analysis'))
 
 
-def controller_principal_component_analysis_evalues_data(user, id):
+def controller_principal_component_analysis_data(user, id):
     id = int(id)
     if user.is_authenticated:
         csvfile = io.StringIO()
         instance = user.compute_principal_component_analysis.filter_by(id=id).first()
 
         evalues_values = np.array(json.loads(instance.evalues))
-        pc_terms = json.loads(instance.pc_terms)
-
-        writer = csv.writer(csvfile)
-
-        writer.writerow(pc_terms)
-        writer.writerow(evalues_values)
-
-        return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=eigenvalues_data.csv"})
-
-    else:
-        return redirect(url_for('principal_component_analysis'))
-
-
-def controller_principal_component_analysis_autovect_data(user, id):
-    id = int(id)
-    if user.is_authenticated:
-
-        csvfile = io.StringIO()
-        instance = user.compute_principal_component_analysis.filter_by(id=id).first()
-
         autovect_values = np.array(json.loads(instance.autovect))
-        pc_terms = json.loads(instance.pc_terms)
+
+        fieldnames = ['EigenValues', 'EigenVectors']
 
         writer = csv.writer(csvfile)
-
-        writer.writerow(pc_terms)
-        for value in autovect_values:
+        writer.writerow(fieldnames)
+        for value in zip(evalues_values, autovect_values):
             writer.writerow(value)
 
         return Response(csvfile.getvalue(), mimetype="text/csv",
-                        headers={"Content-disposition": "attachment; filename=eigenvector_data.csv"})
+                        headers={"Content-disposition": "attachment; filename=principal_component_data.csv"})
 
     else:
         return redirect(url_for('principal_component_analysis'))

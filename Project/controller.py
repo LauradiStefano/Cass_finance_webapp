@@ -29,7 +29,7 @@ from term_structure.controller import controller_term_structure, controller_old_
 from mortgage.controller import controller_mortgage, controller_old_mortgage, delete_mortgage_simulation
 from principal_component_analysis.controller import controller_principal_component_analysis, \
     controller_old_principal_component_analysis, delete_principal_component_analysis_simulation, \
-    controller_principal_component_analysis_autovect_data, controller_principal_component_analysis_evalues_data
+    controller_principal_component_analysis_data
 from temperature.controller import controller_temperature, controller_old_temperature, delete_temperature_simulation, \
     controller_temperature_data
 from linear_interpolation_constant_forward.controller import controller_linear_interpolation_constant_forward, \
@@ -435,18 +435,10 @@ def download_temperature_data(id):
     return response
 
 
-@app.route('/download_principal_evalues_data/<id>')
+@app.route('/download_principal_data/<id>')
 @login_required
-def download_principal_evalues_data(id):
-    response = controller_principal_component_analysis_evalues_data(current_user, id)
-
-    return response
-
-
-@app.route('/download_principal_autovect_data/<id>')
-@login_required
-def download_principal_autovect_data(id):
-    response = controller_principal_component_analysis_autovect_data(current_user, id)
+def download_principal_data(id):
+    response = controller_principal_component_analysis_data(current_user, id)
 
     return response
 

@@ -196,26 +196,18 @@
         {%if sim_id != None %}
 
         <div class="row">
-            <div class="col-6">
-                <a href="/download_principal_evalues_data/{{sim_id}}" class="download_data">
-                    Click here to download eigenvalues computations</a>
-            </div>
-            <div class="col-6">
-                <a href="/download_principal_autovect_data/{{sim_id}}" class="download_data">
-                    Click here to download eigenvector computations</a>
+            <div class="col">
+                <a href="/download_principal_data/{{sim_id}}" class="download_data">
+                    Click here to download eigenvalues and eigenvectors</a>
             </div>
         </div>
 
         {% else %}
 
         <div class="row">
-            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
+            <div class="col download_data" data-toggle="tooltip" data-placement="top"
                  title="Log in to download file">
-                Click here to download eigenvalues computations
-            </div>
-            <div class="col-6 download_data" data-toggle="tooltip" data-placement="top"
-                 title="Log in to download file">
-                Click here to download eigenvector computations
+                Click here to download eigenvalues and eigenvectors
             </div>
         </div>
 
