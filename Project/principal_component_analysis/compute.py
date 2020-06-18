@@ -11,23 +11,22 @@ import pandas as pd
 import pandas_datareader.data as web
 import bokeh.plotting as bp
 
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, BoxAnnotation
 from bokeh.palettes import Blues9
 from bokeh.transform import factor_cmap
 
 
 def import_dataset_file_excel(filename, price_or_return, cov_or_corr):
     data = pd.read_excel(os.path.join('uploads/', filename))
+    price_or_return = int(price_or_return)
+    tickers = list(data.columns.values)
 
+    data_array = []
+    for i in range(0, len(data)):
+        data_array.append((np.array(data.loc[i])))
+    prices = np.vstack(data_array)   
+    
     if price_or_return == 0:  # log returns
-        tickers = list(data.columns.values)
-        data_array = []
-
-        for i in range(0, len(data)):
-            data_array.append((np.array(data.loc[i])))
-
-        prices = np.vstack(data_array)
-
         log_returns = []
         for i in range(0, len(prices) - 1):
             log_return = np.log(prices[i + 1] / prices[i])
@@ -36,45 +35,26 @@ def import_dataset_file_excel(filename, price_or_return, cov_or_corr):
         returns = np.vstack(log_returns)
 
     elif price_or_return == 1:  # percentage returns
-        tickers = list(data.columns.values)
-        data_array = []
-
-        for i in range(0, len(data)):
-            data_array.append((np.array(data.loc[i])))
-
-        prices = np.vstack(data_array)
-
         percentage_returns = []
-
         for i in range(0, len(prices) - 1):
             percentage_return = (prices[i + 1] - prices[i]) / prices[i]
             percentage_returns.append(percentage_return)
-        returns = percentage_returns
+
+        returns = np.vstack(percentage_returns)
 
     elif price_or_return == 2:  # changes
-        tickers = list(data.columns.values)
-        data_array = []
-
-        for i in range(0, len(data)):
-            data_array.append((np.array(data.loc[i])))
-
-        prices = np.vstack(data_array)
-
         changes = []
-
         for i in range(0, len(prices) - 1):
             change = prices[i + 1] - prices[i]
             changes.append(change)
-        returns = changes
+        returns = np.vstack(changes)
 
     else:
-        tickers = list(data.columns.values)
-        data_array = []
-        for i in range(0, len(data)):
-            data_array.append((np.array(data.loc[i])))
 
-        returns = np.vstack(data_array)
+        returns = prices
 
+    cov_or_corr = int(cov_or_corr)
+    
     if cov_or_corr == 0:  # use covariance matrix
         covariance_matrix = np.cov(returns.T)
         D, A = np.linalg.eig(covariance_matrix)
@@ -99,7 +79,10 @@ def import_dataset_file_excel(filename, price_or_return, cov_or_corr):
 
 # Permette di calcolare la matrice varianza covarianza importando i prezzi di chiusura da Yahoo
 
-def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, end_month, end_year):
+def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, 
+                           end_month, end_year, price_or_return, cov_or_corr):
+    
+    price_or_return = int(price_or_return)
     start = dt.datetime(start_year, start_month, start_day)
     end = dt.datetime(end_year, end_month, end_day)
 
@@ -120,16 +103,42 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
         data_array.append((np.array(data.loc[i])))
 
     prices = np.vstack(data_array)
+    
+    if price_or_return == 0: # log returns
+        log_returns = []
+        for i in range(0, len(prices) - 1):
+            log_return = np.log(prices[i + 1] / prices[i])
+            log_returns.append(log_return)
+        returns = np.vstack(log_returns)
+        
+    elif price_or_return == 1: # percentage returns
+        percentage_returns = []
+        for i in range(0, len(prices) - 1):
+            percentage_return = (prices[i + 1] - prices[i]) / prices[i]
+            percentage_returns.append(percentage_return)
+        returns = np.vstack(percentage_returns)     
+        
+    elif price_or_return ==2: # changes
+        changes = []
+        for i in range(0, len(prices) - 1):
+            change = prices[i + 1] - prices[i]
+            changes.append(change)
+        
+        returns = np.vstack(changes)
+    
+    else : # prices
+        returns = prices
+    
+    
+    cov_or_corr = int(cov_or_corr)
+    
+    if cov_or_corr == 0:  # use covariance matrix
+        covariance_matrix = np.cov(returns.T)
+        D, A = np.linalg.eig(covariance_matrix)
 
-    log_returns = []
-    for i in range(0, len(prices) - 1):
-        log_return = np.log(prices[i + 1] / prices[i])
-        log_returns.append(log_return)
-
-    log_returns = np.vstack(log_returns)
-    covariance_matrix = np.cov(log_returns.T)
-
-    D, A = np.linalg.eig(covariance_matrix)
+    else:  # use corr coef
+        correlation_matrix = np.corrcoef(returns.T)
+        D, A = np.linalg.eig(correlation_matrix)
 
     evalues = sorted(D, reverse=True)
     evalues = np.array(evalues)
@@ -164,12 +173,17 @@ def create_plot_variance_component(evalues, desired_explained_variance):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
                     y_axis_label='Percentage')
 
-    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
+    desired_variance = BoxAnnotation(bottom = 0, top = desired_explained_variance*100, fill_color='#0095B6',
+                                        fill_alpha=0.1)
+    fig.add_layout(desired_variance)
+    
+
+    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, #legend_field="tickers",
+             line_color='#FFFFFF')#fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_left"
+    #fig.legend.orientation = "horizontal"
+    #fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
@@ -195,12 +209,16 @@ def create_plot_cumulative_component(evalues, desired_explained_variance):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
                     y_axis_label='Percentage')
 
-    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
+    fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, #legend_field="tickers",
+             line_color='#FFFFFF')#fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
+    desired_variance = BoxAnnotation(bottom = 0, top = desired_explained_variance*100, fill_color='#0095B6',
+                                        fill_alpha=0.1)
+    fig.add_layout(desired_variance)
+    
     fig.xgrid.grid_line_color = None
-    fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_left"
+    #fig.legend.orientation = "horizontal"
+    #fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
@@ -225,14 +243,14 @@ def create_plot_one_loadings(autovect):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
                     y_axis_label='Percentage')
 
-    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
+    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, #legend_field="tickers"
+             line_color='#FFFFFF')#fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
     # fig.y_range.start = -1
     # fig.y_range.end = 1
-    fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_left"
+    #fig.legend.orientation = "horizontal"
+    #fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
@@ -257,12 +275,12 @@ def create_plot_two_loadings(autovect):
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
                     y_axis_label='Percentage')
 
-    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, legend_field="tickers",
-             line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
+    fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, # legend_field="tickers"
+             line_color='#FFFFFF')#<fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers)) 
 
     fig.xgrid.grid_line_color = None
-    fig.legend.orientation = "horizontal"
-    fig.legend.location = "top_left"
+    #fig.legend.orientation = "horizontal"
+    #fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 
     from bokeh.embed import components
