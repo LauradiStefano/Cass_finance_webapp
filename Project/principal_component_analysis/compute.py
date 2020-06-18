@@ -13,19 +13,17 @@ import bokeh.plotting as bp
 
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Blues9
-from bokeh.plotting import figure
 from bokeh.transform import factor_cmap
 
 
-def import_dataset_file_excel(filename, price_or_return):
-
+def import_dataset_file_excel(filename, price_or_return, cov_or_corr):
     data = pd.read_excel(os.path.join('uploads/', filename))
 
-    if price_or_return == 0: # log returns
+    if price_or_return == 0:  # log returns
         tickers = list(data.columns.values)
         data_array = []
 
-        for i in range(0, len(data)): 
+        for i in range(0, len(data)):
             data_array.append((np.array(data.loc[i])))
 
         prices = np.vstack(data_array)
@@ -37,11 +35,11 @@ def import_dataset_file_excel(filename, price_or_return):
 
         returns = np.vstack(log_returns)
 
-    elif prices_or_return == 1: # percentage returns
+    elif price_or_return == 1:  # percentage returns
         tickers = list(data.columns.values)
         data_array = []
 
-        for i in range(0, len(data)): 
+        for i in range(0, len(data)):
             data_array.append((np.array(data.loc[i])))
 
         prices = np.vstack(data_array)
@@ -49,15 +47,15 @@ def import_dataset_file_excel(filename, price_or_return):
         percentage_returns = []
 
         for i in range(0, len(prices) - 1):
-            percentage_return = (prices[i + 1] - prices[i])/prices[i]
+            percentage_return = (prices[i + 1] - prices[i]) / prices[i]
             percentage_returns.append(percentage_return)
         returns = percentage_returns
 
-    elif prices_or_return == 2: # changes
+    elif price_or_return == 2:  # changes
         tickers = list(data.columns.values)
         data_array = []
 
-        for i in range(0, len(data)): 
+        for i in range(0, len(data)):
             data_array.append((np.array(data.loc[i])))
 
         prices = np.vstack(data_array)
@@ -69,8 +67,7 @@ def import_dataset_file_excel(filename, price_or_return):
             changes.append(change)
         returns = changes
 
-    
-    else: 
+    else:
         tickers = list(data.columns.values)
         data_array = []
         for i in range(0, len(data)):
@@ -78,23 +75,20 @@ def import_dataset_file_excel(filename, price_or_return):
 
         returns = np.vstack(data_array)
 
-    
-    if cov_or_corr == 0 : #use covariance matrix
+    if cov_or_corr == 0:  # use covariance matrix
         covariance_matrix = np.cov(returns.T)
         D, A = np.linalg.eig(covariance_matrix)
 
-    else : # use corr coef
-        cor_mat = np.corrcoef(returns.T)
-        D, A = np.linalg.eig(covariance_matrix)
-
-
+    else:  # use corr coef
+        correlation_matrix = np.corrcoef(returns.T)
+        D, A = np.linalg.eig(correlation_matrix)
 
     autovect = A
     evalues = sorted(D, reverse=True)
     evalues = np.array(evalues)
 
     pc_terms = []
-    for i in range(1, len(evalues)+1):
+    for i in range(1, len(evalues) + 1):
         z = "pc" + str(i)
         pc_terms.append(z)
 
@@ -142,7 +136,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
     autovect = A
 
     pc_terms = []
-    for i in range(1, len(evalues)+1):
+    for i in range(1, len(evalues) + 1):
         z = "pc" + str(i)
         pc_terms.append(z)
 
@@ -174,7 +168,7 @@ def create_plot_variance_component(evalues, desired_explained_variance):
              line_color='#FFFFFF', fill_color=factor_cmap('tickers', palette=Blues9, factors=tickers))
 
     fig.xgrid.grid_line_color = None
-    fig.legend.orientation = "horizont8al"
+    fig.legend.orientation = "horizontal"
     fig.legend.location = "top_left"
     fig.toolbar.active_drag = None
 

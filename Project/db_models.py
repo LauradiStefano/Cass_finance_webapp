@@ -513,7 +513,9 @@ class principal_component_analysis(db.Model):
 
     method_choice = db.Column(db.String())
     file_name = db.Column(db.String())
-    price_return_flag = db.Column(db.String())
+    asset_flag = db.Column(db.String())
+    matrix_flag = db.Column(db.String())
+    explained_variance = db.Column(db.Float())
 
     start_day = db.Column(db.Integer())
     start_month = db.Column(db.Integer())

@@ -1,19 +1,28 @@
 import wtforms as wtf
-from flask_wtf.file import FileRequired
 from wtforms import validators, StringField, IntegerField, FieldList
 from wtforms.validators import InputRequired
 
 
 class ComputeForm(wtf.Form):
     method_choice = wtf.RadioField('Choose the Method', choices=[('0', 'Excel File'), ('1', 'Yahoo Tickers')],
-                                   validators=[InputRequired()])
+                                   default='0', validators=[InputRequired()])
 
     file_data = wtf.FileField(label='Import File')
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
 
-    price_return_flag = wtf.RadioField('Prices-Returns:', choices=[('0', 'Prices'), ('1', 'Returns')],
-                                       validators=[InputRequired()], default='0')
+    asset_flag = wtf.RadioField('Asset:',
+                                choices=[('0', 'Log-Returns'), ('1', 'Percentage Returns'), ('2', 'Changes'),
+                                         ('3', 'Levels')], validators=[InputRequired()], default='0')
+
+    matrix_flag = wtf.RadioField('Covariance-Correlation:',
+                                 choices=[('0', 'Covariance Matrix'), ('1', 'Correlation Matrix')],
+                                 validators=[InputRequired()], default='0')
+
+    explained_variance = wtf.FloatField(label='Desidered explained variance', default=0.9,
+                                        validators=[wtf.validators.InputRequired(),
+                                                    validators.NumberRange(min=0, max=1,
+                                                                           message='The value must be between 0 and 1')])
 
     tickers_list = FieldList(StringField(label='Ticker'), min_entries=2)
 

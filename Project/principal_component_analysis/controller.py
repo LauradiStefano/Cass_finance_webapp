@@ -39,16 +39,17 @@ def controller_principal_component_analysis(user, request):
                         file_data = secure_filename(file.filename)
                         file.save(os.path.join(app.config['UPLOAD_FOLDER'], file_data))
 
-                evalues, autovect, pc_terms = import_dataset_file_excel(file_data, form.price_return_flag.data)
+                evalues, autovect, pc_terms = import_dataset_file_excel(file_data, form.asset_flag.data,
+                                                                        form.matrix_flag.data)
             else:
                 evalues, autovect, pc_terms = import_dataset_tickers(form.tickers_list.data, form.start_day.data,
                                                                      form.start_month.data, form.start_year.data,
                                                                      form.end_day.data, form.end_month.data,
                                                                      form.end_year.data)
 
-            plot_variance_component = create_plot_variance_component(evalues)
+            plot_variance_component = create_plot_variance_component(evalues, form.explained_variance.data)
 
-            plot_cumulative_component = create_plot_cumulative_component(evalues)
+            plot_cumulative_component = create_plot_cumulative_component(evalues, form.explained_variance.data)
 
             plot_one_loadings = create_plot_one_loadings(autovect)
 
@@ -78,9 +79,9 @@ def controller_principal_component_analysis(user, request):
                 evalues = np.array(json.loads(instance.evalues))
                 autovect = np.array(json.loads(instance.autovect))
 
-                plot_variance_component = create_plot_variance_component(evalues)
+                plot_variance_component = create_plot_variance_component(evalues, form.explained_variance.data)
 
-                plot_cumulative_component = create_plot_cumulative_component(evalues)
+                plot_cumulative_component = create_plot_cumulative_component(evalues, form.explained_variance.data)
 
                 plot_one_loadings = create_plot_one_loadings(autovect)
 
@@ -115,9 +116,9 @@ def controller_old_principal_component_analysis(user):
             evalues = np.array(json.loads(instance.evalues))
             autovect = np.array(json.loads(instance.autovect))
 
-            plot_variance_component = create_plot_variance_component(evalues)
+            plot_variance_component = create_plot_variance_component(evalues, form.explained_variance.data)
 
-            plot_cumulative_component = create_plot_cumulative_component(evalues)
+            plot_cumulative_component = create_plot_cumulative_component(evalues, form.explained_variance.data)
 
             plot_one_loadings = create_plot_one_loadings(autovect)
 
