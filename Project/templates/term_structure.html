@@ -512,7 +512,7 @@
 </div>
 {% include 'footer.html' %}
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var select_distribution = $('#model_choice');
         var vasicek = $('#vasicek');
         var cir = $('#cir');
@@ -522,7 +522,7 @@
         var help_formula = $('#help_formula');
         var help_dataset = $('#help_dataset');
 
-        update = function() {
+        update = function () {
             var vasicek_formula = $('#vasicek > .model_formula')[0].innerHTML;
             var cir_formula = $('#cir > .model_formula')[0].innerHTML;
             var nelsonSiegel_formula = $('#nelson_siegel > .model_formula')[0].innerHTML;
@@ -559,38 +559,24 @@
         var icon_help = $('.icon_help').first();
         var icon_help_dataset = $('#icon_help_dataset');
 
-        icon_help.on('mouseenter', function() {
+        icon_help.on('mouseenter', function () {
             help_formula.show();
         });
 
-          icon_help.on('mouseleave', function() {
+        icon_help.on('mouseleave', function () {
             help_formula.hide();
         });
 
-        icon_help_dataset.on('mouseenter', function(){
+        icon_help_dataset.on('mouseenter', function () {
             help_dataset.show();
         });
 
-        icon_help_dataset.on('mouseleave', function() {
+        icon_help_dataset.on('mouseleave', function () {
             help_dataset.hide();
         });
 
         update();
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 </body>
