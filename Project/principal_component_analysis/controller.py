@@ -12,8 +12,7 @@ from app import allowed_file, app
 from db_models import db
 from db_models import principal_component_analysis as compute
 from principal_component_analysis.compute import import_dataset_file_excel, import_dataset_tickers, \
-    create_plot_variance_component, \
-    create_plot_cumulative_component, create_plot_one_loadings, create_plot_two_loadings
+    create_plot_variance_component, create_plot_cumulative_component, create_plot_one_loadings, create_plot_two_loadings
 from principal_component_analysis.forms import ComputeForm
 
 
@@ -45,7 +44,8 @@ def controller_principal_component_analysis(user, request):
                 evalues, autovect, pc_terms = import_dataset_tickers(form.tickers_list.data, form.start_day.data,
                                                                      form.start_month.data, form.start_year.data,
                                                                      form.end_day.data, form.end_month.data,
-                                                                     form.end_year.data)
+                                                                     form.end_year.data, form.asset_flag.data,
+                                                                     form.matrix_flag.data)
 
             plot_variance_component = create_plot_variance_component(evalues, form.explained_variance.data)
 
