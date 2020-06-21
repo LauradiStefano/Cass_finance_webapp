@@ -1,5 +1,4 @@
 import wtforms as wtf
-from wtforms import validators
 
 from common_validators import greater_than_zero
 
@@ -53,11 +52,24 @@ class ComputeForm(wtf.Form):
                                 validators=[wtf.validators.InputRequired()])
 
     # Contract parameters
-    price = wtf.FloatField(label='Spot Price', default=100,
-                           validators=[wtf.validators.InputRequired(), greater_than_zero])
+    price_abm = wtf.FloatField(label='Starting Value', default=0,
+                               validators=[wtf.validators.InputRequired()])
+
+    price_gbm = wtf.FloatField(label='Starting Value', default=1,
+                               validators=[wtf.validators.InputRequired()])
+
+    price_mrg = wtf.FloatField(label='Starting Value', default=0.1,
+                               validators=[wtf.validators.InputRequired()])
+
+    price_cir = wtf.FloatField(label='Starting Value', default=0.1,
+                               validators=[wtf.validators.InputRequired()])
+
+    price_heston = wtf.FloatField(label='Starting Value', default=0,
+                                  validators=[wtf.validators.InputRequired()])
+
     time = wtf.FloatField(label='Time to Maturity (Years)', default=5,
                           validators=[wtf.validators.InputRequired(), greater_than_zero])
-    number_step = wtf.IntegerField(label='Number of Step', default=50,
+    number_step = wtf.IntegerField(label='Number of Steps', default=50,
                                    validators=[wtf.validators.InputRequired(), greater_than_zero])
     number_paths = wtf.IntegerField(label='Number of Paths', default=1000,
                                     validators=[wtf.validators.InputRequired(), greater_than_zero])

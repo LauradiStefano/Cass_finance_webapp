@@ -11,9 +11,9 @@ class ComputeForm(wtf.Form):
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
 
-    asset_flag = wtf.RadioField('Asset:',
-                                choices=[('0', 'Log-Returns'), ('1', 'Percentage Returns'), ('2', 'Changes'),
-                                         ('3', 'Levels')], validators=[InputRequired()], default='0')
+    asset_flag = wtf.RadioField('Quantity to Analyze:',
+                                choices=[('3', 'Levels'), ('2', 'Changes'), ('0', 'Log-Returns'),
+                                         ('1', 'Percentage Returns')], validators=[InputRequired()], default='0')
 
     matrix_flag = wtf.RadioField('Covariance-Correlation:',
                                  choices=[('0', 'Covariance Matrix'), ('1', 'Correlation Matrix')],

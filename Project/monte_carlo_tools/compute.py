@@ -303,7 +303,7 @@ def create_plot_histogram(simulated_paths, NStep):
     fig_hist_1 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
-    fig_hist_1.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t1)
+    fig_hist_1.xaxis.axis_label = 'Obs Simulated Paths at Step n' + str(t1)
     fig_hist_1.xgrid.grid_line_color = None
     fig_hist_1.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
 
@@ -312,7 +312,7 @@ def create_plot_histogram(simulated_paths, NStep):
     fig_hist_2 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
-    fig_hist_2.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t2)
+    fig_hist_2.xaxis.axis_label = 'Obs Simulated Paths at Step n' + str(t2)
     fig_hist_2.xgrid.grid_line_color = None
     fig_hist_2.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
 
@@ -321,7 +321,7 @@ def create_plot_histogram(simulated_paths, NStep):
     fig_hist_3 = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
-    fig_hist_3.xaxis.axis_label = 'Obs simulated_paths at step n' + str(t3)
+    fig_hist_3.xaxis.axis_label = 'Obs Simulated Paths at Step n' + str(t3)
     fig_hist_3.xgrid.grid_line_color = None
     fig_hist_3.quad(bottom=0, left=hedges[:-1], right=hedges[1:], top=hhist, color="#0095B6", line_color="#ffffff")
 

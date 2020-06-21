@@ -272,15 +272,67 @@
                     <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInRight ">
 
                         <div class="row border-bottom mb-2 pb-1">
-                            <legend>Contract Parameters</legend>
+                            <legend>Simulation Parameters</legend>
+                        </div>
+                        <div id="price_abm" class="row" {% if form.model_choice.data !='0' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_abm.label}}
+                                {{form.price_abm}}
+                                {% if form.price_abm.errors %}
+                                {% for error in form.price_abm.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
 
-                        <div class="row">
+                        <div id="price_gbm" class="row" {% if form.model_choice.data !='1' %}
+                             style="display:none" {%endif%}>
                             <div class="col mb-1">
-                                {{form.price.label}}
-                                {{form.price}}
-                                {% if form.price.errors %}
-                                {% for error in form.price.errors %}
+                                {{form.price_gbm.label}}
+                                {{form.price_gbm}}
+                                {% if form.price_gbm.errors %}
+                                {% for error in form.price_gbm.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_cir" class="row" {% if form.model_choice.data !='2' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_cir.label}}
+                                {{form.price_cir}}
+                                {% if form.price_cir.errors %}
+                                {% for error in form.price_cir.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_mrg" class="row" {% if form.model_choice.data !='3' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_mrg.label}}
+                                {{form.price_mrg}}
+                                {% if form.price_mrg.errors %}
+                                {% for error in form.price_mrg.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_heston" class="row" {% if form.model_choice.data !='4' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_heston.label}}
+                                {{form.price_heston}}
+                                {% if form.price_heston.errors %}
+                                {% for error in form.price_heston.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -353,7 +405,7 @@
             <div class="download_data col-6" data-toggle="tooltip" data-placement="top" title="Log in to download file">
                 Click here to download the simulated paths
             </div>
-             <div class="download_data col-6" data-toggle="tooltip" data-placement="top" title="Log in to download file">
+            <div class="download_data col-6" data-toggle="tooltip" data-placement="top" title="Log in to download file">
                 Click here to download the moments and quantiles
             </div>
         </div>
@@ -404,10 +456,15 @@
     $(function () {
         var select_distribution = $('#model_choice');
         var abm = $('#abm');
+        var price_abm = $('#price_abm');
         var gbm = $('#gbm');
+        var price_gbm = $('#price_gbm');
         var cir = $('#cir');
+        var price_cir = $('#price_cir');
         var mrg = $('#mrg');
+        var price_mrg = $('#price_mrg');
         var heston = $('#heston');
+        var price_heston = $('#price_heston');
 
         select_distribution.on('change', function () {
             if (select_distribution.val() == '0') {
@@ -416,30 +473,55 @@
                 cir.hide();
                 mrg.hide();
                 heston.hide();
+                price_abm.show();
+                price_gbm.hide();
+                price_cir.hide();
+                price_mrg.hide();
+                price_heston.hide();
             } else if (select_distribution.val() == '1') {
                 abm.hide();
                 gbm.show();
                 cir.hide();
                 mrg.hide();
                 heston.hide();
+                price_abm.hide();
+                price_gbm.show();
+                price_cir.hide();
+                price_mrg.hide();
+                price_heston.hide();
             } else if (select_distribution.val() == '2') {
                 abm.hide();
                 gbm.hide();
                 cir.show();
                 mrg.hide();
                 heston.hide();
+                price_abm.hide();
+                price_gbm.hide();
+                price_cir.show();
+                price_mrg.hide();
+                price_heston.hide();
             } else if (select_distribution.val() == '3') {
                 abm.hide();
                 gbm.hide();
                 cir.hide();
                 mrg.show();
                 heston.hide();
+                price_abm.hide();
+                price_gbm.hide();
+                price_cir.hide();
+                price_mrg.show();
+                price_heston.hide();
             } else {
                 abm.hide();
                 gbm.hide();
                 cir.hide();
                 mrg.hide();
                 heston.show();
+                price_abm.hide();
+                price_gbm.hide();
+                price_cir.hide();
+                price_mrg.hide();
+                price_heston.show();
             }
         });
     });

@@ -607,7 +607,11 @@ class monte_carlo_tools(db.Model):
     eta_heston = db.Column(db.Float())
     rho_heston = db.Column(db.Float())
 
-    price = db.Column(db.Float())
+    price_abm = db.Column(db.Float())
+    price_gbm = db.Column(db.Float())
+    price_cir = db.Column(db.Float())
+    price_mrg = db.Column(db.Float())
+    price_heston = db.Column(db.Float())
     time = db.Column(db.Float())
     number_step = db.Column(db.Integer())
     number_paths = db.Column(db.Integer())

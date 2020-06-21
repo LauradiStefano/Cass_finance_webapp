@@ -28,13 +28,14 @@ def controller_monte_carlo_tools(user, request):
         if form.validate():
             simulated_paths, moments, quantiles, timestep = \
                 get_simutalted_path_and_moments(form.time.data, form.number_step.data, form.number_paths.data,
-                                                form.model_choice.data, form.price.data, form.mu_abm.data,
-                                                form.sigma_abm.data, form.mu_gbm.data, form.sigma_gbm.data,
-                                                form.alpha_cir.data, form.mu_cir.data, form.sigma_cir.data,
-                                                form.alpha_mrg.data, form.mu_mrg.data, form.sigma_mrg.data,
-                                                form.mu_heston.data, form.volatility_t0_heston.data,
-                                                form.alpha_heston.data, form.beta_heston.data, form.eta_heston.data,
-                                                form.rho_heston.data)
+                                                form.model_choice.data, form.price_abm.data, form.price_gbm.data,
+                                                form.price_cir.data, form.price_mrg.data, form.price_heston.data,
+                                                form.mu_abm.data, form.sigma_abm.data, form.mu_gbm.data,
+                                                form.sigma_gbm.data, form.alpha_cir.data, form.mu_cir.data,
+                                                form.sigma_cir.data, form.alpha_mrg.data, form.mu_mrg.data,
+                                                form.sigma_mrg.data, form.mu_heston.data,
+                                                form.volatility_t0_heston.data, form.alpha_heston.data,
+                                                form.beta_heston.data, form.eta_heston.data, form.rho_heston.data)
 
             plot_simulated_paths = create_plot_simulated_paths(simulated_paths, timestep, form.number_step.data,
                                                                form.number_paths.data, quantiles)

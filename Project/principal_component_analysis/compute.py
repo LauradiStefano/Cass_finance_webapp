@@ -168,7 +168,7 @@ def create_plot_variance_component(evalues, desired_explained_variance):
     y_range = [0, 140]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Principal Component',
                     y_axis_label='Percentage')
 
     desired_variance = BoxAnnotation(bottom=0, top=desired_explained_variance * 100, fill_color='#0095B6',
@@ -202,7 +202,7 @@ def create_plot_cumulative_component(evalues, desired_explained_variance):
     y_range = [0, 140]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Principal Component',
                     y_axis_label='Percentage')
 
     fig.vbar(x='tickers', top='percentage', width=0.9, alpha=0.8, source=data, line_color='#FFFFFF')
@@ -233,8 +233,8 @@ def create_plot_one_loadings(autovect):
     y_range = [-1, 1]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
-                    y_axis_label='Percentage')
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Asset',
+                    y_axis_label='Loading')
 
     fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, line_color='#FFFFFF')
 
@@ -260,8 +260,8 @@ def create_plot_two_loadings(autovect):
     y_range = [-1, 1]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
-                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Ticker',
-                    y_axis_label='Percentage')
+                    sizing_mode='scale_both', toolbar_location="right", x_axis_label='Asset',
+                    y_axis_label='Loading')
 
     fig.vbar(x='tickers', top='pca_one', width=0.9, alpha=0.8, source=data, line_color='#FFFFFF')
 
