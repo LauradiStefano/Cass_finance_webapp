@@ -165,7 +165,7 @@ def create_plot_variance_component(evalues, desired_explained_variance):
         percentage=percentage))
 
     x_range = tickers
-    y_range = [0, 140]
+    y_range = [0, 100]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Principal Component',
@@ -199,7 +199,7 @@ def create_plot_cumulative_component(evalues, desired_explained_variance):
     ))
 
     x_range = tickers
-    y_range = [0, 140]
+    y_range = [0, 100]
 
     fig = bp.figure(tools=['save, pan, box_zoom, reset, crosshair'], x_range=x_range, y_range=y_range,
                     sizing_mode='scale_both', toolbar_location="right", x_axis_label='Principal Component',
@@ -223,7 +223,7 @@ def create_plot_cumulative_component(evalues, desired_explained_variance):
 def create_plot_one_loadings(autovect):
     pca_one = autovect[:, 0]
 
-    tickers = [str(i) for i in range(len(pca_one))]
+    tickers = [str(i) for i in range(1, len(pca_one)+1)]
 
     data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
@@ -250,7 +250,7 @@ def create_plot_one_loadings(autovect):
 def create_plot_two_loadings(autovect):
     pca_one = autovect[:, 1]
 
-    tickers = [str(i) for i in range(len(pca_one))]
+    tickers = [str(i) for i in range(1, len(pca_one)+1)]
 
     data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
