@@ -11,7 +11,7 @@ import numpy as np
 
 def get_moments(model, X0, parameters, T, NStep):
     dt = T / NStep
-    p = 0.01
+    p = 0.05
 
     horizon = np.arange(0, T + dt, dt)
     if model == 0:  # ABM
