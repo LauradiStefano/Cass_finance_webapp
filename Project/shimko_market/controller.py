@@ -66,6 +66,12 @@ def controller_shimko_market(user, request):
     plot_index_cdf = None
     plot_return_cdf = None
 
+    if user.is_authenticated:
+        compute_not_allowed = False
+
+    else:
+        compute_not_allowed = True
+
     if request.method == "POST":
         if user.is_authenticated:
             if form.validate() and request.files:
@@ -207,8 +213,6 @@ def controller_shimko_market(user, request):
                     db.session.add(object)
                     db.session.commit()
                     sim_id = object.id
-        else:
-            compute_not_allowed = True
     else:
         if user.is_authenticated:  # user authenticated, store the data
 

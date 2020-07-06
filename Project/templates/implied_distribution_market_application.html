@@ -150,183 +150,181 @@
 
             </div>
 
-            <div class="row mt-3">
+            <div class="row mt-3 justify-content-center">
+                {% if compute_not_allowed %}
+                <div class="col d-flex justify-content-center alert_warning" data-toggle="tooltip" data-placement="top"
+                     title="Warning! Register to continue">
+                    {{form.button_compute}}
+                </div>
+                {% else %}
                 <div class="col d-flex justify-content-center">
                     {{form.button_compute}}
                 </div>
+                {% endif %}
             </div>
 
-        </form>
-    </div>
+    </form>
+</div>
 
-    <div class="row d-flex justify-content-center">
-        {% if compute_not_allowed %}
-        <div class="alert alert-warning">
-            <strong>Warning!</strong>
-            Register to Continue
-        </div>
-        {% endif %}
-    </div>
+{% if plot_implied_volatility != None %}
+<div class="row d-flex justify-content-center">
 
-    {% if plot_implied_volatility != None %}
-    <div class="row d-flex justify-content-center">
+    <div class="col-md-4 col-12">
+        <fieldset class="shadow-sm p-3 bg-white mb-2 rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Results</legend>
+            </div>
 
-        <div class="col-md-4 col-12">
-            <fieldset class="shadow-sm p-3 bg-white mb-2 rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Results</legend>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <h6>Fitted Volatility Smile </h6>
-                        \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)
-                        <hr>
-                        <div class="row d-flex flex-column">
-                            <span class="font-weight-light mb-1"> \(a_{0}\): {{a0}}</span>
-                            <span class="font-weight-light mb-1"> \(a_{1}\): {{a1}}</span>
-                            <span class="font-weight-light mb-1"> \(a_{2}\): {{a2}}</span>
-                            <span class="font-weight-light mb-1"> \(R^{2}\): {{r2}}</span>
-                        </div>
+            <div class="row">
+                <div class="col-12">
+                    <h6>Fitted Volatility Smile </h6>
+                    \(a_{0}+a_{1}\cdot k+a_{2}\cdot k^{2}\)
+                    <hr>
+                    <div class="row d-flex flex-column">
+                        <span class="font-weight-light mb-1"> \(a_{0}\): {{a0}}</span>
+                        <span class="font-weight-light mb-1"> \(a_{1}\): {{a1}}</span>
+                        <span class="font-weight-light mb-1"> \(a_{2}\): {{a2}}</span>
+                        <span class="font-weight-light mb-1"> \(R^{2}\): {{r2}}</span>
                     </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col d-flex mb-3 justify-content-center">
-                        <div id="button_view_details" class="popup_table_open">
-                            {{form.button_view_details}}
-                        </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col d-flex mb-3 justify-content-center">
+                    <div id="button_view_details" class="popup_table_open">
+                        {{form.button_view_details}}
                     </div>
                 </div>
-            </fieldset>
-            {%if form.risk_dividend.data == '1'%}
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Model Details</legend>
-                </div>
+            </div>
+        </fieldset>
+        {%if form.risk_dividend.data == '1'%}
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Model Details</legend>
+            </div>
 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row d-flex flex-column">
-                            <span class="font-weight-light mb-1"> Interest Rate \((\%)\): {{risk_free}}</span>
-                            <span class="font-weight-light mb-1"> Dividend Yield \((\%)\): {{div_yield}}</span>
-                        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row d-flex flex-column">
+                        <span class="font-weight-light mb-1"> Interest Rate \((\%)\): {{risk_free}}</span>
+                        <span class="font-weight-light mb-1"> Dividend Yield \((\%)\): {{div_yield}}</span>
                     </div>
                 </div>
-            </fieldset>
-            {%endif%}
-        </div>
-
-        <div class="col-md-8 col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Kolmogorov Smirnov Test</legend>
-                </div>
-                <table class="table table-striped">
-                    <thead>
-                    <th scope="col"></th>
-                    <th scope="col"> Cdf Prices</th>
-                    <th scope="col"> Cdf Returns</th>
-                    </thead>
-
-                    <tbody>
-                    <tr>
-                        <th> Statistic Value</th>
-                        <td> {{statistic_prices}}</td>
-                        <td> {{statistic_returns}}</td>
-                    </tr>
-                    <tr>
-                        <th> PValue</th>
-                        <td> {{pvalue_prices}}</td>
-                        <td> {{pvalue_returns}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </fieldset>
-        </div>
+            </div>
+        </fieldset>
+        {%endif%}
     </div>
 
-    <div class="row d-flex justify-content-center">
-        {%if sim_id != None %}
-        <div>
-            <a href="/download_shimko_market_data/{{sim_id}}" class="download_data">
-                Click here to download the implicit values</a>
-        </div>
-        {% endif %}
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied Volatility Profile</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_implied_volatility[0]|safe}}
-                    {{plot_implied_volatility[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
+    <div class="col-md-8 col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Kolmogorov Smirnov Test</legend>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <th scope="col"></th>
+                <th scope="col"> Cdf Prices</th>
+                <th scope="col"> Cdf Returns</th>
+                </thead>
 
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied CEQ Returns Distribution</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_return_distribution[0]|safe}}
-                    {{plot_return_distribution[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
+                <tbody>
+                <tr>
+                    <th> Statistic Value</th>
+                    <td> {{statistic_prices}}</td>
+                    <td> {{statistic_returns}}</td>
+                </tr>
+                <tr>
+                    <th> PValue</th>
+                    <td> {{pvalue_prices}}</td>
+                    <td> {{pvalue_returns}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
     </div>
+</div>
 
-    {%if plot_index_distribution != None%}
-    <div class="row d-flex justify-content-center">
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied CEQ Index Distribution</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_index_distribution[0]|safe}}
-                    {{plot_index_distribution[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    {%endif%}
-
-    {%if plot_index_cdf != None%}
-    <div class="row d-flex justify-content-center">
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied CEQ Prices CDF</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_index_cdf[0]|safe}}
-                    {{plot_index_cdf[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    {%endif%}
-
-    {%if plot_return_cdf != None%}
-    <div class="row d-flex justify-content-center">
-        <div class=" col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
-                <div class="row border-bottom mb-2 pb-1">
-                    <legend>Implied CEQ Returns CDF</legend>
-                </div>
-                <div class="d-flex justify-content-center plot">
-                    {{plot_return_cdf[0]|safe}}
-                    {{plot_return_cdf[1]|safe}}
-                </div>
-            </fieldset>
-        </div>
-
+<div class="row d-flex justify-content-center">
+    {%if sim_id != None %}
+    <div>
+        <a href="/download_shimko_market_data/{{sim_id}}" class="download_data">
+            Click here to download the implicit values</a>
     </div>
     {% endif %}
-    {% endif %}
+    <div class=" col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Implied Volatility Profile</legend>
+            </div>
+            <div class="d-flex justify-content-center plot">
+                {{plot_implied_volatility[0]|safe}}
+                {{plot_implied_volatility[1]|safe}}
+            </div>
+        </fieldset>
+    </div>
+
+    <div class=" col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Implied CEQ Returns Distribution</legend>
+            </div>
+            <div class="d-flex justify-content-center plot">
+                {{plot_return_distribution[0]|safe}}
+                {{plot_return_distribution[1]|safe}}
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+{%if plot_index_distribution != None%}
+<div class="row d-flex justify-content-center">
+    <div class=" col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Implied CEQ Index Distribution</legend>
+            </div>
+            <div class="d-flex justify-content-center plot">
+                {{plot_index_distribution[0]|safe}}
+                {{plot_index_distribution[1]|safe}}
+            </div>
+        </fieldset>
+    </div>
+</div>
+{%endif%}
+
+{%if plot_index_cdf != None%}
+<div class="row d-flex justify-content-center">
+    <div class=" col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Implied CEQ Prices CDF</legend>
+            </div>
+            <div class="d-flex justify-content-center plot">
+                {{plot_index_cdf[0]|safe}}
+                {{plot_index_cdf[1]|safe}}
+            </div>
+        </fieldset>
+    </div>
+</div>
+{%endif%}
+
+{%if plot_return_cdf != None%}
+<div class="row d-flex justify-content-center">
+    <div class=" col-12">
+        <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+            <div class="row border-bottom mb-2 pb-1">
+                <legend>Implied CEQ Returns CDF</legend>
+            </div>
+            <div class="d-flex justify-content-center plot">
+                {{plot_return_cdf[0]|safe}}
+                {{plot_return_cdf[1]|safe}}
+            </div>
+        </fieldset>
+    </div>
+
+</div>
+{% endif %}
+{% endif %}
 </div>
 
 <div id="popup_table">
@@ -390,11 +388,11 @@
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var select_risk_dividend = $('#risk_dividend');
         var risk_free = $('#risk_free');
 
-        select_risk_dividend.on('click', function() {
+        select_risk_dividend.on('click', function () {
             if ($('[name=risk_dividend]:radio:checked').val() == '0') {
                 risk_free.show();
             } else {
@@ -404,19 +402,21 @@
 
         var help_dataset = $('#help_dataset');
         var icon_help_dataset = $('#icon_help_dataset');
-         icon_help_dataset.on('mouseenter', function(){
+        icon_help_dataset.on('mouseenter', function () {
             help_dataset.show();
         });
 
-        icon_help_dataset.on('mouseleave', function() {
+        icon_help_dataset.on('mouseleave', function () {
             help_dataset.hide();
         });
     });
 
-
-
-
-
+    $('#button_compute').on('click', function (e) {
+        e.preventDefault();
+        $('[data-toggle="tooltip"]').tooltip('show')
+        $('#button_compute').prop('disabled', true);
+        $('#button_compute').css('opacity', '0.5');
+    });
 </script>
 </body>
 </html>

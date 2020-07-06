@@ -27,6 +27,12 @@ def controller_linear_interpolation_constant_forward(user, request):
     plot_discount_factor_term_structure = None
     plot_interest_rate_term_structure = None
 
+    if user.is_authenticated:
+        compute_not_allowed = False
+
+    else:
+        compute_not_allowed = True
+
     if request.method == "POST":
         if user.is_authenticated:
             if form.validate() and request.files:
@@ -64,9 +70,6 @@ def controller_linear_interpolation_constant_forward(user, request):
                     db.session.add(object)
                     db.session.commit()
                     sim_id = object.id
-        else:
-            compute_not_allowed = True
-
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_linear_interpolation_constant_forward.count() > 0:

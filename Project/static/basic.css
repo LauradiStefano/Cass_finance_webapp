@@ -608,6 +608,13 @@ div.download_data:hover, div.download_data:active {
     color: #808080;
 }
 
+.alert_warning {
+    color: #C0C0C0;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 20px;
+}
+
 .img_logo {
     height: 30px;
     width: 290px;
@@ -618,8 +625,9 @@ div.download_data:hover, div.download_data:active {
     width: 78px;
 }
 
-.alert-warning {
-    font-size: 12px;
+#alert_warning {
+    font-size: 13px;
+    max-width: 350px;
 }
 
 .alert {

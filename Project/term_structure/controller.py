@@ -47,6 +47,12 @@ def controller_term_structure(user, request):
     plot_error_discount_factor = None
     plot_error_interest_rate = None
 
+    if user.is_authenticated:
+        compute_not_allowed = False
+
+    else:
+        compute_not_allowed = True
+
     if request.method == "POST":
         if user.is_authenticated:
             if form.validate() and request.files:
@@ -111,9 +117,6 @@ def controller_term_structure(user, request):
                     db.session.add(object)
                     db.session.commit()
                     sim_id = object.id
-        else:
-            compute_not_allowed = True
-
     else:
         if user.is_authenticated:  # user authenticated, store the data
             if user.compute_term_structure.count() > 0:
@@ -215,7 +218,7 @@ def controller_old_term_structure(user):
             plot_error_interest_rate = create_plot_error_interest_rate(spot_rate_model_error, time)
 
             parameters = [round(x, 6) for x in parameters] if parameters is not None else None
-            
+
             data.append({'form': form, 'id': id, 'parameters': parameters, 'name_param': name_param,
                          'rmse_discount_factor': rmse_discount_factor, 'rmse_spot_rate': rmse_spot_rate,
                          'plot_discount_factor_term_structure': plot_discount_factor_term_structure,

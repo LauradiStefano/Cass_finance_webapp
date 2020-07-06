@@ -402,20 +402,19 @@
                 </div>
             </div>
 
-            <div class="row mt-3">
+            <div class="row mt-3 justify-content-center">
+                {% if compute_not_allowed %}
+                <div class="col d-flex justify-content-center alert_warning" data-toggle="tooltip" data-placement="top"
+                     title="Warning! Register to continue">
+                    {{form.button_compute}}
+                </div>
+                {% else %}
                 <div class="col d-flex justify-content-center">
                     {{form.button_compute}}
                 </div>
+                {% endif %}
             </div>
         </form>
-    </div>
-    <div class="row d-flex justify-content-center">
-        {% if compute_not_allowed %}
-        <div class="alert alert-warning">
-            <strong>Warning!</strong>
-            Register to Continue
-        </div>
-        {% endif %}
     </div>
 
     {% if plot_discount_factor_term_structure != None %}
@@ -577,6 +576,13 @@
 
         update();
     });
+    $('#button_compute').on('click', function (e) {
+        e.preventDefault();
+        $('[data-toggle="tooltip"]').tooltip('show')
+        $('#button_compute').prop('disabled', true);
+        $('#button_compute').css('opacity', '0.5');
+    });
+
 </script>
 
 </body>
