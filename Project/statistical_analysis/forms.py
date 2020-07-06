@@ -12,7 +12,7 @@ class ComputeForm(wtf.Form):
     file_name = StringField(label='DataSet Name', default='Test',
                             validators=[InputRequired(), validators.Length(max=25)])
 
-    tickers_list = FieldList(StringField(label='Ticker', default='AAPL'), min_entries=1)
+    tickers_list = FieldList(StringField(label='Ticker', default='AAPL'), validators=[InputRequired()], min_entries=1)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
