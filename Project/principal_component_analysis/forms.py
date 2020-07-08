@@ -24,7 +24,7 @@ class ComputeForm(wtf.Form):
                                                     validators.NumberRange(min=0, max=1,
                                                                            message='The value must be between 0 and 1')])
 
-    tickers_list = FieldList(StringField(label='Ticker'), validators=[InputRequired()], min_entries=2)
+    tickers_list = FieldList(StringField(label='Ticker'), min_entries=2)
 
     start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
     start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
