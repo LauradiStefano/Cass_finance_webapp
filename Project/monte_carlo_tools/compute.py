@@ -29,8 +29,9 @@ import itertools
 
 """
 
-#form.price_abm.data, form.price_gbm.data,
-#form.price_cir.data, form.price_mrg.data, form.price_heston.data
+
+# form.price_abm.data, form.price_gbm.data,
+# form.price_cir.data, form.price_mrg.data, form.price_heston.data
 
 def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gbm, price_cir, price_mrg, price_heston,
                                     mu_abm, sigma_abm,
@@ -50,7 +51,7 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
     # model = 5  # 0-abm  1-gbm  2-cir  3-mrg  4-heston
 
     """2 - Insert model parameters and compute simulated paths"""
-    
+
     model = int(model)
     # Arithmetic Brownian Motion
     if model == 0:
@@ -111,7 +112,8 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
         # rho_heston = -0.8
         parameters = [v0_heston, mu_heston, alpha_heston, beta_heston, eta_heston, rho_heston]
 
-        X = get_mc_heston(price_heston, v0_heston, mu_heston, alpha_heston, beta_heston, eta_heston, rho_heston, T, NStep, NPaths)
+        X = get_mc_heston(price_heston, v0_heston, mu_heston, alpha_heston, beta_heston, eta_heston, rho_heston, T,
+                          NStep, NPaths)
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_heston
@@ -167,12 +169,12 @@ def create_plot_simulated_paths(simulated_paths, timestep, NStep, NPaths, quanti
 
 
 def create_plot_moments(simulated_paths, moments, timestep):
-    exp_value_Simulated = np.mean(simulated_paths, axis=1)
-    variance_Simulated = np.var(simulated_paths, axis=1) ** 0.5
-    skewness_Simulated = skew(simulated_paths, axis=1)
-    skewness_Simulated[0] = 0
-    kurtosis_Simulated = kurtosis(simulated_paths, axis=1) + 3
-    kurtosis_Simulated[0] = 3
+    exp_value_simulated = np.mean(simulated_paths, axis=1)
+    variance_simulated = np.var(simulated_paths, axis=1) ** 0.5
+    skewness_simulated = skew(simulated_paths, axis=1)
+    skewness_simulated[0] = 0
+    kurtosis_simulated = kurtosis(simulated_paths, axis=1) + 3
+    kurtosis_simulated[0] = 3
 
     exp_value_theoretical = moments[:, 0]
     variance_theoretical = moments[:, 1]
@@ -181,109 +183,109 @@ def create_plot_moments(simulated_paths, moments, timestep):
 
     data_exp_value = ColumnDataSource(data=dict(
         exp_value_theoretical=exp_value_theoretical,
-        exp_value_Simulated=exp_value_Simulated,
+        exp_value_simulated=exp_value_simulated,
         timestep=timestep))
 
     hover_exp_theoretical = HoverTool(attachment="above", names=['theoretical expected value'],
                                       tooltips=[("Theoretical Expected Value ", "@exp_value_theoretical"),
                                                 ("Nstep", "@timestep")])
 
-    hover_exp_Simulated = HoverTool(attachment="below", names=['Simulated expected value'],
-                                    tooltips=[("Simulated Expected Value ", "@exp_value_Simulated"),
+    hover_exp_simulated = HoverTool(attachment="below", names=['simulated expected value'],
+                                    tooltips=[("Simulated Expected Value ", "@exp_value_simulated"),
                                               ("Nstep", "@timestep")])
 
     fig_exp_value = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair', hover_exp_theoretical, hover_exp_Simulated],
+        tools=['save, pan, box_zoom, reset, crosshair', hover_exp_theoretical, hover_exp_simulated],
         sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Expected Value')
 
     fig_exp_value.line(x='timestep', y='exp_value_theoretical', source=data_exp_value,
                        legend_label="Theoretical Expected Value", color="#D21F1B", alpha=0.9, line_width=1,
                        name='theoretical expected value')
 
-    fig_exp_value.line(x='timestep', y='exp_value_Simulated', source=data_exp_value,
+    fig_exp_value.line(x='timestep', y='exp_value_simulated', source=data_exp_value,
                        legend_label="Simulated Expected Value", color="#0095B6", alpha=0.9, line_width=1,
-                       name='Simulated expected value')
+                       name='simulated expected value')
 
     fig_exp_value.legend.location = "bottom_left"
     fig_exp_value.toolbar.active_drag = None
 
     data_variance = ColumnDataSource(data=dict(
         variance_theoretical=variance_theoretical,
-        variance_Simulated=variance_Simulated,
+        variance_simulated=variance_simulated,
         timestep=timestep))
 
     hover_var_theoretical = HoverTool(attachment="above", names=['theoretical standard deviation'],
                                       tooltips=[("Theoretical Variance ", "@variance_theoretical"),
                                                 ("Nstep", "@timestep")])
 
-    hover_var_Simulated = HoverTool(attachment="below", names=['Simulated standard deviation'],
+    hover_var_simulated = HoverTool(attachment="below", names=['simulated standard deviation'],
                                     tooltips=[("Simulated Variance ", "@variance_Simulated"), ("Nstep", "@timestep")])
 
     fig_variance_value = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair', hover_var_theoretical, hover_var_Simulated],
+        tools=['save, pan, box_zoom, reset, crosshair', hover_var_theoretical, hover_var_simulated],
         sizing_mode='scale_both', x_axis_label='Time', y_axis_label=' Standard Deviation')
 
     fig_variance_value.line(x='timestep', y='variance_theoretical', source=data_variance,
                             legend_label="Theoretical Standard Deviation", color="#D21F1B", alpha=0.9, line_width=1,
                             name='theoretical standard deviation')
 
-    fig_variance_value.line(x='timestep', y='variance_theoretical', source=data_variance,
+    fig_variance_value.line(x='timestep', y='variance_simulated', source=data_variance,
                             legend_label="Simulated Standard Deviation", color="#0095B6", alpha=0.9, line_width=1,
-                            name='Simulated standard deviation')
+                            name='simulated standard deviation')
 
     fig_variance_value.legend.location = "bottom_right"
     fig_variance_value.toolbar.active_drag = None
 
     data_skewness = ColumnDataSource(data=dict(
         skewness_theoretical=skewness_theoretical,
-        skewness_Simulated=skewness_Simulated,
+        skewness_simulated=skewness_simulated,
         timestep=timestep))
 
     hover_skew_theoretical = HoverTool(attachment="above", names=['theoretical skewness'],
                                        tooltips=[("Theoretical Skewness ", "@skewness_theoretical"),
                                                  ("Nstep", "@timestep")])
 
-    hover_skew_Simulated = HoverTool(attachment="below", names=['Simulated skewness'],
+    hover_skew_simulated = HoverTool(attachment="below", names=['simulated skewness'],
                                      tooltips=[("Simulated Skewness ", "@skewness_Simulated"), ("Nstep", "@timestep")])
 
     fig_skewness_value = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair', hover_skew_theoretical, hover_skew_Simulated],
+        tools=['save, pan, box_zoom, reset, crosshair', hover_skew_theoretical, hover_skew_simulated],
         sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Skewness')
 
     fig_skewness_value.line(x='timestep', y='skewness_theoretical', source=data_skewness,
                             legend_label="Theoretical Skewness", color="#D21F1B", alpha=0.9, line_width=1,
                             name='theoretical skewness')
 
-    fig_skewness_value.line(x='timestep', y='skewness_Simulated', source=data_skewness,
+    fig_skewness_value.line(x='timestep', y='skewness_simulated', source=data_skewness,
                             legend_label="Simulated Skewness", color="#0095B6", alpha=0.9, line_width=1,
-                            name='Simulated skewness')
+                            name='simulated skewness')
 
     fig_skewness_value.legend.location = "top_right"
     fig_skewness_value.toolbar.active_drag = None
 
     data_kurtosis = ColumnDataSource(data=dict(
         kurtosis_theoretical=kurtosis_theoretical,
-        kurtosis_Simulated=kurtosis_Simulated,
+        kurtosis_simulated=kurtosis_simulated,
         timestep=timestep))
 
     hover_kurt_theoretical = HoverTool(attachment="above", names=['theoretical kurtosis'],
                                        tooltips=[("Theoretical Kurtosis ", "@kurtosis_theoretical"),
                                                  ("Nstep", "@timestep")])
 
-    hover_kurt_Simulated = HoverTool(attachment="below", names=['Simulated kurtosis'],
+    hover_kurt_simulated = HoverTool(attachment="below", names=['simulated kurtosis'],
                                      tooltips=[("Simulated Kurtosis ", "@kurtosis_Simulated"), ("Nstep", "@timestep")])
 
     fig_kurtosis_value = bp.figure(
-        tools=['save, pan, box_zoom, reset, crosshair', hover_kurt_theoretical, hover_kurt_Simulated],
+        tools=['save, pan, box_zoom, reset, crosshair', hover_kurt_theoretical, hover_kurt_simulated],
         sizing_mode='scale_both', x_axis_label='Time', y_axis_label='Kurtosis')
 
     fig_kurtosis_value.line(x='timestep', y='kurtosis_theoretical', source=data_kurtosis,
                             legend_label="Theoretical Kurtosis", color="#D21F1B", alpha=0.9, line_width=1,
                             name='theoretical kurtosis')
 
-    fig_kurtosis_value.line(x='timestep', y='kurtosis_Simulated', source=data_kurtosis,
+    fig_kurtosis_value.line(x='timestep', y='kurtosis_simulated', source=data_kurtosis,
                             legend_label="Simulated Kurtosis", color="#0095B6", alpha=0.9, line_width=1,
-                            name='Simulated kurtosis')
+                            name='simulated kurtosis')
 
     fig_kurtosis_value.legend.location = "bottom_right"
     fig_kurtosis_value.toolbar.active_drag = None
@@ -307,7 +309,8 @@ def create_plot_histogram(simulated_paths, NStep):
 
     x_range = [min_x, max_x]
 
-    fig_hist_1 = bp.figure(title='Simulated distribution after ' + str(t1) + ' steps', tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+    fig_hist_1 = bp.figure(title='Simulated distribution after ' + str(t1) + ' steps',
+                           tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
     fig_hist_1.xaxis.axis_label = "X"
@@ -316,7 +319,8 @@ def create_plot_histogram(simulated_paths, NStep):
 
     hhist, hedges = np.histogram(simulated_paths[t2, :], density=True, bins=100)
 
-    fig_hist_2 = bp.figure(title='Simulated distribution after ' + str(t2) + ' steps', tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+    fig_hist_2 = bp.figure(title='Simulated distribution after ' + str(t2) + ' steps',
+                           tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
     fig_hist_2.xaxis.axis_label = "X"
@@ -325,7 +329,8 @@ def create_plot_histogram(simulated_paths, NStep):
 
     hhist, hedges = np.histogram(simulated_paths[t3, :], density=True, bins=100)
 
-    fig_hist_3 = bp.figure(title='Simulated distribution after ' + str(t3) + ' steps', tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
+    fig_hist_3 = bp.figure(title='Simulated distribution after ' + str(t3) + ' steps',
+                           tools=['save, pan, box_zoom, reset, crosshair'], sizing_mode='scale_both',
                            y_axis_location="right", x_range=x_range)
 
     fig_hist_3.xaxis.axis_label = "X"
