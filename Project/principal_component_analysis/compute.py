@@ -157,7 +157,7 @@ def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
 
 def create_plot_variance_component(evalues, desired_explained_variance):
     len_tickers = len(evalues)
-    tickers = [str(i) for i in range(len_tickers)]
+    tickers = [str(i) for i in range(1, len_tickers + 1)]
     percentage = evalues / sum(evalues) * 100
 
     data = ColumnDataSource(data=dict(
@@ -190,7 +190,7 @@ def create_plot_variance_component(evalues, desired_explained_variance):
 
 def create_plot_cumulative_component(evalues, desired_explained_variance):
     len_tickers = len(evalues)
-    tickers = [str(i) for i in range(len_tickers)]
+    tickers = [str(i) for i in range(1, len_tickers + 1)]
     percentage = np.cumsum(evalues / sum(evalues) * 100)
 
     data = ColumnDataSource(data=dict(
@@ -223,7 +223,7 @@ def create_plot_cumulative_component(evalues, desired_explained_variance):
 def create_plot_one_loadings(autovect):
     pca_one = autovect[:, 0]
 
-    tickers = [str(i) for i in range(1, len(pca_one)+1)]
+    tickers = [str(i) for i in range(1, len(pca_one) + 1)]
 
     data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
@@ -250,7 +250,7 @@ def create_plot_one_loadings(autovect):
 def create_plot_two_loadings(autovect):
     pca_one = autovect[:, 1]
 
-    tickers = [str(i) for i in range(1, len(pca_one)+1)]
+    tickers = [str(i) for i in range(1, len(pca_one) + 1)]
 
     data = ColumnDataSource(data=dict(
         tickers=tickers, pca_one=pca_one
