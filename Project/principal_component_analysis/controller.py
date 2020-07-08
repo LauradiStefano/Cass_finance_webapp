@@ -40,7 +40,7 @@ def controller_principal_component_analysis(user, request):
 
                 evalues, autovect, pc_terms = import_dataset_file_excel(file_data, form.asset_flag.data,
                                                                         form.matrix_flag.data)
-            else:
+            else:  # if form.method_choice.data == '1':
                 evalues, autovect, pc_terms = import_dataset_tickers(form.tickers_list.data, form.start_day.data,
                                                                      form.start_month.data, form.start_year.data,
                                                                      form.end_day.data, form.end_month.data,
