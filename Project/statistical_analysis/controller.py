@@ -52,9 +52,9 @@ def controller_statistical_analysis(user, request):
 
             else:  # form.method_choice.data == '1'
 
-                file_data, dates = import_dataset_tickers(form.tickers_list.data, form.start_day.data, form.start_month.data,
-                                                          form.start_year.data, form.end_day.data, form.end_month.data,
-                                                          form.end_year.data)
+                file_data, dates = import_dataset_tickers(form.tickers_list.data, form.start_day.data,
+                                                          form.start_month.data, form.start_year.data,
+                                                          form.end_day.data, form.end_month.data, form.end_year.data)
 
             mean, volatility, variance, skewness, kurtosis, min_return, max_return, jb_test, pvalue, tickers, \
             n_observation, log_returns, prices = compute_table(file_data)
