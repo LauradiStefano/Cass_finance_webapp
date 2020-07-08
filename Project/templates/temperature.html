@@ -4,7 +4,8 @@
     <div class="row">
         <div class="col p-3 m-4">
             <h1 class="title text-center text-light">Temperature</h1>
-            <h2 class="lead text-center text-light animated fadeInDown"> --- </h2>
+            <h2 class="lead text-center text-light animated fadeInDown"> Analysis the performance of hedging strategies
+                based on snow and temperature options. </h2>
         </div>
     </div>
 </div>
@@ -89,7 +90,8 @@
                         <div class="icon_help">
                             <img src="/static/icon_help.png">
                             <div class="lambda_formula" id="help_formula">
-                                $$ \Lambda_{t} = \lambda_{0} + \lambda_{1} t + \lambda_{2} sin(2\pi t) + \lambda_{3} cos(2\pi t) $$
+                                $$ \Lambda_{t} = \lambda_{0} + \lambda_{1} t + \lambda_{2} sin(2\pi t) + \lambda_{3}
+                                cos(2\pi t) $$
                             </div>
                         </div>
 
@@ -150,11 +152,11 @@
             help_dataset.hide();
         });
 
-        icon_help.on('mouseenter', function() {
+        icon_help.on('mouseenter', function () {
             help_formula.show();
         });
 
-        icon_help.on('mouseleave', function() {
+        icon_help.on('mouseleave', function () {
             help_formula.hide();
         });
 
