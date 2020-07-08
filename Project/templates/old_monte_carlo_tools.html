@@ -114,10 +114,51 @@
                                 </div>
                             </div>
                             <div class="col-12 font-weight-bold d-flex flex-column">
+                                <div id="price_abm">
+                                    {% if result['form'].model_choice.data == '0' %}
                                     <span class="mb-1">
-                                            {{result['form'].price.label}}:
-                                            {{result['form'].price.data}}<br/>
+                                            {{result['form'].price_abm.label}}:
+                                            {{result['form'].price_abm.data}}<br/>
                                     </span>
+                                    {%endif%}
+                                </div>
+
+                                 <div id="price_gbm">
+                                    {% if result['form'].model_choice.data == '1' %}
+                                    <span class="mb-1">
+                                            {{result['form'].price_gbm.label}}:
+                                            {{result['form'].price_gbm.data}}<br/>
+                                    </span>
+                                    {%endif%}
+                                </div>
+
+                                 <div id="price_cir">
+                                    {% if result['form'].model_choice.data == '2' %}
+                                    <span class="mb-1">
+                                            {{result['form'].price_cir.label}}:
+                                            {{result['form'].price_cir.data}}<br/>
+                                    </span>
+                                    {%endif%}
+                                </div>
+
+                                 <div id="price_mrg">
+                                    {% if result['form'].model_choice.data == '3' %}
+                                    <span class="mb-1">
+                                            {{result['form'].price_mrg.label}}:
+                                            {{result['form'].price_mrg.data}}<br/>
+                                    </span>
+                                    {%endif%}
+                                </div>
+
+                                 <div id="price_heston">
+                                    {% if result['form'].model_choice.data == '4' %}
+                                    <span class="mb-1">
+                                            {{result['form'].price_gbm.label}}:
+                                            {{result['form'].price_gbm.data}}<br/>
+                                    </span>
+                                    {%endif%}
+                                </div>
+
                                 <span class="mb-1">
                                             {{result['form'].time.label}}:
                                             {{result['form'].time.data}}<br/>
