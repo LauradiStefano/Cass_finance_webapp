@@ -403,7 +403,7 @@
             </div>
 
             <div class="row mt-3 justify-content-center">
-                {% if compute_not_allowed %}
+                {% if compute_not_allowed == True %}
                 <div class="col d-flex justify-content-center alert_warning" data-toggle="tooltip" data-placement="top"
                      title="Warning! Register to continue">
                     {{form.button_compute}}
@@ -576,14 +576,17 @@
 
         update();
     });
+</script>
+{% if compute_not_allowed == True %}
+<script charset="utf-8" type="text/javascript">
+
     $('#button_compute').on('click', function (e) {
         e.preventDefault();
         $('[data-toggle="tooltip"]').tooltip('show')
         $('#button_compute').prop('disabled', true);
         $('#button_compute').css('opacity', '0.5');
     });
-
 </script>
-
+{% endif %}
 </body>
 </html>

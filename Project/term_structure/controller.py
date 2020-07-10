@@ -32,7 +32,6 @@ def controller_term_structure(user, request):
     name_param = None
     rmse_discount_factor = None
     rmse_spot_rate = None
-    compute_not_allowed = False
     daily_discount_factor = None
     annual_basis_date = None
     daily_model_spot_rate = None

@@ -20,8 +20,6 @@ def controller_linear_interpolation_constant_forward(user, request):
 
     file_data = None
 
-    compute_not_allowed = False
-
     sim_id = None
 
     plot_discount_factor_term_structure = None

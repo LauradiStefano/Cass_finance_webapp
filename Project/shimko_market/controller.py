@@ -56,8 +56,6 @@ def controller_shimko_market(user, request):
     risk_free = None
     div_yield = None
 
-    compute_not_allowed = False
-
     sim_id = None
 
     plot_implied_volatility = None
