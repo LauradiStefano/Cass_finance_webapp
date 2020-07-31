@@ -6,7 +6,7 @@ Created on Sun May 17 14:49:47 2020
 """
 from scipy.stats import norm, lognorm, ncx2
 from monte_carlo_tools.heston_mom import get_heston_moment, Power
-from  get_garch_moments import get_mom_GARCH11
+from monte_carlo_tools.get_garch_moments import get_mom_GARCH11
 
 import numpy as np
 
@@ -84,101 +84,98 @@ def get_moments(model, X0, parameters, T, NStep):
         quantiles = np.zeros((len(horizon), 2))
         quantiles[:, 0] = norm.ppf(0.05, moments[:, 0], moments[:, 1])
         quantiles[:, 1] = norm.ppf(0.95, moments[:, 0], moments[:, 1])
-    
-    
-    elif model == 6: #EWMA ok
-        
-        mu = parameters[0] 
+
+
+    elif model == 6:  # EWMA ok
+
+        mu = parameters[0]
         v0 = parameters[1]
         omega = parameters[2]
-        alpha = parameters[3] 
-        beta = parameters[4] 
-        asymm = 0 
+        alpha = parameters[3]
+        beta = parameters[4]
+        asymm = 0
         moments = get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
-        
-        #moments = [X0, 0, 0 3 moments ]
-        quantiles = np.zeros((len(horizon)+1,2))
-        quantiles[:,0] = moments[:,0]+5*moments[:,1]
-        quantiles[:,1] = moments[:,0]-5*moments[:,1]
 
-    elif model == 7: #GARCH ok
-        mu = parameters[0] 
+        # moments = [X0, 0, 0 3 moments ]
+        quantiles = np.zeros((len(horizon) + 1, 2))
+        quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
+        quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
+
+    elif model == 7:  # GARCH ok
+        mu = parameters[0]
         v0 = parameters[1]
         omega = parameters[2]
-        alpha = parameters[3] 
-        beta = parameters[4] 
-        asymm = parameters[5]  
+        alpha = parameters[3]
+        beta = parameters[4]
+        asymm = parameters[5]
         moments = get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
-        
-        #moments = [X0, 0, 0 3 moments ]
-        quantiles[:,0] = moments[:,0]+5*moments[:,1]
-        quantiles[:,1] = moments[:,0]-5*moments[:,1]
 
+        # moments = [X0, 0, 0 3 moments ]
+        quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
+        quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
 
-    if model == 8: #MJD ok
+    if model == 8:  # MJD ok
         mu = parameters[0]
         sigma = parameters[1]
         lambda_mjd = parameters[2]
         mu_jumps = parameters[3]
         sg_jumps = parameters[4]
-        
-        moments = np.zeros((len(horizon),4))
-        moments[:,0] = (mu+lambda_mjd*mu_jumps)*horizon #mean
-        moments[:,1] = ((sigma*sigma+lambda_mjd*(mu_jumps**2+sg_jumps**2))*horizon)**0.5 #std. dev.
-        numsk = lambda_mjd*mu_jumps *(mu_jumps**2+3*sg_jumps**2)*horizon
-        moments[:,2] = numsk/moments[:,1]**3 #skewness
-        numk = lambda_mjd*(mu_jumps**4+6*mu_jumps**2*sg_jumps**2+3*sg_jumps**4)*horizon
-        moments[:,3] = 3 + numk/moments[:,1]**4 #kurtosis
-    
-        moments[0,2] = 0
-        moments[0,3] = 3
-        
-        quantiles = np.zeros((len(horizon),2))
-        quantiles[:,0] = moments[:,0]+5*moments[:,1]
-        quantiles[:,1] = moments[:,0]-5*moments[:,1]
 
+        moments = np.zeros((len(horizon), 4))
+        moments[:, 0] = (mu + lambda_mjd * mu_jumps) * horizon  # mean
+        moments[:, 1] = ((sigma * sigma + lambda_mjd * (mu_jumps ** 2 + sg_jumps ** 2)) * horizon) ** 0.5  # std. dev.
+        numsk = lambda_mjd * mu_jumps * (mu_jumps ** 2 + 3 * sg_jumps ** 2) * horizon
+        moments[:, 2] = numsk / moments[:, 1] ** 3  # skewness
+        numk = lambda_mjd * (mu_jumps ** 4 + 6 * mu_jumps ** 2 * sg_jumps ** 2 + 3 * sg_jumps ** 4) * horizon
+        moments[:, 3] = 3 + numk / moments[:, 1] ** 4  # kurtosis
 
+        moments[0, 2] = 0
+        moments[0, 3] = 3
 
-    if model == 10 : #DEJD ok
+        quantiles = np.zeros((len(horizon), 2))
+        quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
+        quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
+
+    if model == 10:  # DEJD ok
         mu = parameters[0]
         sigma = parameters[1]
         lambda_dedj = parameters[2]
         p = parameters[3]
         eta1 = parameters[4]
         eta2 = parameters[5]
-        
-        moments = np.zeros((len(horizon),4))
-        moments[:,0] = (mu + lambda_dedj*(p/eta1-(1-p)/eta2) )*horizon  #mean
-        moments[:,1] = ((sigma*sigma+ lambda_dedj*(p/eta1**2+(1-p)/eta2**2))*horizon)**0.5 #std. dev.
-        num_skewness = 6*lambda_dedj*(p/eta1**3-(1-p)/eta2**3)*horizon
-        moments[:,2] = num_skewness/moments[:,1]**(3) #skewness
-        num_kurtosis = 24*lambda_dedj*(p/eta1**4+(1-p)/eta2**4)*horizon
-        moments[:,3] = 3 + num_kurtosis/moments[:,1]**(4) #kurtosis
-        moments[0,2] = 0
-        moments[0,3] = 3
-        
-        quantiles = np.zeros((len(horizon),2))
-        quantiles[:,0] = moments[:,0]+5*moments[:,1]
-        quantiles[:,1] = moments[:,0]-5*moments[:,1]
 
+        moments = np.zeros((len(horizon), 4))
+        moments[:, 0] = (mu + lambda_dedj * (p / eta1 - (1 - p) / eta2)) * horizon  # mean
+        moments[:, 1] = ((sigma * sigma + lambda_dedj * (
+                    p / eta1 ** 2 + (1 - p) / eta2 ** 2)) * horizon) ** 0.5  # std. dev.
+        num_skewness = 6 * lambda_dedj * (p / eta1 ** 3 - (1 - p) / eta2 ** 3) * horizon
+        moments[:, 2] = num_skewness / moments[:, 1] ** (3)  # skewness
+        num_kurtosis = 24 * lambda_dedj * (p / eta1 ** 4 + (1 - p) / eta2 ** 4) * horizon
+        moments[:, 3] = 3 + num_kurtosis / moments[:, 1] ** (4)  # kurtosis
+        moments[0, 2] = 0
+        moments[0, 3] = 3
 
+        quantiles = np.zeros((len(horizon), 2))
+        quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
+        quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
 
-    if model == 9 : #VG ok
+    if model == 9:  # VG ok
         theta = parameters[0]
         sigma = parameters[1]
         kappa = parameters[2]
-    
-        moments[:,0] = (theta)*horizon  #mean
-        moments[:,1] = ((sigma*sigma + theta*theta*kappa)*horizon)**0.5 #std. dev.
-        num_skewness = (3*sigma*sigma+2*theta*theta*kappa)*theta*kappa*horizon
-        moments[:,2] = num_skewness/moments[:,1]**(3) #skewness
-        num_kurtosis = (3*sigma**4+12*sigma*sigma*theta*theta*kappa+6*theta**4*kappa*kappa)*kappa*horizon
-        moments[:,3] = 3 + num_kurtosis/moments[:,1]**(4) #kurtosis
-        moments[0,2] = 0
-        moments[0,3] = 3
-    
-        quantiles[:,0] = moments[:,0]+5*moments[:,1]
-        quantiles[:,1] = moments[:,0]-5*moments[:,1]
+
+        moments[:, 0] = (theta) * horizon  # mean
+        moments[:, 1] = ((sigma * sigma + theta * theta * kappa) * horizon) ** 0.5  # std. dev.
+        num_skewness = (3 * sigma * sigma + 2 * theta * theta * kappa) * theta * kappa * horizon
+        moments[:, 2] = num_skewness / moments[:, 1] ** (3)  # skewness
+        num_kurtosis = (
+                                   3 * sigma ** 4 + 12 * sigma * sigma * theta * theta * kappa + 6 * theta ** 4 * kappa * kappa) * kappa * horizon
+        moments[:, 3] = 3 + num_kurtosis / moments[:, 1] ** (4)  # kurtosis
+        moments[0, 2] = 0
+        moments[0, 3] = 3
+
+        quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
+        quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
 
     else:  # Heston
         v0 = parameters[0]

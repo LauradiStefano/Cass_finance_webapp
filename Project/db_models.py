@@ -589,16 +589,33 @@ class monte_carlo_tools(db.Model):
     mu_abm = db.Column(db.Float())
     sigma_abm = db.Column(db.Float())
 
-    mu_gbm = db.Column(db.Float())
-    sigma_gbm = db.Column(db.Float())
-
     mu_cir = db.Column(db.Float())
     sigma_cir = db.Column(db.Float())
     alpha_cir = db.Column(db.Float())
 
-    mu_mrg = db.Column(db.Float())
-    sigma_mrg = db.Column(db.Float())
-    alpha_mrg = db.Column(db.Float())
+    mu_dejd = db.Column(db.Float())
+    sigma_dejd = db.Column(db.Float())
+    lam_dejd = db.Column(db.Float())
+    rho_dejd = db.Column(db.Float())
+    eta1_dejd = db.Column(db.Float())
+    eta2_dejd = db.Column(db.Float())
+
+    mu_ewma = db.Column(db.Float())
+    volatility_t0_ewma = db.Column(db.Float())
+    omega_ewma = db.Column(db.Float())
+    alpha_ewma = db.Column(db.Float())
+    beta_ewma = db.Column(db.Float())
+    asymm_ewma = db.Column(db.Float())
+
+    mu_garch = db.Column(db.Float())
+    volatility_t0_garch = db.Column(db.Float())
+    omega_garch = db.Column(db.Float())
+    alpha_garch = db.Column(db.Float())
+    beta_garch = db.Column(db.Float())
+    asymm_garch = db.Column(db.Float())
+
+    mu_gbm = db.Column(db.Float())
+    sigma_gbm = db.Column(db.Float())
 
     mu_heston = db.Column(db.Float())
     volatility_t0_heston = db.Column(db.Float())
@@ -607,11 +624,31 @@ class monte_carlo_tools(db.Model):
     eta_heston = db.Column(db.Float())
     rho_heston = db.Column(db.Float())
 
+    mu_mjd = db.Column(db.Float())
+    sigma_mjd = db.Column(db.Float())
+    lam_mjd = db.Column(db.Float())
+    mu_x_mjd = db.Column(db.Float())
+    sigma_x_mjd = db.Column(db.Float())
+
+    mu_mrg = db.Column(db.Float())
+    sigma_mrg = db.Column(db.Float())
+    alpha_mrg = db.Column(db.Float())
+
+    sigma_vg = db.Column(db.Float())
+    thetha_vg = db.Column(db.Float())
+    kappa_vg = db.Column(db.Float())
+
     price_abm = db.Column(db.Float())
-    price_gbm = db.Column(db.Float())
     price_cir = db.Column(db.Float())
-    price_mrg = db.Column(db.Float())
+    price_dejd = db.Column(db.Float())
+    price_ewma = db.Column(db.Float())
+    price_garch = db.Column(db.Float())
+    price_gbm = db.Column(db.Float())
     price_heston = db.Column(db.Float())
+    price_mjd = db.Column(db.Float())
+    price_mrg = db.Column(db.Float())
+    price_vg = db.Column(db.Float())
+
     time = db.Column(db.Float())
     number_step = db.Column(db.Integer())
     number_paths = db.Column(db.Integer())

@@ -8,10 +8,10 @@ from monte_carlo_tools.get_mc_abm import get_mc_abm
 from monte_carlo_tools.get_mc_cir import get_mc_cir
 from monte_carlo_tools.get_mc_heston import get_mc_heston
 from monte_carlo_tools.get_mc_gmr import get_mc_gmr
-from get_mc_garch import get_mc_garch
-from get_mc_mjd import get_mc_mjd
-from get_mc_dedj import get_mc_dedj
-from get_mc_vg import get_mc_vg
+from monte_carlo_tools.get_mc_garch import get_mc_garch
+from monte_carlo_tools.get_mc_mjd import get_mc_mjd
+from monte_carlo_tools.get_mc_dedj import get_mc_dedj
+from monte_carlo_tools.get_mc_vg import get_mc_vg
 
 from monte_carlo_tools.get_moments import get_moments
 from scipy.stats import skew, kurtosis
@@ -38,25 +38,14 @@ import itertools
 # form.price_abm.data, form.price_gbm.data,
 # form.price_cir.data, form.price_mrg.data, form.price_heston.data
 
-def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gbm, 
-                                    price_cir, price_mrg, price_ewma, price_garch,
-                                    price_mjd, price_dejd, price_vg, price_heston,
-                                    mu_abm, sigma_abm,
-                                    mu_gbm, sigma_gbm,
-                                    alpha_cir, mu_cir, sigma_cir,
-                                    alpha_gmr, mu_gmr, sigma_gmr,
-                                    mu_ewma, v0_ewma, omega_ewma, alpha_ewma, 
-                                    beta_ewma, asymm_ewma,
-                                    mu_garch, v0_garch,  omega_garch, 
-                                    alpha_garch, beta_garch, asymm_garch,
-                                    mu_mjd, sigma_mjd, lambda_mjd, 
-                                    mu_jumps_mjd, sg_jumps_mjd,
-                                    mu_dejd, sigma_dejd, lambda_dejd, 
-                                    p_dejd, eta1_dejd, eta2_dejd,
-                                    theta_vg, sigma_vg, kappa_vg,
-                                    mu_heston, v0_heston,
-                                    alpha_heston, beta_heston, eta_heston, rho_heston):
-    
+def get_simutalted_path_and_moments(T, NStep, NPaths, model, mu_abm, sigma_abm, mu_cir, alpha_cir, sigma_cir, mu_dejd,
+                                    sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd, mu_ewma, v0_ewma, omega_ewma,
+                                    alpha_ewma, beta_ewma, asymm_ewma, mu_garch, v0_garch, omega_garch, alpha_garch,
+                                    beta_garch, asymm_garch, mu_gbm, sigma_gbm, mu_heston, v0_heston, alpha_heston,
+                                    beta_heston, eta_heston, rho_heston, mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd,
+                                    sg_jumps_mjd, mu_gmr, alpha_gmr, sigma_gmr, theta_vg, sigma_vg, kappa_vg,
+                                    price_abm, price_cir, price_dejd, price_ewma, price_garch, price_gbm, price_heston,
+                                    price_mjd, price_mrg, price_vg):
     """1 - Fix steps, nsimulations, time horizon and the model"""
     # T=5
     # NStep=50
@@ -82,20 +71,8 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
         # std = np.std(X[-1,:])
         X0 = price_abm
 
-    # Geometric Brownian Motion
-    elif model == 1:
-        # X0 = 1
-        # mu_gbm = 0.01
-        # sigma_gbm = 0.2
-        parameters = [mu_gbm, sigma_gbm]
-
-        X = np.exp(get_mc_abm(np.log(price_gbm), mu_gbm - sigma_gbm * sigma_gbm / 2, sigma_gbm, T, NStep, NPaths))
-        # mean = np.mean(X[-1,:])
-        # std = np.std(X[-1,:])
-        X0 = price_gbm
     # Cox Ingersson Ross
-
-    elif model == 2:
+    elif model == 1:
         # X0 = 0.1
         # alpha_cir = 1
         # mu_cir = 0.05
@@ -106,20 +83,23 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_cir
-    # Mean Reverting Gaussian
-    elif model == 3:
-        # X0 = 0.1
-        # alpha_gmr = 1
-        # mu_gmr = -0.05
-        # sigma_gmr = 0.1
-        parameters = [alpha_gmr, mu_gmr, sigma_gmr]
 
-        X = get_mc_gmr(price_mrg, alpha_gmr, mu_gmr, sigma_gmr, T, NStep, NPaths)
+    # DEJD
+    elif model == 2:
+        # mu_dejd = 0.01
+        # sigma_dejd = 0.2
+        # lambda_dejd = 0.1
+        # p_dejd = 0.2
+        # eta1_dejd = 12
+        # eta2_dejd = 23
+        parameters = [mu_dejd, sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd]
+        # X0 = 0
+        X = get_mc_dedj(price_dejd, mu_dejd, sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd, T, NStep, NPaths)
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
-        X0 = price_mrg
+        X0 = price_dejd
 
-    elif model == 6 : 
+    elif model == 3:
         # v0_ewma = 0.2**2/250
         # mu_ewma = 0
         # omega_ewma = 0
@@ -127,71 +107,44 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
         # beta_ewma = 1-alpha_ewma
         # asymm_ewma = 0
         parameters = [mu_ewma, v0_ewma, omega_ewma, alpha_ewma, beta_ewma, asymm_ewma]
-        #X0 = 0
-        
-        X = get_mc_garch(price_ewma, mu_ewma, v0_ewma, omega_ewma, alpha_ewma, beta_ewma, 
-                        asymm_ewma, T, NStep, NPaths)
+        # X0 = 0
+
+        X = get_mc_garch(price_ewma, mu_ewma, v0_ewma, omega_ewma, alpha_ewma, beta_ewma,
+                         asymm_ewma, T, NStep, NPaths)
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_ewma
-    
-    # GARCH   
-    elif model == 7 :
+
+    # GARCH
+    elif model == 4:
         # v0_garch = 0.2**2/250
         # mu_garch = 0.0
         # alpha_garch = 0.1
         # beta_garch = 0.85
-        # omega_garch = 5.7800*10**(-6)    
+        # omega_garch = 5.7800*10**(-6)
         # asymm_garch = 0
-        parameters = [mu_garch, v0_garch,  omega_garch, alpha_garch, beta_garch, asymm_garch]
-        #X0 = 0.0
-        X = get_mc_garch(price_garch, mu_garch, v0_garch, omega_garch, alpha_garch, beta_garch, 
+        parameters = [mu_garch, v0_garch, omega_garch, alpha_garch, beta_garch, asymm_garch]
+        # X0 = 0.0
+        X = get_mc_garch(price_garch, mu_garch, v0_garch, omega_garch, alpha_garch, beta_garch,
                          asymm_garch, T, NStep, NPaths)
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_garch
-        
-    # MJD   
-    elif model == 8 :
-        mu_mjd = 0.01
-        sigma_mjd = 0.1
-        lambda_mjd = 0.5
-        mu_jumps_mjd = -0.1
-        sg_jumps_mjd = 0.2
-        parameters = [mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd, sg_jumps_mjd]
-        #X0 = 0
-        X = get_mc_mjd(price_mjd, mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd, sg_jumps_mjd, T, NStep, NPaths)
+
+    # Geometric Brownian Motion
+    elif model == 5:
+        # X0 = 1
+        # mu_gbm = 0.01
+        # sigma_gbm = 0.2
+        parameters = [mu_gbm, sigma_gbm]
+
+        X = np.exp(get_mc_abm(np.log(price_gbm), mu_gbm - sigma_gbm * sigma_gbm / 2, sigma_gbm, T, NStep, NPaths))
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
-        X0 = price_mjd
-    
-    # DEJD
-    elif model == 9 :
-        mu_dejd = 0.01
-        sigma_dejd = 0.2
-        lambda_dejd = 0.1
-        p_dejd = 0.2
-        eta1_dejd = 12
-        eta2_dejd = 23
-        parameters = [mu_dejd, sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd]
-        #X0 = 0
-        X = get_mc_dedj(price_dejd, mu_dejd, sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd, T, NStep, NPaths)
-        # mean = np.mean(X[-1,:])
-        # std = np.std(X[-1,:])
-        X0 = price_dejd
-    
-    # VG   
-    elif model == 10 :
-        theta_vg = -0.01
-        sigma_vg = 0.2
-        kappa_vg = 0.3
-        parameters = [theta_vg, sigma_vg, kappa_vg]
-        #X0=0.1
-        X = get_mc_vg(price_vg, theta_vg, sigma_vg, kappa_vg, T, NStep, NPaths)    
-        X0 = price_vg
-        
+        X0 = price_gbm
+
     # Heston Model
-    else:
+    elif model == 6:
         # X0 = 0.1
         # mu_heston = 0
         # v0_heston = 0.2**2
@@ -206,7 +159,44 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, price_abm, price_gb
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_heston
-    # print([mean, std])    
+    # print([mean, std])
+
+    # MJD
+    elif model == 7:
+        # mu_mjd = 0.01
+        # sigma_mjd = 0.1
+        # lambda_mjd = 0.5
+        # mu_jumps_mjd = -0.1
+        # sg_jumps_mjd = 0.2
+        parameters = [mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd, sg_jumps_mjd]
+        # X0 = 0
+        X = get_mc_mjd(price_mjd, mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd, sg_jumps_mjd, T, NStep, NPaths)
+        # mean = np.mean(X[-1,:])
+        # std = np.std(X[-1,:])
+        X0 = price_mjd
+
+    # Mean Reverting Gaussian
+    elif model == 8:
+        # X0 = 0.1
+        # alpha_gmr = 1
+        # mu_gmr = -0.05
+        # sigma_gmr = 0.1
+        parameters = [alpha_gmr, mu_gmr, sigma_gmr]
+
+        X = get_mc_gmr(price_mrg, alpha_gmr, mu_gmr, sigma_gmr, T, NStep, NPaths)
+        # mean = np.mean(X[-1,:])
+        # std = np.std(X[-1,:])
+        X0 = price_mrg
+
+    # VG   
+    else:  # model==9
+        # theta_vg = -0.01
+        # sigma_vg = 0.2
+        # kappa_vg = 0.3
+        parameters = [theta_vg, sigma_vg, kappa_vg]
+        # X0=0.1
+        X = get_mc_vg(price_vg, theta_vg, sigma_vg, kappa_vg, T, NStep, NPaths)
+        X0 = price_vg
 
     simulated_paths = X
     """3 - Compute moments and quatiles"""

@@ -64,38 +64,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="gbm" {% if form.model_choice.data !='1' %}
-                                 style="display:none" {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.mu_gbm.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.mu_gbm}}
-                                        {% if form.mu_gbm.errors %}
-                                        {% for error in form.mu_gbm.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_gbm.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_gbm}}
-                                        {% if form.sigma_gbm.errors %}
-                                        {% for error in form.sigma_gbm.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col" id="cir" {% if form.model_choice.data !='2' %}
+                            <div class="col" id="cir" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -138,17 +107,16 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="mrg" {% if form.model_choice.data !='3' %}
-                                 style="display:none"
-                                 {%endif%}>
+                            <div class="col" id="dejd" {% if form.model_choice.data !='2' %}
+                                 style="display:none" {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.mu_mrg.label}}
+                                        {{form.mu_dejd.label}}
                                     </div>
                                     <div class="col-11 mb-1">
-                                        {{form.mu_mrg}}
-                                        {% if form.mu_mrg.errors %}
-                                        {% for error in form.mu_mrg.errors %}
+                                        {{form.mu_dejd}}
+                                        {% if form.mu_dejd.errors %}
+                                        {% for error in form.mu_dejd.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -156,12 +124,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.sigma_mrg.label}}
+                                        {{form.sigma_dejd.label}}
                                     </div>
                                     <div class="col-11 mb-1">
-                                        {{form.sigma_mrg}}
-                                        {% if form.sigma_mrg.errors %}
-                                        {% for error in form.sigma_mrg.errors %}
+                                        {{form.sigma_dejd}}
+                                        {% if form.sigma_dejd.errors %}
+                                        {% for error in form.sigma_dejd.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -169,12 +137,51 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.alpha_mrg.label}}
+                                        {{form.lam_dejd.label}}
                                     </div>
                                     <div class="col-11 mb-1">
-                                        {{form.alpha_mrg}}
-                                        {% if form.alpha_mrg.errors %}
-                                        {% for error in form.alpha_mrg.errors %}
+                                        {{form.lam_dejd}}
+                                        {% if form.lam_dejd.errors %}
+                                        {% for error in form.lam_dejd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.rho_dejd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_dejd}}
+                                        {% if form.rho_dejd.errors %}
+                                        {% for error in form.rho_dejd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.eta1_dejd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.eta1_dejd}}
+                                        {% if form.eta1_dejd.errors %}
+                                        {% for error in form.eta1_dejd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.eta2_dejd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.eta2_dejd}}
+                                        {% if form.eta2_dejd.errors %}
+                                        {% for error in form.eta2_dejd.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -182,7 +189,202 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="heston" {% if form.model_choice.data !='4' %}
+                            <div class="col" id="ewma" {% if form.model_choice.data !='3' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_ewma}}
+                                        {% if form.mu_ewma.errors %}
+                                        {% for error in form.mu_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.volatility_t0_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.volatility_t0_ewma}}
+                                        {% if form.volatility_t0_ewma.errors %}
+                                        {% for error in form.volatility_t0_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.omega_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.omega_ewma}}
+                                        {% if form.omega_ewma.errors %}
+                                        {% for error in form.omega_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_ewma}}
+                                        {% if form.alpha_ewma.errors %}
+                                        {% for error in form.alpha_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.beta_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta_ewma}}
+                                        {% if form.beta_ewma.errors %}
+                                        {% for error in form.beta_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.asymm_ewma.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.asymm_ewma}}
+                                        {% if form.asymm_ewma.errors %}
+                                        {% for error in form.asymm_ewma.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="garch" {% if form.model_choice.data !='4' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_garch}}
+                                        {% if form.mu_garch.errors %}
+                                        {% for error in form.mu_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.volatility_t0_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.volatility_t0_garch}}
+                                        {% if form.volatility_t0_garch.errors %}
+                                        {% for error in form.volatility_t0_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.omega_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.omega_garch}}
+                                        {% if form.omega_garch.errors %}
+                                        {% for error in form.omega_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_garch}}
+                                        {% if form.alpha_garch.errors %}
+                                        {% for error in form.alpha_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.beta_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta_garch}}
+                                        {% if form.beta_garch.errors %}
+                                        {% for error in form.beta_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.asymm_garch.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.asymm_garch}}
+                                        {% if form.asymm_garch.errors %}
+                                        {% for error in form.asymm_garch.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="gbm" {% if form.model_choice.data !='5' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_gbm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_gbm}}
+                                        {% if form.mu_gbm.errors %}
+                                        {% for error in form.mu_gbm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_gbm.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_gbm}}
+                                        {% if form.sigma_gbm.errors %}
+                                        {% for error in form.sigma_gbm.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col" id="heston" {% if form.model_choice.data !='6' %}
                                  style="display:none"
                                  {%endif%}>
                                 <div class="row">
@@ -264,6 +466,165 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col" id="mjd" {% if form.model_choice.data !='7' %}
+                                 style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_mjd}}
+                                        {% if form.mu_mjd.errors %}
+                                        {% for error in form.mu_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_mjd}}
+                                        {% if form.sigma_mjd.errors %}
+                                        {% for error in form.sigma_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.lam_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.lam_mjd}}
+                                        {% if form.lam_mjd.errors %}
+                                        {% for error in form.lam_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_x_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_x_mjd}}
+                                        {% if form.mu_x_mjd.errors %}
+                                        {% for error in form.mu_x_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_x_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_x_mjd}}
+                                        {% if form.sigma_x_mjd.errors %}
+                                        {% for error in form.sigma_x_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="mrg" {% if form.model_choice.data !='8' %}
+                                 style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_mrg}}
+                                        {% if form.mu_mrg.errors %}
+                                        {% for error in form.mu_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_mrg}}
+                                        {% if form.sigma_mrg.errors %}
+                                        {% for error in form.sigma_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.alpha_mrg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.alpha_mrg}}
+                                        {% if form.alpha_mrg.errors %}
+                                        {% for error in form.alpha_mrg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="vg" {% if form.model_choice.data !='9' %}
+                                 style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_vg}}
+                                        {% if form.sigma_vg.errors %}
+                                        {% for error in form.sigma_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.theta_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_vg}}
+                                        {% if form.theta_vg.errors %}
+                                        {% for error in form.theta_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.kappa_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_vg}}
+                                        {% if form.kappa_vg.errors %}
+                                        {% for error in form.kappa_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </fieldset>
                 </div>
@@ -287,20 +648,7 @@
                             </div>
                         </div>
 
-                        <div id="price_gbm" class="row" {% if form.model_choice.data !='1' %}
-                             style="display:none" {%endif%}>
-                            <div class="col mb-1">
-                                {{form.price_gbm.label}}
-                                {{form.price_gbm}}
-                                {% if form.price_gbm.errors %}
-                                {% for error in form.price_gbm.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div id="price_cir" class="row" {% if form.model_choice.data !='2' %}
+                        <div id="price_cir" class="row" {% if form.model_choice.data !='1' %}
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 {{form.price_cir.label}}
@@ -313,7 +661,85 @@
                             </div>
                         </div>
 
-                        <div id="price_mrg" class="row" {% if form.model_choice.data !='3' %}
+                        <div id="price_dejd" class="row" {% if form.model_choice.data !='2' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_dejd.label}}
+                                {{form.price_dejd}}
+                                {% if form.price_dejd.errors %}
+                                {% for error in form.price_dejd.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_ewma" class="row" {% if form.model_choice.data !='3' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_ewma.label}}
+                                {{form.price_ewma}}
+                                {% if form.price_ewma.errors %}
+                                {% for error in form.price_ewma.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_garch" class="row" {% if form.model_choice.data !='4' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_garch.label}}
+                                {{form.price_garch}}
+                                {% if form.price_garch.errors %}
+                                {% for error in form.price_garch.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_gbm" class="row" {% if form.model_choice.data !='5' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_gbm.label}}
+                                {{form.price_gbm}}
+                                {% if form.price_gbm.errors %}
+                                {% for error in form.price_gbm.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_heston" class="row" {% if form.model_choice.data !='6' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_heston.label}}
+                                {{form.price_heston}}
+                                {% if form.price_heston.errors %}
+                                {% for error in form.price_heston.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_mjd" class="row" {% if form.model_choice.data !='7' %}
+                             style="display:none" {%endif%}>
+                            <div class="col mb-1">
+                                {{form.price_mjd.label}}
+                                {{form.price_mjd}}
+                                {% if form.price_mjd.errors %}
+                                {% for error in form.price_mjd.errors %}
+                                <div style="color: #ff0000;">{{ error }}</div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="price_mrg" class="row" {% if form.model_choice.data !='8' %}
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
                                 {{form.price_mrg.label}}
@@ -326,13 +752,13 @@
                             </div>
                         </div>
 
-                        <div id="price_heston" class="row" {% if form.model_choice.data !='4' %}
+                        <div id="price_vg" class="row" {% if form.model_choice.data !='9' %}
                              style="display:none" {%endif%}>
                             <div class="col mb-1">
-                                {{form.price_heston.label}}
-                                {{form.price_heston}}
-                                {% if form.price_heston.errors %}
-                                {% for error in form.price_heston.errors %}
+                                {{form.price_vg.label}}
+                                {{form.price_vg}}
+                                {% if form.price_vg.errors %}
+                                {% for error in form.price_vg.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -456,72 +882,250 @@
     $(function () {
         var select_distribution = $('#model_choice');
         var abm = $('#abm');
-        var price_abm = $('#price_abm');
-        var gbm = $('#gbm');
-        var price_gbm = $('#price_gbm');
         var cir = $('#cir');
-        var price_cir = $('#price_cir');
-        var mrg = $('#mrg');
-        var price_mrg = $('#price_mrg');
+        var dejd = $('#dejd');
+        var ewma = $('#ewma');
+        var garch = $('#garch');
+        var gbm = $('#gbm');
         var heston = $('#heston');
+        var mjd = $('#mjd');
+        var mrg = $('#mrg');
+        var vg = $('#vg');
+
+        var price_abm = $('#price_abm');
+        var price_cir = $('#price_cir');
+        var price_dejd = $('#price_dejd');
+        var price_ewma = $('#price_ewma');
+        var price_garch = $('#price_garch');
+        var price_gbm = $('#price_gbm');
         var price_heston = $('#price_heston');
+        var price_mjd = $('#price_mjd');
+        var price_mrg = $('#price_mrg');
+        var price_vg = $('#price_vg');
 
         select_distribution.on('change', function () {
             if (select_distribution.val() == '0') {
                 abm.show();
-                gbm.hide();
                 cir.hide();
-                mrg.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
                 heston.hide();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
                 price_abm.show();
-                price_gbm.hide();
                 price_cir.hide();
-                price_mrg.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
                 price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
             } else if (select_distribution.val() == '1') {
                 abm.hide();
-                gbm.show();
-                cir.hide();
-                mrg.hide();
+                cir.show();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
                 heston.hide();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
                 price_abm.hide();
-                price_gbm.show();
-                price_cir.hide();
-                price_mrg.hide();
+                price_cir.show();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
                 price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
             } else if (select_distribution.val() == '2') {
                 abm.hide();
+                cir.hide();
+                dejd.show();
+                ewma.hide();
+                garch.hide();
                 gbm.hide();
-                cir.show();
+                heston.hide();
+                mjd.hide();
                 mrg.hide();
+                vg.hide();
                 heston.hide();
                 price_abm.hide();
+                price_cir.hide();
+                price_dejd.show();
+                price_ewma.hide();
+                price_garch.hide();
                 price_gbm.hide();
-                price_cir.show();
-                price_mrg.hide();
                 price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
             } else if (select_distribution.val() == '3') {
                 abm.hide();
-                gbm.hide();
                 cir.hide();
-                mrg.show();
+                dejd.hide();
+                ewma.show();
+                garch.hide();
+                gbm.hide();
                 heston.hide();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
                 price_abm.hide();
-                price_gbm.hide();
                 price_cir.hide();
-                price_mrg.show();
+                price_dejd.hide();
+                price_ewma.show();
+                price_garch.hide();
+                price_gbm.hide();
                 price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+                ;
+            } else if (select_distribution.val() == '4') {
+                abm.hide();
+                cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.show();
+                gbm.hide();
+                heston.hide();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
+                price_abm.hide();
+                price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.show();
+                price_gbm.hide();
+                price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
+            } else if (select_distribution.val() == '5') {
+                abm.hide();
+                cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.show();
+                heston.hide();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
+                price_abm.hide();
+                price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.show();
+                price_heston.hide();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
+            } else if (select_distribution.val() == '6') {
+                abm.hide();
+                cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
+                heston.show();
+                mjd.hide();
+                mrg.hide();
+                vg.hide();
+                price_abm.hide();
+                price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
+                price_heston.show();
+                price_mjd.hide();
+                price_mrg.hide();
+                price_vg.hide();
+
+            } else if (select_distribution.val() == '7') {
+                abm.hide();
+                cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
+                heston.hide();
+                mjd.show();
+                mrg.hide();
+                vg.hide();
+                price_abm.hide();
+                price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
+                price_heston.hide();
+                price_mjd.show();
+                price_mrg.hide();
+                price_vg.hide();
+
+            } else if (select_distribution.val() == '8') {
+                abm.hide();
+                cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
+                heston.hide();
+                mjd.hide();
+                mrg.show();
+                vg.hide();
+                price_abm.hide();
+                price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
+                price_heston.hide();
+                price_mjd.hide();
+                price_mrg.show();
+                price_vg.hide();
+
             } else {
                 abm.hide();
-                gbm.hide();
                 cir.hide();
+                dejd.hide();
+                ewma.hide();
+                garch.hide();
+                gbm.hide();
+                heston.hide();
+                mjd.hide();
                 mrg.hide();
-                heston.show();
+                vg.show();
+                heston.hide();
                 price_abm.hide();
-                price_gbm.hide();
                 price_cir.hide();
+                price_dejd.hide();
+                price_ewma.hide();
+                price_garch.hide();
+                price_gbm.hide();
+                price_heston.hide();
+                price_mjd.hide();
                 price_mrg.hide();
-                price_heston.show();
+                price_vg.show();
+
             }
         });
     });
