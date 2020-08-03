@@ -6,27 +6,40 @@ Created on Mon Jul 13 16:40:23 2020
 """
 import numpy as np
 
+# X0 = 0
+# T=5
+# NStep=50
+# v0 = 0.2**2/250
+# mu = 0.0
+# alpha = 0.1
+# beta = 0.85
+# omega = 5.7800*10**(-6)
+# asymm = 0
 
-def get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
-    # dt = T/NStep
-    # dt = 1
+def get_secondmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
+    dt = 1
     horizon = np.arange(1, NStep + 1)
 
-    # phi = alpha + beta
-    # omega0 = omega + alpha * asymm * asymm
-    # v1 = omega + alpha*(X0-mu*dt-asymm)**2 + beta *v0
-    moments = np.zeros((NStep, 4))
-    moments[:, 0] = X0 + mu * np.reshape(horizon, NStep)
-    moments[:, 1] = get_secondmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
-    moments[:, 2] = moments[:, 1]
-    moments[:, 3] = moments[:, 1]
-    # P, Q = get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
-    a = np.array((X0, v0 ** 0.5, 0, 3))
-    a = np.reshape(a, (4, 1))
-    moments = np.concatenate((a.T, moments), axis=0)
+    phi = alpha + beta
+    omega0 = omega + alpha * asymm * asymm
+    v1 = omega + alpha * (X0 - mu * dt - asymm) ** 2 + beta * v0
 
-    return moments
+    if asymm == 0:
+        if phi < 1:
+            moments2 = ((horizon - (1 - phi ** horizon) / (1 - phi)) * omega0 / (1 - phi) +
+                        (1 - phi ** horizon) / (1 - phi) * v1) ** 0.5
 
+        if phi == 1:
+            # lambda_one = 1-alpha
+            # K = 3
+            # G = (K-1)*(1-lambda_oone)**2+1
+            # H = 1 - lambda_one + lambda_one/K
+
+            moments2 = ((horizon - 1) * horizon * omega0 / 2 + horizon * v1) ** 0.5
+
+    # moments2 = np.reshape(moments2, (NStep, 1))
+    print(moments2)
+    return moments2
 
 def get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
     # dt = 1
@@ -65,38 +78,24 @@ def get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
 
     return P, Q
 
-
-# X0 = 0
-# T=5
-# NStep=50
-# v0 = 0.2**2/250
-# mu = 0.0
-# alpha = 0.1
-# beta = 0.85
-# omega = 5.7800*10**(-6)    
-# asymm = 0
-
-def get_secondmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
-    dt = 1
+def get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
+    # dt = T/NStep
+    # dt = 1
     horizon = np.arange(1, NStep + 1)
 
-    phi = alpha + beta
-    omega0 = omega + alpha * asymm * asymm
-    v1 = omega + alpha * (X0 - mu * dt - asymm) ** 2 + beta * v0
+    # phi = alpha + beta
+    # omega0 = omega + alpha * asymm * asymm
+    # v1 = omega + alpha*(X0-mu*dt-asymm)**2 + beta *v0
+    moments = np.zeros((NStep, 4))
+    moments[:, 0] = X0 + mu * np.reshape(horizon, NStep)
+    moments[:, 1] = get_secondmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
+    moments[:, 2] = moments[:, 1]
+    moments[:, 3] = moments[:, 1]
+    # P, Q = get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
+    a = np.array((X0, v0 ** 0.5, 0, 3))
+    a = np.reshape(a, (4, 1))
+    moments = np.concatenate((a.T, moments), axis=0)
 
-    if asymm == 0:
-        if phi < 1:
-            moments2 = ((horizon - (1 - phi ** horizon) / (1 - phi)) * omega0 / (1 - phi) +
-                        (1 - phi ** horizon) / (1 - phi) * v1) ** 0.5
+    return moments
 
-        if phi == 1:
-            # lambda_one = 1-alpha
-            # K = 3
-            # G = (K-1)*(1-lambda_oone)**2+1
-            # H = 1 - lambda_one + lambda_one/K
 
-            moments2 = ((horizon - 1) * horizon * omega0 / 2 + horizon * v1) ** 0.5
-
-    # moments2 = np.reshape(moments2, (NStep, 1))
-
-    return moments2

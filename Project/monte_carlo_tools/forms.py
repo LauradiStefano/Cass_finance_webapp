@@ -42,7 +42,7 @@ class ComputeForm(wtf.Form):
     omega_ewma = wtf.FloatField(label=r'$$ \omega $$', default=0, validators=[wtf.validators.InputRequired()])
     alpha_ewma = wtf.FloatField(label=r'$$ \alpha $$', default=0.1, validators=[wtf.validators.InputRequired()]
                                 )
-    beta_ewma = wtf.FloatField(label=r'$$ \beta $$', default=1, validators=[wtf.validators.InputRequired()]
+    beta_ewma = wtf.FloatField(label=r'$$ \beta $$', default=0.9, validators=[wtf.validators.InputRequired()]
                                )
     asymm_ewma = wtf.FloatField(label=r'$$ \gamma $$', default=0, validators=[wtf.validators.InputRequired()]
                                 )

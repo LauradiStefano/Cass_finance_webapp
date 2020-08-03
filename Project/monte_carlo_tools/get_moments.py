@@ -82,7 +82,7 @@ def get_moments(model, X0, parameters, T, NStep):
         moments = get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
 
         # moments = [X0, 0, 0 3 moments ]
-        quantiles = np.zeros((len(horizon) + 1, 2))
+        quantiles = np.zeros((len(horizon), 2))
         quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
         quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
 
@@ -94,6 +94,7 @@ def get_moments(model, X0, parameters, T, NStep):
         beta = parameters[4]
         asymm = parameters[5]
         moments = get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep)
+        quantiles = np.zeros((len(horizon), 2))
 
         # moments = [X0, 0, 0 3 moments ]
         quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
@@ -185,7 +186,7 @@ def get_moments(model, X0, parameters, T, NStep):
         moments[:, 3] = 3 + num_kurtosis / moments[:, 1] ** (4)  # kurtosis
         moments[0, 2] = 0
         moments[0, 3] = 3
-
+        quantiles = np.zeros((len(horizon), 2))
         quantiles[:, 0] = moments[:, 0] + 5 * moments[:, 1]
         quantiles[:, 1] = moments[:, 0] - 5 * moments[:, 1]
 
