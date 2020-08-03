@@ -6,6 +6,7 @@ Created on Mon Jul 13 16:40:23 2020
 """
 import numpy as np
 
+
 # X0 = 0
 # T=5
 # NStep=50
@@ -38,8 +39,8 @@ def get_secondmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
             moments2 = ((horizon - 1) * horizon * omega0 / 2 + horizon * v1) ** 0.5
 
     # moments2 = np.reshape(moments2, (NStep, 1))
-    print(moments2)
     return moments2
+
 
 def get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
     # dt = 1
@@ -78,6 +79,7 @@ def get_fourthmoment(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
 
     return P, Q
 
+
 def get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
     # dt = T/NStep
     # dt = 1
@@ -97,5 +99,3 @@ def get_mom_GARCH11(X0, mu, v0, omega, alpha, beta, asymm, T, NStep):
     moments = np.concatenate((a.T, moments), axis=0)
 
     return moments
-
-

@@ -99,6 +99,7 @@ def get_simutalted_path_and_moments(T, NStep, NPaths, model, mu_abm, sigma_abm, 
         # std = np.std(X[-1,:])
         X0 = price_dejd
 
+    # EWMA
     elif model == 3:
         # v0_ewma = 0.2**2/250
         # mu_ewma = 0
