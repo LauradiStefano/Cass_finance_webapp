@@ -4,7 +4,7 @@ Created on Tue Jun 30 20:54:23 2020
 
 @author: Diego
 """
-from scipy.stats import gamma, norm
+
 import numpy as np
 
 

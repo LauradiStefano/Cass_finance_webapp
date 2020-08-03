@@ -60,15 +60,15 @@ def get_heston_moment(x0, v0, mu, alpha, beta, eta, rho, timestep):
                                                    (tau * beta - 2 * x0) - 4 * tau * beta * (-1 + x0) + 4 * x0 ** 2) - 4
                  * k2 * (tau * th2 + 2 * v0 * (-1 + r * tau + x0) - beta *
                          (- 2 + 2 * r * tau - 2 * rho * eta * tau + tau * v0 + 2 * x0)))) / (
-                         8. * np.exp(2 * alpha * tau)
-                         * k3)
+                     8. * np.exp(2 * alpha * tau)
+                     * k3)
         m2_list.append(m2)
         # Third moment
         m3 = (-(sg4 * (beta - 3 * v0)) - 2 * k2 * (beta - v0) ** 3 - 3 * alpha * sg2 * (th2 - 3 * beta * v0 + 2 * v02) +
               3 * np.exp(alpha * tau) * (2 * sg4 * (-beta + v0) + alpha * sg2 * (-3 * th2 + 4 * rho * eta *
                                                                                  (2 * beta - 3 * v0) - 2 * sg2 * tau *
                                                                                  (
-                                                                                             beta - 2 * v0) + beta * v0 + 2 * v02) -
+                                                                                         beta - 2 * v0) + beta * v0 + 2 * v02) -
                                          2 * k3 * (beta - v0) ** 2 *
                                          (4 - 2 * r * tau - 4 * rho * eta * tau + tau * beta - 2 * x0) + k2 *
                                          (4 * rho * sg3 * tau * (beta - 2 * v0) + 2 * (beta - v0) ** 3 + 8 * rho * eta *
@@ -79,7 +79,7 @@ def get_heston_moment(x0, v0, mu, alpha, beta, eta, rho, timestep):
                                                                    (10 * beta - 3 * v0) - 7 * beta * v0 + 2 * v02) + 6 *
                k4 * (4 * r2 * tau2 * (beta - v0) - 4 * r * tau * (tau * th2 + beta * (2 + 2 * rho * eta * tau - tau * v0
                                                                                       - 2 * x0) + 2 * v0 * (
-                                                                              -1 + x0)) + 4
+                                                                          -1 + x0)) + 4
                      * rho * eta * tau * beta * (2 + tau * beta - 2 * x0) + (beta - v0) *
                      (tau2 * th2 - 4 * tau * beta * (- 2 + x0) + 4 * (-2 + x0) * x0)) + 2 * k5 *
                (8 * r3 * tau3 - tau3 * th3 - 12 * r2 * tau2 * (tau * beta - 2 * x0) + 6 * tau2 * th2 *
@@ -90,24 +90,24 @@ def get_heston_moment(x0, v0, mu, alpha, beta, eta, rho, timestep):
                            (-2 - 4 * rho2 + r * tau + x0))) - 6 * k3 * (8 * rho2 * sg2 * tau * beta +
                                                                         (sg2 * tau * beta + (beta - v0) ** 2) *
                                                                         (
-                                                                                    4 - 2 * r * tau + tau * beta - 2 * x0) + 4 * rho *
+                                                                                4 - 2 * r * tau + tau * beta - 2 * x0) + 4 * rho *
                                                                         eta * (3 * tau * th2 + 2 * v0 *
                                                                                (- 1 + r * tau + x0) - 2 * beta *
                                                                                (
-                                                                                           -2 + 2 * r * tau + tau * v0 + 2 * x0)))) -
+                                                                                       -2 + 2 * r * tau + tau * v0 + 2 * x0)))) -
               3 * np.exp(2 * alpha * tau) * (sg4 * (5 * beta + v0) + alpha * sg2 * (-32 * rho * eta * beta - 9 * th2 +
                                                                                     sg2 * tau * (
-                                                                                                6 * beta - 2 * v0) + 11 *
+                                                                                            6 * beta - 2 * v0) + 11 *
                                                                                     beta * v0 - 2 * v02) + 2 * k2 *
                                              (sg4 * tau2 * (beta - v0) + (beta - v0) ** 3 + 8 * rho * sg3 * tau *
                                               (-2 * beta + v0) + 8 * rho * eta * (2 * th2 - 3 * beta * v0 + v02) + sg2 *
                                               (tau * th2 - 2 * v0 * (4 * rho2 + tau * v0) + beta *
                                                (8 + 24 * rho2 - 4 * r * tau + 3 * tau * v0 - 4 * x0))) + 2 * k4 *
                                              (beta - v0) * (
-                                                         4 * r2 * tau2 + 4 * rho2 * sg2 * tau2 + 8 * tau * beta + tau2
-                                                         * th2 - 4 * rho * eta * tau * (2 + tau * beta - 2 * x0) -
-                                                         8 * x0 - 4 * tau * beta * x0 + 4 * x02 + 4 * r * tau *
-                                                         (- 2 + 2 * rho * eta * tau - tau * beta + 2 * x0)) + 4 * k3
+                                                     4 * r2 * tau2 + 4 * rho2 * sg2 * tau2 + 8 * tau * beta + tau2
+                                                     * th2 - 4 * rho * eta * tau * (2 + tau * beta - 2 * x0) -
+                                                     8 * x0 - 4 * tau * beta * x0 + 4 * x02 + 4 * r * tau *
+                                                     (- 2 + 2 * rho * eta * tau - tau * beta + 2 * x0)) + 4 * k3
                                              * (4 * rho2 * sg2 * tau * (2 * beta - v0) + (beta - v0) *
                                                 (sg2 * tau - beta + v0) * (4 - 2 * r * tau + tau * beta - 2 * x0) + 2 *
                                                 rho * eta * (-2 * tau * th2 + v0 * (2 - 2 * r * tau + sg2 * tau2 + tau *
