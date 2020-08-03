@@ -38,7 +38,7 @@ class ComputeForm(wtf.Form):
     # EWMA distribution
     mu_ewma = wtf.FloatField(label=r'$$ \mu $$', default=0,
                              validators=[wtf.validators.InputRequired()])
-    volatility_t0_ewma = wtf.FloatField(label=r'$$ v_0 $$', default=0, validators=[wtf.validators.InputRequired()])
+    volatility_t0_ewma = wtf.FloatField(label=r'$$ v_0 $$', default=0.2, validators=[wtf.validators.InputRequired()])
     omega_ewma = wtf.FloatField(label=r'$$ \omega $$', default=0, validators=[wtf.validators.InputRequired()])
     alpha_ewma = wtf.FloatField(label=r'$$ \alpha $$', default=0.1, validators=[wtf.validators.InputRequired()]
                                 )

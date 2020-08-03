@@ -49,7 +49,7 @@ def get_moments(model, X0, parameters, T, NStep):
         quantiles[:, 0] = k * ncx2.ppf(0.05, d, lam)
         quantiles[:, 1] = k * ncx2.ppf(0.95, d, lam)
 
-    if model == 2:  # DEJD
+    elif model == 2:  # DEJD
         mu = parameters[0]
         sigma = parameters[1]
         lambda_dedj = parameters[2]
@@ -135,7 +135,7 @@ def get_moments(model, X0, parameters, T, NStep):
         quantiles[:, 0] = moments[:, 0] + 3 * moments[:, 1]
         quantiles[:, 1] = moments[:, 0] - 3 * moments[:, 1]
 
-    if model == 7:  # MJD
+    elif model == 7:  # MJD
         mu = parameters[0]
         sigma = parameters[1]
         lambda_mjd = parameters[2]
@@ -176,13 +176,13 @@ def get_moments(model, X0, parameters, T, NStep):
         theta = parameters[0]
         sigma = parameters[1]
         kappa = parameters[2]
+        moments = np.zeros((len(horizon), 4))
 
         moments[:, 0] = (theta) * horizon  # mean
         moments[:, 1] = ((sigma * sigma + theta * theta * kappa) * horizon) ** 0.5  # std. dev.
         num_skewness = (3 * sigma * sigma + 2 * theta * theta * kappa) * theta * kappa * horizon
         moments[:, 2] = num_skewness / moments[:, 1] ** (3)  # skewness
-        num_kurtosis = (
-                               3 * sigma ** 4 + 12 * sigma * sigma * theta * theta * kappa + 6 * theta ** 4 * kappa * kappa) * kappa * horizon
+        num_kurtosis = (3 * sigma ** 4 + 12 * sigma * sigma * theta * theta * kappa + 6 * theta ** 4 * kappa * kappa) * kappa * horizon
         moments[:, 3] = 3 + num_kurtosis / moments[:, 1] ** (4)  # kurtosis
         moments[0, 2] = 0
         moments[0, 3] = 3
