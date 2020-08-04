@@ -300,7 +300,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
                                                 ("Nstep", "@timestep")])
 
     hover_var_simulated = HoverTool(attachment="below", names=['simulated standard deviation'],
-                                    tooltips=[("Simulated Variance ", "@variance_Simulated"), ("Nstep", "@timestep")])
+                                    tooltips=[("Simulated Variance ", "@variance_simulated"), ("Nstep", "@timestep")])
 
     fig_variance_value = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_var_theoretical, hover_var_simulated],
@@ -327,7 +327,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
                                                  ("Nstep", "@timestep")])
 
     hover_skew_simulated = HoverTool(attachment="below", names=['simulated skewness'],
-                                     tooltips=[("Simulated Skewness ", "@skewness_Simulated"), ("Nstep", "@timestep")])
+                                     tooltips=[("Simulated Skewness ", "@skewness_simulated"), ("Nstep", "@timestep")])
 
     fig_skewness_value = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_skew_theoretical, hover_skew_simulated],
@@ -354,7 +354,7 @@ def create_plot_moments(simulated_paths, moments, timestep):
                                                  ("Nstep", "@timestep")])
 
     hover_kurt_simulated = HoverTool(attachment="below", names=['simulated kurtosis'],
-                                     tooltips=[("Simulated Kurtosis ", "@kurtosis_Simulated"), ("Nstep", "@timestep")])
+                                     tooltips=[("Simulated Kurtosis ", "@kurtosis_simulated"), ("Nstep", "@timestep")])
 
     fig_kurtosis_value = bp.figure(
         tools=['save, pan, box_zoom, reset, crosshair', hover_kurt_theoretical, hover_kurt_simulated],
