@@ -873,6 +873,18 @@
             </fieldset>
         </div>
 
+        <div class=" col-12">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
+                <div class="row border-bottom mb-2 pb-1">
+                    <legend>Evolution of Density</legend>
+                </div>
+                <div class="d-flex justify-content-center plot_monte_carlo">
+                    {{plot_3d_density[0]|safe}}
+                    {{plot_3d_density[1]|safe}}
+                </div>
+            </fieldset>
+        </div>
+
     </div>
     {%endif%}
 </div>
