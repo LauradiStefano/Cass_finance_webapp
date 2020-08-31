@@ -219,19 +219,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.omega_ewma.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.omega_ewma}}
-                                        {% if form.omega_ewma.errors %}
-                                        {% for error in form.omega_ewma.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
                                         {{form.alpha_ewma.label}}
                                     </div>
                                     <div class="col-11 mb-1">
@@ -251,19 +238,6 @@
                                         {{form.beta_ewma}}
                                         {% if form.beta_ewma.errors %}
                                         {% for error in form.beta_ewma.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.asymm_ewma.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.asymm_ewma}}
-                                        {% if form.asymm_ewma.errors %}
-                                        {% for error in form.asymm_ewma.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}

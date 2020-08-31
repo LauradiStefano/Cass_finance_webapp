@@ -602,10 +602,8 @@ class monte_carlo_tools(db.Model):
 
     mu_ewma = db.Column(db.Float())
     volatility_t0_ewma = db.Column(db.Float())
-    omega_ewma = db.Column(db.Float())
     alpha_ewma = db.Column(db.Float())
     beta_ewma = db.Column(db.Float())
-    asymm_ewma = db.Column(db.Float())
 
     mu_garch = db.Column(db.Float())
     volatility_t0_garch = db.Column(db.Float())

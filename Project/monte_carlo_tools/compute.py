@@ -39,8 +39,8 @@ import itertools
 
 
 def get_simulated_path_and_moments(T, NStep, NPaths, model, mu_abm, sigma_abm, mu_cir, alpha_cir, sigma_cir, mu_dejd,
-                                   sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd, mu_ewma, v0_ewma, omega_ewma,
-                                   alpha_ewma, beta_ewma, asymm_ewma, mu_garch, v0_garch, omega_garch, alpha_garch,
+                                   sigma_dejd, lambda_dejd, p_dejd, eta1_dejd, eta2_dejd, mu_ewma, v0_ewma,
+                                   alpha_ewma, beta_ewma, mu_garch, v0_garch, omega_garch, alpha_garch,
                                    beta_garch, asymm_garch, mu_gbm, sigma_gbm, mu_heston, v0_heston, alpha_heston,
                                    beta_heston, eta_heston, rho_heston, mu_mjd, sigma_mjd, lambda_mjd, mu_jumps_mjd,
                                    sg_jumps_mjd, mu_gmr, alpha_gmr, sigma_gmr, theta_vg, sigma_vg, kappa_vg,
@@ -628,7 +628,7 @@ def create_plot_3D_evolution_of_density(simulated_paths, moments, timestep, NSte
         z=z
     ))
 
-    fig = Surface3d(x="x", y="y", z="z", data_source=data, height=600, width=600 )
+    fig = Surface3d(x="x", y="y", z="z", data_source=data, height=600, width=600)
 
     script, div = components(fig)
     return script, div
