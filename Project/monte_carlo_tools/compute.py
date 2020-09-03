@@ -107,11 +107,10 @@ def get_simulated_path_and_moments(T, NStep, NPaths, model, mu_abm, sigma_abm, m
         # alpha_ewma = 0.1
         # beta_ewma = 1-alpha_ewma
         # asymm_ewma = 0
-        parameters = [mu_ewma, v0_ewma, omega_ewma, alpha_ewma, beta_ewma, asymm_ewma]
+        parameters = [mu_ewma, v0_ewma, alpha_ewma, beta_ewma]
         # X0 = 0
 
-        X = get_mc_garch(price_ewma, mu_ewma, v0_ewma, omega_ewma, alpha_ewma, beta_ewma,
-                         asymm_ewma, T, NStep, NPaths)
+        X = get_mc_garch(price_ewma, mu_ewma, v0_ewma, alpha_ewma, beta_ewma, T, NStep, NPaths)
         # mean = np.mean(X[-1,:])
         # std = np.std(X[-1,:])
         X0 = price_ewma
