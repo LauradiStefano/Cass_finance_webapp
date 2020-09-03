@@ -449,8 +449,8 @@ def create_plot_3D_evolution_of_density(simulated_paths, moments, timestep, NSte
     // This defines some default options for the Graph3d feature of vis.js
     // See: http://visjs.org/graph3d_examples.html for more details.
     const OPTIONS = {
-      width: '100%',
-      height: '600px',
+      width: '700px',
+      height: '700px',
       style: 'surface',
       showPerspective: true,
       showGrid: true,
@@ -458,9 +458,9 @@ def create_plot_3D_evolution_of_density(simulated_paths, moments, timestep, NSte
       verticalRatio: 0.5,
       legendLabel: 'stuff',
       cameraPosition: {
-        horizontal: 1.0,
-        vertical: 0.5,
-        distance: 1.7,
+        horizontal: 0.8,
+        vertical: 0.3,
+        distance: 2.0,
       },
     }
     // To create custom model extensions that will render on to the HTML canvas
@@ -628,7 +628,7 @@ def create_plot_3D_evolution_of_density(simulated_paths, moments, timestep, NSte
         z=z
     ))
 
-    fig = Surface3d(x="x", y="y", z="z", data_source=data, height=600, width=600)
+    fig = Surface3d(x="x", y="y", z="z", data_source=data, height=700, width=700)
 
     script, div = components(fig)
     return script, div
