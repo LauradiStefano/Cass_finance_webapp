@@ -41,7 +41,7 @@
 
                         <div class="row">
 
-                            <div class="col" id="cir" {% if form.model_choice.data !='1' %}
+                            <div class="col" id="cir" {% if form.model_choice.data !='0' %}
                                  style="display:none" {%endif%}>
                                 <div class="model_formula">
                                     $$
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="nelson_siegel" {% if form.model_choice.data !='2' %}
+                            <div class="col" id="nelson_siegel" {% if form.model_choice.data !='1' %}
                                  style="display:none" {%endif%}>
                                 <div class="model_formula">
                                     $$ SpotRates(t)= \\
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="svensson" {% if form.model_choice.data !='3' %} style="display:none"
+                            <div class="col" id="svensson" {% if form.model_choice.data !='2' %} style="display:none"
                                  {%endif%}>
                                 <div class="model_formula">
                                     $$ SpotRates(t)= \\
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
 
-                            <div class="col" id="vasicek" {% if form.model_choice.data !='0' and form.model_choice
+                            <div class="col" id="vasicek" {% if form.model_choice.data !='3' and form.model_choice
                                  !=None
                                  %}
                                  style="display:none" {%endif%}>
@@ -526,30 +526,34 @@
             var cir_formula = $('#cir > .model_formula')[0].innerHTML;
             var nelsonSiegel_formula = $('#nelson_siegel > .model_formula')[0].innerHTML;
             var svensson_formula = $('#svensson > .model_formula')[0].innerHTML;
+
             if (select_distribution.val() == '0') {
-                vasicek.show();
-                cir.hide();
-                nelsonSiegel.hide();
-                svensson.hide();
-                help_formula.html(vasicek_formula).hide();
-            } else if (select_distribution.val() == '1') {
-                vasicek.hide();
                 cir.show();
                 nelsonSiegel.hide();
                 svensson.hide();
-                help_formula.html(cir_formula);
-            } else if (select_distribution.val() == '2') {
                 vasicek.hide();
+                help_formula.html(cir_formula);
+
+            } else if (select_distribution.val() == '1') {
                 cir.hide();
                 nelsonSiegel.show();
                 svensson.hide();
-                help_formula.html(nelsonSiegel_formula);
-            } else {
                 vasicek.hide();
+                help_formula.html(nelsonSiegel_formula);
+
+            } else if (select_distribution.val() == '2') {
                 cir.hide();
                 nelsonSiegel.hide();
                 svensson.show();
+                vasicek.hide();
                 help_formula.html(svensson_formula);
+
+            } else {
+                cir.hide();
+                nelsonSiegel.hide();
+                svensson.hide();
+                vasicek.show();
+                help_formula.html(vasicek_formula);
             }
         };
 

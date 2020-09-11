@@ -30,10 +30,30 @@ def y_cgmy_check(form, field):
 
 class ComputeForm(wtf.Form):
     type_choice = wtf.SelectField('Model',
-                                  choices=[('0', 'Normal'), ('1', 'VG'), ('2', 'NIG'), ('3', 'CGMY')], default='0')
+                                  choices=[('0', 'CGMY'), ('1', 'NIG'), ('2', 'Normal'), ('3', 'VG')], default='0')
 
     mu = wtf.FloatField(label='$$ \mu $$', default=0,
                         validators=[wtf.validators.InputRequired()])
+
+    # CGMY distribution
+    c = wtf.FloatField(label='$$ C $$', default=1,
+                       validators=[wtf.validators.InputRequired(), greater_than_zero])
+    g = wtf.FloatField(label='$$ G $$', default=5,
+                       validators=[wtf.validators.InputRequired(), greater_than_zero])
+    m = wtf.FloatField(label='$$ M $$', default=5,
+                       validators=[wtf.validators.InputRequired(), greater_than_zero])
+    y = wtf.FloatField(label='$$ Y $$', default=0.5,
+                       validators=[wtf.validators.InputRequired(), y_cgmy_check])
+
+    # NIG distribution
+    sigma_nig = wtf.FloatField(label='$$ \sigma $$', default=0.16,
+                               validators=[wtf.validators.InputRequired(), greater_than_zero])
+    kappa_nig = wtf.FloatField(label='$$ \kappa $$', default=0.2,
+                               validators=[wtf.validators.InputRequired(), kappa_nig_check])
+    theta_nig = wtf.FloatField(label=r'$$ \theta $$', default=-0.12,
+                               validators=[wtf.validators.InputRequired(),
+                                           validators.NumberRange(min=-1, max=1,
+                                                                  message='The value must be between -1 and 1')])
 
     # Normal distribution
     sigma_normal = wtf.FloatField(label='$$ \sigma $$', default=0.12,
@@ -46,26 +66,6 @@ class ComputeForm(wtf.Form):
                               validators=[wtf.validators.InputRequired(), kappa_vg_check])
     theta_vg = wtf.FloatField(label=r'$$ \theta $$', default=-0.14,
                               validators=[wtf.validators.InputRequired(), theta_vg_check])
-
-    # NIG distribution
-    sigma_nig = wtf.FloatField(label='$$ \sigma $$', default=0.16,
-                               validators=[wtf.validators.InputRequired(), greater_than_zero])
-    kappa_nig = wtf.FloatField(label='$$ \kappa $$', default=0.2,
-                               validators=[wtf.validators.InputRequired(), kappa_nig_check])
-    theta_nig = wtf.FloatField(label=r'$$ \theta $$', default=-0.12,
-                               validators=[wtf.validators.InputRequired(),
-                                           validators.NumberRange(min=-1, max=1,
-                                                                  message='The value must be between -1 and 1')])
-
-    # CGMY distribution
-    c = wtf.FloatField(label='$$ C $$', default=1,
-                       validators=[wtf.validators.InputRequired(), greater_than_zero])
-    g = wtf.FloatField(label='$$ G $$', default=5,
-                       validators=[wtf.validators.InputRequired(), greater_than_zero])
-    m = wtf.FloatField(label='$$ M $$', default=5,
-                       validators=[wtf.validators.InputRequired(), greater_than_zero])
-    y = wtf.FloatField(label='$$ Y $$', default=0.5,
-                       validators=[wtf.validators.InputRequired(), y_cgmy_check])
 
     # Contract parameters
     price = wtf.FloatField(label='Spot Price', default=100,

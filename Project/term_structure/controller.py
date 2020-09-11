@@ -63,16 +63,15 @@ def controller_term_structure(user, request):
 
                 file_data = upload_input(file_data)
 
-                variables = create_objective_vector(form.model_choice.data, form.kappa_vasicek.data,
-                                                    form.theta_vasicek.data, form.sigma_vasicek.data,
-                                                    form.rho_vasicek.data,
-                                                    form.kappa_cir.data, form.theta_cir.data, form.sigma_cir.data,
-                                                    form.rho_cir.data, form.beta0_nelson.data, form.beta1_nelson.data,
-                                                    form.beta2_nelson.data, form.tau_nelson.data,
-                                                    form.beta0_svensson.data,
+                variables = create_objective_vector(form.model_choice.data, form.kappa_cir.data, form.theta_cir.data,
+                                                    form.sigma_cir.data, form.rho_cir.data, form.beta0_nelson.data,
+                                                    form.beta1_nelson.data, form.beta2_nelson.data,
+                                                    form.tau_nelson.data, form.beta0_svensson.data,
                                                     form.beta1_svensson.data, form.beta2_svensson.data,
                                                     form.beta3_svensson.data, form.tau1_svensson.data,
-                                                    form.tau2_svensson.data)
+                                                    form.tau2_svensson.data, form.kappa_vasicek.data,
+                                                    form.theta_vasicek.data, form.sigma_vasicek.data,
+                                                    form.rho_vasicek.data)
 
                 market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
                 discount_factor_model_error, spot_rate_model_error, parameters, time, rmse_discount_factor, \

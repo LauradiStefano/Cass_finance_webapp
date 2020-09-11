@@ -183,6 +183,17 @@ class levy_process(db.Model):
 
     mu = db.Column(db.Float())
 
+    # CGMY distribution
+    c = db.Column(db.Float())
+    g = db.Column(db.Float())
+    m = db.Column(db.Float())
+    y = db.Column(db.Float())
+
+    # NIG distribution
+    sigma_nig = db.Column(db.Float())
+    kappa_nig = db.Column(db.Float())
+    theta_nig = db.Column(db.Float())
+
     # Gaussian distribution
     sigma_normal = db.Column(db.Float())
 
@@ -190,17 +201,6 @@ class levy_process(db.Model):
     sigma_vg = db.Column(db.Float())
     kappa_vg = db.Column(db.Float())
     theta_vg = db.Column(db.Float())
-
-    # NIG distribution
-    sigma_nig = db.Column(db.Float())
-    kappa_nig = db.Column(db.Float())
-    theta_nig = db.Column(db.Float())
-
-    # CGMY distribution
-    c = db.Column(db.Float())
-    g = db.Column(db.Float())
-    m = db.Column(db.Float())
-    y = db.Column(db.Float())
 
     mean = db.Column(db.Float())
     variance = db.Column(db.Float())
@@ -346,12 +346,6 @@ class term_structure(db.Model):
     model_choice = db.Column(db.String())
     file_name = db.Column(db.String())
 
-    # Vasicek distribution
-    kappa_vasicek = db.Column(db.Float())
-    theta_vasicek = db.Column(db.Float())
-    sigma_vasicek = db.Column(db.Float())
-    rho_vasicek = db.Column(db.Float())
-
     # Cir distribution
     kappa_cir = db.Column(db.Float())
     theta_cir = db.Column(db.Float())
@@ -371,6 +365,12 @@ class term_structure(db.Model):
     beta3_svensson = db.Column(db.Float())
     tau1_svensson = db.Column(db.Float())
     tau2_svensson = db.Column(db.Float())
+
+    # Vasicek distribution
+    kappa_vasicek = db.Column(db.Float())
+    theta_vasicek = db.Column(db.Float())
+    sigma_vasicek = db.Column(db.Float())
+    rho_vasicek = db.Column(db.Float())
 
     discount_factor = db.Column(db.String())
     least_fmin = db.Column(db.String())

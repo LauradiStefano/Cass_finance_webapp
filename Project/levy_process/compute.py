@@ -18,20 +18,21 @@ from levy_process.get_pdf_cos import get_pdf_cos
 from levy_process.getbs import find_vol
 
 
-def select_parameters(type_choice, mu, sigma_normal, sigma_vg, kappa_vg, theta_vg, sigma_nig, kappa_nig, theta_nig, c,
-                      g, m, y):
+def select_parameters(type_choice, mu, c, g, m, y, sigma_nig, kappa_nig, theta_nig, sigma_normal, sigma_vg, kappa_vg,
+                      theta_vg):
     type_choice = int(type_choice)
-    if type_choice == 0:
-        parameters = [mu, sigma_normal]
 
-    elif type_choice == 1:
-        parameters = [mu, sigma_vg, theta_vg, kappa_vg]
+    if type_choice == 0:  # CGMY
+        parameters = [mu, c, g, m, y]
 
-    elif type_choice == 2:
+    elif type_choice == 1:  # Nig
         parameters = [mu, sigma_nig, theta_nig, kappa_nig]
 
-    else:  # type_choice == 3
-        parameters = [mu, c, g, m, y]
+    elif type_choice == 2:  # Normal
+        parameters = [mu, sigma_normal]
+
+    else:  # type_choice == 3 VG
+        parameters = [mu, sigma_vg, theta_vg, kappa_vg]
 
     return parameters
 

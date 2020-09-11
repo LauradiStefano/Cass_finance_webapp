@@ -51,111 +51,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col" id="normal" {% if form.type_choice.data !='0' and form.type_choice !=None
-                                 %}
-                                 style="display:none" {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_normal.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_normal}}
-                                        {% if form.sigma_normal.errors %}
-                                        {% for error in form.sigma_normal.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col" id="vg" {% if form.type_choice.data !='1' %}
-                                 style="display:none" {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_vg.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_vg}}
-                                        {% if form.sigma_vg.errors %}
-                                        {% for error in form.sigma_vg.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.kappa_vg.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.kappa_vg}}
-                                        {% if form.kappa_vg.errors %}
-                                        {% for error in form.kappa_vg.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.theta_vg.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.theta_vg}}
-                                        {% if form.theta_vg.errors %}
-                                        {% for error in form.theta_vg.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col" id="nig" {% if form.type_choice.data !='2' %}
-                                 style="display:none" {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_nig}}
-                                        {% if form.sigma_nig.errors %}
-                                        {% for error in form.sigma_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.kappa_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.kappa_nig}}
-                                        {% if form.kappa_nig.errors %}
-                                        {% for error in form.kappa_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.theta_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.theta_nig}}
-                                        {% if form.theta_nig.errors %}
-                                        {% for error in form.theta_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col" id="cgmy" {% if form.type_choice.data !='3' %}
+                            <div class="col" id="cgmy" {% if form.type_choice.data !='0' and form.type_choice !=None %}
                                  style="display:none"
                                  {%endif%}>
 
@@ -206,6 +103,109 @@
                                         {{form.y}}
                                         {% if form.y.errors %}
                                         {% for error in form.y.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="nig" {% if form.type_choice.data !='1' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_nig}}
+                                        {% if form.sigma_nig.errors %}
+                                        {% for error in form.sigma_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.kappa_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_nig}}
+                                        {% if form.kappa_nig.errors %}
+                                        {% for error in form.kappa_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.theta_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_nig}}
+                                        {% if form.theta_nig.errors %}
+                                        {% for error in form.theta_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="normal" {% if form.type_choice.data !='2' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_normal.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_normal}}
+                                        {% if form.sigma_normal.errors %}
+                                        {% for error in form.sigma_normal.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" id="vg" {% if form.type_choice.data !='3' %}
+                                 style="display:none" {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_vg}}
+                                        {% if form.sigma_vg.errors %}
+                                        {% for error in form.sigma_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.kappa_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_vg}}
+                                        {% if form.kappa_vg.errors %}
+                                        {% for error in form.kappa_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.theta_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_vg}}
+                                        {% if form.theta_vg.errors %}
+                                        {% for error in form.theta_vg.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -337,7 +337,7 @@
         </div>
         {% else %}
         <div class="download_data" data-toggle="tooltip" data-placement="top" title="Log in to download file">
-           Click here to download the distribution
+            Click here to download the distribution
         </div>
         {% endif %}
 
@@ -431,43 +431,44 @@
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var select_distribution = $('#type_choice');
         var normal = $('#normal');
         var vg = $('#vg');
         var nig = $('#nig');
         var cgmy = $('#cgmy');
 
-        select_distribution.on('change', function() {
+        select_distribution.on('change', function () {
             if (select_distribution.val() == '0') {
+                cgmy.show();
+                nig.hide();
+                normal.hide();
+                vg.hide();
+
+            } else if (select_distribution.val() == '1') {
+                cgmy.hide();
+                nig.show();
+                normal.hide();
+                vg.hide();
+
+            } else if (select_distribution.val() == '2') {
+                cgmy.hide();
+                nig.hide();
                 normal.show();
                 vg.hide();
-                nig.hide();
+
+            } else {
                 cgmy.hide();
-            } else if (select_distribution.val() == '1') {
+                nig.hide();
                 normal.hide();
                 vg.show();
-                nig.hide();
-                cgmy.hide();
-            } else if (select_distribution.val() == '2') {
-                normal.hide();
-                vg.hide();
-                nig.show();
-                cgmy.hide();
-            } else {
-                normal.hide();
-                vg.hide();
-                nig.hide();
-                cgmy.show();
             }
         });
     });
 
-    $(document).ready(function(){
-         $('[data-toggle="tooltip"]').tooltip();
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
-
-
 
 
 </script>

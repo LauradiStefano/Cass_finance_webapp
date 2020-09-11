@@ -33,22 +33,22 @@ def upload_input(filename=None):
     return data
 
 
-def create_objective_vector(model, kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek, kappa_cir, theta_cir,
-                            sigma_cir, rho_cir, beta0_nelson, beta1_nelson, beta2_nelson, tau_nelson, beta0_svensson,
-                            beta1_svensson, beta2_svensson, beta3_svensson, tau1_svensson, tau2_svensson):
+def create_objective_vector(model, kappa_cir, theta_cir, sigma_cir, rho_cir, beta0_nelson, beta1_nelson, beta2_nelson,
+                            tau_nelson, beta0_svensson, beta1_svensson, beta2_svensson, beta3_svensson, tau1_svensson,
+                            tau2_svensson, kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek):
     model = int(model)
 
-    if model == 0:
-        x0 = [kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek]
-
-    elif model == 1:
+    if model == 0:  # Cir
         x0 = [kappa_cir, theta_cir, sigma_cir, rho_cir]
 
-    elif model == 2:
+    elif model == 1:  # Nelson
         x0 = [beta0_nelson, beta1_nelson, beta2_nelson, tau_nelson]
 
-    else:  # model == 3
+    elif model == 2:  # Svenson
         x0 = [beta0_svensson, beta1_svensson, beta2_svensson, beta3_svensson, tau1_svensson, tau2_svensson]
+
+    else:  # if model == 3 Vasicek
+        x0 = [kappa_vasicek, theta_vasicek, sigma_vasicek, rho_vasicek]
 
     return x0
 
@@ -61,23 +61,8 @@ def fitting_method(model, x0, data, flag1, flag2):
     flag2 = int(flag2)
     dates, annual_basis_date = list_of_daily_dates(time)
     discount_factor = []
+
     if model == 0:
-
-        if flag1 == 0:
-
-            res_1 = least_squares(lambda y: fit_df_Vasicek(y, data, flag1, flag2), x0)
-            param = res_1.x
-            discount_factor = get_df_Vasicek(param, time)
-            daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
-
-
-        else:
-
-            param = optimize.fmin(lambda y: fit_df_Vasicek(y, data, flag1, flag2), x0)
-            discount_factor = get_df_Vasicek(param, time)
-            daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
-
-    elif model == 1:
 
         if flag1 == 0:
 
@@ -94,7 +79,7 @@ def fitting_method(model, x0, data, flag1, flag2):
             daily_discount_factor = get_df_CIR(param, annual_basis_date)
 
 
-    elif model == 2:
+    elif model == 1:
 
         if flag1 == 0:
 
@@ -109,7 +94,7 @@ def fitting_method(model, x0, data, flag1, flag2):
             discount_factor = get_df_NelsonSiegel(param, time)
             daily_discount_factor = get_df_NelsonSiegel(param, annual_basis_date)
 
-    else:  # model == 3
+    elif model == 3:
 
         if flag1 == 0:
 
@@ -124,6 +109,21 @@ def fitting_method(model, x0, data, flag1, flag2):
             discount_factor = get_df_Svensson(param, time)
             daily_discount_factor = get_df_Svensson(param, annual_basis_date)
 
+    else:  # model == 3
+        if flag1 == 0:
+
+            res_1 = least_squares(lambda y: fit_df_Vasicek(y, data, flag1, flag2), x0)
+            param = res_1.x
+            discount_factor = get_df_Vasicek(param, time)
+            daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
+
+
+        else:
+
+            param = optimize.fmin(lambda y: fit_df_Vasicek(y, data, flag1, flag2), x0)
+            discount_factor = get_df_Vasicek(param, time)
+            daily_discount_factor = get_df_Vasicek(param, annual_basis_date)
+
     model_discount_factor = discount_factor
 
     model_spot_rate = -np.log(model_discount_factor) / time
@@ -137,10 +137,10 @@ def fitting_method(model, x0, data, flag1, flag2):
     rmse_discount_factor = "{:.3e}".format(rmse_discount_factor)
     rmse_spot_rate = "{:.3e}".format(rmse_spot_rate)
     daily_model_spot_rate = -np.log(daily_discount_factor) / annual_basis_date
-    daily_discount_factor = np.delete(daily_discount_factor,0)
-    daily_model_spot_rate = np.delete(daily_model_spot_rate,0)
+    daily_discount_factor = np.delete(daily_discount_factor, 0)
+    daily_model_spot_rate = np.delete(daily_model_spot_rate, 0)
     daily_discount_factor = np.insert(daily_discount_factor, 0, 1.0)
-    daily_model_spot_rate=np.insert(daily_model_spot_rate, 0, 0)
+    daily_model_spot_rate = np.insert(daily_model_spot_rate, 0, 0)
     return market_discount_factor, market_spot_rate, model_discount_factor, model_spot_rate, \
            discount_factor_model_error, spot_rate_model_error, param, time, \
            rmse_discount_factor, rmse_spot_rate, daily_discount_factor, annual_basis_date, daily_model_spot_rate, dates
