@@ -29,18 +29,18 @@ def controller_asian_option(user, request):
         if form.validate():
             optimal_lower_bound, optimal_strike, lower_bound_strike, lam, lower_bound = \
                 compute_values(form.model_choice.data, form.price.data, form.strike.data, form.time.data,
-                               form.risk_free.data, form.step.data, form.sigma_gaussian.data, form.sigma_vg.data,
-                               form.theta_vg.data, form.kappa_vg.data, form.volatility_t0.data, form.alpha_heston.data,
-                               form.beta_heston.data, form.gamma_heston.data, form.rho_heston.data, form.a_nig.data,
-                               form.b_nig.data, form.delta_nig.data, form.c.data, form.g.data, form.m.data,
-                               form.y.data, form.a_meixner.data, form.b_meixner.data, form.delta_meixner.data,
+                               form.risk_free.data, form.step.data, form.grid.data, form.upper_range.data,
+                               form.lower_range.data, form.dump.data, form.tolerance.data, form.price_exp.data,
+                               form.strike_exp.data, form.risk_free_exp.data, form.time_exp.data, form.step_exp.data,
+                               form.upper_range_exp.data, form.lower_range_exp.data, form.beta_cev.data, form.c.data,
+                               form.g.data, form.m.data, form.y.data, form.sigma_dejd.data, form.lam_dejd.data,
+                               form.rho_dejd.data, form.eta1_dejd.data, form.eta2_dejd.data, form.epsilon_exp.data,
+                               form.k1_exp.data, form.sigma_exp.data, form.sigma_gaussian.data, form.volatility_t0.data,
+                               form.alpha_heston.data, form.beta_heston.data, form.gamma_heston.data,
+                               form.rho_heston.data, form.a_meixner.data, form.b_meixner.data, form.delta_meixner.data,
                                form.sigma_mjd.data, form.lam_mjd.data, form.mu_x_mjd.data, form.sigma_x_mjd.data,
-                               form.sigma_dejd.data, form.lam_dejd.data, form.rho_dejd.data, form.eta1_dejd.data,
-                               form.eta2_dejd.data, form.beta_cev.data, form.epsilon_exp.data, form.k1_exp.data,
-                               form.sigma_exp.data, form.price_exp.data, form.strike_exp.data, form.risk_free_exp.data,
-                               form.time_exp.data, form.step_exp.data, form.upper_range_exp.data,
-                               form.lower_range_exp.data, form.grid.data, form.upper_range.data,
-                               form.lower_range.data, form.dump.data, form.tolerance.data)
+                               form.a_nig.data, form.b_nig.data, form.delta_nig.data, form.sigma_vg.data,
+                               form.theta_vg.data, form.kappa_vg.data, )
 
             plot_lower_bound = create_plot_lower_bound(lam, lower_bound)
 

@@ -29,73 +29,17 @@
                                         {{dict(result['form'].model_choice.choices).get(result['form'].model_choice.data)}}
                                     </span>
 
-                                    <div id="gaussian">
+                                    <div id="cev">
                                         {% if result['form'].model_choice.data == '0' %}
                                         <span class="mb-1">
-                                            {{result['form'].sigma_gaussian.label}}:
-                                            {{result['form'].sigma_gaussian.data|round(4)}}
+                                            {{result['form'].beta_cev.label}}:
+                                            {{result['form'].beta_cev.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
 
-                                    <div id="vg">
-                                        {% if result['form'].model_choice.data == '1' %}
-                                        <span class="mb-1">
-                                            {{result['form'].kappa_vg.label}}:
-                                            {{result['form'].kappa_vg.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].theta_vg.label}}:
-                                            {{result['form'].theta_vg.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].sigma_vg.label}}:
-                                            {{result['form'].sigma_vg.data|round(4)}}
-                                        </span>
-                                        {%endif%}
-                                    </div>
-                                    <div id="heston">
-                                        {% if result['form'].model_choice.data == '2' %}
-                                        <span class="mb-1">
-                                            {{result['form'].alpha_heston.label}}:
-                                            {{result['form'].alpha_heston.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].beta_heston.label}}:
-                                            {{result['form'].beta_heston.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].gamma_heston.label}}:
-                                            {{result['form'].gamma_heston.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].rho_heston.label}}:
-                                            {{result['form'].rho_heston.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].volatility_t0.label}}:
-                                            {{result['form'].volatility_t0.data|round(4)}}
-                                        </span>>
-                                        {%endif%}
-                                    </div>
-                                    <div id="nig">
-                                        {% if result['form'].model_choice.data == '3' %}
-                                        <span class="mb-1">
-                                            {{result['form'].a_nig.label}}:
-                                            {{result['form'].a_nig.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].b_nig.label}}:
-                                            {{result['form'].b_nig.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].delta_nig.label}}:
-                                            {{result['form'].delta_nig.data|round(4)}}
-                                        </span>
-                                        {%endif%}
-                                    </div>
                                     <div id="cgmy">
-                                        {% if result['form'].model_choice.data == '4' %}
+                                        {% if result['form'].model_choice.data == '1' %}
                                         <span class="mb-1">
                                             {{result['form'].c.label}}:
                                             {{result['form'].c.data|round(4)}}<br/>
@@ -114,44 +58,9 @@
                                         </span>
                                         {%endif%}
                                     </div>
-                                    <div id="meixer">
-                                        {% if result['form'].model_choice.data == '5' %}
-                                        <span class="mb-1">
-                                            {{result['form'].a_meixner.label}}:
-                                            {{result['form'].a_meixner.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].b_meixner.label}}:
-                                            {{result['form'].b_meixner.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].delta_meixner.label}}:
-                                            {{result['form'].delta_meixner.data|round(4)}}
-                                        </span>
-                                        {%endif%}
-                                    </div>
-                                    <div id="mjd">
-                                        {% if result['form'].model_choice.data == '6' %}
-                                        <span class="mb-1">
-                                            {{result['form'].sigma_mjd.label}}:
-                                            {{result['form'].sigma_mjd.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].lam_mjd.label}}:
-                                            {{result['form'].lam_mjd.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].mu_x_mjd.label}}:
-                                            {{result['form'].mu_x_mjd.data|round(4)}}<br/>
-                                        </span>
-                                        <span class="mb-1">
-                                            {{result['form'].sigma_x_mjd.label}}:
-                                            {{result['form'].sigma_x_mjd.data|round(4)}}
-                                        </span>
-                                        {%endif%}
-                                    </div>
+
                                     <div id="dejd">
-                                        {% if result['form'].model_choice.data == '7' %}
+                                        {% if result['form'].model_choice.data == '2' %}
                                         <span class="mb-1">
                                             {{result['form'].sigma_dejd.label}}:
                                             {{result['form'].sigma_dejd.data|round(4)}}<br/>
@@ -174,16 +83,98 @@
                                         </span>
                                         {%endif%}
                                     </div>
-                                    <div id="cev">
-                                        {% if result['form'].model_choice.data == '8' %}
+
+                                    <div id="heston">
+                                        {% if result['form'].model_choice.data == '3' %}
                                         <span class="mb-1">
-                                            {{result['form'].beta_cev.label}}:
-                                            {{result['form'].beta_cev.data|round(4)}}
+                                            {{result['form'].alpha_heston.label}}:
+                                            {{result['form'].alpha_heston.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].beta_heston.label}}:
+                                            {{result['form'].beta_heston.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].gamma_heston.label}}:
+                                            {{result['form'].gamma_heston.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].rho_heston.label}}:
+                                            {{result['form'].rho_heston.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].volatility_t0.label}}:
+                                            {{result['form'].volatility_t0.data|round(4)}}
+                                        </span>>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="meixer">
+                                        {% if result['form'].model_choice.data == '4' %}
+                                        <span class="mb-1">
+                                            {{result['form'].a_meixner.label}}:
+                                            {{result['form'].a_meixner.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].b_meixner.label}}:
+                                            {{result['form'].b_meixner.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].delta_meixner.label}}:
+                                            {{result['form'].delta_meixner.data|round(4)}}
                                         </span>
                                         {%endif%}
                                     </div>
+
+                                    <div id="mjd">
+                                        {% if result['form'].model_choice.data == '5' %}
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_mjd.label}}:
+                                            {{result['form'].sigma_mjd.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].lam_mjd.label}}:
+                                            {{result['form'].lam_mjd.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].mu_x_mjd.label}}:
+                                            {{result['form'].mu_x_mjd.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_x_mjd.label}}:
+                                            {{result['form'].sigma_x_mjd.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="nig">
+                                        {% if result['form'].model_choice.data == '6' %}
+                                        <span class="mb-1">
+                                            {{result['form'].a_nig.label}}:
+                                            {{result['form'].a_nig.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].b_nig.label}}:
+                                            {{result['form'].b_nig.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].delta_nig.label}}:
+                                            {{result['form'].delta_nig.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
+                                    <div id="gaussian">
+                                        {% if result['form'].model_choice.data == '7' %}
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_gaussian.label}}:
+                                            {{result['form'].sigma_gaussian.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
                                     <div id="exp_gau">
-                                        {% if result['form'].model_choice.data == '9' %}
+                                        {% if result['form'].model_choice.data == '8' %}
                                         <span class="mb-1">
                                             {{result['form'].epsilon_exp.label}}:
                                             {{result['form'].epsilon_exp.data|round(4)}}<br/>
@@ -198,11 +189,29 @@
                                         </span>
                                         {%endif%}
                                     </div>
+
+                                    <div id="vg">
+                                        {% if result['form'].model_choice.data == '9' %}
+                                        <span class="mb-1">
+                                            {{result['form'].kappa_vg.label}}:
+                                            {{result['form'].kappa_vg.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].theta_vg.label}}:
+                                            {{result['form'].theta_vg.data|round(4)}}<br/>
+                                        </span>
+                                        <span class="mb-1">
+                                            {{result['form'].sigma_vg.label}}:
+                                            {{result['form'].sigma_vg.data|round(4)}}
+                                        </span>
+                                        {%endif%}
+                                    </div>
+
                                 </div>
                                 <div class="col-12 font-weight-bold d-flex flex-column">
 
                                     <div id="general_price">
-                                        {% if result['form'].model_choice.data != '9' %}
+                                        {% if result['form'].model_choice.data != '8' %}
                                         <span class="mb-1">
                                         {{result['form'].price.label}}:
                                         {{result['form'].price.data|round(4)}}<br/>
@@ -231,7 +240,7 @@
                                     </div>
 
                                     <div id="exp_price">
-                                        {% if result['form'].model_choice.data == '9' %}
+                                        {% if result['form'].model_choice.data == '8' %}
                                         <span class="mb-1">
                                         {{result['form'].price_exp.label}}:
                                         {{result['form'].price_exp.data|round(4)}}<br/>
@@ -264,7 +273,7 @@
                                         {{result['form'].grid.data|round(4)}}
                                     </span>
                                     <div id="general_upper">
-                                        {% if result['form'].model_choice.data != '9' %}
+                                        {% if result['form'].model_choice.data != '8' %}
                                         <span class="mb-1">
                                         {{result['form'].upper_range.label}}:
                                         {{result['form'].upper_range.data|round(4)}}<br/>
@@ -276,8 +285,9 @@
                                         </span>
                                         {% endif %}
                                     </div>
+
                                     <div id="exp_upper">
-                                        {% if result['form'].model_choice.data == '9' %}
+                                        {% if result['form'].model_choice.data == '8' %}
                                         <span class="mb-1">
                                         {{result['form'].upper_range_exp.label}}:
                                         {{result['form'].upper_range_exp.data|round(4)}}<br/>
@@ -289,6 +299,7 @@
                                         </span>
                                         {% endif %}
                                     </div>
+
                                     <span class="mb-1">
                                         {{result['form'].dump.label}}:
                                         {{result['form'].dump.data|round(4)}}
@@ -324,7 +335,7 @@
                                         <tr>
                                             <td>{{result['optimal_strike']}}</td>
                                             <td>{{result['optimal_lower_bound']}}</td>
-                                            {% if result['form'].model_choice.data == '9' %}
+                                            {% if result['form'].model_choice.data == '8' %}
                                             <td>{{result['form'].strike_exp.data|round(4)}}</td>
                                             {% else %}
                                             <td>{{result['form'].strike.data|round(4)}}</td>

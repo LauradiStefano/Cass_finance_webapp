@@ -33,59 +33,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div id="gaussian" class="col" {% if form.model_choice.data !='0' and form.model_choice.data
-                                 !=None %} style="display:none" {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_gaussian.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_gaussian}}
-                                        {% if form.sigma_gaussian.errors %}
-                                        {% for error in form.sigma_gaussian.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="vg" class="col" {% if form.model_choice.data !='1' %} style="display:none"
+                            <div id="cev" class="col" {% if form.model_choice.data !='0' and form.model_choice.data
+                                 !=None %} style="display:none"
                                  {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.kappa_vg.label}}
+                                        {{form.beta_cev.label}}
                                     </div>
                                     <div class="col-11 mb-1">
-                                        {{form.kappa_vg}}
-                                        {% if form.kappa_vg.errors %}
-                                        {% for error in form.kappa_vg.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.theta_vg.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.theta_vg}}
-                                        {% if form.theta_vg.errors %}
-                                        {% for error in form.theta_vg.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_vg.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_vg}}
-                                        {% if form.sigma_vg.errors %}
-                                        {% for error in form.sigma_vg.errors %}
+                                        {{form.beta_cev}}
+                                        {% if form.beta_cev.errors %}
+                                        {% for error in form.beta_cev.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -93,119 +51,7 @@
                                 </div>
                             </div>
 
-                            <div id="heston" class="col" {% if form.model_choice.data !='2' %} style="display:none"
-                                 {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.alpha_heston.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.alpha_heston}}
-                                        {% if form.alpha_heston.errors %}
-                                        {% for error in form.alpha_heston.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.beta_heston.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.beta_heston}}
-                                        {% if form.beta_heston.errors %}
-                                        {% for error in form.beta_heston.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.gamma_heston.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.gamma_heston}}
-                                        {% if form.gamma_heston.errors %}
-                                        {% for error in form.gamma_heston.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.rho_heston.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.rho_heston}}
-                                        {% if form.rho_heston.errors %}
-                                        {% for error in form.rho_heston.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.volatility_t0.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.volatility_t0}}
-                                        {% if form.volatility_t0.errors %}
-                                        {% for error in form.volatility_t0.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="nig" class="col" {% if form.model_choice.data !='3' %} style="display:none"
-                                 {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.a_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.a_nig}}
-                                        {% if form.a_nig.errors %}
-                                        {% for error in form.a_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.b_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.b_nig}}
-                                        {% if form.b_nig.errors %}
-                                        {% for error in form.b_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.delta_nig.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.delta_nig}}
-                                        {% if form.delta_nig.errors %}
-                                        {% for error in form.delta_nig.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="cgmy" class="col" {% if form.model_choice.data !='4' %} style="display:none"
+                            <div id="cgmy" class="col" {% if form.model_choice.data !='1' %} style="display:none"
                                  {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -261,106 +107,7 @@
                                 </div>
                             </div>
 
-                            <div id="meixner" class="col" {% if form.model_choice.data !='5' %} style="display:none"
-                                 {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.a_meixner.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.a_meixner}}
-                                        {% if form.a_meixner.errors %}
-                                        {% for error in form.a_meixner.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.b_meixner.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.b_meixner}}
-                                        {% if form.b_meixner.errors %}
-                                        {% for error in form.b_meixner.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.delta_meixner.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.delta_meixner}}
-                                        {% if form.delta_meixner.errors %}
-                                        {% for error in form.delta_meixner.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="mjd" class="col" {% if form.model_choice.data !='6' %} style="display:none"
-                                 {%endif%}>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_mjd.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_mjd}}
-                                        {% if form.sigma_mjd.errors %}
-                                        {% for error in form.sigma_mjd.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.lam_mjd.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.lam_mjd}}
-                                        {% if form.lam_mjd.errors %}
-                                        {% for error in form.lam_mjd.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.mu_x_mjd.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.mu_x_mjd}}
-                                        {% if form.mu_x_mjd.errors %}
-                                        {% for error in form.mu_x_mjd.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col mb-1">
-                                        {{form.sigma_x_mjd.label}}
-                                    </div>
-                                    <div class="col-11 mb-1">
-                                        {{form.sigma_x_mjd}}
-                                        {% if form.sigma_x_mjd.errors %}
-                                        {% for error in form.sigma_x_mjd.errors %}
-                                        <div style="color: #ff0000;">{{ error }}</div>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="dejd" class="col" {% if form.model_choice.data !='7' %} style="display:none"
+                            <div id="dejd" class="col" {% if form.model_choice.data !='2' %} style="display:none"
                                  {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
@@ -429,16 +176,68 @@
                                 </div>
                             </div>
 
-                            <div id="cev" class="col" {% if form.model_choice.data !='8' %} style="display:none"
+                            <div id="heston" class="col" {% if form.model_choice.data !='3' %} style="display:none"
                                  {%endif%}>
                                 <div class="row">
                                     <div class="col mb-1">
-                                        {{form.beta_cev.label}}
+                                        {{form.alpha_heston.label}}
                                     </div>
                                     <div class="col-11 mb-1">
-                                        {{form.beta_cev}}
-                                        {% if form.beta_cev.errors %}
-                                        {% for error in form.beta_cev.errors %}
+                                        {{form.alpha_heston}}
+                                        {% if form.alpha_heston.errors %}
+                                        {% for error in form.alpha_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.beta_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.beta_heston}}
+                                        {% if form.beta_heston.errors %}
+                                        {% for error in form.beta_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.gamma_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.gamma_heston}}
+                                        {% if form.gamma_heston.errors %}
+                                        {% for error in form.gamma_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.rho_heston.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.rho_heston}}
+                                        {% if form.rho_heston.errors %}
+                                        {% for error in form.rho_heston.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.volatility_t0.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.volatility_t0}}
+                                        {% if form.volatility_t0.errors %}
+                                        {% for error in form.volatility_t0.errors %}
                                         <div style="color: #ff0000;">{{ error }}</div>
                                         {% endfor %}
                                         {% endif %}
@@ -446,7 +245,166 @@
                                 </div>
                             </div>
 
-                            <div id="exponential" class="col" {% if form.model_choice.data !='9' %}
+                            <div id="meixner" class="col" {% if form.model_choice.data !='4' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.a_meixner.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.a_meixner}}
+                                        {% if form.a_meixner.errors %}
+                                        {% for error in form.a_meixner.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.b_meixner.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.b_meixner}}
+                                        {% if form.b_meixner.errors %}
+                                        {% for error in form.b_meixner.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.delta_meixner.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.delta_meixner}}
+                                        {% if form.delta_meixner.errors %}
+                                        {% for error in form.delta_meixner.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="mjd" class="col" {% if form.model_choice.data !='5' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_mjd}}
+                                        {% if form.sigma_mjd.errors %}
+                                        {% for error in form.sigma_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.lam_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.lam_mjd}}
+                                        {% if form.lam_mjd.errors %}
+                                        {% for error in form.lam_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.mu_x_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.mu_x_mjd}}
+                                        {% if form.mu_x_mjd.errors %}
+                                        {% for error in form.mu_x_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_x_mjd.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_x_mjd}}
+                                        {% if form.sigma_x_mjd.errors %}
+                                        {% for error in form.sigma_x_mjd.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="nig" class="col" {% if form.model_choice.data !='6' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.a_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.a_nig}}
+                                        {% if form.a_nig.errors %}
+                                        {% for error in form.a_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.b_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.b_nig}}
+                                        {% if form.b_nig.errors %}
+                                        {% for error in form.b_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.delta_nig.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.delta_nig}}
+                                        {% if form.delta_nig.errors %}
+                                        {% for error in form.delta_nig.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="gaussian" class="col" {% if form.model_choice.data !='7' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_gaussian.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_gaussian}}
+                                        {% if form.sigma_gaussian.errors %}
+                                        {% for error in form.sigma_gaussian.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="exponential" class="col" {% if form.model_choice.data !='8' %}
                                  style="display:none"
                                  {%endif%}>
                                 <div class="row">
@@ -489,6 +447,49 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div id="vg" class="col" {% if form.model_choice.data !='9' %} style="display:none"
+                                 {%endif%}>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.kappa_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.kappa_vg}}
+                                        {% if form.kappa_vg.errors %}
+                                        {% for error in form.kappa_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.theta_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.theta_vg}}
+                                        {% if form.theta_vg.errors %}
+                                        {% for error in form.theta_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col mb-1">
+                                        {{form.sigma_vg.label}}
+                                    </div>
+                                    <div class="col-11 mb-1">
+                                        {{form.sigma_vg}}
+                                        {% if form.sigma_vg.errors %}
+                                        {% for error in form.sigma_vg.errors %}
+                                        <div style="color: #ff0000;">{{ error }}</div>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </div>
@@ -499,7 +500,7 @@
                             <legend>Contract Parameters</legend>
                         </div>
 
-                        <div id="general_price" class="row" {% if form.model_choice.data=='9' %}
+                        <div id="general_price" class="row" {% if form.model_choice.data=='8' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -512,7 +513,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="general_risk_free" class="row" {% if form.model_choice.data=='9' %}
+                        <div id="general_risk_free" class="row" {% if form.model_choice.data=='8' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -526,7 +527,7 @@
                             </div>
                         </div>
 
-                        <div id="exp_price" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                        <div id="exp_price" class="row" {% if form.model_choice.data !='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.price_exp.label}}
@@ -538,7 +539,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="exp_risk_free" class="row" {% if form.model_choice.data!='9' %}
+                        <div id="exp_risk_free" class="row" {% if form.model_choice.data!='8' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -552,7 +553,7 @@
                             </div>
                         </div>
 
-                        <div id="general_time" class="row" {% if form.model_choice.data=='9' %}
+                        <div id="general_time" class="row" {% if form.model_choice.data=='8' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -565,7 +566,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="general_step" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                        <div id="general_step" class="row" {% if form.model_choice.data=='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.step.label}}
@@ -577,7 +578,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="general_strike" class="row" {% if form.model_choice.data=='9' %}
+                        <div id="general_strike" class="row" {% if form.model_choice.data=='8' %}
                              style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
@@ -591,7 +592,7 @@
                             </div>
                         </div>
 
-                        <div id="exp_time" class="row" {% if form.model_choice.data !='9' %} style="display:none"
+                        <div id="exp_time" class="row" {% if form.model_choice.data !='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.time_exp.label}}
@@ -603,7 +604,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="exp_step" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                        <div id="exp_step" class="row" {% if form.model_choice.data!='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.step_exp.label}}
@@ -615,7 +616,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="exp_strike" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                        <div id="exp_strike" class="row" {% if form.model_choice.data!='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.strike_exp.label}}
@@ -647,7 +648,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="general_upper" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                        <div id="general_upper" class="row" {% if form.model_choice.data=='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.upper_range.label}}
@@ -659,7 +660,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="general_lower" class="row" {% if form.model_choice.data=='9' %} style="display:none"
+                        <div id="general_lower" class="row" {% if form.model_choice.data=='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.lower_range.label}}
@@ -671,7 +672,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="exp_upper" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                        <div id="exp_upper" class="row" {% if form.model_choice.data!='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.upper_range_exp.label}}
@@ -683,7 +684,7 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <div id="exp_lower" class="row" {% if form.model_choice.data!='9' %} style="display:none"
+                        <div id="exp_lower" class="row" {% if form.model_choice.data!='8' %} style="display:none"
                              {%endif%}>
                             <div class="col mb-1">
                                 {{form.lower_range_exp.label}}
@@ -796,16 +797,17 @@
 <script charset="utf-8" type="text/javascript">
     $(function () {
         var select_model = $('#model_choice');
-        var gaussian = $('#gaussian');
-        var vg = $('#vg');
-        var heston = $('#heston');
-        var nig = $('#nig');
+
+        var cev = $('#cev');
         var cgmy = $('#cgmy');
+        var dejd = $('#dejd');
+        var exponential = $('#exponential');
+        var gaussian = $('#gaussian');
+        var heston = $('#heston');
         var meixner = $('#meixner');
         var mjd = $('#mjd');
-        var dejd = $('#dejd');
-        var cev = $('#cev');
-        var exponential = $('#exponential');
+        var nig = $('#nig');
+        var vg = $('#vg');
 
         var generalPrice = $('#general_price');
         var generalRiskFree = $('#general_risk_free');
@@ -824,16 +826,16 @@
         var expLower = $('#exp_lower');
 
         function reset() {
-            gaussian.hide();
-            vg.hide();
-            heston.hide();
-            nig.hide();
+            cev.hide();
             cgmy.hide();
+            dejd.hide();
+            exponential.hide();
+            gaussian.hide();
+            heston.hide();
             meixner.hide();
             mjd.hide();
-            dejd.hide();
-            cev.hide();
-            exponential.hide();
+            nig.hide();
+            vg.hide();
 
             generalPrice.hide();
             generalRiskFree.hide();
@@ -855,7 +857,7 @@
         select_model.on('change', function () {
             if (select_model.val() == '0') {
                 reset();
-                gaussian.show();
+                cev.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -866,7 +868,7 @@
 
             } else if (select_model.val() == '1') {
                 reset();
-                vg.show();
+                cgmy.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -877,7 +879,7 @@
 
             } else if (select_model.val() == '2') {
                 reset();
-                heston.show();
+                dejd.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -888,7 +890,7 @@
 
             } else if (select_model.val() == '3') {
                 reset();
-                nig.show();
+                heston.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -899,7 +901,7 @@
 
             } else if (select_model.val() == '4') {
                 reset();
-                cgmy.show();
+                meixner.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -910,7 +912,7 @@
 
             } else if (select_model.val() == '5') {
                 reset();
-                meixner.show();
+                mjd.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -921,7 +923,7 @@
 
             } else if (select_model.val() == '6') {
                 reset();
-                mjd.show();
+                nig.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -932,7 +934,7 @@
 
             } else if (select_model.val() == '7') {
                 reset();
-                dejd.show();
+                gaussian.show();
                 generalPrice.show();
                 generalRiskFree.show();
                 generalTime.show();
@@ -943,17 +945,6 @@
 
             } else if (select_model.val() == '8') {
                 reset();
-                cev.show();
-                generalPrice.show();
-                generalRiskFree.show();
-                generalTime.show();
-                generalStep.show();
-                generalStrike.show();
-                generalUpper.show();
-                generalLower.show();
-
-            } else {
-                reset();
                 exponential.show();
                 expPrice.show();
                 expRiskFree.show();
@@ -962,6 +953,18 @@
                 expStrike.show();
                 expUpper.show();
                 expLower.show();
+
+            } else {
+                reset();
+                vg.show();
+                generalPrice.show();
+                generalRiskFree.show();
+                generalTime.show();
+                generalStep.show();
+                generalStrike.show();
+                generalUpper.show();
+                generalLower.show();
+
             }
         });
     });

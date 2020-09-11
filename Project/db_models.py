@@ -257,13 +257,21 @@ class asian_option(db.Model):
 
     model_choice = db.Column(db.String())
 
-    # GBM distribution
-    sigma_gaussian = db.Column(db.Float())
+    # CEV distribution
+    beta_cev = db.Column(db.Float())
 
-    # VG distribution
-    sigma_vg = db.Column(db.Float())
-    theta_vg = db.Column(db.Float())
-    kappa_vg = db.Column(db.Float())
+    # CGMY distribution
+    c = db.Column(db.Float())
+    g = db.Column(db.Float())
+    m = db.Column(db.Float())
+    y = db.Column(db.Float())
+
+    # DEJD distribution
+    sigma_dejd = db.Column(db.Float())
+    lam_dejd = db.Column(db.Float())
+    rho_dejd = db.Column(db.Float())
+    eta1_dejd = db.Column(db.Float())
+    eta2_dejd = db.Column(db.Float())
 
     # Heston distribution
     volatility_t0 = db.Column(db.Float())
@@ -271,17 +279,6 @@ class asian_option(db.Model):
     beta_heston = db.Column(db.Float())
     gamma_heston = db.Column(db.Float())
     rho_heston = db.Column(db.Float())
-
-    # NIG distribution
-    a_nig = db.Column(db.Float())
-    b_nig = db.Column(db.Float())
-    delta_nig = db.Column(db.Float())
-
-    # CGMY distribution
-    c = db.Column(db.Float())
-    g = db.Column(db.Float())
-    m = db.Column(db.Float())
-    y = db.Column(db.Float())
 
     # Meixner distribution
     a_meixner = db.Column(db.Float())
@@ -294,17 +291,15 @@ class asian_option(db.Model):
     mu_x_mjd = db.Column(db.Float())
     sigma_x_mjd = db.Column(db.Float())
 
-    # DEJD distribution
-    sigma_dejd = db.Column(db.Float())
-    lam_dejd = db.Column(db.Float())
-    rho_dejd = db.Column(db.Float())
-    eta1_dejd = db.Column(db.Float())
-    eta2_dejd = db.Column(db.Float())
+    # NIG distribution
+    a_nig = db.Column(db.Float())
+    b_nig = db.Column(db.Float())
+    delta_nig = db.Column(db.Float())
 
-    # CEV distribution
-    beta_cev = db.Column(db.Float())
+    # GBM (Normal) distribution
+    sigma_gaussian = db.Column(db.Float())
 
-    # Exponential Gaussian distribution
+    # Exponential Gaussian (O-U) distribution
     epsilon_exp = db.Column(db.Float())
     k1_exp = db.Column(db.Float())
     sigma_exp = db.Column(db.Float())
@@ -315,6 +310,11 @@ class asian_option(db.Model):
     step_exp = db.Column(db.Float())
     upper_range_exp = db.Column(db.Float())
     lower_range_exp = db.Column(db.Float())
+
+    # VG distribution
+    sigma_vg = db.Column(db.Float())
+    theta_vg = db.Column(db.Float())
+    kappa_vg = db.Column(db.Float())
 
     grid = db.Column(db.Float())
     upper_range = db.Column(db.Float())

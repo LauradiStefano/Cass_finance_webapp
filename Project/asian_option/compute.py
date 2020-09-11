@@ -20,78 +20,77 @@ from asian_option.get_option_nig import nig_option
 from asian_option.get_vg_option import vg_option
 
 
-def compute_values(type_choice, s0, strike, time, risk_free, N, sigma_gaussian, sigma_vg, theta_vg, kappa_vg, v0,
-                   alpha_heston, beta_heston, gamma, rho, a_nig, b_nig, delta_nig, C, G, M, Y, a_meixner, b_meixner,
-                   delta_meixner, sigma_mjd, lam_mjd, mews, sigmas, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2,
-                   beta_cev, epsilon_exp, k1_exp, sigma_exp, price_exp, strike_exp, risk_free_exp, time_exp, N_exp,
-                   lmax_exp, lmin_exp, Nfft, lmax, lmin, delta, tolerance):
+def compute_values(type_choice, s0, strike, time, risk_free, N, Nfft, lmax, lmin, delta, tolerance, price_exp,
+                   strike_exp, risk_free_exp, time_exp, N_exp, lmax_exp, beta_cev, lmin_exp, C, G, M, Y, sigma_dejd,
+                   lam_dejd, rho_dejd, eta1, eta2, epsilon_exp, k1_exp, sigma_exp, sigma_gaussian, v0, alpha_heston,
+                   beta_heston, gamma, rho, a_meixner, b_meixner, delta_meixner, sigma_mjd, lam_mjd, mews, sigmas,
+                   a_nig, b_nig, delta_nig, sigma_vg, theta_vg, kappa_vg):
     Nfft = 2 ** Nfft
     N = int(N)
     type_choice = int(type_choice)
     risk_free = risk_free / 100
 
-    if type_choice == 0:  # GBM
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N,
-                                                                           sigma_gaussian, Nfft, lmax, lmin, delta,
-                                                                           tolerance)
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 1:  # VG
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            vg_option(s0, strike, time, risk_free, N, sigma_vg, theta_vg, kappa_vg, Nfft, lmax, lmin, delta, tolerance)
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 2:  # Heston
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            heston_option(s0, strike, v0, time, risk_free, N, alpha_heston, beta_heston, gamma, rho, Nfft, lmax, lmin,
-                          delta, tolerance)
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 3:  # NIG
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            nig_option(s0, strike, time, risk_free, N, a_nig, b_nig, delta_nig, Nfft, lmax, lmin, delta, tolerance)
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 4:  # CGMY
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y, Nfft, lmax, lmin, delta, tolerance)
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 5:  # Meixner
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            meixner_option(s0, strike, time, risk_free, N, a_meixner, b_meixner, delta_meixner, Nfft, lmax, lmin,
-                           delta, tolerance)
-
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 6:  # MJD
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mews, sigmas, Nfft, lmax, lmin, delta,
-                       tolerance)
-
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 7:  # DEJD
-        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
-            dejd_option(s0, strike, time, risk_free, N, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft, lmax, lmin,
-                        delta, tolerance)
-
-        ptrue_strike = ptrue_strike[0]
-
-    elif type_choice == 8:  # CEV
+    if type_choice == 0:  # CEV
 
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = cev_option(s0, strike, time, risk_free, N, beta_cev,
                                                                            Nfft, lmax, lmin, delta, tolerance)
         ptrue_strike = ptrue_strike[0]
         strike_exp_lcr = strike_exp_lcr[0]
 
-    else:  # type choice == 9 Ou exp gaussian model
+    elif type_choice == 1:  # CGMY
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            CGMY_option(s0, strike, time, risk_free, N, C, G, M, Y, Nfft, lmax, lmin, delta, tolerance)
+        ptrue_strike = ptrue_strike[0]
 
+    elif type_choice == 2:  # DEJD
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            dejd_option(s0, strike, time, risk_free, N, sigma_dejd, lam_dejd, rho_dejd, eta1, eta2, Nfft, lmax, lmin,
+                        delta, tolerance)
+
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 3:  # Heston
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            heston_option(s0, strike, v0, time, risk_free, N, alpha_heston, beta_heston, gamma, rho, Nfft, lmax, lmin,
+                          delta, tolerance)
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 4:  # Meixner
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            meixner_option(s0, strike, time, risk_free, N, a_meixner, b_meixner, delta_meixner, Nfft, lmax, lmin,
+                           delta, tolerance)
+
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 5:  # MJD
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            mjd_option(s0, strike, time, risk_free, N, sigma_mjd, lam_mjd, mews, sigmas, Nfft, lmax, lmin, delta,
+                       tolerance)
+
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 6:  # NIG
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            nig_option(s0, strike, time, risk_free, N, a_nig, b_nig, delta_nig, Nfft, lmax, lmin, delta, tolerance)
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 7:  # GBM normal
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = gbm_option(s0, strike, time, risk_free, N,
+                                                                           sigma_gaussian, Nfft, lmax, lmin, delta,
+                                                                           tolerance)
+        ptrue_strike = ptrue_strike[0]
+
+    elif type_choice == 8:  # Ou exp gaussian model
         risk_free_exp = risk_free_exp / 100
         ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
             exp_gaussian_option(price_exp, strike_exp, time_exp, risk_free_exp, N_exp, epsilon_exp, k1_exp, sigma_exp,
                                 Nfft, lmax_exp, lmin_exp, delta,
                                 tolerance)
+
+    else:  # type_choice == 9  VG
+        ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound = \
+            vg_option(s0, strike, time, risk_free, N, sigma_vg, theta_vg, kappa_vg, Nfft, lmax, lmin, delta, tolerance)
+        ptrue_strike = ptrue_strike[0]
 
     return ptrue, strike_exp_lcr, ptrue_strike, lam, lower_bound
 
