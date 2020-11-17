@@ -5,7 +5,6 @@ Created on Mon May  4 17:08:56 2020
 @author: Diego
 """
 import os
-import datetime as dt
 import numpy as np
 import pandas as pd
 import pandas_datareader.data as web
@@ -79,15 +78,12 @@ def import_dataset_file_excel(filename, price_or_return, cov_or_corr):
 
 # Permette di calcolare la matrice varianza covarianza importando i prezzi di chiusura da Yahoo
 
-def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day,
-                           end_month, end_year, price_or_return, cov_or_corr):
+def import_dataset_tickers(tickers, entry_date, end_date, price_or_return, cov_or_corr):
     price_or_return = int(price_or_return)
-    start = dt.datetime(start_year, start_month, start_day)
-    end = dt.datetime(end_year, end_month, end_day)
 
     data = pd.DataFrame()
     for i in range(0, len(tickers)):
-        df = web.DataReader(tickers[i], 'yahoo', start, end)
+        df = web.DataReader(tickers[i], 'yahoo', entry_date, end_date)
         price = df['Adj Close']
 
         data.insert(i, tickers[i], price, True)

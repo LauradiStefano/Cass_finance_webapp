@@ -27,14 +27,11 @@ def import_dataset_file_excel(filename):
     return data, dates
 
 
-def import_dataset_tickers(tickers, start_day, start_month, start_year, end_day, end_month, end_year):
-    start = dt.datetime(start_year, start_month, start_day)
-    end = dt.datetime(end_year, end_month, end_day)
-
+def import_dataset_tickers(tickers, entry_date, end_date):
     data = pd.DataFrame()
 
     for i in range(0, len(tickers)):
-        df = web.DataReader(tickers[i], 'yahoo', start, end)
+        df = web.DataReader(tickers[i], 'yahoo', entry_date, end_date)
         price = df['Adj Close']
 
         data.insert(i, tickers[i], price, True)

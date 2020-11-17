@@ -2,6 +2,7 @@ import wtforms as wtf
 from flask_wtf.file import FileRequired
 from wtforms import validators, StringField, IntegerField, FieldList
 from wtforms.validators import InputRequired
+from wtforms.fields.html5 import DateField
 
 
 class ComputeForm(wtf.Form):
@@ -14,13 +15,9 @@ class ComputeForm(wtf.Form):
 
     tickers_list = FieldList(StringField(label='Ticker', default='AAPL'), min_entries=1)
 
-    start_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
-    start_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
-    start_year = IntegerField(label='Year', default=2015, validators=[InputRequired()])
+    entry_date = DateField('From')
 
-    end_day = IntegerField(label='Day', default=15, validators=[InputRequired()])
-    end_month = IntegerField(label='Month', default=11, validators=[InputRequired()])
-    end_year = IntegerField(label='Year', default=2018, validators=[InputRequired()])
+    end_date = DateField('To')
 
     button_compute = wtf.SubmitField(label='Compute')
     button_export_table = wtf.SubmitField(label='Export Table')

@@ -38,13 +38,9 @@
                                         {{dict(result['form'].method_choice.choices).get(result['form'].method_choice.data)}}
                                     </span>
                                 <span class="mb-1">
-                                        <label>Start Date</label>:
-                                        {{result['form'].start_day.data}}/{{result['form'].start_month.data}}/{{result['form'].start_year.data}}
-                                    </span>
-
-                                <span class="mb-1">
-                                        <label>End Date</label>:
-                                        {{result['form'].end_day.data}}/{{result['form'].end_month.data}}/{{result['form'].end_year.data}}
+                                        <label>Time Period</label>:
+                                        {{result['form'].entry_date.data}} /
+                                        {{result['form'].end_date.data}}
                                     </span>
                                 {%endif%}
                                 <span class="mb-1">
@@ -70,11 +66,10 @@
     {% if result['plot_efficient_frontier'] != None %}
     <div class="row d-flex justify-content-center">
         <div class="col-12">
-            <fieldset class="shadow-sm p-3 bg-white rounded d-flex animated fadeInDown">
+            <fieldset class="shadow-sm p-3 bg-white rounded animated fadeInDown">
                 <div class="row border-bottom mb-2 pb-1">
                     <legend>Percentage Variance Explained by Each Component</legend>
                 </div>
-
                 <div class="d-flex justify-content-center plot">
                     {{ result['plot_variance_component'][0]|safe}}
                     {{ result['plot_variance_component'][1]|safe}}

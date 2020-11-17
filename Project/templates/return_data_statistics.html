@@ -106,61 +106,24 @@
                             </div>
                         </div>
 
-                        <label> Start Date</label>
+                        <label> Time Period</label>
+
                         <div class="row">
-                            <div class="col-4 mb-1">
-                                {{form.start_day.label}}
-                                {{form.start_day}}
-                                {% if form.start_day.errors %}
-                                {% for error in form.start_day.errors %}
+                            <div class="col mb-1">
+                                {{form.entry_date.label}}
+                                {{form.entry_date}}
+                                {% if form.entry_date.errors %}
+                                {% for error in form.entry_date.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="col-4 mb-1">
-                                {{form.start_month.label}}
-                                {{form.start_month}}
-                                {% if form.start_month.errors %}
-                                {% for error in form.start_month.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.start_year.label}}
-                                {{form.start_year}}
-                                {% if form.start_year.errors %}
-                                {% for error in form.start_year.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-                        <label> End Date</label>
-                        <div class="row">
-                            <div class="col-4 mb-1">
-                                {{form.end_day.label}}
-                                {{form.end_day}}
-                                {% if form.end_day.errors %}
-                                {% for error in form.end_day.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.end_month.label}}
-                                {{form.end_month}}
-                                {% if form.end_month.errors %}
-                                {% for error in form.end_month.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.end_year.label}}
-                                {{form.end_year}}
-                                {% if form.end_year.errors %}
-                                {% for error in form.end_year.errors %}
+
+                            <div class="col mb-1">
+                                {{form.end_date.label}}
+                                {{form.end_date}}
+                                {% if form.end_date.errors %}
+                                {% for error in form.end_date.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
@@ -273,12 +236,12 @@
 {% include 'footer.html' %}
 
 <script charset="utf-8" type="text/javascript">
-    $(function(){
+    $(function () {
         var select_method_choice = $('#method_choice');
         var import_file = $('#import_file');
         var ticker = $('#tickers');
 
-        select_method_choice.on('click', function() {
+        select_method_choice.on('click', function () {
             if ($('[name=method_choice]:radio:checked').val() == '0') {
                 import_file.show();
                 ticker.hide();
@@ -291,35 +254,35 @@
         var help_dataset = $('#help_dataset');
         var icon_help_dataset = $('#icon_help_dataset');
 
-        icon_help_dataset.on('mouseenter', function(){
+        icon_help_dataset.on('mouseenter', function () {
             help_dataset.show();
         });
 
-        icon_help_dataset.on('mouseleave', function() {
+        icon_help_dataset.on('mouseleave', function () {
             help_dataset.hide();
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var max_fields = 20;
-        var field_number = $('#tickers_list').children().length ;
+        var field_number = $('#tickers_list').children().length;
         var min_fields = 1;
 
         if (field_number == min_fields) {
             $('#button_delete_field').prop('disabled', true);
             $('#button_delete_field').css('opacity', '0.5');
 
-        } else if (field_number == max_fields){
-             $('#button_add_field').prop('disabled', true);
-             $('#button_add_field').css('opacity', '0.5');
+        } else if (field_number == max_fields) {
+            $('#button_add_field').prop('disabled', true);
+            $('#button_add_field').css('opacity', '0.5');
         }
 
-        $('#button_add_field').click(function(e) {
+        $('#button_add_field').click(function (e) {
             e.preventDefault();
-            if(field_number <= max_fields){
+            if (field_number <= max_fields) {
                 var new_input = $("<input required type='text' ></input>")
-                .attr('id', 'tickers_list-' + field_number)
-                .attr('name', 'tickers_list-' + field_number);
+                    .attr('id', 'tickers_list-' + field_number)
+                    .attr('name', 'tickers_list-' + field_number);
 
                 field_number++;
                 $('#tickers_list').append(new_input);
@@ -333,9 +296,9 @@
                 }
             }
         });
-        $('#button_delete_field').click(function(e) {
+        $('#button_delete_field').click(function (e) {
             e.preventDefault();
-            if (field_number > min_fields){
+            if (field_number > min_fields) {
                 $('#tickers_list').children().last().remove();
                 field_number--;
 
@@ -351,14 +314,14 @@
         });
     });
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         var select_method_choice = $('#method_choice');
         if ($('[name=method_choice]:radio:checked').val() == undefined) {
             $('#button_compute').prop('disabled', true);
             $('#button_compute').css('opacity', '0.3');
         }
 
-        select_method_choice.on('click', function() {
+        select_method_choice.on('click', function () {
             if ($('[name=method_choice]:radio:checked').val() != '') {
                 $('#button_compute').prop('disabled', false)
                 $("#button_compute").css('opacity', '1');
@@ -366,34 +329,9 @@
         });
     });
 
-    $(document).ready(function(){
-         $('[data-toggle="tooltip"]').tooltip();
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </script>

@@ -105,61 +105,24 @@
                             </div>
                         </div>
 
-                        <label> Start Date</label>
+                        <label> Time Period</label>
+
                         <div class="row">
-                            <div class="col-4 mb-1">
-                                {{form.start_day.label}}
-                                {{form.start_day}}
-                                {% if form.start_day.errors %}
-                                {% for error in form.start_day.errors %}
+                            <div class="col mb-1">
+                                {{form.entry_date.label}}
+                                {{form.entry_date}}
+                                {% if form.entry_date.errors %}
+                                {% for error in form.entry_date.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="col-4 mb-1">
-                                {{form.start_month.label}}
-                                {{form.start_month}}
-                                {% if form.start_month.errors %}
-                                {% for error in form.start_month.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.start_year.label}}
-                                {{form.start_year}}
-                                {% if form.start_year.errors %}
-                                {% for error in form.start_year.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                        </div>
-                        <label> End Date</label>
-                        <div class="row">
-                            <div class="col-4 mb-1">
-                                {{form.end_day.label}}
-                                {{form.end_day}}
-                                {% if form.end_day.errors %}
-                                {% for error in form.end_day.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.end_month.label}}
-                                {{form.end_month}}
-                                {% if form.end_month.errors %}
-                                {% for error in form.end_month.errors %}
-                                <div style="color: #ff0000;">{{ error }}</div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="col-4 mb-1">
-                                {{form.end_year.label}}
-                                {{form.end_year}}
-                                {% if form.end_year.errors %}
-                                {% for error in form.end_year.errors %}
+
+                            <div class="col mb-1">
+                                {{form.end_date.label}}
+                                {{form.end_date}}
+                                {% if form.end_date.errors %}
+                                {% for error in form.end_date.errors %}
                                 <div style="color: #ff0000;">{{ error }}</div>
                                 {% endfor %}
                                 {% endif %}

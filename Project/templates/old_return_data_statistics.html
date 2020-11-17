@@ -39,13 +39,9 @@
                                         {{dict(result['form'].method_choice.choices).get(result['form'].method_choice.data)}}
                                     </span>
                                 <span class="mb-1">
-                                        <label>Start Date</label>:
-                                        {{result['form'].start_day.data}}/{{result['form'].start_month.data}}/{{result['form'].start_year.data}}
-                                    </span>
-
-                                <span class="mb-1">
-                                        <label>End Date</label>:
-                                        {{result['form'].end_day.data}}/{{result['form'].end_month.data}}/{{result['form'].end_year.data}}
+                                        <label>Time Period</label>:
+                                        {{result['form'].entry_date.data}} /
+                                        {{result['form'].end_date.data}}
                                     </span>
                                 {%endif%}
                             </div>

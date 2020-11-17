@@ -430,13 +430,8 @@ class statisitcal_analysis(db.Model):
     method_choice = db.Column(db.String())
     file_name = db.Column(db.String())
 
-    start_day = db.Column(db.Integer())
-    start_month = db.Column(db.Integer())
-    start_year = db.Column(db.Integer())
-
-    end_day = db.Column(db.Integer())
-    end_month = db.Column(db.Integer())
-    end_year = db.Column(db.Integer())
+    entry_date = db.Column(db.Date())
+    end_date = db.Column(db.Date())
 
     mean = db.Column(db.String())
     variance = db.Column(db.String())
@@ -517,13 +512,8 @@ class principal_component_analysis(db.Model):
     matrix_flag = db.Column(db.String())
     explained_variance = db.Column(db.Float())
 
-    start_day = db.Column(db.Integer())
-    start_month = db.Column(db.Integer())
-    start_year = db.Column(db.Integer())
-
-    end_day = db.Column(db.Integer())
-    end_month = db.Column(db.Integer())
-    end_year = db.Column(db.Integer())
+    entry_date = db.Column(db.Date())
+    end_date = db.Column(db.Date())
 
     evalues = db.Column(db.String())
     autovect = db.Column(db.String())
