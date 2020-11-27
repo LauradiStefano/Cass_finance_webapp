@@ -112,6 +112,15 @@ class LoginForm(wtf.Form):
             email=self.email.data).first()
 
 
+class ChangePasswordForm(wtf.Form):
+    password = wtf.PasswordField(label='Create Password',
+                                 validators=[wtf.validators.DataRequired(),
+                                             wtf.validators.EqualTo('confirm', message='Passwords must match'),
+                                             check_password])
+    confirm = wtf.PasswordField(label='Verify Password', validators=[wtf.validators.DataRequired()])
+    button_save = wtf.SubmitField(label='Save')
+
+
 class DevLoginForm(wtf.Form):
     email = html5.EmailField(label='Email')
     password = wtf.PasswordField(label='Password')

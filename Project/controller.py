@@ -1,7 +1,7 @@
 import os
 from _socket import gethostname
 
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, current_user, \
     login_user, logout_user, login_required
 
@@ -51,7 +51,9 @@ def load_user(user_id):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     just_registered = request.args.get('just_registered')
-    return render_template("index.html", user=current_user, index=True, just_registered=just_registered)
+    password_change = request.args.get('password_change')
+    return render_template("index.html", user=current_user, index=True, just_registered=just_registered,
+                           password_change=password_change)
 
 
 @app.route('/implied_distribution_illustration', methods=['GET', 'POST'])
@@ -490,17 +492,35 @@ def login():
     from forms import LoginForm
     form = LoginForm(request.form)
 
-    if app.env == "development":
-        from forms import DevLoginForm
-        user = DevLoginForm(request.form).get_user()
-        login_user(user, remember=True)
-        return redirect(url_for('index'))
+    # if app.env == "development":
+    #     from forms import DevLoginForm
+    #     user = DevLoginForm(request.form).get_user()
+    #     login_user(user, remember=True)
+    #     return redirect(url_for('index'))
 
     if request.method == 'POST' and form.validate():
         user = form.get_user()
         login_user(user, remember=True)
         return redirect(url_for('index'))
     return render_template("login.html", form=form, login=True)
+
+
+@app.route('/change_password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    from forms import ChangePasswordForm
+    form = ChangePasswordForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        user = current_user
+        user.set_password(form.password.data)
+
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('index', password_change=1))
+
+    return render_template('change_password.html', form=form)
 
 
 @app.route('/logout')
