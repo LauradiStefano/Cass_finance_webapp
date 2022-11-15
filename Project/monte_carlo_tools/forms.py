@@ -213,9 +213,8 @@ class ComputeForm(wtf.Form):
             self.beta_ewma.errors.append('The value must be equal to 1 - alpha')
             valid = False
 
-        if self.alpha_garch.data + self.beta_garch.data >= 0:
-            self.alpha_garch.errors.append('The value must be - beta')
-            self.beta_garch.errors.append('The value must be - alpha')
-            valid = False
+        # if self.alpha_garch.data + self.beta_garch.data >= 0:
+        #     self.alpha_garch.errors.append('The value must be smaller than - beta')
+        #     valid = False
 
         return valid
